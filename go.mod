@@ -1,4 +1,4 @@
-module github.com/pulumi/environments
+module github.com/pulumi/esc
 
 go 1.20
 
