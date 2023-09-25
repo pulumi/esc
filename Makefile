@@ -4,10 +4,12 @@ PULUMI_LIVE_TEST  ?= false
 export PULUMI_TEST_ORG
 export PULUMI_TEST_OWNER
 
-CONCURRENCY       := 10
+VERSION := $(if ${PULUMI_VERSION},${PULUMI_VERSION},$(shell ./scripts/pulumi-version.sh))
+
+CONCURRENCY := 10
 SHELL := sh
 
-GO                          := go
+GO := go
 
 .phony: .EXPORT_ALL_VARIABLES
 .EXPORT_ALL_VARIABLES:
@@ -31,7 +33,10 @@ lint-copyright:
 	pulumictl copyright
 
 build:: ensure
-	${GO} build -p ${CONCURRENCY} ./...
+	${GO} install -ldflags "-X github.com/pulumi/esc/cmd/internal/version.Version=${VERSION}" ./cmd/esc
+
+build_debug:: ensure
+	${GO} install -gcflags="all=-N -l" -ldflags "-X github.com/pulumi/esc/cmd/internal/version.Version=${VERSION}" ./cmd/esc
 
 test:: build
 	${GO} test --timeout 30m -short -count 1 -parallel ${CONCURRENCY} ./...
