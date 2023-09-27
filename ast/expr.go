@@ -5,7 +5,6 @@ package ast
 import (
 	"encoding/json"
 	"fmt"
-	"regexp"
 	"strings"
 
 	"github.com/hashicorp/hcl/v2"
@@ -534,7 +533,8 @@ func tryParseFunction(node *syntax.ObjectNode) (Expr, syntax.Diagnostics, bool) 
 	case "fn::toString":
 		parse = parseToString
 	default:
-		if match, _ := regexp.MatchString(fnOpenRegex.String(), kvp.Key.Value()); match {
+
+		if providerName, isOpen := strings.CutPrefix(kvp.Key.Value(), "fn::open::"); isOpen {
 			// transform the node into fn::open format
 			providerName := strings.TrimPrefix(kvp.Key.Value(), "fn::")
 			// case 1: inputs are provided
