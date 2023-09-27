@@ -617,7 +617,7 @@ func parseShortOpen(node *syntax.ObjectNode, name *StringExpr, args Expr) (Expr,
 		return nil, syntax.Diagnostics{ExprError(args, fmt.Sprintf("the argument to fn::open::%s must be an object", provider), "")}
 	}
 
-	return OpenSyntax(node, name, inputs, String(provider), inputs), nil
+	return OpenSyntax(node, name, inputs, StringSyntaxValue(name.Syntax(), provider), inputs), nil
 }
 
 func parseJoin(node *syntax.ObjectNode, name *StringExpr, args Expr) (Expr, syntax.Diagnostics) {
