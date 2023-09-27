@@ -1,0 +1,317 @@
+// Copyright 2016-2022, Pulumi Corporation.
+
+package client
+
+import (
+	"context"
+	"crypto/tls"
+	"encoding/json"
+	"errors"
+	"fmt"
+	"net/http"
+	"time"
+
+	"github.com/pulumi/esc"
+
+	"github.com/pulumi/pulumi/sdk/v3/go/common/workspace"
+)
+
+// Client provides a slim wrapper around the Pulumi HTTP/REST API.
+type Client struct {
+	apiURL     string
+	apiToken   string
+	apiUser    string
+	apiOrgs    []string
+	tokenInfo  *workspace.TokenInformation // might be nil if running against old services
+	insecure   bool
+	restClient restClient
+	httpClient *http.Client
+}
+
+// newClient creates a new Pulumi API client with the given URL and API token. It is a variable instead of a regular
+// function so it can be set to a different implementation at runtime, if necessary.
+var newClient = func(apiURL, apiToken string, insecure bool) *Client {
+	var httpClient *http.Client
+	if insecure {
+		tr := &http.Transport{
+			//nolint:gosec // The user has explicitly opted into setting this
+			TLSClientConfig: &tls.Config{InsecureSkipVerify: true},
+		}
+		httpClient = &http.Client{Transport: tr}
+	} else {
+		httpClient = http.DefaultClient
+	}
+
+	return &Client{
+		apiURL:     apiURL,
+		apiToken:   apiToken,
+		httpClient: httpClient,
+		restClient: &defaultRESTClient{
+			client: &defaultHTTPClient{
+				client: httpClient,
+			},
+		},
+	}
+}
+
+// Returns true if this client is insecure (i.e. has TLS disabled).
+func (pc *Client) Insecure() bool {
+	return pc.insecure
+}
+
+// NewClient creates a new Pulumi API client with the given URL and API token.
+func NewClient(apiURL, apiToken string, insecure bool) *Client {
+	return newClient(apiURL, apiToken, insecure)
+}
+
+// URL returns the URL of the API endpoint this client interacts with
+func (pc *Client) URL() string {
+	return pc.apiURL
+}
+
+// restCall makes a REST-style request to the Pulumi API using the given method, path, query object, and request
+// object. If a response object is provided, the server's response is deserialized into that object.
+func (pc *Client) restCall(ctx context.Context, method, path string, queryObj, reqObj, respObj interface{}) error {
+	return pc.restClient.Call(ctx, pc.apiURL, method, path, queryObj, reqObj, respObj, pc.apiToken,
+		httpCallOptions{})
+}
+
+// restCall makes a REST-style request to the Pulumi API using the given method, path, query object, and request
+// object. If a response object is provided, the server's response is deserialized into that object.
+func (pc *Client) restCallWithOptions(ctx context.Context, method, path string, queryObj, reqObj,
+	respObj interface{}, opts httpCallOptions,
+) error {
+	return pc.restClient.Call(ctx, pc.apiURL, method, path, queryObj, reqObj, respObj, pc.apiToken, opts)
+}
+
+// Copied from https://github.com/pulumi/pulumi-service/blob/master/pkg/apitype/users.go#L7-L16
+type serviceUserInfo struct {
+	Name        string `json:"name"`
+	GitHubLogin string `json:"githubLogin"`
+	AvatarURL   string `json:"avatarUrl"`
+	Email       string `json:"email,omitempty"`
+}
+
+// Copied from https://github.com/pulumi/pulumi-service/blob/master/pkg/apitype/users.go#L20-L37
+type serviceUser struct {
+	ID            string            `json:"id"`
+	GitHubLogin   string            `json:"githubLogin"`
+	Name          string            `json:"name"`
+	Email         string            `json:"email"`
+	AvatarURL     string            `json:"avatarUrl"`
+	Organizations []serviceUserInfo `json:"organizations"`
+	Identities    []string          `json:"identities"`
+	SiteAdmin     *bool             `json:"siteAdmin,omitempty"`
+	TokenInfo     *serviceTokenInfo `json:"tokenInfo,omitempty"`
+}
+
+// Copied from https://github.com/pulumi/pulumi-service/blob/master/pkg/apitype/users.go#L39-L43
+type serviceTokenInfo struct {
+	Name         string `json:"name"`
+	Organization string `json:"organization,omitempty"`
+	Team         string `json:"team,omitempty"`
+}
+
+// GetPulumiAccountName returns the user implied by the API token associated with this client.
+func (pc *Client) GetPulumiAccountDetails(ctx context.Context) (string, []string, *workspace.TokenInformation, error) {
+	if pc.apiUser == "" {
+		resp := serviceUser{}
+		if err := pc.restCall(ctx, "GET", "/api/user", nil, nil, &resp); err != nil {
+			return "", nil, nil, err
+		}
+
+		if resp.GitHubLogin == "" {
+			return "", nil, nil, errors.New("unexpected response from server")
+		}
+
+		pc.apiUser = resp.GitHubLogin
+		pc.apiOrgs = make([]string, len(resp.Organizations))
+		for i, org := range resp.Organizations {
+			if org.GitHubLogin == "" {
+				return "", nil, nil, errors.New("unexpected response from server")
+			}
+
+			pc.apiOrgs[i] = org.GitHubLogin
+		}
+		if resp.TokenInfo != nil {
+			pc.tokenInfo = &workspace.TokenInformation{
+				Name:         resp.TokenInfo.Name,
+				Organization: resp.TokenInfo.Organization,
+				Team:         resp.TokenInfo.Team,
+			}
+		}
+	}
+
+	return pc.apiUser, pc.apiOrgs, pc.tokenInfo, nil
+}
+
+func (pc *Client) ListEnvironments(ctx context.Context, orgName string) ([]string, error) {
+	var resp struct {
+		Environments []string `json:"environments,omitempty"`
+	}
+	path := fmt.Sprintf("/api/preview/environments/%v", orgName)
+	err := pc.restCall(ctx, http.MethodGet, path, nil, nil, &resp)
+	if err != nil {
+		return nil, err
+	}
+	return resp.Environments, nil
+}
+
+func (pc *Client) CreateEnvironment(ctx context.Context, orgName, envName string) error {
+	path := fmt.Sprintf("/api/preview/environments/%v/%v", orgName, envName)
+	return pc.restCall(ctx, http.MethodPost, path, nil, nil, nil)
+}
+
+func (pc *Client) GetEnvironment(ctx context.Context, orgName, envName string) ([]byte, string, error) {
+	path := fmt.Sprintf("/api/preview/environments/%v/%v", orgName, envName)
+	var resp *http.Response
+	if err := pc.restCall(ctx, http.MethodGet, path, nil, nil, &resp); err != nil {
+		return nil, "", err
+	}
+	yaml, err := readBody(resp)
+	if err != nil {
+		return nil, "", err
+	}
+	tag := resp.Header.Get("ETag")
+	return yaml, tag, nil
+}
+
+func (pc *Client) UpdateEnvironment(
+	ctx context.Context,
+	orgName string,
+	envName string,
+	yaml []byte,
+	tag string,
+) ([]EnvironmentDiagnostic, error) {
+	header := http.Header{}
+	if tag != "" {
+		header.Set("ETag", tag)
+	}
+
+	var errResp EnvironmentDiagnosticsResponse
+	path := fmt.Sprintf("/api/preview/environments/%v/%v", orgName, envName)
+	err := pc.restCallWithOptions(ctx, http.MethodPatch, path, nil, json.RawMessage(yaml), nil, httpCallOptions{
+		Header:        header,
+		ErrorResponse: &errResp,
+	})
+	if err != nil {
+		var diags *EnvironmentDiagnosticsResponse
+		if errors.As(err, &diags) {
+			return diags.Diagnostics, nil
+		}
+		return nil, err
+	}
+	return nil, nil
+}
+
+func (pc *Client) DeleteEnvironment(ctx context.Context, orgName, envName string) error {
+	path := fmt.Sprintf("/api/preview/environments/%v/%v", orgName, envName)
+	return pc.restCall(ctx, http.MethodDelete, path, nil, nil, nil)
+}
+
+func (pc *Client) OpenEnvironment(
+	ctx context.Context,
+	orgName string,
+	envName string,
+	duration time.Duration,
+) (string, []EnvironmentDiagnostic, error) {
+	queryObj := struct {
+		Duration string `url:"duration"`
+	}{
+		Duration: duration.String(),
+	}
+
+	var resp struct {
+		ID string `json:"id"`
+	}
+	var errResp EnvironmentDiagnosticsResponse
+	path := fmt.Sprintf("/api/preview/environments/%v/%v/open", orgName, envName)
+	err := pc.restCallWithOptions(ctx, http.MethodPost, path, queryObj, nil, &resp, httpCallOptions{
+		ErrorResponse: &errResp,
+	})
+	if err != nil {
+		var diags *EnvironmentDiagnosticsResponse
+		if errors.As(err, &diags) {
+			return "", diags.Diagnostics, nil
+		}
+		return "", nil, err
+	}
+	return resp.ID, nil, nil
+}
+
+func (pc *Client) CheckYAMLEnvironment(
+	ctx context.Context,
+	orgName string,
+	yaml []byte,
+) (*esc.Environment, []EnvironmentDiagnostic, error) {
+	var resp esc.Environment
+	var errResp EnvironmentDiagnosticsResponse
+	path := fmt.Sprintf("/api/preview/environments-yaml/%v/check", orgName)
+	err := pc.restCallWithOptions(ctx, http.MethodPost, path, nil, json.RawMessage(yaml), &resp, httpCallOptions{
+		ErrorResponse: &errResp,
+	})
+	if err != nil {
+		var diags *EnvironmentDiagnosticsResponse
+		if errors.As(err, &diags) {
+			return nil, diags.Diagnostics, nil
+		}
+		return nil, nil, err
+	}
+	return &resp, nil, nil
+}
+
+func (pc *Client) OpenYAMLEnvironment(
+	ctx context.Context,
+	orgName string,
+	yaml []byte,
+	duration time.Duration,
+) (string, []EnvironmentDiagnostic, error) {
+	queryObj := struct {
+		Duration string `url:"duration"`
+	}{
+		Duration: duration.String(),
+	}
+
+	var resp struct {
+		ID string `json:"id"`
+	}
+	var errResp EnvironmentDiagnosticsResponse
+	path := fmt.Sprintf("/api/preview/environments-yaml/%v/open", orgName)
+	err := pc.restCallWithOptions(ctx, http.MethodPost, path, queryObj, json.RawMessage(yaml), &resp, httpCallOptions{
+		ErrorResponse: &errResp,
+	})
+	if err != nil {
+		var diags *EnvironmentDiagnosticsResponse
+		if errors.As(err, &diags) {
+			return "", diags.Diagnostics, nil
+		}
+		return "", nil, err
+	}
+	return resp.ID, nil, nil
+}
+
+func (pc *Client) GetOpenEnvironment(ctx context.Context, openEnvID string) (*esc.Environment, error) {
+	var resp esc.Environment
+	path := fmt.Sprintf("/api/preview/environments-open/%v", openEnvID)
+	err := pc.restCall(ctx, http.MethodGet, path, nil, nil, &resp)
+	if err != nil {
+		return nil, err
+	}
+	return &resp, nil
+}
+
+func (pc *Client) GetOpenProperty(ctx context.Context, openEnvID, property string) (*esc.Value, error) {
+	queryObj := struct {
+		Property string `url:"property"`
+	}{
+		Property: property,
+	}
+
+	var resp esc.Value
+	path := fmt.Sprintf("/api/preview/openenvironments/%v", openEnvID)
+	err := pc.restCall(ctx, http.MethodGet, path, queryObj, nil, &resp)
+	if err != nil {
+		return nil, err
+	}
+	return &resp, nil
+}
