@@ -5,11 +5,14 @@ package ast
 import (
 	"encoding/json"
 	"fmt"
+	"regexp"
 	"strings"
 
 	"github.com/hashicorp/hcl/v2"
 	"github.com/pulumi/esc/syntax"
 )
+
+var fnOpenRegex = regexp.MustCompile("fn::[a-zA-Z]+-[a-zA-Z]+")
 
 // Expr represents a Pulumi YAML expression. Expressions may be literals, interpolated strings, symbols, or builtin
 // functions.
@@ -531,6 +534,34 @@ func tryParseFunction(node *syntax.ObjectNode) (Expr, syntax.Diagnostics, bool) 
 	case "fn::toString":
 		parse = parseToString
 	default:
+		if match, _ := regexp.MatchString(fnOpenRegex.String(), kvp.Key.Value()); match {
+			// transform the node into fn::open format
+			providerName := strings.TrimPrefix(kvp.Key.Value(), "fn::")
+			// case 1: inputs are provided
+			if _, ok := kvp.Value.(*syntax.ObjectNode); ok {
+				kvp.Value = syntax.Object(
+					syntax.ObjectPropertyDef{
+						Key:   syntax.StringSyntax(kvp.Syntax, "inputs"),
+						Value: kvp.Value,
+					},
+					syntax.ObjectPropertyDef{
+						Key:   syntax.StringSyntax(kvp.Syntax, "provider"),
+						Value: syntax.String(providerName),
+					},
+				)
+			} else {
+				// case 2: inputs are not provided
+				kvp.Value = syntax.Object(
+					syntax.ObjectPropertyDef{
+						Key:   syntax.StringSyntax(kvp.Syntax, "inputs"),
+						Value: syntax.String(providerName),
+					},
+				)
+			}
+			parse = parseOpen
+			break
+		}
+
 		if strings.HasPrefix(strings.ToLower(kvp.Key.Value()), "fn::") {
 			diags = append(diags, syntax.Warning(kvp.Key.Syntax().Range(),
 				"'fn::' is a reserved prefix",
