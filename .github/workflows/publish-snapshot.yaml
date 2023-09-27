@@ -1,0 +1,23 @@
+name: Publish Snapshot
+
+on:
+  push:
+    branches: ['main', 'feature/**', 'feature-**']
+    paths-ignore:
+      - 'CHANGELOG.md'
+      - 'CHANGELOG_PENDING.md'
+      - 'README.md'
+
+env:
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+jobs:
+  lint:
+    uses: ./.github/workflows/stage-lint.yml
+  test:
+    uses: ./.github/workflows/stage-test.yml
+  publish:
+    needs: [test, lint]
+    uses: ./.github/workflows/stage-publish.yml
+    with:
+      goreleaser-args: -p 10 -f .goreleaser.prerelease.yml --rm-dist --skip-validate --timeout 60m0s --release-notes=CHANGELOG_PENDING.md

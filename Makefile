@@ -1,9 +1,3 @@
-PULUMI_TEST_ORG   ?= $(shell pulumi whoami)
-PULUMI_TEST_OWNER ?= ${PULUMI_TEST_ORG}
-PULUMI_LIVE_TEST  ?= false
-export PULUMI_TEST_ORG
-export PULUMI_TEST_OWNER
-
 VERSION := $(if ${PULUMI_VERSION},${PULUMI_VERSION},$(shell ./scripts/pulumi-version.sh))
 
 CONCURRENCY := 10

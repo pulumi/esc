@@ -1,0 +1,20 @@
+name: Publish Prerelease
+
+on:
+  push:
+    tags:
+      - v*.*.*-**
+
+env:
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+jobs:
+  lint:
+    uses: ./.github/workflows/stage-lint.yml
+  test:
+    uses: ./.github/workflows/stage-test.yml
+  publish:
+    needs: [test, lint]
+    uses: ./.github/workflows/stage-publish.yml
+    with:
+      goreleaser-args: -p 10 -f .goreleaser.prerelease.yml --rm-dist --skip-validate --timeout 60m0s --release-notes=CHANGELOG_PENDING.md

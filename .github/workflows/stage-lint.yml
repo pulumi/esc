@@ -1,0 +1,57 @@
+name: Lint
+
+on:
+  workflow_call:
+
+permissions: read-all
+
+env:
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v2
+      - name: Set up Go 1.21.0
+        uses: actions/setup-go@v3
+        with:
+          go-version: 1.21.0
+      - run: go mod tidy
+      - name: Fail if go mod not tidy
+        run: |
+          if [ -n "$(git status --porcelain)" ]; then
+            echo "::error go.mod not tidy"
+            exit 1
+          fi
+
+      # We leverage the golangci-lint action to install
+      # and maintain the cache,
+      # but we want to run the command ourselves.
+      # The action doesn't have an install-only mode,
+      # so we'll ask it to print its version only.
+      - name: Install golangci-lint
+        uses: golangci/golangci-lint-action@v3
+        with:
+          version: v1.54.2
+          args: --version
+
+      - name: Lint
+        run: make lint-golang
+
+  check-copyright:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v2
+      - name: Install pulumictl
+        uses: jaxxstorm/action-install-gh-release@v1.5.0
+        with:
+          repo: pulumi/pulumictl
+      - name: Set up Go 1.21.0
+        uses: actions/setup-go@v3
+        with:
+          go-version: 1.21.0
+      - name: Lint
+        run: make lint-copyright
