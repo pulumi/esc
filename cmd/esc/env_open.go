@@ -149,7 +149,7 @@ func newEnvOpenCmd(envcmd *envCommand) *cobra.Command {
 		"the output format to use. May be 'flat', 'json', 'detailed', or 'shell'")
 	cmd.Flags().BoolVarP(
 		&preview, "preview", "p", false,
-		"true to preview the openend environment")
+		"true to preview the opened environment")
 
 	return cmd
 }
