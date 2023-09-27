@@ -533,32 +533,8 @@ func tryParseFunction(node *syntax.ObjectNode) (Expr, syntax.Diagnostics, bool) 
 	case "fn::toString":
 		parse = parseToString
 	default:
-
-		if providerName, isOpen := strings.CutPrefix(kvp.Key.Value(), "fn::open::"); isOpen {
-			// transform the node into fn::open format
-			providerName := strings.TrimPrefix(kvp.Key.Value(), "fn::")
-			// case 1: inputs are provided
-			if _, ok := kvp.Value.(*syntax.ObjectNode); ok {
-				kvp.Value = syntax.Object(
-					syntax.ObjectPropertyDef{
-						Key:   syntax.StringSyntax(kvp.Syntax, "inputs"),
-						Value: kvp.Value,
-					},
-					syntax.ObjectPropertyDef{
-						Key:   syntax.StringSyntax(kvp.Syntax, "provider"),
-						Value: syntax.String(providerName),
-					},
-				)
-			} else {
-				// case 2: inputs are not provided
-				kvp.Value = syntax.Object(
-					syntax.ObjectPropertyDef{
-						Key:   syntax.StringSyntax(kvp.Syntax, "inputs"),
-						Value: syntax.String(providerName),
-					},
-				)
-			}
-			parse = parseOpen
+		if strings.HasPrefix(kvp.Key.Value(), "fn::open::") {
+			parse = parseShortOpen
 			break
 		}
 
@@ -633,6 +609,16 @@ func parseOpen(node *syntax.ObjectNode, name *StringExpr, args Expr) (Expr, synt
 	}
 
 	return OpenSyntax(node, name, obj, provider, inputs), diags
+}
+
+func parseShortOpen(node *syntax.ObjectNode, name *StringExpr, args Expr) (Expr, syntax.Diagnostics) {
+	provider := strings.TrimPrefix(node.Key.Value(), "fn::open::")
+	inputs, ok := args.(*ObjectExpr)
+	if !ok {
+		return nil, syntax.Diagnostics{ExprError(args, fmt.Sprintf("the argument to fn::open::%s must be an object", provider), "")}
+	}
+
+	return OpenSyntax(node, name, inputs, StringSyntaxValue(name, provider), inputs), nil
 }
 
 func parseJoin(node *syntax.ObjectNode, name *StringExpr, args Expr) (Expr, syntax.Diagnostics) {
