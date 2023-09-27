@@ -52,9 +52,8 @@ imports:
 config:
   aws:
     fn::open::aws-oidc:
-      inputs:
-        sessionName: site-prod-session
-        roleArn: some-role-arn
+      sessionName: site-prod-session
+      roleArn: some-role-arn
   pulumi:
     aws:defaultTags:
       tags:
