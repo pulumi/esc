@@ -610,13 +610,14 @@ func parseOpen(node *syntax.ObjectNode, name *StringExpr, args Expr) (Expr, synt
 }
 
 func parseShortOpen(node *syntax.ObjectNode, name *StringExpr, args Expr) (Expr, syntax.Diagnostics) {
-	provider := strings.TrimPrefix(node.Key.Value(), "fn::open::")
+	kvp := node.Index(0)
+	provider := strings.TrimPrefix(kvp.Key.Value(), "fn::open::")
 	inputs, ok := args.(*ObjectExpr)
 	if !ok {
 		return nil, syntax.Diagnostics{ExprError(args, fmt.Sprintf("the argument to fn::open::%s must be an object", provider), "")}
 	}
 
-	return OpenSyntax(node, name, inputs, StringSyntaxValue(name, provider), inputs), nil
+	return OpenSyntax(node, name, inputs, String(provider), inputs), nil
 }
 
 func parseJoin(node *syntax.ObjectNode, name *StringExpr, args Expr) (Expr, syntax.Diagnostics) {
