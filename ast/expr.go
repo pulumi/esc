@@ -11,8 +11,6 @@ import (
 	"github.com/pulumi/esc/syntax"
 )
 
-var fnOpenRegex = regexp.MustCompile(`^fn::open::[a-zA-Z-]+$`)
-
 // Expr represents a Pulumi YAML expression. Expressions may be literals, interpolated strings, symbols, or builtin
 // functions.
 type Expr interface {

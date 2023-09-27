@@ -51,7 +51,7 @@ imports:
   - us-west-2
 config:
   aws:
-    fn::aws-oidc:
+    fn::open::aws-oidc:
       inputs:
         sessionName: site-prod-session
         roleArn: some-role-arn
