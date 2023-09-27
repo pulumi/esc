@@ -1,6 +1,6 @@
 module github.com/pulumi/esc
 
-go 1.20
+go 1.21.0
 
 require (
 	github.com/google/go-querystring v1.1.0
