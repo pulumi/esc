@@ -1,0 +1,132 @@
+{
+    "environment": {
+        "exprs": {
+            "second": {
+                "range": {
+                    "environment": "imports_interpolate",
+                    "begin": {
+                        "line": 4,
+                        "column": 11,
+                        "byte": 33
+                    },
+                    "end": {
+                        "line": 4,
+                        "column": 20,
+                        "byte": 42
+                    }
+                },
+                "schema": {
+                    "type": "string",
+                    "const": "everybody"
+                },
+                "base": {
+                    "range": {
+                        "environment": "a",
+                        "begin": {
+                            "line": 3,
+                            "column": 11,
+                            "byte": 33
+                        },
+                        "end": {
+                            "line": 3,
+                            "column": 16,
+                            "byte": 38
+                        }
+                    },
+                    "schema": {
+                        "type": "string",
+                        "const": "world"
+                    },
+                    "literal": "world"
+                },
+                "literal": "everybody"
+            }
+        },
+        "properties": {
+            "first": {
+                "value": "hello",
+                "trace": {
+                    "def": {
+                        "environment": "a",
+                        "begin": {
+                            "line": 2,
+                            "column": 10,
+                            "byte": 17
+                        },
+                        "end": {
+                            "line": 2,
+                            "column": 15,
+                            "byte": 22
+                        }
+                    }
+                }
+            },
+            "second": {
+                "value": "everybody",
+                "trace": {
+                    "def": {
+                        "environment": "imports_interpolate",
+                        "begin": {
+                            "line": 4,
+                            "column": 11,
+                            "byte": 33
+                        },
+                        "end": {
+                            "line": 4,
+                            "column": 20,
+                            "byte": 42
+                        }
+                    },
+                    "base": {
+                        "value": "world",
+                        "trace": {
+                            "def": {
+                                "environment": "a",
+                                "begin": {
+                                    "line": 3,
+                                    "column": 11,
+                                    "byte": 33
+                                },
+                                "end": {
+                                    "line": 3,
+                                    "column": 16,
+                                    "byte": 38
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "test": {
+                "value": "hello, everybody",
+                "trace": {
+                    "def": {
+                        "environment": "a",
+                        "begin": {
+                            "line": 4,
+                            "column": 9,
+                            "byte": 47
+                        },
+                        "end": {
+                            "line": 4,
+                            "column": 28,
+                            "byte": 66
+                        }
+                    }
+                }
+            }
+        },
+        "schema": {
+            "properties": {
+                "second": {
+                    "type": "string",
+                    "const": "everybody"
+                }
+            },
+            "type": "object",
+            "required": [
+                "second"
+            ]
+        }
+    }
+}

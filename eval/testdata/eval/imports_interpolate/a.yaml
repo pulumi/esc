@@ -1,0 +1,4 @@
+values:
+  first: hello
+  second: world
+  test: ${first}, ${second}

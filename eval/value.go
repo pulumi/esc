@@ -29,8 +29,9 @@ type value struct {
 
 	// true if the value is unknown (e.g. because it did not evaluate successfully or is the result of an unevaluated
 	// fn::open)
-	unknown bool
-	secret  bool // true if the value is secret
+	unknown     bool
+	secret      bool             // true if the value is secret
+	interpolate *interpolateExpr // delay resolved interpolate expr
 
 	repr any // nil | bool | json.Number | string | []*value | map[string]*value
 }
@@ -101,12 +102,13 @@ func (v *value) copy() *value {
 		repr = vr
 	}
 	return &value{
-		def:     v.def,
-		base:    v.base.copy(),
-		schema:  v.schema,
-		unknown: v.unknown,
-		secret:  v.secret,
-		repr:    repr,
+		def:         v.def,
+		base:        v.base.copy(),
+		schema:      v.schema,
+		unknown:     v.unknown,
+		secret:      v.secret,
+		interpolate: v.interpolate,
+		repr:        repr,
 	}
 }
 

@@ -98,6 +98,7 @@ func evalEnvironment(
 
 	ec := newEvalContext(ctx, validating, name, env, providers, envs, map[string]*value{})
 	v, diags := ec.evaluate()
+	ec.resolveInterpolations(v)
 
 	s := schema.Never().Schema()
 	if v != nil {
@@ -479,14 +480,43 @@ func (e *evalContext) evaluateObject(x *expr, repr *objectExpr) *value {
 
 // evaluateInterpolate evaluates a string interpolation expression.
 func (e *evalContext) evaluateInterpolate(x *expr, repr *interpolateExpr) *value {
-	v := &value{def: x, schema: x.schema}
+	v := &value{def: x, schema: x.schema, interpolate: repr}
+	return v
+}
 
+func (e *evalContext) resolveInterpolations(v *value) {
+	if v == nil {
+		return
+	}
+
+	e.resolveInterpolations(v.base)
+	if v.interpolate != nil {
+		e.resolveInterpolation(v)
+		return
+	}
+
+	switch repr := v.repr.(type) {
+	case []*value:
+		for i := range repr {
+			e.resolveInterpolations(repr[i])
+		}
+	case map[string]*value:
+		for _, v := range repr {
+			e.resolveInterpolations(v)
+		}
+	default:
+		return
+	}
+
+}
+
+func (e *evalContext) resolveInterpolation(v *value) {
 	var b strings.Builder
-	for _, i := range repr.parts {
+	for _, i := range v.interpolate.parts {
 		b.WriteString(i.syntax.Text)
 
 		if i.value != nil {
-			pv := e.evaluatePropertyAccess(x, i.value.accessors)
+			pv := e.evaluatePropertyAccess(v.def, i.value.accessors)
 			s, unknown, secret := pv.toString()
 			v.unknown, v.secret = v.unknown || unknown, v.secret || secret
 			if !unknown {
@@ -500,7 +530,7 @@ func (e *evalContext) evaluateInterpolate(x *expr, repr *interpolateExpr) *value
 	} else {
 		v.repr = "<unknown>"
 	}
-	return v
+	v.interpolate = nil
 }
 
 // evalutePropertyAccess evaluates a property access.
