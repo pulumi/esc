@@ -28,8 +28,14 @@ func (err EnvironmentDiagnosticsResponse) Error() string {
 	return diags.String()
 }
 
+type OrgEnvironment struct {
+	Organization string `json:"organization,omitempty"`
+	Name         string `json:"name,omitempty"`
+}
+
 type ListEnvironmentsResponse struct {
-	Environments []string `json:"environments,omitempty"`
+	Environments []OrgEnvironment `json:"environments,omitempty"`
+	NextToken    string           `json:"nextToken,omitempty"`
 }
 
 type UpdateEnvironmentResponse struct {

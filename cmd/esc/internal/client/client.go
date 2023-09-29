@@ -145,16 +145,25 @@ func (pc *Client) GetPulumiAccountDetails(ctx context.Context) (string, []string
 	return pc.apiUser, pc.apiOrgs, pc.tokenInfo, nil
 }
 
-func (pc *Client) ListEnvironments(ctx context.Context, orgName string) ([]string, error) {
-	var resp struct {
-		Environments []string `json:"environments,omitempty"`
+func (pc *Client) ListEnvironments(
+	ctx context.Context,
+	orgName string,
+	continuationToken string,
+) ([]OrgEnvironment, string, error) {
+	queryObj := struct {
+		ContinuationToken string `url:"continuationToken,omitempty"`
+		Organization      string `organization:"organization,omitempty"`
+	}{
+		ContinuationToken: continuationToken,
+		Organization:      orgName,
 	}
-	path := fmt.Sprintf("/api/preview/environments/%v", orgName)
-	err := pc.restCall(ctx, http.MethodGet, path, nil, nil, &resp)
+
+	var resp ListEnvironmentsResponse
+	err := pc.restCall(ctx, http.MethodGet, "/api/preview/environments", queryObj, nil, &resp)
 	if err != nil {
-		return nil, err
+		return nil, "", err
 	}
-	return resp.Environments, nil
+	return resp.Environments, resp.NextToken, nil
 }
 
 func (pc *Client) CreateEnvironment(ctx context.Context, orgName, envName string) error {
