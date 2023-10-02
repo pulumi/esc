@@ -152,7 +152,7 @@ func (pc *Client) ListEnvironments(
 ) ([]OrgEnvironment, string, error) {
 	queryObj := struct {
 		ContinuationToken string `url:"continuationToken,omitempty"`
-		Organization      string `organization:"organization,omitempty"`
+		Organization      string `url:"organization,omitempty"`
 	}{
 		ContinuationToken: continuationToken,
 		Organization:      orgName,
