@@ -1,24 +1,20 @@
 // Copyright 2023, Pulumi Corporation.
 
-package main
+package cli
 
 import (
 	"context"
 	"errors"
 	"fmt"
 	"net/url"
-	"os"
 	"path"
 	"strings"
 
 	"github.com/spf13/cobra"
 
-	"github.com/pulumi/esc/cmd/esc/internal/client"
-	"github.com/pulumi/esc/cmd/esc/internal/workspace"
+	"github.com/pulumi/esc/cmd/esc/cli/workspace"
 	"github.com/pulumi/pulumi/pkg/v3/backend/display"
 	"github.com/pulumi/pulumi/pkg/v3/backend/filestate"
-	"github.com/pulumi/pulumi/pkg/v3/backend/httpstate"
-	"github.com/pulumi/pulumi/sdk/v3/go/common/util/cmdutil"
 )
 
 func newLoginCmd(esc *escCommand) *cobra.Command {
@@ -49,8 +45,9 @@ func newLoginCmd(esc *escCommand) *cobra.Command {
 			"For `https://` URLs, the CLI will speak REST to a Pulumi Cloud that manages state and concurrency control.\n" +
 			"You can specify a default org to use when logging into the Pulumi Cloud backend or a " +
 			"self-hosted Pulumi Cloud.\n",
-		Args: cmdutil.MaximumNArgs(1),
-		Run: cmdutil.RunFunc(func(cmd *cobra.Command, args []string) error {
+		SilenceUsage: true,
+		Args:         cobra.MaximumNArgs(1),
+		RunE: func(cmd *cobra.Command, args []string) error {
 			ctx := context.Background()
 
 			// If a <cloud> was specified as an argument, use it.
@@ -66,7 +63,7 @@ func newLoginCmd(esc *escCommand) *cobra.Command {
 			}
 
 			if backendURL == "" {
-				account, isShared, err := workspace.GetCurrentAccount(shared)
+				account, isShared, err := esc.workspace.GetCurrentAccount(shared)
 				if err != nil {
 					return fmt.Errorf("could not determine current cloud: %w", err)
 				}
@@ -81,7 +78,7 @@ func newLoginCmd(esc *escCommand) *cobra.Command {
 				return fmt.Errorf("%s does not support Pulumi ESC.", backendURL)
 			}
 
-			account, err := httpstate.NewLoginManager().Login(
+			account, err := esc.login.Login(
 				ctx,
 				backendURL,
 				insecure,
@@ -93,7 +90,7 @@ func newLoginCmd(esc *escCommand) *cobra.Command {
 			)
 			// if the user has specified a default org to associate with the backend
 			if defaultOrg != "" {
-				if err := workspace.SetBackendConfigDefaultOrg(backendURL, defaultOrg); err != nil {
+				if err := esc.workspace.SetBackendConfigDefaultOrg(backendURL, defaultOrg); err != nil {
 					return err
 				}
 			}
@@ -106,7 +103,7 @@ func newLoginCmd(esc *escCommand) *cobra.Command {
 				DefaultOrg: defaultOrg,
 			}
 
-			if err := workspace.SetCurrentAccount(esc.account, shared); err != nil {
+			if err := esc.workspace.SetCurrentAccount(esc.account, shared); err != nil {
 				return fmt.Errorf("setting current account: %w", err)
 			}
 
@@ -115,17 +112,17 @@ func newLoginCmd(esc *escCommand) *cobra.Command {
 				backendName = "pulumi.com"
 			}
 
-			client := client.NewClient(backendURL, account.AccessToken, account.Insecure)
+			client := esc.newClient(backendURL, account.AccessToken, account.Insecure)
 			if currentUser, _, _, err := client.GetPulumiAccountDetails(ctx); err == nil {
 				// TODO should we print the token information here? (via team MyTeam token MyToken)
-				consoleURL := cloudConsoleURL(backendURL, currentUser)
+				consoleURL := esc.cloudConsoleURL(backendURL, currentUser)
 				fmt.Printf("Logged in to %s as %s (%s)\n", backendName, currentUser, consoleURL)
 			} else {
-				fmt.Printf("Logged in to %s (%s)\n", backendName, cloudConsoleURL(backendURL))
+				fmt.Printf("Logged in to %s (%s)\n", backendName, esc.cloudConsoleURL(backendURL))
 			}
 
 			return nil
-		}),
+		},
 	}
 
 	cmd.Flags().StringVarP(&backendURL, "cloud-url", "c", "", "A cloud URL to log in to")
@@ -142,7 +139,7 @@ func isInvalidSelfHostedURL(url string) bool {
 }
 
 func (esc *escCommand) getCachedClient(ctx context.Context) error {
-	account, _, err := workspace.GetCurrentAccount(false)
+	account, _, err := esc.workspace.GetCurrentAccount(false)
 	if err != nil {
 		return fmt.Errorf("could not determine current cloud: %w", err)
 	}
@@ -155,17 +152,17 @@ func (esc *escCommand) getCachedClient(ctx context.Context) error {
 		return fmt.Errorf("no credentials. Please run `esc login` to log in.")
 	}
 
-	esc.client = client.NewClient(account.BackendURL, account.AccessToken, account.Insecure)
+	esc.client = esc.newClient(account.BackendURL, account.AccessToken, account.Insecure)
 	return nil
 }
 
 func (esc *escCommand) getCachedCredentials(ctx context.Context, backendURL string, insecure bool) (bool, error) {
-	account, err := httpstate.NewLoginManager().Current(ctx, backendURL, insecure, false)
+	account, err := esc.login.Current(ctx, backendURL, insecure, false)
 	if err != nil {
 		return false, err
 	}
 
-	defaultOrg, err := workspace.GetBackendConfigDefaultOrg(backendURL, account.Username)
+	defaultOrg, err := esc.workspace.GetBackendConfigDefaultOrg(backendURL, account.Username)
 	if err != nil {
 		return false, err
 	}
@@ -195,18 +192,18 @@ const (
 
 // cloudConsoleURL returns a URL to the Pulumi Cloud Console, rooted at cloudURL. If there is
 // an error, returns "".
-func cloudConsoleURL(cloudURL string, paths ...string) string {
+func (esc *escCommand) cloudConsoleURL(cloudURL string, paths ...string) string {
 	u, err := url.Parse(cloudURL)
 	if err != nil {
 		return ""
 	}
 
 	switch {
-	case os.Getenv(consoleDomainEnvVar) != "":
+	case esc.environ.Get(consoleDomainEnvVar) != "":
 		// Honor a PULUMI_CONSOLE_DOMAIN environment variable to override the
 		// default behavior. Since we identify a backend by a single URI, we
 		// cannot know what the Pulumi Console is hosted at...
-		u.Host = os.Getenv(consoleDomainEnvVar)
+		u.Host = esc.environ.Get(consoleDomainEnvVar)
 	case strings.HasPrefix(u.Host, defaultAPIDomainPrefix):
 		// ... but if the cloudURL (API domain) is "api.", then we assume the
 		// console is hosted at "app.".

@@ -1,17 +1,16 @@
 // Copyright 2023, Pulumi Corporation.
 
-package main
+package cli
 
 import (
 	"context"
 	"encoding/json"
 	"fmt"
-	"os"
 	"sort"
 	"time"
 
 	"github.com/pulumi/esc"
-	"github.com/pulumi/esc/cmd/esc/internal/client"
+	"github.com/pulumi/esc/cmd/esc/cli/client"
 	"github.com/pulumi/pulumi/sdk/v3/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v3/go/common/util/cmdutil"
 	"github.com/pulumi/pulumi/sdk/v3/go/common/util/contract"
@@ -26,13 +25,14 @@ func newEnvOpenCmd(envcmd *envCommand) *cobra.Command {
 
 	cmd := &cobra.Command{
 		Use:   "open [<org-name>/]<environment-name> [property path]",
-		Args:  cmdutil.MaximumNArgs(2),
+		Args:  cobra.MaximumNArgs(2),
 		Short: "Open the environment with the given name.",
 		Long: "Open the environment with the given name and return the result\n" +
 			"\n" +
 			"This command opens the environment with the given name. The result is written to\n" +
 			"stdout as JSON. If a property path is specified, only retrieves that property.\n",
-		Run: cmdutil.RunFunc(func(cmd *cobra.Command, args []string) error {
+		SilenceUsage: true,
+		RunE: func(cmd *cobra.Command, args []string) error {
 			ctx := context.Background()
 
 			if err := envcmd.esc.getCachedClient(ctx); err != nil {
@@ -80,7 +80,7 @@ func newEnvOpenCmd(envcmd *envCommand) *cobra.Command {
 				return err
 			}
 			if len(diags) != 0 {
-				return envcmd.writePropertyEnvironmentDiagnostics(os.Stderr, diags)
+				return envcmd.writePropertyEnvironmentDiagnostics(envcmd.esc.stderr, diags)
 			}
 
 			val := esc.NewValue(env.Properties)
@@ -95,11 +95,11 @@ func newEnvOpenCmd(envcmd *envCommand) *cobra.Command {
 			switch format {
 			case "json":
 				body := val.ToJSON(false)
-				enc := json.NewEncoder(os.Stdout)
+				enc := json.NewEncoder(envcmd.esc.stdout)
 				enc.SetIndent("", "  ")
 				return enc.Encode(body)
 			case "detailed":
-				enc := json.NewEncoder(os.Stdout)
+				enc := json.NewEncoder(envcmd.esc.stdout)
 				enc.SetIndent("", "  ")
 				return enc.Encode(val)
 			case "flat":
@@ -138,7 +138,7 @@ func newEnvOpenCmd(envcmd *envCommand) *cobra.Command {
 				// NOTE: we shouldn't get here. This was checked at the beginning of the function.
 				return fmt.Errorf("unknown output format %q", format)
 			}
-		}),
+		},
 	}
 
 	cmd.Flags().DurationVarP(

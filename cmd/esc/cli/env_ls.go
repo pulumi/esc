@@ -1,6 +1,6 @@
 // Copyright 2023, Pulumi Corporation.
 
-package main
+package cli
 
 import (
 	"context"
@@ -9,8 +9,7 @@ import (
 
 	"github.com/spf13/cobra"
 
-	"github.com/pulumi/esc/cmd/esc/internal/client"
-	"github.com/pulumi/pulumi/sdk/v3/go/common/util/cmdutil"
+	"github.com/pulumi/esc/cmd/esc/cli/client"
 )
 
 func newEnvLsCmd(env *envCommand) *cobra.Command {
@@ -22,8 +21,9 @@ func newEnvLsCmd(env *envCommand) *cobra.Command {
 		Long: "List environments\n" +
 			"\n" +
 			"This command lists environments. All environments you have access to will be listed.\n",
-		Args: cmdutil.NoArgs,
-		Run: cmdutil.RunFunc(func(cmd *cobra.Command, _ []string) error {
+		SilenceUsage: true,
+		Args:         cobra.NoArgs,
+		RunE: func(cmd *cobra.Command, _ []string) error {
 			ctx := context.Background()
 
 			if err := env.esc.getCachedClient(ctx); err != nil {
@@ -51,7 +51,10 @@ func newEnvLsCmd(env *envCommand) *cobra.Command {
 			}
 
 			sort.Slice(allNames, func(i, j int) bool {
-				return allNames[i].Organization < allNames[j].Organization || allNames[i].Name < allNames[j].Name
+				if allNames[i].Organization == allNames[j].Organization {
+					return allNames[i].Name < allNames[j].Name
+				}
+				return allNames[i].Organization < allNames[j].Organization
 			})
 
 			for _, n := range allNames {
@@ -63,7 +66,7 @@ func newEnvLsCmd(env *envCommand) *cobra.Command {
 			}
 
 			return nil
-		}),
+		},
 	}
 
 	cmd.PersistentFlags().StringVarP(

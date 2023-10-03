@@ -1,12 +1,11 @@
 // Copyright 2023, Pulumi Corporation.
 
-package main
+package cli
 
 import (
 	"context"
 	"errors"
 	"fmt"
-	"os"
 
 	"github.com/spf13/cobra"
 	"gopkg.in/yaml.v3"
@@ -14,7 +13,6 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/common/diag/colors"
 	pulumienv "github.com/pulumi/pulumi/sdk/v3/go/common/env"
 	"github.com/pulumi/pulumi/sdk/v3/go/common/resource"
-	"github.com/pulumi/pulumi/sdk/v3/go/common/util/cmdutil"
 )
 
 func newEnvRmCmd(env *envCommand) *cobra.Command {
@@ -22,7 +20,7 @@ func newEnvRmCmd(env *envCommand) *cobra.Command {
 
 	cmd := &cobra.Command{
 		Use:   "rm [<org-name>/]<environment-name> [path]",
-		Args:  cmdutil.MaximumNArgs(2),
+		Args:  cobra.MaximumNArgs(2),
 		Short: "Remove an environment or a value from an environment.",
 		Long: "Remove an environment or a value from an environment\n" +
 			"\n" +
@@ -30,7 +28,8 @@ func newEnvRmCmd(env *envCommand) *cobra.Command {
 			"\n" +
 			"When removing an environment, the environment will no longer be available\n" +
 			"once this command completes.",
-		Run: cmdutil.RunFunc(func(cmd *cobra.Command, args []string) error {
+		SilenceUsage: true,
+		RunE: func(cmd *cobra.Command, args []string) error {
 			ctx := context.Background()
 
 			yes = yes || pulumienv.SkipConfirmations.Value()
@@ -101,11 +100,11 @@ func newEnvRmCmd(env *envCommand) *cobra.Command {
 				return fmt.Errorf("updating environment definition: %w", err)
 			}
 			if len(diags) != 0 {
-				return env.writePropertyEnvironmentDiagnostics(os.Stderr, diags)
+				return env.writePropertyEnvironmentDiagnostics(env.esc.stderr, diags)
 			}
 
 			return nil
-		}),
+		},
 	}
 
 	cmd.PersistentFlags().BoolVarP(&yes, "yes", "y", false, "Skip confirmation prompts, and proceed with removal anyway")

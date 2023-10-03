@@ -3,18 +3,20 @@ module github.com/pulumi/esc
 go 1.21.0
 
 require (
+	github.com/gofrs/uuid v4.2.0+incompatible
 	github.com/google/go-querystring v1.1.0
 	github.com/hashicorp/hcl/v2 v2.17.0
 	github.com/petar-dambovaliev/aho-corasick v0.0.0-20230725210150-fb29fc3c913e
 	github.com/pulumi/pulumi/pkg/v3 v3.78.2-0.20230926151835-2b44cf6ec1be
 	github.com/pulumi/pulumi/sdk/v3 v3.85.1-0.20230926151835-2b44cf6ec1be
 	github.com/rivo/uniseg v0.4.4
-	github.com/rogpeppe/go-internal v1.9.0
+	github.com/rogpeppe/go-internal v1.10.1-0.20230524175051-ec119421bb97
 	github.com/spf13/cobra v1.7.0
 	github.com/stretchr/testify v1.8.4
 	golang.org/x/exp v0.0.0-20230817173708-d852ddb80c63
 	golang.org/x/term v0.8.0
 	gopkg.in/yaml.v3 v3.0.1
+	mvdan.cc/sh/v3 v3.7.0
 )
 
 require (
@@ -91,7 +93,6 @@ require (
 	github.com/go-git/gcfg v1.5.0 // indirect
 	github.com/go-git/go-billy/v5 v5.4.0 // indirect
 	github.com/go-git/go-git/v5 v5.6.0 // indirect
-	github.com/gofrs/uuid v4.2.0+incompatible // indirect
 	github.com/gogo/protobuf v1.3.2 // indirect
 	github.com/golang-jwt/jwt v3.2.1+incompatible // indirect
 	github.com/golang-jwt/jwt/v4 v4.4.2 // indirect

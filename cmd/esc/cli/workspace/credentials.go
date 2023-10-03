@@ -1,16 +1,16 @@
-// Copyright 2023, Pulumi Corporation.  All rights reserved.
+// Copyright 2023, Pulumi Corporation. All rights reserved.
 
 package workspace
 
 import (
 	"bytes"
 	"encoding/json"
+	"errors"
 	"fmt"
-	"os"
-	"path/filepath"
+	"io/fs"
+	"path"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/common/workspace"
-	"github.com/rogpeppe/go-internal/lockedfile"
 )
 
 // Account holds details about a Pulumi account.
@@ -32,14 +32,14 @@ type Credentials struct {
 //
 // Note that the account may not be fully populated: it may only have a valid AccessToken. In that case, it is up to
 // the caller to fill in the username and last validation time.
-func GetAccount(backendURL string) (*Account, error) {
-	account, err := workspace.GetAccount(backendURL)
+func (w *Workspace) GetAccount(backendURL string) (*Account, error) {
+	account, err := w.pulumi.GetAccount(backendURL)
 	if err != nil {
 		return nil, err
 	}
 
-	config, err := workspace.GetPulumiConfig()
-	if err != nil && !os.IsNotExist(err) {
+	config, err := w.pulumi.GetPulumiConfig()
+	if err != nil && !errors.Is(err, fs.ErrNotExist) {
 		return nil, err
 	}
 
@@ -51,16 +51,16 @@ func GetAccount(backendURL string) (*Account, error) {
 }
 
 // GetCurrentAccount returns information about the currently logged-in account.
-func GetCurrentAccount(shared bool) (*Account, bool, error) {
+func (w *Workspace) GetCurrentAccount(shared bool) (*Account, bool, error) {
 	// Read esc account.
-	backendURL, err := getCurrentAccountName()
+	backendURL, err := w.getCurrentAccountName()
 	if err != nil {
 		return nil, false, fmt.Errorf("reading credentials: %w", err)
 	}
 
 	// Read Pulumi creds.
-	pulumiCreds, err := workspace.GetStoredCredentials()
-	if err != nil && !os.IsNotExist(err) {
+	pulumiCreds, err := w.pulumi.GetStoredCredentials()
+	if err != nil && !errors.Is(err, fs.ErrNotExist) {
 		return nil, false, fmt.Errorf("reading Pulumi credentials: %w", err)
 	}
 
@@ -80,8 +80,8 @@ func GetCurrentAccount(shared bool) (*Account, bool, error) {
 			"Please re-run `esc login` to reset your credentials file.", backendURL)
 	}
 
-	config, err := workspace.GetPulumiConfig()
-	if err != nil && !os.IsNotExist(err) {
+	config, err := w.pulumi.GetPulumiConfig()
+	if err != nil && !errors.Is(err, fs.ErrNotExist) {
 		return nil, false, err
 	}
 
@@ -93,9 +93,9 @@ func GetCurrentAccount(shared bool) (*Account, bool, error) {
 }
 
 // SetCurrentAccount sets the currently logged-in account.
-func SetCurrentAccount(account Account, shared bool) error {
+func (w *Workspace) SetCurrentAccount(account Account, shared bool) error {
 	// Store the account in Pulumi creds.
-	if err := workspace.StoreAccount(account.BackendURL, account.Account, false); err != nil {
+	if err := w.pulumi.StoreAccount(account.BackendURL, account.Account, false); err != nil {
 		return fmt.Errorf("writing Pulumi credentials: %w", err)
 	}
 
@@ -107,7 +107,7 @@ func SetCurrentAccount(account Account, shared bool) error {
 	}
 	creds := Credentials{Current: current}
 
-	credsFile, err := getCredsFilePath()
+	credsFile, err := w.getCredsFilePath()
 	if err != nil {
 		return err
 	}
@@ -117,22 +117,22 @@ func SetCurrentAccount(account Account, shared bool) error {
 		return fmt.Errorf("marshaling credentials: %w", err)
 	}
 
-	if err := os.MkdirAll(filepath.Dir(credsFile), 0o700); err != nil {
+	if err := w.fs.MkdirAll(path.Dir(credsFile), 0o700); err != nil {
 		return err
 	}
 
-	return lockedfile.Write(credsFile, bytes.NewReader(raw), 0o600)
+	return w.fs.LockedWrite(credsFile, bytes.NewReader(raw), 0o600)
 }
 
-func getCurrentAccountName() (string, error) {
-	credsFile, err := getCredsFilePath()
+func (w *Workspace) getCurrentAccountName() (string, error) {
+	credsFile, err := w.getCredsFilePath()
 	if err != nil {
 		return "", err
 	}
 
-	c, err := lockedfile.Read(credsFile)
+	c, err := w.fs.LockedRead(credsFile)
 	if err != nil {
-		if os.IsNotExist(err) {
+		if errors.Is(err, fs.ErrNotExist) {
 			return "", nil
 		}
 		return "", err
@@ -147,11 +147,11 @@ func getCurrentAccountName() (string, error) {
 
 // getCredsFilePath returns the path to the esc credentials file on disk, regardless of
 // whether it exists or not.
-func getCredsFilePath() (string, error) {
-	dir, err := GetBookkeepingDir()
+func (w *Workspace) getCredsFilePath() (string, error) {
+	dir, err := w.getBookkeepingDir()
 	if err != nil {
 		return "", fmt.Errorf("getting bookkeeping directory: %w", err)
 	}
 
-	return filepath.Join(dir, "credentials.json"), nil
+	return path.Join(dir, "credentials.json"), nil
 }
