@@ -1,31 +1,30 @@
 // Copyright 2023, Pulumi Corporation.
 
-package main
+package cli
 
 import (
 	"context"
 	"fmt"
-	"os"
 
 	"github.com/spf13/cobra"
 	"gopkg.in/yaml.v3"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/common/resource"
-	"github.com/pulumi/pulumi/sdk/v3/go/common/util/cmdutil"
 	"github.com/pulumi/pulumi/sdk/v3/go/common/util/contract"
 )
 
 func newEnvSetCmd(env *envCommand) *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "set [<org-name>/]<environment-name> <path> <value>",
-		Args:  cmdutil.RangeArgs(2, 3),
+		Args:  cobra.RangeArgs(2, 3),
 		Short: "Set a value within an environment.",
 		Long: "Set a value within an environment\n" +
 			"\n" +
 			"This command fetches the current definition for the named environment and modifies a\n" +
 			"value within it. The path to the value to set is a Pulumi property path. The value\n" +
 			"is interpreted as YAML.\n",
-		Run: cmdutil.RunFunc(func(cmd *cobra.Command, args []string) error {
+		SilenceUsage: true,
+		RunE: func(cmd *cobra.Command, args []string) error {
 			ctx := context.Background()
 
 			if err := env.esc.getCachedClient(ctx); err != nil {
@@ -98,10 +97,10 @@ func newEnvSetCmd(env *envCommand) *cobra.Command {
 				return fmt.Errorf("updating environment definition: %w", err)
 			}
 			if len(diags) != 0 {
-				return env.writePropertyEnvironmentDiagnostics(os.Stderr, diags)
+				return env.writePropertyEnvironmentDiagnostics(env.esc.stderr, diags)
 			}
 			return nil
-		}),
+		},
 	}
 
 	return cmd

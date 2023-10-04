@@ -1,12 +1,11 @@
 // Copyright 2023, Pulumi Corporation.
 
-package main
+package cli
 
 import (
 	"context"
 	"encoding/json"
 	"fmt"
-	"os"
 
 	"github.com/spf13/cobra"
 	"gopkg.in/yaml.v3"
@@ -14,7 +13,6 @@ import (
 	"github.com/pulumi/esc"
 	"github.com/pulumi/esc/schema"
 	"github.com/pulumi/pulumi/sdk/v3/go/common/resource"
-	"github.com/pulumi/pulumi/sdk/v3/go/common/util/cmdutil"
 	"github.com/pulumi/pulumi/sdk/v3/go/common/util/contract"
 )
 
@@ -29,14 +27,15 @@ func newEnvGetCmd(env *envCommand) *cobra.Command {
 
 	cmd := &cobra.Command{
 		Use:   "get [<org-name>/]<environment-name> <path>",
-		Args:  cmdutil.RangeArgs(1, 2),
+		Args:  cobra.RangeArgs(1, 2),
 		Short: "Get a value within an environment.",
 		Long: "Get a value within an environment\n" +
 			"\n" +
 			"This command fetches the current definition for the named environment and gets a\n" +
 			"value within it. The path to the value to set is a Pulumi property path. The value\n" +
 			"is printed to stdout as YAML.\n",
-		Run: cmdutil.RunFunc(func(cmd *cobra.Command, args []string) error {
+		SilenceUsage: true,
+		RunE: func(cmd *cobra.Command, args []string) error {
 			ctx := context.Background()
 
 			if err := env.esc.getCachedClient(ctx); err != nil {
@@ -66,7 +65,7 @@ func newEnvGetCmd(env *envCommand) *cobra.Command {
 				if err != nil {
 					return fmt.Errorf("getting environment metadata: %w", err)
 				}
-				enc := json.NewEncoder(os.Stdout)
+				enc := json.NewEncoder(get.env.esc.stdout)
 				enc.SetIndent("", "  ")
 				return enc.Encode(esc.NewValue(env.Properties).ToJSON(true))
 			}
@@ -84,7 +83,7 @@ func newEnvGetCmd(env *envCommand) *cobra.Command {
 				if node == nil {
 					return nil
 				}
-				enc := yaml.NewEncoder(os.Stdout)
+				enc := yaml.NewEncoder(get.env.esc.stdout)
 				return enc.Encode(node)
 			}
 
@@ -110,7 +109,7 @@ func newEnvGetCmd(env *envCommand) *cobra.Command {
 				}
 			}
 			return get.showEnvValue(value, schema, explain)
-		}),
+		},
 	}
 
 	cmd.Flags().BoolVarP(
@@ -141,7 +140,7 @@ func (cmd *envGetCommand) showEnvSyntax(
 	fmt.Fprintln(cmd.env.esc.stdout)
 
 	fmt.Fprintln(cmd.env.esc.stdout, "DEFINITION:")
-	yamlEnc := yaml.NewEncoder(os.Stdout)
+	yamlEnc := yaml.NewEncoder(cmd.env.esc.stdout)
 	if err := yamlEnc.Encode(node); err != nil {
 		return err
 	}

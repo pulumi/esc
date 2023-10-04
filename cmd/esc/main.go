@@ -8,7 +8,8 @@ import (
 	"runtime"
 	"runtime/debug"
 
-	"github.com/pulumi/esc/cmd/esc/internal/version"
+	"github.com/pulumi/esc/cmd/esc/cli"
+	"github.com/pulumi/esc/cmd/esc/cli/version"
 	"github.com/pulumi/pulumi/sdk/v3/go/common/util/contract"
 )
 
@@ -40,7 +41,7 @@ func panicHandler() {
 func main() {
 	err := func() error {
 		defer panicHandler()
-		return New(nil).Execute()
+		return cli.New(nil).Execute()
 	}()
 	if err != nil {
 		_, err = fmt.Fprintf(os.Stderr, "An error occurred: %v\n", err)

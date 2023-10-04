@@ -1,6 +1,6 @@
 // Copyright 2023, Pulumi Corporation.
 
-package main
+package cli
 
 import (
 	"fmt"
@@ -13,7 +13,7 @@ import (
 	"github.com/spf13/cobra"
 	"golang.org/x/term"
 
-	"github.com/pulumi/esc/cmd/esc/internal/client"
+	"github.com/pulumi/esc/cmd/esc/cli/client"
 	"github.com/pulumi/pulumi/sdk/v3/go/common/diag/colors"
 	"github.com/pulumi/pulumi/sdk/v3/go/common/util/cmdutil"
 )

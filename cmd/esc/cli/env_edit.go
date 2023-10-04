@@ -1,6 +1,6 @@
 // Copyright 2023, Pulumi Corporation.
 
-package main
+package cli
 
 import (
 	"bytes"
@@ -8,7 +8,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"os"
+	"io/fs"
 	"os/exec"
 	"strings"
 	"unicode"
@@ -16,7 +16,6 @@ import (
 	"github.com/spf13/cobra"
 
 	"github.com/pulumi/esc"
-	"github.com/pulumi/pulumi/sdk/v3/go/common/util/cmdutil"
 	"github.com/pulumi/pulumi/sdk/v3/go/common/util/contract"
 )
 
@@ -31,7 +30,7 @@ func newEnvEditCmd(env *envCommand) *cobra.Command {
 
 	cmd := &cobra.Command{
 		Use:   "edit [<org-name>/]<environment-name>",
-		Args:  cmdutil.MaximumNArgs(1),
+		Args:  cobra.MaximumNArgs(1),
 		Short: "Open an environment for editing.",
 		Long: "Open an environment for editing\n" +
 			"\n" +
@@ -39,7 +38,8 @@ func newEnvEditCmd(env *envCommand) *cobra.Command {
 			"for editing in an editor. The editor defaults to the value of the VISUAL environment\n" +
 			"variable. If VISUAL is not set, EDITOR is used. These values are interpreted as\n" +
 			"commands to which the name of the temporary file used for the environment is appended.\n",
-		Run: cmdutil.RunFunc(func(cmd *cobra.Command, args []string) error {
+		SilenceUsage: true,
+		RunE: func(cmd *cobra.Command, args []string) error {
 			ctx := context.Background()
 
 			editor, err := edit.getEditor()
@@ -82,7 +82,7 @@ func newEnvEditCmd(env *envCommand) *cobra.Command {
 				}
 			}
 
-			newYAML, err := editWithYAMLEditor(editor, yaml, checked)
+			newYAML, err := edit.editWithYAMLEditor(editor, yaml, checked)
 			if err != nil {
 				return err
 			}
@@ -92,11 +92,11 @@ func newEnvEditCmd(env *envCommand) *cobra.Command {
 				return fmt.Errorf("updating environment definition: %w", err)
 			}
 			if len(diags) != 0 {
-				return edit.env.writeYAMLEnvironmentDiagnostics(os.Stderr, envName, newYAML, diags)
+				return edit.env.writeYAMLEnvironmentDiagnostics(edit.env.esc.stderr, envName, newYAML, diags)
 			}
 
 			return nil
-		}),
+		},
 	}
 
 	cmd.Flags().StringVar(&edit.editorFlag, "editor", "", "the command to use to edit the environment definition")
@@ -108,9 +108,9 @@ func (edit *envEditCommand) getEditor() ([]string, error) {
 	editor := edit.editorFlag
 
 	if editor == "" {
-		editor = os.Getenv("VISUAL")
+		editor = edit.env.esc.environ.Get("VISUAL")
 		if editor == "" {
-			editor = os.Getenv("EDITOR")
+			editor = edit.env.esc.environ.Get("EDITOR")
 		}
 	}
 
@@ -151,7 +151,7 @@ func (edit *envEditCommand) getEditor() ([]string, error) {
 			"VISUAL or EDITOR environment variables.")
 	}
 
-	path, err := exec.LookPath(args[0])
+	path, err := edit.env.esc.exec.LookPath(args[0])
 	if err != nil {
 		return nil, fmt.Errorf("finding %q on path: %w", args[0], err)
 	}
@@ -160,16 +160,16 @@ func (edit *envEditCommand) getEditor() ([]string, error) {
 	return args, nil
 }
 
-func editWithYAMLEditor(editor []string, yaml, checked []byte) ([]byte, error) {
+func (edit *envEditCommand) editWithYAMLEditor(editor []string, yaml, checked []byte) ([]byte, error) {
 	filename, err := func() (string, error) {
-		f, err := os.CreateTemp("", "*.yaml")
+		filename, f, err := edit.env.esc.fs.CreateTemp("", "*.yaml")
 		if err != nil {
 			return "", err
 		}
 		defer contract.IgnoreClose(f)
 
 		if _, err = f.Write(yaml); err != nil {
-			rmErr := os.Remove(f.Name())
+			rmErr := edit.env.esc.fs.Remove(filename)
 			contract.IgnoreError(rmErr)
 			return "", err
 		}
@@ -186,32 +186,32 @@ func editWithYAMLEditor(editor []string, yaml, checked []byte) ([]byte, error) {
 			fmt.Fprintln(f, "# saved.")
 			fmt.Fprintln(f, "")
 			if _, err = f.Write(checked); err != nil {
-				rmErr := os.Remove(f.Name())
+				rmErr := edit.env.esc.fs.Remove(filename)
 				contract.IgnoreError(rmErr)
 				return "", err
 			}
 		}
 
-		return f.Name(), nil
+		return filename, nil
 	}()
 	if err != nil {
 		return nil, fmt.Errorf("writing temporary file: %w", err)
 	}
 	defer func() {
-		err := os.Remove(filename)
+		err := edit.env.esc.fs.Remove(filename)
 		contract.IgnoreError(err)
 	}()
 
 	//nolint:gosec
 	cmd := exec.Command(editor[0], append(editor[1:], filename)...)
-	cmd.Stdin = os.Stdin
-	cmd.Stdout = os.Stdout
-	cmd.Stderr = os.Stderr
-	if err := cmd.Run(); err != nil {
+	cmd.Stdin = edit.env.esc.stdin
+	cmd.Stdout = edit.env.esc.stdout
+	cmd.Stderr = edit.env.esc.stderr
+	if err := edit.env.esc.exec.Run(cmd); err != nil {
 		return nil, fmt.Errorf("editor: %w", err)
 	}
 
-	new, err := os.ReadFile(filename)
+	new, err := fs.ReadFile(edit.env.esc.fs, filename)
 	if err != nil {
 		return nil, fmt.Errorf("reading temporary file: %w", err)
 	}

@@ -1,13 +1,12 @@
 // Copyright 2023, Pulumi Corporation.
 
-package main
+package cli
 
 import (
 	"bytes"
 	"context"
 	"fmt"
 	"io"
-	"os"
 	"os/exec"
 	"strings"
 	"time"
@@ -17,7 +16,6 @@ import (
 	"github.com/pulumi/esc"
 	"github.com/pulumi/esc/ast"
 	"github.com/pulumi/pulumi/sdk/v3/go/common/resource"
-	"github.com/pulumi/pulumi/sdk/v3/go/common/util/cmdutil"
 	"github.com/pulumi/pulumi/sdk/v3/go/common/util/contract"
 	"github.com/spf13/cobra"
 )
@@ -108,7 +106,8 @@ func newEnvRunCmd(envcmd *envCommand) *cobra.Command {
 			"By default, the command to run is assumed to be non-interactive and its output\n" +
 			"streams are filtered to remove any secret values. Use the -i flag to run interactive\n" +
 			"commands, which will disable filtering.\n",
-		Run: cmdutil.RunFunc(func(cmd *cobra.Command, args []string) error {
+		SilenceUsage: true,
+		RunE: func(cmd *cobra.Command, args []string) error {
 			ctx := context.Background()
 
 			if err := envcmd.esc.getCachedClient(ctx); err != nil {
@@ -123,7 +122,7 @@ func newEnvRunCmd(envcmd *envCommand) *cobra.Command {
 			if len(args) == 0 {
 				return fmt.Errorf("no command specified")
 			}
-			command, err := exec.LookPath(args[0])
+			command, err := envcmd.esc.exec.LookPath(args[0])
 			if err != nil {
 				return fmt.Errorf("resolving command: %w", err)
 			}
@@ -134,12 +133,12 @@ func newEnvRunCmd(envcmd *envCommand) *cobra.Command {
 				return err
 			}
 			if len(diags) != 0 {
-				return envcmd.writePropertyEnvironmentDiagnostics(os.Stderr, diags)
+				return envcmd.writePropertyEnvironmentDiagnostics(envcmd.esc.stderr, diags)
 			}
 
 			var secrets []string
 
-			environ := os.Environ()
+			environ := envcmd.esc.environ.Vars()
 			if vars, ok := env.Properties["environmentVariables"].Value.(map[string]esc.Value); ok {
 				for k, v := range vars {
 					if strValue, ok := v.Value.(string); ok {
@@ -197,8 +196,8 @@ func newEnvRunCmd(envcmd *envCommand) *cobra.Command {
 			runCmd.Stdin = envcmd.esc.stdin
 			runCmd.Stdout = stdout
 			runCmd.Stderr = stderr
-			return runCmd.Run()
-		}),
+			return envcmd.esc.exec.Run(runCmd)
+		},
 	}
 
 	cmd.Flags().BoolVarP(&interactive, "interactive", "i", false, "true to treat the command as interactive and disable output filters")

@@ -17,7 +17,62 @@ import (
 )
 
 // Client provides a slim wrapper around the Pulumi HTTP/REST API.
-type Client struct {
+type Client interface {
+	// Returns true if this client is insecure (i.e. has TLS disabled).
+	Insecure() bool
+
+	// URL returns the URL of the API endpoint this client interacts with
+	URL() string
+
+	// GetPulumiAccountDetails returns the user implied by the API token associated with this client.
+	GetPulumiAccountDetails(ctx context.Context) (string, []string, *workspace.TokenInformation, error)
+
+	ListEnvironments(
+		ctx context.Context,
+		orgName string,
+		continuationToken string,
+	) ([]OrgEnvironment, string, error)
+
+	CreateEnvironment(ctx context.Context, orgName, envName string) error
+
+	GetEnvironment(ctx context.Context, orgName, envName string) ([]byte, string, error)
+
+	UpdateEnvironment(
+		ctx context.Context,
+		orgName string,
+		envName string,
+		yaml []byte,
+		tag string,
+	) ([]EnvironmentDiagnostic, error)
+
+	DeleteEnvironment(ctx context.Context, orgName, envName string) error
+
+	OpenEnvironment(
+		ctx context.Context,
+		orgName string,
+		envName string,
+		duration time.Duration,
+	) (string, []EnvironmentDiagnostic, error)
+
+	CheckYAMLEnvironment(
+		ctx context.Context,
+		orgName string,
+		yaml []byte,
+	) (*esc.Environment, []EnvironmentDiagnostic, error)
+
+	OpenYAMLEnvironment(
+		ctx context.Context,
+		orgName string,
+		yaml []byte,
+		duration time.Duration,
+	) (string, []EnvironmentDiagnostic, error)
+
+	GetOpenEnvironment(ctx context.Context, openEnvID string) (*esc.Environment, error)
+
+	GetOpenProperty(ctx context.Context, openEnvID, property string) (*esc.Value, error)
+}
+
+type client struct {
 	apiURL     string
 	apiToken   string
 	apiUser    string
@@ -30,7 +85,7 @@ type Client struct {
 
 // newClient creates a new Pulumi API client with the given URL and API token. It is a variable instead of a regular
 // function so it can be set to a different implementation at runtime, if necessary.
-var newClient = func(apiURL, apiToken string, insecure bool) *Client {
+var newClient = func(apiURL, apiToken string, insecure bool) *client {
 	var httpClient *http.Client
 	if insecure {
 		tr := &http.Transport{
@@ -42,7 +97,7 @@ var newClient = func(apiURL, apiToken string, insecure bool) *Client {
 		httpClient = http.DefaultClient
 	}
 
-	return &Client{
+	return &client{
 		apiURL:     apiURL,
 		apiToken:   apiToken,
 		httpClient: httpClient,
@@ -55,30 +110,30 @@ var newClient = func(apiURL, apiToken string, insecure bool) *Client {
 }
 
 // Returns true if this client is insecure (i.e. has TLS disabled).
-func (pc *Client) Insecure() bool {
+func (pc *client) Insecure() bool {
 	return pc.insecure
 }
 
-// NewClient creates a new Pulumi API client with the given URL and API token.
-func NewClient(apiURL, apiToken string, insecure bool) *Client {
+// New creates a new Pulumi API client with the given URL and API token.
+func New(apiURL, apiToken string, insecure bool) Client {
 	return newClient(apiURL, apiToken, insecure)
 }
 
 // URL returns the URL of the API endpoint this client interacts with
-func (pc *Client) URL() string {
+func (pc *client) URL() string {
 	return pc.apiURL
 }
 
 // restCall makes a REST-style request to the Pulumi API using the given method, path, query object, and request
 // object. If a response object is provided, the server's response is deserialized into that object.
-func (pc *Client) restCall(ctx context.Context, method, path string, queryObj, reqObj, respObj interface{}) error {
+func (pc *client) restCall(ctx context.Context, method, path string, queryObj, reqObj, respObj interface{}) error {
 	return pc.restClient.Call(ctx, pc.apiURL, method, path, queryObj, reqObj, respObj, pc.apiToken,
 		httpCallOptions{})
 }
 
 // restCall makes a REST-style request to the Pulumi API using the given method, path, query object, and request
 // object. If a response object is provided, the server's response is deserialized into that object.
-func (pc *Client) restCallWithOptions(ctx context.Context, method, path string, queryObj, reqObj,
+func (pc *client) restCallWithOptions(ctx context.Context, method, path string, queryObj, reqObj,
 	respObj interface{}, opts httpCallOptions,
 ) error {
 	return pc.restClient.Call(ctx, pc.apiURL, method, path, queryObj, reqObj, respObj, pc.apiToken, opts)
@@ -112,8 +167,8 @@ type serviceTokenInfo struct {
 	Team         string `json:"team,omitempty"`
 }
 
-// GetPulumiAccountName returns the user implied by the API token associated with this client.
-func (pc *Client) GetPulumiAccountDetails(ctx context.Context) (string, []string, *workspace.TokenInformation, error) {
+// GetPulumiAccountDetails returns the user implied by the API token associated with this client.
+func (pc *client) GetPulumiAccountDetails(ctx context.Context) (string, []string, *workspace.TokenInformation, error) {
 	if pc.apiUser == "" {
 		resp := serviceUser{}
 		if err := pc.restCall(ctx, "GET", "/api/user", nil, nil, &resp); err != nil {
@@ -145,7 +200,7 @@ func (pc *Client) GetPulumiAccountDetails(ctx context.Context) (string, []string
 	return pc.apiUser, pc.apiOrgs, pc.tokenInfo, nil
 }
 
-func (pc *Client) ListEnvironments(
+func (pc *client) ListEnvironments(
 	ctx context.Context,
 	orgName string,
 	continuationToken string,
@@ -166,12 +221,12 @@ func (pc *Client) ListEnvironments(
 	return resp.Environments, resp.NextToken, nil
 }
 
-func (pc *Client) CreateEnvironment(ctx context.Context, orgName, envName string) error {
+func (pc *client) CreateEnvironment(ctx context.Context, orgName, envName string) error {
 	path := fmt.Sprintf("/api/preview/environments/%v/%v", orgName, envName)
 	return pc.restCall(ctx, http.MethodPost, path, nil, nil, nil)
 }
 
-func (pc *Client) GetEnvironment(ctx context.Context, orgName, envName string) ([]byte, string, error) {
+func (pc *client) GetEnvironment(ctx context.Context, orgName, envName string) ([]byte, string, error) {
 	path := fmt.Sprintf("/api/preview/environments/%v/%v", orgName, envName)
 	var resp *http.Response
 	if err := pc.restCall(ctx, http.MethodGet, path, nil, nil, &resp); err != nil {
@@ -185,7 +240,7 @@ func (pc *Client) GetEnvironment(ctx context.Context, orgName, envName string) (
 	return yaml, tag, nil
 }
 
-func (pc *Client) UpdateEnvironment(
+func (pc *client) UpdateEnvironment(
 	ctx context.Context,
 	orgName string,
 	envName string,
@@ -213,12 +268,12 @@ func (pc *Client) UpdateEnvironment(
 	return nil, nil
 }
 
-func (pc *Client) DeleteEnvironment(ctx context.Context, orgName, envName string) error {
+func (pc *client) DeleteEnvironment(ctx context.Context, orgName, envName string) error {
 	path := fmt.Sprintf("/api/preview/environments/%v/%v", orgName, envName)
 	return pc.restCall(ctx, http.MethodDelete, path, nil, nil, nil)
 }
 
-func (pc *Client) OpenEnvironment(
+func (pc *client) OpenEnvironment(
 	ctx context.Context,
 	orgName string,
 	envName string,
@@ -248,7 +303,7 @@ func (pc *Client) OpenEnvironment(
 	return resp.ID, nil, nil
 }
 
-func (pc *Client) CheckYAMLEnvironment(
+func (pc *client) CheckYAMLEnvironment(
 	ctx context.Context,
 	orgName string,
 	yaml []byte,
@@ -269,7 +324,7 @@ func (pc *Client) CheckYAMLEnvironment(
 	return &resp, nil, nil
 }
 
-func (pc *Client) OpenYAMLEnvironment(
+func (pc *client) OpenYAMLEnvironment(
 	ctx context.Context,
 	orgName string,
 	yaml []byte,
@@ -299,7 +354,7 @@ func (pc *Client) OpenYAMLEnvironment(
 	return resp.ID, nil, nil
 }
 
-func (pc *Client) GetOpenEnvironment(ctx context.Context, openEnvID string) (*esc.Environment, error) {
+func (pc *client) GetOpenEnvironment(ctx context.Context, openEnvID string) (*esc.Environment, error) {
 	var resp esc.Environment
 	path := fmt.Sprintf("/api/preview/environments-open/%v", openEnvID)
 	err := pc.restCall(ctx, http.MethodGet, path, nil, nil, &resp)
@@ -309,7 +364,7 @@ func (pc *Client) GetOpenEnvironment(ctx context.Context, openEnvID string) (*es
 	return &resp, nil
 }
 
-func (pc *Client) GetOpenProperty(ctx context.Context, openEnvID, property string) (*esc.Value, error) {
+func (pc *client) GetOpenProperty(ctx context.Context, openEnvID, property string) (*esc.Value, error) {
 	queryObj := struct {
 		Property string `url:"property"`
 	}{
