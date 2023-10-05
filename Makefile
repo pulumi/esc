@@ -34,3 +34,6 @@ build_debug:: ensure
 
 test:: build
 	${GO} test --timeout 30m -short -count 1 -parallel ${CONCURRENCY} ./...
+
+test_cover:: build
+	${GO} test --timeout 30m -count 1 -coverpkg=github.com/pulumi/esc/... -race -coverprofile=coverage.out -parallel ${CONCURRENCY} ./...
