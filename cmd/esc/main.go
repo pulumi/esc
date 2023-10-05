@@ -10,7 +10,6 @@ import (
 
 	"github.com/pulumi/esc/cmd/esc/cli"
 	"github.com/pulumi/esc/cmd/esc/cli/version"
-	"github.com/pulumi/pulumi/sdk/v3/go/common/util/contract"
 )
 
 // panicHandler displays an emergency error message to the user and a stack trace to
@@ -44,8 +43,6 @@ func main() {
 		return cli.New(nil).Execute()
 	}()
 	if err != nil {
-		_, err = fmt.Fprintf(os.Stderr, "An error occurred: %v\n", err)
-		contract.IgnoreError(err)
 		os.Exit(1)
 	}
 }
