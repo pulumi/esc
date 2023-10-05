@@ -3,6 +3,7 @@ module github.com/pulumi/esc
 go 1.21.0
 
 require (
+	github.com/ccojocar/zxcvbn-go v1.0.1
 	github.com/gofrs/uuid v4.2.0+incompatible
 	github.com/google/go-querystring v1.1.0
 	github.com/hashicorp/hcl/v2 v2.17.0
