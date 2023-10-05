@@ -9,6 +9,12 @@ on:
         required: false
         type: string
 
+      enable-coverage:
+        description: Collects coverage data from tests.
+        default: false
+        required: false
+        type: boolean
+
 jobs:
   test:
     name: Test
@@ -25,8 +31,19 @@ jobs:
           stable: ${{ matrix.go-stable }}
       - name: Install Pulumi CLI
         uses: pulumi/action-install-pulumi-cli@v2
+      - name: Test w/coverage
+        if: ${{ inputs.enable-coverage }}
+        run: make test_cover
       - name: Test
+        if: ${{ ! inputs.enable-coverate }}
         run: make test
+      - name: Upload code coverage
+        if: ${{ inputs.enable-coverage }}
+        uses: codecov/codecov-action@v3
+        with:
+          fail_ci_if_error: false
+          verbose: true
+          token: ${{ secrets.CODECOV_TOKEN }}
     strategy:
       fail-fast: false
       matrix:

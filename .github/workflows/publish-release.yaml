@@ -14,6 +14,8 @@ jobs:
     uses: ./.github/workflows/stage-lint.yml
   test:
     uses: ./.github/workflows/stage-test.yml
+    with:
+      enable-coverage: true
   publish:
     needs: [test, lint]
     uses: ./.github/workflows/stage-publish.yml
