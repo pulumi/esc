@@ -16,6 +16,7 @@ jobs:
     uses: ./.github/workflows/stage-test.yml
     with:
       enable-coverage: true
+    secrets: inherit
   publish:
     needs: [test, lint]
     uses: ./.github/workflows/stage-publish.yml
