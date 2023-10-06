@@ -12,7 +12,7 @@ require (
 	github.com/pulumi/pulumi/pkg/v3 v3.78.2-0.20230926151835-2b44cf6ec1be
 	github.com/pulumi/pulumi/sdk/v3 v3.85.1-0.20230926151835-2b44cf6ec1be
 	github.com/rivo/uniseg v0.4.4
-	github.com/rogpeppe/go-internal v1.10.1-0.20230524175051-ec119421bb97
+	github.com/rogpeppe/go-internal v1.11.0
 	github.com/spf13/cobra v1.7.0
 	github.com/stretchr/testify v1.8.4
 	golang.org/x/exp v0.0.0-20230817173708-d852ddb80c63
