@@ -22,13 +22,13 @@ var replaceH2Pattern = regexp.MustCompile(`(?m)^## .*$`)
 // Used to promote the `###` headings to `##` in generated markdown files.
 var h3Pattern = regexp.MustCompile(`(?m)^###\s`)
 
-// newGenMarkdownCmd returns a new command that, when run, generates CLI documentation as Markdown files.
+// newGenDocsCmd returns a new command that, when run, generates CLI documentation as Markdown files.
 // It is hidden by default since it's not commonly used outside of our own build processes.
-func newGenMarkdownCmd(root *cobra.Command) *cobra.Command {
+func newGenDocsCmd(root *cobra.Command) *cobra.Command {
 	return &cobra.Command{
-		Use:    "gen-markdown <DIR>",
+		Use:    "gen-docs <DIR>",
 		Args:   cmdutil.ExactArgs(1),
-		Short:  "Generate Pulumi CLI documentation as Markdown (one file per command)",
+		Short:  "Generate ESC CLI documentation as Markdown (one file per command)",
 		Hidden: true,
 		Run: cmdutil.RunFunc(func(cmd *cobra.Command, args []string) error {
 			var files []string

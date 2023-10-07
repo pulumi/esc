@@ -119,8 +119,7 @@ func New(opts *Options) *cobra.Command {
 	cmd.AddCommand(getCommand(env, "run"))
 	cmd.AddCommand(newLoginCmd(esc))
 	cmd.AddCommand(newVersionCmd(esc))
-	cmd.AddCommand(newGenMarkdownCmd(cmd))
-	cmd.AddCommand(newGenCompletionCmd(cmd))
+	cmd.AddCommand(newGenDocsCmd(cmd))
 
 	return cmd
 }
