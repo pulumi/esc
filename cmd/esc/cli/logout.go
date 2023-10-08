@@ -1,3 +1,5 @@
+// Copyright 2023, Pulumi Corporation.
+
 package cli
 
 import (
