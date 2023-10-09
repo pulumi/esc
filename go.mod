@@ -1,6 +1,6 @@
 module github.com/pulumi/esc
 
-go 1.21.0
+go 1.20
 
 require (
 	github.com/ccojocar/zxcvbn-go v1.0.1
