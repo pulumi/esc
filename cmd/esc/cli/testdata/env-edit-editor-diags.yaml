@@ -9,6 +9,8 @@ process:
       echo -e "values:\n  foo: baz\n" >$1
 environments:
   test-user/test:
+    imports:
+      - a
     values:
       foo: bar
 stdout: |+

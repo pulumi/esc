@@ -1,19 +1,13 @@
 run: esc open test --format json
 environments:
   test-user/test:
-    imports:
-      - test-2
     values:
-      foo: bar
-  test-user/test-2:
-    values:
-      foo: baz
-      hello: world
+      object: {}
+      missing: ${foo}
+      invalid: {'fn::toBase64': "${object}"}
 stdout: |
   > esc open test --format json
-  {
-    "foo": "bar",
-    "hello": "world"
-  }
 stderr: |
   > esc open test --format json
+  test:3:14: unknown property "foo"
+  test:4:31: expected string, got object
