@@ -32,7 +32,7 @@ brews:
       name: pulumi-bot
       email: bot@pulumi.com
     homepage: "https://pulumi.com"
-    description: "Pulumi ESC - Manage environments, secrets, and configuration"
+    description: "Pulumi ESC - Manage Environments, Secrets, and Configuration"
     folder: Formula
     license: Apache-2.0
     test: |
