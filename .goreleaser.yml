@@ -22,3 +22,18 @@ builds:
   - -w
   - -X github.com/pulumi/esc/cmd/esc/internal/version.Version={{.Tag}}
   main: ./cmd/esc/
+brews:
+  -
+    name: esc
+    tap:
+      owner: pulumi
+      name: homebrew-tap
+    commit_author:
+      name: pulumi-bot
+      email: bot@pulumi.com
+    homepage: "https://pulumi.com"
+    description: "Pulumi ESC - Manage Environments, Secrets, and Configuration"
+    folder: Formula
+    license: Apache-2.0
+    test: |
+      system "#{bin}/esc version"
