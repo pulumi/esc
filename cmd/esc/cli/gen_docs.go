@@ -34,7 +34,7 @@ func newGenDocsCmd(root *cobra.Command) *cobra.Command {
 			var files []string
 
 			// filePrepender is used to add front matter to each file, and to keep track of all
-			// generated files.
+			// generated files./docs/esc-cli
 			filePrepender := func(s string) string {
 				// Keep track of the generated file.
 				files = append(files, s)
@@ -42,13 +42,10 @@ func newGenDocsCmd(root *cobra.Command) *cobra.Command {
 				// Add some front matter to each file.
 				fileNameWithoutExtension := strings.TrimSuffix(filepath.Base(s), ".md")
 				title := strings.ReplaceAll(fileNameWithoutExtension, "_", " ")
-				ymlIndent := "  " // 2 spaces
 				buf := new(bytes.Buffer)
 				buf.WriteString("---\n")
 				fmt.Fprintf(buf, "title: %q\n", title)
 				// Add redirect aliases to the front matter.
-				fmt.Fprint(buf, "aliases:\n")
-				fmt.Fprintf(buf, "%s- /docs/reference/cli/%s/\n", ymlIndent, fileNameWithoutExtension)
 				buf.WriteString("---\n\n")
 				return buf.String()
 			}
@@ -56,7 +53,7 @@ func newGenDocsCmd(root *cobra.Command) *cobra.Command {
 			// linkHandler emits pretty URL links.
 			linkHandler := func(s string) string {
 				link := strings.TrimSuffix(s, ".md")
-				return fmt.Sprintf("/docs/cli/commands/%s/", link)
+				return fmt.Sprintf("/docs/esc-cli/commands/%s/", link)
 			}
 
 			// Generate the .md files.
