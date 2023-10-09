@@ -30,7 +30,7 @@ func newLoginCmd(esc *escCommand) *cobra.Command {
 			"\n" +
 			"The Pulumi Cloud manages your Pulumi ESC environments. Simply run\n" +
 			"\n" +
-			"    $ pulumi login\n" +
+			"    $ esc login\n" +
 			"\n" +
 			"and this command will prompt you for an access token, including a way to launch your web browser to\n" +
 			"easily obtain one. You can script by using `PULUMI_ACCESS_TOKEN` environment variable.\n" +
