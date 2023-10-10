@@ -26,6 +26,7 @@ jobs:
       goreleaser-args: -p 10 -f .goreleaser.yml --rm-dist --skip-validate --timeout 60m0s --release-notes=CHANGELOG_PENDING.md
     secrets: inherit
   s3-blobs:
+    needs: [publish]
     name: s3 blobs
     runs-on: ubuntu-latest
     steps:
