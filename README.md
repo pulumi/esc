@@ -42,7 +42,7 @@ This will produce an `esc` binary in your `GOBIN` directory.
 
 ## Why Pulumi ESC?
 
-Pulumi ESC was designed to address a set of challenges that many infrastructure and application development teams face in managing configuration and secrets across their vairous environments:
+Pulumi ESC was designed to address a set of challenges that many infrastructure and application development teams face in managing configuration and secrets across their various environments:
 
 * __Secrets and Configuration Sprawl__: Data in many systems. Challenging to audit. Lots of application-specific logic to acquire and compose configuration from multiple sources. Divergent solutions for Infrastructure and Application configuration.
 * __Duplication and Copy/Paste__: Secrets are duplicated in many places. Frequently coupled to application/system-specific configuration stores.
