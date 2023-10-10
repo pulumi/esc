@@ -7,6 +7,8 @@ on:
       - '!v*.*.*-**'
 
 env:
+  TAG: "${{ github.event.release.tag_name }}"
+  ESC_VERSION: "${TAG#v}" # remove prefix
   GITHUB_TOKEN: ${{ secrets.PULUMI_BOT_TOKEN }}
 
 jobs:
@@ -23,3 +25,30 @@ jobs:
     with:
       goreleaser-args: -p 10 -f .goreleaser.yml --rm-dist --skip-validate --timeout 60m0s --release-notes=CHANGELOG_PENDING.md
     secrets: inherit
+  s3-blobs:
+    name: s3 blobs
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v3
+        with:
+          ref: ${TAG}
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-region: us-east-2
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          role-duration-seconds: 3600
+          role-external-id: upload-pulumi-release
+          role-session-name: pulumi@githubActions
+          role-to-assume: ${{ secrets.AWS_UPLOAD_ROLE_ARN }}
+      - name: Download release artifacts
+        run: |
+          mkdir -p artifacts
+          gh release download "v${ESC_VERSION}" --dir ./artifacts --pattern 'esc-*'
+          find artifacts
+      - name: Publish Blobs
+        run: |
+          aws s3 sync artifacts s3://get.pulumi.com/esc/releases --acl public-read
+

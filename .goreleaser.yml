@@ -20,7 +20,7 @@ builds:
   ldflags:
   - -s
   - -w
-  - -X github.com/pulumi/esc/cmd/esc/internal/version.Version={{.Tag}}
+  - -X github.com/pulumi/esc/cmd/esc/cli/version.Version={{.Tag}}
   main: ./cmd/esc/
 brews:
   -
