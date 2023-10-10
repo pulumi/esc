@@ -8,7 +8,7 @@ on:
         type: string
 
 env:
-  GITHUB_TOKEN: ${{ secrets.BOT_GITHUB_TOKEN }}
+  GITHUB_TOKEN: ${{ secrets.PULUMI_BOT_TOKEN }}
 
 jobs:
   publish:
