@@ -7,8 +7,6 @@ on:
       - '!v*.*.*-**'
 
 env:
-  TAG: "${{ github.event.release.tag_name }}"
-  ESC_VERSION: "${TAG#v}" # remove prefix
   GITHUB_TOKEN: ${{ secrets.PULUMI_BOT_TOKEN }}
 
 jobs:
@@ -33,7 +31,7 @@ jobs:
       - name: Checkout Repo
         uses: actions/checkout@v3
         with:
-          ref: ${TAG}
+          ref: ${GITHUB_REF_NAME}
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
@@ -47,7 +45,7 @@ jobs:
       - name: Download release artifacts
         run: |
           mkdir -p artifacts
-          gh release download "v${ESC_VERSION}" --dir ./artifacts --pattern 'esc-*'
+          gh release download "${GITHUB_REF_NAME}" --dir ./artifacts --pattern 'esc-*'
           find artifacts
       - name: Publish Blobs
         run: |
