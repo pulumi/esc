@@ -7,6 +7,22 @@ checksum:
 archives:
 - id: archive
   name_template: '{{ .Binary }}-{{ .Tag }}-{{ .Os }}-{{ .Arch }}'
+  wrap_in_directory: esc{{ if eq .Os "windows" }}/bin{{ end }}
+  format_overrides:
+    - goos: windows
+      format: zip
+  replacements:
+    amd64: x64
+  files:
+    # OS specific scripts, not compiled
+    - src: bin/{{ .Os }}/*
+      dst: '.'
+      strip_parent: true
+      # binaries
+    - src: bin/{{ .Os }}-{{ .Arch }}/*
+      dst: '.'
+      strip_parent: true
+
 builds:
 - id: esc
   binary: esc
@@ -22,6 +38,7 @@ builds:
   - -w
   - -X github.com/pulumi/esc/cmd/esc/cli/version.Version={{.Tag}}
   main: ./cmd/esc/
+
 brews:
   -
     name: esc
