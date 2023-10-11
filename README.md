@@ -1,4 +1,4 @@
-# Pulumi ESC - Environments, Secrets, Configurations
+# Pulumi ESC (Environments, Secrets, and Configuration)
 
 Pulumi ESC is a new product from Pulumi that manages and tames secrets and configuration complexity across all of your cloud infrastructure and application environments. Pulumi ESC introduces a new category of configuration-as-code product, motivated by our experience working with hundreds of Pulumi IaC customers to address their needs in managing secrets and configuration at scale within their Pulumi infrastructure and across other cloud applications and infrastructure projects.
 
@@ -25,7 +25,7 @@ Pulumi ESC is offered as a managed service as part of Pulumi Cloud, and this rep
 
 ![Pulumi ESC Graphic V4](./assets/overview.png)
 
-1. Pulumi ESC enables you to define environments, which are collections of secrets and configurations. Each environment can be composed from  multiple environments.
+1. Pulumi ESC enables you to define environments, which are collections of secrets and configuration. Each environment can be composed from  multiple environments.
 2. Pulumi ESC supports a variety of configuration and secrets sources, and it has an extensible plugin model that allows third-party sources.
 3. Pulumi ESC has a rich API that allows for easy integration.  Every value in an environment can be accessed from any execution environment.
 4. Every environment can be locked down with RBAC, versioned, and audited.
