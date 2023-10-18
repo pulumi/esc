@@ -66,3 +66,18 @@ jobs:
         job:
           - name: Dispatch docs workflow
             run-command: pulumictl create cli-docs-build "${ESC_VERSION}" --event-type "esc-cli"
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v3
+        with:
+          ref: ${ESC_VERSION}
+      - name: Install Pulumictl
+        uses: jaxxstorm/action-install-gh-release@v1.7.1
+        env:
+          GITHUB_TOKEN: ${{ secrets.PULUMI_BOT_TOKEN }}
+        with:
+          repo: pulumi/pulumictl
+          tag: v0.0.45
+          cache: enable
+      - name: Repository Dispatch
+        run: ${{ matrix.job.run-command }}
