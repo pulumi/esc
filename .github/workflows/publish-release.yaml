@@ -56,7 +56,7 @@ jobs:
 
   dispatch:
     name: ${{ matrix.job.name }}
-    if: !contains(${{ github.ref_name }}, '-')
+    if: "!contains(${{ github.ref_name }}, '-')"
     runs-on: ubuntu-latest
     needs: [publish]
     strategy:
