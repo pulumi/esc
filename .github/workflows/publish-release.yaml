@@ -8,7 +8,6 @@ on:
 
 env:
   GITHUB_TOKEN: ${{ secrets.PULUMI_BOT_TOKEN }}
-  ESC_VERSION: ${{ github.ref_name }}
 
 jobs:
   lint:
@@ -35,7 +34,7 @@ jobs:
       - name: Checkout Repo
         uses: actions/checkout@v3
         with:
-          ref: ${ESC_VERSION}
+          ref: ${{ github.ref_name }}
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
@@ -49,7 +48,7 @@ jobs:
       - name: Download release artifacts
         run: |
           mkdir -p artifacts
-          gh release download "${ESC_VERSION}" --dir ./artifacts --pattern 'esc-*'
+          gh release download "${{ github.ref_name }}" --dir ./artifacts --pattern 'esc-*'
           find artifacts
       - name: Publish Blobs
         run: |
@@ -57,7 +56,7 @@ jobs:
 
   dispatch:
     name: ${{ matrix.job.name }}
-    if: inputs.run-dispatch-commands && !contains(inputs.version, '-')
+    if: !contains(${{ github.ref_name }}, '-')
     runs-on: ubuntu-latest
     needs: [publish]
     strategy:
@@ -65,12 +64,12 @@ jobs:
       matrix:
         job:
           - name: Dispatch docs workflow
-            run-command: pulumictl create cli-docs-build "${ESC_VERSION}" --event-type "esc-cli"
+            run-command: pulumictl create cli-docs-build "${{ github.ref_name }}" --event-type "esc-cli"
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v3
         with:
-          ref: ${ESC_VERSION}
+          ref: ${{ github.ref_name }}
       - name: Install Pulumictl
         uses: jaxxstorm/action-install-gh-release@v1.7.1
         env:
