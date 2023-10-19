@@ -20,7 +20,7 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestNonExistentFieldFormatter_fieldsName(t *testing.T) {
+func TestNonExistentFieldFormatterFieldsName(t *testing.T) {
 	t.Parallel()
 	tests := []struct {
 		formatter NonExistentFieldFormatter
@@ -34,7 +34,7 @@ func TestNonExistentFieldFormatter_fieldsName(t *testing.T) {
 	}
 }
 
-func TestNonExistentFieldFormatter_messageHeader(t *testing.T) {
+func TestNonExistentFieldFormatterMessageHeader(t *testing.T) {
 	t.Parallel()
 	tests := []struct {
 		formatter  NonExistentFieldFormatter
@@ -48,7 +48,7 @@ func TestNonExistentFieldFormatter_messageHeader(t *testing.T) {
 	}
 }
 
-func TestNonExistentFieldFormatter_messageBody(t *testing.T) {
+func TestNonExistentFieldFormatterMessageBody(t *testing.T) {
 	t.Parallel()
 	tests := []struct {
 		formatter NonExistentFieldFormatter
@@ -68,7 +68,7 @@ func TestNonExistentFieldFormatter_messageBody(t *testing.T) {
 	}
 }
 
-func TestNonExistentFieldFormatter_Message(t *testing.T) {
+func TestNonExistentFieldFormatterMessage(t *testing.T) {
 	t.Parallel()
 	tests := []struct {
 		formatter  NonExistentFieldFormatter
@@ -86,7 +86,7 @@ func TestNonExistentFieldFormatter_Message(t *testing.T) {
 	}
 }
 
-func TestNonExistentFieldFormatter_MessageWithDetail(t *testing.T) {
+func TestNonExistentFieldFormatterMessageWithDetail(t *testing.T) {
 	t.Parallel()
 	tests := []struct {
 		formatter  NonExistentFieldFormatter
