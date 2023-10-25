@@ -26,6 +26,10 @@ lint-golang:
 lint-copyright:
 	pulumictl copyright
 
+.phony: format
+format:
+	find . -iname "*.go" -print0 | xargs -r0 gofmt -s -w
+
 build:: ensure
 	${GO} install -ldflags "-X github.com/pulumi/esc/cmd/internal/version.Version=${VERSION}" ./cmd/esc
 
