@@ -148,20 +148,11 @@ func newEnvRunCmd(envcmd *envCommand) *cobra.Command {
 				return envcmd.writePropertyEnvironmentDiagnostics(envcmd.esc.stderr, diags)
 			}
 
-			var secrets []string
-
-			environ := envcmd.esc.environ.Vars()
-			if vars, ok := env.Properties["environmentVariables"].Value.(map[string]esc.Value); ok {
-				for k, v := range vars {
-					if strValue, ok := v.Value.(string); ok {
-						if v.Secret {
-							secrets = append(secrets, strValue)
-						}
-
-						environ = append(environ, fmt.Sprintf("%v=%v", k, strValue))
-					}
-				}
+			files, environ, secrets, err := envcmd.prepareEnvironment(env, prepareOptions{})
+			if err != nil {
+				return err
 			}
+			defer envcmd.removeTemporaryFiles(files)
 
 			envV := esc.NewValue(env.Properties)
 			for i, v := range args {
@@ -197,7 +188,7 @@ func newEnvRunCmd(envcmd *envCommand) *cobra.Command {
 			}
 
 			runCmd := exec.Command(command, args...)
-			runCmd.Env = environ
+			runCmd.Env = append(envcmd.esc.environ.Vars(), environ...)
 
 			stdout, stderr := envcmd.esc.stdout, envcmd.esc.stderr
 			if !interactive {
