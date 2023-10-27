@@ -160,6 +160,75 @@
             "EvalContext": null,
             "Extra": null,
             "Shown": false
+        },
+        {
+            "Severity": 1,
+            "Summary": "the root property must be a string subscript or a name",
+            "Detail": "",
+            "Subject": {
+                "Filename": "invalid-access-load",
+                "Start": {
+                    "Line": 10,
+                    "Column": 7,
+                    "Byte": 163
+                },
+                "End": {
+                    "Line": 10,
+                    "Column": 19,
+                    "Byte": 175
+                }
+            },
+            "Context": null,
+            "Expression": null,
+            "EvalContext": null,
+            "Extra": null,
+            "Shown": false
+        },
+        {
+            "Severity": 1,
+            "Summary": "the root property must be a string subscript or a name",
+            "Detail": "",
+            "Subject": {
+                "Filename": "invalid-access-load",
+                "Start": {
+                    "Line": 11,
+                    "Column": 7,
+                    "Byte": 182
+                },
+                "End": {
+                    "Line": 11,
+                    "Column": 16,
+                    "Byte": 191
+                }
+            },
+            "Context": null,
+            "Expression": null,
+            "EvalContext": null,
+            "Extra": null,
+            "Shown": false
+        },
+        {
+            "Severity": 1,
+            "Summary": "the root property must be a string subscript or a name",
+            "Detail": "",
+            "Subject": {
+                "Filename": "invalid-access-load",
+                "Start": {
+                    "Line": 12,
+                    "Column": 7,
+                    "Byte": 198
+                },
+                "End": {
+                    "Line": 12,
+                    "Column": 14,
+                    "Byte": 205
+                }
+            },
+            "Context": null,
+            "Expression": null,
+            "EvalContext": null,
+            "Extra": null,
+            "Shown": false
         }
     ]
 }
