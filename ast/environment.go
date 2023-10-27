@@ -16,7 +16,6 @@ package ast
 
 import (
 	"fmt"
-	"io"
 	"reflect"
 	"strings"
 	"unicode"
@@ -207,19 +206,7 @@ func (d *EnvironmentDecl) recordSyntax() *syntax.Node {
 	return &d.syntax
 }
 
-// NewDiagnosticWriter returns a new hcl.DiagnosticWriter that can be used to print diagnostics associated with the
-// environment.
-func (d *EnvironmentDecl) NewDiagnosticWriter(w io.Writer, width uint, color bool) hcl.DiagnosticWriter {
-	fileMap := map[string]*hcl.File{}
-	if d.source != nil {
-		if s := d.syntax; s != nil {
-			fileMap[s.Syntax().Range().Filename] = &hcl.File{Bytes: d.source}
-		}
-	}
-	return newDiagnosticWriter(w, fileMap, width, color)
-}
-
-// ParseEnvironment parses a environment from the given syntax node. The source text is optional, and is only used to print
+// ParseEnvironment parses an environment from the given syntax node. The source text is optional, and is only used to print
 // diagnostics.
 func ParseEnvironment(source []byte, node syntax.Node) (*EnvironmentDecl, syntax.Diagnostics) {
 	environment := EnvironmentDecl{source: source}
