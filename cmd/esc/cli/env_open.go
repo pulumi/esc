@@ -145,11 +145,6 @@ func (env *envCommand) renderValue(
 
 }
 
-type prepareOptions struct {
-	quote   bool
-	pretend bool
-}
-
 func getEnvironmentVariables(env *esc.Environment, quote bool) (environ, secrets []string) {
 	vars := env.GetEnvironmentVariables()
 	keys := maps.Keys(vars)
@@ -223,6 +218,14 @@ func (env *envCommand) removeTemporaryFiles(paths []string) {
 	}
 }
 
+// prepareOptions contains options for prepareEnvironment.
+type prepareOptions struct {
+	quote   bool // True to quote environment variable values
+	pretend bool // True to skip actually writing temporary files
+}
+
+// prepareEnvironment prepares the envvar and temporary file projections for an environment. Returns the paths to
+// temporary files, environment variable pairs, and secret values.
 func (env *envCommand) prepareEnvironment(e *esc.Environment, opts prepareOptions) (files, environ, secrets []string, err error) {
 	envVars, envSecrets := getEnvironmentVariables(e, opts.quote)
 
