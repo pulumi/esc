@@ -1,0 +1,50 @@
+{
+    "loadDiags": [
+        {
+            "Severity": 1,
+            "Summary": "import must have a single key",
+            "Detail": "",
+            "Subject": {
+                "Filename": "bad-imports",
+                "Start": {
+                    "Line": 2,
+                    "Column": 5,
+                    "Byte": 13
+                },
+                "End": {
+                    "Line": 2,
+                    "Column": 16,
+                    "Byte": 24
+                }
+            },
+            "Context": null,
+            "Expression": null,
+            "EvalContext": null,
+            "Extra": null,
+            "Shown": false
+        },
+        {
+            "Severity": 1,
+            "Summary": "import must be a string or an object",
+            "Detail": "",
+            "Subject": {
+                "Filename": "bad-imports",
+                "Start": {
+                    "Line": 3,
+                    "Column": 5,
+                    "Byte": 0
+                },
+                "End": {
+                    "Line": 3,
+                    "Column": 6,
+                    "Byte": 0
+                }
+            },
+            "Context": null,
+            "Expression": null,
+            "EvalContext": null,
+            "Extra": null,
+            "Shown": false
+        }
+    ]
+}

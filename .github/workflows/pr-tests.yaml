@@ -13,3 +13,4 @@ jobs:
     uses: ./.github/workflows/stage-test.yml
     with:
       enable-coverage: true
+    secrets: inherit
