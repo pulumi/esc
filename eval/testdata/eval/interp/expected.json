@@ -1,6 +1,90 @@
 {
     "environment": {
         "exprs": {
+            "34": {
+                "range": {
+                    "environment": "interp",
+                    "begin": {
+                        "line": 22,
+                        "column": 9,
+                        "byte": 367
+                    },
+                    "end": {
+                        "line": 22,
+                        "column": 28,
+                        "byte": 386
+                    }
+                },
+                "schema": {
+                    "type": "string",
+                    "const": "this should be okay"
+                },
+                "literal": "this should be okay"
+            },
+            "35": {
+                "range": {
+                    "environment": "interp",
+                    "begin": {
+                        "line": 24,
+                        "column": 5,
+                        "byte": 399
+                    },
+                    "end": {
+                        "line": 24,
+                        "column": 20,
+                        "byte": 414
+                    }
+                },
+                "schema": {
+                    "properties": {
+                        "okay": {
+                            "type": "string",
+                            "const": "also okay"
+                        }
+                    },
+                    "type": "object",
+                    "required": [
+                        "okay"
+                    ]
+                },
+                "keyRanges": {
+                    "okay": {
+                        "environment": "interp",
+                        "begin": {
+                            "line": 24,
+                            "column": 5,
+                            "byte": 399
+                        },
+                        "end": {
+                            "line": 24,
+                            "column": 9,
+                            "byte": 403
+                        }
+                    }
+                },
+                "object": {
+                    "okay": {
+                        "range": {
+                            "environment": "interp",
+                            "begin": {
+                                "line": 24,
+                                "column": 11,
+                                "byte": 405
+                            },
+                            "end": {
+                                "line": 24,
+                                "column": 20,
+                                "byte": 414
+                            }
+                        },
+                        "schema": {
+                            "type": "string",
+                            "const": "also okay"
+                        },
+                        "literal": "also okay"
+                    }
+                }
+            },
             "a": {
                 "range": {
                     "environment": "interp",
@@ -579,9 +663,9 @@
                         "byte": 169
                     },
                     "end": {
-                        "line": 19,
-                        "column": 24,
-                        "byte": 317
+                        "line": 21,
+                        "column": 23,
+                        "byte": 358
                     }
                 },
                 "schema": {
@@ -619,6 +703,14 @@
                                 {
                                     "type": "string",
                                     "const": "merp"
+                                },
+                                {
+                                    "type": "string",
+                                    "const": "this should be okay"
+                                },
+                                {
+                                    "type": "string",
+                                    "const": "also okay"
                                 }
                             ],
                             "items": false,
@@ -789,9 +881,9 @@
                                                         "byte": 169
                                                     },
                                                     "end": {
-                                                        "line": 19,
-                                                        "column": 24,
-                                                        "byte": 317
+                                                        "line": 21,
+                                                        "column": 23,
+                                                        "byte": 358
                                                     }
                                                 }
                                             },
@@ -845,9 +937,9 @@
                                                         "byte": 169
                                                     },
                                                     "end": {
-                                                        "line": 19,
-                                                        "column": 24,
-                                                        "byte": 317
+                                                        "line": 21,
+                                                        "column": 23,
+                                                        "byte": 358
                                                     }
                                                 }
                                             },
@@ -921,9 +1013,9 @@
                                 "byte": 258
                             },
                             "end": {
-                                "line": 19,
-                                "column": 24,
-                                "byte": 317
+                                "line": 21,
+                                "column": 23,
+                                "byte": 358
                             }
                         },
                         "schema": {
@@ -939,6 +1031,14 @@
                                 {
                                     "type": "string",
                                     "const": "merp"
+                                },
+                                {
+                                    "type": "string",
+                                    "const": "this should be okay"
+                                },
+                                {
+                                    "type": "string",
+                                    "const": "also okay"
                                 }
                             ],
                             "items": false,
@@ -1151,6 +1251,96 @@
                                         }
                                     }
                                 ]
+                            },
+                            {
+                                "range": {
+                                    "environment": "interp",
+                                    "begin": {
+                                        "line": 20,
+                                        "column": 9,
+                                        "byte": 326
+                                    },
+                                    "end": {
+                                        "line": 20,
+                                        "column": 18,
+                                        "byte": 335
+                                    }
+                                },
+                                "schema": {
+                                    "type": "string",
+                                    "const": "this should be okay"
+                                },
+                                "symbol": [
+                                    {
+                                        "key": "34",
+                                        "value": {
+                                            "environment": "interp",
+                                            "begin": {
+                                                "line": 22,
+                                                "column": 9,
+                                                "byte": 367
+                                            },
+                                            "end": {
+                                                "line": 22,
+                                                "column": 28,
+                                                "byte": 386
+                                            }
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "range": {
+                                    "environment": "interp",
+                                    "begin": {
+                                        "line": 21,
+                                        "column": 9,
+                                        "byte": 344
+                                    },
+                                    "end": {
+                                        "line": 21,
+                                        "column": 23,
+                                        "byte": 358
+                                    }
+                                },
+                                "schema": {
+                                    "type": "string",
+                                    "const": "also okay"
+                                },
+                                "symbol": [
+                                    {
+                                        "key": "35",
+                                        "value": {
+                                            "environment": "interp",
+                                            "begin": {
+                                                "line": 24,
+                                                "column": 5,
+                                                "byte": 399
+                                            },
+                                            "end": {
+                                                "line": 24,
+                                                "column": 20,
+                                                "byte": 414
+                                            }
+                                        }
+                                    },
+                                    {
+                                        "key": "okay",
+                                        "value": {
+                                            "environment": "interp",
+                                            "begin": {
+                                                "line": 24,
+                                                "column": 11,
+                                                "byte": 405
+                                            },
+                                            "end": {
+                                                "line": 24,
+                                                "column": 20,
+                                                "byte": 414
+                                            }
+                                        }
+                                    }
+                                ]
                             }
                         ]
                     }
@@ -1158,6 +1348,61 @@
             }
         },
         "properties": {
+            "34": {
+                "value": "this should be okay",
+                "trace": {
+                    "def": {
+                        "environment": "interp",
+                        "begin": {
+                            "line": 22,
+                            "column": 9,
+                            "byte": 367
+                        },
+                        "end": {
+                            "line": 22,
+                            "column": 28,
+                            "byte": 386
+                        }
+                    }
+                }
+            },
+            "35": {
+                "value": {
+                    "okay": {
+                        "value": "also okay",
+                        "trace": {
+                            "def": {
+                                "environment": "interp",
+                                "begin": {
+                                    "line": 24,
+                                    "column": 11,
+                                    "byte": 405
+                                },
+                                "end": {
+                                    "line": 24,
+                                    "column": 20,
+                                    "byte": 414
+                                }
+                            }
+                        }
+                    }
+                },
+                "trace": {
+                    "def": {
+                        "environment": "interp",
+                        "begin": {
+                            "line": 24,
+                            "column": 5,
+                            "byte": 399
+                        },
+                        "end": {
+                            "line": 24,
+                            "column": 20,
+                            "byte": 414
+                        }
+                    }
+                }
+            },
             "a": {
                 "value": {
                     "p": {
@@ -1512,6 +1757,42 @@
                                         }
                                     }
                                 }
+                            },
+                            {
+                                "value": "this should be okay",
+                                "trace": {
+                                    "def": {
+                                        "environment": "interp",
+                                        "begin": {
+                                            "line": 20,
+                                            "column": 9,
+                                            "byte": 326
+                                        },
+                                        "end": {
+                                            "line": 20,
+                                            "column": 18,
+                                            "byte": 335
+                                        }
+                                    }
+                                }
+                            },
+                            {
+                                "value": "also okay",
+                                "trace": {
+                                    "def": {
+                                        "environment": "interp",
+                                        "begin": {
+                                            "line": 21,
+                                            "column": 9,
+                                            "byte": 344
+                                        },
+                                        "end": {
+                                            "line": 21,
+                                            "column": 23,
+                                            "byte": 358
+                                        }
+                                    }
+                                }
                             }
                         ],
                         "trace": {
@@ -1523,9 +1804,9 @@
                                     "byte": 258
                                 },
                                 "end": {
-                                    "line": 19,
-                                    "column": 24,
-                                    "byte": 317
+                                    "line": 21,
+                                    "column": 23,
+                                    "byte": 358
                                 }
                             }
                         }
@@ -1540,9 +1821,9 @@
                             "byte": 169
                         },
                         "end": {
-                            "line": 19,
-                            "column": 24,
-                            "byte": 317
+                            "line": 21,
+                            "column": 23,
+                            "byte": 358
                         }
                     }
                 }
@@ -1550,6 +1831,22 @@
         },
         "schema": {
             "properties": {
+                "34": {
+                    "type": "string",
+                    "const": "this should be okay"
+                },
+                "35": {
+                    "properties": {
+                        "okay": {
+                            "type": "string",
+                            "const": "also okay"
+                        }
+                    },
+                    "type": "object",
+                    "required": [
+                        "okay"
+                    ]
+                },
                 "a": {
                     "properties": {
                         "p": {
@@ -1651,6 +1948,14 @@
                                 {
                                     "type": "string",
                                     "const": "merp"
+                                },
+                                {
+                                    "type": "string",
+                                    "const": "this should be okay"
+                                },
+                                {
+                                    "type": "string",
+                                    "const": "also okay"
                                 }
                             ],
                             "items": false,
@@ -1667,6 +1972,8 @@
             },
             "type": "object",
             "required": [
+                "34",
+                "35",
                 "a",
                 "b",
                 "c"

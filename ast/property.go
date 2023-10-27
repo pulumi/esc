@@ -16,9 +16,10 @@ package ast
 
 import (
 	"fmt"
-	"github.com/pulumi/esc/syntax"
 	"strconv"
 	"strings"
+
+	"github.com/pulumi/esc/syntax"
 )
 
 type PropertyAccess struct {
