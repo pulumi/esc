@@ -219,19 +219,6 @@ func (d *EnvironmentDecl) NewDiagnosticWriter(w io.Writer, width uint, color boo
 	return newDiagnosticWriter(w, fileMap, width, color)
 }
 
-func EnvironmentSyntax(node *syntax.ObjectNode, description *StringExpr, imports ImportListDecl, values PropertyMapDecl) *EnvironmentDecl {
-	return &EnvironmentDecl{
-		syntax:      node,
-		Description: description,
-		Imports:     imports,
-		Values:      values,
-	}
-}
-
-func Environment(description *StringExpr, imports ImportListDecl, values PropertyMapDecl) *EnvironmentDecl {
-	return EnvironmentSyntax(nil, description, imports, values)
-}
-
 // ParseEnvironment parses a environment from the given syntax node. The source text is optional, and is only used to print
 // diagnostics.
 func ParseEnvironment(source []byte, node syntax.Node) (*EnvironmentDecl, syntax.Diagnostics) {
