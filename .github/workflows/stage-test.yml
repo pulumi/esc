@@ -35,7 +35,7 @@ jobs:
         if: ${{ inputs.enable-coverage }}
         run: make test_cover
       - name: Test
-        if: ${{ ! inputs.enable-coverate }}
+        if: ${{ ! inputs.enable-coverage }}
         run: make test
       - name: Upload code coverage
         if: ${{ inputs.enable-coverage }}
