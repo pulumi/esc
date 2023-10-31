@@ -3,7 +3,7 @@
         {
             "Severity": 1,
             "Summary": "\"imports\" is a reserved key",
-            "Detail": "values.imports",
+            "Detail": "",
             "Subject": {
                 "Filename": "reserved-keys",
                 "Start": {
@@ -21,12 +21,13 @@
             "Expression": null,
             "EvalContext": null,
             "Extra": null,
-            "Shown": false
+            "Shown": false,
+            "Path": "values.imports"
         },
         {
             "Severity": 1,
             "Summary": "\"context\" is a reserved key",
-            "Detail": "values.context",
+            "Detail": "",
             "Subject": {
                 "Filename": "reserved-keys",
                 "Start": {
@@ -44,14 +45,15 @@
             "Expression": null,
             "EvalContext": null,
             "Extra": null,
-            "Shown": false
+            "Shown": false,
+            "Path": "values.context"
         }
     ],
     "evalDiags": [
         {
             "Severity": 1,
             "Summary": "\"imports\" is a reserved key",
-            "Detail": "values.imports",
+            "Detail": "",
             "Subject": {
                 "Filename": "reserved-keys",
                 "Start": {
@@ -69,12 +71,13 @@
             "Expression": null,
             "EvalContext": null,
             "Extra": null,
-            "Shown": false
+            "Shown": false,
+            "Path": "values.imports"
         },
         {
             "Severity": 1,
             "Summary": "\"context\" is a reserved key",
-            "Detail": "values.context",
+            "Detail": "",
             "Subject": {
                 "Filename": "reserved-keys",
                 "Start": {
@@ -92,7 +95,8 @@
             "Expression": null,
             "EvalContext": null,
             "Extra": null,
-            "Shown": false
+            "Shown": false,
+            "Path": "values.context"
         }
     ],
     "environment": {

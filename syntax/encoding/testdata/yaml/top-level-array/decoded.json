@@ -9,7 +9,8 @@
             "Expression": null,
             "EvalContext": null,
             "Extra": null,
-            "Shown": false
+            "Shown": false,
+            "Path": ""
         }
     ]
 }

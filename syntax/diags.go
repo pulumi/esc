@@ -29,7 +29,8 @@ type Diagnostic struct {
 // Error creates a new error-level diagnostic from the given subject, summary, and detail.
 func Error(rng *hcl.Range, summary, path string) *Diagnostic {
 	return &Diagnostic{
-		Diagnostic: hcl.Diagnostic{Severity: hcl.DiagError, Subject: rng, Summary: summary, Detail: path},
+		Diagnostic: hcl.Diagnostic{Severity: hcl.DiagError, Subject: rng, Summary: summary},
+		Path:       path,
 	}
 }
 

@@ -3,7 +3,7 @@
         {
             "Severity": 1,
             "Summary": "duplicate key \"foo\"",
-            "Detail": "values.foo",
+            "Detail": "",
             "Subject": {
                 "Filename": "duplicate-keys",
                 "Start": {
@@ -21,12 +21,13 @@
             "Expression": null,
             "EvalContext": null,
             "Extra": null,
-            "Shown": false
+            "Shown": false,
+            "Path": "values.foo"
         },
         {
             "Severity": 1,
             "Summary": "duplicate key \"foo\"",
-            "Detail": "values.qux.foo",
+            "Detail": "",
             "Subject": {
                 "Filename": "duplicate-keys",
                 "Start": {
@@ -44,14 +45,15 @@
             "Expression": null,
             "EvalContext": null,
             "Extra": null,
-            "Shown": false
+            "Shown": false,
+            "Path": "values.qux.foo"
         }
     ],
     "evalDiags": [
         {
             "Severity": 1,
             "Summary": "duplicate key \"foo\"",
-            "Detail": "values.foo",
+            "Detail": "",
             "Subject": {
                 "Filename": "duplicate-keys",
                 "Start": {
@@ -69,12 +71,13 @@
             "Expression": null,
             "EvalContext": null,
             "Extra": null,
-            "Shown": false
+            "Shown": false,
+            "Path": "values.foo"
         },
         {
             "Severity": 1,
             "Summary": "duplicate key \"foo\"",
-            "Detail": "values.qux.foo",
+            "Detail": "",
             "Subject": {
                 "Filename": "duplicate-keys",
                 "Start": {
@@ -92,7 +95,8 @@
             "Expression": null,
             "EvalContext": null,
             "Extra": null,
-            "Shown": false
+            "Shown": false,
+            "Path": "values.qux.foo"
         }
     ],
     "environment": {

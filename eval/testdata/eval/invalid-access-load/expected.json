@@ -3,7 +3,7 @@
         {
             "Severity": 1,
             "Summary": "missing closing bracket in property access",
-            "Detail": "values.propertyAccessTest[0]",
+            "Detail": "",
             "Subject": {
                 "Filename": "invalid-access-load",
                 "Start": {
@@ -21,12 +21,13 @@
             "Expression": null,
             "EvalContext": null,
             "Extra": null,
-            "Shown": false
+            "Shown": false,
+            "Path": "values.propertyAccessTest[0]"
         },
         {
             "Severity": 1,
             "Summary": "missing closing quote in property name",
-            "Detail": "values.propertyAccessTest[1]",
+            "Detail": "",
             "Subject": {
                 "Filename": "invalid-access-load",
                 "Start": {
@@ -44,12 +45,13 @@
             "Expression": null,
             "EvalContext": null,
             "Extra": null,
-            "Shown": false
+            "Shown": false,
+            "Path": "values.propertyAccessTest[1]"
         },
         {
             "Severity": 1,
             "Summary": "unterminated interpolation",
-            "Detail": "values.propertyAccessTest[2]",
+            "Detail": "",
             "Subject": {
                 "Filename": "invalid-access-load",
                 "Start": {
@@ -67,12 +69,13 @@
             "Expression": null,
             "EvalContext": null,
             "Extra": null,
-            "Shown": false
+            "Shown": false,
+            "Path": "values.propertyAccessTest[2]"
         },
         {
             "Severity": 1,
             "Summary": "missing closing bracket in list index",
-            "Detail": "values.propertyAccessTest[3]",
+            "Detail": "",
             "Subject": {
                 "Filename": "invalid-access-load",
                 "Start": {
@@ -90,12 +93,13 @@
             "Expression": null,
             "EvalContext": null,
             "Extra": null,
-            "Shown": false
+            "Shown": false,
+            "Path": "values.propertyAccessTest[3]"
         },
         {
             "Severity": 1,
             "Summary": "invalid list index",
-            "Detail": "values.propertyAccessTest[4]",
+            "Detail": "",
             "Subject": {
                 "Filename": "invalid-access-load",
                 "Start": {
@@ -113,12 +117,13 @@
             "Expression": null,
             "EvalContext": null,
             "Extra": null,
-            "Shown": false
+            "Shown": false,
+            "Path": "values.propertyAccessTest[4]"
         },
         {
             "Severity": 1,
             "Summary": "Property access expressions cannot be empty",
-            "Detail": "values.propertyAccessTest[5]",
+            "Detail": "",
             "Subject": {
                 "Filename": "invalid-access-load",
                 "Start": {
@@ -136,12 +141,13 @@
             "Expression": null,
             "EvalContext": null,
             "Extra": null,
-            "Shown": false
+            "Shown": false,
+            "Path": "values.propertyAccessTest[5]"
         },
         {
             "Severity": 1,
             "Summary": "the root property must be a string subscript or a name",
-            "Detail": "values.propertyAccessTest[6]",
+            "Detail": "",
             "Subject": {
                 "Filename": "invalid-access-load",
                 "Start": {
@@ -159,12 +165,13 @@
             "Expression": null,
             "EvalContext": null,
             "Extra": null,
-            "Shown": false
+            "Shown": false,
+            "Path": "values.propertyAccessTest[6]"
         },
         {
             "Severity": 1,
             "Summary": "the root property must be a string subscript or a name",
-            "Detail": "values.propertyAccessTest[7]",
+            "Detail": "",
             "Subject": {
                 "Filename": "invalid-access-load",
                 "Start": {
@@ -182,12 +189,13 @@
             "Expression": null,
             "EvalContext": null,
             "Extra": null,
-            "Shown": false
+            "Shown": false,
+            "Path": "values.propertyAccessTest[7]"
         },
         {
             "Severity": 1,
             "Summary": "the root property must be a string subscript or a name",
-            "Detail": "values.propertyAccessTest[8]",
+            "Detail": "",
             "Subject": {
                 "Filename": "invalid-access-load",
                 "Start": {
@@ -205,12 +213,13 @@
             "Expression": null,
             "EvalContext": null,
             "Extra": null,
-            "Shown": false
+            "Shown": false,
+            "Path": "values.propertyAccessTest[8]"
         },
         {
             "Severity": 1,
             "Summary": "the root property must be a string subscript or a name",
-            "Detail": "values.propertyAccessTest[9]",
+            "Detail": "",
             "Subject": {
                 "Filename": "invalid-access-load",
                 "Start": {
@@ -228,7 +237,8 @@
             "Expression": null,
             "EvalContext": null,
             "Extra": null,
-            "Shown": false
+            "Shown": false,
+            "Path": "values.propertyAccessTest[9]"
         }
     ]
 }

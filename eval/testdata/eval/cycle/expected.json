@@ -3,7 +3,7 @@
         {
             "Severity": 1,
             "Summary": "cyclic reference to a.p",
-            "Detail": "values.a.p",
+            "Detail": "",
             "Subject": {
                 "Filename": "cycle",
                 "Start": {
@@ -21,12 +21,13 @@
             "Expression": null,
             "EvalContext": null,
             "Extra": null,
-            "Shown": false
+            "Shown": false,
+            "Path": "values.a.p"
         },
         {
             "Severity": 1,
             "Summary": "cyclic reference to b.p",
-            "Detail": "values.b.p",
+            "Detail": "",
             "Subject": {
                 "Filename": "cycle",
                 "Start": {
@@ -44,14 +45,15 @@
             "Expression": null,
             "EvalContext": null,
             "Extra": null,
-            "Shown": false
+            "Shown": false,
+            "Path": "values.b.p"
         }
     ],
     "evalDiags": [
         {
             "Severity": 1,
             "Summary": "cyclic reference to a.p",
-            "Detail": "values.a.p",
+            "Detail": "",
             "Subject": {
                 "Filename": "cycle",
                 "Start": {
@@ -69,12 +71,13 @@
             "Expression": null,
             "EvalContext": null,
             "Extra": null,
-            "Shown": false
+            "Shown": false,
+            "Path": "values.a.p"
         },
         {
             "Severity": 1,
             "Summary": "cyclic reference to b.p",
-            "Detail": "values.b.p",
+            "Detail": "",
             "Subject": {
                 "Filename": "cycle",
                 "Start": {
@@ -92,7 +95,8 @@
             "Expression": null,
             "EvalContext": null,
             "Extra": null,
-            "Shown": false
+            "Shown": false,
+            "Path": "values.b.p"
         }
     ],
     "environment": {

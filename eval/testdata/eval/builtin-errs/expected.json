@@ -3,7 +3,7 @@
         {
             "Severity": 1,
             "Summary": "unknown property \"missing\"",
-            "Detail": "values.builtins[0].fn::open::test",
+            "Detail": "",
             "Subject": {
                 "Filename": "builtin-errs",
                 "Start": {
@@ -21,12 +21,13 @@
             "Expression": null,
             "EvalContext": null,
             "Extra": null,
-            "Shown": false
+            "Shown": false,
+            "Path": "values.builtins[0].fn::open::test"
         },
         {
             "Severity": 1,
             "Summary": "unknown property \"missing\"",
-            "Detail": "values.builtins[1].fn::join[1]",
+            "Detail": "",
             "Subject": {
                 "Filename": "builtin-errs",
                 "Start": {
@@ -44,12 +45,13 @@
             "Expression": null,
             "EvalContext": null,
             "Extra": null,
-            "Shown": false
+            "Shown": false,
+            "Path": "values.builtins[1].fn::join[1]"
         },
         {
             "Severity": 1,
             "Summary": "expected string, got number",
-            "Detail": "values.builtins[2].fn::join[1][0]",
+            "Detail": "",
             "Subject": {
                 "Filename": "builtin-errs",
                 "Start": {
@@ -67,12 +69,13 @@
             "Expression": null,
             "EvalContext": null,
             "Extra": null,
-            "Shown": false
+            "Shown": false,
+            "Path": "values.builtins[2].fn::join[1][0]"
         },
         {
             "Severity": 1,
             "Summary": "unknown property \"missing\"",
-            "Detail": "values.builtins[3].fn::toBase64",
+            "Detail": "",
             "Subject": {
                 "Filename": "builtin-errs",
                 "Start": {
@@ -90,12 +93,13 @@
             "Expression": null,
             "EvalContext": null,
             "Extra": null,
-            "Shown": false
+            "Shown": false,
+            "Path": "values.builtins[3].fn::toBase64"
         },
         {
             "Severity": 1,
             "Summary": "expected string, got number",
-            "Detail": "values.builtins[4].fn::toBase64",
+            "Detail": "",
             "Subject": {
                 "Filename": "builtin-errs",
                 "Start": {
@@ -113,12 +117,13 @@
             "Expression": null,
             "EvalContext": null,
             "Extra": null,
-            "Shown": false
+            "Shown": false,
+            "Path": "values.builtins[4].fn::toBase64"
         },
         {
             "Severity": 1,
             "Summary": "unknown property \"missing\"",
-            "Detail": "values.builtins[5].fn::toJSON",
+            "Detail": "",
             "Subject": {
                 "Filename": "builtin-errs",
                 "Start": {
@@ -136,12 +141,13 @@
             "Expression": null,
             "EvalContext": null,
             "Extra": null,
-            "Shown": false
+            "Shown": false,
+            "Path": "values.builtins[5].fn::toJSON"
         },
         {
             "Severity": 1,
             "Summary": "unknown property \"missing\"",
-            "Detail": "values.builtins[6].fn::toString",
+            "Detail": "",
             "Subject": {
                 "Filename": "builtin-errs",
                 "Start": {
@@ -159,14 +165,15 @@
             "Expression": null,
             "EvalContext": null,
             "Extra": null,
-            "Shown": false
+            "Shown": false,
+            "Path": "values.builtins[6].fn::toString"
         }
     ],
     "evalDiags": [
         {
             "Severity": 1,
             "Summary": "unknown property \"missing\"",
-            "Detail": "values.builtins[0].fn::open::test",
+            "Detail": "",
             "Subject": {
                 "Filename": "builtin-errs",
                 "Start": {
@@ -184,12 +191,13 @@
             "Expression": null,
             "EvalContext": null,
             "Extra": null,
-            "Shown": false
+            "Shown": false,
+            "Path": "values.builtins[0].fn::open::test"
         },
         {
             "Severity": 1,
             "Summary": "unknown property \"missing\"",
-            "Detail": "values.builtins[1].fn::join[1]",
+            "Detail": "",
             "Subject": {
                 "Filename": "builtin-errs",
                 "Start": {
@@ -207,12 +215,13 @@
             "Expression": null,
             "EvalContext": null,
             "Extra": null,
-            "Shown": false
+            "Shown": false,
+            "Path": "values.builtins[1].fn::join[1]"
         },
         {
             "Severity": 1,
             "Summary": "expected string, got number",
-            "Detail": "values.builtins[2].fn::join[1][0]",
+            "Detail": "",
             "Subject": {
                 "Filename": "builtin-errs",
                 "Start": {
@@ -230,12 +239,13 @@
             "Expression": null,
             "EvalContext": null,
             "Extra": null,
-            "Shown": false
+            "Shown": false,
+            "Path": "values.builtins[2].fn::join[1][0]"
         },
         {
             "Severity": 1,
             "Summary": "unknown property \"missing\"",
-            "Detail": "values.builtins[3].fn::toBase64",
+            "Detail": "",
             "Subject": {
                 "Filename": "builtin-errs",
                 "Start": {
@@ -253,12 +263,13 @@
             "Expression": null,
             "EvalContext": null,
             "Extra": null,
-            "Shown": false
+            "Shown": false,
+            "Path": "values.builtins[3].fn::toBase64"
         },
         {
             "Severity": 1,
             "Summary": "expected string, got number",
-            "Detail": "values.builtins[4].fn::toBase64",
+            "Detail": "",
             "Subject": {
                 "Filename": "builtin-errs",
                 "Start": {
@@ -276,12 +287,13 @@
             "Expression": null,
             "EvalContext": null,
             "Extra": null,
-            "Shown": false
+            "Shown": false,
+            "Path": "values.builtins[4].fn::toBase64"
         },
         {
             "Severity": 1,
             "Summary": "unknown property \"missing\"",
-            "Detail": "values.builtins[5].fn::toJSON",
+            "Detail": "",
             "Subject": {
                 "Filename": "builtin-errs",
                 "Start": {
@@ -299,12 +311,13 @@
             "Expression": null,
             "EvalContext": null,
             "Extra": null,
-            "Shown": false
+            "Shown": false,
+            "Path": "values.builtins[5].fn::toJSON"
         },
         {
             "Severity": 1,
             "Summary": "unknown property \"missing\"",
-            "Detail": "values.builtins[6].fn::toString",
+            "Detail": "",
             "Subject": {
                 "Filename": "builtin-errs",
                 "Start": {
@@ -322,7 +335,8 @@
             "Expression": null,
             "EvalContext": null,
             "Extra": null,
-            "Shown": false
+            "Shown": false,
+            "Path": "values.builtins[6].fn::toString"
         }
     ],
     "environment": {

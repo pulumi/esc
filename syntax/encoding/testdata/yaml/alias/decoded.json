@@ -73,7 +73,7 @@
         {
             "Severity": 1,
             "Summary": "alias nodes are not supported",
-            "Detail": "bar",
+            "Detail": "",
             "Subject": {
                 "Filename": "alias",
                 "Start": {
@@ -91,7 +91,8 @@
             "Expression": null,
             "EvalContext": null,
             "Extra": null,
-            "Shown": false
+            "Shown": false,
+            "Path": "bar"
         }
     ],
     "encodeDiags": [
@@ -104,7 +105,8 @@
             "Expression": null,
             "EvalContext": null,
             "Extra": null,
-            "Shown": false
+            "Shown": false,
+            "Path": ""
         }
     ]
 }

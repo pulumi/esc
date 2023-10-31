@@ -3,7 +3,7 @@
         {
             "Severity": 1,
             "Summary": "testing",
-            "Detail": "values.error",
+            "Detail": "",
             "Subject": {
                 "Filename": "open-unknown",
                 "Start": {
@@ -21,7 +21,8 @@
             "Expression": null,
             "EvalContext": null,
             "Extra": null,
-            "Shown": false
+            "Shown": false,
+            "Path": "values.error"
         }
     ],
     "environment": {

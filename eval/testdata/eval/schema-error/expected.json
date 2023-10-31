@@ -3,7 +3,7 @@
         {
             "Severity": 1,
             "Summary": "expected boolean, got null",
-            "Detail": "values.sink.fn::open::schema.boolean",
+            "Detail": "",
             "Subject": {
                 "Filename": "schema-error",
                 "Start": {
@@ -21,12 +21,13 @@
             "Expression": null,
             "EvalContext": null,
             "Extra": null,
-            "Shown": false
+            "Shown": false,
+            "Path": "values.sink.fn::open::schema.boolean"
         },
         {
             "Severity": 1,
             "Summary": "expected string, got array",
-            "Detail": "values.sink.fn::open::schema.string",
+            "Detail": "",
             "Subject": {
                 "Filename": "schema-error",
                 "Start": {
@@ -44,12 +45,13 @@
             "Expression": null,
             "EvalContext": null,
             "Extra": null,
-            "Shown": false
+            "Shown": false,
+            "Path": "values.sink.fn::open::schema.string"
         },
         {
             "Severity": 1,
             "Summary": "expected number, got object",
-            "Detail": "values.sink.fn::open::schema.number",
+            "Detail": "",
             "Subject": {
                 "Filename": "schema-error",
                 "Start": {
@@ -67,12 +69,13 @@
             "Expression": null,
             "EvalContext": null,
             "Extra": null,
-            "Shown": false
+            "Shown": false,
+            "Path": "values.sink.fn::open::schema.number"
         },
         {
             "Severity": 1,
             "Summary": "expected string, got boolean",
-            "Detail": "values.sink.fn::open::schema.anyOf",
+            "Detail": "",
             "Subject": {
                 "Filename": "schema-error",
                 "Start": {
@@ -90,12 +93,13 @@
             "Expression": null,
             "EvalContext": null,
             "Extra": null,
-            "Shown": false
+            "Shown": false,
+            "Path": "values.sink.fn::open::schema.anyOf"
         },
         {
             "Severity": 1,
             "Summary": "expected number, got boolean",
-            "Detail": "values.sink.fn::open::schema.anyOf",
+            "Detail": "",
             "Subject": {
                 "Filename": "schema-error",
                 "Start": {
@@ -113,12 +117,13 @@
             "Expression": null,
             "EvalContext": null,
             "Extra": null,
-            "Shown": false
+            "Shown": false,
+            "Path": "values.sink.fn::open::schema.anyOf"
         },
         {
             "Severity": 1,
             "Summary": "at least one subschema must match",
-            "Detail": "values.sink.fn::open::schema.anyOf",
+            "Detail": "",
             "Subject": {
                 "Filename": "schema-error",
                 "Start": {
@@ -136,12 +141,13 @@
             "Expression": null,
             "EvalContext": null,
             "Extra": null,
-            "Shown": false
+            "Shown": false,
+            "Path": "values.sink.fn::open::schema.anyOf"
         },
         {
             "Severity": 1,
             "Summary": "expected string, got boolean",
-            "Detail": "values.sink.fn::open::schema.oneOf",
+            "Detail": "",
             "Subject": {
                 "Filename": "schema-error",
                 "Start": {
@@ -159,12 +165,13 @@
             "Expression": null,
             "EvalContext": null,
             "Extra": null,
-            "Shown": false
+            "Shown": false,
+            "Path": "values.sink.fn::open::schema.oneOf"
         },
         {
             "Severity": 1,
             "Summary": "expected number, got boolean",
-            "Detail": "values.sink.fn::open::schema.oneOf",
+            "Detail": "",
             "Subject": {
                 "Filename": "schema-error",
                 "Start": {
@@ -182,12 +189,13 @@
             "Expression": null,
             "EvalContext": null,
             "Extra": null,
-            "Shown": false
+            "Shown": false,
+            "Path": "values.sink.fn::open::schema.oneOf"
         },
         {
             "Severity": 1,
             "Summary": "at least one subschema must match",
-            "Detail": "values.sink.fn::open::schema.oneOf",
+            "Detail": "",
             "Subject": {
                 "Filename": "schema-error",
                 "Start": {
@@ -205,12 +213,13 @@
             "Expression": null,
             "EvalContext": null,
             "Extra": null,
-            "Shown": false
+            "Shown": false,
+            "Path": "values.sink.fn::open::schema.oneOf"
         },
         {
             "Severity": 1,
             "Summary": "expected array, got string",
-            "Detail": "values.sink.fn::open::schema.const-array",
+            "Detail": "",
             "Subject": {
                 "Filename": "schema-error",
                 "Start": {
@@ -228,12 +237,13 @@
             "Expression": null,
             "EvalContext": null,
             "Extra": null,
-            "Shown": false
+            "Shown": false,
+            "Path": "values.sink.fn::open::schema.const-array"
         },
         {
             "Severity": 1,
             "Summary": "expected object, got string",
-            "Detail": "values.sink.fn::open::schema.const-object",
+            "Detail": "",
             "Subject": {
                 "Filename": "schema-error",
                 "Start": {
@@ -251,12 +261,13 @@
             "Expression": null,
             "EvalContext": null,
             "Extra": null,
-            "Shown": false
+            "Shown": false,
+            "Path": "values.sink.fn::open::schema.const-object"
         },
         {
             "Severity": 1,
             "Summary": "dependentReq.bar: missing required property",
-            "Detail": "values.sink.fn::open::schema.dependentReq",
+            "Detail": "",
             "Subject": {
                 "Filename": "schema-error",
                 "Start": {
@@ -274,14 +285,15 @@
             "Expression": null,
             "EvalContext": null,
             "Extra": null,
-            "Shown": false
+            "Shown": false,
+            "Path": "values.sink.fn::open::schema.dependentReq"
         }
     ],
     "evalDiags": [
         {
             "Severity": 1,
             "Summary": "expected boolean, got null",
-            "Detail": "values.sink.fn::open::schema.boolean",
+            "Detail": "",
             "Subject": {
                 "Filename": "schema-error",
                 "Start": {
@@ -299,12 +311,13 @@
             "Expression": null,
             "EvalContext": null,
             "Extra": null,
-            "Shown": false
+            "Shown": false,
+            "Path": "values.sink.fn::open::schema.boolean"
         },
         {
             "Severity": 1,
             "Summary": "expected string, got array",
-            "Detail": "values.sink.fn::open::schema.string",
+            "Detail": "",
             "Subject": {
                 "Filename": "schema-error",
                 "Start": {
@@ -322,12 +335,13 @@
             "Expression": null,
             "EvalContext": null,
             "Extra": null,
-            "Shown": false
+            "Shown": false,
+            "Path": "values.sink.fn::open::schema.string"
         },
         {
             "Severity": 1,
             "Summary": "expected number, got object",
-            "Detail": "values.sink.fn::open::schema.number",
+            "Detail": "",
             "Subject": {
                 "Filename": "schema-error",
                 "Start": {
@@ -345,12 +359,13 @@
             "Expression": null,
             "EvalContext": null,
             "Extra": null,
-            "Shown": false
+            "Shown": false,
+            "Path": "values.sink.fn::open::schema.number"
         },
         {
             "Severity": 1,
             "Summary": "missing required properties: foo",
-            "Detail": "values.sink.fn::open::schema.record",
+            "Detail": "",
             "Subject": {
                 "Filename": "schema-error",
                 "Start": {
@@ -368,12 +383,13 @@
             "Expression": null,
             "EvalContext": null,
             "Extra": null,
-            "Shown": false
+            "Shown": false,
+            "Path": "values.sink.fn::open::schema.record"
         },
         {
             "Severity": 1,
             "Summary": "expected number, got boolean",
-            "Detail": "values.sink.fn::open::schema.anyOf",
+            "Detail": "",
             "Subject": {
                 "Filename": "schema-error",
                 "Start": {
@@ -391,12 +407,13 @@
             "Expression": null,
             "EvalContext": null,
             "Extra": null,
-            "Shown": false
+            "Shown": false,
+            "Path": "values.sink.fn::open::schema.anyOf"
         },
         {
             "Severity": 1,
             "Summary": "at least one subschema must match",
-            "Detail": "values.sink.fn::open::schema.anyOf",
+            "Detail": "",
             "Subject": {
                 "Filename": "schema-error",
                 "Start": {
@@ -414,12 +431,13 @@
             "Expression": null,
             "EvalContext": null,
             "Extra": null,
-            "Shown": false
+            "Shown": false,
+            "Path": "values.sink.fn::open::schema.anyOf"
         },
         {
             "Severity": 1,
             "Summary": "expected string, got boolean",
-            "Detail": "values.sink.fn::open::schema.anyOf",
+            "Detail": "",
             "Subject": {
                 "Filename": "schema-error",
                 "Start": {
@@ -437,12 +455,13 @@
             "Expression": null,
             "EvalContext": null,
             "Extra": null,
-            "Shown": false
+            "Shown": false,
+            "Path": "values.sink.fn::open::schema.anyOf"
         },
         {
             "Severity": 1,
             "Summary": "exactly one subschema must match",
-            "Detail": "values.sink.fn::open::schema.oneOf",
+            "Detail": "",
             "Subject": {
                 "Filename": "schema-error",
                 "Start": {
@@ -460,12 +479,13 @@
             "Expression": null,
             "EvalContext": null,
             "Extra": null,
-            "Shown": false
+            "Shown": false,
+            "Path": "values.sink.fn::open::schema.oneOf"
         },
         {
             "Severity": 1,
             "Summary": "expected number, got boolean",
-            "Detail": "values.sink.fn::open::schema.oneOf",
+            "Detail": "",
             "Subject": {
                 "Filename": "schema-error",
                 "Start": {
@@ -483,12 +503,13 @@
             "Expression": null,
             "EvalContext": null,
             "Extra": null,
-            "Shown": false
+            "Shown": false,
+            "Path": "values.sink.fn::open::schema.oneOf"
         },
         {
             "Severity": 1,
             "Summary": "expected string, got boolean",
-            "Detail": "values.sink.fn::open::schema.oneOf",
+            "Detail": "",
             "Subject": {
                 "Filename": "schema-error",
                 "Start": {
@@ -506,12 +527,13 @@
             "Expression": null,
             "EvalContext": null,
             "Extra": null,
-            "Shown": false
+            "Shown": false,
+            "Path": "values.sink.fn::open::schema.oneOf"
         },
         {
             "Severity": 1,
             "Summary": "expected [\"hello\",42]",
-            "Detail": "values.sink.fn::open::schema.const-array",
+            "Detail": "",
             "Subject": {
                 "Filename": "schema-error",
                 "Start": {
@@ -529,12 +551,13 @@
             "Expression": null,
             "EvalContext": null,
             "Extra": null,
-            "Shown": false
+            "Shown": false,
+            "Path": "values.sink.fn::open::schema.const-array"
         },
         {
             "Severity": 1,
             "Summary": "expected array, got string",
-            "Detail": "values.sink.fn::open::schema.const-array",
+            "Detail": "",
             "Subject": {
                 "Filename": "schema-error",
                 "Start": {
@@ -552,12 +575,13 @@
             "Expression": null,
             "EvalContext": null,
             "Extra": null,
-            "Shown": false
+            "Shown": false,
+            "Path": "values.sink.fn::open::schema.const-array"
         },
         {
             "Severity": 1,
             "Summary": "expected object, got string",
-            "Detail": "values.sink.fn::open::schema.const-object",
+            "Detail": "",
             "Subject": {
                 "Filename": "schema-error",
                 "Start": {
@@ -575,12 +599,13 @@
             "Expression": null,
             "EvalContext": null,
             "Extra": null,
-            "Shown": false
+            "Shown": false,
+            "Path": "values.sink.fn::open::schema.const-object"
         },
         {
             "Severity": 1,
             "Summary": "expected {\"hello\":\"world\"}",
-            "Detail": "values.sink.fn::open::schema.const-object",
+            "Detail": "",
             "Subject": {
                 "Filename": "schema-error",
                 "Start": {
@@ -598,12 +623,13 @@
             "Expression": null,
             "EvalContext": null,
             "Extra": null,
-            "Shown": false
+            "Shown": false,
+            "Path": "values.sink.fn::open::schema.const-object"
         },
         {
             "Severity": 1,
             "Summary": "expected one of [\"foo\",\"bar\"]",
-            "Detail": "values.sink.fn::open::schema.enum",
+            "Detail": "",
             "Subject": {
                 "Filename": "schema-error",
                 "Start": {
@@ -621,12 +647,13 @@
             "Expression": null,
             "EvalContext": null,
             "Extra": null,
-            "Shown": false
+            "Shown": false,
+            "Path": "values.sink.fn::open::schema.enum"
         },
         {
             "Severity": 1,
             "Summary": "missing required properties: bar",
-            "Detail": "values.sink.fn::open::schema.dependentReq",
+            "Detail": "",
             "Subject": {
                 "Filename": "schema-error",
                 "Start": {
@@ -644,12 +671,13 @@
             "Expression": null,
             "EvalContext": null,
             "Extra": null,
-            "Shown": false
+            "Shown": false,
+            "Path": "values.sink.fn::open::schema.dependentReq"
         },
         {
             "Severity": 1,
             "Summary": "expected a multiple of 2",
-            "Detail": "values.sink.fn::open::schema.multiple",
+            "Detail": "",
             "Subject": {
                 "Filename": "schema-error",
                 "Start": {
@@ -667,12 +695,13 @@
             "Expression": null,
             "EvalContext": null,
             "Extra": null,
-            "Shown": false
+            "Shown": false,
+            "Path": "values.sink.fn::open::schema.multiple"
         },
         {
             "Severity": 1,
             "Summary": "expected a number greater than or equal to 1",
-            "Detail": "values.sink.fn::open::schema.minimum",
+            "Detail": "",
             "Subject": {
                 "Filename": "schema-error",
                 "Start": {
@@ -690,12 +719,13 @@
             "Expression": null,
             "EvalContext": null,
             "Extra": null,
-            "Shown": false
+            "Shown": false,
+            "Path": "values.sink.fn::open::schema.minimum"
         },
         {
             "Severity": 1,
             "Summary": "expected a number greater than 1",
-            "Detail": "values.sink.fn::open::schema.exclusiveMinimum",
+            "Detail": "",
             "Subject": {
                 "Filename": "schema-error",
                 "Start": {
@@ -713,12 +743,13 @@
             "Expression": null,
             "EvalContext": null,
             "Extra": null,
-            "Shown": false
+            "Shown": false,
+            "Path": "values.sink.fn::open::schema.exclusiveMinimum"
         },
         {
             "Severity": 1,
             "Summary": "expected a number less than or equal to1",
-            "Detail": "values.sink.fn::open::schema.maximum",
+            "Detail": "",
             "Subject": {
                 "Filename": "schema-error",
                 "Start": {
@@ -736,12 +767,13 @@
             "Expression": null,
             "EvalContext": null,
             "Extra": null,
-            "Shown": false
+            "Shown": false,
+            "Path": "values.sink.fn::open::schema.maximum"
         },
         {
             "Severity": 1,
             "Summary": "expected a number less than 1",
-            "Detail": "values.sink.fn::open::schema.exclusiveMaximum",
+            "Detail": "",
             "Subject": {
                 "Filename": "schema-error",
                 "Start": {
@@ -759,12 +791,13 @@
             "Expression": null,
             "EvalContext": null,
             "Extra": null,
-            "Shown": false
+            "Shown": false,
+            "Path": "values.sink.fn::open::schema.exclusiveMaximum"
         },
         {
             "Severity": 1,
             "Summary": "expected a string of at least length 1",
-            "Detail": "values.sink.fn::open::schema.minLength",
+            "Detail": "",
             "Subject": {
                 "Filename": "schema-error",
                 "Start": {
@@ -782,12 +815,13 @@
             "Expression": null,
             "EvalContext": null,
             "Extra": null,
-            "Shown": false
+            "Shown": false,
+            "Path": "values.sink.fn::open::schema.minLength"
         },
         {
             "Severity": 1,
             "Summary": "expected a string of at most length 1",
-            "Detail": "values.sink.fn::open::schema.maxLength",
+            "Detail": "",
             "Subject": {
                 "Filename": "schema-error",
                 "Start": {
@@ -805,12 +839,13 @@
             "Expression": null,
             "EvalContext": null,
             "Extra": null,
-            "Shown": false
+            "Shown": false,
+            "Path": "values.sink.fn::open::schema.maxLength"
         },
         {
             "Severity": 1,
             "Summary": "string must match the pattern \"^foo[0-9]+$\"",
-            "Detail": "values.sink.fn::open::schema.pattern",
+            "Detail": "",
             "Subject": {
                 "Filename": "schema-error",
                 "Start": {
@@ -828,12 +863,13 @@
             "Expression": null,
             "EvalContext": null,
             "Extra": null,
-            "Shown": false
+            "Shown": false,
+            "Path": "values.sink.fn::open::schema.pattern"
         },
         {
             "Severity": 1,
             "Summary": "expected an array with at least 3 items",
-            "Detail": "values.sink.fn::open::schema.minItems",
+            "Detail": "",
             "Subject": {
                 "Filename": "schema-error",
                 "Start": {
@@ -851,12 +887,13 @@
             "Expression": null,
             "EvalContext": null,
             "Extra": null,
-            "Shown": false
+            "Shown": false,
+            "Path": "values.sink.fn::open::schema.minItems"
         },
         {
             "Severity": 1,
             "Summary": "expected an array with at most 2 items",
-            "Detail": "values.sink.fn::open::schema.maxItems",
+            "Detail": "",
             "Subject": {
                 "Filename": "schema-error",
                 "Start": {
@@ -874,12 +911,13 @@
             "Expression": null,
             "EvalContext": null,
             "Extra": null,
-            "Shown": false
+            "Shown": false,
+            "Path": "values.sink.fn::open::schema.maxItems"
         },
         {
             "Severity": 1,
             "Summary": "expected an object with at least 1 properties",
-            "Detail": "values.sink.fn::open::schema.minProperties",
+            "Detail": "",
             "Subject": {
                 "Filename": "schema-error",
                 "Start": {
@@ -897,12 +935,13 @@
             "Expression": null,
             "EvalContext": null,
             "Extra": null,
-            "Shown": false
+            "Shown": false,
+            "Path": "values.sink.fn::open::schema.minProperties"
         },
         {
             "Severity": 1,
             "Summary": "expected an object with at most 1 properties",
-            "Detail": "values.sink.fn::open::schema.maxProperties",
+            "Detail": "",
             "Subject": {
                 "Filename": "schema-error",
                 "Start": {
@@ -920,7 +959,8 @@
             "Expression": null,
             "EvalContext": null,
             "Extra": null,
-            "Shown": false
+            "Shown": false,
+            "Path": "values.sink.fn::open::schema.maxProperties"
         }
     ],
     "environment": {
