@@ -3,7 +3,7 @@
         {
             "Severity": 1,
             "Summary": "expected boolean, got null",
-            "Detail": "",
+            "Detail": "values.sink.fn::open::schema.boolean",
             "Subject": {
                 "Filename": "schema-error",
                 "Start": {
@@ -26,7 +26,7 @@
         {
             "Severity": 1,
             "Summary": "expected string, got array",
-            "Detail": "",
+            "Detail": "values.sink.fn::open::schema.string",
             "Subject": {
                 "Filename": "schema-error",
                 "Start": {
@@ -49,7 +49,7 @@
         {
             "Severity": 1,
             "Summary": "expected number, got object",
-            "Detail": "",
+            "Detail": "values.sink.fn::open::schema.number",
             "Subject": {
                 "Filename": "schema-error",
                 "Start": {
@@ -72,7 +72,7 @@
         {
             "Severity": 1,
             "Summary": "expected string, got boolean",
-            "Detail": "",
+            "Detail": "values.sink.fn::open::schema.anyOf",
             "Subject": {
                 "Filename": "schema-error",
                 "Start": {
@@ -95,7 +95,7 @@
         {
             "Severity": 1,
             "Summary": "expected number, got boolean",
-            "Detail": "",
+            "Detail": "values.sink.fn::open::schema.anyOf",
             "Subject": {
                 "Filename": "schema-error",
                 "Start": {
@@ -118,7 +118,7 @@
         {
             "Severity": 1,
             "Summary": "at least one subschema must match",
-            "Detail": "",
+            "Detail": "values.sink.fn::open::schema.anyOf",
             "Subject": {
                 "Filename": "schema-error",
                 "Start": {
@@ -141,7 +141,7 @@
         {
             "Severity": 1,
             "Summary": "expected string, got boolean",
-            "Detail": "",
+            "Detail": "values.sink.fn::open::schema.oneOf",
             "Subject": {
                 "Filename": "schema-error",
                 "Start": {
@@ -164,7 +164,7 @@
         {
             "Severity": 1,
             "Summary": "expected number, got boolean",
-            "Detail": "",
+            "Detail": "values.sink.fn::open::schema.oneOf",
             "Subject": {
                 "Filename": "schema-error",
                 "Start": {
@@ -187,7 +187,7 @@
         {
             "Severity": 1,
             "Summary": "at least one subschema must match",
-            "Detail": "",
+            "Detail": "values.sink.fn::open::schema.oneOf",
             "Subject": {
                 "Filename": "schema-error",
                 "Start": {
@@ -210,7 +210,7 @@
         {
             "Severity": 1,
             "Summary": "expected array, got string",
-            "Detail": "",
+            "Detail": "values.sink.fn::open::schema.const-array",
             "Subject": {
                 "Filename": "schema-error",
                 "Start": {
@@ -233,7 +233,7 @@
         {
             "Severity": 1,
             "Summary": "expected object, got string",
-            "Detail": "",
+            "Detail": "values.sink.fn::open::schema.const-object",
             "Subject": {
                 "Filename": "schema-error",
                 "Start": {
@@ -256,7 +256,7 @@
         {
             "Severity": 1,
             "Summary": "dependentReq.bar: missing required property",
-            "Detail": "",
+            "Detail": "values.sink.fn::open::schema.dependentReq",
             "Subject": {
                 "Filename": "schema-error",
                 "Start": {
@@ -281,7 +281,7 @@
         {
             "Severity": 1,
             "Summary": "expected boolean, got null",
-            "Detail": "",
+            "Detail": "values.sink.fn::open::schema.boolean",
             "Subject": {
                 "Filename": "schema-error",
                 "Start": {
@@ -304,7 +304,7 @@
         {
             "Severity": 1,
             "Summary": "expected string, got array",
-            "Detail": "",
+            "Detail": "values.sink.fn::open::schema.string",
             "Subject": {
                 "Filename": "schema-error",
                 "Start": {
@@ -327,7 +327,7 @@
         {
             "Severity": 1,
             "Summary": "expected number, got object",
-            "Detail": "",
+            "Detail": "values.sink.fn::open::schema.number",
             "Subject": {
                 "Filename": "schema-error",
                 "Start": {
@@ -350,7 +350,7 @@
         {
             "Severity": 1,
             "Summary": "missing required properties: foo",
-            "Detail": "",
+            "Detail": "values.sink.fn::open::schema.record",
             "Subject": {
                 "Filename": "schema-error",
                 "Start": {
@@ -373,7 +373,7 @@
         {
             "Severity": 1,
             "Summary": "expected number, got boolean",
-            "Detail": "",
+            "Detail": "values.sink.fn::open::schema.anyOf",
             "Subject": {
                 "Filename": "schema-error",
                 "Start": {
@@ -396,7 +396,7 @@
         {
             "Severity": 1,
             "Summary": "at least one subschema must match",
-            "Detail": "",
+            "Detail": "values.sink.fn::open::schema.anyOf",
             "Subject": {
                 "Filename": "schema-error",
                 "Start": {
@@ -419,7 +419,7 @@
         {
             "Severity": 1,
             "Summary": "expected string, got boolean",
-            "Detail": "",
+            "Detail": "values.sink.fn::open::schema.anyOf",
             "Subject": {
                 "Filename": "schema-error",
                 "Start": {
@@ -442,7 +442,7 @@
         {
             "Severity": 1,
             "Summary": "exactly one subschema must match",
-            "Detail": "",
+            "Detail": "values.sink.fn::open::schema.oneOf",
             "Subject": {
                 "Filename": "schema-error",
                 "Start": {
@@ -465,7 +465,7 @@
         {
             "Severity": 1,
             "Summary": "expected number, got boolean",
-            "Detail": "",
+            "Detail": "values.sink.fn::open::schema.oneOf",
             "Subject": {
                 "Filename": "schema-error",
                 "Start": {
@@ -488,7 +488,7 @@
         {
             "Severity": 1,
             "Summary": "expected string, got boolean",
-            "Detail": "",
+            "Detail": "values.sink.fn::open::schema.oneOf",
             "Subject": {
                 "Filename": "schema-error",
                 "Start": {
@@ -511,7 +511,7 @@
         {
             "Severity": 1,
             "Summary": "expected [\"hello\",42]",
-            "Detail": "",
+            "Detail": "values.sink.fn::open::schema.const-array",
             "Subject": {
                 "Filename": "schema-error",
                 "Start": {
@@ -534,7 +534,7 @@
         {
             "Severity": 1,
             "Summary": "expected array, got string",
-            "Detail": "",
+            "Detail": "values.sink.fn::open::schema.const-array",
             "Subject": {
                 "Filename": "schema-error",
                 "Start": {
@@ -557,7 +557,7 @@
         {
             "Severity": 1,
             "Summary": "expected object, got string",
-            "Detail": "",
+            "Detail": "values.sink.fn::open::schema.const-object",
             "Subject": {
                 "Filename": "schema-error",
                 "Start": {
@@ -580,7 +580,7 @@
         {
             "Severity": 1,
             "Summary": "expected {\"hello\":\"world\"}",
-            "Detail": "",
+            "Detail": "values.sink.fn::open::schema.const-object",
             "Subject": {
                 "Filename": "schema-error",
                 "Start": {
@@ -603,7 +603,7 @@
         {
             "Severity": 1,
             "Summary": "expected one of [\"foo\",\"bar\"]",
-            "Detail": "",
+            "Detail": "values.sink.fn::open::schema.enum",
             "Subject": {
                 "Filename": "schema-error",
                 "Start": {
@@ -626,7 +626,7 @@
         {
             "Severity": 1,
             "Summary": "missing required properties: bar",
-            "Detail": "",
+            "Detail": "values.sink.fn::open::schema.dependentReq",
             "Subject": {
                 "Filename": "schema-error",
                 "Start": {
@@ -649,7 +649,7 @@
         {
             "Severity": 1,
             "Summary": "expected a multiple of 2",
-            "Detail": "",
+            "Detail": "values.sink.fn::open::schema.multiple",
             "Subject": {
                 "Filename": "schema-error",
                 "Start": {
@@ -672,7 +672,7 @@
         {
             "Severity": 1,
             "Summary": "expected a number greater than or equal to 1",
-            "Detail": "",
+            "Detail": "values.sink.fn::open::schema.minimum",
             "Subject": {
                 "Filename": "schema-error",
                 "Start": {
@@ -695,7 +695,7 @@
         {
             "Severity": 1,
             "Summary": "expected a number greater than 1",
-            "Detail": "",
+            "Detail": "values.sink.fn::open::schema.exclusiveMinimum",
             "Subject": {
                 "Filename": "schema-error",
                 "Start": {
@@ -718,7 +718,7 @@
         {
             "Severity": 1,
             "Summary": "expected a number less than or equal to1",
-            "Detail": "",
+            "Detail": "values.sink.fn::open::schema.maximum",
             "Subject": {
                 "Filename": "schema-error",
                 "Start": {
@@ -741,7 +741,7 @@
         {
             "Severity": 1,
             "Summary": "expected a number less than 1",
-            "Detail": "",
+            "Detail": "values.sink.fn::open::schema.exclusiveMaximum",
             "Subject": {
                 "Filename": "schema-error",
                 "Start": {
@@ -764,7 +764,7 @@
         {
             "Severity": 1,
             "Summary": "expected a string of at least length 1",
-            "Detail": "",
+            "Detail": "values.sink.fn::open::schema.minLength",
             "Subject": {
                 "Filename": "schema-error",
                 "Start": {
@@ -787,7 +787,7 @@
         {
             "Severity": 1,
             "Summary": "expected a string of at most length 1",
-            "Detail": "",
+            "Detail": "values.sink.fn::open::schema.maxLength",
             "Subject": {
                 "Filename": "schema-error",
                 "Start": {
@@ -810,7 +810,7 @@
         {
             "Severity": 1,
             "Summary": "string must match the pattern \"^foo[0-9]+$\"",
-            "Detail": "",
+            "Detail": "values.sink.fn::open::schema.pattern",
             "Subject": {
                 "Filename": "schema-error",
                 "Start": {
@@ -833,7 +833,7 @@
         {
             "Severity": 1,
             "Summary": "expected an array with at least 3 items",
-            "Detail": "",
+            "Detail": "values.sink.fn::open::schema.minItems",
             "Subject": {
                 "Filename": "schema-error",
                 "Start": {
@@ -856,7 +856,7 @@
         {
             "Severity": 1,
             "Summary": "expected an array with at most 2 items",
-            "Detail": "",
+            "Detail": "values.sink.fn::open::schema.maxItems",
             "Subject": {
                 "Filename": "schema-error",
                 "Start": {
@@ -879,7 +879,7 @@
         {
             "Severity": 1,
             "Summary": "expected an object with at least 1 properties",
-            "Detail": "",
+            "Detail": "values.sink.fn::open::schema.minProperties",
             "Subject": {
                 "Filename": "schema-error",
                 "Start": {
@@ -902,7 +902,7 @@
         {
             "Severity": 1,
             "Summary": "expected an object with at most 1 properties",
-            "Detail": "",
+            "Detail": "values.sink.fn::open::schema.maxProperties",
             "Subject": {
                 "Filename": "schema-error",
                 "Start": {

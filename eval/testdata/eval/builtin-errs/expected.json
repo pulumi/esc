@@ -3,7 +3,7 @@
         {
             "Severity": 1,
             "Summary": "unknown property \"missing\"",
-            "Detail": "",
+            "Detail": "values.builtins[0].fn::open::test",
             "Subject": {
                 "Filename": "builtin-errs",
                 "Start": {
@@ -26,7 +26,7 @@
         {
             "Severity": 1,
             "Summary": "unknown property \"missing\"",
-            "Detail": "",
+            "Detail": "values.builtins[1].fn::join[1]",
             "Subject": {
                 "Filename": "builtin-errs",
                 "Start": {
@@ -49,7 +49,7 @@
         {
             "Severity": 1,
             "Summary": "expected string, got number",
-            "Detail": "",
+            "Detail": "values.builtins[2].fn::join[1][0]",
             "Subject": {
                 "Filename": "builtin-errs",
                 "Start": {
@@ -72,7 +72,7 @@
         {
             "Severity": 1,
             "Summary": "unknown property \"missing\"",
-            "Detail": "",
+            "Detail": "values.builtins[3].fn::toBase64",
             "Subject": {
                 "Filename": "builtin-errs",
                 "Start": {
@@ -95,7 +95,7 @@
         {
             "Severity": 1,
             "Summary": "expected string, got number",
-            "Detail": "",
+            "Detail": "values.builtins[4].fn::toBase64",
             "Subject": {
                 "Filename": "builtin-errs",
                 "Start": {
@@ -118,7 +118,7 @@
         {
             "Severity": 1,
             "Summary": "unknown property \"missing\"",
-            "Detail": "",
+            "Detail": "values.builtins[5].fn::toJSON",
             "Subject": {
                 "Filename": "builtin-errs",
                 "Start": {
@@ -141,7 +141,7 @@
         {
             "Severity": 1,
             "Summary": "unknown property \"missing\"",
-            "Detail": "",
+            "Detail": "values.builtins[6].fn::toString",
             "Subject": {
                 "Filename": "builtin-errs",
                 "Start": {
@@ -166,7 +166,7 @@
         {
             "Severity": 1,
             "Summary": "unknown property \"missing\"",
-            "Detail": "",
+            "Detail": "values.builtins[0].fn::open::test",
             "Subject": {
                 "Filename": "builtin-errs",
                 "Start": {
@@ -189,7 +189,7 @@
         {
             "Severity": 1,
             "Summary": "unknown property \"missing\"",
-            "Detail": "",
+            "Detail": "values.builtins[1].fn::join[1]",
             "Subject": {
                 "Filename": "builtin-errs",
                 "Start": {
@@ -212,7 +212,7 @@
         {
             "Severity": 1,
             "Summary": "expected string, got number",
-            "Detail": "",
+            "Detail": "values.builtins[2].fn::join[1][0]",
             "Subject": {
                 "Filename": "builtin-errs",
                 "Start": {
@@ -235,7 +235,7 @@
         {
             "Severity": 1,
             "Summary": "unknown property \"missing\"",
-            "Detail": "",
+            "Detail": "values.builtins[3].fn::toBase64",
             "Subject": {
                 "Filename": "builtin-errs",
                 "Start": {
@@ -258,7 +258,7 @@
         {
             "Severity": 1,
             "Summary": "expected string, got number",
-            "Detail": "",
+            "Detail": "values.builtins[4].fn::toBase64",
             "Subject": {
                 "Filename": "builtin-errs",
                 "Start": {
@@ -281,7 +281,7 @@
         {
             "Severity": 1,
             "Summary": "unknown property \"missing\"",
-            "Detail": "",
+            "Detail": "values.builtins[5].fn::toJSON",
             "Subject": {
                 "Filename": "builtin-errs",
                 "Start": {
@@ -304,7 +304,7 @@
         {
             "Severity": 1,
             "Summary": "unknown property \"missing\"",
-            "Detail": "",
+            "Detail": "values.builtins[6].fn::toString",
             "Subject": {
                 "Filename": "builtin-errs",
                 "Start": {

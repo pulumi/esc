@@ -3,7 +3,7 @@
         {
             "Severity": 1,
             "Summary": "testing",
-            "Detail": "",
+            "Detail": "values.error",
             "Subject": {
                 "Filename": "open-unknown",
                 "Start": {

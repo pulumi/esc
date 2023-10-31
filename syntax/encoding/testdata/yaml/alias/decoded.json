@@ -73,7 +73,7 @@
         {
             "Severity": 1,
             "Summary": "alias nodes are not supported",
-            "Detail": "",
+            "Detail": "bar",
             "Subject": {
                 "Filename": "alias",
                 "Start": {

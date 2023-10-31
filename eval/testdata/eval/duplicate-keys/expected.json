@@ -3,7 +3,7 @@
         {
             "Severity": 1,
             "Summary": "duplicate key \"foo\"",
-            "Detail": "",
+            "Detail": "values.foo",
             "Subject": {
                 "Filename": "duplicate-keys",
                 "Start": {
@@ -26,7 +26,7 @@
         {
             "Severity": 1,
             "Summary": "duplicate key \"foo\"",
-            "Detail": "",
+            "Detail": "values.qux.foo",
             "Subject": {
                 "Filename": "duplicate-keys",
                 "Start": {
@@ -51,7 +51,7 @@
         {
             "Severity": 1,
             "Summary": "duplicate key \"foo\"",
-            "Detail": "",
+            "Detail": "values.foo",
             "Subject": {
                 "Filename": "duplicate-keys",
                 "Start": {
@@ -74,7 +74,7 @@
         {
             "Severity": 1,
             "Summary": "duplicate key \"foo\"",
-            "Detail": "",
+            "Detail": "values.qux.foo",
             "Subject": {
                 "Filename": "duplicate-keys",
                 "Start": {

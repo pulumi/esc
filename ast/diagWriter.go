@@ -115,7 +115,6 @@ func (w *diagnosticWriter) fixupOffsets(d *hcl.Diagnostic) {
 
 func (w *diagnosticWriter) WriteDiagnostic(d *hcl.Diagnostic) error {
 	w.fixupOffsets(d)
-
 	return w.w.WriteDiagnostic(d)
 }
 

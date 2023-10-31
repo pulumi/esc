@@ -3,7 +3,7 @@
         {
             "Severity": 1,
             "Summary": "\"imports\" is a reserved key",
-            "Detail": "",
+            "Detail": "values.imports",
             "Subject": {
                 "Filename": "reserved-keys",
                 "Start": {
@@ -26,7 +26,7 @@
         {
             "Severity": 1,
             "Summary": "\"context\" is a reserved key",
-            "Detail": "",
+            "Detail": "values.context",
             "Subject": {
                 "Filename": "reserved-keys",
                 "Start": {
@@ -51,7 +51,7 @@
         {
             "Severity": 1,
             "Summary": "\"imports\" is a reserved key",
-            "Detail": "",
+            "Detail": "values.imports",
             "Subject": {
                 "Filename": "reserved-keys",
                 "Start": {
@@ -74,7 +74,7 @@
         {
             "Severity": 1,
             "Summary": "\"context\" is a reserved key",
-            "Detail": "",
+            "Detail": "values.context",
             "Subject": {
                 "Filename": "reserved-keys",
                 "Start": {

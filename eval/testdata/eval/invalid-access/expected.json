@@ -3,7 +3,7 @@
         {
             "Severity": 1,
             "Summary": "receiver must be an array or an object",
-            "Detail": "",
+            "Detail": "values.errors[0]",
             "Subject": {
                 "Filename": "invalid-access",
                 "Start": {
@@ -26,7 +26,7 @@
         {
             "Severity": 1,
             "Summary": "cannot access an array element using a property name",
-            "Detail": "",
+            "Detail": "values.errors[1]",
             "Subject": {
                 "Filename": "invalid-access",
                 "Start": {
@@ -49,7 +49,7 @@
         {
             "Severity": 1,
             "Summary": "cannot access an array element using a property name",
-            "Detail": "",
+            "Detail": "values.errors[2]",
             "Subject": {
                 "Filename": "invalid-access",
                 "Start": {
@@ -72,7 +72,7 @@
         {
             "Severity": 1,
             "Summary": "array index 3 out-of-bounds for array of length 3",
-            "Detail": "",
+            "Detail": "values.errors[3]",
             "Subject": {
                 "Filename": "invalid-access",
                 "Start": {
@@ -95,7 +95,7 @@
         {
             "Severity": 1,
             "Summary": "array indices must not be negative",
-            "Detail": "",
+            "Detail": "values.errors[4]",
             "Subject": {
                 "Filename": "invalid-access",
                 "Start": {
@@ -118,7 +118,7 @@
         {
             "Severity": 1,
             "Summary": "cannot access an object property using an integer index",
-            "Detail": "",
+            "Detail": "values.errors[5]",
             "Subject": {
                 "Filename": "invalid-access",
                 "Start": {
@@ -141,7 +141,7 @@
         {
             "Severity": 1,
             "Summary": "unknown property \"bar\"",
-            "Detail": "",
+            "Detail": "values.errors[6]",
             "Subject": {
                 "Filename": "invalid-access",
                 "Start": {
@@ -164,7 +164,7 @@
         {
             "Severity": 1,
             "Summary": "unknown property \"bar\"",
-            "Detail": "",
+            "Detail": "values.errors[7]",
             "Subject": {
                 "Filename": "invalid-access",
                 "Start": {
@@ -187,7 +187,7 @@
         {
             "Severity": 1,
             "Summary": "cannot access an object property using an integer index",
-            "Detail": "",
+            "Detail": "values.errors[8]",
             "Subject": {
                 "Filename": "invalid-access",
                 "Start": {
@@ -210,7 +210,7 @@
         {
             "Severity": 1,
             "Summary": "receiver must be an array or an object",
-            "Detail": "",
+            "Detail": "values.errors[9]",
             "Subject": {
                 "Filename": "invalid-access",
                 "Start": {
@@ -233,7 +233,7 @@
         {
             "Severity": 1,
             "Summary": "cannot access an array element using a property name",
-            "Detail": "",
+            "Detail": "values.errors[10]",
             "Subject": {
                 "Filename": "invalid-access",
                 "Start": {
@@ -256,7 +256,7 @@
         {
             "Severity": 1,
             "Summary": "cannot access an array element using a property name",
-            "Detail": "",
+            "Detail": "values.errors[11]",
             "Subject": {
                 "Filename": "invalid-access",
                 "Start": {
@@ -279,7 +279,7 @@
         {
             "Severity": 1,
             "Summary": "cannot access an object property using an integer index",
-            "Detail": "",
+            "Detail": "values.errors[12]",
             "Subject": {
                 "Filename": "invalid-access",
                 "Start": {
@@ -304,7 +304,7 @@
         {
             "Severity": 1,
             "Summary": "receiver must be an array or an object",
-            "Detail": "",
+            "Detail": "values.errors[0]",
             "Subject": {
                 "Filename": "invalid-access",
                 "Start": {
@@ -327,7 +327,7 @@
         {
             "Severity": 1,
             "Summary": "cannot access an array element using a property name",
-            "Detail": "",
+            "Detail": "values.errors[1]",
             "Subject": {
                 "Filename": "invalid-access",
                 "Start": {
@@ -350,7 +350,7 @@
         {
             "Severity": 1,
             "Summary": "cannot access an array element using a property name",
-            "Detail": "",
+            "Detail": "values.errors[2]",
             "Subject": {
                 "Filename": "invalid-access",
                 "Start": {
@@ -373,7 +373,7 @@
         {
             "Severity": 1,
             "Summary": "array index 3 out-of-bounds for array of length 3",
-            "Detail": "",
+            "Detail": "values.errors[3]",
             "Subject": {
                 "Filename": "invalid-access",
                 "Start": {
@@ -396,7 +396,7 @@
         {
             "Severity": 1,
             "Summary": "array indices must not be negative",
-            "Detail": "",
+            "Detail": "values.errors[4]",
             "Subject": {
                 "Filename": "invalid-access",
                 "Start": {
@@ -419,7 +419,7 @@
         {
             "Severity": 1,
             "Summary": "cannot access an object property using an integer index",
-            "Detail": "",
+            "Detail": "values.errors[5]",
             "Subject": {
                 "Filename": "invalid-access",
                 "Start": {
@@ -442,7 +442,7 @@
         {
             "Severity": 1,
             "Summary": "unknown property \"bar\"",
-            "Detail": "",
+            "Detail": "values.errors[6]",
             "Subject": {
                 "Filename": "invalid-access",
                 "Start": {
@@ -465,7 +465,7 @@
         {
             "Severity": 1,
             "Summary": "unknown property \"bar\"",
-            "Detail": "",
+            "Detail": "values.errors[7]",
             "Subject": {
                 "Filename": "invalid-access",
                 "Start": {
@@ -488,7 +488,7 @@
         {
             "Severity": 1,
             "Summary": "cannot access an object property using an integer index",
-            "Detail": "",
+            "Detail": "values.errors[8]",
             "Subject": {
                 "Filename": "invalid-access",
                 "Start": {
@@ -511,7 +511,7 @@
         {
             "Severity": 1,
             "Summary": "receiver must be an array or an object",
-            "Detail": "",
+            "Detail": "values.errors[9]",
             "Subject": {
                 "Filename": "invalid-access",
                 "Start": {
@@ -534,7 +534,7 @@
         {
             "Severity": 1,
             "Summary": "cannot access an array element using a property name",
-            "Detail": "",
+            "Detail": "values.errors[10]",
             "Subject": {
                 "Filename": "invalid-access",
                 "Start": {
@@ -557,7 +557,7 @@
         {
             "Severity": 1,
             "Summary": "cannot access an array element using a property name",
-            "Detail": "",
+            "Detail": "values.errors[11]",
             "Subject": {
                 "Filename": "invalid-access",
                 "Start": {
@@ -580,7 +580,7 @@
         {
             "Severity": 1,
             "Summary": "cannot access an object property using an integer index",
-            "Detail": "",
+            "Detail": "values.errors[12]",
             "Subject": {
                 "Filename": "invalid-access",
                 "Start": {

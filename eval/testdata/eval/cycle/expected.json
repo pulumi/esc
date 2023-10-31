@@ -3,7 +3,7 @@
         {
             "Severity": 1,
             "Summary": "cyclic reference to a.p",
-            "Detail": "",
+            "Detail": "values.a.p",
             "Subject": {
                 "Filename": "cycle",
                 "Start": {
@@ -26,7 +26,7 @@
         {
             "Severity": 1,
             "Summary": "cyclic reference to b.p",
-            "Detail": "",
+            "Detail": "values.b.p",
             "Subject": {
                 "Filename": "cycle",
                 "Start": {
@@ -51,7 +51,7 @@
         {
             "Severity": 1,
             "Summary": "cyclic reference to a.p",
-            "Detail": "",
+            "Detail": "values.a.p",
             "Subject": {
                 "Filename": "cycle",
                 "Start": {
@@ -74,7 +74,7 @@
         {
             "Severity": 1,
             "Summary": "cyclic reference to b.p",
-            "Detail": "",
+            "Detail": "values.b.p",
             "Subject": {
                 "Filename": "cycle",
                 "Start": {

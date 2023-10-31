@@ -3,7 +3,7 @@
         {
             "Severity": 1,
             "Summary": "missing closing bracket in property access",
-            "Detail": "",
+            "Detail": "values.propertyAccessTest[0]",
             "Subject": {
                 "Filename": "invalid-access-load",
                 "Start": {
@@ -26,7 +26,7 @@
         {
             "Severity": 1,
             "Summary": "missing closing quote in property name",
-            "Detail": "",
+            "Detail": "values.propertyAccessTest[1]",
             "Subject": {
                 "Filename": "invalid-access-load",
                 "Start": {
@@ -49,7 +49,7 @@
         {
             "Severity": 1,
             "Summary": "unterminated interpolation",
-            "Detail": "",
+            "Detail": "values.propertyAccessTest[2]",
             "Subject": {
                 "Filename": "invalid-access-load",
                 "Start": {
@@ -72,7 +72,7 @@
         {
             "Severity": 1,
             "Summary": "missing closing bracket in list index",
-            "Detail": "",
+            "Detail": "values.propertyAccessTest[3]",
             "Subject": {
                 "Filename": "invalid-access-load",
                 "Start": {
@@ -95,7 +95,7 @@
         {
             "Severity": 1,
             "Summary": "invalid list index",
-            "Detail": "",
+            "Detail": "values.propertyAccessTest[4]",
             "Subject": {
                 "Filename": "invalid-access-load",
                 "Start": {
@@ -118,7 +118,7 @@
         {
             "Severity": 1,
             "Summary": "Property access expressions cannot be empty",
-            "Detail": "",
+            "Detail": "values.propertyAccessTest[5]",
             "Subject": {
                 "Filename": "invalid-access-load",
                 "Start": {
@@ -141,7 +141,7 @@
         {
             "Severity": 1,
             "Summary": "the root property must be a string subscript or a name",
-            "Detail": "",
+            "Detail": "values.propertyAccessTest[6]",
             "Subject": {
                 "Filename": "invalid-access-load",
                 "Start": {
@@ -164,7 +164,7 @@
         {
             "Severity": 1,
             "Summary": "the root property must be a string subscript or a name",
-            "Detail": "",
+            "Detail": "values.propertyAccessTest[7]",
             "Subject": {
                 "Filename": "invalid-access-load",
                 "Start": {
@@ -187,7 +187,7 @@
         {
             "Severity": 1,
             "Summary": "the root property must be a string subscript or a name",
-            "Detail": "",
+            "Detail": "values.propertyAccessTest[8]",
             "Subject": {
                 "Filename": "invalid-access-load",
                 "Start": {
@@ -210,7 +210,7 @@
         {
             "Severity": 1,
             "Summary": "the root property must be a string subscript or a name",
-            "Detail": "",
+            "Detail": "values.propertyAccessTest[9]",
             "Subject": {
                 "Filename": "invalid-access-load",
                 "Start": {
