@@ -55,16 +55,12 @@ func (p *PropertyAccess) RootName() string {
 }
 
 type PropertyAccessor interface {
-	isAccessor()
-
 	rootName() string
 }
 
 type PropertyName struct {
 	Name string
 }
-
-func (p *PropertyName) isAccessor() {}
 
 func (p *PropertyName) rootName() string {
 	return p.Name
@@ -73,8 +69,6 @@ func (p *PropertyName) rootName() string {
 type PropertySubscript struct {
 	Index interface{}
 }
-
-func (p *PropertySubscript) isAccessor() {}
 
 func (p *PropertySubscript) rootName() string {
 	return p.Index.(string)
