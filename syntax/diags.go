@@ -24,6 +24,8 @@ import (
 // A Diagnostic represents a warning or an error to be presented to the user.
 type Diagnostic struct {
 	hcl.Diagnostic
+
+	Path string
 }
 
 // Error creates a new error-level diagnostic from the given subject, summary, and detail.
