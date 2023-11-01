@@ -19,6 +19,7 @@ import (
 	"errors"
 	"fmt"
 	"io"
+	"regexp"
 	"strconv"
 	"strings"
 
@@ -26,6 +27,8 @@ import (
 	"github.com/pulumi/esc/syntax"
 	"github.com/rivo/uniseg"
 	"gopkg.in/yaml.v3"
+
+	"github.com/pulumi/esc/internal/util"
 )
 
 // A TagDecoder decodes tagged YAML nodes. See the documentation on UnmarshalYAML for more details.
@@ -63,8 +66,19 @@ type positionIndex struct {
 	path  []string
 }
 
+const indexRegexPattern = `\[\d+\]`
+
 func (p positionIndex) pathString() string {
-	return strings.Join(p.path, "")
+	var pathString string
+	for _, s := range p.path {
+		re := regexp.MustCompile(indexRegexPattern)
+		if re.MatchString(s) {
+			pathString += s
+			continue
+		}
+		pathString = util.JoinKey(pathString, s)
+	}
+	return pathString
 }
 
 // isASCII returns true if s only contains ASCII bytes. ASCII bytes are in the range [0x00,0x7f]. Any byte outside this
@@ -189,9 +203,6 @@ func unmarshalYAMLNode(filename string, positions positionIndex, n *yaml.Node, t
 
 				pos := positions
 				accessor := keyNode.Value
-				if len(pos.path) != 0 {
-					accessor = fmt.Sprintf(".%s", accessor)
-				}
 				pos.path = append(pos.path, accessor)
 
 				keyn, kdiags := unmarshalYAML(filename, pos, keyNode, tags)
