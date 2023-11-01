@@ -48,6 +48,9 @@ func (p *PropertyAccess) String() string {
 }
 
 func (p *PropertyAccess) RootName() string {
+	if len(p.Accessors) == 0 {
+		return ""
+	}
 	return p.Accessors[0].rootName()
 }
 

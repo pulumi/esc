@@ -19,23 +19,26 @@ import (
 	"testing"
 )
 
-func TestPropertyAccess_String(t *testing.T) {
+func TestPropertyAccess(t *testing.T) {
+	type want struct {
+		name, root string
+	}
 	tests := []struct {
 		name      string
 		accessors []PropertyAccessor
-		want      string
+		want      want
 	}{
 		{
 			name:      "empty",
 			accessors: []PropertyAccessor{},
-			want:      "",
+			want:      want{"", ""},
 		},
 		{
 			name: "single",
 			accessors: []PropertyAccessor{
 				&PropertyName{Name: "foo"},
 			},
-			want: "foo",
+			want: want{"foo", "foo"},
 		},
 		{
 			name: "multiple",
@@ -43,7 +46,7 @@ func TestPropertyAccess_String(t *testing.T) {
 				&PropertyName{Name: "foo"},
 				&PropertyName{Name: "bar"},
 			},
-			want: "foo.bar",
+			want: want{"foo.bar", "foo"},
 		},
 		{
 			name: "subscript",
@@ -51,7 +54,7 @@ func TestPropertyAccess_String(t *testing.T) {
 				&PropertyName{Name: "foo"},
 				&PropertySubscript{Index: "bar"},
 			},
-			want: "foo[\"bar\"]",
+			want: want{"foo[\"bar\"]", "foo"},
 		},
 		{
 			name: "int-subscript",
@@ -59,7 +62,7 @@ func TestPropertyAccess_String(t *testing.T) {
 				&PropertyName{Name: "foo"},
 				&PropertySubscript{Index: 42},
 			},
-			want: "foo[42]",
+			want: want{"foo[42]", "foo"},
 		},
 	}
 	for _, tt := range tests {
@@ -67,7 +70,8 @@ func TestPropertyAccess_String(t *testing.T) {
 			p := &PropertyAccess{
 				Accessors: tt.accessors,
 			}
-			assert.Equalf(t, tt.want, p.String(), "String()")
+			assert.Equalf(t, tt.want.name, p.String(), "String()")
+			assert.Equal(t, tt.want.root, p.RootName(), "RootName()")
 		})
 	}
 }
