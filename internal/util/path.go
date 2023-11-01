@@ -6,6 +6,10 @@ import "strings"
 
 // JoinKey joins an object property key with the path to its parents, quoting and escaping appropriately.
 func JoinKey(root, k string) string {
+	if k == "" {
+		return root
+	}
+
 	if !MustEscapeKey(k) {
 		if root == "" {
 			return k
