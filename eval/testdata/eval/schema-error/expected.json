@@ -21,7 +21,6 @@
             "Expression": null,
             "EvalContext": null,
             "Extra": null,
-            "Shown": false,
             "Path": "values.sink.fn::open::schema.boolean"
         },
         {
@@ -45,7 +44,6 @@
             "Expression": null,
             "EvalContext": null,
             "Extra": null,
-            "Shown": false,
             "Path": "values.sink.fn::open::schema.string"
         },
         {
@@ -69,7 +67,6 @@
             "Expression": null,
             "EvalContext": null,
             "Extra": null,
-            "Shown": false,
             "Path": "values.sink.fn::open::schema.number"
         },
         {
@@ -93,7 +90,6 @@
             "Expression": null,
             "EvalContext": null,
             "Extra": null,
-            "Shown": false,
             "Path": "values.sink.fn::open::schema.anyOf"
         },
         {
@@ -117,7 +113,6 @@
             "Expression": null,
             "EvalContext": null,
             "Extra": null,
-            "Shown": false,
             "Path": "values.sink.fn::open::schema.anyOf"
         },
         {
@@ -141,7 +136,6 @@
             "Expression": null,
             "EvalContext": null,
             "Extra": null,
-            "Shown": false,
             "Path": "values.sink.fn::open::schema.anyOf"
         },
         {
@@ -165,7 +159,6 @@
             "Expression": null,
             "EvalContext": null,
             "Extra": null,
-            "Shown": false,
             "Path": "values.sink.fn::open::schema.oneOf"
         },
         {
@@ -189,7 +182,6 @@
             "Expression": null,
             "EvalContext": null,
             "Extra": null,
-            "Shown": false,
             "Path": "values.sink.fn::open::schema.oneOf"
         },
         {
@@ -213,7 +205,6 @@
             "Expression": null,
             "EvalContext": null,
             "Extra": null,
-            "Shown": false,
             "Path": "values.sink.fn::open::schema.oneOf"
         },
         {
@@ -237,7 +228,6 @@
             "Expression": null,
             "EvalContext": null,
             "Extra": null,
-            "Shown": false,
             "Path": "values.sink.fn::open::schema.const-array"
         },
         {
@@ -261,7 +251,6 @@
             "Expression": null,
             "EvalContext": null,
             "Extra": null,
-            "Shown": false,
             "Path": "values.sink.fn::open::schema.const-object"
         },
         {
@@ -285,7 +274,6 @@
             "Expression": null,
             "EvalContext": null,
             "Extra": null,
-            "Shown": false,
             "Path": "values.sink.fn::open::schema.dependentReq"
         }
     ],
@@ -311,7 +299,6 @@
             "Expression": null,
             "EvalContext": null,
             "Extra": null,
-            "Shown": false,
             "Path": "values.sink.fn::open::schema.boolean"
         },
         {
@@ -335,7 +322,6 @@
             "Expression": null,
             "EvalContext": null,
             "Extra": null,
-            "Shown": false,
             "Path": "values.sink.fn::open::schema.string"
         },
         {
@@ -359,7 +345,6 @@
             "Expression": null,
             "EvalContext": null,
             "Extra": null,
-            "Shown": false,
             "Path": "values.sink.fn::open::schema.number"
         },
         {
@@ -383,7 +368,6 @@
             "Expression": null,
             "EvalContext": null,
             "Extra": null,
-            "Shown": false,
             "Path": "values.sink.fn::open::schema.record"
         },
         {
@@ -407,7 +391,6 @@
             "Expression": null,
             "EvalContext": null,
             "Extra": null,
-            "Shown": false,
             "Path": "values.sink.fn::open::schema.anyOf"
         },
         {
@@ -431,7 +414,6 @@
             "Expression": null,
             "EvalContext": null,
             "Extra": null,
-            "Shown": false,
             "Path": "values.sink.fn::open::schema.anyOf"
         },
         {
@@ -455,7 +437,6 @@
             "Expression": null,
             "EvalContext": null,
             "Extra": null,
-            "Shown": false,
             "Path": "values.sink.fn::open::schema.anyOf"
         },
         {
@@ -479,7 +460,6 @@
             "Expression": null,
             "EvalContext": null,
             "Extra": null,
-            "Shown": false,
             "Path": "values.sink.fn::open::schema.oneOf"
         },
         {
@@ -503,7 +483,6 @@
             "Expression": null,
             "EvalContext": null,
             "Extra": null,
-            "Shown": false,
             "Path": "values.sink.fn::open::schema.oneOf"
         },
         {
@@ -527,7 +506,6 @@
             "Expression": null,
             "EvalContext": null,
             "Extra": null,
-            "Shown": false,
             "Path": "values.sink.fn::open::schema.oneOf"
         },
         {
@@ -551,7 +529,6 @@
             "Expression": null,
             "EvalContext": null,
             "Extra": null,
-            "Shown": false,
             "Path": "values.sink.fn::open::schema.const-array"
         },
         {
@@ -575,7 +552,6 @@
             "Expression": null,
             "EvalContext": null,
             "Extra": null,
-            "Shown": false,
             "Path": "values.sink.fn::open::schema.const-array"
         },
         {
@@ -599,7 +575,6 @@
             "Expression": null,
             "EvalContext": null,
             "Extra": null,
-            "Shown": false,
             "Path": "values.sink.fn::open::schema.const-object"
         },
         {
@@ -623,7 +598,6 @@
             "Expression": null,
             "EvalContext": null,
             "Extra": null,
-            "Shown": false,
             "Path": "values.sink.fn::open::schema.const-object"
         },
         {
@@ -647,7 +621,6 @@
             "Expression": null,
             "EvalContext": null,
             "Extra": null,
-            "Shown": false,
             "Path": "values.sink.fn::open::schema.enum"
         },
         {
@@ -671,7 +644,6 @@
             "Expression": null,
             "EvalContext": null,
             "Extra": null,
-            "Shown": false,
             "Path": "values.sink.fn::open::schema.dependentReq"
         },
         {
@@ -695,7 +667,6 @@
             "Expression": null,
             "EvalContext": null,
             "Extra": null,
-            "Shown": false,
             "Path": "values.sink.fn::open::schema.multiple"
         },
         {
@@ -719,7 +690,6 @@
             "Expression": null,
             "EvalContext": null,
             "Extra": null,
-            "Shown": false,
             "Path": "values.sink.fn::open::schema.minimum"
         },
         {
@@ -743,7 +713,6 @@
             "Expression": null,
             "EvalContext": null,
             "Extra": null,
-            "Shown": false,
             "Path": "values.sink.fn::open::schema.exclusiveMinimum"
         },
         {
@@ -767,7 +736,6 @@
             "Expression": null,
             "EvalContext": null,
             "Extra": null,
-            "Shown": false,
             "Path": "values.sink.fn::open::schema.maximum"
         },
         {
@@ -791,7 +759,6 @@
             "Expression": null,
             "EvalContext": null,
             "Extra": null,
-            "Shown": false,
             "Path": "values.sink.fn::open::schema.exclusiveMaximum"
         },
         {
@@ -815,7 +782,6 @@
             "Expression": null,
             "EvalContext": null,
             "Extra": null,
-            "Shown": false,
             "Path": "values.sink.fn::open::schema.minLength"
         },
         {
@@ -839,7 +805,6 @@
             "Expression": null,
             "EvalContext": null,
             "Extra": null,
-            "Shown": false,
             "Path": "values.sink.fn::open::schema.maxLength"
         },
         {
@@ -863,7 +828,6 @@
             "Expression": null,
             "EvalContext": null,
             "Extra": null,
-            "Shown": false,
             "Path": "values.sink.fn::open::schema.pattern"
         },
         {
@@ -887,7 +851,6 @@
             "Expression": null,
             "EvalContext": null,
             "Extra": null,
-            "Shown": false,
             "Path": "values.sink.fn::open::schema.minItems"
         },
         {
@@ -911,7 +874,6 @@
             "Expression": null,
             "EvalContext": null,
             "Extra": null,
-            "Shown": false,
             "Path": "values.sink.fn::open::schema.maxItems"
         },
         {
@@ -935,7 +897,6 @@
             "Expression": null,
             "EvalContext": null,
             "Extra": null,
-            "Shown": false,
             "Path": "values.sink.fn::open::schema.minProperties"
         },
         {
@@ -959,7 +920,6 @@
             "Expression": null,
             "EvalContext": null,
             "Extra": null,
-            "Shown": false,
             "Path": "values.sink.fn::open::schema.maxProperties"
         }
     ],

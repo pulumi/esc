@@ -21,7 +21,6 @@
             "Expression": null,
             "EvalContext": null,
             "Extra": null,
-            "Shown": false,
             "Path": "values.imports"
         },
         {
@@ -45,7 +44,6 @@
             "Expression": null,
             "EvalContext": null,
             "Extra": null,
-            "Shown": false,
             "Path": "values.context"
         }
     ],
@@ -71,7 +69,6 @@
             "Expression": null,
             "EvalContext": null,
             "Extra": null,
-            "Shown": false,
             "Path": "values.imports"
         },
         {
@@ -95,7 +92,6 @@
             "Expression": null,
             "EvalContext": null,
             "Extra": null,
-            "Shown": false,
             "Path": "values.context"
         }
     ],

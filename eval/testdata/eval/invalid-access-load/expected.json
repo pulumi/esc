@@ -21,7 +21,6 @@
             "Expression": null,
             "EvalContext": null,
             "Extra": null,
-            "Shown": false,
             "Path": "values.propertyAccessTest[0]"
         },
         {
@@ -45,7 +44,6 @@
             "Expression": null,
             "EvalContext": null,
             "Extra": null,
-            "Shown": false,
             "Path": "values.propertyAccessTest[1]"
         },
         {
@@ -69,7 +67,6 @@
             "Expression": null,
             "EvalContext": null,
             "Extra": null,
-            "Shown": false,
             "Path": "values.propertyAccessTest[2]"
         },
         {
@@ -93,7 +90,6 @@
             "Expression": null,
             "EvalContext": null,
             "Extra": null,
-            "Shown": false,
             "Path": "values.propertyAccessTest[3]"
         },
         {
@@ -117,7 +113,6 @@
             "Expression": null,
             "EvalContext": null,
             "Extra": null,
-            "Shown": false,
             "Path": "values.propertyAccessTest[4]"
         },
         {
@@ -141,7 +136,6 @@
             "Expression": null,
             "EvalContext": null,
             "Extra": null,
-            "Shown": false,
             "Path": "values.propertyAccessTest[5]"
         },
         {
@@ -165,7 +159,6 @@
             "Expression": null,
             "EvalContext": null,
             "Extra": null,
-            "Shown": false,
             "Path": "values.propertyAccessTest[6]"
         },
         {
@@ -189,7 +182,6 @@
             "Expression": null,
             "EvalContext": null,
             "Extra": null,
-            "Shown": false,
             "Path": "values.propertyAccessTest[7]"
         },
         {
@@ -213,7 +205,6 @@
             "Expression": null,
             "EvalContext": null,
             "Extra": null,
-            "Shown": false,
             "Path": "values.propertyAccessTest[8]"
         },
         {
@@ -237,7 +228,6 @@
             "Expression": null,
             "EvalContext": null,
             "Extra": null,
-            "Shown": false,
             "Path": "values.propertyAccessTest[9]"
         }
     ]
