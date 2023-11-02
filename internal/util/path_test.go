@@ -44,22 +44,22 @@ func TestJoinKey(t *testing.T) {
 		{
 			name: "key with dot",
 			args: args{root: "foo", k: "bar.baz"},
-			want: "foo[\"bar.baz\"]",
+			want: `foo["bar.baz"]`,
 		},
 		{
 			name: "key with quote",
 			args: args{root: "foo", k: "bar\"baz"},
-			want: "foo[\"bar\\\"baz\"]",
+			want: `foo["bar\"baz"]`,
 		},
 		{
 			name: "key with quote and dot",
 			args: args{root: "foo", k: "bar\"baz.qux"},
-			want: "foo[\"bar\\\"baz.qux\"]",
+			want: `foo["bar\"baz.qux"]`,
 		},
 		{
 			name: "key with quote and dot and backslash",
 			args: args{root: "foo", k: "bar\"baz.qux\\quux"},
-			want: "foo[\"bar\\\"baz.qux\\quux\"]",
+			want: `foo["bar\"baz.qux\quux"]`,
 		},
 		{
 			name: "key with digit",
@@ -69,7 +69,7 @@ func TestJoinKey(t *testing.T) {
 		{
 			name: "key with digit at start",
 			args: args{root: "foo", k: "0bar"},
-			want: "foo[\"0bar\"]",
+			want: `foo["0bar"]`,
 		},
 	}
 	for _, tt := range tests {
