@@ -19,7 +19,6 @@ import (
 	"errors"
 	"fmt"
 	"io"
-	"regexp"
 	"strconv"
 	"strings"
 
@@ -63,20 +62,18 @@ type linePosition struct {
 
 type positionIndex struct {
 	lines []linePosition
-	path  []string
+	path  []any
 }
-
-const indexRegexPattern = `\[\d+\]`
 
 func (p positionIndex) pathString() string {
 	var pathString string
 	for _, s := range p.path {
-		re := regexp.MustCompile(indexRegexPattern)
-		if re.MatchString(s) {
-			pathString += s
-			continue
+		switch s := s.(type) {
+		case int:
+			pathString = fmt.Sprintf("%s[%d]", pathString, s)
+		case string:
+			pathString = util.JoinKey(pathString, s)
 		}
-		pathString = util.JoinKey(pathString, s)
 	}
 	return pathString
 }
@@ -93,7 +90,7 @@ func isASCII(s []byte) bool {
 }
 
 func newPositionIndex(yaml []byte) positionIndex {
-	offset, lines, path := 0, []linePosition(nil), []string(nil)
+	offset, lines, path := 0, []linePosition(nil), []any(nil)
 	for {
 		line, rest, found := bytes.Cut(yaml, []byte{'\n'})
 
@@ -184,7 +181,7 @@ func unmarshalYAMLNode(filename string, positions positionIndex, n *yaml.Node, t
 			elements = make([]syntax.Node, len(n.Content))
 			for i, v := range n.Content {
 				pos := positions
-				pos.path = append(pos.path, fmt.Sprintf("[%d]", i))
+				pos.path = append(pos.path, i)
 				e, ediags := unmarshalYAML(filename, pos, v, tags)
 				diags.Extend(ediags...)
 
