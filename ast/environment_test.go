@@ -15,15 +15,15 @@
 package ast
 
 import (
-	"github.com/hashicorp/hcl/v2"
-	"github.com/pulumi/esc/syntax"
 	"strings"
 	"testing"
 
+	"github.com/hashicorp/hcl/v2"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"gopkg.in/yaml.v3"
 
+	"github.com/pulumi/esc/syntax"
 	"github.com/pulumi/esc/syntax/encoding"
 )
 
