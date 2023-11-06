@@ -249,6 +249,7 @@ func TestEval(t *testing.T) {
 					EvalDiags:   evalDiags,
 					Environment: actual,
 				}, "", "    ")
+				bytes = append(bytes, '\n')
 				require.NoError(t, err)
 
 				err = os.WriteFile(expectedPath, bytes, 0600)
@@ -256,6 +257,7 @@ func TestEval(t *testing.T) {
 
 				if actual != nil {
 					bytes, err := json.MarshalIndent(actual.ToJSON(), "", "    ")
+					bytes = append(bytes, '\n')
 					require.NoError(t, err)
 
 					err = os.WriteFile(expectedPreviewPath, bytes, 0600)
