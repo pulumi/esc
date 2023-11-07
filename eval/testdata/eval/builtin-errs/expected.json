@@ -1215,7 +1215,11 @@
             ]
         }
     },
-    "preview": {
+    "evalJson": {
+        "builtins": "[unknown]",
+        "number": 42
+    },
+    "checkJson": {
         "builtins": "[unknown]",
         "number": 42
     }

@@ -218,7 +218,8 @@ func TestEval(t *testing.T) {
 		CheckDiags  syntax.Diagnostics `json:"checkDiags,omitempty"`
 		EvalDiags   syntax.Diagnostics `json:"evalDiags,omitempty"`
 		Environment *esc.Environment   `json:"environment,omitempty"`
-		Preview     map[string]any     `json:"preview,omitempty"`
+		EvalJSON    any                `json:"evalJson,omitempty"`
+		CheckJSON   any                `json:"checkJson,omitempty"`
 	}
 
 	path := filepath.Join("testdata", "eval")
@@ -243,9 +244,13 @@ func TestEval(t *testing.T) {
 				actual, evalDiags := EvalEnvironment(context.Background(), e.Name(), env, rot128{}, testProviders{}, &testEnvironments{basePath})
 				sortEnvironmentDiagnostics(evalDiags)
 
-				preview := make(map[string]any)
+				var evalJSON any
+				var checkJSON any
+				if actual != nil {
+					evalJSON = esc.NewValue(actual.Properties).ToJSON(true)
+				}
 				if check != nil {
-					preview = check.ToJSON()
+					checkJSON = esc.NewValue(check.Properties).ToJSON(true)
 				}
 
 				bytes, err := json.MarshalIndent(expectedData{
@@ -253,7 +258,8 @@ func TestEval(t *testing.T) {
 					CheckDiags:  checkDiags,
 					EvalDiags:   evalDiags,
 					Environment: actual,
-					Preview:     preview,
+					EvalJSON:    evalJSON,
+					CheckJSON:   checkJSON,
 				}, "", "    ")
 				bytes = append(bytes, '\n')
 				require.NoError(t, err)
@@ -298,14 +304,16 @@ func TestEval(t *testing.T) {
 				actual.Exprs = normalizeMap(actual.Exprs, nil)
 				actual.Properties = normalizeMap(actual.Properties, nil)
 				normalizeSchema(actual.Schema)
+				evalJSON := esc.NewValue(actual.Properties).ToJSON(true)
+				assert.Equal(t, expected.EvalJSON, evalJSON)
 			}
 
 			if check != nil {
 				check.Exprs = normalizeMap(check.Exprs, nil)
 				check.Properties = normalizeMap(check.Properties, nil)
 				normalizeSchema(check.Schema)
-				preview := check.ToJSON()
-				assert.Equal(t, expected.Preview, preview)
+				checkJSON := esc.NewValue(check.Properties).ToJSON(true)
+				assert.Equal(t, expected.CheckJSON, checkJSON)
 			}
 
 			assert.Equal(t, expected.Environment, actual)

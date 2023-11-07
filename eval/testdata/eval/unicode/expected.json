@@ -353,7 +353,18 @@
             ]
         }
     },
-    "preview": {
+    "evalJson": {
+        "danmark": {
+            "hovedstad": "københavn"
+        },
+        "hello": "世界",
+        "linear-b": [
+            "𐀀",
+            "𐀁"
+        ],
+        "世界": "hello"
+    },
+    "checkJson": {
         "danmark": {
             "hovedstad": "københavn"
         },

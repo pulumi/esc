@@ -164,7 +164,12 @@
             ]
         }
     },
-    "preview": {
+    "evalJson": {
+        "foo": {
+            "bar": "baz"
+        }
+    },
+    "checkJson": {
         "foo": {
             "bar": "baz"
         }

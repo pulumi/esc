@@ -302,7 +302,11 @@
             ]
         }
     },
-    "preview": {
+    "evalJson": {
+        "dependent": "[unknown]",
+        "error": "[unknown]"
+    },
+    "checkJson": {
         "dependent": "[unknown]",
         "error": "[unknown]"
     }

@@ -537,7 +537,15 @@
             ]
         }
     },
-    "preview": {
+    "evalJson": {
+        "open": {
+            "baz": {
+                "qux": "zed"
+            },
+            "foo": "bar"
+        }
+    },
+    "checkJson": {
         "open": {
             "baz": {
                 "qux": "zed"

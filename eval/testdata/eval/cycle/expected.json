@@ -525,7 +525,12 @@
             ]
         }
     },
-    "preview": {
+    "evalJson": {
+        "a": "[unknown]",
+        "b": "[unknown]",
+        "c": "[unknown]"
+    },
+    "checkJson": {
         "a": "[unknown]",
         "b": "[unknown]",
         "c": "[unknown]"

@@ -1434,7 +1434,36 @@
             ]
         }
     },
-    "preview": {
+    "evalJson": {
+        "34": "this should be okay",
+        "35": {
+            "okay": "also okay"
+        },
+        "a": {
+            "p": "foo",
+            "q": "foo",
+            "u": {
+                "\"baz": "merp"
+            }
+        },
+        "b": {
+            "p": "foo"
+        },
+        "c": {
+            "a": [
+                "foo",
+                "hello, world!",
+                "foo bar"
+            ],
+            "b": "world!",
+            "s": [
+                "merp",
+                "this should be okay",
+                "also okay"
+            ]
+        }
+    },
+    "checkJson": {
         "34": "this should be okay",
         "35": {
             "okay": "also okay"

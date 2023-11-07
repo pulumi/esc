@@ -945,7 +945,14 @@
             ]
         }
     },
-    "preview": {
+    "evalJson": {
+        "builtins": "[secret]",
+        "open": {
+            "foo": "bar"
+        },
+        "password": "[secret]"
+    },
+    "checkJson": {
         "builtins": "[secret]",
         "open": "[unknown]",
         "password": "[secret]"

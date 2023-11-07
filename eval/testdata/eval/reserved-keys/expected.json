@@ -99,5 +99,7 @@
         "schema": {
             "type": "object"
         }
-    }
+    },
+    "evalJson": {},
+    "checkJson": {}
 }

@@ -248,7 +248,14 @@
             ]
         }
     },
-    "preview": {
+    "evalJson": {
+        "object": {
+            "\"quoted\"": "baz",
+            "0leadingDigit": "bar",
+            "with-hyphen": "foo"
+        }
+    },
+    "checkJson": {
         "object": {
             "\"quoted\"": "baz",
             "0leadingDigit": "bar",

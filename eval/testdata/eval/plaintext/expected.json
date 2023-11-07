@@ -92,7 +92,10 @@
             ]
         }
     },
-    "preview": {
+    "evalJson": {
+        "password": "[secret]"
+    },
+    "checkJson": {
         "password": "[secret]"
     }
 }
