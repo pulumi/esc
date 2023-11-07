@@ -1095,5 +1095,22 @@
                 "some_string"
             ]
         }
+    },
+    "preview": {
+        "some_list": [
+            "hello",
+            "world"
+        ],
+        "some_number": 42,
+        "some_object": {
+            "alpha": null,
+            "baz": "qux",
+            "beta": "bar",
+            "foo": "bar",
+            "goodbye": "for now",
+            "hello": "world",
+            "zed": "bar"
+        },
+        "some_string": "hello"
     }
 }

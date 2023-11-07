@@ -944,5 +944,10 @@
                 "password"
             ]
         }
+    },
+    "preview": {
+        "builtins": "[secret]",
+        "open": "[unknown]",
+        "password": "[secret]"
     }
 }

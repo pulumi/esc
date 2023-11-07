@@ -264,5 +264,11 @@
                 "qux"
             ]
         }
+    },
+    "preview": {
+        "foo": "bar",
+        "qux": {
+            "foo": "bar"
+        }
     }
 }

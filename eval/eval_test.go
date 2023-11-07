@@ -218,6 +218,7 @@ func TestEval(t *testing.T) {
 		CheckDiags  syntax.Diagnostics `json:"checkDiags,omitempty"`
 		EvalDiags   syntax.Diagnostics `json:"evalDiags,omitempty"`
 		Environment *esc.Environment   `json:"environment,omitempty"`
+		Preview     map[string]any     `json:"preview,omitempty"`
 	}
 
 	path := filepath.Join("testdata", "eval")
@@ -236,18 +237,25 @@ func TestEval(t *testing.T) {
 				require.NoError(t, err)
 				sortEnvironmentDiagnostics(loadDiags)
 
-				_, checkDiags := CheckEnvironment(context.Background(), e.Name(), env, testProviders{}, &testEnvironments{basePath})
+				check, checkDiags := CheckEnvironment(context.Background(), e.Name(), env, testProviders{}, &testEnvironments{basePath})
 				sortEnvironmentDiagnostics(checkDiags)
 
 				actual, evalDiags := EvalEnvironment(context.Background(), e.Name(), env, rot128{}, testProviders{}, &testEnvironments{basePath})
 				sortEnvironmentDiagnostics(evalDiags)
+
+				preview := make(map[string]any)
+				if check != nil {
+					preview = check.ToJSON()
+				}
 
 				bytes, err := json.MarshalIndent(expectedData{
 					LoadDiags:   loadDiags,
 					CheckDiags:  checkDiags,
 					EvalDiags:   evalDiags,
 					Environment: actual,
+					Preview:     preview,
 				}, "", "    ")
+				bytes = append(bytes, '\n')
 				require.NoError(t, err)
 
 				err = os.WriteFile(expectedPath, bytes, 0600)

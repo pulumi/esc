@@ -1214,5 +1214,9 @@
                 "number"
             ]
         }
+    },
+    "preview": {
+        "builtins": "[unknown]",
+        "number": 42
     }
 }

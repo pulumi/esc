@@ -4524,5 +4524,25 @@
                 "string"
             ]
         }
+    },
+    "preview": {
+        "array": [
+            1,
+            2,
+            3
+        ],
+        "errors": "[unknown]",
+        "myObject": {
+            "foo": "bar"
+        },
+        "object": {
+            "baz": "qux",
+            "hello": "world"
+        },
+        "open": "[unknown]",
+        "otherObject": {
+            "foo": "bar"
+        },
+        "string": "esc"
     }
 }

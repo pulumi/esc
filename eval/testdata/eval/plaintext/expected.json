@@ -91,5 +91,8 @@
                 "password"
             ]
         }
+    },
+    "preview": {
+        "password": "[secret]"
     }
 }
