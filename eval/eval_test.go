@@ -277,7 +277,7 @@ func TestEval(t *testing.T) {
 			sortEnvironmentDiagnostics(diags)
 			require.Equal(t, expected.LoadDiags, diags)
 
-			_, diags = CheckEnvironment(context.Background(), e.Name(), env, testProviders{}, &testEnvironments{basePath})
+			check, diags := CheckEnvironment(context.Background(), e.Name(), env, testProviders{}, &testEnvironments{basePath})
 			sortEnvironmentDiagnostics(diags)
 			require.Equal(t, expected.CheckDiags, diags)
 
@@ -298,6 +298,14 @@ func TestEval(t *testing.T) {
 				actual.Exprs = normalizeMap(actual.Exprs, nil)
 				actual.Properties = normalizeMap(actual.Properties, nil)
 				normalizeSchema(actual.Schema)
+			}
+
+			if check != nil {
+				check.Exprs = normalizeMap(check.Exprs, nil)
+				check.Properties = normalizeMap(check.Properties, nil)
+				normalizeSchema(check.Schema)
+				preview := check.ToJSON()
+				assert.Equal(t, expected.Preview, preview)
 			}
 
 			assert.Equal(t, expected.Environment, actual)
