@@ -4464,18 +4464,6 @@
             ]
         }
     },
-    "checkJson": {
-        "accesses": [
-            "[unknown]",
-            "[unknown]",
-            "[unknown]",
-            "[unknown]",
-            "[unknown]",
-            "[unknown]"
-        ],
-        "sink": "[unknown]",
-        "source": "[unknown]"
-    },
     "eval": {
         "exprs": {
             "accesses": {
@@ -11463,6 +11451,18 @@
                 "source"
             ]
         }
+    },
+    "checkJson": {
+        "accesses": [
+            "[unknown]",
+            "[unknown]",
+            "[unknown]",
+            "[unknown]",
+            "[unknown]",
+            "[unknown]"
+        ],
+        "sink": "[unknown]",
+        "source": "[unknown]"
     },
     "evalJson": {
         "accesses": [

@@ -1096,23 +1096,6 @@
             ]
         }
     },
-    "checkJson": {
-        "some_list": [
-            "hello",
-            "world"
-        ],
-        "some_number": 42,
-        "some_object": {
-            "alpha": null,
-            "baz": "qux",
-            "beta": "bar",
-            "foo": "bar",
-            "goodbye": "for now",
-            "hello": "world",
-            "zed": "bar"
-        },
-        "some_string": "hello"
-    },
     "eval": {
         "exprs": {
             "some_list": {
@@ -2209,6 +2192,23 @@
                 "some_string"
             ]
         }
+    },
+    "checkJson": {
+        "some_list": [
+            "hello",
+            "world"
+        ],
+        "some_number": 42,
+        "some_object": {
+            "alpha": null,
+            "baz": "qux",
+            "beta": "bar",
+            "foo": "bar",
+            "goodbye": "for now",
+            "hello": "world",
+            "zed": "bar"
+        },
+        "some_string": "hello"
     },
     "evalJson": {
         "some_list": [

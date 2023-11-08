@@ -897,16 +897,6 @@
             ]
         }
     },
-    "checkJson": {
-        "builtins": [
-            "[secret]",
-            "[secret]",
-            "[secret]",
-            "[secret]"
-        ],
-        "open": "[unknown]",
-        "password": "[secret]"
-    },
     "eval": {
         "exprs": {
             "builtins": {
@@ -1851,6 +1841,16 @@
                 "password"
             ]
         }
+    },
+    "checkJson": {
+        "builtins": [
+            "[secret]",
+            "[secret]",
+            "[secret]",
+            "[secret]"
+        ],
+        "open": "[unknown]",
+        "password": "[secret]"
     },
     "evalJson": {
         "builtins": [

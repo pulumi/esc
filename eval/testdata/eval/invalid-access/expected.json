@@ -300,6 +300,307 @@
             "Path": "values.errors[12]"
         }
     ],
+    "evalDiags": [
+        {
+            "Severity": 1,
+            "Summary": "receiver must be an array or an object",
+            "Detail": "",
+            "Subject": {
+                "Filename": "invalid-access",
+                "Start": {
+                    "Line": 29,
+                    "Column": 7,
+                    "Byte": 517
+                },
+                "End": {
+                    "Line": 29,
+                    "Column": 20,
+                    "Byte": 530
+                }
+            },
+            "Context": null,
+            "Expression": null,
+            "EvalContext": null,
+            "Extra": null,
+            "Path": "values.errors[0]"
+        },
+        {
+            "Severity": 1,
+            "Summary": "cannot access an array element using a property name",
+            "Detail": "",
+            "Subject": {
+                "Filename": "invalid-access",
+                "Start": {
+                    "Line": 30,
+                    "Column": 7,
+                    "Byte": 537
+                },
+                "End": {
+                    "Line": 30,
+                    "Column": 19,
+                    "Byte": 549
+                }
+            },
+            "Context": null,
+            "Expression": null,
+            "EvalContext": null,
+            "Extra": null,
+            "Path": "values.errors[1]"
+        },
+        {
+            "Severity": 1,
+            "Summary": "cannot access an array element using a property name",
+            "Detail": "",
+            "Subject": {
+                "Filename": "invalid-access",
+                "Start": {
+                    "Line": 31,
+                    "Column": 7,
+                    "Byte": 556
+                },
+                "End": {
+                    "Line": 31,
+                    "Column": 22,
+                    "Byte": 571
+                }
+            },
+            "Context": null,
+            "Expression": null,
+            "EvalContext": null,
+            "Extra": null,
+            "Path": "values.errors[2]"
+        },
+        {
+            "Severity": 1,
+            "Summary": "array index 3 out-of-bounds for array of length 3",
+            "Detail": "",
+            "Subject": {
+                "Filename": "invalid-access",
+                "Start": {
+                    "Line": 32,
+                    "Column": 7,
+                    "Byte": 578
+                },
+                "End": {
+                    "Line": 32,
+                    "Column": 18,
+                    "Byte": 589
+                }
+            },
+            "Context": null,
+            "Expression": null,
+            "EvalContext": null,
+            "Extra": null,
+            "Path": "values.errors[3]"
+        },
+        {
+            "Severity": 1,
+            "Summary": "array indices must not be negative",
+            "Detail": "",
+            "Subject": {
+                "Filename": "invalid-access",
+                "Start": {
+                    "Line": 33,
+                    "Column": 7,
+                    "Byte": 596
+                },
+                "End": {
+                    "Line": 33,
+                    "Column": 19,
+                    "Byte": 608
+                }
+            },
+            "Context": null,
+            "Expression": null,
+            "EvalContext": null,
+            "Extra": null,
+            "Path": "values.errors[4]"
+        },
+        {
+            "Severity": 1,
+            "Summary": "cannot access an object property using an integer index",
+            "Detail": "",
+            "Subject": {
+                "Filename": "invalid-access",
+                "Start": {
+                    "Line": 34,
+                    "Column": 7,
+                    "Byte": 615
+                },
+                "End": {
+                    "Line": 34,
+                    "Column": 19,
+                    "Byte": 627
+                }
+            },
+            "Context": null,
+            "Expression": null,
+            "EvalContext": null,
+            "Extra": null,
+            "Path": "values.errors[5]"
+        },
+        {
+            "Severity": 1,
+            "Summary": "unknown property \"bar\"",
+            "Detail": "",
+            "Subject": {
+                "Filename": "invalid-access",
+                "Start": {
+                    "Line": 35,
+                    "Column": 7,
+                    "Byte": 634
+                },
+                "End": {
+                    "Line": 35,
+                    "Column": 20,
+                    "Byte": 647
+                }
+            },
+            "Context": null,
+            "Expression": null,
+            "EvalContext": null,
+            "Extra": null,
+            "Path": "values.errors[6]"
+        },
+        {
+            "Severity": 1,
+            "Summary": "unknown property \"bar\"",
+            "Detail": "",
+            "Subject": {
+                "Filename": "invalid-access",
+                "Start": {
+                    "Line": 36,
+                    "Column": 7,
+                    "Byte": 654
+                },
+                "End": {
+                    "Line": 36,
+                    "Column": 22,
+                    "Byte": 669
+                }
+            },
+            "Context": null,
+            "Expression": null,
+            "EvalContext": null,
+            "Extra": null,
+            "Path": "values.errors[7]"
+        },
+        {
+            "Severity": 1,
+            "Summary": "cannot access an object property using an integer index",
+            "Detail": "",
+            "Subject": {
+                "Filename": "invalid-access",
+                "Start": {
+                    "Line": 37,
+                    "Column": 7,
+                    "Byte": 676
+                },
+                "End": {
+                    "Line": 37,
+                    "Column": 24,
+                    "Byte": 693
+                }
+            },
+            "Context": null,
+            "Expression": null,
+            "EvalContext": null,
+            "Extra": null,
+            "Path": "values.errors[8]"
+        },
+        {
+            "Severity": 1,
+            "Summary": "receiver must be an array or an object",
+            "Detail": "",
+            "Subject": {
+                "Filename": "invalid-access",
+                "Start": {
+                    "Line": 38,
+                    "Column": 7,
+                    "Byte": 700
+                },
+                "End": {
+                    "Line": 38,
+                    "Column": 25,
+                    "Byte": 718
+                }
+            },
+            "Context": null,
+            "Expression": null,
+            "EvalContext": null,
+            "Extra": null,
+            "Path": "values.errors[9]"
+        },
+        {
+            "Severity": 1,
+            "Summary": "cannot access an array element using a property name",
+            "Detail": "",
+            "Subject": {
+                "Filename": "invalid-access",
+                "Start": {
+                    "Line": 39,
+                    "Column": 7,
+                    "Byte": 725
+                },
+                "End": {
+                    "Line": 39,
+                    "Column": 24,
+                    "Byte": 742
+                }
+            },
+            "Context": null,
+            "Expression": null,
+            "EvalContext": null,
+            "Extra": null,
+            "Path": "values.errors[10]"
+        },
+        {
+            "Severity": 1,
+            "Summary": "cannot access an array element using a property name",
+            "Detail": "",
+            "Subject": {
+                "Filename": "invalid-access",
+                "Start": {
+                    "Line": 40,
+                    "Column": 7,
+                    "Byte": 749
+                },
+                "End": {
+                    "Line": 40,
+                    "Column": 27,
+                    "Byte": 769
+                }
+            },
+            "Context": null,
+            "Expression": null,
+            "EvalContext": null,
+            "Extra": null,
+            "Path": "values.errors[11]"
+        },
+        {
+            "Severity": 1,
+            "Summary": "cannot access an object property using an integer index",
+            "Detail": "",
+            "Subject": {
+                "Filename": "invalid-access",
+                "Start": {
+                    "Line": 41,
+                    "Column": 7,
+                    "Byte": 776
+                },
+                "End": {
+                    "Line": 41,
+                    "Column": 24,
+                    "Byte": 793
+                }
+            },
+            "Context": null,
+            "Expression": null,
+            "EvalContext": null,
+            "Extra": null,
+            "Path": "values.errors[12]"
+        }
+    ],
     "check": {
         "exprs": {
             "array": {
@@ -3864,341 +4165,6 @@
             ]
         }
     },
-    "checkJson": {
-        "array": [
-            1,
-            2,
-            3
-        ],
-        "errors": [
-            "[unknown]",
-            "[unknown]",
-            "[unknown]",
-            "[unknown]",
-            "[unknown]",
-            "[unknown]",
-            "[unknown]",
-            "[unknown]",
-            "[unknown]",
-            "[unknown]",
-            "[unknown]",
-            "[unknown]",
-            "[unknown]"
-        ],
-        "myObject": {
-            "foo": "bar"
-        },
-        "object": {
-            "baz": "qux",
-            "hello": "world"
-        },
-        "open": "[unknown]",
-        "otherObject": {
-            "foo": "bar"
-        },
-        "string": "esc"
-    },
-    "evalDiags": [
-        {
-            "Severity": 1,
-            "Summary": "receiver must be an array or an object",
-            "Detail": "",
-            "Subject": {
-                "Filename": "invalid-access",
-                "Start": {
-                    "Line": 29,
-                    "Column": 7,
-                    "Byte": 517
-                },
-                "End": {
-                    "Line": 29,
-                    "Column": 20,
-                    "Byte": 530
-                }
-            },
-            "Context": null,
-            "Expression": null,
-            "EvalContext": null,
-            "Extra": null,
-            "Path": "values.errors[0]"
-        },
-        {
-            "Severity": 1,
-            "Summary": "cannot access an array element using a property name",
-            "Detail": "",
-            "Subject": {
-                "Filename": "invalid-access",
-                "Start": {
-                    "Line": 30,
-                    "Column": 7,
-                    "Byte": 537
-                },
-                "End": {
-                    "Line": 30,
-                    "Column": 19,
-                    "Byte": 549
-                }
-            },
-            "Context": null,
-            "Expression": null,
-            "EvalContext": null,
-            "Extra": null,
-            "Path": "values.errors[1]"
-        },
-        {
-            "Severity": 1,
-            "Summary": "cannot access an array element using a property name",
-            "Detail": "",
-            "Subject": {
-                "Filename": "invalid-access",
-                "Start": {
-                    "Line": 31,
-                    "Column": 7,
-                    "Byte": 556
-                },
-                "End": {
-                    "Line": 31,
-                    "Column": 22,
-                    "Byte": 571
-                }
-            },
-            "Context": null,
-            "Expression": null,
-            "EvalContext": null,
-            "Extra": null,
-            "Path": "values.errors[2]"
-        },
-        {
-            "Severity": 1,
-            "Summary": "array index 3 out-of-bounds for array of length 3",
-            "Detail": "",
-            "Subject": {
-                "Filename": "invalid-access",
-                "Start": {
-                    "Line": 32,
-                    "Column": 7,
-                    "Byte": 578
-                },
-                "End": {
-                    "Line": 32,
-                    "Column": 18,
-                    "Byte": 589
-                }
-            },
-            "Context": null,
-            "Expression": null,
-            "EvalContext": null,
-            "Extra": null,
-            "Path": "values.errors[3]"
-        },
-        {
-            "Severity": 1,
-            "Summary": "array indices must not be negative",
-            "Detail": "",
-            "Subject": {
-                "Filename": "invalid-access",
-                "Start": {
-                    "Line": 33,
-                    "Column": 7,
-                    "Byte": 596
-                },
-                "End": {
-                    "Line": 33,
-                    "Column": 19,
-                    "Byte": 608
-                }
-            },
-            "Context": null,
-            "Expression": null,
-            "EvalContext": null,
-            "Extra": null,
-            "Path": "values.errors[4]"
-        },
-        {
-            "Severity": 1,
-            "Summary": "cannot access an object property using an integer index",
-            "Detail": "",
-            "Subject": {
-                "Filename": "invalid-access",
-                "Start": {
-                    "Line": 34,
-                    "Column": 7,
-                    "Byte": 615
-                },
-                "End": {
-                    "Line": 34,
-                    "Column": 19,
-                    "Byte": 627
-                }
-            },
-            "Context": null,
-            "Expression": null,
-            "EvalContext": null,
-            "Extra": null,
-            "Path": "values.errors[5]"
-        },
-        {
-            "Severity": 1,
-            "Summary": "unknown property \"bar\"",
-            "Detail": "",
-            "Subject": {
-                "Filename": "invalid-access",
-                "Start": {
-                    "Line": 35,
-                    "Column": 7,
-                    "Byte": 634
-                },
-                "End": {
-                    "Line": 35,
-                    "Column": 20,
-                    "Byte": 647
-                }
-            },
-            "Context": null,
-            "Expression": null,
-            "EvalContext": null,
-            "Extra": null,
-            "Path": "values.errors[6]"
-        },
-        {
-            "Severity": 1,
-            "Summary": "unknown property \"bar\"",
-            "Detail": "",
-            "Subject": {
-                "Filename": "invalid-access",
-                "Start": {
-                    "Line": 36,
-                    "Column": 7,
-                    "Byte": 654
-                },
-                "End": {
-                    "Line": 36,
-                    "Column": 22,
-                    "Byte": 669
-                }
-            },
-            "Context": null,
-            "Expression": null,
-            "EvalContext": null,
-            "Extra": null,
-            "Path": "values.errors[7]"
-        },
-        {
-            "Severity": 1,
-            "Summary": "cannot access an object property using an integer index",
-            "Detail": "",
-            "Subject": {
-                "Filename": "invalid-access",
-                "Start": {
-                    "Line": 37,
-                    "Column": 7,
-                    "Byte": 676
-                },
-                "End": {
-                    "Line": 37,
-                    "Column": 24,
-                    "Byte": 693
-                }
-            },
-            "Context": null,
-            "Expression": null,
-            "EvalContext": null,
-            "Extra": null,
-            "Path": "values.errors[8]"
-        },
-        {
-            "Severity": 1,
-            "Summary": "receiver must be an array or an object",
-            "Detail": "",
-            "Subject": {
-                "Filename": "invalid-access",
-                "Start": {
-                    "Line": 38,
-                    "Column": 7,
-                    "Byte": 700
-                },
-                "End": {
-                    "Line": 38,
-                    "Column": 25,
-                    "Byte": 718
-                }
-            },
-            "Context": null,
-            "Expression": null,
-            "EvalContext": null,
-            "Extra": null,
-            "Path": "values.errors[9]"
-        },
-        {
-            "Severity": 1,
-            "Summary": "cannot access an array element using a property name",
-            "Detail": "",
-            "Subject": {
-                "Filename": "invalid-access",
-                "Start": {
-                    "Line": 39,
-                    "Column": 7,
-                    "Byte": 725
-                },
-                "End": {
-                    "Line": 39,
-                    "Column": 24,
-                    "Byte": 742
-                }
-            },
-            "Context": null,
-            "Expression": null,
-            "EvalContext": null,
-            "Extra": null,
-            "Path": "values.errors[10]"
-        },
-        {
-            "Severity": 1,
-            "Summary": "cannot access an array element using a property name",
-            "Detail": "",
-            "Subject": {
-                "Filename": "invalid-access",
-                "Start": {
-                    "Line": 40,
-                    "Column": 7,
-                    "Byte": 749
-                },
-                "End": {
-                    "Line": 40,
-                    "Column": 27,
-                    "Byte": 769
-                }
-            },
-            "Context": null,
-            "Expression": null,
-            "EvalContext": null,
-            "Extra": null,
-            "Path": "values.errors[11]"
-        },
-        {
-            "Severity": 1,
-            "Summary": "cannot access an object property using an integer index",
-            "Detail": "",
-            "Subject": {
-                "Filename": "invalid-access",
-                "Start": {
-                    "Line": 41,
-                    "Column": 7,
-                    "Byte": 776
-                },
-                "End": {
-                    "Line": 41,
-                    "Column": 24,
-                    "Byte": 793
-                }
-            },
-            "Context": null,
-            "Expression": null,
-            "EvalContext": null,
-            "Extra": null,
-            "Path": "values.errors[12]"
-        }
-    ],
     "eval": {
         "exprs": {
             "array": {
@@ -8121,6 +8087,40 @@
                 "string"
             ]
         }
+    },
+    "checkJson": {
+        "array": [
+            1,
+            2,
+            3
+        ],
+        "errors": [
+            "[unknown]",
+            "[unknown]",
+            "[unknown]",
+            "[unknown]",
+            "[unknown]",
+            "[unknown]",
+            "[unknown]",
+            "[unknown]",
+            "[unknown]",
+            "[unknown]",
+            "[unknown]",
+            "[unknown]",
+            "[unknown]"
+        ],
+        "myObject": {
+            "foo": "bar"
+        },
+        "object": {
+            "baz": "qux",
+            "hello": "world"
+        },
+        "open": "[unknown]",
+        "otherObject": {
+            "foo": "bar"
+        },
+        "string": "esc"
     },
     "evalJson": {
         "array": [

@@ -92,9 +92,6 @@
             ]
         }
     },
-    "checkJson": {
-        "password": "[secret]"
-    },
     "eval": {
         "exprs": {
             "password": {
@@ -187,6 +184,9 @@
                 "password"
             ]
         }
+    },
+    "checkJson": {
+        "password": "[secret]"
     },
     "evalJson": {
         "password": "[secret]"
