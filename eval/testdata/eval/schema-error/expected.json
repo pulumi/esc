@@ -300,6 +300,652 @@
             "Path": "values.sink[\"fn::open::schema\"].minLength"
         }
     ],
+    "evalDiags": [
+        {
+            "Severity": 1,
+            "Summary": "expected boolean, got null",
+            "Detail": "",
+            "Subject": {
+                "Filename": "schema-error",
+                "Start": {
+                    "Line": 38,
+                    "Column": 16,
+                    "Byte": 880
+                },
+                "End": {
+                    "Line": 38,
+                    "Column": 30,
+                    "Byte": 894
+                }
+            },
+            "Context": null,
+            "Expression": null,
+            "EvalContext": null,
+            "Extra": null,
+            "Path": "values.sink[\"fn::open::schema\"].boolean"
+        },
+        {
+            "Severity": 1,
+            "Summary": "expected string, got array",
+            "Detail": "",
+            "Subject": {
+                "Filename": "schema-error",
+                "Start": {
+                    "Line": 39,
+                    "Column": 15,
+                    "Byte": 909
+                },
+                "End": {
+                    "Line": 39,
+                    "Column": 30,
+                    "Byte": 924
+                }
+            },
+            "Context": null,
+            "Expression": null,
+            "EvalContext": null,
+            "Extra": null,
+            "Path": "values.sink[\"fn::open::schema\"].string"
+        },
+        {
+            "Severity": 1,
+            "Summary": "expected number, got object",
+            "Detail": "",
+            "Subject": {
+                "Filename": "schema-error",
+                "Start": {
+                    "Line": 40,
+                    "Column": 15,
+                    "Byte": 939
+                },
+                "End": {
+                    "Line": 40,
+                    "Column": 31,
+                    "Byte": 955
+                }
+            },
+            "Context": null,
+            "Expression": null,
+            "EvalContext": null,
+            "Extra": null,
+            "Path": "values.sink[\"fn::open::schema\"].number"
+        },
+        {
+            "Severity": 1,
+            "Summary": "missing required properties: foo",
+            "Detail": "",
+            "Subject": {
+                "Filename": "schema-error",
+                "Start": {
+                    "Line": 41,
+                    "Column": 15,
+                    "Byte": 970
+                },
+                "End": {
+                    "Line": 41,
+                    "Column": 31,
+                    "Byte": 986
+                }
+            },
+            "Context": null,
+            "Expression": null,
+            "EvalContext": null,
+            "Extra": null,
+            "Path": "values.sink[\"fn::open::schema\"].record"
+        },
+        {
+            "Severity": 1,
+            "Summary": "expected number, got boolean",
+            "Detail": "",
+            "Subject": {
+                "Filename": "schema-error",
+                "Start": {
+                    "Line": 42,
+                    "Column": 14,
+                    "Byte": 1000
+                },
+                "End": {
+                    "Line": 42,
+                    "Column": 29,
+                    "Byte": 1015
+                }
+            },
+            "Context": null,
+            "Expression": null,
+            "EvalContext": null,
+            "Extra": null,
+            "Path": "values.sink[\"fn::open::schema\"].anyOf"
+        },
+        {
+            "Severity": 1,
+            "Summary": "at least one subschema must match",
+            "Detail": "",
+            "Subject": {
+                "Filename": "schema-error",
+                "Start": {
+                    "Line": 42,
+                    "Column": 14,
+                    "Byte": 1000
+                },
+                "End": {
+                    "Line": 42,
+                    "Column": 29,
+                    "Byte": 1015
+                }
+            },
+            "Context": null,
+            "Expression": null,
+            "EvalContext": null,
+            "Extra": null,
+            "Path": "values.sink[\"fn::open::schema\"].anyOf"
+        },
+        {
+            "Severity": 1,
+            "Summary": "expected string, got boolean",
+            "Detail": "",
+            "Subject": {
+                "Filename": "schema-error",
+                "Start": {
+                    "Line": 42,
+                    "Column": 14,
+                    "Byte": 1000
+                },
+                "End": {
+                    "Line": 42,
+                    "Column": 29,
+                    "Byte": 1015
+                }
+            },
+            "Context": null,
+            "Expression": null,
+            "EvalContext": null,
+            "Extra": null,
+            "Path": "values.sink[\"fn::open::schema\"].anyOf"
+        },
+        {
+            "Severity": 1,
+            "Summary": "exactly one subschema must match",
+            "Detail": "",
+            "Subject": {
+                "Filename": "schema-error",
+                "Start": {
+                    "Line": 43,
+                    "Column": 14,
+                    "Byte": 1029
+                },
+                "End": {
+                    "Line": 43,
+                    "Column": 29,
+                    "Byte": 1044
+                }
+            },
+            "Context": null,
+            "Expression": null,
+            "EvalContext": null,
+            "Extra": null,
+            "Path": "values.sink[\"fn::open::schema\"].oneOf"
+        },
+        {
+            "Severity": 1,
+            "Summary": "expected number, got boolean",
+            "Detail": "",
+            "Subject": {
+                "Filename": "schema-error",
+                "Start": {
+                    "Line": 43,
+                    "Column": 14,
+                    "Byte": 1029
+                },
+                "End": {
+                    "Line": 43,
+                    "Column": 29,
+                    "Byte": 1044
+                }
+            },
+            "Context": null,
+            "Expression": null,
+            "EvalContext": null,
+            "Extra": null,
+            "Path": "values.sink[\"fn::open::schema\"].oneOf"
+        },
+        {
+            "Severity": 1,
+            "Summary": "expected string, got boolean",
+            "Detail": "",
+            "Subject": {
+                "Filename": "schema-error",
+                "Start": {
+                    "Line": 43,
+                    "Column": 14,
+                    "Byte": 1029
+                },
+                "End": {
+                    "Line": 43,
+                    "Column": 29,
+                    "Byte": 1044
+                }
+            },
+            "Context": null,
+            "Expression": null,
+            "EvalContext": null,
+            "Extra": null,
+            "Path": "values.sink[\"fn::open::schema\"].oneOf"
+        },
+        {
+            "Severity": 1,
+            "Summary": "expected [\"hello\",42]",
+            "Detail": "",
+            "Subject": {
+                "Filename": "schema-error",
+                "Start": {
+                    "Line": 44,
+                    "Column": 20,
+                    "Byte": 1064
+                },
+                "End": {
+                    "Line": 44,
+                    "Column": 36,
+                    "Byte": 1080
+                }
+            },
+            "Context": null,
+            "Expression": null,
+            "EvalContext": null,
+            "Extra": null,
+            "Path": "values.sink[\"fn::open::schema\"][\"const-array\"]"
+        },
+        {
+            "Severity": 1,
+            "Summary": "expected array, got string",
+            "Detail": "",
+            "Subject": {
+                "Filename": "schema-error",
+                "Start": {
+                    "Line": 44,
+                    "Column": 20,
+                    "Byte": 1064
+                },
+                "End": {
+                    "Line": 44,
+                    "Column": 36,
+                    "Byte": 1080
+                }
+            },
+            "Context": null,
+            "Expression": null,
+            "EvalContext": null,
+            "Extra": null,
+            "Path": "values.sink[\"fn::open::schema\"][\"const-array\"]"
+        },
+        {
+            "Severity": 1,
+            "Summary": "expected object, got string",
+            "Detail": "",
+            "Subject": {
+                "Filename": "schema-error",
+                "Start": {
+                    "Line": 45,
+                    "Column": 21,
+                    "Byte": 1101
+                },
+                "End": {
+                    "Line": 45,
+                    "Column": 37,
+                    "Byte": 1117
+                }
+            },
+            "Context": null,
+            "Expression": null,
+            "EvalContext": null,
+            "Extra": null,
+            "Path": "values.sink[\"fn::open::schema\"][\"const-object\"]"
+        },
+        {
+            "Severity": 1,
+            "Summary": "expected {\"hello\":\"world\"}",
+            "Detail": "",
+            "Subject": {
+                "Filename": "schema-error",
+                "Start": {
+                    "Line": 45,
+                    "Column": 21,
+                    "Byte": 1101
+                },
+                "End": {
+                    "Line": 45,
+                    "Column": 37,
+                    "Byte": 1117
+                }
+            },
+            "Context": null,
+            "Expression": null,
+            "EvalContext": null,
+            "Extra": null,
+            "Path": "values.sink[\"fn::open::schema\"][\"const-object\"]"
+        },
+        {
+            "Severity": 1,
+            "Summary": "expected one of [\"foo\",\"bar\"]",
+            "Detail": "",
+            "Subject": {
+                "Filename": "schema-error",
+                "Start": {
+                    "Line": 46,
+                    "Column": 13,
+                    "Byte": 1130
+                },
+                "End": {
+                    "Line": 46,
+                    "Column": 29,
+                    "Byte": 1146
+                }
+            },
+            "Context": null,
+            "Expression": null,
+            "EvalContext": null,
+            "Extra": null,
+            "Path": "values.sink[\"fn::open::schema\"].enum"
+        },
+        {
+            "Severity": 1,
+            "Summary": "missing required properties: bar",
+            "Detail": "",
+            "Subject": {
+                "Filename": "schema-error",
+                "Start": {
+                    "Line": 49,
+                    "Column": 21,
+                    "Byte": 1229
+                },
+                "End": {
+                    "Line": 49,
+                    "Column": 37,
+                    "Byte": 1245
+                }
+            },
+            "Context": null,
+            "Expression": null,
+            "EvalContext": null,
+            "Extra": null,
+            "Path": "values.sink[\"fn::open::schema\"].dependentReq"
+        },
+        {
+            "Severity": 1,
+            "Summary": "expected a multiple of 2",
+            "Detail": "",
+            "Subject": {
+                "Filename": "schema-error",
+                "Start": {
+                    "Line": 50,
+                    "Column": 17,
+                    "Byte": 1262
+                },
+                "End": {
+                    "Line": 50,
+                    "Column": 29,
+                    "Byte": 1274
+                }
+            },
+            "Context": null,
+            "Expression": null,
+            "EvalContext": null,
+            "Extra": null,
+            "Path": "values.sink[\"fn::open::schema\"].multiple"
+        },
+        {
+            "Severity": 1,
+            "Summary": "expected a number greater than or equal to 1",
+            "Detail": "",
+            "Subject": {
+                "Filename": "schema-error",
+                "Start": {
+                    "Line": 51,
+                    "Column": 16,
+                    "Byte": 1290
+                },
+                "End": {
+                    "Line": 51,
+                    "Column": 42,
+                    "Byte": 1316
+                }
+            },
+            "Context": null,
+            "Expression": null,
+            "EvalContext": null,
+            "Extra": null,
+            "Path": "values.sink[\"fn::open::schema\"].minimum"
+        },
+        {
+            "Severity": 1,
+            "Summary": "expected a number greater than 1",
+            "Detail": "",
+            "Subject": {
+                "Filename": "schema-error",
+                "Start": {
+                    "Line": 52,
+                    "Column": 25,
+                    "Byte": 1341
+                },
+                "End": {
+                    "Line": 52,
+                    "Column": 42,
+                    "Byte": 1358
+                }
+            },
+            "Context": null,
+            "Expression": null,
+            "EvalContext": null,
+            "Extra": null,
+            "Path": "values.sink[\"fn::open::schema\"].exclusiveMinimum"
+        },
+        {
+            "Severity": 1,
+            "Summary": "expected a number less than or equal to1",
+            "Detail": "",
+            "Subject": {
+                "Filename": "schema-error",
+                "Start": {
+                    "Line": 53,
+                    "Column": 16,
+                    "Byte": 1374
+                },
+                "End": {
+                    "Line": 53,
+                    "Column": 42,
+                    "Byte": 1400
+                }
+            },
+            "Context": null,
+            "Expression": null,
+            "EvalContext": null,
+            "Extra": null,
+            "Path": "values.sink[\"fn::open::schema\"].maximum"
+        },
+        {
+            "Severity": 1,
+            "Summary": "expected a number less than 1",
+            "Detail": "",
+            "Subject": {
+                "Filename": "schema-error",
+                "Start": {
+                    "Line": 54,
+                    "Column": 25,
+                    "Byte": 1425
+                },
+                "End": {
+                    "Line": 54,
+                    "Column": 42,
+                    "Byte": 1442
+                }
+            },
+            "Context": null,
+            "Expression": null,
+            "EvalContext": null,
+            "Extra": null,
+            "Path": "values.sink[\"fn::open::schema\"].exclusiveMaximum"
+        },
+        {
+            "Severity": 1,
+            "Summary": "expected a string of at least length 1",
+            "Detail": "",
+            "Subject": {
+                "Filename": "schema-error",
+                "Start": {
+                    "Line": 55,
+                    "Column": 18,
+                    "Byte": 1460
+                },
+                "End": {
+                    "Line": 55,
+                    "Column": 18,
+                    "Byte": 1460
+                }
+            },
+            "Context": null,
+            "Expression": null,
+            "EvalContext": null,
+            "Extra": null,
+            "Path": "values.sink[\"fn::open::schema\"].minLength"
+        },
+        {
+            "Severity": 1,
+            "Summary": "expected a string of at most length 1",
+            "Detail": "",
+            "Subject": {
+                "Filename": "schema-error",
+                "Start": {
+                    "Line": 56,
+                    "Column": 18,
+                    "Byte": 1480
+                },
+                "End": {
+                    "Line": 56,
+                    "Column": 34,
+                    "Byte": 1496
+                }
+            },
+            "Context": null,
+            "Expression": null,
+            "EvalContext": null,
+            "Extra": null,
+            "Path": "values.sink[\"fn::open::schema\"].maxLength"
+        },
+        {
+            "Severity": 1,
+            "Summary": "string must match the pattern \"^foo[0-9]+$\"",
+            "Detail": "",
+            "Subject": {
+                "Filename": "schema-error",
+                "Start": {
+                    "Line": 57,
+                    "Column": 16,
+                    "Byte": 1512
+                },
+                "End": {
+                    "Line": 57,
+                    "Column": 32,
+                    "Byte": 1528
+                }
+            },
+            "Context": null,
+            "Expression": null,
+            "EvalContext": null,
+            "Extra": null,
+            "Path": "values.sink[\"fn::open::schema\"].pattern"
+        },
+        {
+            "Severity": 1,
+            "Summary": "expected an array with at least 3 items",
+            "Detail": "",
+            "Subject": {
+                "Filename": "schema-error",
+                "Start": {
+                    "Line": 58,
+                    "Column": 17,
+                    "Byte": 1545
+                },
+                "End": {
+                    "Line": 58,
+                    "Column": 33,
+                    "Byte": 1561
+                }
+            },
+            "Context": null,
+            "Expression": null,
+            "EvalContext": null,
+            "Extra": null,
+            "Path": "values.sink[\"fn::open::schema\"].minItems"
+        },
+        {
+            "Severity": 1,
+            "Summary": "expected an array with at most 2 items",
+            "Detail": "",
+            "Subject": {
+                "Filename": "schema-error",
+                "Start": {
+                    "Line": 59,
+                    "Column": 17,
+                    "Byte": 1578
+                },
+                "End": {
+                    "Line": 59,
+                    "Column": 33,
+                    "Byte": 1594
+                }
+            },
+            "Context": null,
+            "Expression": null,
+            "EvalContext": null,
+            "Extra": null,
+            "Path": "values.sink[\"fn::open::schema\"].maxItems"
+        },
+        {
+            "Severity": 1,
+            "Summary": "expected an object with at least 1 properties",
+            "Detail": "",
+            "Subject": {
+                "Filename": "schema-error",
+                "Start": {
+                    "Line": 60,
+                    "Column": 22,
+                    "Byte": 1616
+                },
+                "End": {
+                    "Line": 60,
+                    "Column": 38,
+                    "Byte": 1632
+                }
+            },
+            "Context": null,
+            "Expression": null,
+            "EvalContext": null,
+            "Extra": null,
+            "Path": "values.sink[\"fn::open::schema\"].minProperties"
+        },
+        {
+            "Severity": 1,
+            "Summary": "expected an object with at most 1 properties",
+            "Detail": "",
+            "Subject": {
+                "Filename": "schema-error",
+                "Start": {
+                    "Line": 61,
+                    "Column": 22,
+                    "Byte": 1654
+                },
+                "End": {
+                    "Line": 61,
+                    "Column": 44,
+                    "Byte": 1676
+                }
+            },
+            "Context": null,
+            "Expression": null,
+            "EvalContext": null,
+            "Extra": null,
+            "Path": "values.sink[\"fn::open::schema\"].maxProperties"
+        }
+    ],
     "check": {
         "exprs": {
             "sink": {
@@ -5702,656 +6348,6 @@
             ]
         }
     },
-    "checkJson": {
-        "sink": "[unknown]",
-        "source": "[unknown]"
-    },
-    "evalDiags": [
-        {
-            "Severity": 1,
-            "Summary": "expected boolean, got null",
-            "Detail": "",
-            "Subject": {
-                "Filename": "schema-error",
-                "Start": {
-                    "Line": 38,
-                    "Column": 16,
-                    "Byte": 880
-                },
-                "End": {
-                    "Line": 38,
-                    "Column": 30,
-                    "Byte": 894
-                }
-            },
-            "Context": null,
-            "Expression": null,
-            "EvalContext": null,
-            "Extra": null,
-            "Path": "values.sink[\"fn::open::schema\"].boolean"
-        },
-        {
-            "Severity": 1,
-            "Summary": "expected string, got array",
-            "Detail": "",
-            "Subject": {
-                "Filename": "schema-error",
-                "Start": {
-                    "Line": 39,
-                    "Column": 15,
-                    "Byte": 909
-                },
-                "End": {
-                    "Line": 39,
-                    "Column": 30,
-                    "Byte": 924
-                }
-            },
-            "Context": null,
-            "Expression": null,
-            "EvalContext": null,
-            "Extra": null,
-            "Path": "values.sink[\"fn::open::schema\"].string"
-        },
-        {
-            "Severity": 1,
-            "Summary": "expected number, got object",
-            "Detail": "",
-            "Subject": {
-                "Filename": "schema-error",
-                "Start": {
-                    "Line": 40,
-                    "Column": 15,
-                    "Byte": 939
-                },
-                "End": {
-                    "Line": 40,
-                    "Column": 31,
-                    "Byte": 955
-                }
-            },
-            "Context": null,
-            "Expression": null,
-            "EvalContext": null,
-            "Extra": null,
-            "Path": "values.sink[\"fn::open::schema\"].number"
-        },
-        {
-            "Severity": 1,
-            "Summary": "missing required properties: foo",
-            "Detail": "",
-            "Subject": {
-                "Filename": "schema-error",
-                "Start": {
-                    "Line": 41,
-                    "Column": 15,
-                    "Byte": 970
-                },
-                "End": {
-                    "Line": 41,
-                    "Column": 31,
-                    "Byte": 986
-                }
-            },
-            "Context": null,
-            "Expression": null,
-            "EvalContext": null,
-            "Extra": null,
-            "Path": "values.sink[\"fn::open::schema\"].record"
-        },
-        {
-            "Severity": 1,
-            "Summary": "expected number, got boolean",
-            "Detail": "",
-            "Subject": {
-                "Filename": "schema-error",
-                "Start": {
-                    "Line": 42,
-                    "Column": 14,
-                    "Byte": 1000
-                },
-                "End": {
-                    "Line": 42,
-                    "Column": 29,
-                    "Byte": 1015
-                }
-            },
-            "Context": null,
-            "Expression": null,
-            "EvalContext": null,
-            "Extra": null,
-            "Path": "values.sink[\"fn::open::schema\"].anyOf"
-        },
-        {
-            "Severity": 1,
-            "Summary": "at least one subschema must match",
-            "Detail": "",
-            "Subject": {
-                "Filename": "schema-error",
-                "Start": {
-                    "Line": 42,
-                    "Column": 14,
-                    "Byte": 1000
-                },
-                "End": {
-                    "Line": 42,
-                    "Column": 29,
-                    "Byte": 1015
-                }
-            },
-            "Context": null,
-            "Expression": null,
-            "EvalContext": null,
-            "Extra": null,
-            "Path": "values.sink[\"fn::open::schema\"].anyOf"
-        },
-        {
-            "Severity": 1,
-            "Summary": "expected string, got boolean",
-            "Detail": "",
-            "Subject": {
-                "Filename": "schema-error",
-                "Start": {
-                    "Line": 42,
-                    "Column": 14,
-                    "Byte": 1000
-                },
-                "End": {
-                    "Line": 42,
-                    "Column": 29,
-                    "Byte": 1015
-                }
-            },
-            "Context": null,
-            "Expression": null,
-            "EvalContext": null,
-            "Extra": null,
-            "Path": "values.sink[\"fn::open::schema\"].anyOf"
-        },
-        {
-            "Severity": 1,
-            "Summary": "exactly one subschema must match",
-            "Detail": "",
-            "Subject": {
-                "Filename": "schema-error",
-                "Start": {
-                    "Line": 43,
-                    "Column": 14,
-                    "Byte": 1029
-                },
-                "End": {
-                    "Line": 43,
-                    "Column": 29,
-                    "Byte": 1044
-                }
-            },
-            "Context": null,
-            "Expression": null,
-            "EvalContext": null,
-            "Extra": null,
-            "Path": "values.sink[\"fn::open::schema\"].oneOf"
-        },
-        {
-            "Severity": 1,
-            "Summary": "expected number, got boolean",
-            "Detail": "",
-            "Subject": {
-                "Filename": "schema-error",
-                "Start": {
-                    "Line": 43,
-                    "Column": 14,
-                    "Byte": 1029
-                },
-                "End": {
-                    "Line": 43,
-                    "Column": 29,
-                    "Byte": 1044
-                }
-            },
-            "Context": null,
-            "Expression": null,
-            "EvalContext": null,
-            "Extra": null,
-            "Path": "values.sink[\"fn::open::schema\"].oneOf"
-        },
-        {
-            "Severity": 1,
-            "Summary": "expected string, got boolean",
-            "Detail": "",
-            "Subject": {
-                "Filename": "schema-error",
-                "Start": {
-                    "Line": 43,
-                    "Column": 14,
-                    "Byte": 1029
-                },
-                "End": {
-                    "Line": 43,
-                    "Column": 29,
-                    "Byte": 1044
-                }
-            },
-            "Context": null,
-            "Expression": null,
-            "EvalContext": null,
-            "Extra": null,
-            "Path": "values.sink[\"fn::open::schema\"].oneOf"
-        },
-        {
-            "Severity": 1,
-            "Summary": "expected [\"hello\",42]",
-            "Detail": "",
-            "Subject": {
-                "Filename": "schema-error",
-                "Start": {
-                    "Line": 44,
-                    "Column": 20,
-                    "Byte": 1064
-                },
-                "End": {
-                    "Line": 44,
-                    "Column": 36,
-                    "Byte": 1080
-                }
-            },
-            "Context": null,
-            "Expression": null,
-            "EvalContext": null,
-            "Extra": null,
-            "Path": "values.sink[\"fn::open::schema\"][\"const-array\"]"
-        },
-        {
-            "Severity": 1,
-            "Summary": "expected array, got string",
-            "Detail": "",
-            "Subject": {
-                "Filename": "schema-error",
-                "Start": {
-                    "Line": 44,
-                    "Column": 20,
-                    "Byte": 1064
-                },
-                "End": {
-                    "Line": 44,
-                    "Column": 36,
-                    "Byte": 1080
-                }
-            },
-            "Context": null,
-            "Expression": null,
-            "EvalContext": null,
-            "Extra": null,
-            "Path": "values.sink[\"fn::open::schema\"][\"const-array\"]"
-        },
-        {
-            "Severity": 1,
-            "Summary": "expected object, got string",
-            "Detail": "",
-            "Subject": {
-                "Filename": "schema-error",
-                "Start": {
-                    "Line": 45,
-                    "Column": 21,
-                    "Byte": 1101
-                },
-                "End": {
-                    "Line": 45,
-                    "Column": 37,
-                    "Byte": 1117
-                }
-            },
-            "Context": null,
-            "Expression": null,
-            "EvalContext": null,
-            "Extra": null,
-            "Path": "values.sink[\"fn::open::schema\"][\"const-object\"]"
-        },
-        {
-            "Severity": 1,
-            "Summary": "expected {\"hello\":\"world\"}",
-            "Detail": "",
-            "Subject": {
-                "Filename": "schema-error",
-                "Start": {
-                    "Line": 45,
-                    "Column": 21,
-                    "Byte": 1101
-                },
-                "End": {
-                    "Line": 45,
-                    "Column": 37,
-                    "Byte": 1117
-                }
-            },
-            "Context": null,
-            "Expression": null,
-            "EvalContext": null,
-            "Extra": null,
-            "Path": "values.sink[\"fn::open::schema\"][\"const-object\"]"
-        },
-        {
-            "Severity": 1,
-            "Summary": "expected one of [\"foo\",\"bar\"]",
-            "Detail": "",
-            "Subject": {
-                "Filename": "schema-error",
-                "Start": {
-                    "Line": 46,
-                    "Column": 13,
-                    "Byte": 1130
-                },
-                "End": {
-                    "Line": 46,
-                    "Column": 29,
-                    "Byte": 1146
-                }
-            },
-            "Context": null,
-            "Expression": null,
-            "EvalContext": null,
-            "Extra": null,
-            "Path": "values.sink[\"fn::open::schema\"].enum"
-        },
-        {
-            "Severity": 1,
-            "Summary": "missing required properties: bar",
-            "Detail": "",
-            "Subject": {
-                "Filename": "schema-error",
-                "Start": {
-                    "Line": 49,
-                    "Column": 21,
-                    "Byte": 1229
-                },
-                "End": {
-                    "Line": 49,
-                    "Column": 37,
-                    "Byte": 1245
-                }
-            },
-            "Context": null,
-            "Expression": null,
-            "EvalContext": null,
-            "Extra": null,
-            "Path": "values.sink[\"fn::open::schema\"].dependentReq"
-        },
-        {
-            "Severity": 1,
-            "Summary": "expected a multiple of 2",
-            "Detail": "",
-            "Subject": {
-                "Filename": "schema-error",
-                "Start": {
-                    "Line": 50,
-                    "Column": 17,
-                    "Byte": 1262
-                },
-                "End": {
-                    "Line": 50,
-                    "Column": 29,
-                    "Byte": 1274
-                }
-            },
-            "Context": null,
-            "Expression": null,
-            "EvalContext": null,
-            "Extra": null,
-            "Path": "values.sink[\"fn::open::schema\"].multiple"
-        },
-        {
-            "Severity": 1,
-            "Summary": "expected a number greater than or equal to 1",
-            "Detail": "",
-            "Subject": {
-                "Filename": "schema-error",
-                "Start": {
-                    "Line": 51,
-                    "Column": 16,
-                    "Byte": 1290
-                },
-                "End": {
-                    "Line": 51,
-                    "Column": 42,
-                    "Byte": 1316
-                }
-            },
-            "Context": null,
-            "Expression": null,
-            "EvalContext": null,
-            "Extra": null,
-            "Path": "values.sink[\"fn::open::schema\"].minimum"
-        },
-        {
-            "Severity": 1,
-            "Summary": "expected a number greater than 1",
-            "Detail": "",
-            "Subject": {
-                "Filename": "schema-error",
-                "Start": {
-                    "Line": 52,
-                    "Column": 25,
-                    "Byte": 1341
-                },
-                "End": {
-                    "Line": 52,
-                    "Column": 42,
-                    "Byte": 1358
-                }
-            },
-            "Context": null,
-            "Expression": null,
-            "EvalContext": null,
-            "Extra": null,
-            "Path": "values.sink[\"fn::open::schema\"].exclusiveMinimum"
-        },
-        {
-            "Severity": 1,
-            "Summary": "expected a number less than or equal to1",
-            "Detail": "",
-            "Subject": {
-                "Filename": "schema-error",
-                "Start": {
-                    "Line": 53,
-                    "Column": 16,
-                    "Byte": 1374
-                },
-                "End": {
-                    "Line": 53,
-                    "Column": 42,
-                    "Byte": 1400
-                }
-            },
-            "Context": null,
-            "Expression": null,
-            "EvalContext": null,
-            "Extra": null,
-            "Path": "values.sink[\"fn::open::schema\"].maximum"
-        },
-        {
-            "Severity": 1,
-            "Summary": "expected a number less than 1",
-            "Detail": "",
-            "Subject": {
-                "Filename": "schema-error",
-                "Start": {
-                    "Line": 54,
-                    "Column": 25,
-                    "Byte": 1425
-                },
-                "End": {
-                    "Line": 54,
-                    "Column": 42,
-                    "Byte": 1442
-                }
-            },
-            "Context": null,
-            "Expression": null,
-            "EvalContext": null,
-            "Extra": null,
-            "Path": "values.sink[\"fn::open::schema\"].exclusiveMaximum"
-        },
-        {
-            "Severity": 1,
-            "Summary": "expected a string of at least length 1",
-            "Detail": "",
-            "Subject": {
-                "Filename": "schema-error",
-                "Start": {
-                    "Line": 55,
-                    "Column": 18,
-                    "Byte": 1460
-                },
-                "End": {
-                    "Line": 55,
-                    "Column": 18,
-                    "Byte": 1460
-                }
-            },
-            "Context": null,
-            "Expression": null,
-            "EvalContext": null,
-            "Extra": null,
-            "Path": "values.sink[\"fn::open::schema\"].minLength"
-        },
-        {
-            "Severity": 1,
-            "Summary": "expected a string of at most length 1",
-            "Detail": "",
-            "Subject": {
-                "Filename": "schema-error",
-                "Start": {
-                    "Line": 56,
-                    "Column": 18,
-                    "Byte": 1480
-                },
-                "End": {
-                    "Line": 56,
-                    "Column": 34,
-                    "Byte": 1496
-                }
-            },
-            "Context": null,
-            "Expression": null,
-            "EvalContext": null,
-            "Extra": null,
-            "Path": "values.sink[\"fn::open::schema\"].maxLength"
-        },
-        {
-            "Severity": 1,
-            "Summary": "string must match the pattern \"^foo[0-9]+$\"",
-            "Detail": "",
-            "Subject": {
-                "Filename": "schema-error",
-                "Start": {
-                    "Line": 57,
-                    "Column": 16,
-                    "Byte": 1512
-                },
-                "End": {
-                    "Line": 57,
-                    "Column": 32,
-                    "Byte": 1528
-                }
-            },
-            "Context": null,
-            "Expression": null,
-            "EvalContext": null,
-            "Extra": null,
-            "Path": "values.sink[\"fn::open::schema\"].pattern"
-        },
-        {
-            "Severity": 1,
-            "Summary": "expected an array with at least 3 items",
-            "Detail": "",
-            "Subject": {
-                "Filename": "schema-error",
-                "Start": {
-                    "Line": 58,
-                    "Column": 17,
-                    "Byte": 1545
-                },
-                "End": {
-                    "Line": 58,
-                    "Column": 33,
-                    "Byte": 1561
-                }
-            },
-            "Context": null,
-            "Expression": null,
-            "EvalContext": null,
-            "Extra": null,
-            "Path": "values.sink[\"fn::open::schema\"].minItems"
-        },
-        {
-            "Severity": 1,
-            "Summary": "expected an array with at most 2 items",
-            "Detail": "",
-            "Subject": {
-                "Filename": "schema-error",
-                "Start": {
-                    "Line": 59,
-                    "Column": 17,
-                    "Byte": 1578
-                },
-                "End": {
-                    "Line": 59,
-                    "Column": 33,
-                    "Byte": 1594
-                }
-            },
-            "Context": null,
-            "Expression": null,
-            "EvalContext": null,
-            "Extra": null,
-            "Path": "values.sink[\"fn::open::schema\"].maxItems"
-        },
-        {
-            "Severity": 1,
-            "Summary": "expected an object with at least 1 properties",
-            "Detail": "",
-            "Subject": {
-                "Filename": "schema-error",
-                "Start": {
-                    "Line": 60,
-                    "Column": 22,
-                    "Byte": 1616
-                },
-                "End": {
-                    "Line": 60,
-                    "Column": 38,
-                    "Byte": 1632
-                }
-            },
-            "Context": null,
-            "Expression": null,
-            "EvalContext": null,
-            "Extra": null,
-            "Path": "values.sink[\"fn::open::schema\"].minProperties"
-        },
-        {
-            "Severity": 1,
-            "Summary": "expected an object with at most 1 properties",
-            "Detail": "",
-            "Subject": {
-                "Filename": "schema-error",
-                "Start": {
-                    "Line": 61,
-                    "Column": 22,
-                    "Byte": 1654
-                },
-                "End": {
-                    "Line": 61,
-                    "Column": 44,
-                    "Byte": 1676
-                }
-            },
-            "Context": null,
-            "Expression": null,
-            "EvalContext": null,
-            "Extra": null,
-            "Path": "values.sink[\"fn::open::schema\"].maxProperties"
-        }
-    ],
     "eval": {
         "exprs": {
             "sink": {
@@ -13059,6 +13055,10 @@
                 "source"
             ]
         }
+    },
+    "checkJson": {
+        "sink": "[unknown]",
+        "source": "[unknown]"
     },
     "evalJson": {
         "sink": "[unknown]",

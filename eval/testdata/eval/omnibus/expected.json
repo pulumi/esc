@@ -1384,23 +1384,6 @@
             ]
         }
     },
-    "checkJson": {
-        "access": "[unknown]",
-        "fromBase64": "hello,world",
-        "fromJSON": "[unknown]",
-        "interp": "[unknown]",
-        "join": "hello,world",
-        "open": "[unknown]",
-        "open2": "[unknown]",
-        "secret": "[secret]",
-        "strings": [
-            "hello",
-            "world"
-        ],
-        "toBase64": "aGVsbG8sd29ybGQ=",
-        "toJSON": "[unknown]",
-        "toString": "[unknown]"
-    },
     "eval": {
         "exprs": {
             "access": {
@@ -3540,6 +3523,23 @@
                 "toString"
             ]
         }
+    },
+    "checkJson": {
+        "access": "[unknown]",
+        "fromBase64": "hello,world",
+        "fromJSON": "[unknown]",
+        "interp": "[unknown]",
+        "join": "hello,world",
+        "open": "[unknown]",
+        "open2": "[unknown]",
+        "secret": "[secret]",
+        "strings": [
+            "hello",
+            "world"
+        ],
+        "toBase64": "aGVsbG8sd29ybGQ=",
+        "toJSON": "[unknown]",
+        "toString": "[unknown]"
     },
     "evalJson": {
         "access": "qux",

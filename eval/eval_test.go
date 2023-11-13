@@ -183,10 +183,10 @@ func TestEval(t *testing.T) {
 	type expectedData struct {
 		LoadDiags  syntax.Diagnostics `json:"loadDiags,omitempty"`
 		CheckDiags syntax.Diagnostics `json:"checkDiags,omitempty"`
-		Check      *esc.Environment   `json:"check,omitempty"`
-		CheckJSON  any                `json:"checkJson,omitempty"`
 		EvalDiags  syntax.Diagnostics `json:"evalDiags,omitempty"`
+		Check      *esc.Environment   `json:"check,omitempty"`
 		Eval       *esc.Environment   `json:"eval,omitempty"`
+		CheckJSON  any                `json:"checkJson,omitempty"`
 		EvalJSON   any                `json:"evalJson,omitempty"`
 	}
 

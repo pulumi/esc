@@ -164,11 +164,6 @@
             ]
         }
     },
-    "checkJson": {
-        "foo": {
-            "bar": "baz"
-        }
-    },
     "eval": {
         "exprs": {
             "foo": {
@@ -332,6 +327,11 @@
             "required": [
                 "foo"
             ]
+        }
+    },
+    "checkJson": {
+        "foo": {
+            "bar": "baz"
         }
     },
     "evalJson": {

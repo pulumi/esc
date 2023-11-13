@@ -813,15 +813,6 @@
             ]
         }
     },
-    "checkJson": {
-        "referent": {
-            "foo": "[unknown]",
-            "list": "[unknown]",
-            "object": "[unknown]",
-            "test": "[unknown]"
-        },
-        "test": "[unknown]"
-    },
     "eval": {
         "exprs": {
             "referent": {
@@ -2140,6 +2131,15 @@
                 "test"
             ]
         }
+    },
+    "checkJson": {
+        "referent": {
+            "foo": "[unknown]",
+            "list": "[unknown]",
+            "object": "[unknown]",
+            "test": "[unknown]"
+        },
+        "test": "[unknown]"
     },
     "evalJson": {
         "referent": {

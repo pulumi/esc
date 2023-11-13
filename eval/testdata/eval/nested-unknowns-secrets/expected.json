@@ -2845,47 +2845,6 @@
             ]
         }
     },
-    "checkJson": {
-        "base64OutputSecret": "[secret]",
-        "base64OutputUnknown": "[unknown]",
-        "cloudflare": {
-            "account": {
-                "id": "[secret]",
-                "name": "account-name"
-            },
-            "apiKey": "[secret]",
-            "apiToken": "[secret]",
-            "username": "bot@pulumi.com",
-            "zoneId": "zone-id-123"
-        },
-        "comboSecretAndUnknown": {
-            "cloudflareApi": "[secret]",
-            "provider": "[unknown]"
-        },
-        "deeplyNestedProvider": {
-            "oneStep": {
-                "twoStep": {
-                    "threeStep": {
-                        "fourStep": "[unknown]"
-                    }
-                }
-            }
-        },
-        "environmentVariables": {
-            "CLOUDFLARE_API_TOKEN": "[secret]"
-        },
-        "jsonOutputCombo": "[secret]",
-        "jsonOutputSecret": "[secret]",
-        "jsonOutputUnknown": "[unknown]",
-        "pulumiConfig": {
-            "accountId": "[secret]",
-            "refTopLevelSecret": "[secret]"
-        },
-        "stringOutputCombo": "[secret]",
-        "stringOutputSecret": "[secret]",
-        "stringOutputUnknown": "[unknown]",
-        "top-level-secret": "[secret]"
-    },
     "eval": {
         "exprs": {
             "base64OutputSecret": {
@@ -5856,6 +5815,47 @@
                 "top-level-secret"
             ]
         }
+    },
+    "checkJson": {
+        "base64OutputSecret": "[secret]",
+        "base64OutputUnknown": "[unknown]",
+        "cloudflare": {
+            "account": {
+                "id": "[secret]",
+                "name": "account-name"
+            },
+            "apiKey": "[secret]",
+            "apiToken": "[secret]",
+            "username": "bot@pulumi.com",
+            "zoneId": "zone-id-123"
+        },
+        "comboSecretAndUnknown": {
+            "cloudflareApi": "[secret]",
+            "provider": "[unknown]"
+        },
+        "deeplyNestedProvider": {
+            "oneStep": {
+                "twoStep": {
+                    "threeStep": {
+                        "fourStep": "[unknown]"
+                    }
+                }
+            }
+        },
+        "environmentVariables": {
+            "CLOUDFLARE_API_TOKEN": "[secret]"
+        },
+        "jsonOutputCombo": "[secret]",
+        "jsonOutputSecret": "[secret]",
+        "jsonOutputUnknown": "[unknown]",
+        "pulumiConfig": {
+            "accountId": "[secret]",
+            "refTopLevelSecret": "[secret]"
+        },
+        "stringOutputCombo": "[secret]",
+        "stringOutputSecret": "[secret]",
+        "stringOutputUnknown": "[unknown]",
+        "top-level-secret": "[secret]"
     },
     "evalJson": {
         "base64OutputSecret": "[secret]",
