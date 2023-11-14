@@ -19,6 +19,7 @@ require (
 	golang.org/x/term v0.13.0
 	gopkg.in/yaml.v3 v3.0.1
 	mvdan.cc/sh/v3 v3.7.0
+	pgregory.net/rapid v0.6.1
 )
 
 require (
