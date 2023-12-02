@@ -2,11 +2,15 @@
 
 package cli
 
-import "os/exec"
+import (
+	"os/exec"
+	"syscall"
+)
 
 type cmdExec interface {
 	LookPath(command string) (string, error)
 	Run(cmd *exec.Cmd) error
+	Exec(cmd *exec.Cmd) error
 }
 
 type defaultCmdExec int
@@ -21,4 +25,11 @@ func (defaultCmdExec) LookPath(command string) (string, error) {
 
 func (defaultCmdExec) Run(cmd *exec.Cmd) error {
 	return cmd.Run()
+}
+
+func (defaultCmdExec) Exec(cmd *exec.Cmd) error {
+	// Exec expects the first argument to be the command name, see execve(2).
+	args := append([]string{cmd.Path}, cmd.Args...)
+	//nolint:gosec
+	return syscall.Exec(cmd.Path, args, cmd.Env)
 }
