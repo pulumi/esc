@@ -1,0 +1,520 @@
+{
+    "check": {
+        "exprs": {
+            "secret_object": {
+                "range": {
+                    "environment": "secret-objects",
+                    "begin": {
+                        "line": 3,
+                        "column": 5,
+                        "byte": 29
+                    },
+                    "end": {
+                        "line": 3,
+                        "column": 52,
+                        "byte": 76
+                    }
+                },
+                "schema": {
+                    "type": "string",
+                    "const": "{\"haha\":\"business\",\"also\":\"secret\"}"
+                },
+                "builtin": {
+                    "name": "fn::secret",
+                    "nameRange": {
+                        "environment": "secret-objects",
+                        "begin": {
+                            "line": 3,
+                            "column": 5,
+                            "byte": 29
+                        },
+                        "end": {
+                            "line": 3,
+                            "column": 15,
+                            "byte": 39
+                        }
+                    },
+                    "argSchema": true,
+                    "arg": {
+                        "range": {
+                            "environment": "secret-objects",
+                            "begin": {
+                                "line": 3,
+                                "column": 17,
+                                "byte": 41
+                            },
+                            "end": {
+                                "line": 3,
+                                "column": 52,
+                                "byte": 76
+                            }
+                        },
+                        "schema": {
+                            "type": "string",
+                            "const": "{\"haha\":\"business\",\"also\":\"secret\"}"
+                        },
+                        "literal": "{\"haha\":\"business\",\"also\":\"secret\"}"
+                    }
+                }
+            },
+            "unmarshalled_secret_object": {
+                "range": {
+                    "environment": "secret-objects",
+                    "begin": {
+                        "line": 5,
+                        "column": 5,
+                        "byte": 113
+                    },
+                    "end": {
+                        "line": 5,
+                        "column": 35,
+                        "byte": 143
+                    }
+                },
+                "schema": {
+                    "properties": {
+                        "also": {
+                            "type": "string",
+                            "const": "secret"
+                        },
+                        "haha": {
+                            "type": "string",
+                            "const": "business"
+                        }
+                    },
+                    "type": "object",
+                    "required": [
+                        "also",
+                        "haha"
+                    ]
+                },
+                "builtin": {
+                    "name": "fn::fromJSON",
+                    "nameRange": {
+                        "environment": "secret-objects",
+                        "begin": {
+                            "line": 5,
+                            "column": 5,
+                            "byte": 113
+                        },
+                        "end": {
+                            "line": 5,
+                            "column": 17,
+                            "byte": 125
+                        }
+                    },
+                    "argSchema": true,
+                    "arg": {
+                        "range": {
+                            "environment": "secret-objects",
+                            "begin": {
+                                "line": 5,
+                                "column": 19,
+                                "byte": 127
+                            },
+                            "end": {
+                                "line": 5,
+                                "column": 35,
+                                "byte": 143
+                            }
+                        },
+                        "schema": {
+                            "type": "string",
+                            "const": "{\"haha\":\"business\",\"also\":\"secret\"}"
+                        },
+                        "symbol": [
+                            {
+                                "key": "secret_object",
+                                "value": {
+                                    "environment": "secret-objects",
+                                    "begin": {
+                                        "line": 3,
+                                        "column": 5,
+                                        "byte": 29
+                                    },
+                                    "end": {
+                                        "line": 3,
+                                        "column": 52,
+                                        "byte": 76
+                                    }
+                                }
+                            }
+                        ]
+                    }
+                }
+            }
+        },
+        "properties": {
+            "secret_object": {
+                "value": "{\"haha\":\"business\",\"also\":\"secret\"}",
+                "secret": true,
+                "trace": {
+                    "def": {
+                        "environment": "secret-objects",
+                        "begin": {
+                            "line": 3,
+                            "column": 17,
+                            "byte": 41
+                        },
+                        "end": {
+                            "line": 3,
+                            "column": 52,
+                            "byte": 76
+                        }
+                    }
+                }
+            },
+            "unmarshalled_secret_object": {
+                "value": {
+                    "also": {
+                        "value": "secret",
+                        "trace": {
+                            "def": {
+                                "environment": "secret-objects",
+                                "begin": {
+                                    "line": 5,
+                                    "column": 5,
+                                    "byte": 113
+                                },
+                                "end": {
+                                    "line": 5,
+                                    "column": 35,
+                                    "byte": 143
+                                }
+                            }
+                        }
+                    },
+                    "haha": {
+                        "value": "business",
+                        "trace": {
+                            "def": {
+                                "environment": "secret-objects",
+                                "begin": {
+                                    "line": 5,
+                                    "column": 5,
+                                    "byte": 113
+                                },
+                                "end": {
+                                    "line": 5,
+                                    "column": 35,
+                                    "byte": 143
+                                }
+                            }
+                        }
+                    }
+                },
+                "trace": {
+                    "def": {
+                        "environment": "secret-objects",
+                        "begin": {
+                            "line": 5,
+                            "column": 5,
+                            "byte": 113
+                        },
+                        "end": {
+                            "line": 5,
+                            "column": 35,
+                            "byte": 143
+                        }
+                    }
+                }
+            }
+        },
+        "schema": {
+            "properties": {
+                "secret_object": {
+                    "type": "string",
+                    "const": "{\"haha\":\"business\",\"also\":\"secret\"}"
+                },
+                "unmarshalled_secret_object": {
+                    "properties": {
+                        "also": {
+                            "type": "string",
+                            "const": "secret"
+                        },
+                        "haha": {
+                            "type": "string",
+                            "const": "business"
+                        }
+                    },
+                    "type": "object",
+                    "required": [
+                        "also",
+                        "haha"
+                    ]
+                }
+            },
+            "type": "object",
+            "required": [
+                "secret_object",
+                "unmarshalled_secret_object"
+            ]
+        }
+    },
+    "checkJson": {
+        "secret_object": "[secret]",
+        "unmarshalled_secret_object": {
+            "also": "secret",
+            "haha": "business"
+        }
+    },
+    "eval": {
+        "exprs": {
+            "secret_object": {
+                "range": {
+                    "environment": "secret-objects",
+                    "begin": {
+                        "line": 3,
+                        "column": 5,
+                        "byte": 29
+                    },
+                    "end": {
+                        "line": 3,
+                        "column": 52,
+                        "byte": 76
+                    }
+                },
+                "schema": {
+                    "type": "string",
+                    "const": "{\"haha\":\"business\",\"also\":\"secret\"}"
+                },
+                "builtin": {
+                    "name": "fn::secret",
+                    "nameRange": {
+                        "environment": "secret-objects",
+                        "begin": {
+                            "line": 3,
+                            "column": 5,
+                            "byte": 29
+                        },
+                        "end": {
+                            "line": 3,
+                            "column": 15,
+                            "byte": 39
+                        }
+                    },
+                    "argSchema": true,
+                    "arg": {
+                        "range": {
+                            "environment": "secret-objects",
+                            "begin": {
+                                "line": 3,
+                                "column": 17,
+                                "byte": 41
+                            },
+                            "end": {
+                                "line": 3,
+                                "column": 52,
+                                "byte": 76
+                            }
+                        },
+                        "schema": {
+                            "type": "string",
+                            "const": "{\"haha\":\"business\",\"also\":\"secret\"}"
+                        },
+                        "literal": "{\"haha\":\"business\",\"also\":\"secret\"}"
+                    }
+                }
+            },
+            "unmarshalled_secret_object": {
+                "range": {
+                    "environment": "secret-objects",
+                    "begin": {
+                        "line": 5,
+                        "column": 5,
+                        "byte": 113
+                    },
+                    "end": {
+                        "line": 5,
+                        "column": 35,
+                        "byte": 143
+                    }
+                },
+                "schema": {
+                    "properties": {
+                        "also": {
+                            "type": "string",
+                            "const": "secret"
+                        },
+                        "haha": {
+                            "type": "string",
+                            "const": "business"
+                        }
+                    },
+                    "type": "object",
+                    "required": [
+                        "also",
+                        "haha"
+                    ]
+                },
+                "builtin": {
+                    "name": "fn::fromJSON",
+                    "nameRange": {
+                        "environment": "secret-objects",
+                        "begin": {
+                            "line": 5,
+                            "column": 5,
+                            "byte": 113
+                        },
+                        "end": {
+                            "line": 5,
+                            "column": 17,
+                            "byte": 125
+                        }
+                    },
+                    "argSchema": true,
+                    "arg": {
+                        "range": {
+                            "environment": "secret-objects",
+                            "begin": {
+                                "line": 5,
+                                "column": 19,
+                                "byte": 127
+                            },
+                            "end": {
+                                "line": 5,
+                                "column": 35,
+                                "byte": 143
+                            }
+                        },
+                        "schema": {
+                            "type": "string",
+                            "const": "{\"haha\":\"business\",\"also\":\"secret\"}"
+                        },
+                        "symbol": [
+                            {
+                                "key": "secret_object",
+                                "value": {
+                                    "environment": "secret-objects",
+                                    "begin": {
+                                        "line": 3,
+                                        "column": 5,
+                                        "byte": 29
+                                    },
+                                    "end": {
+                                        "line": 3,
+                                        "column": 52,
+                                        "byte": 76
+                                    }
+                                }
+                            }
+                        ]
+                    }
+                }
+            }
+        },
+        "properties": {
+            "secret_object": {
+                "value": "{\"haha\":\"business\",\"also\":\"secret\"}",
+                "secret": true,
+                "trace": {
+                    "def": {
+                        "environment": "secret-objects",
+                        "begin": {
+                            "line": 3,
+                            "column": 17,
+                            "byte": 41
+                        },
+                        "end": {
+                            "line": 3,
+                            "column": 52,
+                            "byte": 76
+                        }
+                    }
+                }
+            },
+            "unmarshalled_secret_object": {
+                "value": {
+                    "also": {
+                        "value": "secret",
+                        "trace": {
+                            "def": {
+                                "environment": "secret-objects",
+                                "begin": {
+                                    "line": 5,
+                                    "column": 5,
+                                    "byte": 113
+                                },
+                                "end": {
+                                    "line": 5,
+                                    "column": 35,
+                                    "byte": 143
+                                }
+                            }
+                        }
+                    },
+                    "haha": {
+                        "value": "business",
+                        "trace": {
+                            "def": {
+                                "environment": "secret-objects",
+                                "begin": {
+                                    "line": 5,
+                                    "column": 5,
+                                    "byte": 113
+                                },
+                                "end": {
+                                    "line": 5,
+                                    "column": 35,
+                                    "byte": 143
+                                }
+                            }
+                        }
+                    }
+                },
+                "trace": {
+                    "def": {
+                        "environment": "secret-objects",
+                        "begin": {
+                            "line": 5,
+                            "column": 5,
+                            "byte": 113
+                        },
+                        "end": {
+                            "line": 5,
+                            "column": 35,
+                            "byte": 143
+                        }
+                    }
+                }
+            }
+        },
+        "schema": {
+            "properties": {
+                "secret_object": {
+                    "type": "string",
+                    "const": "{\"haha\":\"business\",\"also\":\"secret\"}"
+                },
+                "unmarshalled_secret_object": {
+                    "properties": {
+                        "also": {
+                            "type": "string",
+                            "const": "secret"
+                        },
+                        "haha": {
+                            "type": "string",
+                            "const": "business"
+                        }
+                    },
+                    "type": "object",
+                    "required": [
+                        "also",
+                        "haha"
+                    ]
+                }
+            },
+            "type": "object",
+            "required": [
+                "secret_object",
+                "unmarshalled_secret_object"
+            ]
+        }
+    },
+    "evalJson": {
+        "secret_object": "[secret]",
+        "unmarshalled_secret_object": {
+            "also": "secret",
+            "haha": "business"
+        }
+    }
+}
