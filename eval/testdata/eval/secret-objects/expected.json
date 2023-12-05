@@ -203,6 +203,7 @@
                         }
                     }
                 },
+                "secret": true,
                 "trace": {
                     "def": {
                         "environment": "secret-objects",
@@ -253,10 +254,7 @@
     },
     "checkJson": {
         "secret_object": "[secret]",
-        "unmarshalled_secret_object": {
-            "also": "secret",
-            "haha": "business"
-        }
+        "unmarshalled_secret_object": "[secret]"
     },
     "eval": {
         "exprs": {
@@ -462,6 +460,7 @@
                         }
                     }
                 },
+                "secret": true,
                 "trace": {
                     "def": {
                         "environment": "secret-objects",
@@ -510,8 +509,12 @@
             ]
         }
     },
-    "evalJson": {
+    "evalJsonRedacted": {
         "secret_object": "[secret]",
+        "unmarshalled_secret_object": "[secret]"
+    },
+    "evalJSONRevealed": {
+        "secret_object": "{\"haha\":\"business\",\"also\":\"secret\"}",
         "unmarshalled_secret_object": {
             "also": "secret",
             "haha": "business"
