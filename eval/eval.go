@@ -919,13 +919,12 @@ func (e *evalContext) evaluateBuiltinFromJSON(x *expr, repr *fromJSONExpr) *valu
 			return v
 		}
 
-		ev, err := esc.FromJSON(jv)
+		ev, err := esc.FromJSON(jv, v.secret)
 		if err != nil {
 			e.errorf(repr.syntax(), "internal error: decoding JSON value: %v", err)
 			v.unknown = true
 			return v
 		}
-		ev.Secret = v.secret
 
 		return unexport(ev, x)
 	}

@@ -400,6 +400,7 @@
         "properties": {
             "item_from_secret_array": {
                 "value": "haha",
+                "secret": true,
                 "trace": {
                     "def": {
                         "environment": "secret-objects",
@@ -418,6 +419,7 @@
             },
             "item_from_secret_object": {
                 "value": "business",
+                "secret": true,
                 "trace": {
                     "def": {
                         "environment": "secret-objects",
@@ -476,6 +478,7 @@
                 "value": [
                     {
                         "value": "haha",
+                        "secret": true,
                         "trace": {
                             "def": {
                                 "environment": "secret-objects",
@@ -494,6 +497,7 @@
                     },
                     {
                         "value": "business",
+                        "secret": true,
                         "trace": {
                             "def": {
                                 "environment": "secret-objects",
@@ -512,6 +516,7 @@
                     },
                     {
                         "value": "also",
+                        "secret": true,
                         "trace": {
                             "def": {
                                 "environment": "secret-objects",
@@ -530,6 +535,7 @@
                     },
                     {
                         "value": "secret",
+                        "secret": true,
                         "trace": {
                             "def": {
                                 "environment": "secret-objects",
@@ -568,6 +574,7 @@
                 "value": {
                     "also": {
                         "value": "secret",
+                        "secret": true,
                         "trace": {
                             "def": {
                                 "environment": "secret-objects",
@@ -586,6 +593,7 @@
                     },
                     "haha": {
                         "value": "business",
+                        "secret": true,
                         "trace": {
                             "def": {
                                 "environment": "secret-objects",
@@ -691,8 +699,8 @@
         }
     },
     "checkJson": {
-        "item_from_secret_array": "haha",
-        "item_from_secret_object": "business",
+        "item_from_secret_array": "[secret]",
+        "item_from_secret_object": "[secret]",
         "secret_array": "[secret]",
         "secret_object": "[secret]",
         "unmarshalled_secret_array": "[secret]",
@@ -1099,6 +1107,7 @@
         "properties": {
             "item_from_secret_array": {
                 "value": "haha",
+                "secret": true,
                 "trace": {
                     "def": {
                         "environment": "secret-objects",
@@ -1117,6 +1126,7 @@
             },
             "item_from_secret_object": {
                 "value": "business",
+                "secret": true,
                 "trace": {
                     "def": {
                         "environment": "secret-objects",
@@ -1175,6 +1185,7 @@
                 "value": [
                     {
                         "value": "haha",
+                        "secret": true,
                         "trace": {
                             "def": {
                                 "environment": "secret-objects",
@@ -1193,6 +1204,7 @@
                     },
                     {
                         "value": "business",
+                        "secret": true,
                         "trace": {
                             "def": {
                                 "environment": "secret-objects",
@@ -1211,6 +1223,7 @@
                     },
                     {
                         "value": "also",
+                        "secret": true,
                         "trace": {
                             "def": {
                                 "environment": "secret-objects",
@@ -1229,6 +1242,7 @@
                     },
                     {
                         "value": "secret",
+                        "secret": true,
                         "trace": {
                             "def": {
                                 "environment": "secret-objects",
@@ -1267,6 +1281,7 @@
                 "value": {
                     "also": {
                         "value": "secret",
+                        "secret": true,
                         "trace": {
                             "def": {
                                 "environment": "secret-objects",
@@ -1285,6 +1300,7 @@
                     },
                     "haha": {
                         "value": "business",
+                        "secret": true,
                         "trace": {
                             "def": {
                                 "environment": "secret-objects",
@@ -1390,8 +1406,8 @@
         }
     },
     "evalJsonRedacted": {
-        "item_from_secret_array": "haha",
-        "item_from_secret_object": "business",
+        "item_from_secret_array": "[secret]",
+        "item_from_secret_object": "[secret]",
         "secret_array": "[secret]",
         "secret_object": "[secret]",
         "unmarshalled_secret_array": "[secret]",
