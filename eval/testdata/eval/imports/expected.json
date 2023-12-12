@@ -1094,7 +1094,12 @@
                 "some_object",
                 "some_string"
             ]
-        }
+        },
+        "imports": [
+            "a",
+            "b",
+            "c"
+        ]
     },
     "checkJson": {
         "some_list": [
@@ -2208,7 +2213,12 @@
                 "some_object",
                 "some_string"
             ]
-        }
+        },
+        "imports": [
+            "a",
+            "b",
+            "c"
+        ]
     },
     "evalJsonRedacted": {
         "some_list": [

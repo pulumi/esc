@@ -598,7 +598,10 @@
             "required": [
                 "open"
             ]
-        }
+        },
+        "imports": [
+            "a"
+        ]
     },
     "checkJson": {
         "open": {
@@ -1144,7 +1147,10 @@
             "required": [
                 "open"
             ]
-        }
+        },
+        "imports": [
+            "a"
+        ]
     },
     "evalJsonRedacted": {
         "open": {

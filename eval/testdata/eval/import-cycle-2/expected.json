@@ -27,7 +27,10 @@
     "check": {
         "schema": {
             "type": "object"
-        }
+        },
+        "imports": [
+            "a"
+        ]
     },
     "checkJson": {},
     "evalDiags": [
@@ -58,7 +61,10 @@
     "eval": {
         "schema": {
             "type": "object"
-        }
+        },
+        "imports": [
+            "a"
+        ]
     },
     "evalJsonRedacted": {},
     "evalJSONRevealed": {}

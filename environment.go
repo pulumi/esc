@@ -30,6 +30,9 @@ type Environment struct {
 
 	// Schema contains the schema for Properties.
 	Schema *schema.Schema `json:"schema,omitempty"`
+
+	// Imports contains the imports list for the environment.
+	Imports []string `json:"imports,omitempty"`
 }
 
 // GetEnvironmentVariables returns any environment variables defined by the environment.

@@ -3862,7 +3862,11 @@
                 "open",
                 "string"
             ]
-        }
+        },
+        "imports": [
+            "a",
+            "a"
+        ]
     },
     "checkJson": {
         "array": [
@@ -8120,7 +8124,11 @@
                 "open",
                 "string"
             ]
-        }
+        },
+        "imports": [
+            "a",
+            "a"
+        ]
     },
     "evalJsonRedacted": {
         "array": [

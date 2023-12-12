@@ -124,10 +124,17 @@ func evalEnvironment(
 		s = schema.Record(properties).Schema()
 	}
 
+	imports := env.Imports.GetElements()
+	importNames := make([]string, len(imports))
+	for i, imp := range imports {
+		importNames[i] = imp.Environment.GetValue()
+	}
+
 	return &esc.Environment{
 		Exprs:      ec.root.export(name).Object,
 		Properties: v.export(name).Value.(map[string]esc.Value),
 		Schema:     s,
+		Imports:    importNames,
 	}, diags
 }
 

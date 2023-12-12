@@ -1382,7 +1382,10 @@
                 "toJSON",
                 "toString"
             ]
-        }
+        },
+        "imports": [
+            "a"
+        ]
     },
     "checkJson": {
         "access": "[unknown]",
@@ -3539,7 +3542,10 @@
                 "toJSON",
                 "toString"
             ]
-        }
+        },
+        "imports": [
+            "a"
+        ]
     },
     "evalJsonRedacted": {
         "access": "qux",
