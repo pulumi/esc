@@ -25,14 +25,14 @@ import (
 
 	"github.com/hashicorp/hcl/v2"
 	"github.com/pulumi/esc/syntax"
-	"github.com/pulumi/pulumi/sdk/v3/go/common/util/cmdutil"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"gopkg.in/yaml.v3"
 )
 
 func accept() bool {
-	return cmdutil.IsTruthy(os.Getenv("PULUMI_ACCEPT"))
+	s := os.Getenv("PULUMI_ACCEPT")
+	return s == "1" || strings.EqualFold(s, "true")
 }
 
 func sortDiagnostics(diags syntax.Diagnostics) {

@@ -23,18 +23,19 @@ import (
 	"os"
 	"path/filepath"
 	"sort"
+	"strings"
 	"testing"
 
 	"github.com/pulumi/esc"
 	"github.com/pulumi/esc/schema"
 	"github.com/pulumi/esc/syntax"
-	"github.com/pulumi/pulumi/sdk/v3/go/common/util/cmdutil"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )
 
 func accept() bool {
-	return cmdutil.IsTruthy(os.Getenv("PULUMI_ACCEPT"))
+	s := os.Getenv("PULUMI_ACCEPT")
+	return s == "1" || strings.EqualFold(s, "true")
 }
 
 type errorProvider struct{}
