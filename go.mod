@@ -9,8 +9,8 @@ require (
 	github.com/google/go-querystring v1.1.0
 	github.com/hashicorp/hcl/v2 v2.17.0
 	github.com/petar-dambovaliev/aho-corasick v0.0.0-20230725210150-fb29fc3c913e
-	github.com/pulumi/pulumi/pkg/v3 v3.97.0
-	github.com/pulumi/pulumi/sdk/v3 v3.97.0
+	github.com/pulumi/pulumi/pkg/v3 v3.98.0
+	github.com/pulumi/pulumi/sdk/v3 v3.98.0
 	github.com/rivo/uniseg v0.4.4
 	github.com/rogpeppe/go-internal v1.11.0
 	github.com/spf13/cobra v1.7.0
