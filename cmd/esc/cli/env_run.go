@@ -189,17 +189,18 @@ func newEnvRunCmd(envcmd *envCommand) *cobra.Command {
 
 			runCmd := exec.Command(command, args...)
 			runCmd.Env = append(envcmd.esc.environ.Vars(), environ...)
-
-			stdout, stderr := envcmd.esc.stdout, envcmd.esc.stderr
+			runCmd.Stdin = envcmd.esc.stdin
+			runCmd.Stdout = envcmd.esc.stdout
+			runCmd.Stderr = envcmd.esc.stderr
 			if !interactive {
 				replacer := newReplacer(secrets)
-				stdout, stderr = newRedactor(stdout, replacer), newRedactor(stderr, replacer)
+				runCmd.Stdout = newRedactor(runCmd.Stdout, replacer)
+				runCmd.Stderr = newRedactor(runCmd.Stderr, replacer)
+				return envcmd.esc.exec.Run(runCmd)
 			}
 
-			runCmd.Stdin = envcmd.esc.stdin
-			runCmd.Stdout = stdout
-			runCmd.Stderr = stderr
-			return envcmd.esc.exec.Run(runCmd)
+			// Use the exec syscall or CreateProcess to replace the current process with the command.
+			return envcmd.esc.exec.Exec(runCmd)
 		},
 	}
 
