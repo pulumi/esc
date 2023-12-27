@@ -19,5 +19,5 @@
         "baseUrl": "./src"
     },
     "lib": ["es2017"],
-    "include": ["src/**/*"],
+    "include": ["src/**/*", "test/**/*"],
 }

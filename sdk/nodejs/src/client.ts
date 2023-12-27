@@ -12,17 +12,31 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import { EnvironmentResponse, ListEnvironmentsResponse, OpenEnvironmentResponse, OrgEnvironment } from ".";
-import axios, { AxiosRequestConfig, AxiosInstance } from "axios";
+import {
+    EnvironmentDefinition,
+    EnvironmentResponse,
+    ListEnvironmentsResponse,
+    OpenEnvironmentResponse,
+    OrgEnvironment,
+    ReadEnvironmentResponse,
+    UpdateEnvironmentResponse,
+} from ".";
+import axios, { AxiosRequestConfig, AxiosInstance, AxiosError, HttpStatusCode } from "axios";
+import { stringify } from "yaml";
 
 const API_URL: string = "https://api.pulumi.com/api";
 
 export abstract class ESCApiClient {
     abstract createEnvironment(name: string): Promise<null>;
     abstract deleteEnvironment(name: string): Promise<null>;
-    abstract getEnvironment(name: string): Promise<EnvironmentResponse>;
+    abstract readEnvironment(name: string): Promise<ReadEnvironmentResponse>;
+    abstract checkEnvironment(name: string, tag?: string): Promise<EnvironmentResponse>;
     abstract openEnvironment(name: string): Promise<OpenEnvironmentResponse>;
-    abstract updateEnvironment(name: string, body: string, tag?: string): Promise<null>;
+    abstract updateEnvironment(
+        name: string,
+        body: EnvironmentDefinition,
+        tag?: string,
+    ): Promise<UpdateEnvironmentResponse>;
     abstract readOpenEnvironment(name: string, openSessionId: string): Promise<EnvironmentResponse>;
     abstract listEnvironments(): Promise<OrgEnvironment[]>;
 }
@@ -37,10 +51,10 @@ export class ESC implements ESCApiClient {
         this.token = token;
         this.org = org;
         this.apiUrl = apiURL || API_URL;
-        this.http = axios.create(this.getConfig());
+        this.http = axios.create(this.config);
     }
 
-    private getConfig(): AxiosRequestConfig {
+    private get config(): AxiosRequestConfig {
         return {
             headers: new axios.AxiosHeaders({
                 Authorization: `token ${this.token}`,
@@ -60,8 +74,26 @@ export class ESC implements ESCApiClient {
         return response.data.environments;
     }
 
-    public async getEnvironment(name: string): Promise<EnvironmentResponse> {
-        const response = await this.http.get<EnvironmentResponse>(`environments/${this.org}/${name}`);
+    public async readEnvironment(name: string, tag?: string): Promise<ReadEnvironmentResponse> {
+        const options: AxiosRequestConfig = {};
+        if (tag) {
+            options.headers = {
+                "If-Match": tag,
+            };
+        }
+        const resp = await this.http.get<string>(`environments/${this.org}/${name}`, options);
+        const result: ReadEnvironmentResponse = {
+            environmentString: resp.data,
+        };
+        if (resp.headers.etag) {
+            result.tag = resp.headers.etag;
+        }
+
+        return result;
+    }
+
+    public async checkEnvironment(name: string): Promise<EnvironmentResponse> {
+        const response = await this.http.post<EnvironmentResponse>(`environments/${this.org}/${name}/check`);
         return response.data;
     }
 
@@ -77,11 +109,31 @@ export class ESC implements ESCApiClient {
         return response.data;
     }
 
-    public async updateEnvironment(name: string, body: string, tag?: string): Promise<null> {
-        return this.http.put(`environments/${this.org}/${name}`, {
-            body,
-            tag,
-        });
+    public async updateEnvironment(
+        name: string,
+        def: EnvironmentDefinition,
+        tag?: string,
+    ): Promise<UpdateEnvironmentResponse> {
+        const envYaml = stringify(def);
+        const options: AxiosRequestConfig = {
+            headers: {
+                "Content-Type": "application/x-yaml",
+            },
+        };
+        if (tag) {
+            options.headers!["If-Match"] = tag;
+        }
+
+        const diags = await this.http
+            .patch(`environments/${this.org}/${name}`, envYaml, options)
+            .catch((err: AxiosError) => {
+                if (err.response?.status === HttpStatusCode.BadRequest) {
+                    return err.response?.data;
+                }
+                throw err;
+            });
+
+        return diags as UpdateEnvironmentResponse;
     }
 
     public async deleteEnvironment(name: string): Promise<null> {

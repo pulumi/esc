@@ -25,6 +25,7 @@ export interface ListEnvironmentsResponse {
 }
 
 export interface EnvironmentResponse {
+    diagnostics?: EnvironmentDiagnostic[];
     exprs: Record<string, object>; // TODO: add a type for expr rather than a raw object.
     properties: Record<string, EnvironmentValue>;
     schema: object; // TODO: add a type for schema rather than a raw object.
@@ -69,4 +70,45 @@ export interface EnvironmentDiagnostic {
     range?: EnvironmentDiagnosticRange;
     summary?: string;
     path?: string;
+}
+
+export interface UpdateEnvironmentResponse {
+    diagnostics?: EnvironmentDiagnostic[];
+}
+
+export interface ReadEnvironmentResponse {
+    tag?: string;
+    environmentString: string;
+}
+
+export class EnvironmentDefinition {
+    // imports is a list of environments that will be imported and merged into the environment being defined.
+    imports?: string[];
+    // values is a map of values that will be defined within the environment.
+    values?: EnvironmentDefinitionValues;
+
+    constructor(env: EnvironmentDefinitionArgs) {
+        if (env.imports && env.imports.length > 0) {
+            this.imports = env.imports;
+        }
+        if (env.values) {
+            this.values = env.values;
+        }
+    }
+}
+
+export interface EnvironmentDefinitionArgs {
+    imports?: string[];
+    values?: EnvironmentDefinitionValues;
+}
+
+export interface EnvironmentDefinitionValues {
+    // pulumiConfig is a map of config keys to config values that will be passed to the Pulumi program.
+    pulumiConfig?: Record<string, any>;
+    // environmentVariables is a map of environment variable names to values that will be set in the terminal if running
+    // `esc run` or `pulumi env run` or if running a Pulumi program.
+    environmentVariables?: Record<string, string>;
+    // All other values that are to be defined within the environment but not exported via either the Pulumi config or
+    // environment variables.
+    [key: string]: any;
 }
