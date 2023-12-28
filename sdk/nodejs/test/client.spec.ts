@@ -27,12 +27,12 @@ describe("ESC", () => {
         if (!PULUMI_ORG) {
             throw new Error("PULUMI_ORG not set");
         }
-        const client = new ESC(PULUMI_ACCESS_TOKEN, PULUMI_ORG);
+        const client = new ESC();
         const name = `test-${Date.now()}`;
 
-        await assert.doesNotReject(client.createEnvironment(name));
-        const envs = await client.listEnvironments();
-        assert(envs.some((e) => e.name === name));
+        await assert.doesNotReject(client.createEnvironment(PULUMI_ORG, name));
+        const listResp = await client.listEnvironments(PULUMI_ORG);
+        assert(listResp.environments.some((e) => e.name === name));
 
         // Add some configuration to the environment.
         const foo = "bar";
@@ -47,36 +47,36 @@ describe("ESC", () => {
                 },
             },
         });
-        let updateResp = await client.updateEnvironment(name, envDef);
+        let updateResp = await client.updateEnvironment(PULUMI_ORG, name, envDef);
         assert.strictEqual(updateResp.diagnostics, undefined);
 
-        const getResp = await client.readEnvironment(name);
+        const getResp = await client.readEnvironment(PULUMI_ORG, name);
         assert.strictEqual(getResp.environmentString, stringify(envDef));
         const { tag } = getResp;
         assert.ok(tag);
 
-        let checkResult = await client.checkEnvironment(name);
+        let checkResult = await client.checkEnvironment(PULUMI_ORG, name);
         assert.strictEqual(checkResult.diagnostics, undefined);
 
-        let session = await client.openEnvironment(name);
+        let session = await client.openEnvironment(PULUMI_ORG, name);
         assert.ok(session.id);
 
-        let openEnv = await client.readOpenEnvironment(name, session.id);
+        let openEnv = await client.readOpenEnvironment(PULUMI_ORG, name, session.id);
         assert.strictEqual(openEnv.diagnostics, undefined);
 
         envDef.values!.pulumiConfig!.haha = "business";
-        updateResp = await client.updateEnvironment(name, envDef, tag);
+        updateResp = await client.updateEnvironment(PULUMI_ORG, name, envDef, tag);
         assert.strictEqual(updateResp.diagnostics, undefined);
 
-        checkResult = await client.checkEnvironment(name);
+        checkResult = await client.checkEnvironment(PULUMI_ORG, name);
         assert.strictEqual(checkResult.diagnostics, undefined);
 
-        session = await client.openEnvironment(name);
+        session = await client.openEnvironment(PULUMI_ORG, name);
         assert.ok(session.id);
 
-        openEnv = await client.readOpenEnvironment(name, session.id);
+        openEnv = await client.readOpenEnvironment(PULUMI_ORG, name, session.id);
         assert.strictEqual(openEnv.diagnostics, undefined);
 
-        await assert.doesNotReject(client.deleteEnvironment(name));
+        await assert.doesNotReject(client.deleteEnvironment(PULUMI_ORG, name));
     });
 });

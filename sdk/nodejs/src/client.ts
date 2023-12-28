@@ -27,29 +27,32 @@ import { stringify } from "yaml";
 const API_URL: string = "https://api.pulumi.com/api";
 
 export abstract class ESCApiClient {
-    abstract createEnvironment(name: string): Promise<null>;
-    abstract deleteEnvironment(name: string): Promise<null>;
-    abstract readEnvironment(name: string): Promise<ReadEnvironmentResponse>;
-    abstract checkEnvironment(name: string, tag?: string): Promise<EnvironmentResponse>;
-    abstract openEnvironment(name: string): Promise<OpenEnvironmentResponse>;
+    abstract createEnvironment(org: string, name: string): Promise<void>;
+    abstract deleteEnvironment(org: string, name: string): Promise<void>;
+    abstract readEnvironment(org: string, name: string): Promise<ReadEnvironmentResponse>;
+    abstract checkEnvironment(org: string, name: string, tag?: string): Promise<EnvironmentResponse>;
+    abstract openEnvironment(org: string, name: string): Promise<OpenEnvironmentResponse>;
     abstract updateEnvironment(
+        org: string,
         name: string,
         body: EnvironmentDefinition,
         tag?: string,
     ): Promise<UpdateEnvironmentResponse>;
-    abstract readOpenEnvironment(name: string, openSessionId: string): Promise<EnvironmentResponse>;
-    abstract listEnvironments(): Promise<OrgEnvironment[]>;
+    abstract readOpenEnvironment(org: string, name: string, openSessionId: string): Promise<EnvironmentResponse>;
+    abstract listEnvironments(org?: string): Promise<ListEnvironmentsResponse>;
 }
 
 export class ESC implements ESCApiClient {
     private readonly apiUrl: string;
     private readonly token: string;
-    private readonly org: string;
     private readonly http: AxiosInstance;
 
-    constructor(token: string, org: string, apiURL?: string) {
-        this.token = token;
-        this.org = org;
+    constructor(token?: string, apiURL?: string) {
+        const accessToken = token || process.env.PULUMI_ACCESS_TOKEN;
+        if (!accessToken) {
+            throw new Error("No token provided");
+        }
+        this.token = accessToken;
         this.apiUrl = apiURL || API_URL;
         this.http = axios.create(this.config);
     }
@@ -65,23 +68,23 @@ export class ESC implements ESCApiClient {
         };
     }
 
-    public async createEnvironment(name: string): Promise<null> {
-        return this.http.post(`environments/${this.org}/${name}`, {});
+    public async createEnvironment(org: string, name: string): Promise<void> {
+        await this.http.post<null>(`environments/${org}/${name}`, {});
     }
 
-    public async listEnvironments(): Promise<OrgEnvironment[]> {
-        const response = await this.http.get<ListEnvironmentsResponse>(`environments/${this.org}`);
-        return response.data.environments;
+    public async listEnvironments(org?: string): Promise<ListEnvironmentsResponse> {
+        const response = await this.http.get<ListEnvironmentsResponse>(`environments/${org}`);
+        return response.data;
     }
 
-    public async readEnvironment(name: string, tag?: string): Promise<ReadEnvironmentResponse> {
+    public async readEnvironment(org: string, name: string, tag?: string): Promise<ReadEnvironmentResponse> {
         const options: AxiosRequestConfig = {};
         if (tag) {
             options.headers = {
                 "If-Match": tag,
             };
         }
-        const resp = await this.http.get<string>(`environments/${this.org}/${name}`, options);
+        const resp = await this.http.get<string>(`environments/${org}/${name}`, options);
         const result: ReadEnvironmentResponse = {
             environmentString: resp.data,
         };
@@ -92,24 +95,23 @@ export class ESC implements ESCApiClient {
         return result;
     }
 
-    public async checkEnvironment(name: string): Promise<EnvironmentResponse> {
-        const response = await this.http.post<EnvironmentResponse>(`environments/${this.org}/${name}/check`);
+    public async checkEnvironment(org: string, name: string): Promise<EnvironmentResponse> {
+        const response = await this.http.post<EnvironmentResponse>(`environments/${org}/${name}/check`);
         return response.data;
     }
 
-    public async openEnvironment(name: string): Promise<OpenEnvironmentResponse> {
-        const response = await this.http.post<OpenEnvironmentResponse>(`environments/${this.org}/${name}/open`, {});
+    public async openEnvironment(org: string, name: string): Promise<OpenEnvironmentResponse> {
+        const response = await this.http.post<OpenEnvironmentResponse>(`environments/${org}/${name}/open`, {});
         return response.data;
     }
 
-    public async readOpenEnvironment(name: string, openSessionId: string): Promise<EnvironmentResponse> {
-        const response = await this.http.get<EnvironmentResponse>(
-            `environments/${this.org}/${name}/open/${openSessionId}`,
-        );
+    public async readOpenEnvironment(org: string, name: string, openSessionId: string): Promise<EnvironmentResponse> {
+        const response = await this.http.get<EnvironmentResponse>(`environments/${org}/${name}/open/${openSessionId}`);
         return response.data;
     }
 
     public async updateEnvironment(
+        org: string,
         name: string,
         def: EnvironmentDefinition,
         tag?: string,
@@ -125,7 +127,7 @@ export class ESC implements ESCApiClient {
         }
 
         const diags = await this.http
-            .patch(`environments/${this.org}/${name}`, envYaml, options)
+            .patch(`environments/${org}/${name}`, envYaml, options)
             .catch((err: AxiosError) => {
                 if (err.response?.status === HttpStatusCode.BadRequest) {
                     return err.response?.data;
@@ -136,7 +138,7 @@ export class ESC implements ESCApiClient {
         return diags as UpdateEnvironmentResponse;
     }
 
-    public async deleteEnvironment(name: string): Promise<null> {
-        return this.http.delete(`environments/${this.org}/${name}`);
+    public async deleteEnvironment(org: string, name: string): Promise<void> {
+        await this.http.delete<null>(`environments/${org}/${name}`);
     }
 }
