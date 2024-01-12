@@ -1,6 +1,13 @@
 CHANGELOG
 =========
 
+## 0.7.0
+
+### Bug Fixes
+
+- Fix merging of already-merged values.
+  [#213](https://github.com/pulumi/esc/pull/213)
+
 ## 0.6.2
 
 ### Bug Fixes
