@@ -563,6 +563,14 @@ func (c *testExec) Run(cmd *exec.Cmd) error {
 	return c.runScript(script, cmd)
 }
 
+func (c *testExec) Exec(cmd *exec.Cmd) error {
+	script, ok := c.commands[filepath.Base(cmd.Path)]
+	if !ok {
+		return errors.New("command not found")
+	}
+	return c.runScript(script, cmd)
+}
+
 func (c *testExec) runScript(script string, cmd *exec.Cmd) error {
 	file, err := shsyntax.NewParser().Parse(strings.NewReader(script), cmd.Path)
 	if err != nil {
