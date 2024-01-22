@@ -81,8 +81,9 @@ func EvalEnvironment(
 	decrypter Decrypter,
 	providers ProviderLoader,
 	environments EnvironmentLoader,
+	evaluationMetadata map[string]string,
 ) (*esc.Environment, syntax.Diagnostics) {
-	return evalEnvironment(ctx, false, name, env, decrypter, providers, environments)
+	return evalEnvironment(ctx, false, name, env, decrypter, providers, environments, evaluationMetadata)
 }
 
 // CheckEnvironment symbolically evaluates the given environment. Calls to fn::open are not invoked, and instead
@@ -93,8 +94,9 @@ func CheckEnvironment(
 	env *ast.EnvironmentDecl,
 	providers ProviderLoader,
 	environments EnvironmentLoader,
+	evaluationMetadata map[string]string,
 ) (*esc.Environment, syntax.Diagnostics) {
-	return evalEnvironment(ctx, true, name, env, nil, providers, environments)
+	return evalEnvironment(ctx, true, name, env, nil, providers, environments, evaluationMetadata)
 }
 
 // evalEnvironment evaluates an environment and exports the result of evaluation.
@@ -106,12 +108,13 @@ func evalEnvironment(
 	decrypter Decrypter,
 	providers ProviderLoader,
 	envs EnvironmentLoader,
+	evaluationMetadata map[string]string,
 ) (*esc.Environment, syntax.Diagnostics) {
 	if env == nil || (len(env.Values.GetEntries()) == 0 && len(env.Imports.GetElements()) == 0) {
 		return nil, nil
 	}
 
-	ec := newEvalContext(ctx, validating, name, env, decrypter, providers, envs, map[string]*imported{})
+	ec := newEvalContext(ctx, validating, name, env, decrypter, providers, envs, map[string]*imported{}, evaluationMetadata)
 	v, diags := ec.evaluate()
 
 	s := schema.Never().Schema()
@@ -147,6 +150,8 @@ type evalContext struct {
 	environments EnvironmentLoader    // the environment loader to use
 	imports      map[string]*imported // the shared set of imported environments
 
+	evaluationMetadata map[string]string // operation contextual information for interpolation
+
 	myImports *value // directly-imported environments
 	root      *expr  // the root expression
 	base      *value // the base value
@@ -163,16 +168,18 @@ func newEvalContext(
 	providers ProviderLoader,
 	environments EnvironmentLoader,
 	imports map[string]*imported,
+	evaluationMetadata map[string]string,
 ) *evalContext {
 	return &evalContext{
-		ctx:          ctx,
-		validating:   validating,
-		name:         name,
-		env:          env,
-		decrypter:    decrypter,
-		providers:    providers,
-		environments: environments,
-		imports:      imports,
+		ctx:                ctx,
+		validating:         validating,
+		name:               name,
+		env:                env,
+		decrypter:          decrypter,
+		providers:          providers,
+		environments:       environments,
+		imports:            imports,
+		evaluationMetadata: evaluationMetadata,
 	}
 }
 
@@ -405,7 +412,7 @@ func (e *evalContext) evaluateImport(myImports map[string]*value, decl *ast.Impo
 			return
 		}
 
-		imp := newEvalContext(e.ctx, e.validating, name, env, dec, e.providers, e.environments, e.imports)
+		imp := newEvalContext(e.ctx, e.validating, name, env, dec, e.providers, e.environments, e.imports, e.evaluationMetadata)
 		v, diags := imp.evaluate()
 		e.diags.Extend(diags...)
 
@@ -572,12 +579,48 @@ func (e *evalContext) evaluatePropertyAccess(x *expr, accessors []*propertyAcces
 	return v
 }
 
+func buildPropertyPathFromAccessors(accessors []*propertyAccessor) string {
+	path := ""
+	for len(accessors) > 0 {
+		accessor := accessors[0]
+
+		switch a := accessor.accessor.(type) {
+		case *ast.PropertyName:
+			path = fmt.Sprintf("%s.%s", path, a.Name)
+		default:
+			return path
+		}
+
+		accessors = accessors[1:]
+	}
+
+	return path
+}
+
 // evaluateExprAccess is the primary entrypoint for access evaluation, and begins with the assumption that the receiver
 // is an expression. If the receiver is a list, object, or secret  expression, it is _not evaluated_. If the receiver
 // is any other type of expression, it is evaluated and the result is passed to evaluateValueAccess. Once all accessors
 // have been processed, the resolved expression is evaluated.
 func (e *evalContext) evaluateExprAccess(x *expr, accessors []*propertyAccessor) *value {
 	receiver := e.root
+
+	interpolationReferencePath := buildPropertyPathFromAccessors(accessors)
+
+	if v, ok := e.evaluationMetadata[interpolationReferencePath]; ok {
+		for _, a := range accessors {
+			a.value = &value{
+				def:    receiver,
+				base:   receiver.base,
+				schema: receiver.schema,
+			}
+		}
+
+		val := &value{def: x, schema: schema.String().Schema(), repr: v}
+		val.merge(x.base)
+		x.schema = val.schema
+		x.value = val
+		return val
+	}
 
 	// Check for an imports access.
 	if k, ok := e.objectKey(x.repr.syntax(), accessors[0].accessor, false); ok && k == "imports" {
