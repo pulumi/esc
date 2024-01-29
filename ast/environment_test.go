@@ -149,17 +149,6 @@ func loadYAMLBytes(filename string, source []byte) (*EnvironmentDecl, syntax.Dia
 	return t, diags, nil
 }
 
-func normalize[T any](t *testing.T, v T) T {
-	var decoded T
-	marshaled, err := json.Marshal(v)
-	require.NoError(t, err)
-	dec := json.NewDecoder(bytes.NewReader(marshaled))
-	dec.UseNumber()
-	err = dec.Decode(&decoded)
-	require.NoError(t, err)
-	return decoded
-}
-
 func TestParse(t *testing.T) {
 	type expectedData struct {
 		Decl  any                `json:"decl,omitempty"`
