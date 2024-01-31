@@ -1,0 +1,117 @@
+---
+openapi: "3.0.3"
+info:
+  title: ESC API
+  description: "Pulumi ESC allows you to compose and manage hierarchical collections\
+    \ of configuration and secrets and consume them in various ways."
+  version: "0.1.0"
+servers:
+  - url: https://api.pulumi.com/api/preview
+    description: Pulumi Cloud Production API
+components:
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      name: Authorization
+      in: header
+  schemas:
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+        code:
+          type: string
+      required:
+        - message
+        - code
+    EnvironmentDefinition:
+      type: object
+      properties:
+        values:
+          type: object
+          properties:
+            pulumiConfig:
+              type: object
+              additionalProperties:
+                type: string
+            environmentVariables:
+              type: object
+              additionalProperties:
+                type: string
+          additionalProperties:
+            type: object
+  responses:
+    Conflict:
+      description: Conflict
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+          example:
+            message: Conflict
+            code: "409"
+    Unauthorized:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+          example:
+            message: Unauthorized
+            code: "401"
+    InternalServerError:
+      description: "Internal Server Error"
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+          example:
+            message: Internal Server Error
+            code: "500"
+    NotFound:
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+          example:
+            message: Not Found
+            code: "404"
+security:
+  - Authorization: []
+paths:
+  /environments/{orgName}/{envName}:
+    post:
+      summary: Create a new environment
+      description: Create a new environment
+      responses:
+        "201":
+          description: Success
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+        "409":
+          $ref: "#/components/responses/Conflict"
+    get:
+      summary: Read an environment
+      description: Read an environment
+      responses:
+        "200":
+          description: Success
+          content:
+            application/x-yaml:
+              schema:
+                $ref: "#/components/schemas/EnvironmentDefinition"
+              example:
+                values:
+                  foo: bar
+                  pulumiConfig:
+                    foo: ${foo}
+                  environmentVariables:
+                    MY_KEY: my-value
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
