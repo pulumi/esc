@@ -59,7 +59,7 @@ func (s YAMLSyntax) ScalarRange(start, end int) *hcl.Range {
 		return nil
 	}
 
-	// TODO: handle multi-line and quoted scalars.
+	// #237: handle other string styles
 	if s.rng.Start.Line != s.rng.End.Line || (s.Style != 0 && s.Style != yaml.FlowStyle) {
 		return nil
 	}
