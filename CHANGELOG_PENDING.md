@@ -15,4 +15,7 @@
 - Provide more accurate accessor diagnostic positions.
   [#238](https://github.com/pulumi/esc/pull/238)
 
+- Add support for execution context interpolation.
+  [#239](https://github.com/pulumi/esc/pull/239)
+
 ### Bug Fixes

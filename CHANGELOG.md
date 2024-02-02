@@ -1,13 +1,6 @@
 CHANGELOG
 =========
 
-## 0.8.0
-
-### Bug Fixes
-
-- Add support for execution context interpolation.
-  [#239](https://github.com/pulumi/esc/pull/239)
-
 ## 0.7.0
 
 ### Bug Fixes
