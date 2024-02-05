@@ -336,6 +336,7 @@ func (e *evalContext) isReserveTopLevelKey(k string) bool {
 func (e *evalContext) evaluate() (*value, syntax.Diagnostics) {
 	// Evaluate imports. We do this prior to declaration so that we can plumb base values as part of declaration.
 	e.evaluateImports()
+	// Evaliate context. We prepare the context values to later evaluate interpolations.
 	e.evaluateContext()
 
 	// Build the root value. We do this manually b/c the AST uses a declaration rather than an expression for the
@@ -619,6 +620,7 @@ func (e *evalContext) evaluateExprAccess(x *expr, accessors []*propertyAccessor)
 		return e.evaluateValueAccess(x.repr.syntax(), e.myImports, accessors[1:])
 	}
 
+	// Check for context interpolation.
 	if ok && k == "context" {
 		accessors[0].value = e.myContext
 		return e.evaluateValueAccess(x.repr.syntax(), e.myContext, accessors[1:])
