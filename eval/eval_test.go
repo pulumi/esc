@@ -202,7 +202,7 @@ func TestEval(t *testing.T) {
 			envBytes, err := os.ReadFile(envPath)
 			require.NoError(t, err)
 
-			contextValues := esc.NewValue(map[string]esc.Value{
+			contextValues := map[string]esc.Value{
 				"pulumi": esc.NewValue(map[string]esc.Value{
 					"user": esc.NewValue(map[string]esc.Value{
 						"id": esc.NewValue("USER_123"),
@@ -211,7 +211,7 @@ func TestEval(t *testing.T) {
 				"environment": esc.NewValue(map[string]esc.Value{
 					"name": esc.NewValue("TEST_ENVIRONMENT"),
 				}),
-			})
+			}
 
 			if accept() {
 				env, loadDiags, err := LoadYAMLBytes(e.Name(), envBytes)

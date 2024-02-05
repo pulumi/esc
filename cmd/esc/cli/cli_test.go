@@ -339,7 +339,7 @@ func (c *testPulumiClient) checkEnvironment(ctx context.Context, orgName, envNam
 	providers := &testProviders{}
 	envLoader := &testEnvironments{orgName: orgName, environments: c.environments}
 
-	checked, checkDiags := eval.CheckEnvironment(ctx, envName, environment, providers, envLoader, esc.NewValue(map[string]esc.Value{}))
+	checked, checkDiags := eval.CheckEnvironment(ctx, envName, environment, providers, envLoader, map[string]esc.Value{})
 	diags.Extend(checkDiags...)
 	return checked, mapDiags(diags), nil
 }
@@ -361,7 +361,7 @@ func (c *testPulumiClient) openEnvironment(ctx context.Context, orgName, name st
 	providers := &testProviders{}
 	envLoader := &testEnvironments{orgName: orgName, environments: c.environments}
 
-	openEnv, evalDiags := eval.EvalEnvironment(ctx, name, decl, rot128{}, providers, envLoader, esc.NewValue(map[string]esc.Value{}))
+	openEnv, evalDiags := eval.EvalEnvironment(ctx, name, decl, rot128{}, providers, envLoader, map[string]esc.Value{})
 	diags.Extend(evalDiags...)
 
 	if diags.HasErrors() {

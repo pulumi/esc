@@ -77,7 +77,7 @@ func EvalEnvironment(
 	decrypter Decrypter,
 	providers ProviderLoader,
 	environments EnvironmentLoader,
-	context esc.Value,
+	context map[string]esc.Value,
 ) (*esc.Environment, syntax.Diagnostics) {
 	return evalEnvironment(ctx, false, name, env, decrypter, providers, environments, context)
 }
@@ -90,7 +90,7 @@ func CheckEnvironment(
 	env *ast.EnvironmentDecl,
 	providers ProviderLoader,
 	environments EnvironmentLoader,
-	context esc.Value,
+	context map[string]esc.Value,
 ) (*esc.Environment, syntax.Diagnostics) {
 	return evalEnvironment(ctx, true, name, env, nil, providers, environments, context)
 }
@@ -104,7 +104,7 @@ func evalEnvironment(
 	decrypter Decrypter,
 	providers ProviderLoader,
 	envs EnvironmentLoader,
-	context esc.Value,
+	context map[string]esc.Value,
 ) (*esc.Environment, syntax.Diagnostics) {
 	if env == nil || (len(env.Values.GetEntries()) == 0 && len(env.Imports.GetElements()) == 0) {
 		return nil, nil
@@ -144,7 +144,7 @@ type evalContext struct {
 	providers     ProviderLoader       // the provider loader to use
 	environments  EnvironmentLoader    // the environment loader to use
 	imports       map[string]*imported // the shared set of imported environments
-	contextValues esc.Value            // evaluation context used for interpolation
+	contextValues map[string]esc.Value // evaluation context used for interpolation
 
 	myContext *value // evaluated context to be used to interpolate properties
 	myImports *value // directly-imported environments
@@ -163,7 +163,7 @@ func newEvalContext(
 	providers ProviderLoader,
 	environments EnvironmentLoader,
 	imports map[string]*imported,
-	contextValues esc.Value,
+	contextValues map[string]esc.Value,
 ) *evalContext {
 	return &evalContext{
 		ctx:           ctx,
@@ -370,7 +370,7 @@ func (e *evalContext) evaluate() (*value, syntax.Diagnostics) {
 
 func (e *evalContext) evaluateContext() {
 	def := declare(e, "", ast.Symbol(&ast.PropertyName{Name: "context"}), nil)
-	e.myContext = unexport(e.contextValues, def)
+	e.myContext = unexport(esc.NewValue(e.contextValues), def)
 }
 
 // evaluateImports evaluates an environment's imports.
