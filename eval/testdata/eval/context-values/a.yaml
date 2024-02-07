@@ -1,0 +1,4 @@
+values:
+  inputs:
+    alpha: beta
+    gamma: delta

@@ -1,0 +1,235 @@
+{
+    "check": {
+        "properties": {
+            "inputs": {
+                "value": {
+                    "alpha": {
+                        "value": "beta",
+                        "trace": {
+                            "def": {
+                                "environment": "a",
+                                "begin": {
+                                    "line": 3,
+                                    "column": 12,
+                                    "byte": 29
+                                },
+                                "end": {
+                                    "line": 3,
+                                    "column": 16,
+                                    "byte": 33
+                                }
+                            }
+                        }
+                    },
+                    "gamma": {
+                        "value": "delta",
+                        "trace": {
+                            "def": {
+                                "environment": "a",
+                                "begin": {
+                                    "line": 4,
+                                    "column": 12,
+                                    "byte": 45
+                                },
+                                "end": {
+                                    "line": 4,
+                                    "column": 17,
+                                    "byte": 50
+                                }
+                            }
+                        }
+                    }
+                },
+                "trace": {
+                    "def": {
+                        "environment": "a",
+                        "begin": {
+                            "line": 3,
+                            "column": 5,
+                            "byte": 22
+                        },
+                        "end": {
+                            "line": 4,
+                            "column": 17,
+                            "byte": 50
+                        }
+                    }
+                }
+            },
+            "output": {
+                "value": "{\"alpha\":\"beta\",\"gamma\":\"delta\"}",
+                "trace": {
+                    "def": {
+                        "environment": "b",
+                        "begin": {
+                            "line": 2,
+                            "column": 11,
+                            "byte": 18
+                        },
+                        "end": {
+                            "line": 2,
+                            "column": 49,
+                            "byte": 56
+                        }
+                    }
+                }
+            }
+        },
+        "schema": {
+            "properties": {
+                "inputs": {
+                    "properties": {
+                        "alpha": {
+                            "type": "string",
+                            "const": "beta"
+                        },
+                        "gamma": {
+                            "type": "string",
+                            "const": "delta"
+                        }
+                    },
+                    "type": "object",
+                    "required": [
+                        "alpha",
+                        "gamma"
+                    ]
+                },
+                "output": {
+                    "type": "string"
+                }
+            },
+            "type": "object",
+            "required": [
+                "inputs",
+                "output"
+            ]
+        }
+    },
+    "checkJson": {
+        "inputs": {
+            "alpha": "beta",
+            "gamma": "delta"
+        },
+        "output": "{\"alpha\":\"beta\",\"gamma\":\"delta\"}"
+    },
+    "eval": {
+        "properties": {
+            "inputs": {
+                "value": {
+                    "alpha": {
+                        "value": "beta",
+                        "trace": {
+                            "def": {
+                                "environment": "a",
+                                "begin": {
+                                    "line": 3,
+                                    "column": 12,
+                                    "byte": 29
+                                },
+                                "end": {
+                                    "line": 3,
+                                    "column": 16,
+                                    "byte": 33
+                                }
+                            }
+                        }
+                    },
+                    "gamma": {
+                        "value": "delta",
+                        "trace": {
+                            "def": {
+                                "environment": "a",
+                                "begin": {
+                                    "line": 4,
+                                    "column": 12,
+                                    "byte": 45
+                                },
+                                "end": {
+                                    "line": 4,
+                                    "column": 17,
+                                    "byte": 50
+                                }
+                            }
+                        }
+                    }
+                },
+                "trace": {
+                    "def": {
+                        "environment": "a",
+                        "begin": {
+                            "line": 3,
+                            "column": 5,
+                            "byte": 22
+                        },
+                        "end": {
+                            "line": 4,
+                            "column": 17,
+                            "byte": 50
+                        }
+                    }
+                }
+            },
+            "output": {
+                "value": "{\"alpha\":\"beta\",\"gamma\":\"delta\"}",
+                "trace": {
+                    "def": {
+                        "environment": "b",
+                        "begin": {
+                            "line": 2,
+                            "column": 11,
+                            "byte": 18
+                        },
+                        "end": {
+                            "line": 2,
+                            "column": 49,
+                            "byte": 56
+                        }
+                    }
+                }
+            }
+        },
+        "schema": {
+            "properties": {
+                "inputs": {
+                    "properties": {
+                        "alpha": {
+                            "type": "string",
+                            "const": "beta"
+                        },
+                        "gamma": {
+                            "type": "string",
+                            "const": "delta"
+                        }
+                    },
+                    "type": "object",
+                    "required": [
+                        "alpha",
+                        "gamma"
+                    ]
+                },
+                "output": {
+                    "type": "string"
+                }
+            },
+            "type": "object",
+            "required": [
+                "inputs",
+                "output"
+            ]
+        }
+    },
+    "evalJsonRedacted": {
+        "inputs": {
+            "alpha": "beta",
+            "gamma": "delta"
+        },
+        "output": "{\"alpha\":\"beta\",\"gamma\":\"delta\"}"
+    },
+    "evalJSONRevealed": {
+        "inputs": {
+            "alpha": "beta",
+            "gamma": "delta"
+        },
+        "output": "{\"alpha\":\"beta\",\"gamma\":\"delta\"}"
+    }
+}

@@ -1,0 +1,386 @@
+{
+    "check": {
+        "exprs": {
+            "output": {
+                "range": {
+                    "environment": "context-values-2",
+                    "begin": {
+                        "line": 2,
+                        "column": 11,
+                        "byte": 18
+                    },
+                    "end": {
+                        "line": 2,
+                        "column": 49,
+                        "byte": 56
+                    }
+                },
+                "schema": {
+                    "type": "string"
+                },
+                "builtin": {
+                    "name": "fn::toJSON",
+                    "nameRange": {
+                        "environment": "context-values-2",
+                        "begin": {
+                            "line": 2,
+                            "column": 13,
+                            "byte": 20
+                        },
+                        "end": {
+                            "line": 2,
+                            "column": 23,
+                            "byte": 30
+                        }
+                    },
+                    "argSchema": true,
+                    "arg": {
+                        "range": {
+                            "environment": "context-values-2",
+                            "begin": {
+                                "line": 2,
+                                "column": 25,
+                                "byte": 32
+                            },
+                            "end": {
+                                "line": 2,
+                                "column": 49,
+                                "byte": 56
+                            }
+                        },
+                        "schema": true,
+                        "symbol": [
+                            {
+                                "key": "context",
+                                "range": {
+                                    "environment": "context-values-2",
+                                    "begin": {
+                                        "line": 0,
+                                        "column": 0,
+                                        "byte": 0
+                                    },
+                                    "end": {
+                                        "line": 0,
+                                        "column": 0,
+                                        "byte": 0
+                                    }
+                                },
+                                "value": {
+                                    "environment": "context-values-2",
+                                    "begin": {
+                                        "line": 0,
+                                        "column": 0,
+                                        "byte": 0
+                                    },
+                                    "end": {
+                                        "line": 0,
+                                        "column": 0,
+                                        "byte": 0
+                                    }
+                                }
+                            },
+                            {
+                                "key": "values",
+                                "range": {
+                                    "environment": "context-values-2",
+                                    "begin": {
+                                        "line": 0,
+                                        "column": 0,
+                                        "byte": 0
+                                    },
+                                    "end": {
+                                        "line": 0,
+                                        "column": 0,
+                                        "byte": 0
+                                    }
+                                },
+                                "value": {
+                                    "environment": "context-values-2",
+                                    "begin": {
+                                        "line": 0,
+                                        "column": 0,
+                                        "byte": 0
+                                    },
+                                    "end": {
+                                        "line": 0,
+                                        "column": 0,
+                                        "byte": 0
+                                    }
+                                }
+                            },
+                            {
+                                "key": "inputs",
+                                "range": {
+                                    "environment": "context-values-2",
+                                    "begin": {
+                                        "line": 0,
+                                        "column": 0,
+                                        "byte": 0
+                                    },
+                                    "end": {
+                                        "line": 0,
+                                        "column": 0,
+                                        "byte": 0
+                                    }
+                                },
+                                "value": {
+                                    "environment": "context-values-2",
+                                    "begin": {
+                                        "line": 2,
+                                        "column": 25,
+                                        "byte": 32
+                                    },
+                                    "end": {
+                                        "line": 2,
+                                        "column": 49,
+                                        "byte": 56
+                                    }
+                                }
+                            }
+                        ]
+                    }
+                }
+            }
+        },
+        "properties": {
+            "output": {
+                "unknown": true,
+                "trace": {
+                    "def": {
+                        "environment": "context-values-2",
+                        "begin": {
+                            "line": 2,
+                            "column": 11,
+                            "byte": 18
+                        },
+                        "end": {
+                            "line": 2,
+                            "column": 49,
+                            "byte": 56
+                        }
+                    }
+                }
+            }
+        },
+        "schema": {
+            "properties": {
+                "output": {
+                    "type": "string"
+                }
+            },
+            "type": "object",
+            "required": [
+                "output"
+            ]
+        }
+    },
+    "checkJson": {
+        "output": "[unknown]"
+    },
+    "evalDiags": [
+        {
+            "Severity": 1,
+            "Summary": "parameterized environments may not be opened. Import this environment into another in order to open it.",
+            "Detail": "",
+            "Subject": {
+                "Filename": "context-values-2",
+                "Start": {
+                    "Line": 2,
+                    "Column": 25,
+                    "Byte": 32
+                },
+                "End": {
+                    "Line": 2,
+                    "Column": 49,
+                    "Byte": 56
+                }
+            },
+            "Context": null,
+            "Expression": null,
+            "EvalContext": null,
+            "Extra": null,
+            "Path": "values.output[\"fn::toJSON\"]"
+        }
+    ],
+    "eval": {
+        "exprs": {
+            "output": {
+                "range": {
+                    "environment": "context-values-2",
+                    "begin": {
+                        "line": 2,
+                        "column": 11,
+                        "byte": 18
+                    },
+                    "end": {
+                        "line": 2,
+                        "column": 49,
+                        "byte": 56
+                    }
+                },
+                "schema": {
+                    "type": "string"
+                },
+                "builtin": {
+                    "name": "fn::toJSON",
+                    "nameRange": {
+                        "environment": "context-values-2",
+                        "begin": {
+                            "line": 2,
+                            "column": 13,
+                            "byte": 20
+                        },
+                        "end": {
+                            "line": 2,
+                            "column": 23,
+                            "byte": 30
+                        }
+                    },
+                    "argSchema": true,
+                    "arg": {
+                        "range": {
+                            "environment": "context-values-2",
+                            "begin": {
+                                "line": 2,
+                                "column": 25,
+                                "byte": 32
+                            },
+                            "end": {
+                                "line": 2,
+                                "column": 49,
+                                "byte": 56
+                            }
+                        },
+                        "schema": true,
+                        "symbol": [
+                            {
+                                "key": "context",
+                                "range": {
+                                    "environment": "context-values-2",
+                                    "begin": {
+                                        "line": 0,
+                                        "column": 0,
+                                        "byte": 0
+                                    },
+                                    "end": {
+                                        "line": 0,
+                                        "column": 0,
+                                        "byte": 0
+                                    }
+                                },
+                                "value": {
+                                    "environment": "context-values-2",
+                                    "begin": {
+                                        "line": 0,
+                                        "column": 0,
+                                        "byte": 0
+                                    },
+                                    "end": {
+                                        "line": 0,
+                                        "column": 0,
+                                        "byte": 0
+                                    }
+                                }
+                            },
+                            {
+                                "key": "values",
+                                "range": {
+                                    "environment": "context-values-2",
+                                    "begin": {
+                                        "line": 0,
+                                        "column": 0,
+                                        "byte": 0
+                                    },
+                                    "end": {
+                                        "line": 0,
+                                        "column": 0,
+                                        "byte": 0
+                                    }
+                                },
+                                "value": {
+                                    "environment": "context-values-2",
+                                    "begin": {
+                                        "line": 0,
+                                        "column": 0,
+                                        "byte": 0
+                                    },
+                                    "end": {
+                                        "line": 0,
+                                        "column": 0,
+                                        "byte": 0
+                                    }
+                                }
+                            },
+                            {
+                                "key": "inputs",
+                                "range": {
+                                    "environment": "context-values-2",
+                                    "begin": {
+                                        "line": 0,
+                                        "column": 0,
+                                        "byte": 0
+                                    },
+                                    "end": {
+                                        "line": 0,
+                                        "column": 0,
+                                        "byte": 0
+                                    }
+                                },
+                                "value": {
+                                    "environment": "context-values-2",
+                                    "begin": {
+                                        "line": 2,
+                                        "column": 25,
+                                        "byte": 32
+                                    },
+                                    "end": {
+                                        "line": 2,
+                                        "column": 49,
+                                        "byte": 56
+                                    }
+                                }
+                            }
+                        ]
+                    }
+                }
+            }
+        },
+        "properties": {
+            "output": {
+                "unknown": true,
+                "trace": {
+                    "def": {
+                        "environment": "context-values-2",
+                        "begin": {
+                            "line": 2,
+                            "column": 11,
+                            "byte": 18
+                        },
+                        "end": {
+                            "line": 2,
+                            "column": 49,
+                            "byte": 56
+                        }
+                    }
+                }
+            }
+        },
+        "schema": {
+            "properties": {
+                "output": {
+                    "type": "string"
+                }
+            },
+            "type": "object",
+            "required": [
+                "output"
+            ]
+        }
+    },
+    "evalJsonRedacted": {
+        "output": "[unknown]"
+    },
+    "evalJSONRevealed": {
+        "output": "[unknown]"
+    }
+}

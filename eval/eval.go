@@ -110,7 +110,23 @@ func evalEnvironment(
 		return nil, nil
 	}
 
-	ec := newEvalContext(ctx, validating, name, env, decrypter, providers, envs, map[string]*imported{}, context)
+	// Synthesize a stack for the root.
+	//
+	// Note that this is _always_ undefined, even when not validating. This allows us to detect
+	// accesses and issue more helpful errors.
+	stack := &expr{
+		path: "<parameters>",
+		repr: &objectExpr{node: ast.Object()},
+	}
+	stack.value = &value{
+		def:     stack,
+		schema:  schema.Always(),
+		unknown: true,
+	}
+
+	ec := newEvalContext(ctx, validating, name, env, decrypter, providers, envs, map[string]*imported{}, context, stack.value)
+	ec.isRoot = true
+
 	v, diags := ec.evaluate()
 
 	s := schema.Never().Schema()
@@ -145,6 +161,8 @@ type evalContext struct {
 	environments  EnvironmentLoader    // the environment loader to use
 	imports       map[string]*imported // the shared set of imported environments
 	contextValues map[string]esc.Value // evaluation context used for interpolation
+	stack         *value               // the merge stack for the environment
+	isRoot        bool                 // true if this is the evaluation root.
 
 	myContext *value // evaluated context to be used to interpolate properties
 	myImports *value // directly-imported environments
@@ -164,7 +182,17 @@ func newEvalContext(
 	environments EnvironmentLoader,
 	imports map[string]*imported,
 	contextValues map[string]esc.Value,
+	stack *value,
 ) *evalContext {
+	base := &expr{
+		path: "",
+		repr: &objectExpr{node: ast.Object()},
+	}
+	base.value = &value{
+		def:     base,
+		schema:  schema.Record(nil).Schema(),
+		repr: map[string]*value{},
+	}
 	return &evalContext{
 		ctx:           ctx,
 		validating:    validating,
@@ -175,6 +203,8 @@ func newEvalContext(
 		environments:  environments,
 		imports:       imports,
 		contextValues: contextValues,
+		stack:         stack,
+		base: base.value,
 	}
 }
 
@@ -441,7 +471,7 @@ func (e *evalContext) evaluateImport(myImports map[string]*value, decl *ast.Impo
 			return
 		}
 
-		imp := newEvalContext(e.ctx, e.validating, name, env, dec, e.providers, e.environments, e.imports, e.contextValues)
+		imp := newEvalContext(e.ctx, e.validating, name, env, dec, e.providers, e.environments, e.imports, e.contextValues, e.base)
 		v, diags := imp.evaluate()
 		e.diags.Extend(diags...)
 
@@ -628,7 +658,22 @@ func (e *evalContext) evaluateExprAccess(x *expr, accessors []*propertyAccessor)
 	// Check for context interpolation.
 	if ok && k == "context" {
 		accessors[0].value = e.myContext
-		return e.evaluateValueAccess(x.repr.syntax(), e.myContext, accessors[1:])
+
+		rest := accessors[1:]
+		if len(rest) > 0 {
+			if k, ok := e.objectKey(x.repr.syntax(), rest[0].accessor, false); ok {
+				if k == "values" {
+					if !e.validating && e.isRoot {
+						e.accessorError(x.repr.syntax(), rest[0].accessor,
+							"parameterized environments may not be opened. Import this environment into another in order to open it.")
+					}
+
+					rest[0].value = e.stack
+					return e.evaluateValueAccess(x.repr.syntax(), e.stack, rest[1:])
+				}
+			}
+		}
+		return e.evaluateValueAccess(x.repr.syntax(), e.myContext, rest)
 	}
 
 	for len(accessors) > 0 {

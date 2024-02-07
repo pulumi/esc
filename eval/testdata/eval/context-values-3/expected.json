@@ -1,0 +1,127 @@
+{
+    "checkDiags": [
+        {
+            "Severity": 1,
+            "Summary": "unknown property \"inputs\"",
+            "Detail": "",
+            "Subject": {
+                "Filename": "a",
+                "Start": {
+                    "Line": 2,
+                    "Column": 25,
+                    "Byte": 32
+                },
+                "End": {
+                    "Line": 2,
+                    "Column": 49,
+                    "Byte": 56
+                }
+            },
+            "Context": null,
+            "Expression": null,
+            "EvalContext": null,
+            "Extra": null,
+            "Path": "values.output[\"fn::toJSON\"]"
+        }
+    ],
+    "check": {
+        "properties": {
+            "output": {
+                "unknown": true,
+                "trace": {
+                    "def": {
+                        "environment": "a",
+                        "begin": {
+                            "line": 2,
+                            "column": 11,
+                            "byte": 18
+                        },
+                        "end": {
+                            "line": 2,
+                            "column": 49,
+                            "byte": 56
+                        }
+                    }
+                }
+            }
+        },
+        "schema": {
+            "properties": {
+                "output": {
+                    "type": "string"
+                }
+            },
+            "type": "object",
+            "required": [
+                "output"
+            ]
+        }
+    },
+    "checkJson": {
+        "output": "[unknown]"
+    },
+    "evalDiags": [
+        {
+            "Severity": 1,
+            "Summary": "unknown property \"inputs\"",
+            "Detail": "",
+            "Subject": {
+                "Filename": "a",
+                "Start": {
+                    "Line": 2,
+                    "Column": 25,
+                    "Byte": 32
+                },
+                "End": {
+                    "Line": 2,
+                    "Column": 49,
+                    "Byte": 56
+                }
+            },
+            "Context": null,
+            "Expression": null,
+            "EvalContext": null,
+            "Extra": null,
+            "Path": "values.output[\"fn::toJSON\"]"
+        }
+    ],
+    "eval": {
+        "properties": {
+            "output": {
+                "unknown": true,
+                "trace": {
+                    "def": {
+                        "environment": "a",
+                        "begin": {
+                            "line": 2,
+                            "column": 11,
+                            "byte": 18
+                        },
+                        "end": {
+                            "line": 2,
+                            "column": 49,
+                            "byte": 56
+                        }
+                    }
+                }
+            }
+        },
+        "schema": {
+            "properties": {
+                "output": {
+                    "type": "string"
+                }
+            },
+            "type": "object",
+            "required": [
+                "output"
+            ]
+        }
+    },
+    "evalJsonRedacted": {
+        "output": "[unknown]"
+    },
+    "evalJSONRevealed": {
+        "output": "[unknown]"
+    }
+}
