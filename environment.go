@@ -29,10 +29,55 @@ type ExecContext struct {
 	values         map[string]Value
 }
 
+type copier struct {
+	memo map[*Value]*Value
+}
+
+func newCopier() copier {
+	return copier{memo: map[*Value]*Value{}}
+}
+
+func (c copier) copy(v *Value) *Value {
+	if v == nil {
+		return nil
+	}
+
+	if copy, ok := c.memo[v]; ok {
+		return copy
+	}
+
+	copy := &Value{}
+	c.memo[v] = copy
+
+	var nv any
+	switch vr := v.Value.(type) {
+	case []*Value:
+		a := make([]*Value, len(vr))
+		for i, v := range vr {
+			a[i] = c.copy(v)
+		}
+		nv = a
+	case map[string]*Value:
+		m := make(map[string]*Value, len(vr))
+		for k, v := range vr {
+			m[k] = c.copy(v)
+		}
+		nv = m
+	default:
+		nv = vr
+	}
+
+	*copy = Value{
+		Value: nv,
+	}
+	return copy
+}
+
 func copyContext(context map[string]Value) map[string]Value {
 	newContext := make(map[string]Value)
 	for key, value := range context {
-		newContext[key] = value
+		copy := newCopier().copy(&value)
+		newContext[key] = *copy
 	}
 	return newContext
 }
