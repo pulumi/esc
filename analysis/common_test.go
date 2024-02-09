@@ -63,7 +63,7 @@ func (testProvider) Open(ctx context.Context, inputs map[string]esc.Value) (esc.
 
 type testProviders struct{}
 
-func (testProviders) LoadProvider(ctx context.Context, name string) (esc.Provider, error) {
+func (testProviders) LoadProvider(ctx context.Context, name string, context map[string]esc.Value) (esc.Provider, error) {
 	switch name {
 	case "test":
 		return testProvider{}, nil

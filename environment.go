@@ -16,9 +16,73 @@ package esc
 
 import (
 	"encoding/json"
+	"errors"
+	"fmt"
 
 	"github.com/pulumi/esc/schema"
 )
+
+const AnonymousEnvironmentName = "<yaml>"
+
+type ExecContext struct {
+	rootEvironment string
+	values         map[string]Value
+}
+
+func copyContext(context map[string]Value) map[string]Value {
+	newContext := make(map[string]Value)
+	for key, value := range context {
+		newContext[key] = value
+	}
+	return newContext
+}
+
+func (ec *ExecContext) Copy() *ExecContext {
+	return &ExecContext{
+		values:         copyContext(ec.values),
+		rootEvironment: ec.rootEvironment,
+	}
+}
+
+func (ec *ExecContext) Values(envName string) map[string]Value {
+	context := ec.values
+	context["currentEnvironment"] = NewValue(map[string]Value{
+		"name": NewValue(envName),
+	})
+
+	if ec.rootEvironment == AnonymousEnvironmentName || ec.rootEvironment == "" {
+		ec.rootEvironment = envName
+	}
+
+	context["rootEnvironment"] = NewValue(map[string]Value{
+		"name": NewValue(ec.rootEvironment),
+	})
+
+	return context
+}
+
+var ErrForbiddenContextkey = errors.New("forbidden context key")
+
+func validateContextVariable(context map[string]Value, key string) error {
+	if _, ok := context[key]; ok {
+		return fmt.Errorf("%w: %q", ErrForbiddenContextkey, key)
+	}
+	return nil
+}
+
+func NewExecContext(values map[string]Value) (*ExecContext, error) {
+	if err := validateContextVariable(values, "currentEnvironment"); err != nil {
+		return nil, err
+	}
+
+	if err := validateContextVariable(values, "rootEnvironment"); err != nil {
+		return nil, err
+	}
+
+	return &ExecContext{
+		values: values,
+	}, nil
+}
 
 // An Environment contains the result of evaluating an environment definition.
 type Environment struct {
