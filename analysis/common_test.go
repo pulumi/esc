@@ -57,13 +57,13 @@ func (testProvider) Schema() (*schema.Schema, *schema.Schema) {
 	return testProviderSchema, schema.Always()
 }
 
-func (testProvider) Open(ctx context.Context, inputs map[string]esc.Value) (esc.Value, error) {
+func (testProvider) Open(ctx context.Context, inputs map[string]esc.Value, context map[string]esc.Value) (esc.Value, error) {
 	return esc.NewValue(inputs), nil
 }
 
 type testProviders struct{}
 
-func (testProviders) LoadProvider(ctx context.Context, name string, context map[string]esc.Value) (esc.Provider, error) {
+func (testProviders) LoadProvider(ctx context.Context, name string) (esc.Provider, error) {
 	switch name {
 	case "test":
 		return testProvider{}, nil

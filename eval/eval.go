@@ -36,7 +36,7 @@ import (
 // A ProviderLoader provides the environment evaluator the capability to load providers.
 type ProviderLoader interface {
 	// LoadProvider loads the provider with the given name.
-	LoadProvider(ctx context.Context, name string, contextValues map[string]esc.Value) (esc.Provider, error)
+	LoadProvider(ctx context.Context, name string) (esc.Provider, error)
 }
 
 // An EnvironmentLoader provides the environment evaluator the capability to load imported environment definitions.
@@ -872,7 +872,7 @@ func (e *evalContext) evaluateBuiltinOpen(x *expr, repr *openExpr) *value {
 		return v
 	}
 
-	provider, err := e.providers.LoadProvider(e.ctx, repr.node.Provider.GetValue(), e.execContext.Values(e.name))
+	provider, err := e.providers.LoadProvider(e.ctx, repr.node.Provider.GetValue())
 	if err != nil {
 		e.errorf(repr.syntax(), "%v", err)
 	} else {
@@ -897,7 +897,7 @@ func (e *evalContext) evaluateBuiltinOpen(x *expr, repr *openExpr) *value {
 		return v
 	}
 
-	output, err := provider.Open(e.ctx, inputs.export("").Value.(map[string]esc.Value))
+	output, err := provider.Open(e.ctx, inputs.export("").Value.(map[string]esc.Value), e.execContext.Values(e.name))
 	if err != nil {
 		e.errorf(repr.syntax(), err.Error())
 		v.unknown = true

@@ -198,13 +198,13 @@ func (testProvider) Schema() (*schema.Schema, *schema.Schema) {
 	return schema.Always(), schema.Always()
 }
 
-func (testProvider) Open(ctx context.Context, inputs map[string]esc.Value) (esc.Value, error) {
+func (testProvider) Open(ctx context.Context, inputs map[string]esc.Value, context map[string]esc.Value) (esc.Value, error) {
 	return esc.NewValue(inputs), nil
 }
 
 type testProviders struct{}
 
-func (testProviders) LoadProvider(ctx context.Context, name string, context map[string]esc.Value) (esc.Provider, error) {
+func (testProviders) LoadProvider(ctx context.Context, name string) (esc.Provider, error) {
 	if name == "test" {
 		return testProvider{}, nil
 	}
