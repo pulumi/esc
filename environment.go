@@ -75,7 +75,8 @@ func (c copier) copy(v *Value) *Value {
 
 func copyContext(context map[string]Value) map[string]Value {
 	newContext := make(map[string]Value)
-	for key, value := range context {
+	for key, v := range context {
+		value := v
 		copy := newCopier().copy(&value)
 		newContext[key] = *copy
 	}
