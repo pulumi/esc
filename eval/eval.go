@@ -174,7 +174,7 @@ func newEvalContext(
 		providers:    providers,
 		environments: environments,
 		imports:      imports,
-		execContext:  execContext,
+		execContext:  execContext.CopyForEnv(name),
 	}
 }
 
@@ -371,7 +371,7 @@ func (e *evalContext) evaluate() (*value, syntax.Diagnostics) {
 
 func (e *evalContext) evaluateContext() {
 	def := declare(e, "", ast.Symbol(&ast.PropertyName{Name: "context"}), nil)
-	e.myContext = unexport(esc.NewValue(e.execContext.Values(e.name)), def)
+	e.myContext = unexport(esc.NewValue(e.execContext.Values()), def)
 }
 
 // evaluateImports evaluates an environment's imports.
@@ -441,7 +441,7 @@ func (e *evalContext) evaluateImport(myImports map[string]*value, decl *ast.Impo
 			return
 		}
 
-		imp := newEvalContext(e.ctx, e.validating, name, env, dec, e.providers, e.environments, e.imports, e.execContext.Copy())
+		imp := newEvalContext(e.ctx, e.validating, name, env, dec, e.providers, e.environments, e.imports, e.execContext)
 		v, diags := imp.evaluate()
 		e.diags.Extend(diags...)
 
@@ -897,7 +897,7 @@ func (e *evalContext) evaluateBuiltinOpen(x *expr, repr *openExpr) *value {
 		return v
 	}
 
-	output, err := provider.Open(e.ctx, inputs.export("").Value.(map[string]esc.Value), e.execContext.Values(e.name))
+	output, err := provider.Open(e.ctx, inputs.export("").Value.(map[string]esc.Value), e.execContext.Values())
 	if err != nil {
 		e.errorf(repr.syntax(), err.Error())
 		v.unknown = true

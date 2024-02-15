@@ -83,14 +83,7 @@ func copyContext(context map[string]Value) map[string]Value {
 	return newContext
 }
 
-func (ec *ExecContext) Copy() *ExecContext {
-	return &ExecContext{
-		values:         ec.values,
-		rootEvironment: ec.rootEvironment,
-	}
-}
-
-func (ec *ExecContext) Values(envName string) map[string]Value {
+func (ec *ExecContext) CopyForEnv(envName string) *ExecContext {
 	context := copyContext(ec.values)
 	context["currentEnvironment"] = NewValue(map[string]Value{
 		"name": NewValue(envName),
@@ -104,7 +97,14 @@ func (ec *ExecContext) Values(envName string) map[string]Value {
 		"name": NewValue(ec.rootEvironment),
 	})
 
-	return context
+	return &ExecContext{
+		values:         context,
+		rootEvironment: ec.rootEvironment,
+	}
+}
+
+func (ec *ExecContext) Values() map[string]Value {
+	return ec.values
 }
 
 var ErrReservedContextkey = errors.New("reserved context key")
