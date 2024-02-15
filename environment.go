@@ -25,8 +25,8 @@ import (
 const AnonymousEnvironmentName = "<yaml>"
 
 type ExecContext struct {
-	rootEvironment string
-	values         map[string]Value
+	rootEnvironment string
+	values          map[string]Value
 }
 
 type copier struct {
@@ -84,22 +84,23 @@ func copyContext(context map[string]Value) map[string]Value {
 }
 
 func (ec *ExecContext) CopyForEnv(envName string) *ExecContext {
-	context := copyContext(ec.values)
-	context["currentEnvironment"] = NewValue(map[string]Value{
+	values := copyContext(ec.values)
+	values["currentEnvironment"] = NewValue(map[string]Value{
 		"name": NewValue(envName),
 	})
 
-	if ec.rootEvironment == AnonymousEnvironmentName || ec.rootEvironment == "" {
-		ec.rootEvironment = envName
+	root := ec.rootEnvironment
+	if ec.rootEnvironment == AnonymousEnvironmentName || ec.rootEnvironment == "" {
+		root = envName
 	}
 
-	context["rootEnvironment"] = NewValue(map[string]Value{
-		"name": NewValue(ec.rootEvironment),
+	values["rootEnvironment"] = NewValue(map[string]Value{
+		"name": NewValue(root),
 	})
 
 	return &ExecContext{
-		values:         context,
-		rootEvironment: ec.rootEvironment,
+		values:          values,
+		rootEnvironment: root,
 	}
 }
 
