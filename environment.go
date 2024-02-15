@@ -85,13 +85,13 @@ func copyContext(context map[string]Value) map[string]Value {
 
 func (ec *ExecContext) Copy() *ExecContext {
 	return &ExecContext{
-		values:         copyContext(ec.values),
+		values:         ec.values,
 		rootEvironment: ec.rootEvironment,
 	}
 }
 
 func (ec *ExecContext) Values(envName string) map[string]Value {
-	context := ec.values
+	context := copyContext(ec.values)
 	context["currentEnvironment"] = NewValue(map[string]Value{
 		"name": NewValue(envName),
 	})
@@ -107,11 +107,11 @@ func (ec *ExecContext) Values(envName string) map[string]Value {
 	return context
 }
 
-var ErrForbiddenContextkey = errors.New("forbidden context key")
+var ErrReservedContextkey = errors.New("reserved context key")
 
 func validateContextVariable(context map[string]Value, key string) error {
 	if _, ok := context[key]; ok {
-		return fmt.Errorf("%w: %q", ErrForbiddenContextkey, key)
+		return fmt.Errorf("%w: %q", ErrReservedContextkey, key)
 	}
 	return nil
 }
