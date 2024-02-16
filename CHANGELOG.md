@@ -1,6 +1,13 @@
 CHANGELOG
 =========
 
+## 0.8.2
+
+### Improvements
+
+- Document the CLI's REST API client.
+  [#257](https://github.com/pulumi/esc/pull/257)
+
 ## 0.8.1
 
 ### Improvements
