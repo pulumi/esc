@@ -179,19 +179,6 @@ func normalize[T any](t *testing.T, v T) T {
 	return decoded
 }
 
-func doesFileExist(file string) (bool, error) {
-	_, err := os.Stat(file)
-
-	switch {
-	case errors.Is(err, os.ErrNotExist):
-		return false, nil
-	case err != nil:
-		return false, err
-	}
-
-	return true, nil
-}
-
 func TestEval(t *testing.T) {
 	type testOverrides struct {
 		RootEnvironment string `json:"rootEnvironment,omitempty"`
@@ -231,16 +218,12 @@ func TestEval(t *testing.T) {
 			assert.NoError(t, err)
 
 			environmentName := e.Name()
-			overridesExists, err := doesFileExist(overridesPath)
-			assert.NoError(t, err)
+			overridesBytes, err := os.ReadFile(overridesPath)
+			require.True(t, err == nil || errors.Is(err, os.ErrNotExist))
 
-			if overridesExists {
+			if err == nil {
 				var overrides testOverrides
-				expectedBytes, err := os.ReadFile(overridesPath)
-				require.NoError(t, err)
-				dec := json.NewDecoder(bytes.NewReader(expectedBytes))
-				dec.UseNumber()
-				err = dec.Decode(&overrides)
+				err = json.Unmarshal(overridesBytes, &overrides)
 				require.NoError(t, err)
 
 				if overrides.RootEnvironment != "" {
