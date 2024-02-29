@@ -108,6 +108,10 @@ func (ec *ExecContext) Values() map[string]Value {
 	return ec.values
 }
 
+func (ec *ExecContext) GetRootEnvironmentName() string {
+	return ec.rootEnvironment
+}
+
 var ErrReservedContextkey = errors.New("reserved context key")
 
 func validateContextVariable(context map[string]Value, key string) error {
