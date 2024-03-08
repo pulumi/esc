@@ -171,10 +171,15 @@ func (esc *escCommand) getCachedClient(ctx context.Context) error {
 			return fmt.Errorf("could not determine current cloud: %w", err)
 		}
 
+		defaultOrg, err := esc.workspace.GetBackendConfigDefaultOrg(backendURL, nAccount.Username)
+		if err != nil {
+			return fmt.Errorf("could not determine default org: %w", err)
+		}
+
 		account = &workspace.Account{
 			Account:    *nAccount,
-			BackendURL: "https://api.pulumi.com",
-			DefaultOrg: "",
+			BackendURL: backendURL,
+			DefaultOrg: defaultOrg,
 		}
 	}
 
