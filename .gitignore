@@ -34,3 +34,6 @@ go.work
 .history/
 # Built Visual Studio Code Extensions
 *.vsix
+
+sdk/typescript/node_modules/*
+sdk/typescript/bin/*
