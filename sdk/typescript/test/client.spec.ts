@@ -12,13 +12,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import { describe, it } from "node:test";
+import { after, before, describe, it } from "node:test";
 import assert from "assert";
 import * as esc from "../esc";
-import * as yaml from "js-yaml";
 
 const ENV_PREFIX = "sdk-ts-test";
 describe("ESC", async () => {
+
     const PULUMI_ACCESS_TOKEN = process.env.PULUMI_ACCESS_TOKEN;
     const PULUMI_ORG = process.env.PULUMI_ORG;
     if (!PULUMI_ACCESS_TOKEN) {
@@ -31,19 +31,26 @@ describe("ESC", async () => {
     config.apiKey = `token ${PULUMI_ACCESS_TOKEN}`;
     const client = new esc.EscApi(config);
     const baseEnvName = `${ENV_PREFIX}-base-${Date.now()}`;
-    const envDef: esc.EnvironmentDefinition = {
-        values: {
-            base: "baseEnvName",
-        },
-    }
-    await client.createEnvironment(PULUMI_ORG, baseEnvName);
-    await client.updateEnvironment(PULUMI_ORG, baseEnvName, envDef);
 
+    before(async () => {
+    
+        const envDef: esc.EnvironmentDefinition = {
+            values: {
+                base: baseEnvName,
+            },
+        }
+        await removeAllTestEnvs(client, PULUMI_ORG);
+        await client.createEnvironment(PULUMI_ORG, baseEnvName);
+        await client.updateEnvironment(PULUMI_ORG, baseEnvName, envDef);
+    });
+
+    after(async () => {
+        await client.deleteEnvironment(PULUMI_ORG, baseEnvName);
+    });
 
     it("should create, list, update, get, decrypt, open and delete an environment", async () => {
         const name = `${ENV_PREFIX}-${Date.now()}`;
     
-        await removeAllTestEnvs(client, PULUMI_ORG);
         await assert.doesNotReject(client.createEnvironment(PULUMI_ORG, name));
         const orgs = await client.listEnvironments(PULUMI_ORG);
         assert.notEqual(orgs, undefined);
@@ -82,13 +89,14 @@ describe("ESC", async () => {
         assert.equal(decryptEnv?.definition?.values?.my_secret["fn::secret"], "shh! don't tell anyone");
                 
         const openEnv = await client.openAndReadEnvironment(PULUMI_ORG, name);
-
+        
         assert.equal(openEnv?.values?.base, baseEnvName);
         assert.equal(openEnv?.values?.foo, "bar");
         assert.deepEqual(openEnv?.values?.my_array, [1, 2, 3]);
         assert.deepEqual(openEnv?.values?.my_secret, "shh! don't tell anyone");
         assert.equal(openEnv?.values?.pulumiConfig?.foo, "bar");
         assert.equal(openEnv?.values?.environmentVariables?.FOO, "bar");
+        console.log("test");
 
         const openInfo = await client.openEnvironment(PULUMI_ORG, name);
         assert.notEqual(openInfo, undefined);
@@ -106,8 +114,9 @@ describe("ESC", async () => {
             },
         }
 
-        const diags = client.checkEnvironment(PULUMI_ORG, envDef)
+        const diags = await client.checkEnvironment(PULUMI_ORG, envDef)
         assert.notEqual(diags, undefined);
+        assert.equal(diags?.diagnostics?.length, 0);
     });
 
     it("check environment invalid", async () => {
@@ -124,8 +133,6 @@ describe("ESC", async () => {
         assert.equal(diags?.diagnostics?.length, 1)
         assert.equal(diags?.diagnostics?.[0].summary, "unknown property \"bad_ref\"")
     });
-
-    await client.deleteEnvironment(PULUMI_ORG, baseEnvName);
 });
 
 function assertEnvDef(env: esc.EnvironmentDefinitionResponse, baseEnvName: string) {

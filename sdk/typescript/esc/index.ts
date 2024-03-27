@@ -1,9 +1,9 @@
 import { string } from "yaml/dist/schema/common/string";
-import { Environment, EnvironmentDefinitionValues, OpenEnvironment, OrgEnvironments, OrgEnvironment, EnvironmentDefinition, EscApi as EscRawApi, Configuration, Value, EnvironmentDiagnostics, CheckEnvironment } from "./raw/index";
+import { Environment, EnvironmentDefinitionValues, OpenEnvironment, OrgEnvironments, OrgEnvironment, EnvironmentDefinition, EscApi as EscRawApi, Configuration, Value, EnvironmentDiagnostics, CheckEnvironment, Pos, Range, Trace } from "./raw/index";
 import * as yaml from "js-yaml";
 import { AxiosError } from "axios";
 
-export { Configuration, Environment, EnvironmentDefinitionValues, OpenEnvironment, OrgEnvironments, OrgEnvironment, EnvironmentDefinition, EscRawApi, Value, EnvironmentDiagnostics, CheckEnvironment };
+export { Configuration, Environment, EnvironmentDefinitionValues, OpenEnvironment, OrgEnvironments, OrgEnvironment, EnvironmentDefinition, EscRawApi, Value, EnvironmentDiagnostics, CheckEnvironment, Pos, Range, Trace };
 
 export interface EnvironmentDefinitionResponse {
     definition: EnvironmentDefinition;
@@ -187,9 +187,13 @@ function convertEnvPropertiesToValues(env: {[key:string]: Value} | undefined): {
 }
 
 function convertPropertyToValue(property: any): any {
+    if (!property) {
+        return property;
+    }
+
     let value = property;
     if ("value" in property) {
-        value = property.value;
+        value = convertPropertyToValue(property.value);
     }
 
     if (!value) {
@@ -202,7 +206,12 @@ function convertPropertyToValue(property: any): any {
     }
 
     if (typeof value === "object") {
-        return convertEnvPropertiesToValues(value as {[key:string]: Value});
+        const result: any = {}
+        for (const key in value) {
+            result[key] = convertPropertyToValue(value[key]);
+        }
+
+        return result
     }
     
     return value;
