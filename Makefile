@@ -48,4 +48,8 @@ generate_go_client_sdk:
 
 .PHONY: generate_ts_client_sdk
 generate_ts_client_sdk:
-	TS_POST_PROCESS_FILE="/usr/local/bin/prettier --write" openapi-generator-cli generate -i ./sdk/swagger.yaml -p npmName=@pulumi/esc-sdk -t ./sdk/templates/typescript --enable-post-process-file -g typescript-axios -o ./sdk/typescript/esc/raw  --git-repo-id esc --git-user-id pulumi
+	TS_POST_PROCESS_FILE="/usr/local/bin/prettier --write" openapi-generator-cli generate -i ./sdk/swagger.yaml -p npmName=@pulumi/esc-sdk -t ./sdk/templates/typescript --enable-post-process-file -g typescript-axios -o ./sdk/typescript/esc/raw --git-repo-id esc --git-user-id pulumi
+
+.PHONY: generate_python_client_sdk
+generate_python_client_sdk:
+	openapi-generator-cli generate -i ./sdk/swagger.yaml -p packageName=esc -t ./sdk/templates/python -g python -o ./sdk/python --git-repo-id esc --git-user-id pulumi
