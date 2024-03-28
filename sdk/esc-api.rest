@@ -1,0 +1,46 @@
+@token = {{$processEnv PULUMI_ACCESS_TOKEN}}
+@organization = {{$processEnv PULUMI_ORG}}
+
+GET https://api.pulumi.com/api/preview/environments/{{organization}} HTTP/1.1
+Authorization: token {{token}}
+###
+
+GET https://api.pulumi.com/api/preview/environments/{{organization}}/sdk-test HTTP/1.1
+Authorization: token {{token}}
+
+###
+# @name openAPI
+POST https://api.pulumi.com/api/preview/environments/{{organization}}/sdk-test/open?duration=1h HTTP/1.1
+Authorization: token {{token}}
+
+@openId = {{openAPI.response.body.id}}
+###
+GET https://api.pulumi.com/api/preview/environments/{{organization}}/sdk-test/open/{{openId}} HTTP/1.1
+Authorization: token {{token}}
+
+###
+
+HEAD https://api.pulumi.com/api/preview/environments/{{organization}}/sdk-test HTTP/1.1
+Authorization: token {{token}}
+
+###
+
+POST https://api.pulumi.com/api/preview/environments/{{organization}}/sdk-test HTTP/1.1
+Authorization: token {{token}}
+Content-Type: application/yaml
+
+###
+
+PATCH https://api.pulumi.com/api/preview/environments/{{organization}}/sdk-test HTTP/1.1
+Authorization: token {{token}}
+Content-Type: application/yaml
+
+values:
+    foo: bar
+    baz: auto
+    test: 123
+
+###
+
+DELETE https://api.pulumi.com/api/preview/environments/{{organization}}/sdk-test HTTP/1.1
+Authorization: token {{token}}
