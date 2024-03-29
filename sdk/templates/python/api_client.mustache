@@ -10,6 +10,7 @@ import mimetypes
 import os
 import re
 import tempfile
+import yaml
 
 from urllib.parse import quote
 from typing import Tuple, Optional, List, Dict
@@ -320,7 +321,7 @@ class ApiClient:
                     match = re.search(r"charset=([a-zA-Z\-\d]+)[\s;]?", content_type)
                 encoding = match.group(1) if match else "utf-8"
                 response_text = response_data.data.decode(encoding)
-                return_data = self.deserialize(response_text, response_type)
+                return_data = self.deserialize(response_text, response_type, content_type)
         finally:
             if not 200 <= response_data.status <= 299:
                 raise ApiException.from_response(
@@ -380,7 +381,7 @@ class ApiClient:
             for key, val in obj_dict.items()
         }
 
-    def deserialize(self, response_text, response_type):
+    def deserialize(self, response_text, response_type, content_type="application/json"):
         """Deserializes response into an object.
 
         :param response: RESTResponse object to be deserialized.
@@ -392,7 +393,10 @@ class ApiClient:
 
         # fetch data from response object
         try:
-            data = json.loads(response_text)
+            if "json" in content_type:
+                data = json.loads(response_text)
+            elif "yaml" in content_type:
+                data = yaml.safe_load(response_text)
         except ValueError:
             data = response_text
 
