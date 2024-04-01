@@ -8,3 +8,6 @@
 
 ### Bug Fixes
 
+- Ensure that redacted output is flushed in `esc run`
+  [#280](https://github.com/pulumi/esc/pull/280/files)
+
