@@ -16,6 +16,7 @@ require (
 	github.com/hashicorp/hcl/v2 v2.17.0
 	github.com/muesli/termenv v0.15.2
 	github.com/petar-dambovaliev/aho-corasick v0.0.0-20230725210150-fb29fc3c913e
+	github.com/pgavlin/fx v0.1.6
 	github.com/pulumi/pulumi/pkg/v3 v3.98.0
 	github.com/pulumi/pulumi/sdk/v3 v3.98.0
 	github.com/rivo/uniseg v0.4.4
@@ -176,7 +177,6 @@ require (
 	github.com/opentracing/basictracer-go v1.1.0 // indirect
 	github.com/opentracing/opentracing-go v1.2.0 // indirect
 	github.com/pgavlin/diff v0.0.0-20230503175810-113847418e2e // indirect
-	github.com/pgavlin/fx v0.1.6 // indirect
 	github.com/pgavlin/goldmark v1.1.33-0.20200616210433-b5eb04559386 // indirect
 	github.com/pgavlin/text v0.0.0-20230428184845-84c285f11d2f // indirect
 	github.com/pierrec/lz4 v2.6.1+incompatible // indirect

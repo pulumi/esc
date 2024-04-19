@@ -6,6 +6,9 @@
 - Add support for listing the revisions to an environment.
   [#277](https://github.com/pulumi/esc/pull/277)
 
+- Add support for managing version tags.
+  [#283](https://github.com/pulumi/esc/pull/283)
+
 ### Bug Fixes
 
 - Ensure that redacted output is flushed in `esc run`
