@@ -1,3 +1,5 @@
+// Copyright 2024, Pulumi Corporation.
+
 package style
 
 import (
