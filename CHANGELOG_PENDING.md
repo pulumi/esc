@@ -9,6 +9,9 @@
 - Add support for managing version tags.
   [#283](https://github.com/pulumi/esc/pull/283)
 
+- Add support for displaying changed between environment revisions.
+  [#295](https://github.com/pulumi/esc/pull/295)
+
 ### Bug Fixes
 
 - Ensure that redacted output is flushed in `esc run`
