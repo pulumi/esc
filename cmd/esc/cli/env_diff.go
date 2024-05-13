@@ -23,14 +23,15 @@ func newEnvDiffCmd(env *envCommand) *cobra.Command {
 	diff := &envGetCommand{env: env}
 
 	cmd := &cobra.Command{
-		Use:   "diff [<org-name>/]<environment-name>[:<revision-or-tag>] [<revision-or-tag>]",
+		Use:   "diff [<org-name>/]<environment-name>[:<version>] [<version>]",
 		Args:  cobra.RangeArgs(1, 2),
-		Short: "Show changes between revisions.",
-		Long: "Show changes between revisions\n" +
+		Short: "Show changes between versions.",
+		Long: "Show changes between versions\n" +
 			"\n" +
-			"This command fetches the current definition for the named environment and gets a\n" +
-			"value within it. The path to the value to set is a Pulumi property path. The value\n" +
-			"is printed to stdout as YAML.\n",
+			"This command displays the changes between two versions of an environment.\n" +
+			"The first argument is the environment and base version for the diff and\n" +
+			"the second argument is the comparison version. If the second argument is\n" +
+			"omitted, the 'latest' tag is used.",
 		SilenceUsage: true,
 		RunE: func(cmd *cobra.Command, args []string) error {
 			ctx := context.Background()
@@ -43,14 +44,14 @@ func newEnvDiffCmd(env *envCommand) *cobra.Command {
 			if err != nil {
 				return err
 			}
-			baseRevisionOrTag := revisionOrTag
-			if baseRevisionOrTag == "" {
-				baseRevisionOrTag = "latest"
+			baseVersion := revisionOrTag
+			if baseVersion == "" {
+				baseVersion = "latest"
 			}
 
-			tipRevisionOrTag := "latest"
+			compareVersion := "latest"
 			if len(args) != 0 {
-				tipRevisionOrTag = args[0]
+				compareVersion = args[0]
 			}
 
 			var path resource.PropertyPath
@@ -65,22 +66,22 @@ func newEnvDiffCmd(env *envCommand) *cobra.Command {
 			case "":
 				// OK
 			case "detailed", "json", "string":
-				return diff.diffValue(ctx, orgName, envName, baseRevisionOrTag, tipRevisionOrTag, path, format, showSecrets)
+				return diff.diffValue(ctx, orgName, envName, baseVersion, compareVersion, path, format, showSecrets)
 			case "dotenv":
 				if len(path) != 0 {
 					return fmt.Errorf("output format '%s' may not be used with a property path", format)
 				}
-				return diff.diffValue(ctx, orgName, envName, baseRevisionOrTag, tipRevisionOrTag, path, format, showSecrets)
+				return diff.diffValue(ctx, orgName, envName, baseVersion, compareVersion, path, format, showSecrets)
 			case "shell":
 				if len(path) != 0 {
 					return fmt.Errorf("output format '%s' may not be used with a property path", format)
 				}
-				return diff.diffValue(ctx, orgName, envName, baseRevisionOrTag, tipRevisionOrTag, path, format, showSecrets)
+				return diff.diffValue(ctx, orgName, envName, baseVersion, compareVersion, path, format, showSecrets)
 			default:
 				return fmt.Errorf("unknown output format %q", format)
 			}
 
-			baseData, err := diff.getEnvironment(ctx, orgName, envName, baseRevisionOrTag, path, showSecrets)
+			baseData, err := diff.getEnvironment(ctx, orgName, envName, baseVersion, path, showSecrets)
 			if err != nil {
 				return err
 			}
@@ -88,17 +89,17 @@ func newEnvDiffCmd(env *envCommand) *cobra.Command {
 				baseData = &envGetTemplateData{}
 			}
 
-			tipData, err := diff.getEnvironment(ctx, orgName, envName, tipRevisionOrTag, path, showSecrets)
+			compareData, err := diff.getEnvironment(ctx, orgName, envName, compareVersion, path, showSecrets)
 			if err != nil {
 				return err
 			}
-			if tipData == nil {
-				tipData = &envGetTemplateData{}
+			if compareData == nil {
+				compareData = &envGetTemplateData{}
 			}
 
-			baseRef := fmt.Sprintf("%s:%s", envName, baseRevisionOrTag)
-			tipRef := fmt.Sprintf("%s:%s", envName, tipRevisionOrTag)
-			data := diff.diff(baseRef, baseData, tipRef, tipData)
+			baseRef := fmt.Sprintf("%s:%s", envName, baseVersion)
+			compareRef := fmt.Sprintf("%s:%s", envName, compareVersion)
+			data := diff.diff(baseRef, baseData, compareRef, compareData)
 
 			var markdown bytes.Buffer
 			if err := envDiffTemplate.Execute(&markdown, data); err != nil {
