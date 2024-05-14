@@ -40,6 +40,7 @@ func newEnvVersionShowCmd(env *envCommand) *cobra.Command {
 			if version == "" {
 				version = "latest"
 			}
+			_ = args
 
 			st := style.NewStylist(style.Profile(env.esc.stdout))
 			if isRevisionNumber(version) {
