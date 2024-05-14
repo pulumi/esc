@@ -18,6 +18,9 @@
 - Add support to `esc env edit` for reading the edited environment definition from a file.
   [#308](https://github.com/pulumi/esc/pull/308)
 
+- Add support for rolling back to a specific version of an environment.
+  [#305](https://github.com/pulumi/esc/pull/305)
+
 ### Bug Fixes
 
 - Ensure that redacted output is flushed in `esc run`
