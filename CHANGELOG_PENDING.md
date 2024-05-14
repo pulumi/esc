@@ -11,6 +11,9 @@
 
 - Add support for displaying changed between environment revisions.
   [#295](https://github.com/pulumi/esc/pull/295)
+  
+- Finalize command tree for version management.
+  [#304](https://github.com/pulumi/esc/pull/304)
 
 ### Bug Fixes
 
