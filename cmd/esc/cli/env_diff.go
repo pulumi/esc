@@ -33,7 +33,7 @@ func newEnvDiffCmd(env *envCommand) *cobra.Command {
 			"\n" +
 			"The first argument is the base environment for the diff and the second argument\n" +
 			"is the comparison environment. If the environment name portion of the second\n" +
-			"argument, the name of the base environment is used. If the version portion of\n" +
+			"argument is omitted, the name of the base environment is used. If the version portion of\n" +
 			"the second argument is omitted, the 'latest' tag is used.",
 		SilenceUsage: true,
 		RunE: func(cmd *cobra.Command, args []string) error {
