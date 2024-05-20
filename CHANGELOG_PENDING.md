@@ -15,6 +15,9 @@
 - Finalize command tree for version management.
   [#304](https://github.com/pulumi/esc/pull/304)
 
+- Add support to `esc env edit` for reading the edited environment definition from a file.
+  [#308](https://github.com/pulumi/esc/pull/308)
+
 ### Bug Fixes
 
 - Ensure that redacted output is flushed in `esc run`
