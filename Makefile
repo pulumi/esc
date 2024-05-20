@@ -44,7 +44,7 @@ test_cover:: build
 
 .PHONY: generate_go_client_sdk
 generate_go_client_sdk:
-	GO_POST_PROCESS_FILE="/usr/local/bin/gofmt -w" openapi-generator-cli generate -i ./sdk/swagger.yaml -p packageName=esc,withGoMod=false,isGoSubmodule=true -t ./sdk/templates/go -g go -o ./sdk/go --git-repo-id esc --git-user-id pulumi
+	GO_POST_PROCESS_FILE="/usr/local/bin/gofmt -w" openapi-generator-cli generate -i ./sdk/swagger.yaml -p packageName=esc_sdk,withGoMod=false,isGoSubmodule=true -t ./sdk/templates/go -g go -o ./sdk/go --git-repo-id esc --git-user-id pulumi
 
 .PHONY: generate_ts_client_sdk
 generate_ts_client_sdk:

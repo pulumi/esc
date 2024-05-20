@@ -1,4 +1,4 @@
-package esc
+package esc_sdk
 
 import (
 	"context"
