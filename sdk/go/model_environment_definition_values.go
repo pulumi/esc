@@ -1,3 +1,4 @@
+// Copyright 2024, Pulumi Corporation.  All rights reserved.
 /*
 ESC (Environments, Secrets, Config) API
 
@@ -21,6 +22,7 @@ var _ MappedNullable = &EnvironmentDefinitionValues{}
 type EnvironmentDefinitionValues struct {
 	PulumiConfig map[string]interface{} `json:"pulumiConfig,omitempty"`
 	EnvironmentVariables *map[string]string `json:"environmentVariables,omitempty"`
+	Files *map[string]string `json:"files,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -107,6 +109,38 @@ func (o *EnvironmentDefinitionValues) SetEnvironmentVariables(v map[string]strin
 	o.EnvironmentVariables = &v
 }
 
+// GetFiles returns the Files field value if set, zero value otherwise.
+func (o *EnvironmentDefinitionValues) GetFiles() map[string]string {
+	if o == nil || IsNil(o.Files) {
+		var ret map[string]string
+		return ret
+	}
+	return *o.Files
+}
+
+// GetFilesOk returns a tuple with the Files field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *EnvironmentDefinitionValues) GetFilesOk() (*map[string]string, bool) {
+	if o == nil || IsNil(o.Files) {
+		return nil, false
+	}
+	return o.Files, true
+}
+
+// HasFiles returns a boolean if a field has been set.
+func (o *EnvironmentDefinitionValues) HasFiles() bool {
+	if o != nil && !IsNil(o.Files) {
+		return true
+	}
+
+	return false
+}
+
+// SetFiles gets a reference to the given map[string]string and assigns it to the Files field.
+func (o *EnvironmentDefinitionValues) SetFiles(v map[string]string) {
+	o.Files = &v
+}
+
 func (o EnvironmentDefinitionValues) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -122,6 +156,9 @@ func (o EnvironmentDefinitionValues) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.EnvironmentVariables) {
 		toSerialize["environmentVariables"] = o.EnvironmentVariables
+	}
+	if !IsNil(o.Files) {
+		toSerialize["files"] = o.Files
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -147,6 +184,7 @@ func (o *EnvironmentDefinitionValues) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "pulumiConfig")
 		delete(additionalProperties, "environmentVariables")
+		delete(additionalProperties, "files")
 		o.AdditionalProperties = additionalProperties
 	}
 
