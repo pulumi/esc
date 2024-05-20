@@ -228,6 +228,10 @@ components:
           type: object
           additionalProperties:
             type: string
+        files:
+          type: object
+          additionalProperties:
+            type: string
       additionalProperties:
         type: object
     EnvironmentDefinition:
