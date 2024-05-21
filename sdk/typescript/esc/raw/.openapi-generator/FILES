@@ -1,10 +1,7 @@
-.gitignore
 .npmignore
-README.md
 api.ts
 base.ts
 common.ts
 configuration.ts
 index.ts
-package.json
 tsconfig.json

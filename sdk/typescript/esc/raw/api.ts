@@ -1,5 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
+// Copyright 2024, Pulumi Corporation.  All rights reserved.
+
 /**
  * ESC (Environments, Secrets, Config) API
  * Pulumi ESC allows you to compose and manage hierarchical collections of configuration and secrets and consume them in various ways.
@@ -174,6 +176,12 @@ export interface EnvironmentDefinitionValues {
      * @memberof EnvironmentDefinitionValues
      */
     'environmentVariables'?: { [key: string]: string; };
+    /**
+     * 
+     * @type {{ [key: string]: string; }}
+     * @memberof EnvironmentDefinitionValues
+     */
+    'files'?: { [key: string]: string; };
 }
 /**
  * 

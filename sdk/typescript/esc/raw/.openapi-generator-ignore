@@ -25,3 +25,4 @@
 git_push.sh
 .gitignore
 package.json
+README.md
