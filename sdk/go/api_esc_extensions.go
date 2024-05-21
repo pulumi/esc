@@ -151,25 +151,24 @@ func MarshalEnvironmentDefinition(env *EnvironmentDefinition) (string, error) {
 }
 
 func mapValuesPrimitive(value any) any {
-	if val, ok := value.(*Value); ok {
+	switch val := value.(type) {
+	case *Value:
 		return mapValuesPrimitive(val.Value)
-	}
-	if mapData, isMap := value.(map[string]Value); isMap {
-
-		output := make(map[string]any, len(mapData))
-		for k, v := range mapData {
+	case map[string]Value:
+		output := make(map[string]any, len(val))
+		for k, v := range val {
 			output[k] = mapValuesPrimitive(v.Value)
 		}
 
 		return output
-	} else if sliceData, isSlice := value.([]any); isSlice {
-		for i, v := range sliceData {
-			sliceData[i] = mapValuesPrimitive(v)
+	case []any:
+		for i, v := range val {
+			val[i] = mapValuesPrimitive(v)
 		}
-		return sliceData
+		return val
+	default:
+		return value
 	}
-
-	return value
 }
 
 func mapValues(value any) any {
@@ -233,15 +232,12 @@ func getTrace(data map[string]any) Trace {
 }
 
 func getMapSafe(data any) map[string]any {
-	if data != nil {
-		if val, ok := data.(map[string]any); ok {
-			return val
-		}
-
+	if data == nil {
 		return nil
 	}
 
-	return nil
+	val, _ := data.(map[string]any)
+	return val
 }
 
 func getRange(data map[string]any) *Range {
