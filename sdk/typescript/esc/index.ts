@@ -1,9 +1,40 @@
-import { string } from "yaml/dist/schema/common/string";
-import { Environment, EnvironmentDefinitionValues, OpenEnvironment, OrgEnvironments, OrgEnvironment, EnvironmentDefinition, EscApi as EscRawApi, Configuration, Value, EnvironmentDiagnostics, CheckEnvironment, Pos, Range, Trace } from "./raw/index";
+// Copyright 2024, Pulumi Corporation.  All rights reserved.
+
+import {
+    Environment,
+    EnvironmentDefinitionValues,
+    OpenEnvironment,
+    OrgEnvironments,
+    OrgEnvironment,
+    EnvironmentDefinition,
+    EscApi as EscRawApi,
+    Configuration,
+    Value,
+    EnvironmentDiagnostics,
+    CheckEnvironment,
+    Pos,
+    Range,
+    Trace,
+} from "./raw/index";
 import * as yaml from "js-yaml";
 import { AxiosError } from "axios";
 
-export { Configuration, Environment, EnvironmentDefinitionValues, OpenEnvironment, OrgEnvironments, OrgEnvironment, EnvironmentDefinition, EscRawApi, Value, EnvironmentDiagnostics, CheckEnvironment, Pos, Range, Trace };
+export {
+    Configuration,
+    Environment,
+    EnvironmentDefinitionValues,
+    OpenEnvironment,
+    OrgEnvironments,
+    OrgEnvironment,
+    EnvironmentDefinition,
+    EscRawApi,
+    Value,
+    EnvironmentDiagnostics,
+    CheckEnvironment,
+    Pos,
+    Range,
+    Trace,
+};
 
 export interface EnvironmentDefinitionResponse {
     definition: EnvironmentDefinition;
@@ -20,9 +51,10 @@ export interface EnvironmentPropertyResponse {
     value: any;
 }
 
-type KeyValueMap = {[key: string]: string};
+type KeyValueMap = { [key: string]: string };
+
 /**
- * 
+ *
  * @export
  * @class EscApi
  */
@@ -63,13 +95,17 @@ export class EscApi {
         throw new Error(`Failed to open environment: ${resp.statusText}`);
     }
 
-    async readOpenEnvironment(org: string, name: string, openSessionID: string): Promise<EnvironmentResponse | undefined> {
+    async readOpenEnvironment(
+        org: string,
+        name: string,
+        openSessionID: string,
+    ): Promise<EnvironmentResponse | undefined> {
         const resp = await this.rawApi.readOpenEnvironment(org, name, openSessionID);
         if (resp.status === 200) {
             return {
                 environment: resp.data,
                 values: convertEnvPropertiesToValues(resp.data.properties),
-            }
+            };
         }
 
         throw new Error(`Failed to read environment: ${resp.statusText}`);
@@ -78,19 +114,24 @@ export class EscApi {
     async openAndReadEnvironment(org: string, name: string): Promise<EnvironmentResponse | undefined> {
         const open = await this.openEnvironment(org, name);
         if (open?.id) {
-            return await this.readOpenEnvironment(org, name, open.id);        
+            return await this.readOpenEnvironment(org, name, open.id);
         }
 
         throw new Error(`Failed to open and read environment: ${open}`);
     }
 
-    async readOpenEnvironmentProperty(org: string, name: string, openSessionID: string, property: string): Promise<EnvironmentPropertyResponse | undefined> {
+    async readOpenEnvironmentProperty(
+        org: string,
+        name: string,
+        openSessionID: string,
+        property: string,
+    ): Promise<EnvironmentPropertyResponse | undefined> {
         const resp = await this.rawApi.readOpenEnvironmentProperty(org, name, openSessionID, property);
         if (resp.status === 200) {
             return {
                 property: resp.data,
                 value: convertPropertyToValue(resp.data),
-            }
+            };
         }
 
         throw new Error(`Failed to read environment property: ${resp.statusText}`);
@@ -113,8 +154,12 @@ export class EscApi {
 
         throw new Error(`Failed to update environment: ${resp.statusText}`);
     }
-    
-    async updateEnvironment(org: string, name: string, values: EnvironmentDefinition): Promise<EnvironmentDiagnostics | undefined> {
+
+    async updateEnvironment(
+        org: string,
+        name: string,
+        values: EnvironmentDefinition,
+    ): Promise<EnvironmentDiagnostics | undefined> {
         const body = yaml.dump(values);
         const resp = await this.rawApi.updateEnvironmentYaml(org, name, body);
         if (resp.status === 200) {
@@ -142,13 +187,13 @@ export class EscApi {
 
             throw new Error(`Failed to check environment: ${resp.statusText}`);
         } catch (err: any) {
-            if (err instanceof  AxiosError) {
+            if (err instanceof AxiosError) {
                 if (err.response?.status === 400) {
                     return err.response?.data;
                 }
             }
             throw err;
-        }    
+        }
     }
 
     async checkEnvironment(org: string, env: EnvironmentDefinition): Promise<CheckEnvironment | undefined> {
@@ -168,21 +213,20 @@ export class EscApi {
 
         throw new Error(`Failed to decrypt environment: ${resp.statusText}`);
     }
-
 }
 
-function convertEnvPropertiesToValues(env: {[key:string]: Value} | undefined): {[key:string]: any} {
+function convertEnvPropertiesToValues(env: { [key: string]: Value } | undefined): KeyValueMap {
     if (!env) {
         return {};
     }
 
-    const values: {[key:string]: any} = {};
+    const values: KeyValueMap = {};
     for (const key in env) {
         const value = env[key];
-        
+
         values[key] = convertPropertyToValue(value);
     }
-    
+
     return values;
 }
 
@@ -206,13 +250,13 @@ function convertPropertyToValue(property: any): any {
     }
 
     if (typeof value === "object") {
-        const result: any = {}
+        const result: any = {};
         for (const key in value) {
             result[key] = convertPropertyToValue(value[key]);
         }
 
-        return result
+        return result;
     }
-    
+
     return value;
 }
