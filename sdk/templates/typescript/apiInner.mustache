@@ -219,6 +219,8 @@ export const {{classname}}AxiosParamCreator = function (configuration?: Configur
 
     {{/bodyParam}}
             setSearchParams(localVarUrlObj, localVarQueryParameter);
+            localVarHeaderParameter['X-Pulumi-Source'] = 'esc-sdk'
+            localVarHeaderParameter['User-Agent'] = '{{userAgent}}'
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions,{{#hasFormParams}}{{#multipartFormData}} ...(localVarFormParams as any).getHeaders?.(),{{/multipartFormData}}{{/hasFormParams}} ...options.headers};
     {{#hasFormParams}}
