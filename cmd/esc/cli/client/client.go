@@ -26,6 +26,7 @@ import (
 	"net/http"
 	"path"
 	"runtime"
+	"strconv"
 	"strings"
 	"time"
 
@@ -49,6 +50,9 @@ type Client interface {
 	// GetPulumiAccountDetails returns the user implied by the API token associated with this client.
 	GetPulumiAccountDetails(ctx context.Context) (string, []string, *workspace.TokenInformation, error)
 
+	// GetRevisionNumber returns the revision number for version.
+	GetRevisionNumber(ctx context.Context, orgName, envName, version string) (int, error)
+
 	// ListEnvironments lists all environments in the given org that are accessible to the calling user.
 	//
 	// Each call to ListEnvironments returns a page of results and a continuation token. If there are no
@@ -69,7 +73,13 @@ type Client interface {
 	//
 	// The etag returned by GetEnvironment can be passed to UpdateEnvironment in order to avoid RMW issues
 	// when editing envirionments.
-	GetEnvironment(ctx context.Context, orgName, envName string, decrypt bool) (yaml []byte, etag string, err error)
+	GetEnvironment(
+		ctx context.Context,
+		orgName string,
+		envName string,
+		version string,
+		decrypt bool,
+	) (yaml []byte, etag string, err error)
 
 	// UpdateEnvironment updates the YAML for the environment envName in org orgName.
 	//
@@ -98,6 +108,7 @@ type Client interface {
 		ctx context.Context,
 		orgName string,
 		envName string,
+		version string,
 		duration time.Duration,
 	) (string, []EnvironmentDiagnostic, error)
 
@@ -138,6 +149,39 @@ type Client interface {
 	//     environmentVariables["AWS_ACCESS_KEY_ID"]
 	//
 	GetOpenProperty(ctx context.Context, orgName, envName, openEnvID, property string) (*esc.Value, error)
+
+	// GetEnvironmentRevision returns a description of the given revision.
+	GetEnvironmentRevision(ctx context.Context, orgName, envName string, revision int) (*EnvironmentRevision, error)
+
+	// ListEnvironmentRevisions returns a list of revisions to the named environments in reverse order by
+	// revision number. The revision at which to start and the number of revisions to return are
+	// configurable via the options parameter.
+	ListEnvironmentRevisions(
+		ctx context.Context,
+		orgName string,
+		envName string,
+		options ListEnvironmentRevisionsOptions,
+	) ([]EnvironmentRevision, error)
+
+	// CreateEnvironmentRevisionTag creates a new revision tag with the given name.
+	CreateEnvironmentRevisionTag(ctx context.Context, orgName, envName, tagName string, revision *int) error
+
+	// GetEnvironmentRevisionTag returns a description of the given revision tag.
+	GetEnvironmentRevisionTag(ctx context.Context, orgName, envName, tagName string) (*EnvironmentRevisionTag, error)
+
+	// UpdateEnvironmentRevisionTag updates the revision tag with the given name.
+	UpdateEnvironmentRevisionTag(ctx context.Context, orgName, envName, tagName string, revision *int) error
+
+	// DeleteEnvironmentRevisionTag deletes the revision tag with the given name.
+	DeleteEnvironmentRevisionTag(ctx context.Context, orgName, envName, tagName string) error
+
+	// ListEnvironmentRevisionTags lists the revision tags for the given environment.
+	ListEnvironmentRevisionTags(
+		ctx context.Context,
+		orgName string,
+		envName string,
+		options ListEnvironmentRevisionTagsOptions,
+	) ([]EnvironmentRevisionTag, error)
 }
 
 type client struct {
@@ -255,6 +299,48 @@ func (pc *client) GetPulumiAccountDetails(ctx context.Context) (string, []string
 	return pc.apiUser, pc.apiOrgs, pc.tokenInfo, nil
 }
 
+// resolveEnvironmentPath resolves an environment and revision or tag to its API path.
+//
+// If version begins with a digit, it is treated as a revision number. Otherwise, it is trated as a tag. If
+// no revision or tag is present, the "latest" tag is used.
+func (pc *client) resolveEnvironmentPath(ctx context.Context, orgName, envName, version string) (string, error) {
+	if version == "" {
+		return fmt.Sprintf("/api/preview/environments/%v/%v", orgName, envName), nil
+	}
+
+	if version[0] >= '0' && version[0] <= '9' {
+		return fmt.Sprintf("/api/preview/environments/%v/%v/revisions/%v", orgName, envName, version), nil
+	}
+
+	path := fmt.Sprintf("/api/preview/environments/%v/%v/tags/%v", orgName, envName, version)
+
+	var resp EnvironmentRevisionTag
+	if err := pc.restCall(ctx, http.MethodGet, path, nil, nil, &resp); err != nil {
+		return "", fmt.Errorf("resolving tag %q: %w", version, err)
+	}
+	return fmt.Sprintf("/api/preview/environments/%v/%v/revisions/%v", orgName, envName, resp.Revision), nil
+}
+
+func (pc *client) GetRevisionNumber(ctx context.Context, orgName, envName, version string) (int, error) {
+	if version == "" {
+		version = "latest"
+	} else if version[0] >= '0' && version[0] <= '9' {
+		rev, err := strconv.ParseInt(version, 10, 0)
+		if err != nil {
+			return 0, fmt.Errorf("invalid revision number %q", version)
+		}
+		return int(rev), nil
+	}
+
+	path := fmt.Sprintf("/api/preview/environments/%v/%v/tags/%v", orgName, envName, version)
+
+	var resp EnvironmentRevisionTag
+	if err := pc.restCall(ctx, http.MethodGet, path, nil, nil, &resp); err != nil {
+		return 0, fmt.Errorf("resolving tag %q: %w", version, err)
+	}
+	return resp.Revision, nil
+}
+
 func (pc *client) ListEnvironments(
 	ctx context.Context,
 	orgName string,
@@ -281,8 +367,17 @@ func (pc *client) CreateEnvironment(ctx context.Context, orgName, envName string
 	return pc.restCall(ctx, http.MethodPost, path, nil, nil, nil)
 }
 
-func (pc *client) GetEnvironment(ctx context.Context, orgName, envName string, decrypt bool) ([]byte, string, error) {
-	path := fmt.Sprintf("/api/preview/environments/%v/%v", orgName, envName)
+func (pc *client) GetEnvironment(
+	ctx context.Context,
+	orgName string,
+	envName string,
+	version string,
+	decrypt bool,
+) ([]byte, string, error) {
+	path, err := pc.resolveEnvironmentPath(ctx, orgName, envName, version)
+	if err != nil {
+		return nil, "", err
+	}
 	if decrypt {
 		path += "/decrypt"
 	}
@@ -336,8 +431,15 @@ func (pc *client) OpenEnvironment(
 	ctx context.Context,
 	orgName string,
 	envName string,
+	version string,
 	duration time.Duration,
 ) (string, []EnvironmentDiagnostic, error) {
+	path, err := pc.resolveEnvironmentPath(ctx, orgName, envName, version)
+	if err != nil {
+		return "", nil, err
+	}
+	path += "/open"
+
 	queryObj := struct {
 		Duration string `url:"duration"`
 	}{
@@ -348,8 +450,7 @@ func (pc *client) OpenEnvironment(
 		ID string `json:"id"`
 	}
 	var errResp EnvironmentErrorResponse
-	path := fmt.Sprintf("/api/preview/environments/%v/%v/open", orgName, envName)
-	err := pc.restCallWithOptions(ctx, http.MethodPost, path, queryObj, nil, &resp, httpCallOptions{
+	err = pc.restCallWithOptions(ctx, http.MethodPost, path, queryObj, nil, &resp, httpCallOptions{
 		ErrorResponse: &errResp,
 	})
 	if err != nil {
@@ -437,6 +538,117 @@ func (pc *client) GetOpenProperty(ctx context.Context, orgName, envName, openSes
 		return nil, err
 	}
 	return &resp, nil
+}
+
+// GetEnvironmentRevision returns a description of the given revision.
+func (pc *client) GetEnvironmentRevision(
+	ctx context.Context,
+	orgName string,
+	envName string,
+	revision int,
+) (*EnvironmentRevision, error) {
+	before, count := revision+1, 1
+
+	opts := ListEnvironmentRevisionsOptions{Before: &before, Count: &count}
+	revs, err := pc.ListEnvironmentRevisions(ctx, orgName, envName, opts)
+	if err != nil || len(revs) == 0 {
+		return nil, err
+	}
+	return &revs[0], nil
+}
+
+type ListEnvironmentRevisionsOptions struct {
+	Before *int `url:"before"`
+	Count  *int `url:"count"`
+}
+
+func (pc *client) ListEnvironmentRevisions(
+	ctx context.Context,
+	orgName string,
+	envName string,
+	options ListEnvironmentRevisionsOptions,
+) ([]EnvironmentRevision, error) {
+	var resp []EnvironmentRevision
+	path := fmt.Sprintf("/api/preview/environments/%v/%v/revisions", orgName, envName)
+	err := pc.restCall(ctx, http.MethodGet, path, options, nil, &resp)
+	if err != nil {
+		return nil, err
+	}
+	return resp, nil
+}
+
+// CreateEnvironmentRevisionTag creates a new revision tag with the given name.
+func (pc *client) CreateEnvironmentRevisionTag(
+	ctx context.Context,
+	orgName string,
+	envName string,
+	tagName string,
+	revision *int,
+) error {
+	req := CreateEnvironmentRevisionTagRequest{Revision: revision}
+	path := fmt.Sprintf("/api/preview/environments/%v/%v/tags/%v", orgName, envName, tagName)
+	return pc.restCall(ctx, http.MethodPost, path, nil, &req, nil)
+}
+
+// GetEnvironmentRevisionTag returns a description of the given revision tag.
+func (pc *client) GetEnvironmentRevisionTag(
+	ctx context.Context,
+	orgName string,
+	envName string,
+	tagName string,
+) (*EnvironmentRevisionTag, error) {
+	var resp EnvironmentRevisionTag
+	path := fmt.Sprintf("/api/preview/environments/%v/%v/tags/%v", orgName, envName, tagName)
+	err := pc.restCall(ctx, http.MethodGet, path, nil, nil, &resp)
+	if err != nil {
+		return nil, err
+	}
+	return &resp, nil
+}
+
+// UpdateEnvironmentRevisionTag updates the revision tag with the given name.
+func (pc *client) UpdateEnvironmentRevisionTag(
+	ctx context.Context,
+	orgName string,
+	envName string,
+	tagName string,
+	revision *int,
+) error {
+	req := UpdateEnvironmentRevisionTagRequest{Revision: revision}
+	path := fmt.Sprintf("/api/preview/environments/%v/%v/tags/%v", orgName, envName, tagName)
+	return pc.restCall(ctx, http.MethodPatch, path, nil, &req, nil)
+}
+
+// DeleteEnvironmentRevisionTag deletes the revision tag with the given name.
+func (pc *client) DeleteEnvironmentRevisionTag(
+	ctx context.Context,
+	orgName string,
+	envName string,
+	tagName string,
+) error {
+	path := fmt.Sprintf("/api/preview/environments/%v/%v/tags/%v", orgName, envName, tagName)
+	return pc.restCall(ctx, http.MethodDelete, path, nil, nil, nil)
+}
+
+type ListEnvironmentRevisionTagsOptions struct {
+	After string `url:"after"`
+	Count *int   `url:"count"`
+}
+
+// ListEnvironmentRevisionTags lists the revision tags for the given environment.
+func (pc *client) ListEnvironmentRevisionTags(
+	ctx context.Context,
+	orgName string,
+	envName string,
+	options ListEnvironmentRevisionTagsOptions,
+) ([]EnvironmentRevisionTag, error) {
+	var resp ListEnvironmentRevisionTagsResponse
+	path := fmt.Sprintf("/api/preview/environments/%v/%v/tags", orgName, envName)
+	err := pc.restCall(ctx, http.MethodGet, path, options, nil, &resp)
+	if err != nil {
+		return nil, err
+	}
+	return resp.Tags, nil
 }
 
 type httpCallOptions struct {
@@ -663,4 +875,10 @@ func cleanPath(p string) string {
 	}
 
 	return np
+}
+
+// IsNotFound returns true if the indicated error is a "not found" error.
+func IsNotFound(err error) bool {
+	resp, ok := err.(*apitype.ErrorResponse)
+	return ok && resp.Code == http.StatusNotFound
 }

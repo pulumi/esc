@@ -11,6 +11,7 @@ import (
 	"hash/fnv"
 	"io"
 	"io/fs"
+	"net/http"
 	"os"
 	"os/exec"
 	"path"
@@ -23,12 +24,14 @@ import (
 	"time"
 
 	"github.com/gofrs/uuid"
+	"github.com/pgavlin/fx"
 	"github.com/pulumi/esc"
 	"github.com/pulumi/esc/cmd/esc/cli/client"
 	"github.com/pulumi/esc/eval"
 	"github.com/pulumi/esc/schema"
 	"github.com/pulumi/esc/syntax"
 	"github.com/pulumi/pulumi/pkg/v3/backend/display"
+	"github.com/pulumi/pulumi/sdk/v3/go/common/apitype"
 	"github.com/pulumi/pulumi/sdk/v3/go/common/diag/colors"
 	"github.com/pulumi/pulumi/sdk/v3/go/common/util/cmdutil"
 	"github.com/pulumi/pulumi/sdk/v3/go/common/util/contract"
@@ -37,6 +40,7 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"golang.org/x/exp/maps"
+	"golang.org/x/exp/slices"
 	"gopkg.in/yaml.v3"
 	"mvdan.cc/sh/v3/expand"
 	"mvdan.cc/sh/v3/interp"
@@ -238,12 +242,22 @@ func (e *testEnvironments) LoadEnvironment(ctx context.Context, envName string) 
 	if !ok {
 		return nil, nil, errors.New("not found")
 	}
-	return env.yaml, rot128{}, nil
+	return env.latest().yaml, rot128{}, nil
+}
+
+type testEnvironmentRevision struct {
+	number int
+	yaml   []byte
+	tag    string
 }
 
 type testEnvironment struct {
-	yaml []byte
-	tag  string
+	revisions []*testEnvironmentRevision
+	tags      map[string]int
+}
+
+func (env *testEnvironment) latest() *testEnvironmentRevision {
+	return env.revisions[len(env.revisions)-1]
 }
 
 type testPulumiClient struct {
@@ -327,6 +341,34 @@ func mapDiags(diags syntax.Diagnostics) []client.EnvironmentDiagnostic {
 	return out
 }
 
+func (c *testPulumiClient) getEnvironment(orgName, envName, version string) (*testEnvironment, *testEnvironmentRevision, error) {
+	name := path.Join(orgName, envName)
+
+	env, ok := c.environments[name]
+	if !ok {
+		return nil, nil, errors.New("not found")
+	}
+
+	var revision int
+	if version == "" || version == "latest" {
+		revision = len(env.revisions)
+	} else if version[0] >= '0' && version[0] <= '9' {
+		rev, err := strconv.ParseInt(version, 10, 0)
+		if err != nil || rev < 1 || rev > int64(len(env.revisions)) {
+			return nil, nil, errors.New("not found")
+		}
+		revision = int(rev)
+	} else {
+		rev, ok := env.tags[version]
+		if !ok {
+			return nil, nil, errors.New("not found")
+		}
+		revision = rev
+	}
+
+	return env, env.revisions[revision-1], nil
+}
+
 func (c *testPulumiClient) checkEnvironment(ctx context.Context, orgName, envName string, yaml []byte) (*esc.Environment, []client.EnvironmentDiagnostic, error) {
 	environment, diags, err := eval.LoadYAMLBytes(envName, yaml)
 	if err != nil {
@@ -398,6 +440,15 @@ func (c *testPulumiClient) GetPulumiAccountDetails(ctx context.Context) (string,
 	return c.user, nil, nil, nil
 }
 
+func (c *testPulumiClient) GetRevisionNumber(ctx context.Context, orgName, envName, version string) (int, error) {
+	_, rev, err := c.getEnvironment(orgName, envName, version)
+	if err != nil {
+		return 0, err
+	}
+	return rev.number, nil
+
+}
+
 func (c *testPulumiClient) ListEnvironments(
 	ctx context.Context,
 	orgName string,
@@ -438,15 +489,23 @@ func (c *testPulumiClient) CreateEnvironment(ctx context.Context, orgName, envNa
 	if _, ok := c.environments[name]; ok {
 		return errors.New("already exists")
 	}
-	c.environments[name] = &testEnvironment{}
+	c.environments[name] = &testEnvironment{
+		revisions: []*testEnvironmentRevision{{}},
+		tags:      map[string]int{"latest": 0},
+	}
 	return nil
 }
 
-func (c *testPulumiClient) GetEnvironment(ctx context.Context, orgName, envName string, showSecrets bool) ([]byte, string, error) {
-	name := path.Join(orgName, envName)
-	env, ok := c.environments[name]
-	if !ok {
-		return nil, "", errors.New("not found")
+func (c *testPulumiClient) GetEnvironment(
+	ctx context.Context,
+	orgName string,
+	envName string,
+	version string,
+	showSecrets bool,
+) ([]byte, string, error) {
+	_, env, err := c.getEnvironment(orgName, envName, version)
+	if err != nil {
+		return nil, "", err
 	}
 
 	yaml := env.yaml
@@ -468,12 +527,11 @@ func (c *testPulumiClient) UpdateEnvironment(
 	yaml []byte,
 	tag string,
 ) ([]client.EnvironmentDiagnostic, error) {
-	name := path.Join(orgName, envName)
-	env, ok := c.environments[name]
-	if !ok {
-		return nil, errors.New("not found")
+	env, latest, err := c.getEnvironment(orgName, envName, "")
+	if err != nil {
+		return nil, err
 	}
-	if tag != "" && tag != env.tag {
+	if tag != "" && tag != latest.tag {
 		return nil, errors.New("tag mismatch")
 	}
 
@@ -487,8 +545,13 @@ func (c *testPulumiClient) UpdateEnvironment(
 			return nil, err
 		}
 
-		env.yaml = yaml
-		env.tag = base64.StdEncoding.EncodeToString(h.Sum(nil))
+		revisionNumber := len(env.revisions) + 1
+		env.revisions = append(env.revisions, &testEnvironmentRevision{
+			number: revisionNumber,
+			yaml:   yaml,
+			tag:    base64.StdEncoding.EncodeToString(h.Sum(nil)),
+		})
+		env.tags["latest"] = revisionNumber
 	}
 
 	return diags, err
@@ -507,12 +570,12 @@ func (c *testPulumiClient) OpenEnvironment(
 	ctx context.Context,
 	orgName string,
 	envName string,
+	version string,
 	duration time.Duration,
 ) (string, []client.EnvironmentDiagnostic, error) {
-	name := path.Join(orgName, envName)
-	env, ok := c.environments[name]
-	if !ok {
-		return "", nil, errors.New("not found")
+	_, env, err := c.getEnvironment(orgName, envName, version)
+	if err != nil {
+		return "", nil, err
 	}
 
 	return c.openEnvironment(ctx, orgName, envName, env.yaml)
@@ -545,6 +608,173 @@ func (c *testPulumiClient) GetOpenEnvironment(ctx context.Context, orgName, envN
 
 func (c *testPulumiClient) GetOpenProperty(ctx context.Context, orgName, envName, openEnvID, property string) (*esc.Value, error) {
 	return nil, errors.New("NYI")
+}
+
+func (c *testPulumiClient) GetEnvironmentRevision(
+	ctx context.Context,
+	orgName string,
+	envName string,
+	revision int,
+) (*client.EnvironmentRevision, error) {
+	before, count := revision+1, 1
+
+	opts := client.ListEnvironmentRevisionsOptions{Before: &before, Count: &count}
+	revs, err := c.ListEnvironmentRevisions(ctx, orgName, envName, opts)
+	if err != nil || len(revs) == 0 {
+		return nil, err
+	}
+	return &revs[0], nil
+}
+
+func (c *testPulumiClient) ListEnvironmentRevisions(
+	ctx context.Context,
+	orgName string,
+	envName string,
+	options client.ListEnvironmentRevisionsOptions,
+) ([]client.EnvironmentRevision, error) {
+	env, _, err := c.getEnvironment(orgName, envName, "")
+	if err != nil {
+		return nil, err
+	}
+
+	before := len(env.revisions) + 1
+	if options.Before != nil && *options.Before != 0 {
+		before = *options.Before
+	}
+
+	var resp []client.EnvironmentRevision
+	for i := before - 1; i > 0; i-- {
+		var tags []string
+		if tag := env.revisions[i-1].tag; tag != "" {
+			tags = []string{tag}
+		}
+
+		resp = append(resp, client.EnvironmentRevision{
+			Number:       i,
+			Created:      time.Unix(0, 0).Add(time.Duration(i) * time.Hour),
+			CreatorLogin: "Test Tester",
+			CreatorName:  "test-tester",
+			Tags:         tags,
+		})
+	}
+
+	return resp, nil
+}
+
+// CreateEnvironmentRevisionTag creates a new revision tag with the given name.
+func (c *testPulumiClient) CreateEnvironmentRevisionTag(
+	ctx context.Context,
+	orgName string,
+	envName string,
+	tagName string,
+	revision *int,
+) error {
+	env, _, err := c.getEnvironment(orgName, envName, "")
+	if err != nil {
+		return err
+	}
+
+	rev := len(env.revisions)
+	if revision != nil {
+		rev = *revision
+	}
+	if rev < 1 || rev > len(env.revisions) {
+		return errors.New("not found")
+	}
+
+	if _, ok := env.tags[tagName]; ok {
+		return errors.New("already exists")
+	}
+
+	env.tags[tagName] = rev
+	return nil
+}
+
+// GetEnvironmentRevisionTag returns a description of the given revision tag.
+func (c *testPulumiClient) GetEnvironmentRevisionTag(
+	ctx context.Context,
+	orgName string,
+	envName string,
+	tagName string,
+) (*client.EnvironmentRevisionTag, error) {
+	env, _, err := c.getEnvironment(orgName, envName, "")
+	if err != nil {
+		return nil, err
+	}
+
+	rev, ok := env.tags[tagName]
+	if !ok {
+		return nil, &apitype.ErrorResponse{Code: http.StatusNotFound}
+	}
+	return &client.EnvironmentRevisionTag{Name: tagName, Revision: rev}, nil
+}
+
+// UpdateEnvironmentRevisionTag updates the revision tag with the given name.
+func (c *testPulumiClient) UpdateEnvironmentRevisionTag(
+	ctx context.Context,
+	orgName string,
+	envName string,
+	tagName string,
+	revision *int,
+) error {
+	env, _, err := c.getEnvironment(orgName, envName, "")
+	if err != nil {
+		return err
+	}
+
+	rev := len(env.revisions)
+	if revision != nil {
+		rev = *revision
+	}
+	if rev < 1 || rev > len(env.revisions) {
+		return errors.New("not found")
+	}
+
+	if _, ok := env.tags[tagName]; !ok {
+		return &apitype.ErrorResponse{Code: http.StatusNotFound}
+	}
+
+	env.tags[tagName] = rev
+	return nil
+}
+
+// DeleteEnvironmentRevisionTag deletes the revision tag with the given name.
+func (c *testPulumiClient) DeleteEnvironmentRevisionTag(
+	ctx context.Context,
+	orgName string,
+	envName string,
+	tagName string,
+) error {
+	env, _, err := c.getEnvironment(orgName, envName, "")
+	if err != nil {
+		return err
+	}
+
+	if _, ok := env.tags[tagName]; !ok {
+		return errors.New("not found")
+	}
+
+	delete(env.tags, tagName)
+	return nil
+}
+
+// ListEnvironmentRevisionTags lists the revision tags for the given environment.
+func (c *testPulumiClient) ListEnvironmentRevisionTags(
+	ctx context.Context,
+	orgName string,
+	envName string,
+	options client.ListEnvironmentRevisionTagsOptions,
+) ([]client.EnvironmentRevisionTag, error) {
+	env, _, err := c.getEnvironment(orgName, envName, "")
+	if err != nil {
+		return nil, err
+	}
+
+	names := maps.Keys(env.tags)
+	slices.Sort(names)
+	return fx.ToSlice(fx.FMap(fx.IterSlice(names), func(name string) (client.EnvironmentRevisionTag, bool) {
+		return client.EnvironmentRevisionTag{Name: name, Revision: env.tags[name]}, name > options.After
+	})), nil
 }
 
 type testExec struct {
@@ -609,6 +839,7 @@ func (c *testExec) runScript(script string, cmd *exec.Cmd) error {
 					fs:              c.fs,
 					environ:         environ,
 					exec:            c,
+					pager:           testPager(0),
 					newClient: func(_, backendURL, accessToken string, insecure bool) client.Client {
 						return c.client
 					},
@@ -665,10 +896,25 @@ func (c *testExec) runScript(script string, cmd *exec.Cmd) error {
 	return runner.Run(context.Background(), file)
 }
 
+type testPager int
+
+func (testPager) Run(pager string, stdout, stderr io.Writer, f func(context.Context, io.Writer) error) error {
+	return f(context.Background(), stdout)
+}
+
 type cliTestcaseProcess struct {
 	FS       map[string]string `yaml:"fs,omitempty"`
 	Environ  map[string]string `yaml:"environ,omitempty"`
 	Commands map[string]string `yaml:"commands,omitempty"`
+}
+
+type cliTestcaseRevision struct {
+	YAML yaml.Node `yaml:"yaml"`
+	Tag  string    `yaml:"tag,omitempty"`
+}
+
+type cliTestcaseRevisions struct {
+	Revisions []cliTestcaseRevision `yaml:"revisions,omitempty"`
 }
 
 type cliTestcaseYAML struct {
@@ -722,12 +968,39 @@ func loadTestcase(path string) (*cliTestcaseYAML, *cliTestcase, error) {
 
 	environments := map[string]*testEnvironment{}
 	for k, env := range testcase.Environments {
-		bytes, err := yaml.Marshal(env)
-		if err != nil {
-			return nil, nil, err
+		var revisions cliTestcaseRevisions
+		if err := env.Decode(&revisions); err != nil || len(revisions.Revisions) == 0 {
+			revisions = cliTestcaseRevisions{Revisions: []cliTestcaseRevision{{YAML: env}}}
 		}
 
-		environments[k] = &testEnvironment{yaml: bytes}
+		envRevisions := []*testEnvironmentRevision{{number: 1}}
+		tags := map[string]int{}
+		for _, rev := range revisions.Revisions {
+			bytes, err := yaml.Marshal(rev.YAML)
+			if err != nil {
+				return nil, nil, err
+			}
+
+			revisionNumber := len(envRevisions) + 1
+			envRevisions = append(envRevisions, &testEnvironmentRevision{
+				number: revisionNumber,
+				yaml:   bytes,
+			})
+
+			if rev.Tag != "" {
+				if _, ok := tags[rev.Tag]; ok || rev.Tag == "latest" {
+					return nil, nil, fmt.Errorf("duplicate tag %q", rev.Tag)
+				}
+				tags[rev.Tag] = revisionNumber
+				envRevisions[revisionNumber-1].tag = rev.Tag
+			}
+		}
+		tags["latest"] = len(envRevisions)
+
+		environments[k] = &testEnvironment{
+			revisions: envRevisions,
+			tags:      tags,
+		}
 	}
 
 	creds := workspace.Credentials{

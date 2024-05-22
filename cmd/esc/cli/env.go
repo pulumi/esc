@@ -52,7 +52,10 @@ func newEnvCmd(esc *escCommand) *cobra.Command {
 	cmd.AddCommand(newEnvInitCmd(env))
 	cmd.AddCommand(newEnvEditCmd(env))
 	cmd.AddCommand(newEnvGetCmd(env))
+	cmd.AddCommand(newEnvDiffCmd(env))
 	cmd.AddCommand(newEnvSetCmd(env))
+	cmd.AddCommand(newEnvVersionCmd(env))
+	cmd.AddCommand(newEnvRollbackCmd(env))
 	cmd.AddCommand(newEnvLsCmd(env))
 	cmd.AddCommand(newEnvRmCmd(env))
 	cmd.AddCommand(newEnvOpenCmd(env))
@@ -61,19 +64,50 @@ func newEnvCmd(esc *escCommand) *cobra.Command {
 	return cmd
 }
 
-func (cmd *envCommand) getEnvName(args []string) (org, env string, rest []string, err error) {
+type environmentRef struct {
+	orgName string
+	envName string
+	version string
+}
+
+func (r *environmentRef) String() string {
+	s := r.envName
+	if r.orgName != "" {
+		s = fmt.Sprintf("%s/%s", r.orgName, r.envName)
+	}
+	if r.version != "" {
+		s = fmt.Sprintf("%s@%s", s, r.version)
+	}
+	return s
+}
+
+func (cmd *envCommand) getRelativeEnvRef(refStr string, rel *environmentRef) environmentRef {
+	orgName, envNameAndVersion, hasOrgName := strings.Cut(refStr, "/")
+	if !hasOrgName {
+		orgName, envNameAndVersion = cmd.esc.account.DefaultOrg, orgName
+	}
+
+	envName, version, hasSep := strings.Cut(envNameAndVersion, "@")
+	if !hasSep {
+		envName, version, _ = strings.Cut(envNameAndVersion, ":")
+	}
+
+	if rel != nil && envName == "" && version != "" {
+		orgName, envName = rel.orgName, rel.envName
+	}
+
+	return environmentRef{orgName, envName, version}
+}
+
+func (cmd *envCommand) getEnvRef(args []string) (ref environmentRef, rest []string, err error) {
 	if cmd.envNameFlag == "" {
 		if len(args) == 0 {
-			return "", "", nil, fmt.Errorf("no environment name specified")
+			return environmentRef{}, nil, fmt.Errorf("no environment name specified")
 		}
 		cmd.envNameFlag, args = args[0], args[1:]
 	}
 
-	orgName, envName, hasOrgName := strings.Cut(cmd.envNameFlag, "/")
-	if !hasOrgName {
-		orgName, envName = cmd.esc.account.DefaultOrg, orgName
-	}
-	return orgName, envName, args, nil
+	return cmd.getRelativeEnvRef(cmd.envNameFlag, nil), args, nil
 }
 
 func sortEnvironmentDiagnostics(diags []client.EnvironmentDiagnostic) {

@@ -28,6 +28,7 @@ type envEditCommand struct {
 }
 
 func newEnvEditCmd(env *envCommand) *cobra.Command {
+	var file string
 	var showSecrets bool
 
 	edit := &envEditCommand{env: env}
@@ -48,43 +49,32 @@ func newEnvEditCmd(env *envCommand) *cobra.Command {
 		RunE: func(cmd *cobra.Command, args []string) error {
 			ctx := context.Background()
 
-			editor, err := edit.getEditor()
-			if err != nil {
-				return err
-			}
-
 			if err := env.esc.getCachedClient(ctx); err != nil {
 				return err
 			}
 
-			orgName, envName, args, err := edit.env.getEnvName(args)
+			ref, args, err := edit.env.getEnvRef(args)
 			if err != nil {
 				return err
 			}
+			if ref.version != "" {
+				return fmt.Errorf("the edit command does not accept versions")
+			}
 			_ = args
 
-			yaml, tag, err := edit.env.esc.client.GetEnvironment(ctx, orgName, envName, showSecrets)
-			if err != nil {
-				return fmt.Errorf("getting environment definition: %w", err)
-			}
-
-			var env *esc.Environment
-			var diags []client.EnvironmentDiagnostic
-			if len(yaml) != 0 {
-				env, diags, _ = edit.env.esc.client.CheckYAMLEnvironment(ctx, orgName, yaml)
-			}
-
-			for {
-				newYAML, err := edit.editWithYAMLEditor(editor, envName, yaml, env, diags)
+			if file != "" {
+				var yaml []byte
+				switch file {
+				case "-":
+					yaml, err = io.ReadAll(env.esc.stdin)
+				default:
+					yaml, err = fs.ReadFile(env.esc.fs, file)
+				}
 				if err != nil {
-					return err
-				}
-				if len(bytes.TrimSpace(newYAML)) == 0 {
-					fmt.Fprintln(edit.env.esc.stderr, "Aborting edit due to empty definition.")
-					return nil
+					return fmt.Errorf("reading environment definition: %w", err)
 				}
 
-				diags, err = edit.env.esc.client.UpdateEnvironment(ctx, orgName, envName, newYAML, tag)
+				diags, err := edit.env.esc.client.UpdateEnvironment(ctx, ref.orgName, ref.envName, yaml, "")
 				if err != nil {
 					return fmt.Errorf("updating environment definition: %w", err)
 				}
@@ -93,7 +83,45 @@ func newEnvEditCmd(env *envCommand) *cobra.Command {
 					return nil
 				}
 
-				err = edit.env.writeYAMLEnvironmentDiagnostics(edit.env.esc.stderr, envName, newYAML, diags)
+				return edit.env.writeYAMLEnvironmentDiagnostics(edit.env.esc.stderr, ref.envName, yaml, diags)
+			}
+
+			editor, err := edit.getEditor()
+			if err != nil {
+				return err
+			}
+
+			yaml, tag, err := edit.env.esc.client.GetEnvironment(ctx, ref.orgName, ref.envName, "", showSecrets)
+			if err != nil {
+				return fmt.Errorf("getting environment definition: %w", err)
+			}
+
+			var env *esc.Environment
+			var diags []client.EnvironmentDiagnostic
+			if len(yaml) != 0 {
+				env, diags, _ = edit.env.esc.client.CheckYAMLEnvironment(ctx, ref.orgName, yaml)
+			}
+
+			for {
+				newYAML, err := edit.editWithYAMLEditor(editor, ref.envName, yaml, env, diags)
+				if err != nil {
+					return err
+				}
+				if len(bytes.TrimSpace(newYAML)) == 0 {
+					fmt.Fprintln(edit.env.esc.stderr, "Aborting edit due to empty definition.")
+					return nil
+				}
+
+				diags, err = edit.env.esc.client.UpdateEnvironment(ctx, ref.orgName, ref.envName, newYAML, tag)
+				if err != nil {
+					return fmt.Errorf("updating environment definition: %w", err)
+				}
+				if len(diags) == 0 {
+					fmt.Fprintln(edit.env.esc.stdout, "Environment updated.")
+					return nil
+				}
+
+				err = edit.env.writeYAMLEnvironmentDiagnostics(edit.env.esc.stderr, ref.envName, newYAML, diags)
 				contract.IgnoreError(err)
 
 				fmt.Fprintln(edit.env.esc.stderr, "Press ENTER to continue editing or ^D to exit")
@@ -113,6 +141,10 @@ func newEnvEditCmd(env *envCommand) *cobra.Command {
 	}
 
 	cmd.Flags().StringVar(&edit.editorFlag, "editor", "", "the command to use to edit the environment definition")
+
+	cmd.Flags().StringVarP(&file,
+		"file", "f", "",
+		"the file that contains the updated environment, if any. Pass `-` to read from standard input.")
 
 	cmd.Flags().BoolVar(
 		&showSecrets, "show-secrets", false,
