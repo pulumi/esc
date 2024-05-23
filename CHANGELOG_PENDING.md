@@ -21,6 +21,9 @@
 - Add support for rolling back to a specific version of an environment.
   [#305](https://github.com/pulumi/esc/pull/305)
 
+- Add a new ESC SDK for Go and Typescript
+  [#271](https://github.com/pulumi/esc/pull/271)
+
 ### Bug Fixes
 
 - Ensure that redacted output is flushed in `esc run`
