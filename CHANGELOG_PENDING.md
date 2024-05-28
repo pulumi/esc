@@ -24,6 +24,9 @@
 - Add a new ESC SDK for Go and Typescript
   [#271](https://github.com/pulumi/esc/pull/271)
 
+- Add revision field to GetEnvironment and UpdateEnvironment client functions
+  [#313](https://github.com/pulumi/esc/issues/313)
+
 ### Bug Fixes
 
 - Ensure that redacted output is flushed in `esc run`
