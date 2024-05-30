@@ -69,6 +69,7 @@ func newEnvVersionCmd(env *envCommand) *cobra.Command {
 
 	cmd.AddCommand(newEnvVersionTagCmd(env))
 	cmd.AddCommand(newEnvVersionHistoryCmd(env))
+	cmd.AddCommand(newEnvVersionRetractCmd(env))
 
 	cmd.Flags().BoolVar(&utc, "utc", false, "display times in UTC")
 
@@ -79,13 +80,17 @@ func printRevision(stdout io.Writer, st *style.Stylist, r client.EnvironmentRevi
 	rules := style.Default()
 
 	st.Fprintf(stdout, rules.H1.StylePrimitive, "revision %v", r.Number)
-	switch len(r.Tags) {
-	case 0:
-		// OK
-	case 1:
-		st.Fprintf(stdout, rules.LinkText, " (tag: %v)", r.Tags[0])
-	default:
-		st.Fprintf(stdout, rules.LinkText, " (tags: %v)", strings.Join(r.Tags, ", "))
+	if r.Retracted != nil {
+		st.Fprintf(stdout, rules.CodeBlock.Chroma.GenericDeleted, " (retracted)")
+	} else {
+		switch len(r.Tags) {
+		case 0:
+			// OK
+		case 1:
+			st.Fprintf(stdout, rules.LinkText, " (tag: %v)", r.Tags[0])
+		default:
+			st.Fprintf(stdout, rules.LinkText, " (tags: %v)", strings.Join(r.Tags, ", "))
+		}
 	}
 	fmt.Fprintln(stdout, "")
 
@@ -103,6 +108,24 @@ func printRevision(stdout io.Writer, st *style.Stylist, r client.EnvironmentRevi
 	}
 
 	fmt.Fprintf(stdout, "Date:   %v\n", stamp)
+
+	if r.Retracted != nil {
+		if r.Retracted.ByLogin == "" {
+			fmt.Fprintf(stdout, "\n    Retracted by <unknown>")
+		} else {
+			fmt.Fprintf(stdout, "\n    Retracted by %v <%v>", r.Retracted.ByName, r.Retracted.ByLogin)
+		}
+		fmt.Fprintf(stdout, " at %v and replaced with revision %v.\n", r.Retracted.At, r.Retracted.Replacement)
+
+		if r.Retracted.Reason != "" {
+			fmt.Fprintln(stdout, "")
+
+			reason := strings.Split(r.Retracted.Reason, "\n")
+			for _, line := range reason {
+				fmt.Fprintf(stdout, "    %v\n", line)
+			}
+		}
+	}
 }
 
 func printRevisionTag(stdout io.Writer, st *style.Stylist, tag client.EnvironmentRevisionTag, utc bool) {
