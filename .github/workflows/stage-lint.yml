@@ -58,6 +58,8 @@ jobs:
   check-sdk-generation-clean:
     runs-on: ubuntu-latest
     steps:
+    - name: Checkout Repo
+      uses: actions/checkout@v2
     - name: Generate SDKs
       uses: ./.github/actions/generate_sdk
 
