@@ -29,13 +29,12 @@
         "jasmine": "^5.1.0",
         "prettier": "^3.1.1",
         "tsx": "^4.7.0",
-        "typescript": "^5.4.2"
+        "typescript": "^5.4.5"
     },
     "dependencies": {
         "axios": "^1.6.7",
         "js-yaml": "^4.1.0",
         "ts-node": "^10.9.2",
-        "tsc": "^2.0.4",
         "yaml": "^2.3.4"
     },
     "scripts": {
