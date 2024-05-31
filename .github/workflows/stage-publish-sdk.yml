@@ -25,9 +25,7 @@ jobs:
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v4
-        with:
-          submodules: true
-    
+
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
@@ -66,8 +64,6 @@ jobs:
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v4
-        with:
-          submodules: true
 
       - name: Setup Node
         uses: actions/setup-node@v4
