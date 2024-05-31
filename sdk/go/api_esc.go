@@ -107,7 +107,7 @@ func (a *EscAPIService) CheckEnvironmentYamlExecute(r ApiCheckEnvironmentYamlReq
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Pulumi-Source", "esc-sdk", "")
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "User-Agent", "esc-sdk/go/0.8.3-dev.0", "")
+	parameterAddToHeaderOrQuery(localVarHeaderParams, "User-Agent", "esc-sdk/go/0.9.0-dev.0", "")
 	// body params
 	localVarPostBody = r.body
 	if r.ctx != nil {
@@ -296,7 +296,7 @@ func (a *EscAPIService) CreateEnvironmentExecute(r ApiCreateEnvironmentRequest) 
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Pulumi-Source", "esc-sdk", "")
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "User-Agent", "esc-sdk/go/0.8.3-dev.0", "")
+	parameterAddToHeaderOrQuery(localVarHeaderParams, "User-Agent", "esc-sdk/go/0.9.0-dev.0", "")
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -494,7 +494,7 @@ func (a *EscAPIService) DecryptEnvironmentExecute(r ApiDecryptEnvironmentRequest
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Pulumi-Source", "esc-sdk", "")
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "User-Agent", "esc-sdk/go/0.8.3-dev.0", "")
+	parameterAddToHeaderOrQuery(localVarHeaderParams, "User-Agent", "esc-sdk/go/0.9.0-dev.0", "")
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -681,7 +681,7 @@ func (a *EscAPIService) DeleteEnvironmentExecute(r ApiDeleteEnvironmentRequest) 
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Pulumi-Source", "esc-sdk", "")
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "User-Agent", "esc-sdk/go/0.8.3-dev.0", "")
+	parameterAddToHeaderOrQuery(localVarHeaderParams, "User-Agent", "esc-sdk/go/0.9.0-dev.0", "")
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -868,7 +868,7 @@ func (a *EscAPIService) GetEnvironmentExecute(r ApiGetEnvironmentRequest) (*Envi
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Pulumi-Source", "esc-sdk", "")
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "User-Agent", "esc-sdk/go/0.8.3-dev.0", "")
+	parameterAddToHeaderOrQuery(localVarHeaderParams, "User-Agent", "esc-sdk/go/0.9.0-dev.0", "")
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -1053,7 +1053,7 @@ func (a *EscAPIService) GetEnvironmentETagExecute(r ApiGetEnvironmentETagRequest
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Pulumi-Source", "esc-sdk", "")
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "User-Agent", "esc-sdk/go/0.8.3-dev.0", "")
+	parameterAddToHeaderOrQuery(localVarHeaderParams, "User-Agent", "esc-sdk/go/0.9.0-dev.0", "")
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -1220,7 +1220,7 @@ func (a *EscAPIService) ListEnvironmentsExecute(r ApiListEnvironmentsRequest) (*
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Pulumi-Source", "esc-sdk", "")
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "User-Agent", "esc-sdk/go/0.8.3-dev.0", "")
+	parameterAddToHeaderOrQuery(localVarHeaderParams, "User-Agent", "esc-sdk/go/0.9.0-dev.0", "")
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -1409,7 +1409,7 @@ func (a *EscAPIService) OpenEnvironmentExecute(r ApiOpenEnvironmentRequest) (*Op
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Pulumi-Source", "esc-sdk", "")
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "User-Agent", "esc-sdk/go/0.8.3-dev.0", "")
+	parameterAddToHeaderOrQuery(localVarHeaderParams, "User-Agent", "esc-sdk/go/0.9.0-dev.0", "")
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -1600,7 +1600,7 @@ func (a *EscAPIService) ReadOpenEnvironmentExecute(r ApiReadOpenEnvironmentReque
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Pulumi-Source", "esc-sdk", "")
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "User-Agent", "esc-sdk/go/0.8.3-dev.0", "")
+	parameterAddToHeaderOrQuery(localVarHeaderParams, "User-Agent", "esc-sdk/go/0.9.0-dev.0", "")
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -1791,7 +1791,7 @@ func (a *EscAPIService) ReadOpenEnvironmentPropertyExecute(r ApiReadOpenEnvironm
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Pulumi-Source", "esc-sdk", "")
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "User-Agent", "esc-sdk/go/0.8.3-dev.0", "")
+	parameterAddToHeaderOrQuery(localVarHeaderParams, "User-Agent", "esc-sdk/go/0.9.0-dev.0", "")
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -1977,7 +1977,7 @@ func (a *EscAPIService) UpdateEnvironmentYamlExecute(r ApiUpdateEnvironmentYamlR
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Pulumi-Source", "esc-sdk", "")
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "User-Agent", "esc-sdk/go/0.8.3-dev.0", "")
+	parameterAddToHeaderOrQuery(localVarHeaderParams, "User-Agent", "esc-sdk/go/0.9.0-dev.0", "")
 	// body params
 	localVarPostBody = r.body
 	if r.ctx != nil {

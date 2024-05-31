@@ -639,7 +639,7 @@ export const EscApiAxiosParamCreator = function (configuration?: Configuration) 
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             localVarHeaderParameter['X-Pulumi-Source'] = 'esc-sdk'
-            localVarHeaderParameter['User-Agent'] = 'esc-sdk/ts/0.8.3-dev.0'
+            localVarHeaderParameter['User-Agent'] = 'esc-sdk/ts/0.9.0-dev.0'
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
             localVarRequestOptions.data = serializeDataIfNeeded(body, localVarRequestOptions, configuration)
@@ -683,7 +683,7 @@ export const EscApiAxiosParamCreator = function (configuration?: Configuration) 
     
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             localVarHeaderParameter['X-Pulumi-Source'] = 'esc-sdk'
-            localVarHeaderParameter['User-Agent'] = 'esc-sdk/ts/0.8.3-dev.0'
+            localVarHeaderParameter['User-Agent'] = 'esc-sdk/ts/0.9.0-dev.0'
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
@@ -726,7 +726,7 @@ export const EscApiAxiosParamCreator = function (configuration?: Configuration) 
     
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             localVarHeaderParameter['X-Pulumi-Source'] = 'esc-sdk'
-            localVarHeaderParameter['User-Agent'] = 'esc-sdk/ts/0.8.3-dev.0'
+            localVarHeaderParameter['User-Agent'] = 'esc-sdk/ts/0.9.0-dev.0'
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
@@ -769,7 +769,7 @@ export const EscApiAxiosParamCreator = function (configuration?: Configuration) 
     
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             localVarHeaderParameter['X-Pulumi-Source'] = 'esc-sdk'
-            localVarHeaderParameter['User-Agent'] = 'esc-sdk/ts/0.8.3-dev.0'
+            localVarHeaderParameter['User-Agent'] = 'esc-sdk/ts/0.9.0-dev.0'
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
@@ -812,7 +812,7 @@ export const EscApiAxiosParamCreator = function (configuration?: Configuration) 
     
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             localVarHeaderParameter['X-Pulumi-Source'] = 'esc-sdk'
-            localVarHeaderParameter['User-Agent'] = 'esc-sdk/ts/0.8.3-dev.0'
+            localVarHeaderParameter['User-Agent'] = 'esc-sdk/ts/0.9.0-dev.0'
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
@@ -855,7 +855,7 @@ export const EscApiAxiosParamCreator = function (configuration?: Configuration) 
     
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             localVarHeaderParameter['X-Pulumi-Source'] = 'esc-sdk'
-            localVarHeaderParameter['User-Agent'] = 'esc-sdk/ts/0.8.3-dev.0'
+            localVarHeaderParameter['User-Agent'] = 'esc-sdk/ts/0.9.0-dev.0'
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
@@ -899,7 +899,7 @@ export const EscApiAxiosParamCreator = function (configuration?: Configuration) 
     
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             localVarHeaderParameter['X-Pulumi-Source'] = 'esc-sdk'
-            localVarHeaderParameter['User-Agent'] = 'esc-sdk/ts/0.8.3-dev.0'
+            localVarHeaderParameter['User-Agent'] = 'esc-sdk/ts/0.9.0-dev.0'
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
@@ -947,7 +947,7 @@ export const EscApiAxiosParamCreator = function (configuration?: Configuration) 
     
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             localVarHeaderParameter['X-Pulumi-Source'] = 'esc-sdk'
-            localVarHeaderParameter['User-Agent'] = 'esc-sdk/ts/0.8.3-dev.0'
+            localVarHeaderParameter['User-Agent'] = 'esc-sdk/ts/0.9.0-dev.0'
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
@@ -994,7 +994,7 @@ export const EscApiAxiosParamCreator = function (configuration?: Configuration) 
     
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             localVarHeaderParameter['X-Pulumi-Source'] = 'esc-sdk'
-            localVarHeaderParameter['User-Agent'] = 'esc-sdk/ts/0.8.3-dev.0'
+            localVarHeaderParameter['User-Agent'] = 'esc-sdk/ts/0.9.0-dev.0'
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
@@ -1048,7 +1048,7 @@ export const EscApiAxiosParamCreator = function (configuration?: Configuration) 
     
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             localVarHeaderParameter['X-Pulumi-Source'] = 'esc-sdk'
-            localVarHeaderParameter['User-Agent'] = 'esc-sdk/ts/0.8.3-dev.0'
+            localVarHeaderParameter['User-Agent'] = 'esc-sdk/ts/0.9.0-dev.0'
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
@@ -1096,7 +1096,7 @@ export const EscApiAxiosParamCreator = function (configuration?: Configuration) 
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             localVarHeaderParameter['X-Pulumi-Source'] = 'esc-sdk'
-            localVarHeaderParameter['User-Agent'] = 'esc-sdk/ts/0.8.3-dev.0'
+            localVarHeaderParameter['User-Agent'] = 'esc-sdk/ts/0.9.0-dev.0'
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
             localVarRequestOptions.data = serializeDataIfNeeded(body, localVarRequestOptions, configuration)
