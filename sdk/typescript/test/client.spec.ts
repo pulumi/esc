@@ -18,7 +18,6 @@ import * as esc from "../esc";
 
 const ENV_PREFIX = "sdk-ts-test";
 describe("ESC", async () => {
-
     const PULUMI_ACCESS_TOKEN = process.env.PULUMI_ACCESS_TOKEN;
     const PULUMI_ORG = process.env.PULUMI_ORG;
     if (!PULUMI_ACCESS_TOKEN) {
@@ -33,12 +32,11 @@ describe("ESC", async () => {
     const baseEnvName = `${ENV_PREFIX}-base-${Date.now()}`;
 
     before(async () => {
-    
         const envDef: esc.EnvironmentDefinition = {
             values: {
                 base: baseEnvName,
             },
-        }
+        };
         await removeAllTestEnvs(client, PULUMI_ORG);
         await client.createEnvironment(PULUMI_ORG, baseEnvName);
         await client.updateEnvironment(PULUMI_ORG, baseEnvName, envDef);
@@ -50,11 +48,10 @@ describe("ESC", async () => {
 
     it("should create, list, update, get, decrypt, open and delete an environment", async () => {
         const name = `${ENV_PREFIX}-${Date.now()}`;
-    
         await assert.doesNotReject(client.createEnvironment(PULUMI_ORG, name));
         const orgs = await client.listEnvironments(PULUMI_ORG);
         assert.notEqual(orgs, undefined);
-        assert(orgs?.environments?.some((e) => e.name === name))
+        assert(orgs?.environments?.some((e) => e.name === name));
 
         const envDef: esc.EnvironmentDefinition = {
             imports: [baseEnvName],
@@ -71,12 +68,12 @@ describe("ESC", async () => {
                     FOO: "${foo}",
                 },
             },
-        }
-        const diags = await client.updateEnvironment(PULUMI_ORG, name, envDef)
+        };
+        const diags = await client.updateEnvironment(PULUMI_ORG, name, envDef);
         assert.notEqual(diags, undefined);
         assert.equal(diags?.diagnostics, undefined);
 
-        const env = await client.getEnvironment(PULUMI_ORG, name)
+        const env = await client.getEnvironment(PULUMI_ORG, name);
 
         assert.notEqual(env, undefined);
         assertEnvDef(env!, baseEnvName);
@@ -87,9 +84,9 @@ describe("ESC", async () => {
         assert.notEqual(decryptEnv, undefined);
         assertEnvDef(decryptEnv!, baseEnvName);
         assert.equal(decryptEnv?.definition?.values?.my_secret["fn::secret"], "shh! don't tell anyone");
-                
+
         const openEnv = await client.openAndReadEnvironment(PULUMI_ORG, name);
-        
+
         assert.equal(openEnv?.values?.base, baseEnvName);
         assert.equal(openEnv?.values?.foo, "bar");
         assert.deepEqual(openEnv?.values?.my_array, [1, 2, 3]);
@@ -112,9 +109,9 @@ describe("ESC", async () => {
             values: {
                 foo: "bar",
             },
-        }
+        };
 
-        const diags = await client.checkEnvironment(PULUMI_ORG, envDef)
+        const diags = await client.checkEnvironment(PULUMI_ORG, envDef);
         assert.notEqual(diags, undefined);
         assert.equal(diags?.diagnostics?.length, 0);
     });
@@ -127,11 +124,11 @@ describe("ESC", async () => {
                     foo: "${bad_ref}",
                 },
             },
-        }
-        const diags = await client.checkEnvironment(PULUMI_ORG, envDef)
+        };
+        const diags = await client.checkEnvironment(PULUMI_ORG, envDef);
         assert.notEqual(diags, undefined);
-        assert.equal(diags?.diagnostics?.length, 1)
-        assert.equal(diags?.diagnostics?.[0].summary, "unknown property \"bad_ref\"")
+        assert.equal(diags?.diagnostics?.length, 1);
+        assert.equal(diags?.diagnostics?.[0].summary, `unknown property "bad_ref"`);
     });
 });
 
