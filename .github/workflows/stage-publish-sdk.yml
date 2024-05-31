@@ -7,6 +7,10 @@ on:
         required: true
         type: string
         description: Version to be used to publish the SDKs
+      prerelease:
+        required: true
+        type: boolean
+        description: Indicates if we're doing a pre- or proper release.
 
 env:
   GITHUB_TOKEN: ${{ secrets.PULUMI_BOT_TOKEN }}
@@ -76,11 +80,48 @@ jobs:
         env:
           VERSION: ${{ inputs.version }}
 
-      - name: Publish Go SDK
-        uses: pulumi/publish-go-sdk-action@v1
+      - name: Checkout Go SDK repo
+        uses: actions/checkout@v4
         with:
+          token: ${{ secrets.PULUMI_BOT_TOKEN }}
           repository: pulumi/esc-sdk
-          base-ref: main
-          source: sdk/go
-          version: ${{ inputs.version }}
-          additive: false
+          path: pulumi/esc-sdk
+          fetch-depth: 0
+
+      - name: Checkout prerelease branch
+        if: inputs.prerelease == true
+        working-directory: sdk/esc-sdk
+        run: git checkout -b ${{ inputs.version }}
+
+      - name: Checkout main branch
+        if: inputs.prerelease == false
+        working-directory: sdk/esc-sdk
+        run: git checkout main
+
+      - name: Copy files
+        uses: pulumi/glob-action@v1
+        with:
+          operation: copy
+          source:  sdk/go
+          destination: sdk/esc-sdk
+          files: |
+            **
+
+      - name: Commit and tag
+        working-directory: sdk/esc-sdk
+        run: |
+          git config user.name "Pulumi Bot"
+          git config user.email "bot@pulumi.com"
+          git add .
+          git commit -m "v${{ inputs.version }}"
+          ../../.github/scripts/tag-go-modules.sh ${{ inputs.version }}
+
+      - name: Publish to prerelease branch
+        if: inputs.prerelease == true
+        working-directory: sdk/esc-sdk
+        run: git push -u origin ${{ inputs.version }} --tags
+
+      - name: Publish to master branch
+        if: inputs.prerelease == false
+        working-directory: sdk/esc-sdk
+        run: git push -u origin main --tags
