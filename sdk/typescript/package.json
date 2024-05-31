@@ -1,11 +1,17 @@
 {
     "name": "@pulumi/esc-sdk",
-    "version": "0.0.1",
+    "version": "${VERSION}",
     "description": "NodeJS SDK for Pulumi ESC",
+    "keywords": [
+        "pulumi",
+        "esc",
+        "sdk",
+        "category/cloud"
+    ],
     "repository": {
         "type": "git",
         "url": "https://github.com/pulumi/esc.git",
-        "directory": "sdk/nodejs"
+        "directory": "sdk/typescript"
     },
     "license": "Apache-2.0",
     "bugs": {

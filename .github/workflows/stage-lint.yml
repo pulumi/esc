@@ -55,3 +55,14 @@ jobs:
           go-version: 1.20.x
       - name: Lint
         run: make lint-copyright
+  check-sdk-generation-clean:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Generate SDKs
+      uses: ./.github/actions/generate_sdk
+
+    - name: Check worktree clean
+      uses: pulumi/git-status-check-action@v1
+
+    - run: git status --porcelain
+      shell: bash

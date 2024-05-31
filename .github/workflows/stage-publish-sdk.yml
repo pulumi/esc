@@ -1,0 +1,96 @@
+name: Publish-SDK
+
+on:
+  workflow_call:
+    inputs:
+      version:
+        required: true
+        type: string
+        description: Version to be used to publish the SDKs
+
+
+env:
+  GITHUB_TOKEN: ${{ secrets.PULUMI_BOT_TOKEN }}
+  PULUMI_LOCAL_NUGET: ${{ github.workspace }}/nuget
+  NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+  NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+  NUGET_PUBLISH_KEY: ${{ secrets.NUGET_PUBLISH_KEY }}
+  PYPI_USERNAME: __token__
+  PYPI_PASSWORD: ${{ secrets.PYPI_API_TOKEN }}
+
+jobs:
+
+  publish-nodejs-sdk:
+    runs-on: ubuntu-latest
+    name: publish-nodejs-sdk
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v4
+        with:
+          submodules: true
+    
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          registry-url: https://registry.npmjs.org
+
+      - name: Generate SDKs
+        uses: ./.github/actions/generate_sdk
+        env:
+          VERSION: ${{ inputs.version }}
+
+      - name: Calculate tag
+        id: tag
+        run: echo "tag=$(./.github/scripts/calculate-npm-tag.sh "${{ inputs.version }}")" >> "$GITHUB_OUTPUT"
+
+      - name: Build Node.JS SDK
+        working-directory: sdk/typescript
+        run: |-
+          npm i
+          npm run build
+          cp ../../README.md ../../LICENSE package.json package-lock.json bin/
+          sed -i.bak 's/$${VERSION}/$(VERSION)/g' bin/package.json
+        env:
+            VERSION: ${{ inputs.version }}
+      
+      - name: Publish Node.JS SDK
+        working-directory: sdk/typescript/bin
+        run: npm publish --tag "${{ steps.tag.outputs.tag }}"
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+  # publish-go-sdk:
+  #   runs-on: ubuntu-latest
+  #   name: publish-go-sdk
+  #   steps:
+  #     - name: Checkout Repo
+  #       uses: actions/checkout@v4
+  #       with:
+  #         submodules: true
+
+
+  #     - name: Setup Node
+  #       uses: actions/setup-node@v4
+  #       with:
+  #         node-version: 20
+  #         registry-url: https://registry.npmjs.org
+
+  #     - name: Generate SDKs
+  #       uses: ./.github/actions/generate_sdk
+  #       env:
+  #         VERSION: ${{ inputs.version }}
+
+  #     - name: Publish Go SDK
+  #       uses: pulumi/publish-go-sdk-action@v1
+  #       with:
+  #         repository: ${{ github.repository }}
+  #         base-ref: ${{ github.sha }}
+  #         source: sdk
+  #         path: sdk
+  #         version: ${{ steps.version.outputs.version }}
+  #         additive: false
+  #         files: |-
+  #           go.*
+  #           go/**
+  #           !*.tar.gz

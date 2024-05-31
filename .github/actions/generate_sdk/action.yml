@@ -1,0 +1,15 @@
+name: Generate SDKs
+description: Generate SDKs using the openapi-generator-cli
+
+runs:
+  using: "composite"
+  steps:
+  - name: Install OpenAPI Generator CLI
+    run: npm install @openapitools/openapi-generator-cli -g
+    shell: bash
+
+  - name: Generate SDKs
+    run: |
+      # Generate the SDKs
+      make generate_go_client_sdk, generate_ts_client_sdk
+    shell: bash
