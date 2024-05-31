@@ -28,4 +28,5 @@ jobs:
     uses: ./.github/workflows/stage-publish-sdk.yml
     with:
       version: ${{ github.ref_name }}
+      prerelease: true
     secrets: inherit
