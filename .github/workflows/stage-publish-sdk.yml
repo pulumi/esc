@@ -49,15 +49,14 @@ jobs:
         run: |-
           npm i
           npm run build
-          cp ../../README.md ../../LICENSE package.json package-lock.json bin/
-          cat bin/package.json
-          sed -i.bak -e "s/$${VERSION}/$VERSION/g" ./bin/package.json
+          cp ../../README.md ../../LICENSE package.json package-lock.json bin/esc/
+          sed -i.bak -e "s/\${VERSION}/$VERSION/g" ./bin/esc/package.json
           cat bin/package.json
         env:
             VERSION: ${{ inputs.version }}
       
       - name: Publish Node.JS SDK
-        working-directory: sdk/typescript/bin
+        working-directory: sdk/typescript/bin/esc
         run: npm publish --tag "${{ steps.tag.outputs.tag }}"
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
