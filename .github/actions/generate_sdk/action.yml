@@ -11,5 +11,5 @@ runs:
   - name: Generate SDKs
     run: |
       # Generate the SDKs
-      make generate_go_client_sdk, generate_ts_client_sdk
+      make generate_go_client_sdk generate_ts_client_sdk
     shell: bash
