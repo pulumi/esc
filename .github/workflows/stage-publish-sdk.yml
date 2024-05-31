@@ -114,7 +114,7 @@ jobs:
           git config user.email "bot@pulumi.com"
           git add .
           git commit -m "v${{ inputs.version }}"
-          ../../.github/scripts/tag-go-modules.sh ${{ inputs.version }}
+          git tag "${{ inputs.version }}"
 
       - name: Publish to prerelease branch
         if: inputs.prerelease == true
