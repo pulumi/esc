@@ -47,6 +47,7 @@ jobs:
       - name: Build Node.JS SDK
         working-directory: sdk/typescript
         run: |-
+          yarn global add typescript
           npm i
           npm run build
           cp ../../README.md ../../LICENSE package.json package-lock.json bin/

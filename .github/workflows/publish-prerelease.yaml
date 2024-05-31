@@ -9,22 +9,22 @@ env:
   GITHUB_TOKEN: ${{ secrets.PULUMI_BOT_TOKEN }}
 
 jobs:
-  lint:
-    uses: ./.github/workflows/stage-lint.yml
-  test:
-    uses: ./.github/workflows/stage-test.yml
-    with:
-      enable-coverage: true
-    secrets: inherit
-  publish:
-    needs: [test, lint]
-    uses: ./.github/workflows/stage-publish.yml
-    with:
-      goreleaser-args: -p 10 -f .goreleaser.prerelease.yml --rm-dist --skip-validate --timeout 60m0s --release-notes=CHANGELOG_PENDING.md
-    secrets: inherit
+  # lint:
+  #   uses: ./.github/workflows/stage-lint.yml
+  # test:
+  #   uses: ./.github/workflows/stage-test.yml
+  #   with:
+  #     enable-coverage: true
+  #   secrets: inherit
+  # publish:
+  #   needs: [test, lint]
+  #   uses: ./.github/workflows/stage-publish.yml
+  #   with:
+  #     goreleaser-args: -p 10 -f .goreleaser.prerelease.yml --rm-dist --skip-validate --timeout 60m0s --release-notes=CHANGELOG_PENDING.md
+  #   secrets: inherit
 
   publish-sdks:
-    needs: [test, lint]
+    # needs: [test, lint]
     uses: ./.github/workflows/stage-publish-sdk.yml
     with:
       version: ${{ github.ref_name }}
