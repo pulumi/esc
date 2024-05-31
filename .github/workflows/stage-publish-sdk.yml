@@ -51,7 +51,7 @@ jobs:
           npm run build
           cp ../../README.md ../../LICENSE package.json package-lock.json bin/
           cat bin/package.json
-          sed -i.bak "s/$${VERSION}/$(VERSION)/g" bin/package.json
+          sed -i.bak "s/$${VERSION}/$VERSION/g" bin/package.json
           cat bin/package.json
         env:
             VERSION: ${{ inputs.version }}
