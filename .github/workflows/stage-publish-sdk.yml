@@ -55,7 +55,7 @@ jobs:
             VERSION: ${{ inputs.version }}
       
       - name: Publish Node.JS SDK
-        working-directory: sdk/typescript/bin/esc
+        working-directory: sdk/typescript/bin
         run: npm publish --tag "${{ steps.tag.outputs.tag }}"
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
