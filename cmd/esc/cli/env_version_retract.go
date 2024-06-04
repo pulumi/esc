@@ -43,6 +43,7 @@ func newEnvVersionRetractCmd(env *envCommand) *cobra.Command {
 			if ref.version == "latest" {
 				return errors.New("cannot retract the `latest` revision")
 			}
+			_ = args
 
 			var replacementRevision *int
 			if replacement != "" {
