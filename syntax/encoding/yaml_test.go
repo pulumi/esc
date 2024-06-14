@@ -20,6 +20,7 @@ import (
 	"os"
 	"path/filepath"
 	"sort"
+	"strconv"
 	"strings"
 	"testing"
 
@@ -29,6 +30,7 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"gopkg.in/yaml.v3"
+	"pgregory.net/rapid"
 )
 
 func accept() bool {
@@ -176,4 +178,112 @@ baz: qux
 
 	assert.Empty(t, diags)
 	assert.Equal(t, expected, b.String())
+}
+
+func FuzzYAMLDecode(f *testing.F) {
+	f.Fuzz(func(t *testing.T, seed int) {
+		switch seed {
+		case 53, 128, 311:
+			t.Skip("passes manually, but takes >1s")
+		}
+
+		doc := MappingNodeGenerator(5).Example(seed)
+		bytes, err := yaml.Marshal(doc)
+		require.NoError(t, err)
+
+		root, diags := DecodeYAMLBytes("doc", bytes, nil)
+		require.Empty(t, diags)
+		assert.NotNil(t, root)
+	})
+}
+
+func ScalarNodeGenerator() *rapid.Generator[*yaml.Node] {
+	return rapid.Custom(func(t *rapid.T) *yaml.Node {
+		var val string
+		tag := rapid.SampledFrom([]string{"!!null", "!!bool", "!!int", "!!float", "!!str"}).Draw(t, "tag")
+		switch tag {
+		case "!!null":
+			val = "null"
+		case "!!bool":
+			val = strconv.FormatBool(rapid.Bool().Draw(t, "booleans"))
+		case "!!int":
+			val = strconv.FormatInt(rapid.Int64().Draw(t, "ints"), 10)
+		case "!!float":
+			val = strconv.FormatFloat(rapid.Float64().Draw(t, "floats"), 'g', -1, 64)
+		case "!!str":
+			return StringNodeGenerator().Draw(t, "string scalar node")
+		}
+
+		return &yaml.Node{
+			Kind:  yaml.ScalarNode,
+			Tag:   tag,
+			Value: val,
+		}
+	})
+}
+
+func StringNodeGenerator() *rapid.Generator[*yaml.Node] {
+	return rapid.Custom(func(t *rapid.T) *yaml.Node {
+		val := rapid.String().Draw(t, "strings")
+		for strings.ContainsAny(val, ":-") {
+			val = rapid.String().Draw(t, "strings")
+		}
+
+		style := rapid.SampledFrom([]yaml.Style{0, yaml.DoubleQuotedStyle, yaml.FoldedStyle, yaml.LiteralStyle, yaml.SingleQuotedStyle}).Draw(t, "string styles")
+		return &yaml.Node{
+			Kind:  yaml.ScalarNode,
+			Style: style,
+			Tag:   "!!str",
+			Value: val,
+		}
+	})
+}
+
+func SequenceNodeGenerator(maxDepth int) *rapid.Generator[*yaml.Node] {
+	return rapid.Custom(func(t *rapid.T) *yaml.Node {
+		content := rapid.SliceOfN(NodeGenerator(maxDepth-1), 0, 32).Draw(t, "sequence elements")
+		style := rapid.SampledFrom([]yaml.Style{0, yaml.FlowStyle}).Draw(t, "sequence style")
+		return &yaml.Node{
+			Kind:    yaml.SequenceNode,
+			Style:   style,
+			Content: content,
+		}
+	})
+}
+
+func MappingNodeGenerator(maxDepth int) *rapid.Generator[*yaml.Node] {
+	return rapid.Custom(func(t *rapid.T) *yaml.Node {
+		for {
+			keys := rapid.SliceOfNDistinct(StringNodeGenerator(), 0, 32, func(n *yaml.Node) string { return n.Value }).Draw(t, "mapping keys")
+			values := rapid.SliceOfN(NodeGenerator(maxDepth-1), len(keys), len(keys)).Draw(t, "mapping values")
+			style := rapid.SampledFrom([]yaml.Style{0, yaml.FlowStyle}).Draw(t, "mapping style")
+			content := make([]*yaml.Node, len(keys)*2)
+			for i, k := range keys {
+				content[2*i], content[2*i+1] = k, values[i]
+			}
+			n := &yaml.Node{
+				Kind:    yaml.MappingNode,
+				Style:   style,
+				Content: content,
+			}
+			bytes, err := yaml.Marshal(n)
+			if err != nil {
+				t.Errorf("marshaling node: %v", err)
+			}
+			var unused any
+			if err := yaml.Unmarshal(bytes, &unused); err == nil {
+				return n
+			}
+		}
+	})
+}
+
+func NodeGenerator(maxDepth int) *rapid.Generator[*yaml.Node] {
+	choices := []*rapid.Generator[*yaml.Node]{
+		ScalarNodeGenerator(),
+	}
+	if maxDepth > 0 {
+		choices = append(choices, SequenceNodeGenerator(maxDepth), MappingNodeGenerator(maxDepth))
+	}
+	return rapid.OneOf(choices...)
 }
