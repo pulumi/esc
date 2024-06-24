@@ -163,6 +163,28 @@ type Client interface {
 	//
 	GetOpenProperty(ctx context.Context, orgName, envName, openEnvID, property string) (*esc.Value, error)
 
+	// ListEnvironmentTags lists the tags for the given environment.
+	ListEnvironmentTags(
+		ctx context.Context,
+		orgName, envName string,
+		options ListEnvironmentTagsOptions,
+	) ([]*EnvironmentTag, string, error)
+
+	// CreateEnvironmentTag creates and applies a tag to the given environment.
+	CreateEnvironmentTag(
+		ctx context.Context,
+		orgName, envName, key, value string,
+	) (*EnvironmentTag, error)
+
+	// UpdateEnvironmentTag updates a specified environment tag with a new key / value.
+	UpdateEnvironmentTag(
+		ctx context.Context,
+		orgName, envName, tagID, currentKey, currentValue, newKey, newValue string,
+	) (*EnvironmentTag, error)
+
+	// DeleteEnvironmentTag deletes a specified tag on an environment.
+	DeleteEnvironmentTag(ctx context.Context, orgName, envName, tagID string) error
+
 	// GetEnvironmentRevision returns a description of the given revision.
 	GetEnvironmentRevision(ctx context.Context, orgName, envName string, revision int) (*EnvironmentRevision, error)
 
@@ -573,6 +595,83 @@ func (pc *client) GetOpenProperty(ctx context.Context, orgName, envName, openSes
 		return nil, err
 	}
 	return &resp, nil
+}
+
+type ListEnvironmentTagsOptions struct {
+	After string `url:"after"`
+	Count *int   `url:"count"`
+}
+
+// ListEnvironmentTags lists the tags for the given environment.
+func (pc *client) ListEnvironmentTags(
+	ctx context.Context,
+	orgName string,
+	envName string,
+	options ListEnvironmentTagsOptions,
+) ([]*EnvironmentTag, string, error) {
+	var resp ListEnvironmentTagsResponse
+	path := fmt.Sprintf("/api/preview/environments/%v/%v/tags", orgName, envName)
+	err := pc.restCall(ctx, http.MethodGet, path, options, nil, &resp)
+	if err != nil {
+		return nil, "", err
+	}
+
+	tags := []*EnvironmentTag{}
+	for _, t := range resp.Tags {
+		tags = append(tags, t)
+	}
+	return tags, resp.NextToken, nil
+}
+
+// CreateEnvironmentTag creates and applies a tag to the given environment.
+func (pc *client) CreateEnvironmentTag(
+	ctx context.Context,
+	orgName, envName, key, value string,
+) (*EnvironmentTag, error) {
+	var resp EnvironmentTag
+	req := CreateEnvironmentTagRequest{
+		Name:  key,
+		Value: value,
+	}
+	path := fmt.Sprintf("/api/preview/environments/%v/%v/tags", orgName, envName)
+	err := pc.restCall(ctx, http.MethodPost, path, nil, &req, &resp)
+	if err != nil {
+		return nil, err
+	}
+	return &resp, nil
+}
+
+// UpdateEnvironmentTag updates a specified environment tag with a new key / value.
+func (pc *client) UpdateEnvironmentTag(
+	ctx context.Context,
+	orgName, envName, tagID, currentKey, currentValue, newKey, newValue string,
+) (*EnvironmentTag, error) {
+	var resp EnvironmentTag
+	req := UpdateEnvironmentTagRequest{
+		CurrentTag: TagRequest{
+			Name:  currentKey,
+			Value: currentValue,
+		},
+		NewTag: TagRequest{},
+	}
+	if newKey != "" {
+		req.NewTag.Name = newKey
+	}
+	if newValue != "" {
+		req.NewTag.Value = newValue
+	}
+	path := fmt.Sprintf("/api/preview/environments/%v/%v/tags/%v", orgName, envName, tagID)
+	err := pc.restCall(ctx, http.MethodPatch, path, nil, &req, &resp)
+	if err != nil {
+		return nil, err
+	}
+	return &resp, nil
+}
+
+// DeleteEnvironmentTag deletes a specified tag on an environment.
+func (pc *client) DeleteEnvironmentTag(ctx context.Context, orgName, envName, tagID string) error {
+	path := fmt.Sprintf("/api/preview/environments/%v/%v/tags/%v", orgName, envName, tagID)
+	return pc.restCall(ctx, http.MethodDelete, path, nil, nil, nil)
 }
 
 // GetEnvironmentRevision returns a description of the given revision.
