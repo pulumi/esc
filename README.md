@@ -12,11 +12,11 @@
 
 **[Pulumi ESC](https://www.pulumi.com/product/esc/)** is an open source secrets management platform that tames secrets and configuration complexity across all of your cloud infrastructure and application environments.
 
-Pulumi ESC enables teams to aggregate secrets and configuration from many sources, manage hierarchical collections of configuration and secrets as environments, and consume those configuration and secrets from a variety of different infrastructure and application services.
+With Pulumi ESC, teams can aggregate secrets and configurations from many sources, manage hierarchical collections of configurations and secrets as environments, and consume them through a variety of means including CLI, SDK, REST API, Pulumi Cloud Web Console and Pulumi-service provider.
 
-Pulumi ESC It simplifies secrets and configurations for all your application and infrastructure, including Pulumi IaC.
+Pulumi ESC not only works great for your applications and IaC, including Pulumi IaC, but it also makes your day-to-day developer workflow much more secure and streamlined. For example, the Pulumi ESC CLI (esc) allows you to give your developers immediate, just-in-time authenticated, and short-lived access to cloud credentials across any cloud provider with just a single command: `esc run aws-staging -- aws s3 ls`.
 
-For example, the Pulumi ESC CLI (`esc`) makes it possible to give your developers immediate, just-in-time authenticated and short-lived access to cloud credentials across any cloud provider with just a single command: `esc run aws-staging -- aws s3 ls`.
+In this example, an ESC environment named aws-staging has all the necessary staging environment configuration and OIDC setup to connect to AWS. Running this command opens up a temporary environment and executes the aws s3 ls command in that environment. The temporary AWS credentials are not stored anywhere, making them secure and also allowing you to switch between different environments dynamically.
 
 ![Pulumi's open source secrets management solution overview](./assets/esc_product_demo.gif)
 
