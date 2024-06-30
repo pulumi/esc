@@ -627,6 +627,70 @@ func (c *testPulumiClient) GetOpenProperty(ctx context.Context, orgName, envName
 	return nil, errors.New("NYI")
 }
 
+func (c *testPulumiClient) ListEnvironmentTags(
+	ctx context.Context,
+	orgName string,
+	envName string,
+	options client.ListEnvironmentTagsOptions,
+) ([]*client.EnvironmentTag, string, error) {
+	ts := time.Now()
+	return []*client.EnvironmentTag{
+		{
+			ID:          "1234",
+			Name:        "team",
+			Value:       "pulumi",
+			Created:     ts,
+			Modified:    ts,
+			EditorLogin: "pulumipus",
+			EditorName:  "pulumipus",
+		},
+	}, "", nil
+}
+
+func (c *testPulumiClient) CreateEnvironmentTag(
+	ctx context.Context,
+	orgName, envName, key, value string,
+) (*client.EnvironmentTag, error) {
+	ts := time.Now()
+	return &client.EnvironmentTag{
+		ID:          "1234",
+		Name:        key,
+		Value:       value,
+		Created:     ts,
+		Modified:    ts,
+		EditorLogin: "pulumipus",
+		EditorName:  "pulumipus",
+	}, nil
+}
+
+func (c *testPulumiClient) UpdateEnvironmentTag(
+	ctx context.Context,
+	orgName, envName, tagID, currentKey, currentValue, newKey, newValue string,
+) (*client.EnvironmentTag, error) {
+	name := newKey
+	if name == "" {
+		name = currentKey
+	}
+	value := newValue
+	if value == "" {
+		value = currentValue
+	}
+	ts := time.Now()
+	return &client.EnvironmentTag{
+		ID:          "1234",
+		Name:        name,
+		Value:       value,
+		Created:     ts,
+		Modified:    ts,
+		EditorLogin: "pulumipus",
+		EditorName:  "pulumipus",
+	}, nil
+}
+
+func (c *testPulumiClient) DeleteEnvironmentTag(ctx context.Context, orgName, envName, tagID string) error {
+	return nil
+}
+
 func (c *testPulumiClient) GetEnvironmentRevision(
 	ctx context.Context,
 	orgName string,
