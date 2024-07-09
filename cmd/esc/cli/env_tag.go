@@ -7,7 +7,6 @@ import (
 	"errors"
 	"fmt"
 	"io"
-	"strings"
 
 	"github.com/pulumi/esc/cmd/esc/cli/client"
 	"github.com/pulumi/esc/cmd/esc/cli/style"
@@ -18,8 +17,8 @@ func newEnvTagCmd(env *envCommand) *cobra.Command {
 	var utc bool
 
 	cmd := &cobra.Command{
-		Use:   "tag [<org-name>/]<environment-name> <name>:<value>",
-		Args:  cobra.RangeArgs(1, 3),
+		Use:   "tag [<org-name>/]<environment-name> <name> <value>",
+		Args:  cobra.ExactArgs(3),
 		Short: "Manage environment tags",
 		Long: "Manage environment tags\n" +
 			"\n" +
@@ -42,18 +41,8 @@ func newEnvTagCmd(env *envCommand) *cobra.Command {
 				return errors.New("the tag command does not accept versions")
 			}
 
-			if len(args) == 0 {
-				return errors.New("must specify an environment tag")
-			}
-
-			// parse tag argument into name / value variables
-			tagParts := strings.Split(args[0], ":")
-			if len(tagParts) < 2 {
-				return errors.New("must specify both key and value")
-			}
-
-			name := tagParts[0]
-			value := tagParts[1]
+			name := args[0]
+			value := args[1]
 
 			if name == "" {
 				return errors.New("environment tag name cannot be empty")
