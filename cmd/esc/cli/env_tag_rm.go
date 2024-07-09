@@ -4,9 +4,7 @@ package cli
 
 import (
 	"context"
-	"errors"
 	"fmt"
-	"strings"
 
 	"github.com/spf13/cobra"
 
@@ -15,13 +13,13 @@ import (
 
 func newEnvTagRmCmd(env *envCommand) *cobra.Command {
 	cmd := &cobra.Command{
-		Use:   "rm [<org-name>/]<environment-name>/<tag-identifier>",
+		Use:   "rm [<org-name>/]<environment-name> <tag-name>",
 		Short: "Remove an environment tag.",
 		Long: "Remove an environment tag\n" +
 			"\n" +
-			"This command removes an environment tag using either the tag ID or tag name.\n",
+			"This command removes an environment tag using the tag name.\n",
 		SilenceUsage: true,
-		Args:         cobra.ExactArgs(1),
+		Args:         cobra.ExactArgs(2),
 		RunE: func(cmd *cobra.Command, args []string) error {
 			ctx := context.Background()
 
@@ -37,14 +35,9 @@ func newEnvTagRmCmd(env *envCommand) *cobra.Command {
 				return fmt.Errorf("the ls command does not accept versions")
 			}
 
-			// parse out environment name and optional tag ID
-			envName, tagIdentifier, hasTagIdentiier := strings.Cut(ref.envName, "/")
+			tagIdentifier := args[1]
 
-			if !hasTagIdentiier {
-				return errors.New("missing environment tag identifier")
-			}
-
-			tagID := tagIdentifier
+			var tagID string
 			after := ""
 			count := 500
 			for {
@@ -52,7 +45,7 @@ func newEnvTagRmCmd(env *envCommand) *cobra.Command {
 					After: after,
 					Count: &count,
 				}
-				tags, next, err := env.esc.client.ListEnvironmentTags(ctx, ref.orgName, envName, options)
+				tags, next, err := env.esc.client.ListEnvironmentTags(ctx, ref.orgName, ref.envName, options)
 				if err != nil {
 					return err
 				}
@@ -70,7 +63,11 @@ func newEnvTagRmCmd(env *envCommand) *cobra.Command {
 				}
 			}
 
-			err = env.esc.client.DeleteEnvironmentTag(ctx, ref.orgName, envName, tagID)
+			if tagID == "" {
+				return fmt.Errorf("could not find tag with name %q on environment %q", tagIdentifier, ref.envName)
+			}
+
+			err = env.esc.client.DeleteEnvironmentTag(ctx, ref.orgName, ref.envName, tagID)
 			if err != nil {
 				return err
 			}
