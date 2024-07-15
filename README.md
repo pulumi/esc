@@ -18,7 +18,7 @@ Pulumi ESC not only works great for your applications and IaC, including Pulumi 
 
 In this example, an ESC environment named aws-staging has all the necessary staging environment configuration and OIDC setup to connect to AWS. Running this command opens up a temporary environment and executes the aws s3 ls command in that environment. The temporary AWS credentials are not stored anywhere, making them secure and also allowing you to switch between different environments dynamically.
 
-![Pulumi's open source secrets management solution overview](./assets/esc_product_demo.gif)
+![Pulumi's open source secrets management solution overview](./assets/esc.gif)
 
 Pulumi ESC is also offered as a managed service as part of [Pulumi Cloud,](https://www.pulumi.com/product/pulumi-cloud/?utm_campaign=pulumi-esc-github-repo&utm_source=github.com) and this repo contains the implementation of the following key components of the ESC open source secrets and configuration management solution:
 
@@ -68,7 +68,7 @@ This will produce an `esc` binary in your `GOBIN` directory.
 
 ## How Pulumi ESC Works
 
-![Pulumi ESC: Open source secrets management overview](./assets/pulumi_esc_overview.png)
+![Pulumi ESC: Open source secrets management overview](./assets/overview.png)
 
 1. Pulumi ESC enables you to define environments, which are collections of secrets and configuration. Each environment can be composed from multiple environments.
 2. Pulumi ESC supports a variety of configuration and secrets sources, and it has an extensible plugin model that allows third-party sources.
