@@ -7,8 +7,6 @@ import (
 	"fmt"
 
 	"github.com/spf13/cobra"
-
-	"github.com/pulumi/esc/cmd/esc/cli/client"
 )
 
 func newEnvTagRmCmd(env *envCommand) *cobra.Command {
@@ -37,37 +35,7 @@ func newEnvTagRmCmd(env *envCommand) *cobra.Command {
 
 			tagIdentifier := args[1]
 
-			var tagID string
-			after := ""
-			count := 500
-			for {
-				options := client.ListEnvironmentTagsOptions{
-					After: after,
-					Count: &count,
-				}
-				tags, next, err := env.esc.client.ListEnvironmentTags(ctx, ref.orgName, ref.envName, options)
-				if err != nil {
-					return err
-				}
-
-				after = next
-				for _, t := range tags {
-					if t.Name == tagIdentifier {
-						tagID = t.ID
-						break
-					}
-				}
-
-				if after == "0" {
-					break
-				}
-			}
-
-			if tagID == "" {
-				return fmt.Errorf("could not find tag with name %q on environment %q", tagIdentifier, ref.envName)
-			}
-
-			err = env.esc.client.DeleteEnvironmentTag(ctx, ref.orgName, ref.envName, tagID)
+			err = env.esc.client.DeleteEnvironmentTag(ctx, ref.orgName, ref.envName, tagIdentifier)
 			if err != nil {
 				return err
 			}

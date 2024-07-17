@@ -627,6 +627,22 @@ func (c *testPulumiClient) GetOpenProperty(ctx context.Context, orgName, envName
 	return nil, errors.New("NYI")
 }
 
+func (c *testPulumiClient) GetEnvironmentTag(
+	ctx context.Context,
+	orgName, envName, key string,
+) (*client.EnvironmentTag, error) {
+	ts := time.Now()
+	return &client.EnvironmentTag{
+		ID:          "1234",
+		Name:        "team",
+		Value:       "pulumi",
+		Created:     ts,
+		Modified:    ts,
+		EditorLogin: "pulumipus",
+		EditorName:  "pulumipus",
+	}, nil
+}
+
 func (c *testPulumiClient) ListEnvironmentTags(
 	ctx context.Context,
 	orgName string,
@@ -665,7 +681,7 @@ func (c *testPulumiClient) CreateEnvironmentTag(
 
 func (c *testPulumiClient) UpdateEnvironmentTag(
 	ctx context.Context,
-	orgName, envName, tagID, currentKey, currentValue, newKey, newValue string,
+	orgName, envName, currentKey, currentValue, newKey, newValue string,
 ) (*client.EnvironmentTag, error) {
 	name := newKey
 	if name == "" {

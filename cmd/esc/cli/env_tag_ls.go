@@ -3,9 +3,12 @@
 package cli
 
 import (
+	"cmp"
 	"context"
 	"fmt"
 	"io"
+	"slices"
+	"strings"
 
 	"github.com/spf13/cobra"
 
@@ -42,8 +45,9 @@ func newEnvTagLsCmd(env *envCommand) *cobra.Command {
 
 			st := style.NewStylist(style.Profile(env.esc.stdout))
 
+			allTags := []*client.EnvironmentTag{}
 			after := ""
-			return env.esc.pager.Run(pagerFlag, env.esc.stdout, env.esc.stderr, func(ctx context.Context, stdout io.Writer) error {
+			err = env.esc.pager.Run(pagerFlag, env.esc.stdout, env.esc.stderr, func(ctx context.Context, stdout io.Writer) error {
 				count := 500
 				for {
 					options := client.ListEnvironmentTagsOptions{
@@ -57,9 +61,7 @@ func newEnvTagLsCmd(env *envCommand) *cobra.Command {
 
 					after = next
 
-					for _, t := range tags {
-						printTag(stdout, st, t, utcFlag(utc))
-					}
+					allTags = append(allTags, tags...)
 
 					if after == "0" {
 						break
@@ -67,6 +69,18 @@ func newEnvTagLsCmd(env *envCommand) *cobra.Command {
 				}
 				return nil
 			})
+
+			slices.SortStableFunc(allTags, func(a, b *client.EnvironmentTag) int {
+				return cmp.Compare(strings.ToLower(a.Name), strings.ToLower(b.Name))
+			})
+
+			for _, t := range allTags {
+				printTag(env.esc.stdout, st, t, utcFlag(utc))
+			}
+			if err != nil {
+				return err
+			}
+			return nil
 		},
 	}
 

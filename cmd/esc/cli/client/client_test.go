@@ -666,6 +666,53 @@ func TestGetOpenProperty(t *testing.T) {
 	})
 }
 
+func TestGetEnvironmentTag(t *testing.T) {
+	t.Run("OK", func(t *testing.T) {
+		ts := time.Now()
+
+		expectedTag := &EnvironmentTag{
+			ID:          "1234",
+			Name:        "owner",
+			Value:       "pulumi",
+			Created:     ts,
+			Modified:    ts,
+			EditorLogin: "pulumipus",
+			EditorName:  "pulumipus",
+		}
+
+		client := newTestClient(t, http.MethodGet, "/api/preview/environments/test-org/test-env/tags/owner", func(w http.ResponseWriter, r *http.Request) {
+			err := json.NewEncoder(w).Encode(expectedTag)
+			require.NoError(t, err)
+		})
+
+		tag, err := client.GetEnvironmentTag(context.Background(), "test-org", "test-env", "owner")
+
+		require.NoError(t, err)
+		assert.Equal(t, expectedTag.ID, tag.ID)
+		assert.Equal(t, expectedTag.Created.UTC(), tag.Created.UTC())
+		assert.Equal(t, expectedTag.Modified.UTC(), tag.Modified.UTC())
+		assert.Equal(t, expectedTag.Name, tag.Name)
+		assert.Equal(t, expectedTag.Value, tag.Value)
+		assert.Equal(t, expectedTag.EditorLogin, tag.EditorLogin)
+		assert.Equal(t, expectedTag.EditorName, tag.EditorName)
+	})
+
+	t.Run("Not found", func(t *testing.T) {
+		client := newTestClient(t, http.MethodGet, "/api/preview/environments/test-org/test-env/tags/owner", func(w http.ResponseWriter, r *http.Request) {
+			w.WriteHeader(http.StatusNotFound)
+
+			err := json.NewEncoder(w).Encode(apitype.ErrorResponse{
+				Code:    http.StatusNotFound,
+				Message: http.StatusText(http.StatusNotFound),
+			})
+			require.NoError(t, err)
+		})
+
+		_, err := client.GetEnvironmentTag(context.Background(), "test-org", "test-env", "owner")
+		assert.ErrorContains(t, err, http.StatusText(http.StatusNotFound))
+	})
+}
+
 func TestListEnvironmentTags(t *testing.T) {
 	t.Run("OK", func(t *testing.T) {
 		after := "10"
@@ -783,7 +830,6 @@ func TestUpdateEnvironmentTags(t *testing.T) {
 
 		expectedBody := UpdateEnvironmentTagRequest{
 			CurrentTag: TagRequest{
-				Name:  "owner",
 				Value: "pulumi",
 			},
 			NewTag: TagRequest{
@@ -801,7 +847,7 @@ func TestUpdateEnvironmentTags(t *testing.T) {
 			EditorName:  "pulumipus",
 		}
 
-		client := newTestClient(t, http.MethodPatch, "/api/preview/environments/test-org/test-env/tags/1234", func(w http.ResponseWriter, r *http.Request) {
+		client := newTestClient(t, http.MethodPatch, "/api/preview/environments/test-org/test-env/tags/owner", func(w http.ResponseWriter, r *http.Request) {
 			body, err := io.ReadAll(r.Body)
 			require.NoError(t, err)
 			expectedBodyJSON, err := json.Marshal(expectedBody)
@@ -812,7 +858,7 @@ func TestUpdateEnvironmentTags(t *testing.T) {
 			require.NoError(t, err)
 		})
 
-		val, err := client.UpdateEnvironmentTag(context.Background(), "test-org", "test-env", "1234", "owner", "pulumi", "", "pulumipus")
+		val, err := client.UpdateEnvironmentTag(context.Background(), "test-org", "test-env", "owner", "pulumi", "", "pulumipus")
 		require.NoError(t, err)
 		assert.Equal(t, expectedTag.ID, val.ID)
 		assert.Equal(t, expectedTag.Created.UTC(), val.Created.UTC())
@@ -828,7 +874,6 @@ func TestUpdateEnvironmentTags(t *testing.T) {
 
 		expectedBody := UpdateEnvironmentTagRequest{
 			CurrentTag: TagRequest{
-				Name:  "owner",
 				Value: "pulumi",
 			},
 			NewTag: TagRequest{
@@ -846,7 +891,7 @@ func TestUpdateEnvironmentTags(t *testing.T) {
 			EditorName:  "pulumipus",
 		}
 
-		client := newTestClient(t, http.MethodPatch, "/api/preview/environments/test-org/test-env/tags/1234", func(w http.ResponseWriter, r *http.Request) {
+		client := newTestClient(t, http.MethodPatch, "/api/preview/environments/test-org/test-env/tags/owner", func(w http.ResponseWriter, r *http.Request) {
 			body, err := io.ReadAll(r.Body)
 			require.NoError(t, err)
 			expectedBodyJSON, err := json.Marshal(expectedBody)
@@ -857,7 +902,7 @@ func TestUpdateEnvironmentTags(t *testing.T) {
 			require.NoError(t, err)
 		})
 
-		val, err := client.UpdateEnvironmentTag(context.Background(), "test-org", "test-env", "1234", "owner", "pulumi", "team", "")
+		val, err := client.UpdateEnvironmentTag(context.Background(), "test-org", "test-env", "owner", "pulumi", "team", "")
 		require.NoError(t, err)
 		assert.Equal(t, expectedTag.ID, val.ID)
 		assert.Equal(t, expectedTag.Created.UTC(), val.Created.UTC())
@@ -869,7 +914,7 @@ func TestUpdateEnvironmentTags(t *testing.T) {
 	})
 
 	t.Run("Not found", func(t *testing.T) {
-		client := newTestClient(t, http.MethodPatch, "/api/preview/environments/test-org/test-env/tags/1234", func(w http.ResponseWriter, r *http.Request) {
+		client := newTestClient(t, http.MethodPatch, "/api/preview/environments/test-org/test-env/tags/owner", func(w http.ResponseWriter, r *http.Request) {
 			w.WriteHeader(http.StatusNotFound)
 
 			err := json.NewEncoder(w).Encode(apitype.ErrorResponse{
@@ -879,23 +924,23 @@ func TestUpdateEnvironmentTags(t *testing.T) {
 			require.NoError(t, err)
 		})
 
-		_, err := client.UpdateEnvironmentTag(context.Background(), "test-org", "test-env", "1234", "owner", "pulumi", "team", "")
+		_, err := client.UpdateEnvironmentTag(context.Background(), "test-org", "test-env", "owner", "pulumi", "team", "")
 		assert.ErrorContains(t, err, http.StatusText(http.StatusNotFound))
 	})
 }
 
 func TestDeleteEnvironmentTags(t *testing.T) {
 	t.Run("OK", func(t *testing.T) {
-		client := newTestClient(t, http.MethodDelete, "/api/preview/environments/test-org/test-env/tags/1234", func(w http.ResponseWriter, r *http.Request) {
+		client := newTestClient(t, http.MethodDelete, "/api/preview/environments/test-org/test-env/tags/tagName", func(w http.ResponseWriter, r *http.Request) {
 			w.WriteHeader(http.StatusOK)
 		})
 
-		err := client.DeleteEnvironmentTag(context.Background(), "test-org", "test-env", "1234")
+		err := client.DeleteEnvironmentTag(context.Background(), "test-org", "test-env", "tagName")
 		require.NoError(t, err)
 	})
 
 	t.Run("Not found", func(t *testing.T) {
-		client := newTestClient(t, http.MethodDelete, "/api/preview/environments/test-org/test-env/tags/1234", func(w http.ResponseWriter, r *http.Request) {
+		client := newTestClient(t, http.MethodDelete, "/api/preview/environments/test-org/test-env/tags/tagName", func(w http.ResponseWriter, r *http.Request) {
 			w.WriteHeader(http.StatusNotFound)
 
 			err := json.NewEncoder(w).Encode(apitype.ErrorResponse{
@@ -905,7 +950,7 @@ func TestDeleteEnvironmentTags(t *testing.T) {
 			require.NoError(t, err)
 		})
 
-		err := client.DeleteEnvironmentTag(context.Background(), "test-org", "test-env", "1234")
+		err := client.DeleteEnvironmentTag(context.Background(), "test-org", "test-env", "tagName")
 		assert.ErrorContains(t, err, http.StatusText(http.StatusNotFound))
 	})
 }
