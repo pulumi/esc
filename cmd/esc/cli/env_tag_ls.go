@@ -3,11 +3,10 @@
 package cli
 
 import (
-	"cmp"
 	"context"
 	"fmt"
 	"io"
-	"slices"
+	"sort"
 	"strings"
 
 	"github.com/spf13/cobra"
@@ -70,8 +69,8 @@ func newEnvTagLsCmd(env *envCommand) *cobra.Command {
 				return nil
 			})
 
-			slices.SortStableFunc(allTags, func(a, b *client.EnvironmentTag) int {
-				return cmp.Compare(strings.ToLower(a.Name), strings.ToLower(b.Name))
+			sort.Slice(allTags, func(a, b int) bool {
+				return strings.ToLower(allTags[a].Name) < strings.ToLower(allTags[b].Name)
 			})
 
 			for _, t := range allTags {
