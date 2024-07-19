@@ -293,7 +293,7 @@ func parseField(name string, dest reflect.Value, node syntax.Node) syntax.Diagno
 		xv := reflect.ValueOf(x)
 		if !xv.Type().AssignableTo(dest.Type()) {
 			diags.Extend(exprFieldTypeMismatchError(name, dest.Interface(), x))
-			return diags
+			v = reflect.New(dest.Type().Elem())
 		} else {
 			v = xv
 		}
