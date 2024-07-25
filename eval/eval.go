@@ -147,7 +147,7 @@ type imported struct {
 type evalContext struct {
 	ctx          context.Context      // the cancellation context for evaluation
 	validating   bool                 // true if we are only checking the environment
-	showSecrets  bool                 // true if serets should be decrypted during validation
+	showSecrets  bool                 // true if secrets should be decrypted during validation
 	name         string               // the name of the environment
 	env          *ast.EnvironmentDecl // the root of the environment AST
 	decrypter    Decrypter            // the decrypter to use for the environment
