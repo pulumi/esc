@@ -633,16 +633,24 @@ func (c *testPulumiClient) GetEnvironmentTag(
 	ctx context.Context,
 	orgName, envName, key string,
 ) (*client.EnvironmentTag, error) {
-	ts := time.Now()
-	return &client.EnvironmentTag{
-		ID:          "1234",
-		Name:        "team",
-		Value:       "pulumi",
-		Created:     ts,
-		Modified:    ts,
-		EditorLogin: "pulumipus",
-		EditorName:  "pulumipus",
-	}, nil
+	env, ok := c.environments[fmt.Sprintf("%s/%s", orgName, envName)]
+	if !ok {
+		return nil, errors.New("environment not found")
+	}
+
+	if v, ok := env.tags[key]; ok {
+		ts, _ := time.Parse(time.RFC1123, "Mon, 29 Jul 2024 12:30:00 UTC")
+		return &client.EnvironmentTag{
+			ID:          key,
+			Name:        key,
+			Value:       v,
+			Created:     ts,
+			Modified:    ts,
+			EditorLogin: "pulumipus",
+			EditorName:  "pulumipus",
+		}, nil
+	}
+	return nil, &apitype.ErrorResponse{Code: http.StatusNotFound}
 }
 
 func (c *testPulumiClient) ListEnvironmentTags(
@@ -651,34 +659,50 @@ func (c *testPulumiClient) ListEnvironmentTags(
 	envName string,
 	options client.ListEnvironmentTagsOptions,
 ) ([]*client.EnvironmentTag, string, error) {
-	ts := time.Now()
-	return []*client.EnvironmentTag{
-		{
-			ID:          "1234",
-			Name:        "team",
-			Value:       "pulumi",
+	env, ok := c.environments[fmt.Sprintf("%s/%s", orgName, envName)]
+	if !ok {
+		return nil, "", errors.New("environment not found")
+	}
+
+	ts, _ := time.Parse(time.RFC1123, "Mon, 29 Jul 2024 12:30:00 UTC")
+	tags := []*client.EnvironmentTag{}
+	for k, v := range env.tags {
+		tags = append(tags, &client.EnvironmentTag{
+			ID:          k,
+			Name:        k,
+			Value:       v,
 			Created:     ts,
 			Modified:    ts,
 			EditorLogin: "pulumipus",
 			EditorName:  "pulumipus",
-		},
-	}, "0", nil
+		})
+	}
+	return tags, "0", nil
 }
 
 func (c *testPulumiClient) CreateEnvironmentTag(
 	ctx context.Context,
 	orgName, envName, key, value string,
 ) (*client.EnvironmentTag, error) {
-	ts := time.Now()
-	return &client.EnvironmentTag{
-		ID:          "1234",
+	ts, _ := time.Parse(time.RFC1123, "Mon, 29 Jul 2024 12:30:00 UTC")
+	tag := &client.EnvironmentTag{
+		ID:          key,
 		Name:        key,
 		Value:       value,
 		Created:     ts,
 		Modified:    ts,
 		EditorLogin: "pulumipus",
 		EditorName:  "pulumipus",
-	}, nil
+	}
+	env, ok := c.environments[fmt.Sprintf("%s/%s", orgName, envName)]
+	if !ok {
+		return nil, errors.New("environment not found")
+	}
+	if _, ok := env.tags[key]; ok {
+		return nil, errors.New("tag already exists")
+	}
+	env.tags[key] = value
+	return tag, nil
 }
 
 func (c *testPulumiClient) UpdateEnvironmentTag(
@@ -693,9 +717,21 @@ func (c *testPulumiClient) UpdateEnvironmentTag(
 	if value == "" {
 		value = currentValue
 	}
-	ts := time.Now()
+	ts, _ := time.Parse(time.RFC1123, "Mon, 29 Jul 2024 12:30:00 UTC")
+	env, ok := c.environments[fmt.Sprintf("%s/%s", orgName, envName)]
+	if !ok {
+		return nil, errors.New("environment not found")
+	}
+
+	if _, ok := env.tags[currentKey]; !ok {
+		return nil, &apitype.ErrorResponse{Code: http.StatusNotFound}
+	}
+	if newKey != "" {
+		delete(env.tags, currentKey)
+	}
+	env.tags[name] = value
 	return &client.EnvironmentTag{
-		ID:          "1234",
+		ID:          name,
 		Name:        name,
 		Value:       value,
 		Created:     ts,
@@ -706,6 +742,14 @@ func (c *testPulumiClient) UpdateEnvironmentTag(
 }
 
 func (c *testPulumiClient) DeleteEnvironmentTag(ctx context.Context, orgName, envName, tagName string) error {
+	env, ok := c.environments[fmt.Sprintf("%s/%s", orgName, envName)]
+	if !ok {
+		return errors.New("environment not found")
+	}
+	if _, ok := env.tags[tagName]; !ok {
+		return errors.New("tag not found")
+	}
+	delete(env.tags, tagName)
 	return nil
 }
 
@@ -1003,7 +1047,7 @@ func (c *testExec) runScript(script string, cmd *exec.Cmd) error {
 				}()
 				select {
 				case <-ctx.Done():
-					return interp.NewExitStatus(1)
+					return ctx.Err()
 				case result := <-ch:
 					if result != nil {
 						return interp.NewExitStatus(1)
@@ -1132,7 +1176,7 @@ func loadTestcase(path string) (*cliTestcaseYAML, *cliTestcase, error) {
 
 		var tags cliTestcaseEnvironmentTags
 		envTags := map[string]string{}
-		if err := env.Decode(&tags); err == nil {
+		if err := env.Decode(&tags); tags.Tags != nil && err == nil {
 			envTags = tags.Tags
 		}
 

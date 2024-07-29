@@ -17,14 +17,14 @@ func newEnvTagCmd(env *envCommand) *cobra.Command {
 	var utc bool
 
 	cmd := &cobra.Command{
-		Use:   "tag [<org-name>/]<environment-name> <name> [<newName>] <value>",
-		Args:  cobra.RangeArgs(3, 4),
+		Use:   "tag [<org-name>/]<environment-name> <name> <value>",
+		Args:  cobra.ExactArgs(3),
 		Short: "Manage environment tags",
 		Long: "Manage environment tags\n" +
 			"\n" +
-			"This command creates or updates a tag with the given name on the specified environment.\n" +
+			"This command creates a tag with the given name on the specified environment.\n" +
 			"\n" +
-			"Subcommands exist for reading, listing and removing tags.",
+			"Subcommands exist for reading, listing, updating, and removing tags.",
 		SilenceUsage: true,
 		RunE: func(cmd *cobra.Command, args []string) error {
 			ctx := context.Background()
@@ -42,12 +42,7 @@ func newEnvTagCmd(env *envCommand) *cobra.Command {
 			}
 
 			name := args[0]
-			newName := name
 			value := args[1]
-			if len(args) == 3 {
-				newName = args[1]
-				value = args[2]
-			}
 
 			if name == "" {
 				return errors.New("environment tag name cannot be empty")
@@ -56,26 +51,7 @@ func newEnvTagCmd(env *envCommand) *cobra.Command {
 				return errors.New("environment tag value cannot be empty")
 			}
 
-			tag, err := env.esc.client.GetEnvironmentTag(ctx, ref.orgName, ref.envName, name)
-			if err != nil && !client.IsNotFound(err) {
-				return err
-			}
-
 			st := style.NewStylist(style.Profile(env.esc.stdout))
-
-			if tag != nil {
-				if tag.Name == name && tag.Value == value {
-					printTag(env.esc.stdout, st, tag, utcFlag(utc))
-					return nil
-				}
-
-				t, err := env.esc.client.UpdateEnvironmentTag(ctx, ref.orgName, ref.envName, tag.Name, tag.Value, newName, value)
-				if err == nil {
-					printTag(env.esc.stdout, st, t, utcFlag(utc))
-					return nil
-				}
-				return err
-			}
 
 			t, err := env.esc.client.CreateEnvironmentTag(ctx, ref.orgName, ref.envName, name, value)
 			if err != nil {
@@ -91,6 +67,7 @@ func newEnvTagCmd(env *envCommand) *cobra.Command {
 	cmd.AddCommand(newEnvTagGetCmd(env))
 	cmd.AddCommand(newEnvTagLsCmd(env))
 	cmd.AddCommand(newEnvTagRmCmd(env))
+	cmd.AddCommand(newEnvTagMvCmd(env))
 
 	cmd.Flags().BoolVar(&utc, "utc", false, "display times in UTC")
 

@@ -1,10 +1,25 @@
-run: esc env tag rm test-org/env owner
+run: |
+  esc env tag ls test-org/env
+  esc env tag rm test-org/env owner
+  esc env tag ls test-org/env
+  esc env tag rm test-org/env owner
+error: exit status 1
 environments:
   test-org/env:
     tags:
       owner: pulumi
 stdout: |
+  > esc env tag ls test-org/env
+  Name: owner
+  Value: pulumi
+  Last updated at 2024-07-29 05:30:00 -0700 PDT by pulumipus <pulumipus>
   > esc env tag rm test-org/env owner
   Successfully deleted environment tag: owner
-stderr: |
+  > esc env tag ls test-org/env
   > esc env tag rm test-org/env owner
+stderr: |
+  > esc env tag ls test-org/env
+  > esc env tag rm test-org/env owner
+  > esc env tag ls test-org/env
+  > esc env tag rm test-org/env owner
+  Error: tag not found
