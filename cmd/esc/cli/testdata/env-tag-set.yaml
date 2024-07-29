@@ -1,0 +1,17 @@
+run: |
+  esc env tag test-org/env owner pulumi
+  esc env tag test-org/env owner pulumipus
+environments:
+  test-org/env: {}
+stdout: |
+  > esc env tag test-org/env owner pulumi
+  Name: owner
+  Value: pulumi
+  Last updated at 2024-07-29 14:54:58.125392 -0700 PDT by pulumipus <pulumipus>
+  > esc env tag test-org/env owner pulumipus
+  Name: owner
+  Value: pulumipus
+  Last updated at 2024-07-29 14:54:58.125447 -0700 PDT by pulumipus <pulumipus>
+stderr: |
+  > esc env tag test-org/env owner pulumi
+  > esc env tag test-org/env owner pulumipus

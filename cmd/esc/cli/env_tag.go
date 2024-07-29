@@ -63,7 +63,6 @@ func newEnvTagCmd(env *envCommand) *cobra.Command {
 
 			st := style.NewStylist(style.Profile(env.esc.stdout))
 
-			fmt.Println("tag", tag)
 			if tag != nil {
 				if tag.Name == name && tag.Value == value {
 					printTag(env.esc.stdout, st, tag, utcFlag(utc))

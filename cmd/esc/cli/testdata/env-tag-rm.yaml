@@ -1,0 +1,10 @@
+run: esc env tag rm test-org/env owner
+environments:
+  test-org/env:
+    tags:
+      owner: pulumi
+stdout: |
+  > esc env tag rm test-org/env owner
+  Successfully deleted environment tag: owner
+stderr: |
+  > esc env tag rm test-org/env owner

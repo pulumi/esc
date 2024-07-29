@@ -1,0 +1,21 @@
+run: esc env tag ls test-org/env1
+environments:
+  test-org/env1:
+    tags:
+      owner: pulumi
+  test-org/env2:
+    tags:
+      owner: pulumi
+  test-user/env1:
+    tags:
+      owner: pulumipus
+  test-user/github:
+    tags:
+      owner: pulumipus
+stdout: |
+  > esc env tag ls test-org/env1
+  Name: team
+  Value: pulumi
+  Last updated at 2024-07-29 14:54:58.124306 -0700 PDT by pulumipus <pulumipus>
+stderr: |
+  > esc env tag ls test-org/env1
