@@ -1,7 +1,7 @@
 run: |
-  esc env tag ls test-org/one-tag
-  esc env tag ls test-org/no-tags
-  esc env tag ls test-user/multi-tags
+  esc env tag ls test-org/one-tag --utc
+  esc env tag ls test-org/no-tags --utc
+  esc env tag ls test-user/multi-tags --utc
 environments:
   test-org/no-tags: {}
   test-org/one-tag:
@@ -15,19 +15,19 @@ environments:
     tags:
       owner: pulumipus
 stdout: |
-  > esc env tag ls test-org/one-tag
+  > esc env tag ls test-org/one-tag --utc
   Name: owner
   Value: pulumi
-  Last updated at 2024-07-29 05:30:00 -0700 PDT by pulumipus <pulumipus>
-  > esc env tag ls test-org/no-tags
-  > esc env tag ls test-user/multi-tags
+  Last updated at 2024-07-29 12:30:00 +0000 UTC by pulumipus <pulumipus>
+  > esc env tag ls test-org/no-tags --utc
+  > esc env tag ls test-user/multi-tags --utc
   Name: owner
   Value: pulumipus
-  Last updated at 2024-07-29 05:30:00 -0700 PDT by pulumipus <pulumipus>
+  Last updated at 2024-07-29 12:30:00 +0000 UTC by pulumipus <pulumipus>
   Name: team
   Value: esc
-  Last updated at 2024-07-29 05:30:00 -0700 PDT by pulumipus <pulumipus>
+  Last updated at 2024-07-29 12:30:00 +0000 UTC by pulumipus <pulumipus>
 stderr: |
-  > esc env tag ls test-org/one-tag
-  > esc env tag ls test-org/no-tags
-  > esc env tag ls test-user/multi-tags
+  > esc env tag ls test-org/one-tag --utc
+  > esc env tag ls test-org/no-tags --utc
+  > esc env tag ls test-user/multi-tags --utc

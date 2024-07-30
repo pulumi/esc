@@ -1,24 +1,24 @@
 run: |
-  esc env tag ls test-org/env
-  esc env tag mv test-org/env team esc
-  esc env tag mv test-org/env team owner pulumi
-  esc env tag get test-org/env owner
-  esc env tag mv test-org/env team value
+  esc env tag ls test-org/env --utc
+  esc env tag mv test-org/env team esc --utc
+  esc env tag mv test-org/env team owner pulumi --utc
+  esc env tag get test-org/env owner --utc
+  esc env tag mv test-org/env team value --utc
 error: exit status 1
 environments:
   test-org/env:
     tags:
       team: pulumi
 stdout: |
-  > esc env tag ls test-org/env
+  > esc env tag ls test-org/env --utc
   Name: team
   Value: pulumi
-  Last updated at 2024-07-29 05:30:00 -0700 PDT by pulumipus <pulumipus>
-  > esc env tag mv test-org/env team esc
-  > esc env tag mv test-org/env team owner pulumi
-  > esc env tag get test-org/env owner
+  Last updated at 2024-07-29 12:30:00 +0000 UTC by pulumipus <pulumipus>
+  > esc env tag mv test-org/env team esc --utc
+  > esc env tag mv test-org/env team owner pulumi --utc
+  > esc env tag get test-org/env owner --utc
   Name: owner
   Value: pulumi
-  Last updated at 2024-07-29 05:30:00 -0700 PDT by pulumipus <pulumipus>
-  > esc env tag mv test-org/env team value
-stderr: "> esc env tag ls test-org/env\n> esc env tag mv test-org/env team esc\n> esc env tag mv test-org/env team owner pulumi\n> esc env tag get test-org/env owner\n> esc env tag mv test-org/env team value\nError: [404] \n"
+  Last updated at 2024-07-29 12:30:00 +0000 UTC by pulumipus <pulumipus>
+  > esc env tag mv test-org/env team value --utc
+stderr: "> esc env tag ls test-org/env --utc\n> esc env tag mv test-org/env team esc --utc\n> esc env tag mv test-org/env team owner pulumi --utc\n> esc env tag get test-org/env owner --utc\n> esc env tag mv test-org/env team value --utc\nError: [404] \n"
