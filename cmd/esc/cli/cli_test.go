@@ -253,7 +253,7 @@ type testEnvironmentRetract struct {
 type testEnvironmentRevision struct {
 	number    int
 	yaml      []byte
-	tag       string
+	tags      map[string]bool
 	retracted *testEnvironmentRetract
 }
 
@@ -525,7 +525,12 @@ func (c *testPulumiClient) GetEnvironment(
 		yaml = plaintext
 	}
 
-	return yaml, env.tag, env.number, nil
+	eTag := ""
+	if len(env.tags) > 0 {
+		eTag = maps.Keys(env.tags)[0]
+	}
+
+	return yaml, eTag, env.number, nil
 }
 
 func (c *testPulumiClient) UpdateEnvironment(
@@ -550,7 +555,9 @@ func (c *testPulumiClient) UpdateEnvironmentWithRevision(
 	if err != nil {
 		return nil, 0, err
 	}
-	if tag != "" && tag != latest.tag {
+
+	latestRevHasTag := latest.tags[tag]
+	if tag != "" && !latestRevHasTag {
 		return nil, 0, errors.New("tag mismatch")
 	}
 
@@ -568,7 +575,7 @@ func (c *testPulumiClient) UpdateEnvironmentWithRevision(
 		env.revisions = append(env.revisions, &testEnvironmentRevision{
 			number: revisionNumber,
 			yaml:   yaml,
-			tag:    base64.StdEncoding.EncodeToString(h.Sum(nil)),
+			tags:   map[string]bool{base64.StdEncoding.EncodeToString(h.Sum(nil)): true},
 		})
 		env.revisionTags["latest"] = revisionNumber
 	}
@@ -787,9 +794,11 @@ func (c *testPulumiClient) ListEnvironmentRevisions(
 
 	var resp []client.EnvironmentRevision
 	for i := before - 1; i > 0; i-- {
-		var tags []string
-		if tag := env.revisions[i-1].tag; tag != "" {
-			tags = []string{tag}
+		tags := []string{}
+		for k, _ := range env.revisions[i-1].tags {
+			if k != "" {
+				tags = append(tags, k)
+			}
 		}
 
 		var retracted *client.EnvironmentRevisionRetracted
@@ -1106,7 +1115,7 @@ type cliTestcaseRetract struct {
 
 type cliTestcaseRevision struct {
 	YAML      yaml.Node           `yaml:"yaml"`
-	Tag       string              `yaml:"tag,omitempty"`
+	Tags      []string            `yaml:"tags,omitempty"`
 	Retracted *cliTestcaseRetract `yaml:"retracted,omitempty"`
 }
 
@@ -1201,14 +1210,15 @@ func loadTestcase(path string) (*cliTestcaseYAML, *cliTestcase, error) {
 				number:    revisionNumber,
 				yaml:      bytes,
 				retracted: retract,
+				tags:      map[string]bool{},
 			})
 
-			if rev.Tag != "" {
-				if _, ok := revisionTags[rev.Tag]; ok || rev.Tag == "latest" {
-					return nil, nil, fmt.Errorf("duplicate tag %q", rev.Tag)
+			for _, rt := range rev.Tags {
+				if _, ok := revisionTags[rt]; ok || rt == "latest" {
+					return nil, nil, fmt.Errorf("duplicate tag %q", rt)
 				}
-				revisionTags[rev.Tag] = revisionNumber
-				envRevisions[revisionNumber-1].tag = rev.Tag
+				revisionTags[rt] = revisionNumber
+				envRevisions[revisionNumber-1].tags[rt] = true
 			}
 		}
 		revisionTags["latest"] = len(envRevisions)
