@@ -795,7 +795,7 @@ func (c *testPulumiClient) ListEnvironmentRevisions(
 	var resp []client.EnvironmentRevision
 	for i := before - 1; i > 0; i-- {
 		tags := []string{}
-		for k, _ := range env.revisions[i-1].tags {
+		for k := range env.revisions[i-1].tags {
 			if k != "" {
 				tags = append(tags, k)
 			}
