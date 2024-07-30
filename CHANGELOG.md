@@ -1,6 +1,11 @@
 CHANGELOG
 =========
 
+## 0.9.2
+
+- Add commands to manage environment tags.
+  [#345](https://github.com/pulumi/esc/pull/345)
+
 ## 0.9.1
 
 ### Improvements
