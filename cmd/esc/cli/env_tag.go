@@ -43,7 +43,6 @@ func newEnvTagCmd(env *envCommand) *cobra.Command {
 
 			name := args[0]
 			value := args[1]
-
 			if name == "" {
 				return errors.New("environment tag name cannot be empty")
 			}
@@ -51,7 +50,26 @@ func newEnvTagCmd(env *envCommand) *cobra.Command {
 				return errors.New("environment tag value cannot be empty")
 			}
 
+			tag, err := env.esc.client.GetEnvironmentTag(ctx, ref.orgName, ref.envName, name)
+			if err != nil && !client.IsNotFound(err) {
+				return err
+			}
+
 			st := style.NewStylist(style.Profile(env.esc.stdout))
+
+			if tag != nil {
+				if tag.Name == name && tag.Value == value {
+					printTag(env.esc.stdout, st, tag, utcFlag(utc))
+					return nil
+				}
+
+				t, err := env.esc.client.UpdateEnvironmentTag(ctx, ref.orgName, ref.envName, tag.Name, tag.Value, tag.Name, value)
+				if err == nil {
+					printTag(env.esc.stdout, st, t, utcFlag(utc))
+					return nil
+				}
+				return err
+			}
 
 			t, err := env.esc.client.CreateEnvironmentTag(ctx, ref.orgName, ref.envName, name, value)
 			if err != nil {

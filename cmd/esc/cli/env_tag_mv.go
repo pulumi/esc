@@ -14,13 +14,13 @@ func newEnvTagMvCmd(env *envCommand) *cobra.Command {
 	var utc bool
 
 	cmd := &cobra.Command{
-		Use:   "mv [<org-name>/]<environment-name> <name> [<newName>] <value>",
-		Args:  cobra.RangeArgs(3, 4),
+		Use:   "mv [<org-name>/]<environment-name> <name> <newName>",
+		Args:  cobra.ExactArgs(3),
 		Short: "Move an environment tag",
 		Long: "Move an environment tag\n" +
 			"\n" +
 			"This command updates a tag with the given name on the specified environment, " +
-			"changing it's name if a new one is specified or updating it's value.\n",
+			"changing it's name.\n",
 		SilenceUsage: true,
 		RunE: func(cmd *cobra.Command, args []string) error {
 			ctx := context.Background()
@@ -38,17 +38,11 @@ func newEnvTagMvCmd(env *envCommand) *cobra.Command {
 			}
 
 			name := args[0]
-			newName := name
-			value := args[1]
-			if len(args) == 3 {
-				newName = args[1]
-				value = args[2]
-			}
-
+			newName := args[1]
 			if name == "" {
 				return errors.New("environment tag name cannot be empty")
 			}
-			if value == "" {
+			if newName == "" {
 				return errors.New("environment tag value cannot be empty")
 			}
 
@@ -59,13 +53,13 @@ func newEnvTagMvCmd(env *envCommand) *cobra.Command {
 
 			st := style.NewStylist(style.Profile(env.esc.stdout))
 
-			if tag.Name == name && tag.Value == value {
+			if tag.Name == newName {
 				printTag(env.esc.stdout, st, tag, utcFlag(utc))
 				return nil
 			}
 
-			t, err := env.esc.client.UpdateEnvironmentTag(ctx, ref.orgName, ref.envName, tag.Name, tag.Value, newName, value)
-			if err == nil {
+			t, err := env.esc.client.UpdateEnvironmentTag(ctx, ref.orgName, ref.envName, tag.Name, tag.Value, newName, tag.Value)
+			if err != nil {
 				return err
 			}
 

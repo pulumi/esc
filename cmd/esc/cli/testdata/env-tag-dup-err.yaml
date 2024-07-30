@@ -1,7 +1,6 @@
 run: |
   esc env tag get test-org/env team --utc
   esc env tag test-org/env team esc-team --utc
-error: exit status 1
 environments:
   test-org/env:
     tags:
@@ -12,7 +11,9 @@ stdout: |
   Value: esc
   Last updated at 2024-07-29 12:30:00 +0000 UTC by pulumipus <pulumipus>
   > esc env tag test-org/env team esc-team --utc
+  Name: team
+  Value: esc-team
+  Last updated at 2024-07-29 12:30:00 +0000 UTC by pulumipus <pulumipus>
 stderr: |
   > esc env tag get test-org/env team --utc
   > esc env tag test-org/env team esc-team --utc
-  Error: tag already exists
