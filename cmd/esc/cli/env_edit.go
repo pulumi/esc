@@ -53,7 +53,7 @@ func newEnvEditCmd(env *envCommand) *cobra.Command {
 				return err
 			}
 
-			ref, args, err := edit.env.getEnvRef(args)
+			ref, args, err := edit.env.getExistingEnvRef(ctx, args)
 			if err != nil {
 				return err
 			}
