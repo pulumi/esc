@@ -201,7 +201,7 @@ func TestGetEnvironment(t *testing.T) {
 			require.NoError(t, err)
 		})
 
-		actualYAML, actualTag, revision, err := client.GetEnvironment(context.Background(), "test-org", "test-env", "", false)
+		actualYAML, actualTag, revision, err := client.GetEnvironment(context.Background(), "test-org", "test-project", "test-env", "", false)
 		require.NoError(t, err)
 		assert.Equal(t, string(expectedYAML), string(actualYAML))
 		assert.Equal(t, expectedTag, actualTag)
@@ -219,7 +219,7 @@ func TestGetEnvironment(t *testing.T) {
 			require.NoError(t, err)
 		})
 
-		actualYAML, actualTag, revision, err := client.GetEnvironment(context.Background(), "test-org", "test-env", "42", false)
+		actualYAML, actualTag, revision, err := client.GetEnvironment(context.Background(), "test-org", "test-project", "test-env", "42", false)
 		require.NoError(t, err)
 		assert.Equal(t, string(expectedYAML), string(actualYAML))
 		assert.Equal(t, expectedTag, actualTag)
@@ -239,7 +239,7 @@ func TestGetEnvironment(t *testing.T) {
 			require.NoError(t, err)
 		})
 
-		actualYAML, actualTag, revision, err := client.GetEnvironment(context.Background(), "test-org", "test-env", "stable", false)
+		actualYAML, actualTag, revision, err := client.GetEnvironment(context.Background(), "test-org", "test-project", "test-env", "stable", false)
 		require.NoError(t, err)
 		assert.Equal(t, string(expectedYAML), string(actualYAML))
 		assert.Equal(t, expectedTag, actualTag)
@@ -257,7 +257,7 @@ func TestGetEnvironment(t *testing.T) {
 			require.NoError(t, err)
 		})
 
-		actualYAML, actualTag, revision, err := client.GetEnvironment(context.Background(), "test-org", "test-env", "", true)
+		actualYAML, actualTag, revision, err := client.GetEnvironment(context.Background(), "test-org", "test-project", "test-env", "", true)
 		require.NoError(t, err)
 		assert.Equal(t, string(expectedYAML), string(actualYAML))
 		assert.Equal(t, expectedTag, actualTag)
@@ -275,7 +275,7 @@ func TestGetEnvironment(t *testing.T) {
 			require.NoError(t, err)
 		})
 
-		_, _, _, err := client.GetEnvironment(context.Background(), "test-org", "test-env", "", false)
+		_, _, _, err := client.GetEnvironment(context.Background(), "test-org", "test-project", "test-env", "", false)
 		assert.ErrorContains(t, err, "not found")
 	})
 }
@@ -360,7 +360,7 @@ func TestDeleteEnvironment(t *testing.T) {
 		client := newTestClient(t, http.MethodDelete, "/api/esc/environments/test-org/test-project/test-env", func(w http.ResponseWriter, r *http.Request) {
 			w.WriteHeader(http.StatusOK)
 		})
-		err := client.DeleteEnvironment(context.Background(), "test-org", "test-env")
+		err := client.DeleteEnvironment(context.Background(), "test-org", "test-project", "test-env")
 		assert.NoError(t, err)
 	})
 }
@@ -377,7 +377,7 @@ func TestOpenEnvironment(t *testing.T) {
 			require.NoError(t, err)
 		})
 
-		id, diags, err := client.OpenEnvironment(context.Background(), "test-org", "test-env", "", duration)
+		id, diags, err := client.OpenEnvironment(context.Background(), "test-org", "test-project", "test-env", "", duration)
 		require.NoError(t, err)
 		assert.Equal(t, expectedID, id)
 		assert.Empty(t, diags)
@@ -394,7 +394,7 @@ func TestOpenEnvironment(t *testing.T) {
 			require.NoError(t, err)
 		})
 
-		id, diags, err := client.OpenEnvironment(context.Background(), "test-org", "test-env", "42", duration)
+		id, diags, err := client.OpenEnvironment(context.Background(), "test-org", "test-project", "test-env", "42", duration)
 		require.NoError(t, err)
 		assert.Equal(t, expectedID, id)
 		assert.Empty(t, diags)
@@ -413,7 +413,7 @@ func TestOpenEnvironment(t *testing.T) {
 			require.NoError(t, err)
 		})
 
-		id, diags, err := client.OpenEnvironment(context.Background(), "test-org", "test-env", "stable", duration)
+		id, diags, err := client.OpenEnvironment(context.Background(), "test-org", "test-project", "test-env", "stable", duration)
 		require.NoError(t, err)
 		assert.Equal(t, expectedID, id)
 		assert.Empty(t, diags)
@@ -450,7 +450,7 @@ func TestOpenEnvironment(t *testing.T) {
 			require.NoError(t, err)
 		})
 
-		_, diags, err := client.OpenEnvironment(context.Background(), "test-org", "test-env", "", 2*time.Hour)
+		_, diags, err := client.OpenEnvironment(context.Background(), "test-org", "test-project", "test-env", "", 2*time.Hour)
 		require.NoError(t, err)
 		assert.Equal(t, expected, diags)
 	})
@@ -466,7 +466,7 @@ func TestOpenEnvironment(t *testing.T) {
 			require.NoError(t, err)
 		})
 
-		_, _, err := client.OpenEnvironment(context.Background(), "test-org", "test-env", "", 2*time.Hour)
+		_, _, err := client.OpenEnvironment(context.Background(), "test-org", "test-project", "test-env", "", 2*time.Hour)
 		assert.ErrorContains(t, err, "not found")
 	})
 }
