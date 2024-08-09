@@ -51,7 +51,7 @@ func newEnvVersionTagCmd(env *envCommand) *cobra.Command {
 				revision = latest.Revision
 			} else {
 				version, _ := strings.CutPrefix(args[0], "@")
-				revision, err = env.esc.client.GetRevisionNumber(ctx, ref.orgName, ref.envName, version)
+				revision, err = env.esc.client.GetRevisionNumber(ctx, ref.orgName, ref.projectName, ref.envName, version)
 				if err != nil {
 					return err
 				}
