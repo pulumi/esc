@@ -41,6 +41,7 @@ import (
 
 const etagHeader = "ETag"
 const revisionHeader = "Pulumi-ESC-Revision"
+const DefaultProject = "default"
 
 type CheckYAMLOption struct {
 	ShowSecrets bool
@@ -78,8 +79,10 @@ type Client interface {
 		continuationToken string,
 	) (environments []OrgEnvironment, nextToken string, err error)
 
-	// CreateEnvironment creats an environment named envName in orgName.
+	// Deprecated: Use CreateEnvironmentWithProject instead
 	CreateEnvironment(ctx context.Context, orgName, envName string) error
+	// CreateEnvironment creates an environment named projectName/envName in orgName.
+	CreateEnvironmentWithProject(ctx context.Context, orgName, projectName, envName string) error
 
 	// GetEnvironment returns the YAML + ETag for the environment envName in org orgName. If decrypt is
 	// true, any { fn::secret: { ciphertext: "..." } } constructs in the definition will be decrypted and
@@ -110,11 +113,20 @@ type Client interface {
 		etag string,
 	) ([]EnvironmentDiagnostic, int, error)
 
-	// This method has a legacy signature, please use UpdateEnvironmentWithRevision instead
-	// Remove this method once circular dependency between esc and pulumi/pulumi is resolved
+	// Deprecated: Use UpdateEnvironmentWithProject instead
 	UpdateEnvironment(
 		ctx context.Context,
 		orgName string,
+		envName string,
+		yaml []byte,
+		etag string,
+	) ([]EnvironmentDiagnostic, error)
+	// This method has a legacy signature, please use UpdateEnvironmentWithRevision instead
+	// Remove this method once circular dependency between esc and pulumi/pulumi is resolved
+	UpdateEnvironmentWithProject(
+		ctx context.Context,
+		orgName string,
+		projectName string,
 		envName string,
 		yaml []byte,
 		etag string,
@@ -159,9 +171,11 @@ type Client interface {
 		duration time.Duration,
 	) (string, []EnvironmentDiagnostic, error)
 
-	// GetOpenEnvironment returns the AST, values, and schema for the open environment with ID openEnvID in
-	// environment envName and org orgName.
+	// Deprecated: Use GetOpenEnvironmentWithProject instead
 	GetOpenEnvironment(ctx context.Context, orgName, envName, openEnvID string) (*esc.Environment, error)
+	// GetOpenEnvironmentWithProject returns the AST, values, and schema for the open environment with ID openEnvID in
+	// environment envName and org orgName.
+	GetOpenEnvironmentWithProject(ctx context.Context, orgName, projectName, envName, openEnvID string) (*esc.Environment, error)
 
 	// GetOpenProperty returns the value of a single property in the open environment with ID openEnvID in
 	// environment envName and org orgName.
@@ -414,7 +428,13 @@ func (pc *client) ListEnvironments(
 	return resp.Environments, resp.NextToken, nil
 }
 
+// Deprecated: Use CreateEnvironmentWithProject instead
 func (pc *client) CreateEnvironment(ctx context.Context, orgName, envName string) error {
+	return pc.CreateEnvironmentWithProject(ctx, orgName, DefaultProject, envName)
+}
+
+// CreateEnvironmentWithProject creates an environment named envName in org orgName and project projectName.
+func (pc *client) CreateEnvironmentWithProject(ctx context.Context, orgName, projectName, envName string) error {
 	path := fmt.Sprintf("/api/preview/environments/%v/%v", orgName, envName)
 	return pc.restCall(ctx, http.MethodPost, path, nil, nil, nil)
 }
@@ -451,9 +471,21 @@ func (pc *client) GetEnvironment(
 	return yaml, tag, revision, nil
 }
 
+// Deprecated: Use UpdateEnvironmentWithProject instead
 func (pc *client) UpdateEnvironment(
 	ctx context.Context,
 	orgName string,
+	envName string,
+	yaml []byte,
+	tag string,
+) ([]EnvironmentDiagnostic, error) {
+	return pc.UpdateEnvironmentWithProject(ctx, orgName, DefaultProject, envName, yaml, tag)
+}
+
+func (pc *client) UpdateEnvironmentWithProject(
+	ctx context.Context,
+	orgName string,
+	projectName string,
 	envName string,
 	yaml []byte,
 	tag string,
@@ -605,7 +637,12 @@ func (pc *client) OpenYAMLEnvironment(
 	return resp.ID, nil, nil
 }
 
+// Deprecated
 func (pc *client) GetOpenEnvironment(ctx context.Context, orgName, envName, openSessionID string) (*esc.Environment, error) {
+	return pc.GetOpenEnvironmentWithProject(ctx, orgName, DefaultProject, envName, openSessionID)
+}
+
+func (pc *client) GetOpenEnvironmentWithProject(ctx context.Context, orgName, projectName, envName, openSessionID string) (*esc.Environment, error) {
 	var resp esc.Environment
 	path := fmt.Sprintf("/api/preview/environments/%v/%v/open/%v", orgName, envName, openSessionID)
 	err := pc.restCall(ctx, http.MethodGet, path, nil, nil, &resp)
