@@ -662,9 +662,9 @@ func (c *testPulumiClient) GetOpenProperty(ctx context.Context, orgName, envName
 
 func (c *testPulumiClient) GetEnvironmentTag(
 	ctx context.Context,
-	orgName, envName, key string,
+	orgName, projectName, envName, key string,
 ) (*client.EnvironmentTag, error) {
-	env, ok := c.environments[fmt.Sprintf("%s/%s", orgName, envName)]
+	env, ok := c.environments[fmt.Sprintf("%s/%s/%s", orgName, projectName, envName)]
 	if !ok {
 		return nil, errors.New("environment not found")
 	}
@@ -687,10 +687,11 @@ func (c *testPulumiClient) GetEnvironmentTag(
 func (c *testPulumiClient) ListEnvironmentTags(
 	ctx context.Context,
 	orgName string,
+	projectName string,
 	envName string,
 	options client.ListEnvironmentTagsOptions,
 ) ([]*client.EnvironmentTag, string, error) {
-	env, ok := c.environments[fmt.Sprintf("%s/%s", orgName, envName)]
+	env, ok := c.environments[fmt.Sprintf("%s/%s/%s", orgName, projectName, envName)]
 	if !ok {
 		return nil, "", errors.New("environment not found")
 	}
@@ -713,7 +714,7 @@ func (c *testPulumiClient) ListEnvironmentTags(
 
 func (c *testPulumiClient) CreateEnvironmentTag(
 	ctx context.Context,
-	orgName, envName, key, value string,
+	orgName, projectName, envName, key, value string,
 ) (*client.EnvironmentTag, error) {
 	ts, _ := time.Parse(time.RFC1123, "Mon, 29 Jul 2024 12:30:00 UTC")
 	tag := &client.EnvironmentTag{
@@ -725,7 +726,7 @@ func (c *testPulumiClient) CreateEnvironmentTag(
 		EditorLogin: "pulumipus",
 		EditorName:  "pulumipus",
 	}
-	env, ok := c.environments[fmt.Sprintf("%s/%s", orgName, envName)]
+	env, ok := c.environments[fmt.Sprintf("%s/%s/%s", orgName, projectName, envName)]
 	if !ok {
 		return nil, errors.New("environment not found")
 	}
@@ -738,7 +739,7 @@ func (c *testPulumiClient) CreateEnvironmentTag(
 
 func (c *testPulumiClient) UpdateEnvironmentTag(
 	ctx context.Context,
-	orgName, envName, currentKey, currentValue, newKey, newValue string,
+	orgName, projectName, envName, currentKey, currentValue, newKey, newValue string,
 ) (*client.EnvironmentTag, error) {
 	name := newKey
 	if name == "" {
@@ -749,7 +750,7 @@ func (c *testPulumiClient) UpdateEnvironmentTag(
 		value = currentValue
 	}
 	ts, _ := time.Parse(time.RFC1123, "Mon, 29 Jul 2024 12:30:00 UTC")
-	env, ok := c.environments[fmt.Sprintf("%s/%s", orgName, envName)]
+	env, ok := c.environments[fmt.Sprintf("%s/%s/%s", orgName, projectName, envName)]
 	if !ok {
 		return nil, errors.New("environment not found")
 	}
@@ -772,8 +773,8 @@ func (c *testPulumiClient) UpdateEnvironmentTag(
 	}, nil
 }
 
-func (c *testPulumiClient) DeleteEnvironmentTag(ctx context.Context, orgName, envName, tagName string) error {
-	env, ok := c.environments[fmt.Sprintf("%s/%s", orgName, envName)]
+func (c *testPulumiClient) DeleteEnvironmentTag(ctx context.Context, orgName, projectName, envName, tagName string) error {
+	env, ok := c.environments[fmt.Sprintf("%s/%s/%s", orgName, projectName, envName)]
 	if !ok {
 		return errors.New("environment not found")
 	}
