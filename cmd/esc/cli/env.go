@@ -127,7 +127,8 @@ func (cmd *envCommand) parseRef(refStr string) environmentRef {
 	}
 }
 
-// If a non-nil environmentRef is provided, default to its values if an environment name and version are not specified
+// getEnvRef returns an environment reference corresponding to the given ref string
+// If a non-nil environmentRef is provided, default to its values if only a sole version is specified
 func (cmd *envCommand) getEnvRef(refString string, rel *environmentRef) (ref environmentRef) {
 	envRef := cmd.parseRef(refString)
 
@@ -141,7 +142,7 @@ func (cmd *envCommand) getEnvRef(refString string, rel *environmentRef) (ref env
 }
 
 // Get an environment reference when creating a new environment
-// If the given path is ambiguous, we need to make an additional API call to disambiguate
+// If the given path is ambiguous, we need to make additional API calls to disambiguate
 func (cmd *envCommand) getNewEnvRef(
 	ctx context.Context,
 	args []string,
@@ -159,6 +160,16 @@ func (cmd *envCommand) getNewEnvRef(
 		return ref, args, nil
 	}
 
+	// Check if project at <org-name>/<project-name> exists. Assume not if listing environments errors
+	allEnvs, _ := cmd.listEnvironments(ctx, "")
+	existsProject := false
+	for _, e := range allEnvs {
+		if strings.EqualFold(e.Project, ref.projectName) {
+			existsProject = true
+			break
+		}
+	}
+
 	// Check if user is part of the organization from legacy path pattern <org-name>/default/<environment-name>
 	legacyRef := environmentRef{
 		orgName:          ref.projectName,
@@ -168,16 +179,16 @@ func (cmd *envCommand) getNewEnvRef(
 		hasAmbiguousPath: ref.hasAmbiguousPath,
 	}
 
-	useLegacyPath := false
+	existsLegacyPath := false
 	_, orgs, _, _ := cmd.esc.client.GetPulumiAccountDetails(ctx)
 	for _, org := range orgs {
 		if strings.EqualFold(legacyRef.orgName, org) {
-			useLegacyPath = true
+			existsLegacyPath = true
 			break
 		}
 	}
 
-	if useLegacyPath {
+	if !existsProject && existsLegacyPath {
 		return legacyRef, args, nil
 	}
 
