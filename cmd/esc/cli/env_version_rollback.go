@@ -42,7 +42,7 @@ func newEnvVersionRollbackCmd(env *envCommand) *cobra.Command {
 			if err != nil {
 				return err
 			}
-			diags, err := env.esc.client.UpdateEnvironment(ctx, ref.orgName, ref.envName, yaml, "")
+			diags, err := env.esc.client.UpdateEnvironmentWithProject(ctx, ref.orgName, ref.projectName, ref.envName, yaml, "")
 			if err != nil {
 				return err
 			}

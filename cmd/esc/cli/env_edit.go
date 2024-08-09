@@ -74,7 +74,7 @@ func newEnvEditCmd(env *envCommand) *cobra.Command {
 					return fmt.Errorf("reading environment definition: %w", err)
 				}
 
-				diags, err := edit.env.esc.client.UpdateEnvironment(ctx, ref.orgName, ref.envName, yaml, "")
+				diags, err := edit.env.esc.client.UpdateEnvironmentWithProject(ctx, ref.orgName, ref.projectName, ref.envName, yaml, "")
 				if err != nil {
 					return fmt.Errorf("updating environment definition: %w", err)
 				}
@@ -112,7 +112,7 @@ func newEnvEditCmd(env *envCommand) *cobra.Command {
 					return nil
 				}
 
-				diags, err = edit.env.esc.client.UpdateEnvironment(ctx, ref.orgName, ref.envName, newYAML, tag)
+				diags, err = edit.env.esc.client.UpdateEnvironmentWithProject(ctx, ref.orgName, ref.projectName, ref.envName, newYAML, tag)
 				if err != nil {
 					return fmt.Errorf("updating environment definition: %w", err)
 				}

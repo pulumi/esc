@@ -171,6 +171,6 @@ func (env *envCommand) openEnvironment(
 	if len(diags) != 0 {
 		return nil, diags, err
 	}
-	open, err := env.esc.client.GetOpenEnvironment(ctx, ref.orgName, ref.envName, envID)
+	open, err := env.esc.client.GetOpenEnvironmentWithProject(ctx, ref.orgName, ref.projectName, ref.envName, envID)
 	return open, nil, err
 }
