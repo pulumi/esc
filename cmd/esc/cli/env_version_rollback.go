@@ -13,7 +13,7 @@ import (
 
 func newEnvVersionRollbackCmd(env *envCommand) *cobra.Command {
 	cmd := &cobra.Command{
-		Use:   "rollback [<org-name>/]<environment-name>@<version>",
+		Use:   "rollback [<org-name>/][<project-name>/]<environment-name>@<version>",
 		Args:  cobra.ExactArgs(1),
 		Short: "Roll back to a specific version",
 		Long: "Roll back to a specific version\n" +

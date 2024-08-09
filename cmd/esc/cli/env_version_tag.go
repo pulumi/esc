@@ -15,7 +15,7 @@ func newEnvVersionTagCmd(env *envCommand) *cobra.Command {
 	var utc bool
 
 	cmd := &cobra.Command{
-		Use:   "tag [<org-name>/]<environment-name>@<tag> [@<version>]",
+		Use:   "tag [<org-name>/][<project-name>/]<environment-name>@<tag> [@<version>]",
 		Args:  cobra.RangeArgs(1, 2),
 		Short: "Manage tagged versions",
 		Long: "Manage tagged versions\n" +

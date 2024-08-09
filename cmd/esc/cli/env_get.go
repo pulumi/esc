@@ -37,7 +37,7 @@ func newEnvGetCmd(env *envCommand) *cobra.Command {
 	get := &envGetCommand{env: env}
 
 	cmd := &cobra.Command{
-		Use:   "get [<org-name>/]<environment-name>[@<version>] <path>",
+		Use:   "get [<org-name>/][<project-name>/]<environment-name>[@<version>] <path>",
 		Args:  cobra.RangeArgs(1, 2),
 		Short: "Get a value within an environment.",
 		Long: "Get a value within an environment\n" +

@@ -18,7 +18,7 @@ func newEnvVersionHistoryCmd(env *envCommand) *cobra.Command {
 	var utc bool
 
 	cmd := &cobra.Command{
-		Use:   "history [<org-name>/]<environment-name>[@<version>]",
+		Use:   "history [<org-name>/][<project-name>/]<environment-name>[@<version>]",
 		Short: "Show revision history.",
 		Long: "Show revision history\n" +
 			"\n" +

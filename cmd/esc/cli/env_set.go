@@ -21,7 +21,7 @@ func newEnvSetCmd(env *envCommand) *cobra.Command {
 	var plaintext bool
 
 	cmd := &cobra.Command{
-		Use:   "set [<org-name>/]<environment-name> <path> <value>",
+		Use:   "set [<org-name>/][<project-name>/]<environment-name> <path> <value>",
 		Args:  cobra.RangeArgs(2, 3),
 		Short: "Set a value within an environment.",
 		Long: "Set a value within an environment\n" +

@@ -20,7 +20,7 @@ func newEnvVersionCmd(env *envCommand) *cobra.Command {
 	var utc bool
 
 	cmd := &cobra.Command{
-		Use:   "version [<org-name>/]<environment-name>@<version>",
+		Use:   "version [<org-name>/][<project-name>/]<environment-name>@<version>",
 		Args:  cobra.ExactArgs(1),
 		Short: "Manage versions",
 		Long: "Manage versions\n" +
