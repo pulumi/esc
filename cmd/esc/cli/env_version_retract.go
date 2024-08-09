@@ -14,7 +14,7 @@ func newEnvVersionRetractCmd(env *envCommand) *cobra.Command {
 	var reason string
 
 	cmd := &cobra.Command{
-		Use:   "retract [<org-name>/]<environment-name>@<version>",
+		Use:   "retract [<org-name>/][<project-name>/]<environment-name>@<version>",
 		Args:  cobra.RangeArgs(1, 2),
 		Short: "Retract a specific revision of an environment",
 		Long: "Retract a specific revision of an environment\n" +

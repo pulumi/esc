@@ -34,7 +34,7 @@ func newEnvEditCmd(env *envCommand) *cobra.Command {
 	edit := &envEditCommand{env: env}
 
 	cmd := &cobra.Command{
-		Use:   "edit [<org-name>/]<environment-name>",
+		Use:   "edit [<org-name>/][<project-name>/]<environment-name>",
 		Args:  cobra.MaximumNArgs(1),
 		Short: "Edit an environment definition",
 		Long: "Edit an environment definition\n" +

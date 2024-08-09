@@ -11,7 +11,7 @@ import (
 
 func newEnvTagRmCmd(env *envCommand) *cobra.Command {
 	cmd := &cobra.Command{
-		Use:   "rm [<org-name>/]<environment-name> <tag-name>",
+		Use:   "rm [<org-name>/][<project-name>/]<environment-name> <tag-name>",
 		Short: "Remove an environment tag.",
 		Long: "Remove an environment tag\n" +
 			"\n" +

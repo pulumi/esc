@@ -20,7 +20,7 @@ func newEnvTagLsCmd(env *envCommand) *cobra.Command {
 	var utc bool
 
 	cmd := &cobra.Command{
-		Use:   "ls [<org-name>/]<environment-name>",
+		Use:   "ls [<org-name>/][<project-name>/]<environment-name>",
 		Short: "List environment tags.",
 		Long: "List environment tags\n" +
 			"\n" +

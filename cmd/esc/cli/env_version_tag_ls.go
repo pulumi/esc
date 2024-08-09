@@ -18,7 +18,7 @@ func newEnvVersionTagLsCmd(env *envCommand) *cobra.Command {
 	var utc bool
 
 	cmd := &cobra.Command{
-		Use:   "ls [<org-name>/]<environment-name>",
+		Use:   "ls [<org-name>/][<project-name>/]<environment-name>",
 		Short: "List tagged versions.",
 		Long: "List tagged versions\n" +
 			"\n" +

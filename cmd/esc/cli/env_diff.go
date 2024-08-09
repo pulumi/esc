@@ -23,7 +23,7 @@ func newEnvDiffCmd(env *envCommand) *cobra.Command {
 	diff := &envGetCommand{env: env}
 
 	cmd := &cobra.Command{
-		Use:   "diff [<org-name>/]<environment-name>[@<version>] [[[org-name/]<environment-name>]@<version>]",
+		Use:   "diff [<org-name>/][<project-name>/]<environment-name>[@<version>] [[[org-name/][<project-name>/]<environment-name>]@<version>]",
 		Args:  cobra.RangeArgs(1, 2),
 		Short: "Show changes between versions.",
 		Long: "Show changes between versions\n" +

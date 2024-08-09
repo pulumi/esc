@@ -19,7 +19,7 @@ func newEnvRmCmd(env *envCommand) *cobra.Command {
 	var yes bool
 
 	cmd := &cobra.Command{
-		Use:   "rm [<org-name>/]<environment-name> [path]",
+		Use:   "rm [<org-name>/][<project-name>/]<environment-name> [path]",
 		Args:  cobra.MaximumNArgs(2),
 		Short: "Remove an environment or a value from an environment.",
 		Long: "Remove an environment or a value from an environment\n" +

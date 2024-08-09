@@ -11,7 +11,7 @@ import (
 
 func newEnvVersionTagRmCmd(env *envCommand) *cobra.Command {
 	cmd := &cobra.Command{
-		Use:   "rm [<org-name>/]<environment-name>@<tag>",
+		Use:   "rm [<org-name>/][<project-name>/]<environment-name>@<tag>",
 		Args:  cobra.ExactArgs(1),
 		Short: "Remove a tagged version.",
 		Long: "Remove a tagged version\n" +

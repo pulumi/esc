@@ -17,7 +17,7 @@ func newEnvTagCmd(env *envCommand) *cobra.Command {
 	var utc bool
 
 	cmd := &cobra.Command{
-		Use:   "tag [<org-name>/]<environment-name> <name> <value>",
+		Use:   "tag [<org-name>/][<project-name>/]<environment-name> <name> <value>",
 		Args:  cobra.ExactArgs(3),
 		Short: "Manage environment tags",
 		Long: "Manage environment tags\n" +
