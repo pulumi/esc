@@ -57,7 +57,7 @@ func newEnvVersionHistoryCmd(env *envCommand) *cobra.Command {
 						Before: &before,
 						Count:  &count,
 					}
-					revisions, err := env.esc.client.ListEnvironmentRevisions(ctx, ref.orgName, ref.envName, options)
+					revisions, err := env.esc.client.ListEnvironmentRevisions(ctx, ref.orgName, ref.projectName, ref.envName, options)
 					if err != nil {
 						return err
 					}

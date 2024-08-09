@@ -52,7 +52,7 @@ func newEnvVersionCmd(env *envCommand) *cobra.Command {
 				if err != nil {
 					return err
 				}
-				rev, err := env.esc.client.GetEnvironmentRevision(ctx, ref.orgName, ref.envName, int(revisionNumber))
+				rev, err := env.esc.client.GetEnvironmentRevision(ctx, ref.orgName, ref.projectName, ref.envName, int(revisionNumber))
 				if err != nil {
 					return err
 				}
