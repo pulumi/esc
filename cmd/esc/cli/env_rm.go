@@ -98,7 +98,7 @@ func newEnvRmCmd(env *envCommand) *cobra.Command {
 				return fmt.Errorf("marshaling definition: %w", err)
 			}
 
-			diags, err := env.esc.client.UpdateEnvironment(ctx, ref.orgName, ref.envName, newYAML, tag)
+			diags, err := env.esc.client.UpdateEnvironmentWithProject(ctx, ref.orgName, ref.projectName, ref.envName, newYAML, tag)
 			if err != nil {
 				return fmt.Errorf("updating environment definition: %w", err)
 			}
