@@ -259,6 +259,14 @@ type Client interface {
 		envName string,
 		options ListEnvironmentRevisionTagsOptions,
 	) ([]EnvironmentRevisionTag, error)
+
+	// EnvironmentExists checks if the specified environment exists.
+	EnvironmentExists(
+		ctx context.Context,
+		orgName string,
+		projectName string,
+		envName string,
+	) (exists bool, err error)
 }
 
 type client struct {
@@ -883,6 +891,26 @@ func (pc *client) ListEnvironmentRevisionTags(
 		return nil, err
 	}
 	return resp.Tags, nil
+}
+
+// EnvironmentExists checks if the specified environment exists.
+func (pc *client) EnvironmentExists(
+	ctx context.Context,
+	orgName string,
+	projectName string,
+	envName string,
+) (bool, error) {
+	path, err := pc.resolveEnvironmentPath(orgName, projectName, envName, "")
+	if err != nil {
+		return false, err
+	}
+
+	var resp *http.Response
+	if err := pc.restCall(ctx, http.MethodGet, path, nil, nil, &resp); err != nil {
+		return false, err
+	}
+
+	return true, nil
 }
 
 type httpCallOptions struct {
