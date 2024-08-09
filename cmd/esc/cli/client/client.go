@@ -390,9 +390,9 @@ func (pc *client) GetPulumiAccountDetails(ctx context.Context) (string, []string
 // no revision or tag is present, the "latest" tag is used.
 func (pc *client) resolveEnvironmentPath(ctx context.Context, orgName, envName, version string) (string, error) {
 	if version == "" {
-		return fmt.Sprintf("/api/preview/environments/%v/%v", orgName, envName), nil
+		return fmt.Sprintf("/api/esc/environments/%v/%v/%v", orgName, projectName, envName), nil
 	}
-	return fmt.Sprintf("/api/preview/environments/%v/%v/versions/%v", orgName, envName, version), nil
+	return fmt.Sprintf("/api/esc/environments/%v/%v/%v/versions/%v", orgName, projectName, envName, version), nil
 }
 
 func (pc *client) GetRevisionNumber(ctx context.Context, orgName, envName, version string) (int, error) {
@@ -406,7 +406,7 @@ func (pc *client) GetRevisionNumber(ctx context.Context, orgName, envName, versi
 		return int(rev), nil
 	}
 
-	path := fmt.Sprintf("/api/preview/environments/%v/%v/versions/tags/%v", orgName, envName, version)
+	path := fmt.Sprintf("/api/esc/environments/%v/%v/%v/versions/tags/%v", orgName, projectName, envName, version)
 
 	var resp EnvironmentRevisionTag
 	if err := pc.restCall(ctx, http.MethodGet, path, nil, nil, &resp); err != nil {
@@ -429,7 +429,7 @@ func (pc *client) ListEnvironments(
 	}
 
 	var resp ListEnvironmentsResponse
-	err := pc.restCall(ctx, http.MethodGet, "/api/preview/environments", queryObj, nil, &resp)
+	err := pc.restCall(ctx, http.MethodGet, "/api/esc/environments", queryObj, nil, &resp)
 	if err != nil {
 		return nil, "", err
 	}
@@ -443,7 +443,7 @@ func (pc *client) CreateEnvironment(ctx context.Context, orgName, envName string
 
 // CreateEnvironmentWithProject creates an environment named envName in org orgName and project projectName.
 func (pc *client) CreateEnvironmentWithProject(ctx context.Context, orgName, projectName, envName string) error {
-	path := fmt.Sprintf("/api/preview/environments/%v/%v", orgName, envName)
+	path := fmt.Sprintf("/api/esc/environments/%v/%v/%v", orgName, projectName, envName)
 	return pc.restCall(ctx, http.MethodPost, path, nil, nil, nil)
 }
 
@@ -515,7 +515,7 @@ func (pc *client) UpdateEnvironmentWithRevision(
 	}
 
 	var errResp EnvironmentErrorResponse
-	path := fmt.Sprintf("/api/preview/environments/%v/%v", orgName, envName)
+	path := fmt.Sprintf("/api/esc/environments/%v/%v/%v", orgName, projectName, envName)
 	var resp *http.Response
 	err := pc.restCallWithOptions(ctx, http.MethodPatch, path, nil, json.RawMessage(yaml), &resp, httpCallOptions{
 		Header:        header,
@@ -538,7 +538,7 @@ func (pc *client) UpdateEnvironmentWithRevision(
 }
 
 func (pc *client) DeleteEnvironment(ctx context.Context, orgName, envName string) error {
-	path := fmt.Sprintf("/api/preview/environments/%v/%v", orgName, envName)
+	path := fmt.Sprintf("/api/esc/environments/%v/%v/%v", orgName, projectName, envName)
 	return pc.restCall(ctx, http.MethodDelete, path, nil, nil, nil)
 }
 
@@ -592,7 +592,7 @@ func (pc *client) CheckYAMLEnvironment(
 	// to any part of the client API to break the ESC CLI build. So we're limited to non-breaking changes, including adding
 	// variadic args or adding additional methods.
 
-	path := fmt.Sprintf("/api/preview/environments/%v/yaml/check", orgName)
+	path := fmt.Sprintf("/api/esc/environments/%v/yaml/check", orgName)
 
 	queryObj := struct {
 		ShowSecrets bool `url:"showSecrets"`
@@ -631,7 +631,7 @@ func (pc *client) OpenYAMLEnvironment(
 		ID string `json:"id"`
 	}
 	var errResp EnvironmentErrorResponse
-	path := fmt.Sprintf("/api/preview/environments/%v/yaml/open", orgName)
+	path := fmt.Sprintf("/api/esc/environments/%v/yaml/open", orgName)
 	err := pc.restCallWithOptions(ctx, http.MethodPost, path, queryObj, json.RawMessage(yaml), &resp, httpCallOptions{
 		ErrorResponse: &errResp,
 	})
@@ -652,7 +652,7 @@ func (pc *client) GetOpenEnvironment(ctx context.Context, orgName, envName, open
 
 func (pc *client) GetOpenEnvironmentWithProject(ctx context.Context, orgName, projectName, envName, openSessionID string) (*esc.Environment, error) {
 	var resp esc.Environment
-	path := fmt.Sprintf("/api/preview/environments/%v/%v/open/%v", orgName, envName, openSessionID)
+	path := fmt.Sprintf("/api/esc/environments/%v/%v/%v/open/%v", orgName, projectName, envName, openSessionID)
 	err := pc.restCall(ctx, http.MethodGet, path, nil, nil, &resp)
 	if err != nil {
 		return nil, err
@@ -668,7 +668,7 @@ func (pc *client) GetOpenProperty(ctx context.Context, orgName, envName, openSes
 	}
 
 	var resp esc.Value
-	path := fmt.Sprintf("/api/preview/environments/%v/%v/open/%v", orgName, envName, openSessionID)
+	path := fmt.Sprintf("/api/esc/environments/%v/%v/%v/open/%v", orgName, projectName, envName, openSessionID)
 	err := pc.restCall(ctx, http.MethodGet, path, queryObj, nil, &resp)
 	if err != nil {
 		return nil, err
@@ -689,7 +689,7 @@ func (pc *client) ListEnvironmentTags(
 	options ListEnvironmentTagsOptions,
 ) ([]*EnvironmentTag, string, error) {
 	var resp ListEnvironmentTagsResponse
-	path := fmt.Sprintf("/api/preview/environments/%v/%v/tags", orgName, envName)
+	path := fmt.Sprintf("/api/esc/environments/%v/%v/%v/tags", orgName, projectName, envName)
 	err := pc.restCall(ctx, http.MethodGet, path, options, nil, &resp)
 	if err != nil {
 		return nil, "", err
@@ -712,7 +712,7 @@ func (pc *client) CreateEnvironmentTag(
 		Name:  key,
 		Value: value,
 	}
-	path := fmt.Sprintf("/api/preview/environments/%v/%v/tags", orgName, envName)
+	path := fmt.Sprintf("/api/esc/environments/%v/%v/%v/tags", orgName, projectName, envName)
 	err := pc.restCall(ctx, http.MethodPost, path, nil, &req, &resp)
 	if err != nil {
 		return nil, err
@@ -725,7 +725,7 @@ func (pc *client) GetEnvironmentTag(
 	orgName, envName, key string,
 ) (*EnvironmentTag, error) {
 	var resp EnvironmentTag
-	path := fmt.Sprintf("/api/preview/environments/%v/%v/tags/%v", orgName, envName, key)
+	path := fmt.Sprintf("/api/esc/environments/%v/%v/%v/tags/%v", orgName, projectName, envName, key)
 	err := pc.restCall(ctx, http.MethodGet, path, nil, nil, &resp)
 	if err != nil {
 		return nil, err
@@ -751,7 +751,7 @@ func (pc *client) UpdateEnvironmentTag(
 	if newValue != "" {
 		req.NewTag.Value = newValue
 	}
-	path := fmt.Sprintf("/api/preview/environments/%v/%v/tags/%v", orgName, envName, currentKey)
+	path := fmt.Sprintf("/api/esc/environments/%v/%v/%v/tags/%v", orgName, projectName, envName, currentKey)
 	err := pc.restCall(ctx, http.MethodPatch, path, nil, &req, &resp)
 	if err != nil {
 		return nil, err
@@ -761,7 +761,7 @@ func (pc *client) UpdateEnvironmentTag(
 
 // DeleteEnvironmentTag deletes a specified tag on an environment.
 func (pc *client) DeleteEnvironmentTag(ctx context.Context, orgName, envName, tagName string) error {
-	path := fmt.Sprintf("/api/preview/environments/%v/%v/tags/%v", orgName, envName, tagName)
+	path := fmt.Sprintf("/api/esc/environments/%v/%v/%v/tags/%v", orgName, projectName, envName, tagName)
 	return pc.restCall(ctx, http.MethodDelete, path, nil, nil, nil)
 }
 
@@ -794,7 +794,7 @@ func (pc *client) ListEnvironmentRevisions(
 	options ListEnvironmentRevisionsOptions,
 ) ([]EnvironmentRevision, error) {
 	var resp []EnvironmentRevision
-	path := fmt.Sprintf("/api/preview/environments/%v/%v/versions", orgName, envName)
+	path := fmt.Sprintf("/api/esc/environments/%v/%v/%v/versions", orgName, projectName, envName)
 	err := pc.restCall(ctx, http.MethodGet, path, options, nil, &resp)
 	if err != nil {
 		return nil, err
@@ -815,7 +815,7 @@ func (pc *client) RetractEnvironmentRevision(
 		Replacement: replacement,
 		Reason:      reason,
 	}
-	path := fmt.Sprintf("/api/preview/environments/%v/%v/versions/%v/retract", orgName, envName, version)
+	path := fmt.Sprintf("/api/esc/environments/%v/%v/%v/versions/%v/retract", orgName, projectName, envName, version)
 	return pc.restCall(ctx, http.MethodPost, path, nil, &req, nil)
 }
 
@@ -828,7 +828,7 @@ func (pc *client) CreateEnvironmentRevisionTag(
 	revision *int,
 ) error {
 	req := CreateEnvironmentRevisionTagRequest{Revision: revision}
-	path := fmt.Sprintf("/api/preview/environments/%v/%v/versions/tags/%v", orgName, envName, tagName)
+	path := fmt.Sprintf("/api/esc/environments/%v/%v/%v/versions/tags/%v", orgName, projectName, envName, tagName)
 	return pc.restCall(ctx, http.MethodPost, path, nil, &req, nil)
 }
 
@@ -840,7 +840,7 @@ func (pc *client) GetEnvironmentRevisionTag(
 	tagName string,
 ) (*EnvironmentRevisionTag, error) {
 	var resp EnvironmentRevisionTag
-	path := fmt.Sprintf("/api/preview/environments/%v/%v/versions/tags/%v", orgName, envName, tagName)
+	path := fmt.Sprintf("/api/esc/environments/%v/%v/%v/versions/tags/%v", orgName, projectName, envName, tagName)
 	err := pc.restCall(ctx, http.MethodGet, path, nil, nil, &resp)
 	if err != nil {
 		return nil, err
@@ -857,7 +857,7 @@ func (pc *client) UpdateEnvironmentRevisionTag(
 	revision *int,
 ) error {
 	req := UpdateEnvironmentRevisionTagRequest{Revision: revision}
-	path := fmt.Sprintf("/api/preview/environments/%v/%v/versions/tags/%v", orgName, envName, tagName)
+	path := fmt.Sprintf("/api/esc/environments/%v/%v/%v/versions/tags/%v", orgName, projectName, envName, tagName)
 	return pc.restCall(ctx, http.MethodPatch, path, nil, &req, nil)
 }
 
@@ -868,7 +868,7 @@ func (pc *client) DeleteEnvironmentRevisionTag(
 	envName string,
 	tagName string,
 ) error {
-	path := fmt.Sprintf("/api/preview/environments/%v/%v/versions/tags/%v", orgName, envName, tagName)
+	path := fmt.Sprintf("/api/esc/environments/%v/%v/%v/versions/tags/%v", orgName, projectName, envName, tagName)
 	return pc.restCall(ctx, http.MethodDelete, path, nil, nil, nil)
 }
 
@@ -885,7 +885,7 @@ func (pc *client) ListEnvironmentRevisionTags(
 	options ListEnvironmentRevisionTagsOptions,
 ) ([]EnvironmentRevisionTag, error) {
 	var resp ListEnvironmentRevisionTagsResponse
-	path := fmt.Sprintf("/api/preview/environments/%v/%v/versions/tags", orgName, envName)
+	path := fmt.Sprintf("/api/esc/environments/%v/%v/%v/versions/tags", orgName, projectName, envName)
 	err := pc.restCall(ctx, http.MethodGet, path, options, nil, &resp)
 	if err != nil {
 		return nil, err
