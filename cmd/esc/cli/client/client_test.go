@@ -169,7 +169,7 @@ func TestCreateEnvironment(t *testing.T) {
 		client := newTestClient(t, http.MethodPost, "/api/esc/environments/test-org/test-project/test-env", func(w http.ResponseWriter, r *http.Request) {
 			w.WriteHeader(http.StatusOK)
 		})
-		err := client.CreateEnvironment(context.Background(), "test-org", "test-env")
+		err := client.CreateEnvironmentWithProject(context.Background(), "test-org", "test-project", "test-env")
 		assert.NoError(t, err)
 	})
 
@@ -183,7 +183,7 @@ func TestCreateEnvironment(t *testing.T) {
 			})
 			require.NoError(t, err)
 		})
-		err := client.CreateEnvironment(context.Background(), "test-org", "test-env")
+		err := client.CreateEnvironmentWithProject(context.Background(), "test-org", "test-project", "test-env")
 		assert.ErrorContains(t, err, "conflict")
 	})
 
@@ -612,7 +612,7 @@ func TestGetOpenEnvironment(t *testing.T) {
 			require.NoError(t, err)
 		})
 
-		env, err := client.GetOpenEnvironment(context.Background(), "test-org", "test-env", "session")
+		env, err := client.GetOpenEnvironmentWithProject(context.Background(), "test-org", "test-project", "test-env", "session")
 		require.NoError(t, err)
 		assert.Equal(t, expected, env)
 	})
@@ -628,7 +628,7 @@ func TestGetOpenEnvironment(t *testing.T) {
 			require.NoError(t, err)
 		})
 
-		_, err := client.GetOpenEnvironment(context.Background(), "test-org", "test-env", "session")
+		_, err := client.GetOpenEnvironmentWithProject(context.Background(), "test-org", "test-project", "test-env", "session")
 		assert.ErrorContains(t, err, "not found")
 	})
 }

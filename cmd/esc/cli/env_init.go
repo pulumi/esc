@@ -56,12 +56,12 @@ func newEnvInitCmd(env *envCommand) *cobra.Command {
 				return fmt.Errorf("reading environment definition: %w", err)
 			}
 
-			if err := env.esc.client.CreateEnvironment(ctx, ref.orgName, ref.envName); err != nil {
+			if err := env.esc.client.CreateEnvironmentWithProject(ctx, ref.orgName, ref.projectName, ref.envName); err != nil {
 				return fmt.Errorf("creating environment: %w", err)
 			}
 			fmt.Fprintln(env.esc.stdout, "Environment created.")
 			if len(yaml) != 0 {
-				diags, err := env.esc.client.UpdateEnvironment(ctx, ref.orgName, ref.envName, yaml, "")
+				diags, err := env.esc.client.UpdateEnvironmentWithProject(ctx, ref.orgName, ref.projectName, ref.envName, yaml, "")
 				if err != nil {
 					return fmt.Errorf("updating environment definition: %w", err)
 				}
