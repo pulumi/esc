@@ -21,7 +21,7 @@ func newEnvOpenCmd(envcmd *envCommand) *cobra.Command {
 	var format string
 
 	cmd := &cobra.Command{
-		Use:   "open [<org-name>/]<environment-name>[@<version>] [property path]",
+		Use:   "open [<org-name>/][<project-name>/]<environment-name>[@<version>] [property path]",
 		Args:  cobra.MaximumNArgs(2),
 		Short: "Open the environment with the given name.",
 		Long: "Open the environment with the given name and return the result\n" +

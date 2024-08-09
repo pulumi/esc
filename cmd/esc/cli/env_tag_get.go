@@ -14,7 +14,7 @@ func newEnvTagGetCmd(env *envCommand) *cobra.Command {
 	var utc bool
 
 	cmd := &cobra.Command{
-		Use:   "get [<org-name>/]<environment-name> <name>",
+		Use:   "get [<org-name>/][<project-name>/]<environment-name> <name>",
 		Args:  cobra.ExactArgs(2),
 		Short: "Get an environment tag",
 		Long: "Get an environment tag\n" +
