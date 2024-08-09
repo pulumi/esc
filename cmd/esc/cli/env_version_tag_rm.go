@@ -34,7 +34,7 @@ func newEnvVersionTagRmCmd(env *envCommand) *cobra.Command {
 			}
 			_ = args
 
-			return env.esc.client.DeleteEnvironmentRevisionTag(ctx, ref.orgName, ref.envName, ref.version)
+			return env.esc.client.DeleteEnvironmentRevisionTag(ctx, ref.orgName, ref.projectName, ref.envName, ref.version)
 		},
 	}
 
