@@ -51,7 +51,7 @@ func newEnvVersionTagLsCmd(env *envCommand) *cobra.Command {
 						After: after,
 						Count: &count,
 					}
-					tags, err := env.esc.client.ListEnvironmentRevisionTags(ctx, ref.orgName, ref.envName, options)
+					tags, err := env.esc.client.ListEnvironmentRevisionTags(ctx, ref.orgName, ref.projectName, ref.envName, options)
 					if err != nil {
 						return err
 					}

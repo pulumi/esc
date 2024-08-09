@@ -58,7 +58,7 @@ func newEnvVersionCmd(env *envCommand) *cobra.Command {
 				}
 				printRevision(env.esc.stdout, st, *rev, utcFlag(utc))
 			} else {
-				tag, err := env.esc.client.GetEnvironmentRevisionTag(ctx, ref.orgName, ref.envName, ref.version)
+				tag, err := env.esc.client.GetEnvironmentRevisionTag(ctx, ref.orgName, ref.projectName, ref.envName, ref.version)
 				if err != nil {
 					return err
 				}

@@ -243,21 +243,22 @@ type Client interface {
 	) error
 
 	// CreateEnvironmentRevisionTag creates a new revision tag with the given name.
-	CreateEnvironmentRevisionTag(ctx context.Context, orgName, envName, tagName string, revision *int) error
+	CreateEnvironmentRevisionTag(ctx context.Context, orgName, projectName, envName, tagName string, revision *int) error
 
 	// GetEnvironmentRevisionTag returns a description of the given revision tag.
-	GetEnvironmentRevisionTag(ctx context.Context, orgName, envName, tagName string) (*EnvironmentRevisionTag, error)
+	GetEnvironmentRevisionTag(ctx context.Context, orgName, projectName, envName, tagName string) (*EnvironmentRevisionTag, error)
 
 	// UpdateEnvironmentRevisionTag updates the revision tag with the given name.
-	UpdateEnvironmentRevisionTag(ctx context.Context, orgName, envName, tagName string, revision *int) error
+	UpdateEnvironmentRevisionTag(ctx context.Context, orgName, projectName, envName, tagName string, revision *int) error
 
 	// DeleteEnvironmentRevisionTag deletes the revision tag with the given name.
-	DeleteEnvironmentRevisionTag(ctx context.Context, orgName, envName, tagName string) error
+	DeleteEnvironmentRevisionTag(ctx context.Context, orgName, projectName, envName, tagName string) error
 
 	// ListEnvironmentRevisionTags lists the revision tags for the given environment.
 	ListEnvironmentRevisionTags(
 		ctx context.Context,
 		orgName string,
+		projectName string,
 		envName string,
 		options ListEnvironmentRevisionTagsOptions,
 	) ([]EnvironmentRevisionTag, error)
@@ -829,6 +830,7 @@ func (pc *client) RetractEnvironmentRevision(
 func (pc *client) CreateEnvironmentRevisionTag(
 	ctx context.Context,
 	orgName string,
+	projectName string,
 	envName string,
 	tagName string,
 	revision *int,
@@ -842,6 +844,7 @@ func (pc *client) CreateEnvironmentRevisionTag(
 func (pc *client) GetEnvironmentRevisionTag(
 	ctx context.Context,
 	orgName string,
+	projectName string,
 	envName string,
 	tagName string,
 ) (*EnvironmentRevisionTag, error) {
@@ -858,6 +861,7 @@ func (pc *client) GetEnvironmentRevisionTag(
 func (pc *client) UpdateEnvironmentRevisionTag(
 	ctx context.Context,
 	orgName string,
+	projectName string,
 	envName string,
 	tagName string,
 	revision *int,
@@ -871,6 +875,7 @@ func (pc *client) UpdateEnvironmentRevisionTag(
 func (pc *client) DeleteEnvironmentRevisionTag(
 	ctx context.Context,
 	orgName string,
+	projectName string,
 	envName string,
 	tagName string,
 ) error {
@@ -887,6 +892,7 @@ type ListEnvironmentRevisionTagsOptions struct {
 func (pc *client) ListEnvironmentRevisionTags(
 	ctx context.Context,
 	orgName string,
+	projectName string,
 	envName string,
 	options ListEnvironmentRevisionTagsOptions,
 ) ([]EnvironmentRevisionTag, error) {

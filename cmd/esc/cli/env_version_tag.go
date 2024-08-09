@@ -44,7 +44,7 @@ func newEnvVersionTagCmd(env *envCommand) *cobra.Command {
 
 			var revision int
 			if len(args) == 0 {
-				latest, err := env.esc.client.GetEnvironmentRevisionTag(ctx, ref.orgName, ref.envName, "latest")
+				latest, err := env.esc.client.GetEnvironmentRevisionTag(ctx, ref.orgName, ref.projectName, ref.envName, "latest")
 				if err != nil {
 					return err
 				}
@@ -57,14 +57,14 @@ func newEnvVersionTagCmd(env *envCommand) *cobra.Command {
 				}
 			}
 
-			err = env.esc.client.UpdateEnvironmentRevisionTag(ctx, ref.orgName, ref.envName, ref.version, &revision)
+			err = env.esc.client.UpdateEnvironmentRevisionTag(ctx, ref.orgName, ref.projectName, ref.envName, ref.version, &revision)
 			if err == nil {
 				return err
 			}
 			if !client.IsNotFound(err) {
 				return err
 			}
-			return env.esc.client.CreateEnvironmentRevisionTag(ctx, ref.orgName, ref.envName, ref.version, &revision)
+			return env.esc.client.CreateEnvironmentRevisionTag(ctx, ref.orgName, ref.projectName, ref.envName, ref.version, &revision)
 		},
 	}
 
