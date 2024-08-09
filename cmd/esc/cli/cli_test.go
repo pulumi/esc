@@ -237,7 +237,8 @@ type testEnvironments struct {
 }
 
 func (e *testEnvironments) LoadEnvironment(ctx context.Context, envName string) ([]byte, eval.Decrypter, error) {
-	name := path.Join(e.orgName, envName)
+	// TODO: this isn't correct but I thought `envName` is supposed to include project here
+	name := path.Join(e.orgName, client.DefaultProject, envName)
 	env, ok := e.environments[name]
 	if !ok {
 		return nil, nil, errors.New("not found")
@@ -997,6 +998,16 @@ func (c *testPulumiClient) ListEnvironmentRevisionTags(
 	return fx.ToSlice(fx.FMap(fx.IterSlice(names), func(name string) (client.EnvironmentRevisionTag, bool) {
 		return client.EnvironmentRevisionTag{Name: name, Revision: env.revisionTags[name]}, name > options.After
 	})), nil
+}
+
+// unused
+func (c *testPulumiClient) EnvironmentExists(
+	ctx context.Context,
+	orgName string,
+	projectName string,
+	envName string,
+) (bool, error) {
+	return false, nil
 }
 
 type testExec struct {
