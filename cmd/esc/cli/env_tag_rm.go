@@ -35,7 +35,7 @@ func newEnvTagRmCmd(env *envCommand) *cobra.Command {
 
 			tagIdentifier := args[1]
 
-			if err := env.esc.client.DeleteEnvironmentTag(ctx, ref.orgName, ref.envName, tagIdentifier); err != nil {
+			if err := env.esc.client.DeleteEnvironmentTag(ctx, ref.orgName, ref.projectName, ref.envName, tagIdentifier); err != nil {
 				return err
 			}
 

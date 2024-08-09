@@ -42,7 +42,7 @@ func newEnvTagGetCmd(env *envCommand) *cobra.Command {
 				return errors.New("environment tag name cannot be empty")
 			}
 
-			tag, err := env.esc.client.GetEnvironmentTag(ctx, ref.orgName, ref.envName, name)
+			tag, err := env.esc.client.GetEnvironmentTag(ctx, ref.orgName, ref.projectName, ref.envName, name)
 			if err != nil {
 				return err
 			}
