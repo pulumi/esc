@@ -236,8 +236,17 @@ type testEnvironments struct {
 	environments map[string]*testEnvironment
 }
 
-func (e *testEnvironments) LoadEnvironment(ctx context.Context, envName string) ([]byte, eval.Decrypter, error) {
-	name := path.Join(e.orgName, envName)
+func (e *testEnvironments) LoadEnvironment(ctx context.Context, ref string) ([]byte, eval.Decrypter, error) {
+	var name string
+
+	// This "emulates" the backend behavior of resolving refs
+	if strings.Contains(ref, "/") {
+		name = path.Join(e.orgName, ref)
+	} else {
+		// If ref is a single identifier, assume the default project
+		name = path.Join(e.orgName, client.DefaultProject, ref)
+	}
+
 	env, ok := e.environments[name]
 	if !ok {
 		return nil, nil, errors.New("not found")
@@ -997,6 +1006,16 @@ func (c *testPulumiClient) ListEnvironmentRevisionTags(
 	return fx.ToSlice(fx.FMap(fx.IterSlice(names), func(name string) (client.EnvironmentRevisionTag, bool) {
 		return client.EnvironmentRevisionTag{Name: name, Revision: env.revisionTags[name]}, name > options.After
 	})), nil
+}
+
+// unused
+func (c *testPulumiClient) EnvironmentExists(
+	ctx context.Context,
+	orgName string,
+	projectName string,
+	envName string,
+) (bool, error) {
+	return false, nil
 }
 
 type testExec struct {
