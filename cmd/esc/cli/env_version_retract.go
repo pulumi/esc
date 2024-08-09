@@ -55,6 +55,7 @@ func newEnvVersionRetractCmd(env *envCommand) *cobra.Command {
 				rev, err := env.esc.client.GetRevisionNumber(
 					ctx,
 					replacementRef.orgName,
+					replacementRef.projectName,
 					replacementRef.envName,
 					replacementRef.version,
 				)

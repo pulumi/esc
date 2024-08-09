@@ -296,7 +296,7 @@ func TestUpdateEnvironment(t *testing.T) {
 			w.WriteHeader(http.StatusOK)
 		})
 
-		diags, revision, err := client.UpdateEnvironmentWithRevision(context.Background(), "test-org", "test-env", yaml, tag)
+		diags, revision, err := client.UpdateEnvironmentWithRevision(context.Background(), "test-org", "test-project", "test-env", yaml, tag)
 		require.NoError(t, err)
 		assert.Equal(t, 1, revision)
 		assert.Len(t, diags, 0)
@@ -333,7 +333,7 @@ func TestUpdateEnvironment(t *testing.T) {
 			require.NoError(t, err)
 		})
 
-		diags, revision, err := client.UpdateEnvironmentWithRevision(context.Background(), "test-org", "test-env", nil, "")
+		diags, revision, err := client.UpdateEnvironmentWithRevision(context.Background(), "test-org", "test-project", "test-env", nil, "")
 		require.Equal(t, 0, revision)
 		require.NoError(t, err)
 		assert.Equal(t, expected, diags)
@@ -349,7 +349,7 @@ func TestUpdateEnvironment(t *testing.T) {
 			})
 			require.NoError(t, err)
 		})
-		_, revision, err := client.UpdateEnvironmentWithRevision(context.Background(), "test-org", "test-env", nil, "")
+		_, revision, err := client.UpdateEnvironmentWithRevision(context.Background(), "test-org", "test-project", "test-env", nil, "")
 		require.Equal(t, 0, revision)
 		assert.ErrorContains(t, err, "conflict")
 	})
@@ -645,7 +645,7 @@ func TestGetOpenProperty(t *testing.T) {
 			require.NoError(t, err)
 		})
 
-		val, err := client.GetOpenProperty(context.Background(), "test-org", "test-env", "session", property)
+		val, err := client.GetOpenProperty(context.Background(), "test-org", "test-project", "test-env", "session", property)
 		require.NoError(t, err)
 		assert.Equal(t, &expected, val)
 	})
@@ -661,7 +661,7 @@ func TestGetOpenProperty(t *testing.T) {
 			require.NoError(t, err)
 		})
 
-		_, err := client.GetOpenProperty(context.Background(), "test-org", "test-env", "session", "foo")
+		_, err := client.GetOpenProperty(context.Background(), "test-org", "test-project", "test-env", "session", "foo")
 		assert.ErrorContains(t, err, "not found")
 	})
 }

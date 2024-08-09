@@ -348,8 +348,8 @@ func mapDiags(diags syntax.Diagnostics) []client.EnvironmentDiagnostic {
 	return out
 }
 
-func (c *testPulumiClient) getEnvironment(orgName, envName, version string) (*testEnvironment, *testEnvironmentRevision, error) {
-	name := path.Join(orgName, envName)
+func (c *testPulumiClient) getEnvironment(orgName, projectName, envName, version string) (*testEnvironment, *testEnvironmentRevision, error) {
+	name := path.Join(orgName, projectName, envName)
 
 	env, ok := c.environments[name]
 	if !ok {
@@ -451,8 +451,8 @@ func (c *testPulumiClient) GetPulumiAccountDetails(ctx context.Context) (string,
 	return c.user, nil, nil, nil
 }
 
-func (c *testPulumiClient) GetRevisionNumber(ctx context.Context, orgName, envName, version string) (int, error) {
-	_, rev, err := c.getEnvironment(orgName, envName, version)
+func (c *testPulumiClient) GetRevisionNumber(ctx context.Context, orgName, projectName, envName, version string) (int, error) {
+	_, rev, err := c.getEnvironment(orgName, projectName, envName, version)
 	if err != nil {
 		return 0, err
 	}
@@ -520,7 +520,7 @@ func (c *testPulumiClient) GetEnvironment(
 	version string,
 	showSecrets bool,
 ) ([]byte, string, int, error) {
-	_, env, err := c.getEnvironment(orgName, envName, version)
+	_, env, err := c.getEnvironment(orgName, projectName, envName, version)
 	if err != nil {
 		return nil, "", 0, err
 	}
@@ -560,18 +560,19 @@ func (c *testPulumiClient) UpdateEnvironmentWithProject(
 	yaml []byte,
 	tag string,
 ) ([]client.EnvironmentDiagnostic, error) {
-	diags, _, err := c.UpdateEnvironmentWithRevision(ctx, orgName, envName, yaml, tag)
+	diags, _, err := c.UpdateEnvironmentWithRevision(ctx, orgName, projectName, envName, yaml, tag)
 	return diags, err
 }
 
 func (c *testPulumiClient) UpdateEnvironmentWithRevision(
 	ctx context.Context,
 	orgName string,
+	projectName string,
 	envName string,
 	yaml []byte,
 	tag string,
 ) ([]client.EnvironmentDiagnostic, int, error) {
-	env, latest, err := c.getEnvironment(orgName, envName, "")
+	env, latest, err := c.getEnvironment(orgName, projectName, envName, "")
 	if err != nil {
 		return nil, 0, err
 	}
@@ -620,7 +621,7 @@ func (c *testPulumiClient) OpenEnvironment(
 	version string,
 	duration time.Duration,
 ) (string, []client.EnvironmentDiagnostic, error) {
-	_, env, err := c.getEnvironment(orgName, envName, version)
+	_, env, err := c.getEnvironment(orgName, projectName, envName, version)
 	if err != nil {
 		return "", nil, err
 	}
@@ -658,7 +659,7 @@ func (c *testPulumiClient) GetOpenEnvironmentWithProject(ctx context.Context, or
 	return env, nil
 }
 
-func (c *testPulumiClient) GetOpenProperty(ctx context.Context, orgName, envName, openEnvID, property string) (*esc.Value, error) {
+func (c *testPulumiClient) GetOpenProperty(ctx context.Context, orgName, projectName, envName, openEnvID, property string) (*esc.Value, error) {
 	return nil, errors.New("NYI")
 }
 
@@ -811,7 +812,7 @@ func (c *testPulumiClient) ListEnvironmentRevisions(
 	envName string,
 	options client.ListEnvironmentRevisionsOptions,
 ) ([]client.EnvironmentRevision, error) {
-	env, _, err := c.getEnvironment(orgName, envName, "")
+	env, _, err := c.getEnvironment(orgName, projectName, envName, "")
 	if err != nil {
 		return nil, err
 	}
@@ -864,7 +865,7 @@ func (c *testPulumiClient) RetractEnvironmentRevision(
 	replacement *int,
 	reason string,
 ) error {
-	_, rev, err := c.getEnvironment(orgName, envName, version)
+	_, rev, err := c.getEnvironment(orgName, projectName, envName, version)
 	if err != nil {
 		return err
 	}
@@ -886,7 +887,7 @@ func (c *testPulumiClient) CreateEnvironmentRevisionTag(
 	tagName string,
 	revision *int,
 ) error {
-	env, _, err := c.getEnvironment(orgName, envName, "")
+	env, _, err := c.getEnvironment(orgName, projectName, envName, "")
 	if err != nil {
 		return err
 	}
@@ -915,7 +916,7 @@ func (c *testPulumiClient) GetEnvironmentRevisionTag(
 	envName string,
 	tagName string,
 ) (*client.EnvironmentRevisionTag, error) {
-	env, _, err := c.getEnvironment(orgName, envName, "")
+	env, _, err := c.getEnvironment(orgName, projectName, envName, "")
 	if err != nil {
 		return nil, err
 	}
@@ -936,7 +937,7 @@ func (c *testPulumiClient) UpdateEnvironmentRevisionTag(
 	tagName string,
 	revision *int,
 ) error {
-	env, _, err := c.getEnvironment(orgName, envName, "")
+	env, _, err := c.getEnvironment(orgName, projectName, envName, "")
 	if err != nil {
 		return err
 	}
@@ -965,7 +966,7 @@ func (c *testPulumiClient) DeleteEnvironmentRevisionTag(
 	envName string,
 	tagName string,
 ) error {
-	env, _, err := c.getEnvironment(orgName, envName, "")
+	env, _, err := c.getEnvironment(orgName, projectName, envName, "")
 	if err != nil {
 		return err
 	}
@@ -986,7 +987,7 @@ func (c *testPulumiClient) ListEnvironmentRevisionTags(
 	envName string,
 	options client.ListEnvironmentRevisionTagsOptions,
 ) ([]client.EnvironmentRevisionTag, error) {
-	env, _, err := c.getEnvironment(orgName, envName, "")
+	env, _, err := c.getEnvironment(orgName, projectName, envName, "")
 	if err != nil {
 		return nil, err
 	}

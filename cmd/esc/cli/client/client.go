@@ -66,7 +66,7 @@ type Client interface {
 	GetPulumiAccountDetails(ctx context.Context) (string, []string, *workspace.TokenInformation, error)
 
 	// GetRevisionNumber returns the revision number for version.
-	GetRevisionNumber(ctx context.Context, orgName, envName, version string) (int, error)
+	GetRevisionNumber(ctx context.Context, orgName, projectName, envName, version string) (int, error)
 
 	// ListEnvironments lists all environments in the given org that are accessible to the calling user.
 	//
@@ -109,6 +109,7 @@ type Client interface {
 	UpdateEnvironmentWithRevision(
 		ctx context.Context,
 		orgName string,
+		projectName string,
 		envName string,
 		yaml []byte,
 		etag string,
@@ -189,7 +190,7 @@ type Client interface {
 	//     aws.login
 	//     environmentVariables["AWS_ACCESS_KEY_ID"]
 	//
-	GetOpenProperty(ctx context.Context, orgName, envName, openEnvID, property string) (*esc.Value, error)
+	GetOpenProperty(ctx context.Context, orgName, projectName, envName, openEnvID, property string) (*esc.Value, error)
 
 	// ListEnvironmentTags lists the tags for the given environment.
 	ListEnvironmentTags(
@@ -400,7 +401,7 @@ func (pc *client) resolveEnvironmentPath(orgName, projectName, envName, version 
 	return fmt.Sprintf("/api/esc/environments/%v/%v/%v/versions/%v", orgName, projectName, envName, version), nil
 }
 
-func (pc *client) GetRevisionNumber(ctx context.Context, orgName, envName, version string) (int, error) {
+func (pc *client) GetRevisionNumber(ctx context.Context, orgName, projectName, envName, version string) (int, error) {
 	if version == "" {
 		version = "latest"
 	} else if version[0] >= '0' && version[0] <= '9' {
@@ -504,13 +505,14 @@ func (pc *client) UpdateEnvironmentWithProject(
 	yaml []byte,
 	tag string,
 ) ([]EnvironmentDiagnostic, error) {
-	diags, _, err := pc.UpdateEnvironmentWithRevision(ctx, orgName, envName, yaml, tag)
+	diags, _, err := pc.UpdateEnvironmentWithRevision(ctx, orgName, projectName, envName, yaml, tag)
 	return diags, err
 }
 
 func (pc *client) UpdateEnvironmentWithRevision(
 	ctx context.Context,
 	orgName string,
+	projectName string,
 	envName string,
 	yaml []byte,
 	tag string,
@@ -667,7 +669,7 @@ func (pc *client) GetOpenEnvironmentWithProject(ctx context.Context, orgName, pr
 	return &resp, nil
 }
 
-func (pc *client) GetOpenProperty(ctx context.Context, orgName, envName, openSessionID, property string) (*esc.Value, error) {
+func (pc *client) GetOpenProperty(ctx context.Context, orgName, projectName, envName, openSessionID, property string) (*esc.Value, error) {
 	queryObj := struct {
 		Property string `url:"property"`
 	}{
