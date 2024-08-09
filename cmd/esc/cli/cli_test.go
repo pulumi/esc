@@ -479,12 +479,14 @@ func (c *testPulumiClient) ListEnvironments(
 
 	var envs []client.OrgEnvironment
 	for _, k := range names {
-		org, name, _ := strings.Cut(k, "/")
+		parts := strings.Split(k, "/")
+		org, projectName, envName := parts[0], parts[1], parts[2]
 
 		if orgName == "" || org == orgName {
 			envs = append(envs, client.OrgEnvironment{
 				Organization: org,
-				Name:         name,
+				Project:      projectName,
+				Name:         envName,
 			})
 		}
 	}

@@ -44,9 +44,9 @@ func newEnvLsCmd(env *envCommand) *cobra.Command {
 
 			for _, e := range allEnvs {
 				if e.Organization == "" {
-					fmt.Fprintln(env.esc.stdout, e.Name)
+					fmt.Fprintf(env.esc.stdout, "%v/%v\n", e.Project, e.Name)
 				} else {
-					fmt.Fprintf(env.esc.stdout, "%v/%v\n", e.Organization, e.Name)
+					fmt.Fprintf(env.esc.stdout, "%v/%v/%v\n", e.Organization, e.Project, e.Name)
 				}
 			}
 
