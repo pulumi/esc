@@ -218,7 +218,7 @@ type Client interface {
 	DeleteEnvironmentTag(ctx context.Context, orgName, projectName, envName, tagName string) error
 
 	// GetEnvironmentRevision returns a description of the given revision.
-	GetEnvironmentRevision(ctx context.Context, orgName, envName string, revision int) (*EnvironmentRevision, error)
+	GetEnvironmentRevision(ctx context.Context, orgName, projectName, envName string, revision int) (*EnvironmentRevision, error)
 
 	// ListEnvironmentRevisions returns a list of revisions to the named environments in reverse order by
 	// revision number. The revision at which to start and the number of revisions to return are
@@ -226,6 +226,7 @@ type Client interface {
 	ListEnvironmentRevisions(
 		ctx context.Context,
 		orgName string,
+		projectName string,
 		envName string,
 		options ListEnvironmentRevisionsOptions,
 	) ([]EnvironmentRevision, error)
@@ -234,6 +235,7 @@ type Client interface {
 	RetractEnvironmentRevision(
 		ctx context.Context,
 		orgName string,
+		projectName string,
 		envName string,
 		version string,
 		replacement *int,
@@ -770,13 +772,14 @@ func (pc *client) DeleteEnvironmentTag(ctx context.Context, orgName, projectName
 func (pc *client) GetEnvironmentRevision(
 	ctx context.Context,
 	orgName string,
+	projectName string,
 	envName string,
 	revision int,
 ) (*EnvironmentRevision, error) {
 	before, count := revision+1, 1
 
 	opts := ListEnvironmentRevisionsOptions{Before: &before, Count: &count}
-	revs, err := pc.ListEnvironmentRevisions(ctx, orgName, envName, opts)
+	revs, err := pc.ListEnvironmentRevisions(ctx, orgName, projectName, envName, opts)
 	if err != nil || len(revs) == 0 {
 		return nil, err
 	}
@@ -791,6 +794,7 @@ type ListEnvironmentRevisionsOptions struct {
 func (pc *client) ListEnvironmentRevisions(
 	ctx context.Context,
 	orgName string,
+	projectName string,
 	envName string,
 	options ListEnvironmentRevisionsOptions,
 ) ([]EnvironmentRevision, error) {
@@ -807,6 +811,7 @@ func (pc *client) ListEnvironmentRevisions(
 func (pc *client) RetractEnvironmentRevision(
 	ctx context.Context,
 	orgName string,
+	projectName string,
 	envName string,
 	version string,
 	replacement *int,
