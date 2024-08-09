@@ -879,6 +879,7 @@ func (c *testPulumiClient) RetractEnvironmentRevision(
 func (c *testPulumiClient) CreateEnvironmentRevisionTag(
 	ctx context.Context,
 	orgName string,
+	projectName string,
 	envName string,
 	tagName string,
 	revision *int,
@@ -908,6 +909,7 @@ func (c *testPulumiClient) CreateEnvironmentRevisionTag(
 func (c *testPulumiClient) GetEnvironmentRevisionTag(
 	ctx context.Context,
 	orgName string,
+	projectName string,
 	envName string,
 	tagName string,
 ) (*client.EnvironmentRevisionTag, error) {
@@ -927,6 +929,7 @@ func (c *testPulumiClient) GetEnvironmentRevisionTag(
 func (c *testPulumiClient) UpdateEnvironmentRevisionTag(
 	ctx context.Context,
 	orgName string,
+	projectName string,
 	envName string,
 	tagName string,
 	revision *int,
@@ -956,6 +959,7 @@ func (c *testPulumiClient) UpdateEnvironmentRevisionTag(
 func (c *testPulumiClient) DeleteEnvironmentRevisionTag(
 	ctx context.Context,
 	orgName string,
+	projectName string,
 	envName string,
 	tagName string,
 ) error {
@@ -976,6 +980,7 @@ func (c *testPulumiClient) DeleteEnvironmentRevisionTag(
 func (c *testPulumiClient) ListEnvironmentRevisionTags(
 	ctx context.Context,
 	orgName string,
+	projectName string,
 	envName string,
 	options client.ListEnvironmentRevisionTagsOptions,
 ) ([]client.EnvironmentRevisionTag, error) {
