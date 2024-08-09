@@ -36,7 +36,7 @@ func newEnvVersionRetractCmd(env *envCommand) *cobra.Command {
 				return err
 			}
 
-			ref, args, err := env.getEnvRef(args)
+			ref, args, err := env.getExistingEnvRef(ctx, args)
 			if err != nil {
 				return err
 			}
@@ -47,7 +47,11 @@ func newEnvVersionRetractCmd(env *envCommand) *cobra.Command {
 
 			var replacementRevision *int
 			if replacement != "" {
-				replacementRef := env.getRelativeEnvRef(replacement, &ref)
+				replacementRef, err := env.getExistingEnvRefWithRelative(ctx, replacement, &ref)
+				if err != nil {
+					return err
+				}
+
 				rev, err := env.esc.client.GetRevisionNumber(
 					ctx,
 					replacementRef.orgName,
