@@ -685,7 +685,7 @@ func TestGetEnvironmentTag(t *testing.T) {
 			require.NoError(t, err)
 		})
 
-		tag, err := client.GetEnvironmentTag(context.Background(), "test-org", "test-env", "owner")
+		tag, err := client.GetEnvironmentTag(context.Background(), "test-org", "test-project", "test-env", "owner")
 
 		require.NoError(t, err)
 		assert.Equal(t, expectedTag.ID, tag.ID)
@@ -708,7 +708,7 @@ func TestGetEnvironmentTag(t *testing.T) {
 			require.NoError(t, err)
 		})
 
-		_, err := client.GetEnvironmentTag(context.Background(), "test-org", "test-env", "owner")
+		_, err := client.GetEnvironmentTag(context.Background(), "test-org", "test-project", "test-env", "owner")
 		assert.ErrorContains(t, err, http.StatusText(http.StatusNotFound))
 	})
 }
@@ -744,7 +744,7 @@ func TestListEnvironmentTags(t *testing.T) {
 			require.NoError(t, err)
 		})
 
-		val, next, err := client.ListEnvironmentTags(context.Background(), "test-org", "test-env", ListEnvironmentTagsOptions{
+		val, next, err := client.ListEnvironmentTags(context.Background(), "test-org", "test-project", "test-env", ListEnvironmentTagsOptions{
 			After: after,
 			Count: &count,
 		})
@@ -773,7 +773,7 @@ func TestListEnvironmentTags(t *testing.T) {
 			require.NoError(t, err)
 		})
 
-		_, _, err := client.ListEnvironmentTags(context.Background(), "test-org", "test-env", ListEnvironmentTagsOptions{})
+		_, _, err := client.ListEnvironmentTags(context.Background(), "test-org", "test-project", "test-env", ListEnvironmentTagsOptions{})
 		assert.ErrorContains(t, err, http.StatusText(http.StatusNotFound))
 	})
 }
@@ -797,7 +797,7 @@ func TestCreateEnvironmentTags(t *testing.T) {
 			require.NoError(t, err)
 		})
 
-		val, err := client.CreateEnvironmentTag(context.Background(), "test-org", "test-env", "owner", "pulumi")
+		val, err := client.CreateEnvironmentTag(context.Background(), "test-org", "test-project", "test-env", "owner", "pulumi")
 		require.NoError(t, err)
 		assert.Equal(t, expectedTag.ID, val.ID)
 		assert.Equal(t, expectedTag.Created.UTC(), val.Created.UTC())
@@ -819,7 +819,7 @@ func TestCreateEnvironmentTags(t *testing.T) {
 			require.NoError(t, err)
 		})
 
-		_, err := client.CreateEnvironmentTag(context.Background(), "test-org", "test-env", "owner", "pulumi")
+		_, err := client.CreateEnvironmentTag(context.Background(), "test-org", "test-project", "test-env", "owner", "pulumi")
 		assert.ErrorContains(t, err, http.StatusText(http.StatusBadRequest))
 	})
 }
@@ -858,7 +858,7 @@ func TestUpdateEnvironmentTags(t *testing.T) {
 			require.NoError(t, err)
 		})
 
-		val, err := client.UpdateEnvironmentTag(context.Background(), "test-org", "test-env", "owner", "pulumi", "", "pulumipus")
+		val, err := client.UpdateEnvironmentTag(context.Background(), "test-org", "test-project", "test-env", "owner", "pulumi", "", "pulumipus")
 		require.NoError(t, err)
 		assert.Equal(t, expectedTag.ID, val.ID)
 		assert.Equal(t, expectedTag.Created.UTC(), val.Created.UTC())
@@ -902,7 +902,7 @@ func TestUpdateEnvironmentTags(t *testing.T) {
 			require.NoError(t, err)
 		})
 
-		val, err := client.UpdateEnvironmentTag(context.Background(), "test-org", "test-env", "owner", "pulumi", "team", "")
+		val, err := client.UpdateEnvironmentTag(context.Background(), "test-org", "test-project", "test-env", "owner", "pulumi", "team", "")
 		require.NoError(t, err)
 		assert.Equal(t, expectedTag.ID, val.ID)
 		assert.Equal(t, expectedTag.Created.UTC(), val.Created.UTC())
@@ -924,7 +924,7 @@ func TestUpdateEnvironmentTags(t *testing.T) {
 			require.NoError(t, err)
 		})
 
-		_, err := client.UpdateEnvironmentTag(context.Background(), "test-org", "test-env", "owner", "pulumi", "team", "")
+		_, err := client.UpdateEnvironmentTag(context.Background(), "test-org", "test-project", "test-env", "owner", "pulumi", "team", "")
 		assert.ErrorContains(t, err, http.StatusText(http.StatusNotFound))
 	})
 }
@@ -935,7 +935,7 @@ func TestDeleteEnvironmentTags(t *testing.T) {
 			w.WriteHeader(http.StatusOK)
 		})
 
-		err := client.DeleteEnvironmentTag(context.Background(), "test-org", "test-env", "tagName")
+		err := client.DeleteEnvironmentTag(context.Background(), "test-org", "test-project", "test-env", "tagName")
 		require.NoError(t, err)
 	})
 
@@ -950,7 +950,7 @@ func TestDeleteEnvironmentTags(t *testing.T) {
 			require.NoError(t, err)
 		})
 
-		err := client.DeleteEnvironmentTag(context.Background(), "test-org", "test-env", "tagName")
+		err := client.DeleteEnvironmentTag(context.Background(), "test-org", "test-project", "test-env", "tagName")
 		assert.ErrorContains(t, err, http.StatusText(http.StatusNotFound))
 	})
 }
