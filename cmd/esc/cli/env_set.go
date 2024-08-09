@@ -90,7 +90,7 @@ func newEnvSetCmd(env *envCommand) *cobra.Command {
 				yamlValue = *yamlValue.Content[0]
 			}
 
-			def, tag, _, err := env.esc.client.GetEnvironment(ctx, ref.orgName, ref.envName, "", false)
+			def, tag, _, err := env.esc.client.GetEnvironment(ctx, ref.orgName, ref.projectName, ref.envName, "", false)
 			if err != nil {
 				return fmt.Errorf("getting environment definition: %w", err)
 			}
