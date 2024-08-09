@@ -496,7 +496,11 @@ func (c *testPulumiClient) ListEnvironments(
 }
 
 func (c *testPulumiClient) CreateEnvironment(ctx context.Context, orgName, envName string) error {
-	name := path.Join(orgName, envName)
+	return c.CreateEnvironmentWithProject(ctx, orgName, client.DefaultProject, envName)
+}
+
+func (c *testPulumiClient) CreateEnvironmentWithProject(ctx context.Context, orgName, projectName, envName string) error {
+	name := path.Join(orgName, projectName, envName)
 	if _, ok := c.environments[name]; ok {
 		return errors.New("already exists")
 	}
@@ -540,6 +544,17 @@ func (c *testPulumiClient) GetEnvironment(
 func (c *testPulumiClient) UpdateEnvironment(
 	ctx context.Context,
 	orgName string,
+	envName string,
+	yaml []byte,
+	tag string,
+) ([]client.EnvironmentDiagnostic, error) {
+	return c.UpdateEnvironmentWithProject(ctx, orgName, client.DefaultProject, envName, yaml, tag)
+}
+
+func (c *testPulumiClient) UpdateEnvironmentWithProject(
+	ctx context.Context,
+	orgName string,
+	projectName string,
 	envName string,
 	yaml []byte,
 	tag string,
@@ -630,6 +645,10 @@ func (c *testPulumiClient) OpenYAMLEnvironment(
 }
 
 func (c *testPulumiClient) GetOpenEnvironment(ctx context.Context, orgName, envName, openEnvID string) (*esc.Environment, error) {
+	return c.GetOpenEnvironmentWithProject(ctx, orgName, client.DefaultProject, envName, openEnvID)
+}
+
+func (c *testPulumiClient) GetOpenEnvironmentWithProject(ctx context.Context, orgName, projectName, envName, openEnvID string) (*esc.Environment, error) {
 	env, ok := c.openEnvs[openEnvID]
 	if !ok {
 		return nil, errors.New("not found")
