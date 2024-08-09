@@ -515,6 +515,7 @@ func (c *testPulumiClient) CreateEnvironmentWithProject(ctx context.Context, org
 func (c *testPulumiClient) GetEnvironment(
 	ctx context.Context,
 	orgName string,
+	projectName string,
 	envName string,
 	version string,
 	showSecrets bool,
@@ -602,8 +603,8 @@ func (c *testPulumiClient) UpdateEnvironmentWithRevision(
 	return diags, env.revisionTags["latest"], err
 }
 
-func (c *testPulumiClient) DeleteEnvironment(ctx context.Context, orgName, envName string) error {
-	name := path.Join(orgName, envName)
+func (c *testPulumiClient) DeleteEnvironment(ctx context.Context, orgName, projectName, envName string) error {
+	name := path.Join(orgName, projectName, envName)
 	if _, ok := c.environments[name]; !ok {
 		return errors.New("not found")
 	}
@@ -614,6 +615,7 @@ func (c *testPulumiClient) DeleteEnvironment(ctx context.Context, orgName, envNa
 func (c *testPulumiClient) OpenEnvironment(
 	ctx context.Context,
 	orgName string,
+	projectName string,
 	envName string,
 	version string,
 	duration time.Duration,

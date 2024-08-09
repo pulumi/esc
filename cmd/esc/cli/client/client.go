@@ -93,6 +93,7 @@ type Client interface {
 	GetEnvironment(
 		ctx context.Context,
 		orgName string,
+		projectName string,
 		envName string,
 		version string,
 		decrypt bool,
@@ -133,7 +134,7 @@ type Client interface {
 	) ([]EnvironmentDiagnostic, error)
 
 	// DeleteEnvironment deletes the environment envName in org orgName.
-	DeleteEnvironment(ctx context.Context, orgName, envName string) error
+	DeleteEnvironment(ctx context.Context, orgName, projectName, envName string) error
 
 	// OpenEnvironment evaluates the environment envName in org orgName and returns the ID of the opened
 	// environment. The opened environment will be available for the indicated duration, after which it
@@ -143,6 +144,7 @@ type Client interface {
 	OpenEnvironment(
 		ctx context.Context,
 		orgName string,
+		projectName string,
 		envName string,
 		version string,
 		duration time.Duration,
@@ -389,9 +391,9 @@ func (pc *client) GetPulumiAccountDetails(ctx context.Context) (string, []string
 
 // resolveEnvironmentPath resolves an environment and revision or tag to its API path.
 //
-// If version begins with a digit, it is treated as a revision number. Otherwise, it is trated as a tag. If
-// no revision or tag is present, the "latest" tag is used.
-func (pc *client) resolveEnvironmentPath(ctx context.Context, orgName, envName, version string) (string, error) {
+// If version begins with a digit, it is treated as a revision number. Otherwise, it is treated as a tag.
+// If no revision or tag is present, the "latest" tag is used.
+func (pc *client) resolveEnvironmentPath(orgName, projectName, envName, version string) (string, error) {
 	if version == "" {
 		return fmt.Sprintf("/api/esc/environments/%v/%v/%v", orgName, projectName, envName), nil
 	}
@@ -453,11 +455,12 @@ func (pc *client) CreateEnvironmentWithProject(ctx context.Context, orgName, pro
 func (pc *client) GetEnvironment(
 	ctx context.Context,
 	orgName string,
+	projectName string,
 	envName string,
 	version string,
 	decrypt bool,
 ) ([]byte, string, int, error) {
-	path, err := pc.resolveEnvironmentPath(ctx, orgName, envName, version)
+	path, err := pc.resolveEnvironmentPath(orgName, projectName, envName, version)
 	if err != nil {
 		return nil, "", 0, err
 	}
@@ -540,7 +543,7 @@ func (pc *client) UpdateEnvironmentWithRevision(
 	return nil, revision, nil
 }
 
-func (pc *client) DeleteEnvironment(ctx context.Context, orgName, envName string) error {
+func (pc *client) DeleteEnvironment(ctx context.Context, orgName, projectName, envName string) error {
 	path := fmt.Sprintf("/api/esc/environments/%v/%v/%v", orgName, projectName, envName)
 	return pc.restCall(ctx, http.MethodDelete, path, nil, nil, nil)
 }
@@ -548,11 +551,12 @@ func (pc *client) DeleteEnvironment(ctx context.Context, orgName, envName string
 func (pc *client) OpenEnvironment(
 	ctx context.Context,
 	orgName string,
+	projectName string,
 	envName string,
 	version string,
 	duration time.Duration,
 ) (string, []EnvironmentDiagnostic, error) {
-	path, err := pc.resolveEnvironmentPath(ctx, orgName, envName, version)
+	path, err := pc.resolveEnvironmentPath(orgName, projectName, envName, version)
 	if err != nil {
 		return "", nil, err
 	}

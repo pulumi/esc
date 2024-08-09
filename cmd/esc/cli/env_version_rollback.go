@@ -38,7 +38,7 @@ func newEnvVersionRollbackCmd(env *envCommand) *cobra.Command {
 			}
 			_ = args
 
-			yaml, _, _, err := env.esc.client.GetEnvironment(ctx, ref.orgName, ref.envName, ref.version, false)
+			yaml, _, _, err := env.esc.client.GetEnvironment(ctx, ref.orgName, ref.projectName, ref.envName, ref.version, false)
 			if err != nil {
 				return err
 			}

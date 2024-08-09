@@ -164,7 +164,7 @@ func (env *envCommand) openEnvironment(
 	ref environmentRef,
 	duration time.Duration,
 ) (*esc.Environment, []client.EnvironmentDiagnostic, error) {
-	envID, diags, err := env.esc.client.OpenEnvironment(ctx, ref.orgName, ref.envName, ref.version, duration)
+	envID, diags, err := env.esc.client.OpenEnvironment(ctx, ref.orgName, ref.projectName, ref.envName, ref.version, duration)
 	if err != nil {
 		return nil, nil, err
 	}
