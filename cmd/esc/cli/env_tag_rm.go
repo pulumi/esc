@@ -25,7 +25,7 @@ func newEnvTagRmCmd(env *envCommand) *cobra.Command {
 				return err
 			}
 
-			ref, _, err := env.getEnvRef(args)
+			ref, _, err := env.getExistingEnvRef(ctx, args)
 			if err != nil {
 				return err
 			}

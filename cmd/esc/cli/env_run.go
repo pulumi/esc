@@ -130,7 +130,7 @@ func newEnvRunCmd(envcmd *envCommand) *cobra.Command {
 				return err
 			}
 
-			ref, args, err := envcmd.getEnvRef(args)
+			ref, args, err := envcmd.getExistingEnvRef(ctx, args)
 			if err != nil {
 				return err
 			}
