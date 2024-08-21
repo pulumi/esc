@@ -326,6 +326,10 @@ func declare[Expr exprNode](e *evalContext, path string, x Expr, base *value) *e
 	case *ast.ObjectExpr:
 		properties := make(map[string]*expr, len(x.Entries))
 		for _, entry := range x.Entries {
+			if entry.Key == nil {
+				e.errorf(entry.Key, "missing key")
+				continue
+			}
 			k := entry.Key.Value
 			if _, ok := properties[k]; ok {
 				e.errorf(entry.Key, "duplicate key %q", k)
