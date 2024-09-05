@@ -51,6 +51,7 @@ func newEnvCmd(esc *escCommand) *cobra.Command {
 	cmd.PersistentFlags().StringVar(&env.envNameFlag, "env", "", "The name of the environment to operate on.")
 
 	cmd.AddCommand(newEnvInitCmd(env))
+	cmd.AddCommand(newEnvCloneCmd(env))
 	cmd.AddCommand(newEnvEditCmd(env))
 	cmd.AddCommand(newEnvGetCmd(env))
 	cmd.AddCommand(newEnvDiffCmd(env))
