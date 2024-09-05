@@ -1,9 +1,10 @@
-// Copyright 2023, Pulumi Corporation.
+// Copyright 2024, Pulumi Corporation.
 
 package cli
 
 import (
 	"context"
+	"errors"
 	"fmt"
 	"strings"
 
@@ -20,7 +21,7 @@ func newEnvCloneCmd(env *envCommand) *cobra.Command {
 	)
 
 	cmd := &cobra.Command{
-		Use:   "clone [<org-name>/]<project-name>/<environment-name> [<project-name>/]<environment-name>",
+		Use:   "clone [<org-name>/]<src-project-name>/<src-environment-name> [<dest-project-name>/]<dest-environment-name>",
 		Args:  cobra.MaximumNArgs(2),
 		Short: "Clone an existing environment into a new environment.",
 		Long: "Clone an existing environment into a new environment.\n" +
@@ -36,20 +37,19 @@ func newEnvCloneCmd(env *envCommand) *cobra.Command {
 				return err
 			}
 
-			ref, args, err := env.getNewEnvRef(ctx, args)
-			if err != nil {
-				return err
+			ref := env.parseRef(args[0])
+			if ref.isUsingLegacyID {
+				return errors.New("invalid source environment ID")
 			}
 			if ref.version != "" {
-				return fmt.Errorf("the clone command does not accept versions")
+				return errors.New("the clone command does not accept versions")
 			}
 
 			var destProject string
-			destName := args[0]
-			destParts := strings.Split(args[0], "/")
-			if len(destParts) == 2 {
-				destProject = destParts[0]
-				destName = destParts[1]
+			destName := args[1]
+			if project, name, hasDelimiter := strings.Cut(args[1], "/"); hasDelimiter {
+				destProject = project
+				destName = name
 			}
 
 			destEnv := client.CloneEnvironmentRequest{
@@ -78,19 +78,19 @@ func newEnvCloneCmd(env *envCommand) *cobra.Command {
 	}
 
 	cmd.Flags().BoolVar(&preserveHistory,
-		"history", false,
+		"preserve-history", false,
 		"preserve history of the environment being cloned")
 
 	cmd.Flags().BoolVar(&preserveAccess,
-		"access", false,
-		"add the newly cloned environment to the same teams that have access to the origin environment")
+		"preserve-access", false,
+		"preserve the same team access on the environment being cloned")
 
 	cmd.Flags().BoolVar(&preserveEnvironmentTags,
-		"envTags", false,
+		"preserve-env-tags", false,
 		"preserve any tags on the environment being cloned")
 
 	cmd.Flags().BoolVar(&preserveRevisionTags,
-		"revTags", false,
+		"preserve-rev-tags", false,
 		"preserve any tags on the environment revisions being cloned")
 
 	return cmd

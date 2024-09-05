@@ -72,6 +72,7 @@ type environmentRef struct {
 	envName     string
 	version     string
 
+	isUsingLegacyID  bool
 	hasAmbiguousPath bool
 }
 
@@ -93,6 +94,7 @@ func (cmd *envCommand) parseRef(refStr string) environmentRef {
 	hasAmbiguousPath := false
 	orgName = cmd.esc.account.DefaultOrg
 	projectName = client.DefaultProject
+	isUsingLegacyID := false
 
 	parts := strings.Split(refStr, "/")
 
@@ -100,6 +102,8 @@ func (cmd *envCommand) parseRef(refStr string) environmentRef {
 	case l == 1:
 		// <environment-name>
 		envNameAndVersion = parts[0]
+
+		isUsingLegacyID = true
 	case l == 2:
 		// <project-name>/<env-name> or <org-name>/<env-name>
 		// We assume the former, and this will be disambiguated later.
@@ -124,6 +128,7 @@ func (cmd *envCommand) parseRef(refStr string) environmentRef {
 		projectName:      projectName,
 		envName:          envName,
 		version:          version,
+		isUsingLegacyID:  isUsingLegacyID,
 		hasAmbiguousPath: hasAmbiguousPath,
 	}
 }
@@ -177,6 +182,7 @@ func (cmd *envCommand) getNewEnvRef(
 		projectName:      client.DefaultProject,
 		envName:          ref.envName,
 		version:          ref.version,
+		isUsingLegacyID:  true,
 		hasAmbiguousPath: ref.hasAmbiguousPath,
 	}
 
@@ -234,6 +240,7 @@ func (cmd *envCommand) getExistingEnvRefWithRelative(
 		projectName:      client.DefaultProject,
 		envName:          ref.envName,
 		version:          ref.version,
+		isUsingLegacyID:  true,
 		hasAmbiguousPath: ref.hasAmbiguousPath,
 	}
 
