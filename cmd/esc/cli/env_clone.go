@@ -37,14 +37,14 @@ func newEnvCloneCmd(env *envCommand) *cobra.Command {
 				return err
 			}
 
-			ref, args, err := env.getExistingEnvRef(ctx, args)
+			ref, args, _ := env.getExistingEnvRef(ctx, args)
 			// An error will arise if an environment reference is ambiguous and can't be
 			// resolved to a single environment. The ref for the non-legacy environment will
 			// also be returned in this case.
 			// If the original ref is using a legacy ID of just env name return an error
 			// Otherwise we will ignore any conflict errors and assume the user meant <project-name>/<env-name>
-			if (err != nil && ref.isUsingLegacyID) || ref.isUsingLegacyID {
-				return errors.New("source environment ID must be at least <project-name>/<env-name>")
+			if ref.isUsingLegacyID {
+				return errors.New("referring to an environment name ('env' or 'org/env') without a project is not supported")
 			}
 
 			if ref.version != "" {
