@@ -22,7 +22,7 @@ func newEnvCloneCmd(env *envCommand) *cobra.Command {
 
 	cmd := &cobra.Command{
 		Use:   "clone [<org-name>/]<src-project-name>/<src-environment-name> [<dest-project-name>/]<dest-environment-name>",
-		Args:  cobra.MaximumNArgs(2),
+		Args:  cobra.ExactArgs(2),
 		Short: "Clone an existing environment into a new environment.",
 		Long: "Clone an existing environment into a new environment.\n" +
 			"\n" +
