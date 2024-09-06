@@ -19,6 +19,19 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/common/util/cmdutil"
 )
 
+type ambiguousIdentifierError struct {
+	legacyRef environmentRef
+	ref       environmentRef
+}
+
+func (e ambiguousIdentifierError) Error() string {
+	return fmt.Sprintf(
+		"ambiguous path provided\n\nEnvironments found at both '%s' and '%s'.\nPlease specify the full path as <org-name>/<project-name>/<env-name>",
+		e.ref.String(),
+		e.legacyRef.String(),
+	)
+}
+
 type envCommand struct {
 	esc *escCommand
 
@@ -253,11 +266,10 @@ func (cmd *envCommand) getExistingEnvRefWithRelative(
 
 	// Require unambiguous path if both paths exist
 	if exists && existsLegacyPath {
-		return ref, fmt.Errorf(
-			"ambiguous path provided\n\nEnvironments found at both '%s' and '%s'.\nPlease specify the full path as <org-name>/<project-name>/<env-name>",
-			ref.String(),
-			legacyRef.String(),
-		)
+		return ref, ambiguousIdentifierError{
+			legacyRef: legacyRef,
+			ref:       ref,
+		}
 	}
 
 	if existsLegacyPath {
