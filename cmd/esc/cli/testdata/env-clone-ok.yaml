@@ -5,7 +5,7 @@ run: |
   esc env tag ls default/dest --utc
   esc env clone default/src project/env
   esc env get project/env
-  esc env clone default/src project/preserve --history --access --revTags --envTags
+  esc env clone default/src project/preserve --preserve-history --preserve-access --preserve-rev-tags --preserve-env-tags
   esc env version history project/preserve --utc
   esc env tag ls project/preserve --utc
 environments:
@@ -129,7 +129,7 @@ stdout: |
 
   ```
 
-  > esc env clone default/src project/preserve --history --access --revTags --envTags
+  > esc env clone default/src project/preserve --preserve-history --preserve-access --preserve-rev-tags --preserve-env-tags
   Environment test-user/default/src cloned into test-user/project/preserve.
   > esc env version history project/preserve --utc
   revision 4
@@ -159,6 +159,6 @@ stderr: |
   > esc env tag ls default/dest --utc
   > esc env clone default/src project/env
   > esc env get project/env
-  > esc env clone default/src project/preserve --history --access --revTags --envTags
+  > esc env clone default/src project/preserve --preserve-history --preserve-access --preserve-rev-tags --preserve-env-tags
   > esc env version history project/preserve --utc
   > esc env tag ls project/preserve --utc
