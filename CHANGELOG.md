@@ -12,7 +12,7 @@ CHANGELOG
   [#376](https://github.com/pulumi/esc/pull/376)
 
 - Add project filter flag to env ls command.
-  [#](https://github.com/pulumi/esc/pull/)
+  [#382](https://github.com/pulumi/esc/pull/382)
 
 ## 0.9.2
 
