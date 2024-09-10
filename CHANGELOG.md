@@ -1,7 +1,13 @@
 CHANGELOG
 =========
 
-## 0.9.3
+## 0.10.0
+- Add support for projects.
+  [#369](https://github.com/pulumi/esc/pull/369)
+
+- Deprecate legacy environment name format (<org>/<env> or <env>) in favor of <project>/<env> or <org>/<project>/<env>
+  [#375](https://github.com/pulumi/esc/pull/375)
+
 - Add command to clone environments.
   [#376](https://github.com/pulumi/esc/pull/376)
 
