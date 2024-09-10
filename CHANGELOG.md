@@ -11,6 +11,9 @@ CHANGELOG
 - Add command to clone environments.
   [#376](https://github.com/pulumi/esc/pull/376)
 
+- Add project filter flag to env ls command.
+  [#](https://github.com/pulumi/esc/pull/)
+
 ## 0.9.2
 
 - Add commands to manage environment tags.

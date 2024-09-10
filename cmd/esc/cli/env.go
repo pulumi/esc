@@ -89,20 +89,14 @@ type environmentRef struct {
 	hasAmbiguousPath bool
 }
 
-func (r *environmentRef) Id() string {
-	s := fmt.Sprintf("%s/%s", r.projectName, r.envName)
-
-	if r.version != "" {
-		s = fmt.Sprintf("%s@%s", s, r.version)
-	}
-	return s
-}
-
 func (r *environmentRef) String() string {
-	s := r.Id()
+	s := fmt.Sprintf("%s/%s", r.projectName, r.envName)
 
 	if r.orgName != "" {
 		s = fmt.Sprintf("%s/%s", r.orgName, s)
+	}
+	if r.version != "" {
+		s = fmt.Sprintf("%s@%s", s, r.version)
 	}
 	return s
 }
@@ -153,24 +147,17 @@ func (cmd *envCommand) parseRef(refStr string) environmentRef {
 }
 
 // getEnvRef returns an environment reference corresponding to the given ref string
-// and a bool indicating if the environment reference is relative.
-//
-// If `refString` is only a version (i.e. "@123") and a non-nil environmentRef `rel` is provided,
-// the returned environment reference is "relative" and will default to the provided environmentRef's values
-func (cmd *envCommand) getEnvRef(refString string, rel *environmentRef) (environmentRef, bool) {
+// If a non-nil environmentRef is provided, default to its values if only a sole version is specified
+func (cmd *envCommand) getEnvRef(refString string, rel *environmentRef) environmentRef {
 	envRef := cmd.parseRef(refString)
 
-	isRelative := false
-	// If refString is only a version, copy fields from `rel`
 	if rel != nil && envRef.envName == "" && envRef.version != "" {
 		envRef.orgName = rel.orgName
 		envRef.projectName = rel.projectName
 		envRef.envName = rel.envName
-
-		isRelative = true
 	}
 
-	return envRef, isRelative
+	return envRef
 }
 
 // Get an environment reference when creating a new environment
@@ -186,18 +173,14 @@ func (cmd *envCommand) getNewEnvRef(
 		cmd.envNameFlag, args = args[0], args[1:]
 	}
 
-	ref, isRelative := cmd.getEnvRef(cmd.envNameFlag, nil)
+	ref := cmd.getEnvRef(cmd.envNameFlag, nil)
 
 	if !ref.hasAmbiguousPath {
-		if !strings.Contains(cmd.envNameFlag, "/") && !isRelative {
-			cmd.printDeprecatedNameMessage(cmd.envNameFlag, ref)
-		}
-
 		return ref, args, nil
 	}
 
 	// Check if project at <org-name>/<project-name> exists. Assume not if listing environments errors
-	allEnvs, _ := cmd.listEnvironments(ctx, "")
+	allEnvs, _ := cmd.listEnvironments(ctx, "", "")
 	existsProject := false
 	for _, e := range allEnvs {
 		if strings.EqualFold(e.Project, ref.projectName) {
@@ -226,7 +209,6 @@ func (cmd *envCommand) getNewEnvRef(
 	}
 
 	if !existsProject && existsLegacyPath {
-		cmd.printDeprecatedNameMessage(cmd.envNameFlag, legacyRef)
 		return legacyRef, args, nil
 	}
 
@@ -256,13 +238,9 @@ func (cmd *envCommand) getExistingEnvRefWithRelative(
 	refString string,
 	rel *environmentRef,
 ) (environmentRef, error) {
-	ref, isRelative := cmd.getEnvRef(refString, rel)
+	ref := cmd.getEnvRef(refString, rel)
 
 	if !ref.hasAmbiguousPath {
-		if !strings.Contains(refString, "/") && !isRelative {
-			cmd.printDeprecatedNameMessage(refString, ref)
-		}
-
 		return ref, nil
 	}
 
@@ -288,14 +266,14 @@ func (cmd *envCommand) getExistingEnvRefWithRelative(
 
 	// Require unambiguous path if both paths exist
 	if exists && existsLegacyPath {
-		return ref, ambiguousIdentifierError{
-			legacyRef: legacyRef,
-			ref:       ref,
-		}
+		return ref, fmt.Errorf(
+			"ambiguous path provided\n\nEnvironments found at both '%s' and '%s'.\nPlease specify the full path as <org-name>/<project-name>/<env-name>",
+			ref.String(),
+			legacyRef.String(),
+		)
 	}
 
 	if existsLegacyPath {
-		cmd.printDeprecatedNameMessage(refString, legacyRef)
 		return legacyRef, nil
 	}
 
@@ -394,11 +372,4 @@ func (cmd *envCommand) writePropertyEnvironmentDiagnostics(out io.Writer, diags 
 	}
 
 	return nil
-}
-
-func (cmd *envCommand) printDeprecatedNameMessage(name string, ref environmentRef) {
-	msg := fmt.Sprintf(
-		"%sWarning: Referring to an environment name ('%s') without a project is deprecated.\nPlease use '%s/%s' or '%s' instead.%s",
-		colors.SpecWarning, name, ref.orgName, ref.Id(), ref.Id(), colors.Reset)
-	fmt.Fprintln(cmd.esc.stderr, cmd.esc.colors.Colorize(msg))
 }
