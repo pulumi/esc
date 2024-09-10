@@ -1,6 +1,10 @@
 CHANGELOG
 =========
 
+## 0.9.3
+- Add command to clone environments.
+  [#376](https://github.com/pulumi/esc/pull/376)
+
 ## 0.9.2
 
 - Add commands to manage environment tags.
