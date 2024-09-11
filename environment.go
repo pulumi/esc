@@ -18,6 +18,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"strings"
 
 	"github.com/pulumi/esc/schema"
 )
@@ -29,48 +30,83 @@ type EnvExecContext interface {
 	// Returns the current execution context values
 	Values() map[string]Value
 
+	// Returns the root evaluated project.
+	// For anonymous environments, it resolves to the "rootest" non anonymous project.
+	GetRootProjectName() string
 	// Returns the root evaluated environment.
 	// For anonymous environments, it resolves to the "rootest" non anonymous environment.
 	GetRootEnvironmentName() string
 
 	// Returns the current environment being evaluated.
 	GetCurrentEnvironmentName() string
+	GetCurrentProjectName() string
+}
+
+func parseName(name string) (string, string) {
+	var projectName, envName string
+
+	first, second, found := strings.Cut(name, "/")
+	if found {
+		projectName = first
+		envName = second
+	} else {
+		projectName = "default"
+		envName = first
+	}
+
+	return projectName, envName
 }
 
 type ExecContext struct {
 	rootEnvironment    string
+	rootProject        string
 	currentEnvironment string
+	currentProject     string
 	values             map[string]Value
 }
 
-func (ec *ExecContext) CopyForEnv(envName string) *ExecContext {
+func (ec *ExecContext) CopyForEnv(name string) *ExecContext {
+	currentProject, currentEnv := parseName(name)
+
 	values := copyContext(ec.values)
 	values["currentEnvironment"] = NewValue(map[string]Value{
-		"name": NewValue(envName),
+		"project": NewValue(currentProject),
+		"name":    NewValue(currentEnv),
 	})
 
-	root := ec.rootEnvironment
+	rootProject, rootEnv := parseName(ec.rootEnvironment)
 	if ec.rootEnvironment == AnonymousEnvironmentName || ec.rootEnvironment == "" {
-		root = envName
+		rootProject = currentProject
+		rootEnv = currentEnv
 	}
 
 	values["rootEnvironment"] = NewValue(map[string]Value{
-		"name": NewValue(root),
+		"project": NewValue(rootProject),
+		"name":    NewValue(rootEnv),
 	})
 
 	return &ExecContext{
 		values:             values,
-		rootEnvironment:    root,
-		currentEnvironment: envName,
+		rootEnvironment:    rootEnv,
+		rootProject:        rootProject,
+		currentEnvironment: currentEnv,
+		currentProject:     currentProject,
 	}
 }
-
 func (ec *ExecContext) Values() map[string]Value {
 	return ec.values
 }
 
+func (ec *ExecContext) GetRootProjectName() string {
+	return ec.rootProject
+}
+
 func (ec *ExecContext) GetRootEnvironmentName() string {
 	return ec.rootEnvironment
+}
+
+func (ec *ExecContext) GetCurrentProjectName() string {
+	return ec.currentProject
 }
 
 func (ec *ExecContext) GetCurrentEnvironmentName() string {
