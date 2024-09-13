@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://www.pulumi.com?utm_campaign=pulumi-esc-github-repo&utm_source=github.com&utm_medium=top-logo" title="Pulumi ESC: Open source secrets management solution">
-    <img src="https://www.pulumi.com/images/logo/logo-on-white-box.svg?" width="350">
+    <img src="https://www.pulumi.com/images/logo/logo-on-white-box.svg?" width="350" alt="Pulumi logo">
    </a>
 
   [![License](https://img.shields.io/github/license/pulumi/pulumi)](LICENSE)
@@ -37,7 +37,7 @@ Pulumi ESC is also offered as a managed service as part of [Pulumi Cloud,](https
 - :blue_book: [Documentation](https://pulumi.com/docs/pulumi-cloud/esc)
 - :hammer_and_wrench: [How Pulumi ESC Works](#how-pulumi-esc-works)
 - :white_check_mark: [Pulumi ESC Features](#pulumi-esc-features)
-- :compass:	[Pulumi ESC Roadmap](#resources)
+- :compass: [Plumi ESC Roadmap](#resources)
 - :busts_in_silhouette: [Community](#resources)
 - :computer: [Resources](#resources)
 
@@ -53,7 +53,7 @@ For a hands-on, self-paced tutorial see our Pulumi ESC [Getting Started](https:/
     [installation instructions](https://www.pulumi.com/docs/install/esc/?utm_campaign=pulumi-esc-github-repo&utm_source=github.com&utm_medium=getting-started-install) for additional installation options):
 
     ```bash
-    $ curl -fsSL https://get.pulumi.com/ | sh
+    curl -fsSL https://get.pulumi.com/ | sh
     ```
 
 ### Building the ESC CLI Locally
@@ -61,7 +61,7 @@ For a hands-on, self-paced tutorial see our Pulumi ESC [Getting Started](https:/
 You can build the CLI locally for testing by cloning this repo and running:
 
 ```shell
-$ make install
+make install
 ```
 
 This will produce an `esc` binary in your `GOBIN` directory.
@@ -79,27 +79,27 @@ This will produce an `esc` binary in your `GOBIN` directory.
 
 Pulumi ESC was designed to address a set of challenges that many infrastructure and application development teams face in managing configuration and secrets across their various environments:
 
-* __Secrets and Configuration Sprawl__: Data in many systems. Challenging to audit. Lots of application-specific logic to acquire and compose configuration from multiple sources. Divergent solutions for Infrastructure and Application configuration.
-* __Duplication and Copy/Paste__: Secrets are duplicated in many places. Frequently coupled to application/system-specific configuration stores.
-* __Too Many Long-lived Static Secrets__: Long lived static credentials are over-used, exposing companies to significant security risk.  Rotation is operationally challenging. Not all systems support direct integration with OIDC and other dynamic secrets provisioning systems.
+- **Secrets and Configuration Sprawl**: Data in many systems. Challenging to audit. Lots of application-specific logic to acquire and compose configuration from multiple sources. Divergent solutions for Infrastructure and Application configuration.
+- **Duplication and Copy/Paste**: Secrets are duplicated in many places. Frequently coupled to application/system-specific configuration stores.
+- **Too Many Long-lived Static Secrets**: Long lived static credentials are over-used, exposing companies to significant security risk.  Rotation is operationally challenging. Not all systems support direct integration with OIDC and other dynamic secrets provisioning systems.
 
 Pulumi ESC was born to address these problems and needs head on with the following features.
 
 ### Pulumi ESC Features
 
-* __Hierarchical Environments__: Environments contain collections of secrets and configuration, but can also import one or more other environments. Values can be overridden, interpolated from other values, and arbitrarily nested. This allows for flexible composition and reuse, and avoids copy paste.
-* __Dynamic + Static Secrets__: Supports static values and dynamic values pulled from systems; static values can be encrypted, and dynamic secrets plugins include AWS OIDC, HashiCorp Vault, AWS Secrets Manager, 1Password, and Pulumi StackReference.
-* __Auditable__: Every environment opening is recorded in audit logs, providing a concrete set of configuration derived from imported environments and dynamic secrets.
-* __Consume from Anywhere__: The `esc` CLI and the Pulumi ESC Rest API enable environments to be accessed from any application, infrastructure provider, or automation system. At launch, first-class integrations are available with Pulumi IaC, local environment and .env files, GitHub Actions, and more.
-* __Authentication and RBAC__: Pulumi ESC brokers access to secrets and configuration that live in other systems, and so authentication and granular RBAC are critical to ensure robust access controls across your organization. Pulumi ESC leverages the same Pulumi Cloud identity, RBAC, Teams, SAML/SCIM and scoped access tokens that are used for Pulumi IaC today, extending these all to managing access to Environments as well as Stacks.
-* __Configuration as Code__: Environments are defined as YAML documents which describe how to project and compose secrets and configuration, integrate dynamic configuration providers, and compute new configuration from other values (construing a URL from a DNS name, or concatenating multiple configuration values into a derived value). The incredible flexibility of a code-based approach over traditional point-and-click interfaces allows Pulumi ESC to offer rich expressiveness for managing complex configuration.
-* __Open Source + Managed__: Offers an open-source server with pluggable storage and authentication, as well as a managed service in Pulumi Cloud and Pulumi Cloud Self-hosted options.
-* __Version Control and Rollback__: Manage environment changes with full auditability and rollback capabilities.
-* __Language SDKs__: Use ESC in Python, TypeScript/JavaScript, and Go applications.
-* __Traceability and Auditing__: Environments must be “opened” to compute and see the set of values they provide, and this action is recorded in audit logs, including a full record of how each value was sourced from within the hierarchy of environments that contributed to it.
-* __Composable Environments__: Combine multiple environments for greater flexibility.
-* __Dynamic Configuration Providers__: Support for dynamic configuration providers for more flexible management.
-* __Fully Managed__: Pulumi ESC is offered as a fully managed cloud service in Pulumi Cloud (and Pulumi Cloud Self-hosted in the near future). The pulumi/esc project is open source, and contains the evaluation engine for environments, the esc CLI, and in the future, the extensible plugins for source and target integrations.
+- **Hierarchical Environments**: Environments contain collections of secrets and configuration, but can also import one or more other environments. Values can be overridden, interpolated from other values, and arbitrarily nested. This allows for flexible composition and reuse, and avoids copy paste.
+- **Dynamic + Static Secrets**: Supports static values and dynamic values pulled from systems; static values can be encrypted, and dynamic secrets plugins include AWS OIDC, HashiCorp Vault, AWS Secrets Manager, 1Password, and Pulumi StackReference.
+- **Auditable**: Every environment opening is recorded in audit logs, providing a concrete set of configuration derived from imported environments and dynamic secrets.
+- **Consume from Anywhere**: The `esc` CLI and the Pulumi ESC Rest API enable environments to be accessed from any application, infrastructure provider, or automation system. At launch, first-class integrations are available with Pulumi IaC, local environment and .env files, GitHub Actions, and more.
+- **Authentication and RBAC**: Pulumi ESC brokers access to secrets and configuration that live in other systems, and so authentication and granular RBAC are critical to ensure robust access controls across your organization. Pulumi ESC leverages the same Pulumi Cloud identity, RBAC, Teams, SAML/SCIM and scoped access tokens that are used for Pulumi IaC today, extending these all to managing access to Environments as well as Stacks.
+- **Configuration as Code**: Environments are defined as YAML documents which describe how to project and compose secrets and configuration, integrate dynamic configuration providers, and compute new configuration from other values (construing a URL from a DNS name, or concatenating multiple configuration values into a derived value). The incredible flexibility of a code-based approach over traditional point-and-click interfaces allows Pulumi ESC to offer rich expressiveness for managing complex configuration.
+- **Open Source + Managed**: Offers an open-source server with pluggable storage and authentication, as well as a managed service in Pulumi Cloud and Pulumi Cloud Self-hosted options.
+- **Version Control and Rollback**: Manage environment changes with full auditability and rollback capabilities.
+- **Language SDKs**: Use ESC in Python, TypeScript/JavaScript, and Go applications.
+- **Traceability and Auditing**: Environments must be “opened” to compute and see the set of values they provide, and this action is recorded in audit logs, including a full record of how each value was sourced from within the hierarchy of environments that contributed to it.
+- **Composable Environments**: Combine multiple environments for greater flexibility.
+- **Dynamic Configuration Providers**: Support for dynamic configuration providers for more flexible management.
+- **Fully Managed**: Pulumi ESC is offered as a fully managed cloud service in Pulumi Cloud (and Pulumi Cloud Self-hosted in the near future). The pulumi/esc project is open source, and contains the evaluation engine for environments, the esc CLI, and in the future, the extensible plugins for source and target integrations.
 
 ## Pulumi ESC Roadmap
 
