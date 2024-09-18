@@ -5,14 +5,18 @@ package cli
 import (
 	"context"
 	"fmt"
+	"io"
+	"os"
 	"regexp"
 	"strconv"
 
 	"github.com/ccojocar/zxcvbn-go"
 	"github.com/spf13/cobra"
+	"golang.org/x/term"
 	"gopkg.in/yaml.v3"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/common/resource"
+	"github.com/pulumi/pulumi/sdk/v3/go/common/util/cmdutil"
 	"github.com/pulumi/pulumi/sdk/v3/go/common/util/contract"
 )
 
@@ -44,9 +48,6 @@ func newEnvSetCmd(env *envCommand) *cobra.Command {
 			if ref.version != "" {
 				return fmt.Errorf("the set command does not accept versions")
 			}
-			if len(args) < 2 {
-				return fmt.Errorf("expected a path and a value")
-			}
 
 			path, err := resource.ParsePropertyPath(args[0])
 			if err != nil {
@@ -56,8 +57,33 @@ func newEnvSetCmd(env *envCommand) *cobra.Command {
 				return fmt.Errorf("path must contain at least one element")
 			}
 
+			var value string
+			switch {
+			case len(args) == 2:
+				value = args[1]
+			//nolint:gosec // os.Stdin.Fd() == 0: uintptr -> int conversion is always safe
+			case !term.IsTerminal(int(os.Stdin.Fd())):
+				b, readerr := io.ReadAll(os.Stdin)
+				if readerr != nil {
+					return readerr
+				}
+				value = cmdutil.RemoveTrailingNewline(string(b))
+			case !cmdutil.Interactive():
+				return fmt.Errorf("value must be specified in non-interactive mode")
+			case secret:
+				value, err = cmdutil.ReadConsoleNoEcho("value")
+				if err != nil {
+					return err
+				}
+			default:
+				value, err = cmdutil.ReadConsole("value")
+				if err != nil {
+					return err
+				}
+			}
+
 			var yamlValue yaml.Node
-			if err := yaml.Unmarshal([]byte(args[1]), &yamlValue); err != nil {
+			if err := yaml.Unmarshal([]byte(value), &yamlValue); err != nil {
 				return fmt.Errorf("invalid value: %w", err)
 			}
 			if len(yamlValue.Content) == 0 {
