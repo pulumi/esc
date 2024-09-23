@@ -53,7 +53,7 @@ For a hands-on, self-paced tutorial see our Pulumi ESC [Getting Started](https:/
     [installation instructions](https://www.pulumi.com/docs/install/esc/?utm_campaign=pulumi-esc-github-repo&utm_source=github.com&utm_medium=getting-started-install) for additional installation options):
 
     ```bash
-    $ curl -fsSL https://get.pulumi.com/ | sh
+    $ curl -fsSL https://get.pulumi.com/esc/install.sh | sh
     ```
 
 ### Building the ESC CLI Locally
