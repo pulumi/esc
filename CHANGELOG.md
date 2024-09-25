@@ -1,10 +1,41 @@
 CHANGELOG
 =========
 
-## 0.9.2
+## 0.10.0
+
+### Improvements
 
 - Add commands to manage environment tags.
   [#345](https://github.com/pulumi/esc/pull/345)
+
+- Coerce non-string scalars passed to `esc env set --secret` to strings
+  [#353](https://github.com/pulumi/esc/pull/353)
+
+- `esc env get --show-secrets` now shows secrets from imported environments.
+  [#355](https://github.com/pulumi/esc/pull/355)
+
+- Add support for projects.
+  [#369](https://github.com/pulumi/esc/pull/369)
+
+- Add deprecation warning for legacy environment name format (<org>/<env> or <env>) in favor of <project>/<env> or <org>/<project>/<env>.
+  [#375](https://github.com/pulumi/esc/pull/375)
+
+- Add clone environment command.
+  [#376](https://github.com/pulumi/esc/pull/376)
+
+- Add project filter flag to env ls command.
+  [#382](https://github.com/pulumi/esc/pull/382)
+
+
+### Bug Fixes
+
+- Fix a panic in fetching current credentials when the access key had expired.
+  [#368](https://github.com/pulumi/esc/pull/368)
+
+### Breaking Changes
+
+- The minimum Go version supported is now 1.21.
+  [#379](https://github.com/pulumi/esc/pull/379)
 
 ## 0.9.1
 

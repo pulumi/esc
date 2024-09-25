@@ -1,12 +1,11 @@
 ### Improvements
 
-- Coerce non-string scalars passed to `esc env set --secret` to strings
-  [#353](https://github.com/pulumi/esc/pull/353)
-
-- `esc env get --show-secrets` now shows secrets from imported environments.
-  [#355](https://github.com/pulumi/esc/pull/355)
+- Improve evaluation performance and memory footprint.
+  [#392](https://github.com/pulumi/esc/pull/392)
 
 ### Bug Fixes
 
-- Fix a panic in fetching current credentials when the access key had expired.
-  [#368](https://github.com/pulumi/esc/pull/368)
+### Breaking changes
+
+- `schema`: `ObjectBuilder.Properties` and `Record` now take a `MapBuilder` in order to avoid copies.
+  [#392](https://github.com/pulumi/esc/pull/392)

@@ -59,6 +59,16 @@ func diagsErrorString(envDiags []EnvironmentDiagnostic) string {
 	return diags.String()
 }
 
+type CloneEnvironmentRequest struct {
+	Project                 string `json:"project,omitempty"`
+	Name                    string `json:"name"`
+	Version                 int    `json:"version,omitempty"`
+	PreserveHistory         bool   `json:"preserveHistory,omitempty"`
+	PreserveAccess          bool   `json:"preserveAccess,omitempty"`
+	PreserveEnvironmentTags bool   `json:"preserveEnvironmentTags,omitempty"`
+	PreserveRevisionTags    bool   `json:"preserveRevisionTags,omitempty"`
+}
+
 type EnvironmentRevisionRetracted struct {
 	Replacement int       `json:"replacement"`
 	At          time.Time `json:"at"`
@@ -78,7 +88,8 @@ type EnvironmentRevision struct {
 }
 
 type CreateEnvironmentRevisionTagRequest struct {
-	Revision *int `json:"revision,omitempty"`
+	Name     string `json:"name"`
+	Revision *int   `json:"revision,omitempty"`
 }
 
 type UpdateEnvironmentRevisionTagRequest struct {
@@ -127,6 +138,7 @@ type ListEnvironmentRevisionTagsResponse struct {
 }
 type OrgEnvironment struct {
 	Organization string `json:"organization,omitempty"`
+	Project      string `json:"project,omitempty"`
 	Name         string `json:"name,omitempty"`
 }
 

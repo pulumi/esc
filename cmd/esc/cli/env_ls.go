@@ -13,7 +13,10 @@ import (
 )
 
 func newEnvLsCmd(env *envCommand) *cobra.Command {
-	var orgFilter string
+	var (
+		orgFilter     string
+		projectFilter string
+	)
 
 	cmd := &cobra.Command{
 		Use:   "ls",
@@ -30,38 +33,23 @@ func newEnvLsCmd(env *envCommand) *cobra.Command {
 				return err
 			}
 
-			user := env.esc.account.Username
-
-			continuationToken, allNames := "", []client.OrgEnvironment(nil)
-			for {
-				names, nextToken, err := env.esc.client.ListEnvironments(ctx, orgFilter, continuationToken)
-				if err != nil {
-					return fmt.Errorf("listing environments: %w", err)
-				}
-				for _, name := range names {
-					if name.Organization == user {
-						name.Organization = ""
-					}
-					allNames = append(allNames, name)
-				}
-				if nextToken == "" {
-					break
-				}
-				continuationToken = nextToken
+			allEnvs, err := env.listEnvironments(ctx, orgFilter, projectFilter)
+			if err != nil {
+				return err
 			}
 
-			sort.Slice(allNames, func(i, j int) bool {
-				if allNames[i].Organization == allNames[j].Organization {
-					return allNames[i].Name < allNames[j].Name
+			sort.Slice(allEnvs, func(i, j int) bool {
+				if allEnvs[i].Organization == allEnvs[j].Organization {
+					return allEnvs[i].Name < allEnvs[j].Name
 				}
-				return allNames[i].Organization < allNames[j].Organization
+				return allEnvs[i].Organization < allEnvs[j].Organization
 			})
 
-			for _, n := range allNames {
-				if n.Organization == "" {
-					fmt.Fprintln(env.esc.stdout, n.Name)
+			for _, e := range allEnvs {
+				if e.Organization == "" {
+					fmt.Fprintf(env.esc.stdout, "%v/%v\n", e.Project, e.Name)
 				} else {
-					fmt.Fprintf(env.esc.stdout, "%v/%v\n", n.Organization, n.Name)
+					fmt.Fprintf(env.esc.stdout, "%v/%v/%v\n", e.Organization, e.Project, e.Name)
 				}
 			}
 
@@ -70,7 +58,35 @@ func newEnvLsCmd(env *envCommand) *cobra.Command {
 	}
 
 	cmd.PersistentFlags().StringVarP(
-		&orgFilter, "organization", "o", "", "Filter returned stacks to those in a specific organization")
+		&orgFilter, "organization", "o", "", "Filter returned environments to those in a specific organization")
+	cmd.PersistentFlags().StringVarP(
+		&projectFilter, "project", "p", "", "Filter returned environments to those in a specific project")
 
 	return cmd
+}
+
+func (env *envCommand) listEnvironments(ctx context.Context, orgFilter, projectFilter string) ([]client.OrgEnvironment, error) {
+	user := env.esc.account.Username
+	continuationToken, allEnvs := "", []client.OrgEnvironment(nil)
+	for {
+		envs, nextToken, err := env.esc.client.ListEnvironments(ctx, orgFilter, continuationToken)
+		if err != nil {
+			return []client.OrgEnvironment(nil), fmt.Errorf("listing environments: %w", err)
+		}
+		for _, e := range envs {
+			if e.Organization == user {
+				e.Organization = ""
+			}
+			if projectFilter != "" && e.Project != projectFilter {
+				continue
+			}
+			allEnvs = append(allEnvs, e)
+		}
+		if nextToken == "" {
+			break
+		}
+		continuationToken = nextToken
+	}
+
+	return allEnvs, nil
 }
