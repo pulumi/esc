@@ -1,0 +1,27 @@
+{
+    "loadDiags": [
+        {
+            "Severity": 1,
+            "Summary": "object keys must be strings",
+            "Detail": "",
+            "Subject": {
+                "Filename": "invalid-object-key",
+                "Start": {
+                    "Line": 3,
+                    "Column": 8,
+                    "Byte": 26
+                },
+                "End": {
+                    "Line": 3,
+                    "Column": 12,
+                    "Byte": 30
+                }
+            },
+            "Context": null,
+            "Expression": null,
+            "EvalContext": null,
+            "Extra": null,
+            "Path": "values.b[\"${a}\"]"
+        }
+    ]
+}
