@@ -8,6 +8,9 @@
 
 ### Bug Fixes
 
+- Fix panic when object keys are not strings.
+  [#406](https://github.com/pulumi/esc/pull/406)
+
 ### Breaking changes
 
 - `schema`: `ObjectBuilder.Properties` and `Record` now take a `MapBuilder` in order to avoid copies.
