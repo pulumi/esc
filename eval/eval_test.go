@@ -405,6 +405,8 @@ func benchmarkEval(b *testing.B, openDelay, loadDelay time.Duration) {
 	envs, err := newBenchEnvironments(basePath, loadDelay)
 	require.NoError(b, err)
 
+	b.ResetTimer()
+
 	for i := 0; i < b.N; i++ {
 		execContext, err := esc.NewExecContext(map[string]esc.Value{
 			"pulumi": esc.NewValue(map[string]esc.Value{
