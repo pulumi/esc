@@ -85,6 +85,31 @@ func newESC(opts *Options) *escCommand {
 		esc.newClient = client.New
 	}
 
+	// gracefully set the esc account here such that if one of the calls fails we still
+	// return the esc command
+	if opts == nil || opts.PulumiWorkspace == nil {
+		return esc
+	}
+
+	creds, err := opts.PulumiWorkspace.GetStoredCredentials()
+	if err != nil {
+		return esc
+	}
+
+	backendURL := creds.Current
+	if val, ok := creds.Accounts[backendURL]; ok {
+		defaultOrg, err := esc.workspace.GetBackendConfigDefaultOrg(backendURL, val.Username)
+		if err != nil {
+			return esc
+		}
+		esc.account = workspace.Account{
+			Account:    val,
+			BackendURL: creds.Current,
+			DefaultOrg: defaultOrg,
+		}
+	}
+
+	esc.workspace.SetCurrentAccount(esc.account, true)
 	return esc
 }
 
