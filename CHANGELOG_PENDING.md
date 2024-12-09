@@ -1,7 +1,7 @@
 ### Improvements
 
-- Add `--definition` flag to `esc env get` to output definition
-  [#416](https://github.com/pulumi/esc/pull/416)
+- Fix diagnostic messages when updating environment with invalid definition
+  [#422](https://github.com/pulumi/esc/pull/422)
 
 ### Bug Fixes
 

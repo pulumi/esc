@@ -326,8 +326,6 @@ func TestUpdateEnvironment(t *testing.T) {
 			w.WriteHeader(http.StatusBadRequest)
 
 			err := json.NewEncoder(w).Encode(EnvironmentErrorResponse{
-				Code:        400,
-				Message:     "bad request",
 				Diagnostics: expected,
 			})
 			require.NoError(t, err)
