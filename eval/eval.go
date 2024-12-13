@@ -117,7 +117,14 @@ func evalEnvironment(
 		return nil, nil
 	}
 
-	ec := newEvalContext(ctx, validating, name, env, decrypter, providers, envs, map[string]*imported{}, execContext, showSecrets)
+	loader := newLoader(ctx, envs)
+	ec := newEvalContext(ctx, validating, name, env, decrypter, providers, loader, map[string]*imported{}, execContext, showSecrets)
+
+	diags := ec.load()
+	if diags.HasErrors() {
+		return nil, diags
+	}
+
 	v, diags := ec.evaluate()
 
 	s := schema.Never().Schema()
@@ -143,22 +150,23 @@ func evalEnvironment(
 }
 
 type imported struct {
-	evaluating bool
-	value      *value
+	loading bool
+	ctx     *evalContext
+	value   *value
 }
 
 // An evalContext carries the state necessary to evaluate an environment.
 type evalContext struct {
-	ctx          context.Context      // the cancellation context for evaluation
-	validating   bool                 // true if we are only checking the environment
-	showSecrets  bool                 // true if secrets should be decrypted during validation
-	name         string               // the name of the environment
-	env          *ast.EnvironmentDecl // the root of the environment AST
-	decrypter    Decrypter            // the decrypter to use for the environment
-	providers    ProviderLoader       // the provider loader to use
-	environments EnvironmentLoader    // the environment loader to use
-	imports      map[string]*imported // the shared set of imported environments
-	execContext  *esc.ExecContext     // evaluation context used for interpolation
+	ctx         context.Context      // the cancellation context for evaluation
+	validating  bool                 // true if we are only checking the environment
+	showSecrets bool                 // true if secrets should be decrypted during validation
+	name        string               // the name of the environment
+	env         *ast.EnvironmentDecl // the root of the environment AST
+	decrypter   Decrypter            // the decrypter to use for the environment
+	providers   ProviderLoader       // the provider loader to use
+	loader      *loader              // the environment loader
+	imports     map[string]*imported // the shared set of imported environments
+	execContext *esc.ExecContext     // evaluation context used for interpolation
 
 	myContext *value // evaluated context to be used to interpolate properties
 	myImports *value // directly-imported environments
@@ -175,22 +183,22 @@ func newEvalContext(
 	env *ast.EnvironmentDecl,
 	decrypter Decrypter,
 	providers ProviderLoader,
-	environments EnvironmentLoader,
+	loader *loader,
 	imports map[string]*imported,
 	execContext *esc.ExecContext,
 	showSecrets bool,
 ) *evalContext {
 	return &evalContext{
-		ctx:          ctx,
-		validating:   validating,
-		showSecrets:  showSecrets,
-		name:         name,
-		env:          env,
-		decrypter:    decrypter,
-		providers:    providers,
-		environments: environments,
-		imports:      imports,
-		execContext:  execContext.CopyForEnv(name),
+		ctx:         ctx,
+		validating:  validating,
+		showSecrets: showSecrets,
+		name:        name,
+		env:         env,
+		decrypter:   decrypter,
+		providers:   providers,
+		loader:      loader,
+		imports:     imports,
+		execContext: execContext.CopyForEnv(name),
 	}
 }
 
@@ -353,6 +361,55 @@ func (e *evalContext) isReserveTopLevelKey(k string) bool {
 	}
 }
 
+func (e *evalContext) load() syntax.Diagnostics {
+	mine := &imported{loading: true, ctx: e}
+	defer func() { mine.loading = false }()
+	e.imports[e.name] = mine
+
+	loads := make([]*loadedEnvironment, len(e.env.Imports.GetElements()))
+	for i, entry := range e.env.Imports.GetElements() {
+		loads[i] = e.loadImport(entry)
+	}
+
+	for i, entry := range e.env.Imports.GetElements() {
+		l := loads[i]
+		if l == nil {
+			continue
+		}
+		<-l.done
+
+		e.diags.Extend(l.diags...)
+		if l.err != nil {
+			e.errorf(entry.Environment, "%s", l.err.Error())
+			continue
+		}
+
+		imp := newEvalContext(e.ctx, e.validating, l.name, l.env, l.dec, e.providers, e.loader, e.imports, e.execContext, e.showSecrets)
+		diags := imp.load()
+		e.diags.Extend(diags...)
+	}
+
+	return e.diags
+}
+
+func (e *evalContext) loadImport(decl *ast.ImportDecl) *loadedEnvironment {
+	// If the import does not have a name, there's nothing we can do. This can happen for environments
+	// with parse errors.
+	if decl.Environment == nil {
+		return nil
+	}
+	name := decl.Environment.Value
+
+	if imported, ok := e.imports[name]; ok {
+		if imported.loading {
+			e.diags.Extend(syntax.Error(decl.Syntax().Syntax().Range(), fmt.Sprintf("cyclic import of %v", name), decl.Syntax().Syntax().Path()))
+		}
+		return nil
+	}
+
+	return e.loader.load(name)
+}
+
 // evaluate drives the evaluation of the evalContext's environment.
 func (e *evalContext) evaluate() (*value, syntax.Diagnostics) {
 	// Evaluate context. We prepare the context values to later evaluate interpolations.
@@ -397,10 +454,6 @@ func (e *evalContext) evaluateContext() {
 
 // evaluateImports evaluates an environment's imports.
 func (e *evalContext) evaluateImports() {
-	mine := &imported{evaluating: true}
-	defer func() { mine.evaluating = false }()
-	e.imports[e.name] = mine
-
 	myImports := map[string]*value{}
 	for _, entry := range e.env.Imports.GetElements() {
 		e.evaluateImport(myImports, entry)
@@ -436,34 +489,22 @@ func (e *evalContext) evaluateImport(myImports map[string]*value, decl *ast.Impo
 	}
 	name := decl.Environment.Value
 
+	imported, ok := e.imports[name]
+	if !ok {
+		e.diags.Extend(syntax.Error(decl.Syntax().Syntax().Range(), fmt.Sprintf("internal error: missing context for %v", name), decl.Syntax().Syntax().Path()))
+		return
+	}
+
 	merge := true
 	if decl.Meta != nil && decl.Meta.Merge != nil {
 		merge = decl.Meta.Merge.Value
 	}
 
 	var val *value
-	if imported, ok := e.imports[name]; ok {
-		if imported.evaluating {
-			e.diags.Extend(syntax.Error(decl.Syntax().Syntax().Range(), fmt.Sprintf("cyclic import of %v", name), decl.Syntax().Syntax().Path()))
-			return
-		}
+	if imported.value != nil {
 		val = imported.value
 	} else {
-		bytes, dec, err := e.environments.LoadEnvironment(e.ctx, name)
-		if err != nil {
-			e.errorf(decl.Environment, "%s", err.Error())
-			return
-		}
-
-		env, diags, err := LoadYAMLBytes(name, bytes)
-		e.diags.Extend(diags...)
-		if err != nil {
-			e.errorf(decl.Environment, "%s", err.Error())
-			return
-		}
-
-		imp := newEvalContext(e.ctx, e.validating, name, env, dec, e.providers, e.environments, e.imports, e.execContext, e.showSecrets)
-		v, diags := imp.evaluate()
+		v, diags := imported.ctx.evaluate()
 		e.diags.Extend(diags...)
 
 		val = v
