@@ -29,3 +29,9 @@ type Provider interface {
 	// Open retrieves the provider's secrets.
 	Open(ctx context.Context, inputs map[string]Value, executionContext EnvExecContext) (Value, error)
 }
+
+// A Rotator is an extended provider that supports an additional "Rotate" verb.
+type Rotator interface {
+	Provider
+	Rotate(ctx context.Context, inputs map[string]Value) (Value, error)
+}
