@@ -114,7 +114,7 @@ func RotateEnvironment(
 	environments EnvironmentLoader,
 	execContext *esc.ExecContext,
 	paths []string,
-) (*esc.Environment, []*esc.Patch, syntax.Diagnostics) {
+) (*esc.Environment, []*Patch, syntax.Diagnostics) {
 	rotatePaths := map[string]bool{}
 	for _, path := range paths {
 		rotatePaths[path] = true
@@ -134,7 +134,7 @@ func evalEnvironment(
 	execContext *esc.ExecContext,
 	showSecrets bool,
 	rotatePaths map[string]bool,
-) (*esc.Environment, []*esc.Patch, syntax.Diagnostics) {
+) (*esc.Environment, []*Patch, syntax.Diagnostics) {
 	if env == nil || (len(env.Values.GetEntries()) == 0 && len(env.Imports.GetElements()) == 0) {
 		return nil, nil, nil
 	}
@@ -188,7 +188,7 @@ type evalContext struct {
 	base      *value // the base value
 
 	rotatePaths  map[string]bool // when non-nil, specifies providers to rotate. if empty, the full environment is rotated.
-	patchOutputs []*esc.Patch    // updated rotation state to be written back to the environment definition
+	patchOutputs []*Patch        // updated rotation state to be written back to the environment definition
 
 	diags syntax.Diagnostics // diagnostics generated during evaluation
 }
@@ -1032,7 +1032,7 @@ func (e *evalContext) evaluateBuiltinRotate(x *expr, repr *rotateExpr) *value {
 			inputsPath += ".inputs"
 		}
 
-		e.patchOutputs = append(e.patchOutputs, &esc.Patch{
+		e.patchOutputs = append(e.patchOutputs, &Patch{
 			// rotation output is written back to the fn's `state` input
 			DocPath:     x.path + "." + inputsPath + ".state",
 			Replacement: newState,

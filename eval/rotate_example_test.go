@@ -38,7 +38,7 @@ values:
 	require.Len(t, diags, 0)
 
 	// writeback state patches
-	update, err := esc.ApplyPatches([]byte(def), patches)
+	update, err := ApplyPatches([]byte(def), patches)
 	require.NoError(t, err)
 
 	encryptedYaml, err := EncryptSecrets(context.Background(), "<stdin>", update, rot128{})

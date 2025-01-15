@@ -1,6 +1,7 @@
-package esc
+package eval
 
 import (
+	"github.com/pulumi/esc"
 	"github.com/pulumi/esc/syntax/encoding"
 	"github.com/pulumi/pulumi/sdk/v3/go/common/resource"
 	"gopkg.in/yaml.v3"
@@ -9,7 +10,7 @@ import (
 // Patch represents a value that should be written back to the environment at the given path.
 type Patch struct {
 	DocPath     string
-	Replacement Value
+	Replacement esc.Value
 }
 
 // ApplyPatches applies a set of patches values to an environment definition.
@@ -48,16 +49,16 @@ func ApplyPatches(source []byte, patches []*Patch) ([]byte, error) {
 }
 
 // valueToSecretJSON converts a Value into a plain-old-JSON value, but secret values are wrapped with fn::secret
-func valueToSecretJSON(v Value) any {
+func valueToSecretJSON(v esc.Value) any {
 	ret := func() any {
 		switch pv := v.Value.(type) {
-		case []Value:
+		case []esc.Value:
 			a := make([]any, len(pv))
 			for i, v := range pv {
 				a[i] = valueToSecretJSON(v)
 			}
 			return a
-		case map[string]Value:
+		case map[string]esc.Value:
 			m := make(map[string]any, len(pv))
 			for k, v := range pv {
 				m[k] = valueToSecretJSON(v)
