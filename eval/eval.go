@@ -83,7 +83,7 @@ func EvalEnvironment(
 	environments EnvironmentLoader,
 	execContext *esc.ExecContext,
 ) (*esc.Environment, syntax.Diagnostics) {
-	return evalEnvironment(ctx, false, name, env, decrypter, providers, environments, execContext, true)
+	return evalEnvironment(ctx, false, false, name, env, decrypter, providers, environments, execContext, true)
 }
 
 // CheckEnvironment symbolically evaluates the given environment. Calls to fn::open are not invoked, and instead
@@ -98,13 +98,28 @@ func CheckEnvironment(
 	execContext *esc.ExecContext,
 	showSecrets bool,
 ) (*esc.Environment, syntax.Diagnostics) {
-	return evalEnvironment(ctx, true, name, env, decrypter, providers, environments, execContext, showSecrets)
+	return evalEnvironment(ctx, true, false, name, env, decrypter, providers, environments, execContext, showSecrets)
+}
+
+// RotateEnvironment evaluates the given environment and invokes provider rotate methods.
+// Updated rotation state will output via execution context patches, and is expected to be written back to the environment definition by the caller.
+func RotateEnvironment(
+	ctx context.Context,
+	name string,
+	env *ast.EnvironmentDecl,
+	decrypter Decrypter,
+	providers ProviderLoader,
+	environments EnvironmentLoader,
+	execContext *esc.ExecContext,
+) (*esc.Environment, syntax.Diagnostics) {
+	return evalEnvironment(ctx, false, true, name, env, decrypter, providers, environments, execContext, true)
 }
 
 // evalEnvironment evaluates an environment and exports the result of evaluation.
 func evalEnvironment(
 	ctx context.Context,
 	validating bool,
+	rotating bool,
 	name string,
 	env *ast.EnvironmentDecl,
 	decrypter Decrypter,
@@ -117,7 +132,7 @@ func evalEnvironment(
 		return nil, nil
 	}
 
-	ec := newEvalContext(ctx, validating, name, env, decrypter, providers, envs, map[string]*imported{}, execContext, showSecrets)
+	ec := newEvalContext(ctx, validating, rotating, name, env, decrypter, providers, envs, map[string]*imported{}, execContext, showSecrets)
 	v, diags := ec.evaluate()
 
 	s := schema.Never().Schema()
@@ -132,6 +147,7 @@ func evalEnvironment(
 	executionContext := &esc.EvaluatedExecutionContext{
 		Properties: ec.myContext.export(name).Value.(map[string]esc.Value),
 		Schema:     ec.myContext.schema,
+		Patches:    ec.patchOutputs,
 	}
 
 	return &esc.Environment{
@@ -165,12 +181,16 @@ type evalContext struct {
 	root      *expr  // the root expression
 	base      *value // the base value
 
+	rotating     bool         // true if providers should be rotated
+	patchOutputs []*esc.Patch // updated rotation state to be written back to the environment definition
+
 	diags syntax.Diagnostics // diagnostics generated during evaluation
 }
 
 func newEvalContext(
 	ctx context.Context,
 	validating bool,
+	rotating bool,
 	name string,
 	env *ast.EnvironmentDecl,
 	decrypter Decrypter,
@@ -183,6 +203,7 @@ func newEvalContext(
 	return &evalContext{
 		ctx:          ctx,
 		validating:   validating,
+		rotating:     rotating,
 		showSecrets:  showSecrets,
 		name:         name,
 		env:          env,
@@ -462,7 +483,8 @@ func (e *evalContext) evaluateImport(myImports map[string]*value, decl *ast.Impo
 			return
 		}
 
-		imp := newEvalContext(e.ctx, e.validating, name, env, dec, e.providers, e.environments, e.imports, e.execContext, e.showSecrets)
+		// only rotate root environment
+		imp := newEvalContext(e.ctx, e.validating, false, name, env, dec, e.providers, e.environments, e.imports, e.execContext, e.showSecrets)
 		v, diags := imp.evaluate()
 		e.diags.Extend(diags...)
 
@@ -921,6 +943,29 @@ func (e *evalContext) evaluateBuiltinOpen(x *expr, repr *openExpr) *value {
 	if !ok || inputs.containsUnknowns() || e.validating || err != nil {
 		v.unknown = true
 		return v
+	}
+
+	// if rotating, invoke prior to open
+	if e.rotating {
+		if rotator, ok := provider.(esc.Rotator); ok {
+			newState, err := rotator.Rotate(e.ctx, inputs.export("").Value.(map[string]esc.Value))
+			if err != nil {
+				e.errorf(repr.syntax(), "rotate: %s", err.Error())
+				v.unknown = true
+				return v
+			}
+
+			// path to provider arguments differs for long vs short form
+			inputsPath := repr.node.Name().GetValue()
+			if inputsPath == "fn::open" {
+				inputsPath += ".inputs"
+			}
+
+			e.patchOutputs = append(e.patchOutputs, &esc.Patch{
+				DocPath:     x.path + "." + inputsPath + ".state",
+				Replacement: newState,
+			})
+		}
 	}
 
 	output, err := provider.Open(e.ctx, inputs.export("").Value.(map[string]esc.Value), e.execContext)
