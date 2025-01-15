@@ -31,6 +31,7 @@ type Provider interface {
 }
 
 type Rotator interface {
+	Provider
 	// Rotate rotates the provider's secret.
 	// The result represents the new state which will be written back into the environment under the `state` key of the provider's inputs.
 	// Any secret values in the result will be wrapped by fn::secret in the written result.

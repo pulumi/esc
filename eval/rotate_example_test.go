@@ -12,7 +12,7 @@ func TestExampleRotate(t *testing.T) {
 values:
   a:
     a:
-      fn::open:
+      fn::rotate:
         provider: swap
         inputs:
           state:
@@ -20,7 +20,7 @@ values:
             b: b
     b:
     - c:
-        fn::open::swap:
+        fn::rotate::swap:
           state:
             a: 
               fn::secret: a

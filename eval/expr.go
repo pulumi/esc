@@ -204,6 +204,31 @@ func (x *expr) export(environment string) esc.Expr {
 				Arg:       repr.inputs.export(environment),
 			}
 		}
+	case *rotateExpr:
+		name := repr.node.Name().Value
+		if name == "fn::rotate" {
+			ex.Builtin = &esc.BuiltinExpr{
+				Name:      name,
+				NameRange: convertRange(repr.node.Name().Syntax().Syntax().Range(), environment),
+				ArgSchema: schema.Record(schema.SchemaMap{
+					"provider": schema.String().Schema(),
+					"inputs":   repr.inputSchema,
+				}).Schema(),
+				Arg: esc.Expr{
+					Object: map[string]esc.Expr{
+						"provider": repr.provider.export(environment),
+						"inputs":   repr.inputs.export(environment),
+					},
+				},
+			}
+		} else {
+			ex.Builtin = &esc.BuiltinExpr{
+				Name:      name,
+				NameRange: convertRange(repr.node.Name().Syntax().Syntax().Range(), environment),
+				ArgSchema: repr.inputSchema,
+				Arg:       repr.inputs.export(environment),
+			}
+		}
 	case *secretExpr:
 		var arg esc.Expr
 		if repr.plaintext != nil {
@@ -368,6 +393,20 @@ type openExpr struct {
 }
 
 func (x *openExpr) syntax() ast.Expr {
+	return x.node
+}
+
+// rotateExpr represents a call to the fn::rotate builtin.
+type rotateExpr struct {
+	node *ast.RotateExpr
+
+	provider *expr
+	inputs   *expr
+
+	inputSchema *schema.Schema
+}
+
+func (x *rotateExpr) syntax() ast.Expr {
 	return x.node
 }
 

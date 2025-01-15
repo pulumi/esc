@@ -323,6 +323,14 @@ func declare[Expr exprNode](e *evalContext, path string, x Expr, base *value) *e
 			inputSchema: schema.Always().Schema(),
 		}
 		return newExpr(path, repr, schema.Always().Schema(), base)
+	case *ast.RotateExpr:
+		repr := &rotateExpr{
+			node:        x,
+			provider:    declare(e, "", x.Provider, nil),
+			inputs:      declare(e, "", x.Inputs, nil),
+			inputSchema: schema.Always().Schema(),
+		}
+		return newExpr(path, repr, schema.Always().Schema(), base)
 	case *ast.SecretExpr:
 		if x.Plaintext != nil {
 			repr := &secretExpr{node: x, plaintext: declare(e, "", x.Plaintext, nil)}
@@ -548,6 +556,8 @@ func (e *evalContext) evaluateExpr(x *expr) *value {
 		val = e.evaluateBuiltinJoin(x, repr)
 	case *openExpr:
 		val = e.evaluateBuiltinOpen(x, repr)
+	case *rotateExpr:
+		val = e.evaluateBuiltinRotate(x, repr)
 	case *secretExpr:
 		val = e.evaluateBuiltinSecret(x, repr)
 	case *toBase64Expr:
@@ -945,27 +955,82 @@ func (e *evalContext) evaluateBuiltinOpen(x *expr, repr *openExpr) *value {
 		return v
 	}
 
+	output, err := provider.Open(e.ctx, inputs.export("").Value.(map[string]esc.Value), e.execContext)
+	if err != nil {
+		e.errorf(repr.syntax(), "%s", err.Error())
+		v.unknown = true
+		return v
+	}
+	return unexport(output, x)
+}
+
+func loadRotator(ctx context.Context, providers ProviderLoader, name string) (esc.Rotator, error) {
+	provider, err := providers.LoadProvider(ctx, name)
+	if err != nil {
+		return nil, err
+	}
+	rotator, ok := provider.(esc.Rotator)
+	if !ok {
+		return nil, fmt.Errorf("provider is not a rotator")
+	}
+	return rotator, nil
+}
+
+// evaluateBuiltinOpen evaluates a call to the fn::rotate builtin.
+func (e *evalContext) evaluateBuiltinRotate(x *expr, repr *rotateExpr) *value {
+	v := &value{def: x}
+
+	// Can happen if there are parse errors.
+	if repr.node.Provider == nil {
+		v.schema = schema.Always()
+		v.unknown = true
+		return v
+	}
+
+	provider, err := loadRotator(e.ctx, e.providers, repr.node.Provider.GetValue())
+	if err != nil {
+		e.errorf(repr.syntax(), "%v", err)
+	} else {
+		inputSchema, outputSchema := provider.Schema()
+		if err := inputSchema.Compile(); err != nil {
+			e.errorf(repr.syntax(), "internal error: invalid input schema (%v)", err)
+		} else {
+			repr.inputSchema = inputSchema
+		}
+		if err := outputSchema.Compile(); err != nil {
+			e.errorf(repr.syntax(), "internal error: invalid schema (%v)", err)
+		} else {
+			x.schema = outputSchema
+		}
+	}
+	v.schema = x.schema
+
+	inputs, ok := e.evaluateTypedExpr(repr.inputs, repr.inputSchema)
+	if !ok || inputs.containsUnknowns() || e.validating || err != nil {
+		v.unknown = true
+		return v
+	}
+
 	// if rotating, invoke prior to open
 	if e.rotating {
-		if rotator, ok := provider.(esc.Rotator); ok {
-			newState, err := rotator.Rotate(e.ctx, inputs.export("").Value.(map[string]esc.Value))
-			if err != nil {
-				e.errorf(repr.syntax(), "rotate: %s", err.Error())
-				v.unknown = true
-				return v
-			}
-
-			// path to provider arguments differs for long vs short form
-			inputsPath := repr.node.Name().GetValue()
-			if inputsPath == "fn::open" {
-				inputsPath += ".inputs"
-			}
-
-			e.patchOutputs = append(e.patchOutputs, &esc.Patch{
-				DocPath:     x.path + "." + inputsPath + ".state",
-				Replacement: newState,
-			})
+		newState, err := provider.Rotate(e.ctx, inputs.export("").Value.(map[string]esc.Value))
+		if err != nil {
+			e.errorf(repr.syntax(), "rotate: %s", err.Error())
+			v.unknown = true
+			return v
 		}
+
+		// path to provider arguments differs for long vs short form
+		inputsPath := repr.node.Name().GetValue()
+		if inputsPath == "fn::rotate" {
+			inputsPath += ".inputs"
+		}
+
+		e.patchOutputs = append(e.patchOutputs, &esc.Patch{
+			// rotation output is written back to the fn's `state` input
+			DocPath:     x.path + "." + inputsPath + ".state",
+			Replacement: newState,
+		})
 	}
 
 	output, err := provider.Open(e.ctx, inputs.export("").Value.(map[string]esc.Value), e.execContext)
