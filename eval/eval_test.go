@@ -136,6 +136,36 @@ func (testProvider) Open(ctx context.Context, inputs map[string]esc.Value, conte
 	return esc.NewValue(inputs), nil
 }
 
+type swapProvider struct{}
+
+func (swapProvider) Schema() (*schema.Schema, *schema.Schema) {
+	inputSchema := schema.Record(schema.BuilderMap{
+		"state": schema.Record(schema.BuilderMap{
+			"a": schema.String(),
+			"b": schema.String(),
+		}),
+	}).Schema()
+	outputSchema := schema.Record(schema.BuilderMap{
+		"a": schema.String(),
+		"b": schema.String(),
+	}).Schema()
+	return inputSchema, outputSchema
+}
+
+func (swapProvider) Open(ctx context.Context, inputs map[string]esc.Value, context esc.EnvExecContext) (esc.Value, error) {
+	state := inputs["state"].Value.(map[string]esc.Value)
+	return esc.NewValue(state), nil
+}
+
+func (swapProvider) Rotate(ctx context.Context, inputs map[string]esc.Value) (esc.Value, error) {
+	state := inputs["state"].Value.(map[string]esc.Value)
+	newState := esc.NewValue(map[string]esc.Value{
+		"a": state["b"],
+		"b": state["a"],
+	})
+	return newState, nil
+}
+
 type testProviders struct {
 	benchDelay time.Duration
 }
@@ -150,6 +180,8 @@ func (tp testProviders) LoadProvider(ctx context.Context, name string) (esc.Prov
 		return testProvider{}, nil
 	case "bench":
 		return benchProvider{delay: tp.benchDelay}, nil
+	case "swap":
+		return swapProvider{}, nil
 	}
 	return nil, fmt.Errorf("unknown provider %q", name)
 }

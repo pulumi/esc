@@ -165,12 +165,6 @@ type EvaluatedExecutionContext struct {
 	Patches []*Patch
 }
 
-// Patch represents a value that should be written back to the environment at the given path.
-type Patch struct {
-	DocPath     string
-	Replacement Value
-}
-
 // An Environment contains the result of evaluating an environment definition.
 type Environment struct {
 	// Exprs contains the AST for each expression in the environment definition.
