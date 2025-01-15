@@ -160,9 +160,6 @@ type EvaluatedExecutionContext struct {
 
 	// Schema contains the schema for Properties.
 	Schema *schema.Schema `json:"schema,omitempty"`
-
-	// Patches contains updated values that should be written back into the environment definition.
-	Patches []*Patch
 }
 
 // An Environment contains the result of evaluating an environment definition.

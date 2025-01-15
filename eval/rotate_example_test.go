@@ -34,11 +34,11 @@ values:
 	providers := testProviders{}
 	execContext, err := esc.NewExecContext(nil)
 	require.NoError(t, err)
-	open, diags := RotateEnvironment(context.Background(), "<stdin>", env, rot128{}, providers, &testEnvironments{}, execContext)
+	_, patches, diags := RotateEnvironment(context.Background(), "<stdin>", env, rot128{}, providers, &testEnvironments{}, execContext, nil)
 	require.Len(t, diags, 0)
 
 	// writeback state patches
-	update, err := esc.ApplyPatches([]byte(def), open.ExecutionContext.Patches)
+	update, err := esc.ApplyPatches([]byte(def), patches)
 	require.NoError(t, err)
 
 	encryptedYaml, err := EncryptSecrets(context.Background(), "<stdin>", update, rot128{})
