@@ -86,10 +86,11 @@ func EvalEnvironment(
 	env *ast.EnvironmentDecl,
 	decrypter Decrypter,
 	providers ProviderLoader,
+	rotators RotatorLoader,
 	environments EnvironmentLoader,
 	execContext *esc.ExecContext,
 ) (*esc.Environment, syntax.Diagnostics) {
-	opened, _, diags := evalEnvironment(ctx, false, name, env, decrypter, providers, nil, environments, execContext, true, nil)
+	opened, _, diags := evalEnvironment(ctx, false, name, env, decrypter, providers, rotators, environments, execContext, true, nil)
 	return opened, diags
 }
 
@@ -101,11 +102,12 @@ func CheckEnvironment(
 	env *ast.EnvironmentDecl,
 	decrypter Decrypter,
 	providers ProviderLoader,
+	rotators RotatorLoader,
 	environments EnvironmentLoader,
 	execContext *esc.ExecContext,
 	showSecrets bool,
 ) (*esc.Environment, syntax.Diagnostics) {
-	checked, _, diags := evalEnvironment(ctx, true, name, env, decrypter, providers, nil, environments, execContext, showSecrets, nil)
+	checked, _, diags := evalEnvironment(ctx, true, name, env, decrypter, providers, rotators, environments, execContext, showSecrets, nil)
 	return checked, diags
 }
 

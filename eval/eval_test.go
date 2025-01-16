@@ -339,11 +339,11 @@ func TestEval(t *testing.T) {
 				sortEnvironmentDiagnostics(loadDiags)
 
 				check, checkDiags := CheckEnvironment(context.Background(), environmentName, env, rot128{}, testProviders{},
-					&testEnvironments{basePath}, execContext, showSecrets)
+					testRotators{}, &testEnvironments{basePath}, execContext, showSecrets)
 				sortEnvironmentDiagnostics(checkDiags)
 
 				actual, evalDiags := EvalEnvironment(context.Background(), environmentName, env, rot128{}, testProviders{},
-					&testEnvironments{basePath}, execContext)
+					testRotators{}, &testEnvironments{basePath}, execContext)
 				sortEnvironmentDiagnostics(evalDiags)
 
 				var checkJSON any
@@ -392,12 +392,12 @@ func TestEval(t *testing.T) {
 			require.Equal(t, expected.LoadDiags, diags)
 
 			check, diags := CheckEnvironment(context.Background(), environmentName, env, rot128{}, testProviders{},
-				&testEnvironments{basePath}, execContext, showSecrets)
+				&testRotators{}, &testEnvironments{basePath}, execContext, showSecrets)
 			sortEnvironmentDiagnostics(diags)
 			require.Equal(t, expected.CheckDiags, diags)
 
 			actual, diags := EvalEnvironment(context.Background(), environmentName, env, rot128{}, testProviders{},
-				&testEnvironments{basePath}, execContext)
+				&testRotators{}, &testEnvironments{basePath}, execContext)
 			sortEnvironmentDiagnostics(diags)
 			require.Equal(t, expected.EvalDiags, diags)
 
@@ -459,7 +459,7 @@ func benchmarkEval(b *testing.B, openDelay, loadDelay time.Duration) {
 		require.Empty(b, loadDiags)
 
 		_, evalDiags := EvalEnvironment(context.Background(), environmentName, env, rot128{}, testProviders{benchDelay: openDelay},
-			envs, execContext)
+			testRotators{}, envs, execContext)
 		require.Empty(b, evalDiags)
 	}
 }
