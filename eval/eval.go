@@ -1021,13 +1021,13 @@ func (e *evalContext) evaluateBuiltinRotate(x *expr, repr *rotateExpr) *value {
 
 	inputs, inputsOK := e.evaluateTypedExpr(repr.inputs, repr.inputSchema)
 	state, stateOK := e.evaluateTypedExpr(repr.state, repr.stateSchema)
-	if !inputsOK || inputs.containsUnknowns() || !stateOK || state.containsUnknowns() || e.validating || e.rotatePaths == nil || err != nil {
+	if !inputsOK || inputs.containsUnknowns() || !stateOK || state.containsUnknowns() || e.validating || err != nil {
 		v.unknown = true
 		return v
 	}
 
 	// if rotating, invoke prior to open
-	if len(e.rotatePaths) == 0 || e.rotatePaths[x.path] {
+	if e.rotatePaths != nil && (len(e.rotatePaths) == 0 || e.rotatePaths[x.path]) {
 		newState, err := rotator.Rotate(
 			e.ctx,
 			inputs.export("").Value.(map[string]esc.Value),
