@@ -15,12 +15,14 @@ values:
       fn::rotate:
         provider: swap
         inputs:
-          state:
-            a: a
-            b: b
+          foo: bar
+        state:
+          a: a
+          b: b
     b:
     - c:
         fn::rotate::swap:
+          foo: bar
           state:
             a: 
               fn::secret: a
@@ -31,10 +33,9 @@ values:
 	require.Len(t, diags, 0)
 
 	// rotate the environment
-	providers := testProviders{}
 	execContext, err := esc.NewExecContext(nil)
 	require.NoError(t, err)
-	_, patches, diags := RotateEnvironment(context.Background(), "<stdin>", env, rot128{}, providers, &testEnvironments{}, execContext, nil)
+	_, patches, diags := RotateEnvironment(context.Background(), "<stdin>", env, rot128{}, testProviders{}, testRotators{}, &testEnvironments{}, execContext, nil)
 	require.Len(t, diags, 0)
 
 	// writeback state patches

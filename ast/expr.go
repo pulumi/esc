@@ -18,6 +18,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"reflect"
+	"slices"
 	"strings"
 
 	"github.com/hashicorp/hcl/v2"
@@ -436,12 +437,36 @@ func Open(provider string, inputs *ObjectExpr) *OpenExpr {
 
 // RotateExpr is a type of OpenExpr that supports a rotate operation.
 type RotateExpr struct {
-	*OpenExpr
+	builtinNode
+
+	Provider *StringExpr
+	Inputs   Expr
+	State    *ObjectExpr
 }
 
-func RotateSyntax(node *syntax.ObjectNode, name *StringExpr, args Expr, provider *StringExpr, inputs Expr) *RotateExpr {
+func RotateSyntax(node *syntax.ObjectNode, name *StringExpr, args Expr, provider *StringExpr, inputs Expr, state *ObjectExpr) *RotateExpr {
 	return &RotateExpr{
-		OpenExpr: OpenSyntax(node, name, args, provider, inputs),
+		builtinNode: builtin(node, name, args),
+		Provider:    provider,
+		Inputs:      inputs,
+		State:       state,
+	}
+}
+
+func Rotate(provider string, inputs, state *ObjectExpr) *RotateExpr {
+	name, providerX := String("fn::rotate"), String(provider)
+
+	entries := []ObjectProperty{
+		{Key: String("provider"), Value: providerX},
+		{Key: String("inputs"), Value: inputs},
+		{Key: String("state"), Value: state},
+	}
+
+	return &RotateExpr{
+		builtinNode: builtin(nil, name, Object(entries...)),
+		Provider:    providerX,
+		Inputs:      inputs,
+		State:       state,
 	}
 }
 
@@ -716,11 +741,11 @@ func parseShortOpen(node *syntax.ObjectNode, name *StringExpr, args Expr) (Expr,
 func parseRotate(node *syntax.ObjectNode, name *StringExpr, args Expr) (Expr, syntax.Diagnostics) {
 	obj, ok := args.(*ObjectExpr)
 	if !ok {
-		diags := syntax.Diagnostics{ExprError(args, "the argument to fn::rotate must be an object containing 'provider' and 'inputs'")}
-		return RotateSyntax(node, name, args, nil, nil), diags
+		diags := syntax.Diagnostics{ExprError(args, "the argument to fn::rotate must be an object containing 'provider', 'inputs' and 'state'")}
+		return RotateSyntax(node, name, args, nil, nil, nil), diags
 	}
 
-	var providerExpr, inputs Expr
+	var providerExpr, inputs, stateExpr Expr
 	var diags syntax.Diagnostics
 
 	for i := 0; i < len(obj.Entries); i++ {
@@ -731,6 +756,8 @@ func parseRotate(node *syntax.ObjectNode, name *StringExpr, args Expr) (Expr, sy
 			providerExpr = kvp.Value
 		case "inputs":
 			inputs = kvp.Value
+		case "state":
+			stateExpr = kvp.Value
 		}
 	}
 
@@ -747,18 +774,40 @@ func parseRotate(node *syntax.ObjectNode, name *StringExpr, args Expr) (Expr, sy
 		diags.Extend(ExprError(obj, "missing provider inputs ('inputs')"))
 	}
 
-	return RotateSyntax(node, name, obj, provider, inputs), diags
+	state, ok := stateExpr.(*ObjectExpr)
+	if !ok && state != nil {
+		diags.Extend(ExprError(stateExpr, "rotation state must be an object literal"))
+	}
+
+	return RotateSyntax(node, name, obj, provider, inputs, state), diags
 }
 
 func parseShortRotate(node *syntax.ObjectNode, name *StringExpr, args Expr) (Expr, syntax.Diagnostics) {
 	kvp := node.Index(0)
 	provider := StringSyntaxValue(name.Syntax().(*syntax.StringNode), strings.TrimPrefix(kvp.Key.Value(), "fn::rotate::"))
-	if args == nil {
-		diags := syntax.Diagnostics{ExprError(name, "missing provider inputs")}
-		return RotateSyntax(node, name, args, provider, nil), diags
+
+	inputs, ok := args.(*ObjectExpr)
+	if !ok {
+		diags := syntax.Diagnostics{ExprError(args, "provider inputs must be an object")}
+		return RotateSyntax(node, name, args, nil, nil, nil), diags
 	}
 
-	return RotateSyntax(node, name, args, provider, args), nil
+	// hoist 'state' key out of inputs
+	var stateExpr Expr
+	if i := slices.IndexFunc(inputs.Entries, func(kvp ObjectProperty) bool {
+		return kvp.Key.GetValue() == "state"
+	}); i != -1 {
+		stateExpr = inputs.Entries[i].Value
+		inputs.Entries = slices.Delete(inputs.Entries, i, i+1)
+	}
+
+	state, ok := stateExpr.(*ObjectExpr)
+	if !ok && state != nil {
+		diags := syntax.Diagnostics{ExprError(stateExpr, "rotation state must be an object literal")}
+		return RotateSyntax(node, name, args, nil, nil, nil), diags
+	}
+
+	return RotateSyntax(node, name, args, provider, inputs, state), nil
 }
 
 func parseJoin(node *syntax.ObjectNode, name *StringExpr, args Expr) (Expr, syntax.Diagnostics) {

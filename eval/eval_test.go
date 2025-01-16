@@ -136,29 +136,26 @@ func (testProvider) Open(ctx context.Context, inputs map[string]esc.Value, conte
 	return esc.NewValue(inputs), nil
 }
 
-type swapProvider struct{}
+type swapRotator struct{}
 
-func (swapProvider) Schema() (*schema.Schema, *schema.Schema) {
-	inputSchema := schema.Record(schema.BuilderMap{
-		"state": schema.Record(schema.BuilderMap{
-			"a": schema.String(),
-			"b": schema.String(),
-		}),
+func (swapRotator) Schema() (*schema.Schema, *schema.Schema, *schema.Schema) {
+	inputSchema := schema.Always()
+	stateSchema := schema.Record(schema.BuilderMap{
+		"a": schema.String(),
+		"b": schema.String(),
 	}).Schema()
 	outputSchema := schema.Record(schema.BuilderMap{
 		"a": schema.String(),
 		"b": schema.String(),
 	}).Schema()
-	return inputSchema, outputSchema
+	return inputSchema, stateSchema, outputSchema
 }
 
-func (swapProvider) Open(ctx context.Context, inputs map[string]esc.Value, context esc.EnvExecContext) (esc.Value, error) {
-	state := inputs["state"].Value.(map[string]esc.Value)
+func (swapRotator) Open(ctx context.Context, inputs, state map[string]esc.Value, context esc.EnvExecContext) (esc.Value, error) {
 	return esc.NewValue(state), nil
 }
 
-func (swapProvider) Rotate(ctx context.Context, inputs map[string]esc.Value) (esc.Value, error) {
-	state := inputs["state"].Value.(map[string]esc.Value)
+func (swapRotator) Rotate(ctx context.Context, inputs, state map[string]esc.Value) (esc.Value, error) {
 	newState := esc.NewValue(map[string]esc.Value{
 		"a": state["b"],
 		"b": state["a"],
@@ -180,10 +177,18 @@ func (tp testProviders) LoadProvider(ctx context.Context, name string) (esc.Prov
 		return testProvider{}, nil
 	case "bench":
 		return benchProvider{delay: tp.benchDelay}, nil
-	case "swap":
-		return swapProvider{}, nil
 	}
 	return nil, fmt.Errorf("unknown provider %q", name)
+}
+
+type testRotators struct{}
+
+func (testRotators) LoadRotator(ctx context.Context, name string) (esc.Rotator, error) {
+	switch name {
+	case "swap":
+		return swapRotator{}, nil
+	}
+	return nil, fmt.Errorf("unknown rotator %q", name)
 }
 
 type testEnvironments struct {

@@ -16,6 +16,7 @@ package eval
 
 import (
 	"fmt"
+	"maps"
 
 	"github.com/hashicorp/hcl/v2"
 	"github.com/pulumi/esc"
@@ -213,20 +214,29 @@ func (x *expr) export(environment string) esc.Expr {
 				ArgSchema: schema.Record(schema.SchemaMap{
 					"provider": schema.String().Schema(),
 					"inputs":   repr.inputSchema,
+					"state":    repr.stateSchema,
 				}).Schema(),
 				Arg: esc.Expr{
 					Object: map[string]esc.Expr{
 						"provider": repr.provider.export(environment),
 						"inputs":   repr.inputs.export(environment),
+						"state":    repr.state.export(environment),
 					},
 				},
 			}
 		} else {
+			argMap := schema.SchemaMap{}
+			maps.Copy(argMap, repr.inputSchema.Properties)
+			argMap["state"] = repr.stateSchema
+
+			arg := repr.inputs.export(environment)
+			arg.Object["state"] = repr.state.export(environment)
+
 			ex.Builtin = &esc.BuiltinExpr{
 				Name:      name,
 				NameRange: convertRange(repr.node.Name().Syntax().Syntax().Range(), environment),
-				ArgSchema: repr.inputSchema,
-				Arg:       repr.inputs.export(environment),
+				ArgSchema: schema.Record(argMap).Schema(),
+				Arg:       arg,
 			}
 		}
 	case *secretExpr:
@@ -402,8 +412,10 @@ type rotateExpr struct {
 
 	provider *expr
 	inputs   *expr
+	state    *expr
 
 	inputSchema *schema.Schema
+	stateSchema *schema.Schema
 }
 
 func (x *rotateExpr) syntax() ast.Expr {
