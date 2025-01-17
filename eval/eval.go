@@ -512,8 +512,8 @@ func (e *evalContext) evaluateImport(myImports map[string]*value, decl *ast.Impo
 			return
 		}
 
-		// only rotate root environment
-		imp := newEvalContext(e.ctx, e.validating, name, env, dec, e.providers, nil, e.environments, e.imports, e.execContext, e.showSecrets, nil)
+		// we only want to rotate the root environment, so clear out rotatePaths when evaluating imports
+		imp := newEvalContext(e.ctx, e.validating, name, env, dec, e.providers, e.rotators, e.environments, e.imports, e.execContext, e.showSecrets, nil)
 		v, diags := imp.evaluate()
 		e.diags.Extend(diags...)
 
