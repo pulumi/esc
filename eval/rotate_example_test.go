@@ -49,7 +49,7 @@ values:
 	// rotate the environment
 	execContext, err := esc.NewExecContext(nil)
 	require.NoError(t, err)
-	_, patches, diags := RotateEnvironment(context.Background(), "<stdin>", env, rot128{}, testProviders{}, &testEnvironments{}, execContext, nil)
+	_, patches, diags := RotateEnvironment(context.Background(), "<stdin>", env, rot128{}, testProviders{}, &testEnvironments{}, execContext)
 	require.Len(t, diags, 0)
 
 	// writeback state patches

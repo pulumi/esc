@@ -269,9 +269,9 @@ func normalize[T any](t *testing.T, v T) T {
 
 func TestEval(t *testing.T) {
 	type testOverrides struct {
-		ShowSecrets     bool     `json:"showSecrets,omitempty"`
-		RootEnvironment string   `json:"rootEnvironment,omitempty"`
-		RotatePaths     []string `json:"rotatePaths,omitempty"`
+		ShowSecrets     bool   `json:"showSecrets,omitempty"`
+		RootEnvironment string `json:"rootEnvironment,omitempty"`
+		Rotate          bool   `json:"rotate,omitempty"`
 	}
 
 	type expectedData struct {
@@ -326,7 +326,7 @@ func TestEval(t *testing.T) {
 				environmentName = overrides.RootEnvironment
 			}
 			showSecrets := overrides.ShowSecrets
-			rotatePaths := overrides.RotatePaths
+			doRotate := overrides.Rotate
 
 			if accept() {
 				env, loadDiags, err := LoadYAMLBytes(environmentName, envBytes)
@@ -344,9 +344,9 @@ func TestEval(t *testing.T) {
 				var rotated *esc.Environment
 				var patches []*Patch
 				var rotateDiags syntax.Diagnostics
-				if rotatePaths != nil {
+				if doRotate {
 					rotated, patches, rotateDiags = RotateEnvironment(context.Background(), environmentName, env, rot128{}, testProviders{},
-						&testEnvironments{basePath}, execContext, rotatePaths)
+						&testEnvironments{basePath}, execContext)
 				}
 
 				var checkJSON any
@@ -414,9 +414,9 @@ func TestEval(t *testing.T) {
 			require.Equal(t, expected.EvalDiags, diags)
 
 			var rotated *esc.Environment
-			if rotatePaths != nil {
+			if doRotate {
 				rotated_, patches, diags := RotateEnvironment(context.Background(), environmentName, env, rot128{}, testProviders{},
-					&testEnvironments{basePath}, execContext, rotatePaths)
+					&testEnvironments{basePath}, execContext)
 
 				sortEnvironmentDiagnostics(diags)
 				require.Equal(t, expected.RotateDiags, diags)
