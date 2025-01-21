@@ -1013,6 +1013,7 @@ func (e *evalContext) evaluateBuiltinRotate(x *expr, repr *rotateExpr) *value {
 			e.errorf(repr.syntax(), "internal error: invalid schema (%v)", err)
 		} else {
 			x.schema = outputSchema
+			repr.stateSchema = outputSchema // state input schema == output schema
 		}
 	}
 	v.schema = x.schema
