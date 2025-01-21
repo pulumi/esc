@@ -139,20 +139,16 @@ func (testProvider) Open(ctx context.Context, inputs map[string]esc.Value, conte
 
 type swapRotator struct{}
 
-func (swapRotator) Schema() (*schema.Schema, *schema.Schema, *schema.Schema) {
+func (swapRotator) Schema() (*schema.Schema, *schema.Schema) {
 	inputSchema := schema.Always()
-	stateSchema := schema.Record(schema.BuilderMap{
-		"a": schema.String(),
-		"b": schema.String(),
-	}).Schema()
 	outputSchema := schema.Record(schema.BuilderMap{
 		"a": schema.String(),
 		"b": schema.String(),
 	}).Schema()
-	return inputSchema, stateSchema, outputSchema
+	return inputSchema, outputSchema
 }
 
-func (swapRotator) Open(ctx context.Context, inputs, state map[string]esc.Value, context esc.EnvExecContext) (esc.Value, error) {
+func (swapRotator) Open(ctx context.Context, state map[string]esc.Value, context esc.EnvExecContext) (esc.Value, error) {
 	return esc.NewValue(state), nil
 }
 
@@ -178,18 +174,10 @@ func (tp testProviders) LoadProvider(ctx context.Context, name string) (esc.Prov
 		return testProvider{}, nil
 	case "bench":
 		return benchProvider{delay: tp.benchDelay}, nil
-	}
-	return nil, fmt.Errorf("unknown provider %q", name)
-}
-
-type testRotators struct{}
-
-func (testRotators) LoadRotator(ctx context.Context, name string) (esc.Rotator, error) {
-	switch name {
 	case "swap":
 		return swapRotator{}, nil
 	}
-	return nil, fmt.Errorf("unknown rotator %q", name)
+	return nil, fmt.Errorf("unknown provider %q", name)
 }
 
 type testEnvironments struct {
@@ -346,11 +334,11 @@ func TestEval(t *testing.T) {
 				sortEnvironmentDiagnostics(loadDiags)
 
 				check, checkDiags := CheckEnvironment(context.Background(), environmentName, env, rot128{}, testProviders{},
-					testRotators{}, &testEnvironments{basePath}, execContext, showSecrets)
+					&testEnvironments{basePath}, execContext, showSecrets)
 				sortEnvironmentDiagnostics(checkDiags)
 
 				actual, evalDiags := EvalEnvironment(context.Background(), environmentName, env, rot128{}, testProviders{},
-					testRotators{}, &testEnvironments{basePath}, execContext)
+					&testEnvironments{basePath}, execContext)
 				sortEnvironmentDiagnostics(evalDiags)
 
 				var rotated *esc.Environment
@@ -358,7 +346,7 @@ func TestEval(t *testing.T) {
 				var rotateDiags syntax.Diagnostics
 				if rotatePaths != nil {
 					rotated, patches, rotateDiags = RotateEnvironment(context.Background(), environmentName, env, rot128{}, testProviders{},
-						testRotators{}, &testEnvironments{basePath}, execContext, rotatePaths)
+						&testEnvironments{basePath}, execContext, rotatePaths)
 				}
 
 				var checkJSON any
@@ -416,19 +404,19 @@ func TestEval(t *testing.T) {
 			require.Equal(t, expected.LoadDiags, diags)
 
 			check, diags := CheckEnvironment(context.Background(), environmentName, env, rot128{}, testProviders{},
-				&testRotators{}, &testEnvironments{basePath}, execContext, showSecrets)
+				&testEnvironments{basePath}, execContext, showSecrets)
 			sortEnvironmentDiagnostics(diags)
 			require.Equal(t, expected.CheckDiags, diags)
 
 			actual, diags := EvalEnvironment(context.Background(), environmentName, env, rot128{}, testProviders{},
-				&testRotators{}, &testEnvironments{basePath}, execContext)
+				&testEnvironments{basePath}, execContext)
 			sortEnvironmentDiagnostics(diags)
 			require.Equal(t, expected.EvalDiags, diags)
 
 			var rotated *esc.Environment
 			if rotatePaths != nil {
 				rotated_, patches, diags := RotateEnvironment(context.Background(), environmentName, env, rot128{}, testProviders{},
-					&testRotators{}, &testEnvironments{basePath}, execContext, rotatePaths)
+					&testEnvironments{basePath}, execContext, rotatePaths)
 
 				sortEnvironmentDiagnostics(diags)
 				require.Equal(t, expected.RotateDiags, diags)
@@ -510,7 +498,7 @@ func benchmarkEval(b *testing.B, openDelay, loadDelay time.Duration) {
 		require.Empty(b, loadDiags)
 
 		_, evalDiags := EvalEnvironment(context.Background(), environmentName, env, rot128{}, testProviders{benchDelay: openDelay},
-			testRotators{}, envs, execContext)
+			envs, execContext)
 		require.Empty(b, evalDiags)
 	}
 }

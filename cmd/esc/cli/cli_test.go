@@ -215,12 +215,6 @@ func (testProviders) LoadProvider(ctx context.Context, name string) (esc.Provide
 	return nil, fmt.Errorf("unknown provider %q", name)
 }
 
-type testRotators struct{}
-
-func (testRotators) LoadRotator(ctx context.Context, name string) (esc.Rotator, error) {
-	return nil, fmt.Errorf("unknown rotator %q", name)
-}
-
 type rot128 struct{}
 
 func (rot128) Encrypt(_ context.Context, plaintext []byte) ([]byte, error) {
@@ -401,7 +395,6 @@ func (c *testPulumiClient) checkEnvironment(ctx context.Context, orgName, envNam
 	}
 
 	providers := &testProviders{}
-	rotators := &testRotators{}
 	envLoader := &testEnvironments{orgName: orgName, environments: c.environments}
 
 	execContext, err := esc.NewExecContext(make(map[string]esc.Value))
@@ -414,7 +407,7 @@ func (c *testPulumiClient) checkEnvironment(ctx context.Context, orgName, envNam
 		showSecrets = opts[0].ShowSecrets
 	}
 
-	checked, checkDiags := eval.CheckEnvironment(ctx, envName, environment, rot128{}, providers, rotators, envLoader, execContext, showSecrets)
+	checked, checkDiags := eval.CheckEnvironment(ctx, envName, environment, rot128{}, providers, envLoader, execContext, showSecrets)
 	diags.Extend(checkDiags...)
 	return checked, mapDiags(diags), nil
 }
@@ -434,7 +427,6 @@ func (c *testPulumiClient) openEnvironment(ctx context.Context, orgName, name st
 	}
 
 	providers := &testProviders{}
-	rotators := &testRotators{}
 	envLoader := &testEnvironments{orgName: orgName, environments: c.environments}
 
 	execContext, err := esc.NewExecContext(make(map[string]esc.Value))
@@ -442,7 +434,7 @@ func (c *testPulumiClient) openEnvironment(ctx context.Context, orgName, name st
 		return "", nil, fmt.Errorf("initializing the ESC exec context: %w", err)
 	}
 
-	openEnv, evalDiags := eval.EvalEnvironment(ctx, name, decl, rot128{}, providers, rotators, envLoader, execContext)
+	openEnv, evalDiags := eval.EvalEnvironment(ctx, name, decl, rot128{}, providers, envLoader, execContext)
 	diags.Extend(evalDiags...)
 
 	if diags.HasErrors() {

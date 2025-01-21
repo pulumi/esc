@@ -7,5 +7,3 @@
 ### Bug Fixes
 
 ### Breaking changes
-
-- eval.CheckEnvironment and eval.EvalEnvironment now require an additional RotatorLoader param
