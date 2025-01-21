@@ -83,7 +83,7 @@ func EvalEnvironment(
 	environments EnvironmentLoader,
 	execContext *esc.ExecContext,
 ) (*esc.Environment, syntax.Diagnostics) {
-	opened, _, diags := evalEnvironment(ctx, false, name, env, decrypter, providers, environments, execContext, true, nil)
+	opened, _, diags := evalEnvironment(ctx, false, false, name, env, decrypter, providers, environments, execContext, true, nil)
 	return opened, diags
 }
 
@@ -99,7 +99,7 @@ func CheckEnvironment(
 	execContext *esc.ExecContext,
 	showSecrets bool,
 ) (*esc.Environment, syntax.Diagnostics) {
-	checked, _, diags := evalEnvironment(ctx, true, name, env, decrypter, providers, environments, execContext, showSecrets, nil)
+	checked, _, diags := evalEnvironment(ctx, true, false, name, env, decrypter, providers, environments, execContext, showSecrets, nil)
 	return checked, diags
 }
 
@@ -119,13 +119,14 @@ func RotateEnvironment(
 	for _, path := range paths {
 		rotatePaths[path] = true
 	}
-	return evalEnvironment(ctx, false, name, env, decrypter, providers, environments, execContext, true, rotatePaths)
+	return evalEnvironment(ctx, false, true, name, env, decrypter, providers, environments, execContext, true, rotatePaths)
 }
 
 // evalEnvironment evaluates an environment and exports the result of evaluation.
 func evalEnvironment(
 	ctx context.Context,
 	validating bool,
+	rotating bool,
 	name string,
 	env *ast.EnvironmentDecl,
 	decrypter Decrypter,
@@ -139,7 +140,7 @@ func evalEnvironment(
 		return nil, nil, nil
 	}
 
-	ec := newEvalContext(ctx, validating, name, env, decrypter, providers, envs, map[string]*imported{}, execContext, showSecrets, rotatePaths)
+	ec := newEvalContext(ctx, validating, rotating, name, env, decrypter, providers, envs, map[string]*imported{}, execContext, showSecrets, rotatePaths)
 	v, diags := ec.evaluate()
 
 	s := schema.Never().Schema()
@@ -173,6 +174,7 @@ type imported struct {
 type evalContext struct {
 	ctx          context.Context      // the cancellation context for evaluation
 	validating   bool                 // true if we are only checking the environment
+	rotating     bool                 // true if we are invoking rotators
 	showSecrets  bool                 // true if secrets should be decrypted during validation
 	name         string               // the name of the environment
 	env          *ast.EnvironmentDecl // the root of the environment AST
@@ -187,7 +189,7 @@ type evalContext struct {
 	root      *expr  // the root expression
 	base      *value // the base value
 
-	rotatePaths  map[string]bool // when non-nil, specifies providers to rotate. if empty, the full environment is rotated.
+	rotatePaths  map[string]bool // specifies paths to rotate. if empty, the full environment is rotated.
 	patchOutputs []*Patch        // updated rotation state to be written back to the environment definition
 
 	diags syntax.Diagnostics // diagnostics generated during evaluation
@@ -196,6 +198,7 @@ type evalContext struct {
 func newEvalContext(
 	ctx context.Context,
 	validating bool,
+	rotating bool,
 	name string,
 	env *ast.EnvironmentDecl,
 	decrypter Decrypter,
@@ -209,6 +212,7 @@ func newEvalContext(
 	return &evalContext{
 		ctx:          ctx,
 		validating:   validating,
+		rotating:     rotating,
 		showSecrets:  showSecrets,
 		name:         name,
 		env:          env,
@@ -499,8 +503,8 @@ func (e *evalContext) evaluateImport(myImports map[string]*value, decl *ast.Impo
 			return
 		}
 
-		// we only want to rotate the root environment, so clear out rotatePaths when evaluating imports
-		imp := newEvalContext(e.ctx, e.validating, name, env, dec, e.providers, e.environments, e.imports, e.execContext, e.showSecrets, nil)
+		// we only want to rotate the root environment, so set rotating flag to false when evaluating imports
+		imp := newEvalContext(e.ctx, e.validating, false, name, env, dec, e.providers, e.environments, e.imports, e.execContext, e.showSecrets, nil)
 		v, diags := imp.evaluate()
 		e.diags.Extend(diags...)
 
@@ -1021,7 +1025,7 @@ func (e *evalContext) evaluateBuiltinRotate(x *expr, repr *rotateExpr) *value {
 	}
 
 	// if rotating, invoke prior to open
-	if e.rotatePaths != nil && (len(e.rotatePaths) == 0 || e.rotatePaths[x.path]) {
+	if e.rotating && (len(e.rotatePaths) == 0 || e.rotatePaths[x.path]) {
 		newState, err := rotator.Rotate(
 			e.ctx,
 			inputs.export("").Value.(map[string]esc.Value),
