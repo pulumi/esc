@@ -106,7 +106,7 @@ func CheckEnvironment(
 }
 
 // RotateEnvironment evaluates the given environment and invokes provider rotate methods.
-// The updated rotation state is returned a set of patches to be written back to the environment.
+// The updated rotation state is returned with a set of patches to be written back to the environment.
 func RotateEnvironment(
 	ctx context.Context,
 	name string,
