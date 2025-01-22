@@ -174,10 +174,16 @@ func (tp testProviders) LoadProvider(ctx context.Context, name string) (esc.Prov
 		return testProvider{}, nil
 	case "bench":
 		return benchProvider{delay: tp.benchDelay}, nil
+	}
+	return nil, fmt.Errorf("unknown provider %q", name)
+}
+
+func (testProviders) LoadRotator(ctx context.Context, name string) (esc.Rotator, error) {
+	switch name {
 	case "swap":
 		return swapRotator{}, nil
 	}
-	return nil, fmt.Errorf("unknown provider %q", name)
+	return nil, fmt.Errorf("unknown rotator %q", name)
 }
 
 type testEnvironments struct {

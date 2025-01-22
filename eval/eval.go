@@ -37,6 +37,8 @@ import (
 type ProviderLoader interface {
 	// LoadProvider loads the provider with the given name.
 	LoadProvider(ctx context.Context, name string) (esc.Provider, error)
+	// LoadRotator loads the rotator with the given name.
+	LoadRotator(ctx context.Context, name string) (esc.Rotator, error)
 }
 
 // An EnvironmentLoader provides the environment evaluator the capability to load imported environment definitions.
@@ -967,18 +969,6 @@ func (e *evalContext) evaluateBuiltinOpen(x *expr, repr *openExpr) *value {
 	return unexport(output, x)
 }
 
-func loadRotator(ctx context.Context, providers ProviderLoader, name string) (esc.Rotator, error) {
-	provider, err := providers.LoadProvider(ctx, name)
-	if err != nil {
-		return nil, err
-	}
-	rotator, ok := provider.(esc.Rotator)
-	if !ok {
-		return nil, fmt.Errorf("provider is not a rotator")
-	}
-	return rotator, nil
-}
-
 // evaluateBuiltinOpen evaluates a call to the fn::rotate builtin.
 func (e *evalContext) evaluateBuiltinRotate(x *expr, repr *rotateExpr) *value {
 	v := &value{def: x}
@@ -990,7 +980,7 @@ func (e *evalContext) evaluateBuiltinRotate(x *expr, repr *rotateExpr) *value {
 		return v
 	}
 
-	rotator, err := loadRotator(e.ctx, e.providers, repr.node.Provider.GetValue())
+	rotator, err := e.providers.LoadRotator(e.ctx, repr.node.Provider.GetValue())
 	if err != nil {
 		e.errorf(repr.syntax(), "%v", err)
 	} else {
