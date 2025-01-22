@@ -27,9 +27,9 @@ type Patch struct {
 	Replacement esc.Value
 }
 
-// ApplyPatches applies a set of patches values to an environment definition.
+// ApplyValuePatches applies a set of patches values to an environment definition.
 // If patch values contain secret values, they will be wrapped with fn::secret.
-func ApplyPatches(source []byte, patches []*Patch) ([]byte, error) {
+func ApplyValuePatches(source []byte, patches []*Patch) ([]byte, error) {
 	var doc yaml.Node
 	if err := yaml.Unmarshal(source, &doc); err != nil {
 		return nil, err
