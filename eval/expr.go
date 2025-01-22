@@ -16,8 +16,6 @@ package eval
 
 import (
 	"fmt"
-	"maps"
-
 	"github.com/hashicorp/hcl/v2"
 	"github.com/pulumi/esc"
 	"github.com/pulumi/esc/ast"
@@ -225,18 +223,19 @@ func (x *expr) export(environment string) esc.Expr {
 				},
 			}
 		} else {
-			argMap := schema.SchemaMap{}
-			maps.Copy(argMap, repr.inputSchema.Properties)
-			argMap["state"] = repr.stateSchema
-
-			arg := repr.inputs.export(environment)
-			arg.Object["state"] = repr.state.export(environment)
-
 			ex.Builtin = &esc.BuiltinExpr{
 				Name:      name,
 				NameRange: convertRange(repr.node.Name().Syntax().Syntax().Range(), environment),
-				ArgSchema: schema.Record(argMap).Schema(),
-				Arg:       arg,
+				ArgSchema: schema.Record(schema.SchemaMap{
+					"inputs": repr.inputSchema,
+					"state":  repr.stateSchema,
+				}).Schema(),
+				Arg: esc.Expr{
+					Object: map[string]esc.Expr{
+						"inputs": repr.inputs.export(environment),
+						"state":  repr.state.export(environment),
+					},
+				},
 			}
 		}
 	case *secretExpr:

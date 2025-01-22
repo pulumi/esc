@@ -18,7 +18,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"reflect"
-	"slices"
 	"strings"
 
 	"github.com/hashicorp/hcl/v2"
@@ -784,30 +783,38 @@ func parseRotate(node *syntax.ObjectNode, name *StringExpr, args Expr) (Expr, sy
 
 func parseShortRotate(node *syntax.ObjectNode, name *StringExpr, args Expr) (Expr, syntax.Diagnostics) {
 	kvp := node.Index(0)
-	provider := StringSyntaxValue(name.Syntax().(*syntax.StringNode), strings.TrimPrefix(kvp.Key.Value(), "fn::rotate::"))
+	rotator := StringSyntaxValue(name.Syntax().(*syntax.StringNode), strings.TrimPrefix(kvp.Key.Value(), "fn::rotate::"))
 
-	inputs, ok := args.(*ObjectExpr)
+	obj, ok := args.(*ObjectExpr)
 	if !ok {
-		diags := syntax.Diagnostics{ExprError(args, "provider inputs must be an object")}
+		diags := syntax.Diagnostics{ExprError(args, "the argument to fn::rotate must be an object containing 'inputs' and 'state'")}
 		return RotateSyntax(node, name, args, nil, nil, nil), diags
 	}
 
-	// hoist 'state' key out of inputs
-	var stateExpr Expr
-	if i := slices.IndexFunc(inputs.Entries, func(kvp ObjectProperty) bool {
-		return kvp.Key.GetValue() == "state"
-	}); i != -1 {
-		stateExpr = inputs.Entries[i].Value
-		inputs.Entries = slices.Delete(inputs.Entries, i, i+1)
+	var inputs, stateExpr Expr
+	var diags syntax.Diagnostics
+
+	for i := 0; i < len(obj.Entries); i++ {
+		kvp := obj.Entries[i]
+		key := kvp.Key
+		switch key.GetValue() {
+		case "inputs":
+			inputs = kvp.Value
+		case "state":
+			stateExpr = kvp.Value
+		}
+	}
+
+	if inputs == nil {
+		diags.Extend(ExprError(obj, "missing rotator inputs ('inputs')"))
 	}
 
 	state, ok := stateExpr.(*ObjectExpr)
 	if !ok && state != nil {
-		diags := syntax.Diagnostics{ExprError(stateExpr, "rotation state must be an object literal")}
-		return RotateSyntax(node, name, args, nil, nil, nil), diags
+		diags.Extend(ExprError(stateExpr, "rotation state must be an object literal"))
 	}
 
-	return RotateSyntax(node, name, args, provider, inputs, state), nil
+	return RotateSyntax(node, name, args, rotator, inputs, state), nil
 }
 
 func parseJoin(node *syntax.ObjectNode, name *StringExpr, args Expr) (Expr, syntax.Diagnostics) {

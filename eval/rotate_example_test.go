@@ -16,12 +16,11 @@ package eval
 
 import (
 	"context"
+	"fmt"
 	"github.com/pulumi/esc"
-	"github.com/stretchr/testify/require"
-	"testing"
 )
 
-func TestExampleRotate(t *testing.T) {
+func ExampleRotate() {
 	const def = `
 values:
   a:
@@ -36,45 +35,45 @@ values:
     b:
     - c:
         fn::rotate::swap:
-          foo: bar
+          inputs:
+            foo: bar
           state:
             a: 
               fn::secret: a
             b: b
 `
-	env, diags, err := LoadYAMLBytes("<stdin>", []byte(def))
-	require.NoError(t, err)
-	require.Len(t, diags, 0)
+	env, _, _ := LoadYAMLBytes("<stdin>", []byte(def))
 
 	// rotate the environment
-	execContext, err := esc.NewExecContext(nil)
-	require.NoError(t, err)
-	_, patches, diags := RotateEnvironment(context.Background(), "<stdin>", env, rot128{}, testProviders{}, &testEnvironments{}, execContext)
-	require.Len(t, diags, 0)
+	execContext, _ := esc.NewExecContext(nil)
+	_, patches, _ := RotateEnvironment(context.Background(), "<stdin>", env, rot128{}, testProviders{}, &testEnvironments{}, execContext)
 
 	// writeback state patches
-	update, err := ApplyValuePatches([]byte(def), patches)
-	require.NoError(t, err)
+	updated, _ := ApplyValuePatches([]byte(def), patches)
 
-	encryptedYaml, err := EncryptSecrets(context.Background(), "<stdin>", update, rot128{})
-	require.NoError(t, err)
+	// encrypt secret values
+	encryptedYaml, _ := EncryptSecrets(context.Background(), "<stdin>", updated, rot128{})
 
-	t.Log(string(encryptedYaml))
-	//	    values:
-	//          a:
-	//            a:
-	//              fn::rotate:
-	//                rotator: swap
-	//                inputs:
-	//                  state:
-	//                    a: b
-	//                    b: a
-	//            b:
-	//              - c:
-	//                  fn::rotate::swap:
-	//                    state:
-	//                      a: b
-	//                      b:
-	//                        fn::secret:
-	//                          ciphertext: ZXNjeAAAAAHhQRt8TQ==
+	fmt.Println(string(encryptedYaml))
+	// Output:
+	// values:
+	//   a:
+	//     a:
+	//       fn::rotate:
+	//         rotator: swap
+	//         inputs:
+	//           foo: bar
+	//         state:
+	//           a: b
+	//           b: a
+	//     b:
+	//       - c:
+	//           fn::rotate::swap:
+	//             inputs:
+	//               foo: bar
+	//             state:
+	//               a: b
+	//               b:
+	//                 fn::secret:
+	//                   ciphertext: ZXNjeAAAAAHhQRt8TQ==
 }
