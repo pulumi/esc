@@ -984,17 +984,21 @@ func (e *evalContext) evaluateBuiltinRotate(x *expr, repr *rotateExpr) *value {
 	if err != nil {
 		e.errorf(repr.syntax(), "%v", err)
 	} else {
-		inputSchema, outputSchema := rotator.Schema()
+		inputSchema, stateSchema, outputSchema := rotator.Schema()
 		if err := inputSchema.Compile(); err != nil {
 			e.errorf(repr.syntax(), "internal error: invalid input schema (%v)", err)
 		} else {
 			repr.inputSchema = inputSchema
 		}
+		if err := stateSchema.Compile(); err != nil {
+			e.errorf(repr.syntax(), "internal error: invalid state schema (%v)", err)
+		} else {
+			repr.stateSchema = stateSchema
+		}
 		if err := outputSchema.Compile(); err != nil {
 			e.errorf(repr.syntax(), "internal error: invalid schema (%v)", err)
 		} else {
 			x.schema = outputSchema
-			repr.stateSchema = outputSchema // state input schema == output schema
 		}
 	}
 	v.schema = x.schema
@@ -1019,7 +1023,7 @@ func (e *evalContext) evaluateBuiltinRotate(x *expr, repr *rotateExpr) *value {
 			return v
 		}
 
-		// todo: validate newState conforms to output schema
+		// todo: validate newState conforms to state schema
 
 		e.patchOutputs = append(e.patchOutputs, &Patch{
 			// rotation output is written back to the fn's `state` input
@@ -1033,6 +1037,7 @@ func (e *evalContext) evaluateBuiltinRotate(x *expr, repr *rotateExpr) *value {
 
 	output, err := rotator.Open(
 		e.ctx,
+		inputs.export("").Value.(map[string]esc.Value),
 		state.export("").Value.(map[string]esc.Value),
 		e.execContext,
 	)

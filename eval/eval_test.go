@@ -139,16 +139,20 @@ func (testProvider) Open(ctx context.Context, inputs map[string]esc.Value, conte
 
 type swapRotator struct{}
 
-func (swapRotator) Schema() (*schema.Schema, *schema.Schema) {
+func (swapRotator) Schema() (*schema.Schema, *schema.Schema, *schema.Schema) {
 	inputSchema := schema.Always()
+	stateSchema := schema.Record(schema.BuilderMap{
+		"a": schema.String(),
+		"b": schema.String(),
+	}).Schema()
 	outputSchema := schema.Record(schema.BuilderMap{
 		"a": schema.String(),
 		"b": schema.String(),
 	}).Schema()
-	return inputSchema, outputSchema
+	return inputSchema, stateSchema, outputSchema
 }
 
-func (swapRotator) Open(ctx context.Context, state map[string]esc.Value, context esc.EnvExecContext) (esc.Value, error) {
+func (swapRotator) Open(ctx context.Context, inputs, state map[string]esc.Value, context esc.EnvExecContext) (esc.Value, error) {
 	return esc.NewValue(state), nil
 }
 
