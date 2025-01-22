@@ -53,11 +53,11 @@ var testProviderSchema = schema.Object().
 
 type testProvider struct{}
 
-func (testProvider) Schema() (*schema.Schema, *schema.Schema) {
-	return testProviderSchema, schema.Always()
+func (testProvider) Schema() (*schema.Schema, *schema.Schema, *schema.Schema) {
+	return testProviderSchema, nil, schema.Always()
 }
 
-func (testProvider) Open(ctx context.Context, inputs map[string]esc.Value, context esc.EnvExecContext) (esc.Value, error) {
+func (testProvider) Open(ctx context.Context, inputs, state map[string]esc.Value, executionContext esc.EnvExecContext) (esc.Value, error) {
 	return esc.NewValue(inputs), nil
 }
 

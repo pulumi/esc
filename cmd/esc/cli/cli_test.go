@@ -198,11 +198,11 @@ func (w *testPulumiWorkspace) GetAccount(key string) (workspace.Account, error) 
 
 type testProvider struct{}
 
-func (testProvider) Schema() (*schema.Schema, *schema.Schema) {
-	return schema.Always(), schema.Always()
+func (testProvider) Schema() (*schema.Schema, *schema.Schema, *schema.Schema) {
+	return schema.Always(), nil, schema.Always()
 }
 
-func (testProvider) Open(ctx context.Context, inputs map[string]esc.Value, context esc.EnvExecContext) (esc.Value, error) {
+func (testProvider) Open(ctx context.Context, inputs, state map[string]esc.Value, executionContext esc.EnvExecContext) (esc.Value, error) {
 	return esc.NewValue(inputs), nil
 }
 

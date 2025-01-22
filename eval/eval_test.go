@@ -43,17 +43,17 @@ func accept() bool {
 
 type errorProvider struct{}
 
-func (errorProvider) Schema() (*schema.Schema, *schema.Schema) {
-	return schema.Record(schema.BuilderMap{"why": schema.String()}).Schema(), schema.Always()
+func (errorProvider) Schema() (*schema.Schema, *schema.Schema, *schema.Schema) {
+	return schema.Record(schema.BuilderMap{"why": schema.String()}).Schema(), nil, schema.Always()
 }
 
-func (errorProvider) Open(ctx context.Context, inputs map[string]esc.Value, context esc.EnvExecContext) (esc.Value, error) {
+func (errorProvider) Open(ctx context.Context, inputs, state map[string]esc.Value, executionContext esc.EnvExecContext) (esc.Value, error) {
 	return esc.Value{}, errors.New(inputs["why"].Value.(string))
 }
 
 type testSchemaProvider struct{}
 
-func (testSchemaProvider) Schema() (*schema.Schema, *schema.Schema) {
+func (testSchemaProvider) Schema() (*schema.Schema, *schema.Schema, *schema.Schema) {
 	s := schema.Object().
 		Defs(schema.BuilderMap{
 			"defRecord": schema.Record(schema.BuilderMap{
@@ -107,10 +107,10 @@ func (testSchemaProvider) Schema() (*schema.Schema, *schema.Schema) {
 		}).
 		Schema()
 
-	return s, s
+	return s, nil, s
 }
 
-func (testSchemaProvider) Open(ctx context.Context, inputs map[string]esc.Value, context esc.EnvExecContext) (esc.Value, error) {
+func (testSchemaProvider) Open(ctx context.Context, inputs, state map[string]esc.Value, executionContext esc.EnvExecContext) (esc.Value, error) {
 	return esc.NewValue(inputs), nil
 }
 
@@ -118,37 +118,41 @@ type benchProvider struct {
 	delay time.Duration
 }
 
-func (benchProvider) Schema() (*schema.Schema, *schema.Schema) {
-	return schema.Always(), schema.Always()
+func (benchProvider) Schema() (*schema.Schema, *schema.Schema, *schema.Schema) {
+	return schema.Always(), nil, schema.Always()
 }
 
-func (p benchProvider) Open(ctx context.Context, inputs map[string]esc.Value, context esc.EnvExecContext) (esc.Value, error) {
+func (p benchProvider) Open(ctx context.Context, inputs, state map[string]esc.Value, executionContext esc.EnvExecContext) (esc.Value, error) {
 	time.Sleep(p.delay)
 	return esc.NewValue(p.delay.String()), nil
 }
 
 type testProvider struct{}
 
-func (testProvider) Schema() (*schema.Schema, *schema.Schema) {
-	return schema.Always(), schema.Always()
+func (testProvider) Schema() (*schema.Schema, *schema.Schema, *schema.Schema) {
+	return schema.Always(), nil, schema.Always()
 }
 
-func (testProvider) Open(ctx context.Context, inputs map[string]esc.Value, context esc.EnvExecContext) (esc.Value, error) {
+func (testProvider) Open(ctx context.Context, inputs, state map[string]esc.Value, executionContext esc.EnvExecContext) (esc.Value, error) {
 	return esc.NewValue(inputs), nil
 }
 
 type swapRotator struct{}
 
-func (swapRotator) Schema() (*schema.Schema, *schema.Schema) {
+func (swapRotator) Schema() (*schema.Schema, *schema.Schema, *schema.Schema) {
 	inputSchema := schema.Always()
+	stateSchema := schema.Record(schema.BuilderMap{
+		"a": schema.String(),
+		"b": schema.String(),
+	}).Schema()
 	outputSchema := schema.Record(schema.BuilderMap{
 		"a": schema.String(),
 		"b": schema.String(),
 	}).Schema()
-	return inputSchema, outputSchema
+	return inputSchema, stateSchema, outputSchema
 }
 
-func (swapRotator) Open(ctx context.Context, state map[string]esc.Value, context esc.EnvExecContext) (esc.Value, error) {
+func (swapRotator) Open(ctx context.Context, inputs, state map[string]esc.Value, executionContext esc.EnvExecContext) (esc.Value, error) {
 	return esc.NewValue(state), nil
 }
 
