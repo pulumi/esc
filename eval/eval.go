@@ -329,7 +329,7 @@ func declare[Expr exprNode](e *evalContext, path string, x Expr, base *value) *e
 	case *ast.RotateExpr:
 		repr := &rotateExpr{
 			node:        x,
-			provider:    declare(e, "", x.Provider, nil),
+			rotator:     declare(e, "", x.Rotator, nil),
 			inputs:      declare(e, "", x.Inputs, nil),
 			state:       declare(e, "", x.State, nil),
 			inputSchema: schema.Always().Schema(),
@@ -974,13 +974,13 @@ func (e *evalContext) evaluateBuiltinRotate(x *expr, repr *rotateExpr) *value {
 	v := &value{def: x}
 
 	// Can happen if there are parse errors.
-	if repr.node.Provider == nil {
+	if repr.node.Rotator == nil {
 		v.schema = schema.Always()
 		v.unknown = true
 		return v
 	}
 
-	rotator, err := e.providers.LoadRotator(e.ctx, repr.node.Provider.GetValue())
+	rotator, err := e.providers.LoadRotator(e.ctx, repr.node.Rotator.GetValue())
 	if err != nil {
 		e.errorf(repr.syntax(), "%v", err)
 	} else {

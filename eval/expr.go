@@ -212,15 +212,15 @@ func (x *expr) export(environment string) esc.Expr {
 				Name:      name,
 				NameRange: convertRange(repr.node.Name().Syntax().Syntax().Range(), environment),
 				ArgSchema: schema.Record(schema.SchemaMap{
-					"provider": schema.String().Schema(),
-					"inputs":   repr.inputSchema,
-					"state":    repr.stateSchema,
+					"rotator": schema.String().Schema(),
+					"inputs":  repr.inputSchema,
+					"state":   repr.stateSchema,
 				}).Schema(),
 				Arg: esc.Expr{
 					Object: map[string]esc.Expr{
-						"provider": repr.provider.export(environment),
-						"inputs":   repr.inputs.export(environment),
-						"state":    repr.state.export(environment),
+						"rotator": repr.rotator.export(environment),
+						"inputs":  repr.inputs.export(environment),
+						"state":   repr.state.export(environment),
 					},
 				},
 			}
@@ -410,9 +410,9 @@ func (x *openExpr) syntax() ast.Expr {
 type rotateExpr struct {
 	node *ast.RotateExpr
 
-	provider *expr
-	inputs   *expr
-	state    *expr
+	rotator *expr
+	inputs  *expr
+	state   *expr
 
 	inputSchema *schema.Schema
 	stateSchema *schema.Schema
