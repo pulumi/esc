@@ -1016,6 +1016,7 @@ func (e *evalContext) evaluateBuiltinRotate(x *expr, repr *rotateExpr) *value {
 			e.ctx,
 			inputs.export("").Value.(map[string]esc.Value),
 			state.export("").Value.(map[string]esc.Value),
+			e.execContext,
 		)
 		if err != nil {
 			e.errorf(repr.syntax(), "rotate: %s", err.Error())

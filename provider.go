@@ -40,5 +40,5 @@ type Rotator interface {
 	Open(ctx context.Context, inputs, state map[string]Value, executionContext EnvExecContext) (Value, error)
 
 	// Rotate rotates the provider's secret, and returns the rotator's new state to be persisted.
-	Rotate(ctx context.Context, inputs, state map[string]Value) (Value, error)
+	Rotate(ctx context.Context, inputs, state map[string]Value, executionContext EnvExecContext) (Value, error)
 }

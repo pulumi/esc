@@ -156,7 +156,7 @@ func (swapRotator) Open(ctx context.Context, inputs, state map[string]esc.Value,
 	return esc.NewValue(state), nil
 }
 
-func (swapRotator) Rotate(ctx context.Context, inputs, state map[string]esc.Value) (esc.Value, error) {
+func (swapRotator) Rotate(ctx context.Context, inputs, state map[string]esc.Value, context esc.EnvExecContext) (esc.Value, error) {
 	newState := esc.NewValue(map[string]esc.Value{
 		"a": state["b"],
 		"b": state["a"],
