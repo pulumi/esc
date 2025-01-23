@@ -31,7 +31,7 @@ type Provider interface {
 }
 
 // A Rotator enables environments to rotate a secret.
-// Rotators persist internal state by writing back to the environment.
+// It is the responsibility of the caller to appropriately persist rotation state (e.g. by writing it back to the environment definition).
 type Rotator interface {
 	// Schema returns the rotator's input, state, and output schemata.
 	Schema() (inputs, state, outputs *schema.Schema)
