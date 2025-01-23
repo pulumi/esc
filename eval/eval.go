@@ -1028,7 +1028,7 @@ func (e *evalContext) evaluateBuiltinRotate(x *expr, repr *rotateExpr) *value {
 
 		e.patchOutputs = append(e.patchOutputs, &Patch{
 			// rotation output is written back to the fn's `state` input
-			DocPath:     x.path + "." + repr.node.Name().GetValue() + ".state",
+			DocPath:     util.JoinKey(x.path, repr.node.Name().GetValue()) + ".state",
 			Replacement: newState,
 		})
 
