@@ -12,7 +12,7 @@
                     "end": {
                         "line": 8,
                         "column": 16,
-                        "byte": 113
+                        "byte": 114
                     }
                 },
                 "schema": {
@@ -48,7 +48,7 @@
                     "argSchema": {
                         "properties": {
                             "inputs": true,
-                            "rotator": {
+                            "provider": {
                                 "type": "string"
                             },
                             "state": {
@@ -70,7 +70,7 @@
                         "type": "object",
                         "required": [
                             "inputs",
-                            "rotator",
+                            "provider",
                             "state"
                         ]
                     },
@@ -94,30 +94,30 @@
                                     "begin": {
                                         "line": 5,
                                         "column": 15,
-                                        "byte": 66
+                                        "byte": 67
                                     },
                                     "end": {
                                         "line": 5,
                                         "column": 15,
-                                        "byte": 66
+                                        "byte": 67
                                     }
                                 },
                                 "schema": {
                                     "type": "object"
                                 }
                             },
-                            "rotator": {
+                            "provider": {
                                 "range": {
                                     "environment": "rotate",
                                     "begin": {
                                         "line": 4,
-                                        "column": 16,
-                                        "byte": 47
+                                        "column": 17,
+                                        "byte": 48
                                     },
                                     "end": {
                                         "line": 4,
-                                        "column": 20,
-                                        "byte": 51
+                                        "column": 21,
+                                        "byte": 52
                                     }
                                 },
                                 "schema": {
@@ -132,12 +132,12 @@
                                     "begin": {
                                         "line": 7,
                                         "column": 9,
-                                        "byte": 90
+                                        "byte": 91
                                     },
                                     "end": {
                                         "line": 8,
                                         "column": 16,
-                                        "byte": 113
+                                        "byte": 114
                                     }
                                 },
                                 "schema": {
@@ -163,12 +163,12 @@
                                         "begin": {
                                             "line": 7,
                                             "column": 9,
-                                            "byte": 90
+                                            "byte": 91
                                         },
                                         "end": {
                                             "line": 7,
                                             "column": 10,
-                                            "byte": 91
+                                            "byte": 92
                                         }
                                     },
                                     "b": {
@@ -176,12 +176,12 @@
                                         "begin": {
                                             "line": 8,
                                             "column": 9,
-                                            "byte": 106
+                                            "byte": 107
                                         },
                                         "end": {
                                             "line": 8,
                                             "column": 10,
-                                            "byte": 107
+                                            "byte": 108
                                         }
                                     }
                                 },
@@ -192,12 +192,12 @@
                                             "begin": {
                                                 "line": 7,
                                                 "column": 12,
-                                                "byte": 93
+                                                "byte": 94
                                             },
                                             "end": {
                                                 "line": 7,
                                                 "column": 16,
-                                                "byte": 97
+                                                "byte": 98
                                             }
                                         },
                                         "schema": {
@@ -212,12 +212,12 @@
                                             "begin": {
                                                 "line": 8,
                                                 "column": 12,
-                                                "byte": 109
+                                                "byte": 110
                                             },
                                             "end": {
                                                 "line": 8,
                                                 "column": 16,
-                                                "byte": 113
+                                                "byte": 114
                                             }
                                         },
                                         "schema": {
@@ -318,7 +318,7 @@
                                             "end": {
                                                 "line": 8,
                                                 "column": 16,
-                                                "byte": 113
+                                                "byte": 114
                                             }
                                         }
                                     },
@@ -376,12 +376,12 @@
                                             "begin": {
                                                 "line": 10,
                                                 "column": 5,
-                                                "byte": 127
+                                                "byte": 128
                                             },
                                             "end": {
                                                 "line": 14,
                                                 "column": 16,
-                                                "byte": 206
+                                                "byte": 207
                                             }
                                         }
                                     },
@@ -426,12 +426,12 @@
                     "begin": {
                         "line": 10,
                         "column": 5,
-                        "byte": 127
+                        "byte": 128
                     },
                     "end": {
                         "line": 14,
                         "column": 16,
-                        "byte": 206
+                        "byte": 207
                     }
                 },
                 "schema": {
@@ -456,12 +456,12 @@
                         "begin": {
                             "line": 10,
                             "column": 5,
-                            "byte": 127
+                            "byte": 128
                         },
                         "end": {
                             "line": 10,
                             "column": 21,
-                            "byte": 143
+                            "byte": 144
                         }
                     },
                     "argSchema": {
@@ -509,12 +509,12 @@
                                     "begin": {
                                         "line": 11,
                                         "column": 15,
-                                        "byte": 159
+                                        "byte": 160
                                     },
                                     "end": {
                                         "line": 11,
                                         "column": 15,
-                                        "byte": 159
+                                        "byte": 160
                                     }
                                 },
                                 "schema": {
@@ -527,12 +527,12 @@
                                     "begin": {
                                         "line": 13,
                                         "column": 9,
-                                        "byte": 183
+                                        "byte": 184
                                     },
                                     "end": {
                                         "line": 14,
                                         "column": 16,
-                                        "byte": 206
+                                        "byte": 207
                                     }
                                 },
                                 "schema": {
@@ -558,12 +558,12 @@
                                         "begin": {
                                             "line": 13,
                                             "column": 9,
-                                            "byte": 183
+                                            "byte": 184
                                         },
                                         "end": {
                                             "line": 13,
                                             "column": 10,
-                                            "byte": 184
+                                            "byte": 185
                                         }
                                     },
                                     "b": {
@@ -571,12 +571,12 @@
                                         "begin": {
                                             "line": 14,
                                             "column": 9,
-                                            "byte": 199
+                                            "byte": 200
                                         },
                                         "end": {
                                             "line": 14,
                                             "column": 10,
-                                            "byte": 200
+                                            "byte": 201
                                         }
                                     }
                                 },
@@ -587,12 +587,12 @@
                                             "begin": {
                                                 "line": 13,
                                                 "column": 12,
-                                                "byte": 186
+                                                "byte": 187
                                             },
                                             "end": {
                                                 "line": 13,
                                                 "column": 16,
-                                                "byte": 190
+                                                "byte": 191
                                             }
                                         },
                                         "schema": {
@@ -607,12 +607,12 @@
                                             "begin": {
                                                 "line": 14,
                                                 "column": 12,
-                                                "byte": 202
+                                                "byte": 203
                                             },
                                             "end": {
                                                 "line": 14,
                                                 "column": 16,
-                                                "byte": 206
+                                                "byte": 207
                                             }
                                         },
                                         "schema": {
@@ -642,7 +642,7 @@
                         "end": {
                             "line": 8,
                             "column": 16,
-                            "byte": 113
+                            "byte": 114
                         }
                     }
                 }
@@ -693,12 +693,12 @@
                         "begin": {
                             "line": 10,
                             "column": 5,
-                            "byte": 127
+                            "byte": 128
                         },
                         "end": {
                             "line": 14,
                             "column": 16,
-                            "byte": 206
+                            "byte": 207
                         }
                     }
                 }
@@ -964,7 +964,7 @@
                     "end": {
                         "line": 8,
                         "column": 16,
-                        "byte": 113
+                        "byte": 114
                     }
                 },
                 "schema": {
@@ -1002,7 +1002,7 @@
                     "argSchema": {
                         "properties": {
                             "inputs": true,
-                            "rotator": {
+                            "provider": {
                                 "type": "string"
                             },
                             "state": {
@@ -1024,7 +1024,7 @@
                         "type": "object",
                         "required": [
                             "inputs",
-                            "rotator",
+                            "provider",
                             "state"
                         ]
                     },
@@ -1048,30 +1048,30 @@
                                     "begin": {
                                         "line": 5,
                                         "column": 15,
-                                        "byte": 66
+                                        "byte": 67
                                     },
                                     "end": {
                                         "line": 5,
                                         "column": 15,
-                                        "byte": 66
+                                        "byte": 67
                                     }
                                 },
                                 "schema": {
                                     "type": "object"
                                 }
                             },
-                            "rotator": {
+                            "provider": {
                                 "range": {
                                     "environment": "rotate",
                                     "begin": {
                                         "line": 4,
-                                        "column": 16,
-                                        "byte": 47
+                                        "column": 17,
+                                        "byte": 48
                                     },
                                     "end": {
                                         "line": 4,
-                                        "column": 20,
-                                        "byte": 51
+                                        "column": 21,
+                                        "byte": 52
                                     }
                                 },
                                 "schema": {
@@ -1086,12 +1086,12 @@
                                     "begin": {
                                         "line": 7,
                                         "column": 9,
-                                        "byte": 90
+                                        "byte": 91
                                     },
                                     "end": {
                                         "line": 8,
                                         "column": 16,
-                                        "byte": 113
+                                        "byte": 114
                                     }
                                 },
                                 "schema": {
@@ -1117,12 +1117,12 @@
                                         "begin": {
                                             "line": 7,
                                             "column": 9,
-                                            "byte": 90
+                                            "byte": 91
                                         },
                                         "end": {
                                             "line": 7,
                                             "column": 10,
-                                            "byte": 91
+                                            "byte": 92
                                         }
                                     },
                                     "b": {
@@ -1130,12 +1130,12 @@
                                         "begin": {
                                             "line": 8,
                                             "column": 9,
-                                            "byte": 106
+                                            "byte": 107
                                         },
                                         "end": {
                                             "line": 8,
                                             "column": 10,
-                                            "byte": 107
+                                            "byte": 108
                                         }
                                     }
                                 },
@@ -1146,12 +1146,12 @@
                                             "begin": {
                                                 "line": 7,
                                                 "column": 12,
-                                                "byte": 93
+                                                "byte": 94
                                             },
                                             "end": {
                                                 "line": 7,
                                                 "column": 16,
-                                                "byte": 97
+                                                "byte": 98
                                             }
                                         },
                                         "schema": {
@@ -1166,12 +1166,12 @@
                                             "begin": {
                                                 "line": 8,
                                                 "column": 12,
-                                                "byte": 109
+                                                "byte": 110
                                             },
                                             "end": {
                                                 "line": 8,
                                                 "column": 16,
-                                                "byte": 113
+                                                "byte": 114
                                             }
                                         },
                                         "schema": {
@@ -1272,7 +1272,7 @@
                                             "end": {
                                                 "line": 8,
                                                 "column": 16,
-                                                "byte": 113
+                                                "byte": 114
                                             }
                                         }
                                     },
@@ -1301,7 +1301,7 @@
                                             "end": {
                                                 "line": 8,
                                                 "column": 16,
-                                                "byte": 113
+                                                "byte": 114
                                             }
                                         }
                                     }
@@ -1330,12 +1330,12 @@
                                             "begin": {
                                                 "line": 10,
                                                 "column": 5,
-                                                "byte": 127
+                                                "byte": 128
                                             },
                                             "end": {
                                                 "line": 14,
                                                 "column": 16,
-                                                "byte": 206
+                                                "byte": 207
                                             }
                                         }
                                     },
@@ -1359,12 +1359,12 @@
                                             "begin": {
                                                 "line": 10,
                                                 "column": 5,
-                                                "byte": 127
+                                                "byte": 128
                                             },
                                             "end": {
                                                 "line": 14,
                                                 "column": 16,
-                                                "byte": 206
+                                                "byte": 207
                                             }
                                         }
                                     }
@@ -1380,12 +1380,12 @@
                     "begin": {
                         "line": 10,
                         "column": 5,
-                        "byte": 127
+                        "byte": 128
                     },
                     "end": {
                         "line": 14,
                         "column": 16,
-                        "byte": 206
+                        "byte": 207
                     }
                 },
                 "schema": {
@@ -1412,12 +1412,12 @@
                         "begin": {
                             "line": 10,
                             "column": 5,
-                            "byte": 127
+                            "byte": 128
                         },
                         "end": {
                             "line": 10,
                             "column": 21,
-                            "byte": 143
+                            "byte": 144
                         }
                     },
                     "argSchema": {
@@ -1465,12 +1465,12 @@
                                     "begin": {
                                         "line": 11,
                                         "column": 15,
-                                        "byte": 159
+                                        "byte": 160
                                     },
                                     "end": {
                                         "line": 11,
                                         "column": 15,
-                                        "byte": 159
+                                        "byte": 160
                                     }
                                 },
                                 "schema": {
@@ -1483,12 +1483,12 @@
                                     "begin": {
                                         "line": 13,
                                         "column": 9,
-                                        "byte": 183
+                                        "byte": 184
                                     },
                                     "end": {
                                         "line": 14,
                                         "column": 16,
-                                        "byte": 206
+                                        "byte": 207
                                     }
                                 },
                                 "schema": {
@@ -1514,12 +1514,12 @@
                                         "begin": {
                                             "line": 13,
                                             "column": 9,
-                                            "byte": 183
+                                            "byte": 184
                                         },
                                         "end": {
                                             "line": 13,
                                             "column": 10,
-                                            "byte": 184
+                                            "byte": 185
                                         }
                                     },
                                     "b": {
@@ -1527,12 +1527,12 @@
                                         "begin": {
                                             "line": 14,
                                             "column": 9,
-                                            "byte": 199
+                                            "byte": 200
                                         },
                                         "end": {
                                             "line": 14,
                                             "column": 10,
-                                            "byte": 200
+                                            "byte": 201
                                         }
                                     }
                                 },
@@ -1543,12 +1543,12 @@
                                             "begin": {
                                                 "line": 13,
                                                 "column": 12,
-                                                "byte": 186
+                                                "byte": 187
                                             },
                                             "end": {
                                                 "line": 13,
                                                 "column": 16,
-                                                "byte": 190
+                                                "byte": 191
                                             }
                                         },
                                         "schema": {
@@ -1563,12 +1563,12 @@
                                             "begin": {
                                                 "line": 14,
                                                 "column": 12,
-                                                "byte": 202
+                                                "byte": 203
                                             },
                                             "end": {
                                                 "line": 14,
                                                 "column": 16,
-                                                "byte": 206
+                                                "byte": 207
                                             }
                                         },
                                         "schema": {
@@ -1600,7 +1600,7 @@
                                 "end": {
                                     "line": 8,
                                     "column": 16,
-                                    "byte": 113
+                                    "byte": 114
                                 }
                             }
                         }
@@ -1618,7 +1618,7 @@
                                 "end": {
                                     "line": 8,
                                     "column": 16,
-                                    "byte": 113
+                                    "byte": 114
                                 }
                             }
                         }
@@ -1635,7 +1635,7 @@
                         "end": {
                             "line": 8,
                             "column": 16,
-                            "byte": 113
+                            "byte": 114
                         }
                     }
                 }
@@ -1687,12 +1687,12 @@
                                 "begin": {
                                     "line": 10,
                                     "column": 5,
-                                    "byte": 127
+                                    "byte": 128
                                 },
                                 "end": {
                                     "line": 14,
                                     "column": 16,
-                                    "byte": 206
+                                    "byte": 207
                                 }
                             }
                         }
@@ -1705,12 +1705,12 @@
                                 "begin": {
                                     "line": 10,
                                     "column": 5,
-                                    "byte": 127
+                                    "byte": 128
                                 },
                                 "end": {
                                     "line": 14,
                                     "column": 16,
-                                    "byte": 206
+                                    "byte": 207
                                 }
                             }
                         }
@@ -1722,12 +1722,12 @@
                         "begin": {
                             "line": 10,
                             "column": 5,
-                            "byte": 127
+                            "byte": 128
                         },
                         "end": {
                             "line": 14,
                             "column": 16,
-                            "byte": 206
+                            "byte": 207
                         }
                     }
                 }
@@ -2016,7 +2016,7 @@
                     "end": {
                         "line": 8,
                         "column": 16,
-                        "byte": 113
+                        "byte": 114
                     }
                 },
                 "schema": {
@@ -2054,7 +2054,7 @@
                     "argSchema": {
                         "properties": {
                             "inputs": true,
-                            "rotator": {
+                            "provider": {
                                 "type": "string"
                             },
                             "state": {
@@ -2076,7 +2076,7 @@
                         "type": "object",
                         "required": [
                             "inputs",
-                            "rotator",
+                            "provider",
                             "state"
                         ]
                     },
@@ -2100,30 +2100,30 @@
                                     "begin": {
                                         "line": 5,
                                         "column": 15,
-                                        "byte": 66
+                                        "byte": 67
                                     },
                                     "end": {
                                         "line": 5,
                                         "column": 15,
-                                        "byte": 66
+                                        "byte": 67
                                     }
                                 },
                                 "schema": {
                                     "type": "object"
                                 }
                             },
-                            "rotator": {
+                            "provider": {
                                 "range": {
                                     "environment": "rotate",
                                     "begin": {
                                         "line": 4,
-                                        "column": 16,
-                                        "byte": 47
+                                        "column": 17,
+                                        "byte": 48
                                     },
                                     "end": {
                                         "line": 4,
-                                        "column": 20,
-                                        "byte": 51
+                                        "column": 21,
+                                        "byte": 52
                                     }
                                 },
                                 "schema": {
@@ -2138,12 +2138,12 @@
                                     "begin": {
                                         "line": 7,
                                         "column": 9,
-                                        "byte": 90
+                                        "byte": 91
                                     },
                                     "end": {
                                         "line": 8,
                                         "column": 16,
-                                        "byte": 113
+                                        "byte": 114
                                     }
                                 },
                                 "schema": {
@@ -2169,12 +2169,12 @@
                                         "begin": {
                                             "line": 7,
                                             "column": 9,
-                                            "byte": 90
+                                            "byte": 91
                                         },
                                         "end": {
                                             "line": 7,
                                             "column": 10,
-                                            "byte": 91
+                                            "byte": 92
                                         }
                                     },
                                     "b": {
@@ -2182,12 +2182,12 @@
                                         "begin": {
                                             "line": 8,
                                             "column": 9,
-                                            "byte": 106
+                                            "byte": 107
                                         },
                                         "end": {
                                             "line": 8,
                                             "column": 10,
-                                            "byte": 107
+                                            "byte": 108
                                         }
                                     }
                                 },
@@ -2198,12 +2198,12 @@
                                             "begin": {
                                                 "line": 7,
                                                 "column": 12,
-                                                "byte": 93
+                                                "byte": 94
                                             },
                                             "end": {
                                                 "line": 7,
                                                 "column": 16,
-                                                "byte": 97
+                                                "byte": 98
                                             }
                                         },
                                         "schema": {
@@ -2218,12 +2218,12 @@
                                             "begin": {
                                                 "line": 8,
                                                 "column": 12,
-                                                "byte": 109
+                                                "byte": 110
                                             },
                                             "end": {
                                                 "line": 8,
                                                 "column": 16,
-                                                "byte": 113
+                                                "byte": 114
                                             }
                                         },
                                         "schema": {
@@ -2324,7 +2324,7 @@
                                             "end": {
                                                 "line": 8,
                                                 "column": 16,
-                                                "byte": 113
+                                                "byte": 114
                                             }
                                         }
                                     },
@@ -2353,7 +2353,7 @@
                                             "end": {
                                                 "line": 8,
                                                 "column": 16,
-                                                "byte": 113
+                                                "byte": 114
                                             }
                                         }
                                     }
@@ -2382,12 +2382,12 @@
                                             "begin": {
                                                 "line": 10,
                                                 "column": 5,
-                                                "byte": 127
+                                                "byte": 128
                                             },
                                             "end": {
                                                 "line": 14,
                                                 "column": 16,
-                                                "byte": 206
+                                                "byte": 207
                                             }
                                         }
                                     },
@@ -2411,12 +2411,12 @@
                                             "begin": {
                                                 "line": 10,
                                                 "column": 5,
-                                                "byte": 127
+                                                "byte": 128
                                             },
                                             "end": {
                                                 "line": 14,
                                                 "column": 16,
-                                                "byte": 206
+                                                "byte": 207
                                             }
                                         }
                                     }
@@ -2432,12 +2432,12 @@
                     "begin": {
                         "line": 10,
                         "column": 5,
-                        "byte": 127
+                        "byte": 128
                     },
                     "end": {
                         "line": 14,
                         "column": 16,
-                        "byte": 206
+                        "byte": 207
                     }
                 },
                 "schema": {
@@ -2464,12 +2464,12 @@
                         "begin": {
                             "line": 10,
                             "column": 5,
-                            "byte": 127
+                            "byte": 128
                         },
                         "end": {
                             "line": 10,
                             "column": 21,
-                            "byte": 143
+                            "byte": 144
                         }
                     },
                     "argSchema": {
@@ -2517,12 +2517,12 @@
                                     "begin": {
                                         "line": 11,
                                         "column": 15,
-                                        "byte": 159
+                                        "byte": 160
                                     },
                                     "end": {
                                         "line": 11,
                                         "column": 15,
-                                        "byte": 159
+                                        "byte": 160
                                     }
                                 },
                                 "schema": {
@@ -2535,12 +2535,12 @@
                                     "begin": {
                                         "line": 13,
                                         "column": 9,
-                                        "byte": 183
+                                        "byte": 184
                                     },
                                     "end": {
                                         "line": 14,
                                         "column": 16,
-                                        "byte": 206
+                                        "byte": 207
                                     }
                                 },
                                 "schema": {
@@ -2566,12 +2566,12 @@
                                         "begin": {
                                             "line": 13,
                                             "column": 9,
-                                            "byte": 183
+                                            "byte": 184
                                         },
                                         "end": {
                                             "line": 13,
                                             "column": 10,
-                                            "byte": 184
+                                            "byte": 185
                                         }
                                     },
                                     "b": {
@@ -2579,12 +2579,12 @@
                                         "begin": {
                                             "line": 14,
                                             "column": 9,
-                                            "byte": 199
+                                            "byte": 200
                                         },
                                         "end": {
                                             "line": 14,
                                             "column": 10,
-                                            "byte": 200
+                                            "byte": 201
                                         }
                                     }
                                 },
@@ -2595,12 +2595,12 @@
                                             "begin": {
                                                 "line": 13,
                                                 "column": 12,
-                                                "byte": 186
+                                                "byte": 187
                                             },
                                             "end": {
                                                 "line": 13,
                                                 "column": 16,
-                                                "byte": 190
+                                                "byte": 191
                                             }
                                         },
                                         "schema": {
@@ -2615,12 +2615,12 @@
                                             "begin": {
                                                 "line": 14,
                                                 "column": 12,
-                                                "byte": 202
+                                                "byte": 203
                                             },
                                             "end": {
                                                 "line": 14,
                                                 "column": 16,
-                                                "byte": 206
+                                                "byte": 207
                                             }
                                         },
                                         "schema": {
@@ -2652,7 +2652,7 @@
                                 "end": {
                                     "line": 8,
                                     "column": 16,
-                                    "byte": 113
+                                    "byte": 114
                                 }
                             }
                         }
@@ -2670,7 +2670,7 @@
                                 "end": {
                                     "line": 8,
                                     "column": 16,
-                                    "byte": 113
+                                    "byte": 114
                                 }
                             }
                         }
@@ -2687,7 +2687,7 @@
                         "end": {
                             "line": 8,
                             "column": 16,
-                            "byte": 113
+                            "byte": 114
                         }
                     }
                 }
@@ -2739,12 +2739,12 @@
                                 "begin": {
                                     "line": 10,
                                     "column": 5,
-                                    "byte": 127
+                                    "byte": 128
                                 },
                                 "end": {
                                     "line": 14,
                                     "column": 16,
-                                    "byte": 206
+                                    "byte": 207
                                 }
                             }
                         }
@@ -2757,12 +2757,12 @@
                                 "begin": {
                                     "line": 10,
                                     "column": 5,
-                                    "byte": 127
+                                    "byte": 128
                                 },
                                 "end": {
                                     "line": 14,
                                     "column": 16,
-                                    "byte": 206
+                                    "byte": 207
                                 }
                             }
                         }
@@ -2774,12 +2774,12 @@
                         "begin": {
                             "line": 10,
                             "column": 5,
-                            "byte": 127
+                            "byte": 128
                         },
                         "end": {
                             "line": 14,
                             "column": 16,
-                            "byte": 206
+                            "byte": 207
                         }
                     }
                 }
@@ -3044,7 +3044,7 @@
     },
     "rotatePatches": [
         {
-            "DocPath": "full.fn::rotate.state",
+            "DocPath": "full[\"fn::rotate\"].state",
             "Replacement": {
                 "value": {
                     "a": {
@@ -3055,12 +3055,12 @@
                                 "begin": {
                                     "line": 8,
                                     "column": 12,
-                                    "byte": 109
+                                    "byte": 110
                                 },
                                 "end": {
                                     "line": 8,
                                     "column": 16,
-                                    "byte": 113
+                                    "byte": 114
                                 }
                             }
                         }
@@ -3073,12 +3073,12 @@
                                 "begin": {
                                     "line": 7,
                                     "column": 12,
-                                    "byte": 93
+                                    "byte": 94
                                 },
                                 "end": {
                                     "line": 7,
                                     "column": 16,
-                                    "byte": 97
+                                    "byte": 98
                                 }
                             }
                         }
@@ -3101,7 +3101,7 @@
             }
         },
         {
-            "DocPath": "short.fn::rotate::swap.state",
+            "DocPath": "short[\"fn::rotate::swap\"].state",
             "Replacement": {
                 "value": {
                     "a": {
@@ -3112,12 +3112,12 @@
                                 "begin": {
                                     "line": 14,
                                     "column": 12,
-                                    "byte": 202
+                                    "byte": 203
                                 },
                                 "end": {
                                     "line": 14,
                                     "column": 16,
-                                    "byte": 206
+                                    "byte": 207
                                 }
                             }
                         }
@@ -3130,12 +3130,12 @@
                                 "begin": {
                                     "line": 13,
                                     "column": 12,
-                                    "byte": 186
+                                    "byte": 187
                                 },
                                 "end": {
                                     "line": 13,
                                     "column": 16,
-                                    "byte": 190
+                                    "byte": 191
                                 }
                             }
                         }

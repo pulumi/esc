@@ -26,7 +26,7 @@ values:
   a:
     a:
       fn::rotate:
-        rotator: swap
+        provider: swap
         inputs:
           foo: bar
         state:
@@ -60,7 +60,7 @@ values:
 	//   a:
 	//     a:
 	//       fn::rotate:
-	//         rotator: swap
+	//         provider: swap
 	//         inputs:
 	//           foo: bar
 	//         state:
