@@ -22,6 +22,52 @@
             "EvalContext": null,
             "Extra": null,
             "Path": "values[\"invalid-state\"][\"fn::rotate::echo\"].state"
+        },
+        {
+            "Severity": 1,
+            "Summary": "expected null, got object",
+            "Detail": "",
+            "Subject": {
+                "Filename": "rotate-bootstrap",
+                "Start": {
+                    "Line": 27,
+                    "Column": 9,
+                    "Byte": 0
+                },
+                "End": {
+                    "Line": 27,
+                    "Column": 35,
+                    "Byte": 0
+                }
+            },
+            "Context": null,
+            "Expression": null,
+            "EvalContext": null,
+            "Extra": null,
+            "Path": "values[\"invalid-state\"][\"fn::rotate::echo\"].state"
+        },
+        {
+            "Severity": 1,
+            "Summary": "at least one subschema must match",
+            "Detail": "",
+            "Subject": {
+                "Filename": "rotate-bootstrap",
+                "Start": {
+                    "Line": 27,
+                    "Column": 9,
+                    "Byte": 0
+                },
+                "End": {
+                    "Line": 27,
+                    "Column": 35,
+                    "Byte": 0
+                }
+            },
+            "Context": null,
+            "Expression": null,
+            "EvalContext": null,
+            "Extra": null,
+            "Path": "values[\"invalid-state\"][\"fn::rotate::echo\"].state"
         }
     ],
     "check": {
@@ -83,18 +129,26 @@
                                 ]
                             },
                             "state": {
-                                "properties": {
-                                    "current": {
-                                        "type": "string"
+                                "anyOf": [
+                                    {
+                                        "properties": {
+                                            "current": {
+                                                "type": "string"
+                                            },
+                                            "previous": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object",
+                                        "required": [
+                                            "current"
+                                        ]
                                     },
-                                    "previous": {
-                                        "type": "string"
+                                    {
+                                        "type": "null"
                                     }
-                                },
-                                "type": "object",
-                                "required": [
-                                    "current"
-                                ]
+                                ],
+                                "type": ""
                             }
                         },
                         "type": "object",
@@ -344,18 +398,26 @@
                                 ]
                             },
                             "state": {
-                                "properties": {
-                                    "current": {
-                                        "type": "string"
+                                "anyOf": [
+                                    {
+                                        "properties": {
+                                            "current": {
+                                                "type": "string"
+                                            },
+                                            "previous": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object",
+                                        "required": [
+                                            "current"
+                                        ]
                                     },
-                                    "previous": {
-                                        "type": "string"
+                                    {
+                                        "type": "null"
                                     }
-                                },
-                                "type": "object",
-                                "required": [
-                                    "current"
-                                ]
+                                ],
+                                "type": ""
                             }
                         },
                         "type": "object",
@@ -567,18 +629,26 @@
                                 ]
                             },
                             "state": {
-                                "properties": {
-                                    "current": {
-                                        "type": "string"
+                                "anyOf": [
+                                    {
+                                        "properties": {
+                                            "current": {
+                                                "type": "string"
+                                            },
+                                            "previous": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object",
+                                        "required": [
+                                            "current"
+                                        ]
                                     },
-                                    "previous": {
-                                        "type": "string"
+                                    {
+                                        "type": "null"
                                     }
-                                },
-                                "type": "object",
-                                "required": [
-                                    "current"
-                                ]
+                                ],
+                                "type": ""
                             }
                         },
                         "type": "object",
@@ -679,7 +749,9 @@
                                         "byte": 0
                                     }
                                 },
-                                "schema": true
+                                "schema": {
+                                    "type": "null"
+                                }
                             }
                         }
                     }
@@ -742,18 +814,26 @@
                                 ]
                             },
                             "state": {
-                                "properties": {
-                                    "current": {
-                                        "type": "string"
+                                "anyOf": [
+                                    {
+                                        "properties": {
+                                            "current": {
+                                                "type": "string"
+                                            },
+                                            "previous": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object",
+                                        "required": [
+                                            "current"
+                                        ]
                                     },
-                                    "previous": {
-                                        "type": "string"
+                                    {
+                                        "type": "null"
                                     }
-                                },
-                                "type": "object",
-                                "required": [
-                                    "current"
-                                ]
+                                ],
+                                "type": ""
                             }
                         },
                         "type": "object",
@@ -1268,6 +1348,52 @@
             "EvalContext": null,
             "Extra": null,
             "Path": "values[\"invalid-state\"][\"fn::rotate::echo\"].state"
+        },
+        {
+            "Severity": 1,
+            "Summary": "expected null, got object",
+            "Detail": "",
+            "Subject": {
+                "Filename": "rotate-bootstrap",
+                "Start": {
+                    "Line": 27,
+                    "Column": 9,
+                    "Byte": 0
+                },
+                "End": {
+                    "Line": 27,
+                    "Column": 35,
+                    "Byte": 0
+                }
+            },
+            "Context": null,
+            "Expression": null,
+            "EvalContext": null,
+            "Extra": null,
+            "Path": "values[\"invalid-state\"][\"fn::rotate::echo\"].state"
+        },
+        {
+            "Severity": 1,
+            "Summary": "at least one subschema must match",
+            "Detail": "",
+            "Subject": {
+                "Filename": "rotate-bootstrap",
+                "Start": {
+                    "Line": 27,
+                    "Column": 9,
+                    "Byte": 0
+                },
+                "End": {
+                    "Line": 27,
+                    "Column": 35,
+                    "Byte": 0
+                }
+            },
+            "Context": null,
+            "Expression": null,
+            "EvalContext": null,
+            "Extra": null,
+            "Path": "values[\"invalid-state\"][\"fn::rotate::echo\"].state"
         }
     ],
     "eval": {
@@ -1332,18 +1458,26 @@
                                 ]
                             },
                             "state": {
-                                "properties": {
-                                    "current": {
-                                        "type": "string"
+                                "anyOf": [
+                                    {
+                                        "properties": {
+                                            "current": {
+                                                "type": "string"
+                                            },
+                                            "previous": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object",
+                                        "required": [
+                                            "current"
+                                        ]
                                     },
-                                    "previous": {
-                                        "type": "string"
+                                    {
+                                        "type": "null"
                                     }
-                                },
-                                "type": "object",
-                                "required": [
-                                    "current"
-                                ]
+                                ],
+                                "type": ""
                             }
                         },
                         "type": "object",
@@ -1593,18 +1727,26 @@
                                 ]
                             },
                             "state": {
-                                "properties": {
-                                    "current": {
-                                        "type": "string"
+                                "anyOf": [
+                                    {
+                                        "properties": {
+                                            "current": {
+                                                "type": "string"
+                                            },
+                                            "previous": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object",
+                                        "required": [
+                                            "current"
+                                        ]
                                     },
-                                    "previous": {
-                                        "type": "string"
+                                    {
+                                        "type": "null"
                                     }
-                                },
-                                "type": "object",
-                                "required": [
-                                    "current"
-                                ]
+                                ],
+                                "type": ""
                             }
                         },
                         "type": "object",
@@ -1774,18 +1916,7 @@
                     }
                 },
                 "schema": {
-                    "properties": {
-                        "current": {
-                            "type": "string"
-                        },
-                        "previous": {
-                            "type": "string"
-                        }
-                    },
-                    "type": "object",
-                    "required": [
-                        "current"
-                    ]
+                    "type": "object"
                 },
                 "builtin": {
                     "name": "fn::rotate::echo",
@@ -1816,18 +1947,26 @@
                                 ]
                             },
                             "state": {
-                                "properties": {
-                                    "current": {
-                                        "type": "string"
+                                "anyOf": [
+                                    {
+                                        "properties": {
+                                            "current": {
+                                                "type": "string"
+                                            },
+                                            "previous": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object",
+                                        "required": [
+                                            "current"
+                                        ]
                                     },
-                                    "previous": {
-                                        "type": "string"
+                                    {
+                                        "type": "null"
                                     }
-                                },
-                                "type": "object",
-                                "required": [
-                                    "current"
-                                ]
+                                ],
+                                "type": ""
                             }
                         },
                         "type": "object",
@@ -1928,7 +2067,9 @@
                                         "byte": 0
                                     }
                                 },
-                                "schema": true
+                                "schema": {
+                                    "type": "null"
+                                }
                             }
                         }
                     }
@@ -1989,18 +2130,26 @@
                                 ]
                             },
                             "state": {
-                                "properties": {
-                                    "current": {
-                                        "type": "string"
+                                "anyOf": [
+                                    {
+                                        "properties": {
+                                            "current": {
+                                                "type": "string"
+                                            },
+                                            "previous": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object",
+                                        "required": [
+                                            "current"
+                                        ]
                                     },
-                                    "previous": {
-                                        "type": "string"
+                                    {
+                                        "type": "null"
                                     }
-                                },
-                                "type": "object",
-                                "required": [
-                                    "current"
-                                ]
+                                ],
+                                "type": ""
                             }
                         },
                         "type": "object",
@@ -2231,7 +2380,7 @@
                 }
             },
             "optional-state": {
-                "unknown": true,
+                "value": {},
                 "trace": {
                     "def": {
                         "environment": "rotate-bootstrap",
@@ -2320,18 +2469,7 @@
                     ]
                 },
                 "optional-state": {
-                    "properties": {
-                        "current": {
-                            "type": "string"
-                        },
-                        "previous": {
-                            "type": "string"
-                        }
-                    },
-                    "type": "object",
-                    "required": [
-                        "current"
-                    ]
+                    "type": "object"
                 },
                 "partial-state": {
                     "properties": {
@@ -2549,7 +2687,7 @@
             "previous": "update1"
         },
         "invalid-state": "[unknown]",
-        "optional-state": "[unknown]",
+        "optional-state": {},
         "partial-state": {
             "current": "update1"
         }
@@ -2560,7 +2698,7 @@
             "previous": "update1"
         },
         "invalid-state": "[unknown]",
-        "optional-state": "[unknown]",
+        "optional-state": {},
         "partial-state": {
             "current": "update1"
         }
@@ -2569,6 +2707,52 @@
         {
             "Severity": 1,
             "Summary": "missing required properties: current",
+            "Detail": "",
+            "Subject": {
+                "Filename": "rotate-bootstrap",
+                "Start": {
+                    "Line": 27,
+                    "Column": 9,
+                    "Byte": 0
+                },
+                "End": {
+                    "Line": 27,
+                    "Column": 35,
+                    "Byte": 0
+                }
+            },
+            "Context": null,
+            "Expression": null,
+            "EvalContext": null,
+            "Extra": null,
+            "Path": "values[\"invalid-state\"][\"fn::rotate::echo\"].state"
+        },
+        {
+            "Severity": 1,
+            "Summary": "expected null, got object",
+            "Detail": "",
+            "Subject": {
+                "Filename": "rotate-bootstrap",
+                "Start": {
+                    "Line": 27,
+                    "Column": 9,
+                    "Byte": 0
+                },
+                "End": {
+                    "Line": 27,
+                    "Column": 35,
+                    "Byte": 0
+                }
+            },
+            "Context": null,
+            "Expression": null,
+            "EvalContext": null,
+            "Extra": null,
+            "Path": "values[\"invalid-state\"][\"fn::rotate::echo\"].state"
+        },
+        {
+            "Severity": 1,
+            "Summary": "at least one subschema must match",
             "Detail": "",
             "Subject": {
                 "Filename": "rotate-bootstrap",
@@ -2652,18 +2836,26 @@
                                 ]
                             },
                             "state": {
-                                "properties": {
-                                    "current": {
-                                        "type": "string"
+                                "anyOf": [
+                                    {
+                                        "properties": {
+                                            "current": {
+                                                "type": "string"
+                                            },
+                                            "previous": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object",
+                                        "required": [
+                                            "current"
+                                        ]
                                     },
-                                    "previous": {
-                                        "type": "string"
+                                    {
+                                        "type": "null"
                                     }
-                                },
-                                "type": "object",
-                                "required": [
-                                    "current"
-                                ]
+                                ],
+                                "type": ""
                             }
                         },
                         "type": "object",
@@ -2913,18 +3105,26 @@
                                 ]
                             },
                             "state": {
-                                "properties": {
-                                    "current": {
-                                        "type": "string"
+                                "anyOf": [
+                                    {
+                                        "properties": {
+                                            "current": {
+                                                "type": "string"
+                                            },
+                                            "previous": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object",
+                                        "required": [
+                                            "current"
+                                        ]
                                     },
-                                    "previous": {
-                                        "type": "string"
+                                    {
+                                        "type": "null"
                                     }
-                                },
-                                "type": "object",
-                                "required": [
-                                    "current"
-                                ]
+                                ],
+                                "type": ""
                             }
                         },
                         "type": "object",
@@ -3096,15 +3296,17 @@
                 "schema": {
                     "properties": {
                         "current": {
-                            "type": "string"
+                            "type": "string",
+                            "const": "hello world"
                         },
                         "previous": {
-                            "type": "string"
+                            "type": "null"
                         }
                     },
                     "type": "object",
                     "required": [
-                        "current"
+                        "current",
+                        "previous"
                     ]
                 },
                 "builtin": {
@@ -3136,18 +3338,26 @@
                                 ]
                             },
                             "state": {
-                                "properties": {
-                                    "current": {
-                                        "type": "string"
+                                "anyOf": [
+                                    {
+                                        "properties": {
+                                            "current": {
+                                                "type": "string"
+                                            },
+                                            "previous": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object",
+                                        "required": [
+                                            "current"
+                                        ]
                                     },
-                                    "previous": {
-                                        "type": "string"
+                                    {
+                                        "type": "null"
                                     }
-                                },
-                                "type": "object",
-                                "required": [
-                                    "current"
-                                ]
+                                ],
+                                "type": ""
                             }
                         },
                         "type": "object",
@@ -3248,7 +3458,9 @@
                                         "byte": 0
                                     }
                                 },
-                                "schema": true
+                                "schema": {
+                                    "type": "null"
+                                }
                             }
                         }
                     }
@@ -3314,18 +3526,26 @@
                                 ]
                             },
                             "state": {
-                                "properties": {
-                                    "current": {
-                                        "type": "string"
+                                "anyOf": [
+                                    {
+                                        "properties": {
+                                            "current": {
+                                                "type": "string"
+                                            },
+                                            "previous": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object",
+                                        "required": [
+                                            "current"
+                                        ]
                                     },
-                                    "previous": {
-                                        "type": "string"
+                                    {
+                                        "type": "null"
                                     }
-                                },
-                                "type": "object",
-                                "required": [
-                                    "current"
-                                ]
+                                ],
+                                "type": ""
                             }
                         },
                         "type": "object",
@@ -3556,7 +3776,43 @@
                 }
             },
             "optional-state": {
-                "unknown": true,
+                "value": {
+                    "current": {
+                        "value": "hello world",
+                        "trace": {
+                            "def": {
+                                "environment": "rotate-bootstrap",
+                                "begin": {
+                                    "line": 3,
+                                    "column": 5,
+                                    "byte": 30
+                                },
+                                "end": {
+                                    "line": 5,
+                                    "column": 26,
+                                    "byte": 87
+                                }
+                            }
+                        }
+                    },
+                    "previous": {
+                        "trace": {
+                            "def": {
+                                "environment": "rotate-bootstrap",
+                                "begin": {
+                                    "line": 3,
+                                    "column": 5,
+                                    "byte": 30
+                                },
+                                "end": {
+                                    "line": 5,
+                                    "column": 26,
+                                    "byte": 87
+                                }
+                            }
+                        }
+                    }
+                },
                 "trace": {
                     "def": {
                         "environment": "rotate-bootstrap",
@@ -3665,15 +3921,17 @@
                 "optional-state": {
                     "properties": {
                         "current": {
-                            "type": "string"
+                            "type": "string",
+                            "const": "hello world"
                         },
                         "previous": {
-                            "type": "string"
+                            "type": "null"
                         }
                     },
                     "type": "object",
                     "required": [
-                        "current"
+                        "current",
+                        "previous"
                     ]
                 },
                 "partial-state": {
@@ -3897,7 +4155,10 @@
             "previous": "update2"
         },
         "invalid-state": "[unknown]",
-        "optional-state": "[unknown]",
+        "optional-state": {
+            "current": "hello world",
+            "previous": null
+        },
         "partial-state": {
             "current": "update2",
             "previous": "update1"
@@ -3940,6 +4201,61 @@
                                     "line": 19,
                                     "column": 25,
                                     "byte": 320
+                                }
+                            }
+                        }
+                    }
+                },
+                "trace": {
+                    "def": {
+                        "begin": {
+                            "line": 0,
+                            "column": 0,
+                            "byte": 0
+                        },
+                        "end": {
+                            "line": 0,
+                            "column": 0,
+                            "byte": 0
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "DocPath": "optional-state[\"fn::rotate::echo\"].state",
+            "Replacement": {
+                "value": {
+                    "current": {
+                        "value": "hello world",
+                        "trace": {
+                            "def": {
+                                "environment": "rotate-bootstrap",
+                                "begin": {
+                                    "line": 5,
+                                    "column": 15,
+                                    "byte": 76
+                                },
+                                "end": {
+                                    "line": 5,
+                                    "column": 26,
+                                    "byte": 87
+                                }
+                            }
+                        }
+                    },
+                    "previous": {
+                        "trace": {
+                            "def": {
+                                "begin": {
+                                    "line": 0,
+                                    "column": 0,
+                                    "byte": 0
+                                },
+                                "end": {
+                                    "line": 0,
+                                    "column": 0,
+                                    "byte": 0
                                 }
                             }
                         }
