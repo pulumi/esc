@@ -20,6 +20,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"github.com/pulumi/pulumi/sdk/v3/go/common/resource"
 	"os"
 	"path/filepath"
 	"slices"
@@ -337,7 +338,14 @@ func TestEval(t *testing.T) {
 				environmentName = overrides.RootEnvironment
 			}
 			showSecrets := overrides.ShowSecrets
+
 			doRotate := overrides.Rotate
+			rotatePaths := make([]resource.PropertyPath, len(overrides.RotatePaths))
+			for i := range overrides.RotatePaths {
+				propertyPath, err := resource.ParsePropertyPath(path)
+				require.NoError(t, err)
+				rotatePaths[i] = propertyPath
+			}
 
 			if accept() {
 				env, loadDiags, err := LoadYAMLBytes(environmentName, envBytes)
@@ -357,7 +365,7 @@ func TestEval(t *testing.T) {
 				var rotateDiags syntax.Diagnostics
 				if doRotate {
 					rotated, patches, rotateDiags = RotateEnvironment(context.Background(), environmentName, env, rot128{}, testProviders{},
-						&testEnvironments{basePath}, execContext, overrides.RotatePaths)
+						&testEnvironments{basePath}, execContext, rotatePaths)
 				}
 
 				var checkJSON any
@@ -427,7 +435,7 @@ func TestEval(t *testing.T) {
 			var rotated *esc.Environment
 			if doRotate {
 				rotated_, patches, diags := RotateEnvironment(context.Background(), environmentName, env, rot128{}, testProviders{},
-					&testEnvironments{basePath}, execContext, overrides.RotatePaths)
+					&testEnvironments{basePath}, execContext, rotatePaths)
 
 				sortEnvironmentDiagnostics(diags)
 				require.Equal(t, expected.RotateDiags, diags)

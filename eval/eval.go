@@ -19,6 +19,7 @@ import (
 	"encoding/base64"
 	"encoding/json"
 	"fmt"
+	"github.com/pulumi/pulumi/sdk/v3/go/common/resource"
 	"io"
 	"reflect"
 	"sort"
@@ -115,11 +116,11 @@ func RotateEnvironment(
 	providers ProviderLoader,
 	environments EnvironmentLoader,
 	execContext *esc.ExecContext,
-	paths []string,
+	paths []resource.PropertyPath,
 ) (*esc.Environment, []*Patch, syntax.Diagnostics) {
 	rotatePaths := make(map[string]bool, len(paths))
 	for _, path := range paths {
-		rotatePaths[path] = true
+		rotatePaths[path.String()] = true
 	}
 	return evalEnvironment(ctx, false, true, name, env, decrypter, providers, environments, execContext, true, rotatePaths)
 }
