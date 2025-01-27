@@ -342,7 +342,7 @@ func TestEval(t *testing.T) {
 			doRotate := overrides.Rotate
 			rotatePaths := make([]resource.PropertyPath, len(overrides.RotatePaths))
 			for i := range overrides.RotatePaths {
-				propertyPath, err := resource.ParsePropertyPath(path)
+				propertyPath, err := resource.ParsePropertyPath(overrides.RotatePaths[i])
 				require.NoError(t, err)
 				rotatePaths[i] = propertyPath
 			}
