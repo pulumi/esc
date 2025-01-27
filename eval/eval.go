@@ -85,7 +85,7 @@ func EvalEnvironment(
 	environments EnvironmentLoader,
 	execContext *esc.ExecContext,
 ) (*esc.Environment, syntax.Diagnostics) {
-	opened, _, diags := evalEnvironment(ctx, false, false, name, env, decrypter, providers, environments, execContext, true)
+	opened, _, diags := evalEnvironment(ctx, false, false, name, env, decrypter, providers, environments, execContext, true, nil)
 	return opened, diags
 }
 
@@ -101,7 +101,7 @@ func CheckEnvironment(
 	execContext *esc.ExecContext,
 	showSecrets bool,
 ) (*esc.Environment, syntax.Diagnostics) {
-	checked, _, diags := evalEnvironment(ctx, true, false, name, env, decrypter, providers, environments, execContext, showSecrets)
+	checked, _, diags := evalEnvironment(ctx, true, false, name, env, decrypter, providers, environments, execContext, showSecrets, nil)
 	return checked, diags
 }
 
@@ -115,8 +115,13 @@ func RotateEnvironment(
 	providers ProviderLoader,
 	environments EnvironmentLoader,
 	execContext *esc.ExecContext,
+	paths []string,
 ) (*esc.Environment, []*Patch, syntax.Diagnostics) {
-	return evalEnvironment(ctx, false, true, name, env, decrypter, providers, environments, execContext, true)
+	rotatePaths := make(map[string]bool, len(paths))
+	for _, path := range paths {
+		rotatePaths[path] = true
+	}
+	return evalEnvironment(ctx, false, true, name, env, decrypter, providers, environments, execContext, true, rotatePaths)
 }
 
 // evalEnvironment evaluates an environment and exports the result of evaluation.
@@ -131,12 +136,13 @@ func evalEnvironment(
 	envs EnvironmentLoader,
 	execContext *esc.ExecContext,
 	showSecrets bool,
+	rotatePaths map[string]bool,
 ) (*esc.Environment, []*Patch, syntax.Diagnostics) {
 	if env == nil || (len(env.Values.GetEntries()) == 0 && len(env.Imports.GetElements()) == 0) {
 		return nil, nil, nil
 	}
 
-	ec := newEvalContext(ctx, validating, rotating, name, env, decrypter, providers, envs, map[string]*imported{}, execContext, showSecrets)
+	ec := newEvalContext(ctx, validating, rotating, name, env, decrypter, providers, envs, map[string]*imported{}, execContext, showSecrets, rotatePaths)
 	v, diags := ec.evaluate()
 
 	s := schema.Never().Schema()
@@ -185,7 +191,8 @@ type evalContext struct {
 	root      *expr  // the root expression
 	base      *value // the base value
 
-	patchOutputs []*Patch // updated rotation state generated during evaluation, to be written back to the environment definition
+	rotatePaths  map[string]bool // when `rotating`, the subset of paths to invoke rotation for. if empty, all rotators will be invoked.
+	patchOutputs []*Patch        // updated rotation state generated during evaluation, to be written back to the environment definition
 
 	diags syntax.Diagnostics // diagnostics generated during evaluation
 }
@@ -202,6 +209,7 @@ func newEvalContext(
 	imports map[string]*imported,
 	execContext *esc.ExecContext,
 	showSecrets bool,
+	rotatePaths map[string]bool,
 ) *evalContext {
 	return &evalContext{
 		ctx:          ctx,
@@ -215,6 +223,7 @@ func newEvalContext(
 		environments: environments,
 		imports:      imports,
 		execContext:  execContext.CopyForEnv(name),
+		rotatePaths:  rotatePaths,
 	}
 }
 
@@ -497,7 +506,7 @@ func (e *evalContext) evaluateImport(myImports map[string]*value, decl *ast.Impo
 		}
 
 		// we only want to rotate the root environment, so set rotating flag to false when evaluating imports
-		imp := newEvalContext(e.ctx, e.validating, false, name, env, dec, e.providers, e.environments, e.imports, e.execContext, e.showSecrets)
+		imp := newEvalContext(e.ctx, e.validating, false, name, env, dec, e.providers, e.environments, e.imports, e.execContext, e.showSecrets, nil)
 		v, diags := imp.evaluate()
 		e.diags.Extend(diags...)
 
@@ -1011,7 +1020,7 @@ func (e *evalContext) evaluateBuiltinRotate(x *expr, repr *rotateExpr) *value {
 	}
 
 	// if rotating, invoke prior to open
-	if e.rotating {
+	if e.shouldRotate(x.path) {
 		newState, err := rotator.Rotate(
 			e.ctx,
 			inputs.export("").Value.(map[string]esc.Value),
@@ -1048,6 +1057,18 @@ func (e *evalContext) evaluateBuiltinRotate(x *expr, repr *rotateExpr) *value {
 		return v
 	}
 	return unexport(output, x)
+}
+
+// shouldRotate returns true if the rotator at this path should be invoked.
+func (e *evalContext) shouldRotate(path string) bool {
+	if !e.rotating {
+		return false
+	}
+	if len(e.rotatePaths) == 0 {
+		// we're rotating the full environment
+		return true
+	}
+	return e.rotatePaths[path]
 }
 
 // evaluateBuiltinJoin evaluates a call to the fn::join builtin.
