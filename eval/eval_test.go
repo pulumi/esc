@@ -279,9 +279,10 @@ func normalize[T any](t *testing.T, v T) T {
 
 func TestEval(t *testing.T) {
 	type testOverrides struct {
-		ShowSecrets     bool   `json:"showSecrets,omitempty"`
-		RootEnvironment string `json:"rootEnvironment,omitempty"`
-		Rotate          bool   `json:"rotate,omitempty"`
+		ShowSecrets     bool     `json:"showSecrets,omitempty"`
+		RootEnvironment string   `json:"rootEnvironment,omitempty"`
+		Rotate          bool     `json:"rotate,omitempty"`
+		RotatePaths     []string `json:"rotatePaths,omitempty"`
 	}
 
 	type expectedData struct {
@@ -356,7 +357,7 @@ func TestEval(t *testing.T) {
 				var rotateDiags syntax.Diagnostics
 				if doRotate {
 					rotated, patches, rotateDiags = RotateEnvironment(context.Background(), environmentName, env, rot128{}, testProviders{},
-						&testEnvironments{basePath}, execContext)
+						&testEnvironments{basePath}, execContext, overrides.RotatePaths)
 				}
 
 				var checkJSON any
@@ -426,7 +427,7 @@ func TestEval(t *testing.T) {
 			var rotated *esc.Environment
 			if doRotate {
 				rotated_, patches, diags := RotateEnvironment(context.Background(), environmentName, env, rot128{}, testProviders{},
-					&testEnvironments{basePath}, execContext)
+					&testEnvironments{basePath}, execContext, overrides.RotatePaths)
 
 				sortEnvironmentDiagnostics(diags)
 				require.Equal(t, expected.RotateDiags, diags)
