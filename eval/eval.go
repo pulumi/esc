@@ -132,7 +132,7 @@ func evalEnvironment(
 	execContext *esc.ExecContext,
 	showSecrets bool,
 ) (*esc.Environment, []*Patch, syntax.Diagnostics) {
-	if env == nil || (len(env.Values.GetEntries()) == 0 && len(env.Imports.GetElements()) == 0) {
+	if env == nil || (len(env.Values.GetEntries()) == 0 && (env.Imports == nil)) {
 		return nil, nil, nil
 	}
 
@@ -436,8 +436,13 @@ func (e *evalContext) evaluateImports() {
 	e.imports[e.name] = mine
 
 	myImports := map[string]*value{}
-	for _, entry := range e.env.Imports.GetElements() {
-		e.evaluateImport(myImports, entry)
+	if e.env.Imports != nil {
+		for _, entry := range e.env.Imports.Open.GetElements() {
+			e.evaluateImport(myImports, entry)
+		}
+		for _, entry := range e.env.Imports.Rotate.GetElements() {
+			e.evaluateImport(myImports, entry)
+		}
 	}
 
 	properties := make(schema.SchemaMap, len(myImports))
