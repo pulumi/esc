@@ -42,3 +42,17 @@ type Rotator interface {
 	// Rotate rotates the provider's secret, and returns the rotator's new state to be persisted.
 	Rotate(ctx context.Context, inputs, state map[string]Value, executionContext EnvExecContext) (Value, error)
 }
+
+// RetryableError indicates a temporary error was encountered by a provider.
+// Providers can wrap an error with this type  to indicate to the evaluator that it may retry calling the provider.
+type RetryableError struct {
+	Err error
+}
+
+func (e RetryableError) Error() string {
+	return e.Err.Error()
+}
+
+func (e RetryableError) Unwrap() error {
+	return e.Err
+}

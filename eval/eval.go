@@ -18,11 +18,13 @@ import (
 	"context"
 	"encoding/base64"
 	"encoding/json"
+	"errors"
 	"fmt"
 	"io"
 	"reflect"
 	"sort"
 	"strings"
+	"time"
 
 	"github.com/pulumi/esc"
 	"github.com/pulumi/esc/ast"
@@ -31,6 +33,7 @@ import (
 	"github.com/pulumi/esc/syntax"
 	"github.com/pulumi/esc/syntax/encoding"
 	"github.com/pulumi/pulumi/sdk/v3/go/common/resource"
+	"github.com/pulumi/pulumi/sdk/v3/go/common/util/retry"
 	"golang.org/x/exp/maps"
 )
 
@@ -970,7 +973,9 @@ func (e *evalContext) evaluateBuiltinOpen(x *expr, repr *openExpr) *value {
 		return v
 	}
 
-	output, err := provider.Open(e.ctx, inputs.export("").Value.(map[string]esc.Value), e.execContext)
+	output, err := e.retryProvider(func() (esc.Value, error) {
+		return provider.Open(e.ctx, inputs.export("").Value.(map[string]esc.Value), e.execContext)
+	})
 	if err != nil {
 		e.errorf(repr.syntax(), "%s", err.Error())
 		v.unknown = true
@@ -1024,12 +1029,14 @@ func (e *evalContext) evaluateBuiltinRotate(x *expr, repr *rotateExpr) *value {
 	// if rotating, invoke prior to open
 	docPath := x.repr.syntax().Syntax().Syntax().Path()
 	if e.shouldRotate(docPath) {
-		newState, err := rotator.Rotate(
-			e.ctx,
-			inputs.export("").Value.(map[string]esc.Value),
-			asObjectOrNil(state.export("").Value),
-			e.execContext,
-		)
+		newState, err := e.retryProvider(func() (esc.Value, error) {
+			return rotator.Rotate(
+				e.ctx,
+				inputs.export("").Value.(map[string]esc.Value),
+				asObjectOrNil(state.export("").Value),
+				e.execContext,
+			)
+		})
 		if err != nil {
 			e.errorf(repr.syntax(), "rotate: %s", err.Error())
 			v.unknown = true
@@ -1048,12 +1055,14 @@ func (e *evalContext) evaluateBuiltinRotate(x *expr, repr *rotateExpr) *value {
 		state = unexport(newState, x)
 	}
 
-	output, err := rotator.Open(
-		e.ctx,
-		inputs.export("").Value.(map[string]esc.Value),
-		asObjectOrNil(state.export("").Value),
-		e.execContext,
-	)
+	output, err := e.retryProvider(func() (esc.Value, error) {
+		return rotator.Open(
+			e.ctx,
+			inputs.export("").Value.(map[string]esc.Value),
+			asObjectOrNil(state.export("").Value),
+			e.execContext,
+		)
+	})
 	if err != nil {
 		e.errorf(repr.syntax(), "%s", err.Error())
 		v.unknown = true
@@ -1078,6 +1087,30 @@ func (e *evalContext) shouldRotate(docPath string) bool {
 func asObjectOrNil(v any) map[string]esc.Value {
 	cast, _ := v.(map[string]esc.Value)
 	return cast
+}
+
+// retryProvider implements a default retryProvider policy that retries invoking a provider function on temporary error.
+func (e *evalContext) retryProvider(fn func() (esc.Value, error)) (esc.Value, error) {
+	_, result, err := retry.Until(e.ctx, retry.Acceptor{
+		Accept: func(try int, _ time.Duration) (bool, interface{}, error) {
+			result, err := fn()
+
+			var retryableErr *esc.RetryableError
+			if errors.As(err, &retryableErr) && try < 3 {
+				// temporary error
+				return false, nil, nil
+			}
+			if err != nil {
+				// permanent error, or max retries
+				return false, nil, err
+			}
+			return true, result, nil
+		},
+	})
+	if err != nil {
+		return esc.Value{}, err
+	}
+	return result.(esc.Value), nil
 }
 
 // evaluateBuiltinJoin evaluates a call to the fn::join builtin.
