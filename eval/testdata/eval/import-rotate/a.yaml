@@ -1,0 +1,3 @@
+values:
+  some_secret:
+    fn::secret: foobar

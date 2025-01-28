@@ -1,0 +1,999 @@
+{
+    "check": {
+        "exprs": {
+            "example": {
+                "range": {
+                    "environment": "import-rotate",
+                    "begin": {
+                        "line": 6,
+                        "column": 12,
+                        "byte": 147
+                    },
+                    "end": {
+                        "line": 6,
+                        "column": 39,
+                        "byte": 174
+                    }
+                },
+                "schema": true,
+                "symbol": [
+                    {
+                        "key": "imports",
+                        "range": {
+                            "environment": "import-rotate",
+                            "begin": {
+                                "line": 6,
+                                "column": 14,
+                                "byte": 149
+                            },
+                            "end": {
+                                "line": 6,
+                                "column": 21,
+                                "byte": 156
+                            }
+                        },
+                        "value": {
+                            "environment": "import-rotate",
+                            "begin": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            },
+                            "end": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            }
+                        }
+                    },
+                    {
+                        "key": "a",
+                        "range": {
+                            "environment": "import-rotate",
+                            "begin": {
+                                "line": 6,
+                                "column": 21,
+                                "byte": 156
+                            },
+                            "end": {
+                                "line": 6,
+                                "column": 26,
+                                "byte": 161
+                            }
+                        },
+                        "value": {
+                            "environment": "import-rotate",
+                            "begin": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            },
+                            "end": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            }
+                        }
+                    },
+                    {
+                        "key": "some_secret",
+                        "range": {
+                            "environment": "import-rotate",
+                            "begin": {
+                                "line": 6,
+                                "column": 26,
+                                "byte": 161
+                            },
+                            "end": {
+                                "line": 6,
+                                "column": 38,
+                                "byte": 173
+                            }
+                        },
+                        "value": {
+                            "environment": "import-rotate",
+                            "begin": {
+                                "line": 6,
+                                "column": 12,
+                                "byte": 147
+                            },
+                            "end": {
+                                "line": 6,
+                                "column": 39,
+                                "byte": 174
+                            }
+                        }
+                    }
+                ]
+            }
+        },
+        "properties": {
+            "example": {
+                "unknown": true,
+                "trace": {
+                    "def": {
+                        "environment": "import-rotate",
+                        "begin": {
+                            "line": 6,
+                            "column": 12,
+                            "byte": 147
+                        },
+                        "end": {
+                            "line": 6,
+                            "column": 39,
+                            "byte": 174
+                        }
+                    }
+                }
+            }
+        },
+        "schema": {
+            "properties": {
+                "example": true
+            },
+            "type": "object",
+            "required": [
+                "example"
+            ]
+        },
+        "executionContext": {
+            "properties": {
+                "currentEnvironment": {
+                    "value": {
+                        "name": {
+                            "value": "import-rotate",
+                            "trace": {
+                                "def": {
+                                    "environment": "import-rotate",
+                                    "begin": {
+                                        "line": 0,
+                                        "column": 0,
+                                        "byte": 0
+                                    },
+                                    "end": {
+                                        "line": 0,
+                                        "column": 0,
+                                        "byte": 0
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "trace": {
+                        "def": {
+                            "environment": "import-rotate",
+                            "begin": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            },
+                            "end": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            }
+                        }
+                    }
+                },
+                "pulumi": {
+                    "value": {
+                        "user": {
+                            "value": {
+                                "id": {
+                                    "value": "USER_123",
+                                    "trace": {
+                                        "def": {
+                                            "environment": "import-rotate",
+                                            "begin": {
+                                                "line": 0,
+                                                "column": 0,
+                                                "byte": 0
+                                            },
+                                            "end": {
+                                                "line": 0,
+                                                "column": 0,
+                                                "byte": 0
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            "trace": {
+                                "def": {
+                                    "environment": "import-rotate",
+                                    "begin": {
+                                        "line": 0,
+                                        "column": 0,
+                                        "byte": 0
+                                    },
+                                    "end": {
+                                        "line": 0,
+                                        "column": 0,
+                                        "byte": 0
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "trace": {
+                        "def": {
+                            "environment": "import-rotate",
+                            "begin": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            },
+                            "end": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            }
+                        }
+                    }
+                },
+                "rootEnvironment": {
+                    "value": {
+                        "name": {
+                            "value": "import-rotate",
+                            "trace": {
+                                "def": {
+                                    "environment": "import-rotate",
+                                    "begin": {
+                                        "line": 0,
+                                        "column": 0,
+                                        "byte": 0
+                                    },
+                                    "end": {
+                                        "line": 0,
+                                        "column": 0,
+                                        "byte": 0
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "trace": {
+                        "def": {
+                            "environment": "import-rotate",
+                            "begin": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            },
+                            "end": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            }
+                        }
+                    }
+                }
+            },
+            "schema": {
+                "properties": {
+                    "currentEnvironment": {
+                        "properties": {
+                            "name": {
+                                "type": "string",
+                                "const": "import-rotate"
+                            }
+                        },
+                        "type": "object",
+                        "required": [
+                            "name"
+                        ]
+                    },
+                    "pulumi": {
+                        "properties": {
+                            "user": {
+                                "properties": {
+                                    "id": {
+                                        "type": "string",
+                                        "const": "USER_123"
+                                    }
+                                },
+                                "type": "object",
+                                "required": [
+                                    "id"
+                                ]
+                            }
+                        },
+                        "type": "object",
+                        "required": [
+                            "user"
+                        ]
+                    },
+                    "rootEnvironment": {
+                        "properties": {
+                            "name": {
+                                "type": "string",
+                                "const": "import-rotate"
+                            }
+                        },
+                        "type": "object",
+                        "required": [
+                            "name"
+                        ]
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "currentEnvironment",
+                    "pulumi",
+                    "rootEnvironment"
+                ]
+            }
+        }
+    },
+    "checkJson": {
+        "example": "[unknown]"
+    },
+    "eval": {
+        "exprs": {
+            "example": {
+                "range": {
+                    "environment": "import-rotate",
+                    "begin": {
+                        "line": 6,
+                        "column": 12,
+                        "byte": 147
+                    },
+                    "end": {
+                        "line": 6,
+                        "column": 39,
+                        "byte": 174
+                    }
+                },
+                "schema": true,
+                "symbol": [
+                    {
+                        "key": "imports",
+                        "range": {
+                            "environment": "import-rotate",
+                            "begin": {
+                                "line": 6,
+                                "column": 14,
+                                "byte": 149
+                            },
+                            "end": {
+                                "line": 6,
+                                "column": 21,
+                                "byte": 156
+                            }
+                        },
+                        "value": {
+                            "environment": "import-rotate",
+                            "begin": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            },
+                            "end": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            }
+                        }
+                    },
+                    {
+                        "key": "a",
+                        "range": {
+                            "environment": "import-rotate",
+                            "begin": {
+                                "line": 6,
+                                "column": 21,
+                                "byte": 156
+                            },
+                            "end": {
+                                "line": 6,
+                                "column": 26,
+                                "byte": 161
+                            }
+                        },
+                        "value": {
+                            "environment": "import-rotate",
+                            "begin": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            },
+                            "end": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            }
+                        }
+                    },
+                    {
+                        "key": "some_secret",
+                        "range": {
+                            "environment": "import-rotate",
+                            "begin": {
+                                "line": 6,
+                                "column": 26,
+                                "byte": 161
+                            },
+                            "end": {
+                                "line": 6,
+                                "column": 38,
+                                "byte": 173
+                            }
+                        },
+                        "value": {
+                            "environment": "import-rotate",
+                            "begin": {
+                                "line": 6,
+                                "column": 12,
+                                "byte": 147
+                            },
+                            "end": {
+                                "line": 6,
+                                "column": 39,
+                                "byte": 174
+                            }
+                        }
+                    }
+                ]
+            }
+        },
+        "properties": {
+            "example": {
+                "unknown": true,
+                "trace": {
+                    "def": {
+                        "environment": "import-rotate",
+                        "begin": {
+                            "line": 6,
+                            "column": 12,
+                            "byte": 147
+                        },
+                        "end": {
+                            "line": 6,
+                            "column": 39,
+                            "byte": 174
+                        }
+                    }
+                }
+            }
+        },
+        "schema": {
+            "properties": {
+                "example": true
+            },
+            "type": "object",
+            "required": [
+                "example"
+            ]
+        },
+        "executionContext": {
+            "properties": {
+                "currentEnvironment": {
+                    "value": {
+                        "name": {
+                            "value": "import-rotate",
+                            "trace": {
+                                "def": {
+                                    "environment": "import-rotate",
+                                    "begin": {
+                                        "line": 0,
+                                        "column": 0,
+                                        "byte": 0
+                                    },
+                                    "end": {
+                                        "line": 0,
+                                        "column": 0,
+                                        "byte": 0
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "trace": {
+                        "def": {
+                            "environment": "import-rotate",
+                            "begin": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            },
+                            "end": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            }
+                        }
+                    }
+                },
+                "pulumi": {
+                    "value": {
+                        "user": {
+                            "value": {
+                                "id": {
+                                    "value": "USER_123",
+                                    "trace": {
+                                        "def": {
+                                            "environment": "import-rotate",
+                                            "begin": {
+                                                "line": 0,
+                                                "column": 0,
+                                                "byte": 0
+                                            },
+                                            "end": {
+                                                "line": 0,
+                                                "column": 0,
+                                                "byte": 0
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            "trace": {
+                                "def": {
+                                    "environment": "import-rotate",
+                                    "begin": {
+                                        "line": 0,
+                                        "column": 0,
+                                        "byte": 0
+                                    },
+                                    "end": {
+                                        "line": 0,
+                                        "column": 0,
+                                        "byte": 0
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "trace": {
+                        "def": {
+                            "environment": "import-rotate",
+                            "begin": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            },
+                            "end": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            }
+                        }
+                    }
+                },
+                "rootEnvironment": {
+                    "value": {
+                        "name": {
+                            "value": "import-rotate",
+                            "trace": {
+                                "def": {
+                                    "environment": "import-rotate",
+                                    "begin": {
+                                        "line": 0,
+                                        "column": 0,
+                                        "byte": 0
+                                    },
+                                    "end": {
+                                        "line": 0,
+                                        "column": 0,
+                                        "byte": 0
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "trace": {
+                        "def": {
+                            "environment": "import-rotate",
+                            "begin": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            },
+                            "end": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            }
+                        }
+                    }
+                }
+            },
+            "schema": {
+                "properties": {
+                    "currentEnvironment": {
+                        "properties": {
+                            "name": {
+                                "type": "string",
+                                "const": "import-rotate"
+                            }
+                        },
+                        "type": "object",
+                        "required": [
+                            "name"
+                        ]
+                    },
+                    "pulumi": {
+                        "properties": {
+                            "user": {
+                                "properties": {
+                                    "id": {
+                                        "type": "string",
+                                        "const": "USER_123"
+                                    }
+                                },
+                                "type": "object",
+                                "required": [
+                                    "id"
+                                ]
+                            }
+                        },
+                        "type": "object",
+                        "required": [
+                            "user"
+                        ]
+                    },
+                    "rootEnvironment": {
+                        "properties": {
+                            "name": {
+                                "type": "string",
+                                "const": "import-rotate"
+                            }
+                        },
+                        "type": "object",
+                        "required": [
+                            "name"
+                        ]
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "currentEnvironment",
+                    "pulumi",
+                    "rootEnvironment"
+                ]
+            }
+        }
+    },
+    "evalJsonRedacted": {
+        "example": "[unknown]"
+    },
+    "evalJSONRevealed": {
+        "example": "[unknown]"
+    },
+    "rotate": {
+        "exprs": {
+            "example": {
+                "range": {
+                    "environment": "import-rotate",
+                    "begin": {
+                        "line": 6,
+                        "column": 12,
+                        "byte": 147
+                    },
+                    "end": {
+                        "line": 6,
+                        "column": 39,
+                        "byte": 174
+                    }
+                },
+                "schema": {
+                    "type": "string",
+                    "const": "foobar"
+                },
+                "symbol": [
+                    {
+                        "key": "imports",
+                        "range": {
+                            "environment": "import-rotate",
+                            "begin": {
+                                "line": 6,
+                                "column": 14,
+                                "byte": 149
+                            },
+                            "end": {
+                                "line": 6,
+                                "column": 21,
+                                "byte": 156
+                            }
+                        },
+                        "value": {
+                            "environment": "import-rotate",
+                            "begin": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            },
+                            "end": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            }
+                        }
+                    },
+                    {
+                        "key": "a",
+                        "range": {
+                            "environment": "import-rotate",
+                            "begin": {
+                                "line": 6,
+                                "column": 21,
+                                "byte": 156
+                            },
+                            "end": {
+                                "line": 6,
+                                "column": 26,
+                                "byte": 161
+                            }
+                        },
+                        "value": {
+                            "environment": "import-rotate",
+                            "begin": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            },
+                            "end": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            }
+                        }
+                    },
+                    {
+                        "key": "some_secret",
+                        "range": {
+                            "environment": "import-rotate",
+                            "begin": {
+                                "line": 6,
+                                "column": 26,
+                                "byte": 161
+                            },
+                            "end": {
+                                "line": 6,
+                                "column": 38,
+                                "byte": 173
+                            }
+                        },
+                        "value": {
+                            "environment": "a",
+                            "begin": {
+                                "line": 3,
+                                "column": 17,
+                                "byte": 39
+                            },
+                            "end": {
+                                "line": 3,
+                                "column": 23,
+                                "byte": 45
+                            }
+                        }
+                    }
+                ]
+            }
+        },
+        "properties": {
+            "example": {
+                "value": "foobar",
+                "secret": true,
+                "trace": {
+                    "def": {
+                        "environment": "import-rotate",
+                        "begin": {
+                            "line": 6,
+                            "column": 12,
+                            "byte": 147
+                        },
+                        "end": {
+                            "line": 6,
+                            "column": 39,
+                            "byte": 174
+                        }
+                    }
+                }
+            }
+        },
+        "schema": {
+            "properties": {
+                "example": {
+                    "type": "string",
+                    "const": "foobar"
+                }
+            },
+            "type": "object",
+            "required": [
+                "example"
+            ]
+        },
+        "executionContext": {
+            "properties": {
+                "currentEnvironment": {
+                    "value": {
+                        "name": {
+                            "value": "import-rotate",
+                            "trace": {
+                                "def": {
+                                    "environment": "import-rotate",
+                                    "begin": {
+                                        "line": 0,
+                                        "column": 0,
+                                        "byte": 0
+                                    },
+                                    "end": {
+                                        "line": 0,
+                                        "column": 0,
+                                        "byte": 0
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "trace": {
+                        "def": {
+                            "environment": "import-rotate",
+                            "begin": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            },
+                            "end": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            }
+                        }
+                    }
+                },
+                "pulumi": {
+                    "value": {
+                        "user": {
+                            "value": {
+                                "id": {
+                                    "value": "USER_123",
+                                    "trace": {
+                                        "def": {
+                                            "environment": "import-rotate",
+                                            "begin": {
+                                                "line": 0,
+                                                "column": 0,
+                                                "byte": 0
+                                            },
+                                            "end": {
+                                                "line": 0,
+                                                "column": 0,
+                                                "byte": 0
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            "trace": {
+                                "def": {
+                                    "environment": "import-rotate",
+                                    "begin": {
+                                        "line": 0,
+                                        "column": 0,
+                                        "byte": 0
+                                    },
+                                    "end": {
+                                        "line": 0,
+                                        "column": 0,
+                                        "byte": 0
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "trace": {
+                        "def": {
+                            "environment": "import-rotate",
+                            "begin": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            },
+                            "end": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            }
+                        }
+                    }
+                },
+                "rootEnvironment": {
+                    "value": {
+                        "name": {
+                            "value": "import-rotate",
+                            "trace": {
+                                "def": {
+                                    "environment": "import-rotate",
+                                    "begin": {
+                                        "line": 0,
+                                        "column": 0,
+                                        "byte": 0
+                                    },
+                                    "end": {
+                                        "line": 0,
+                                        "column": 0,
+                                        "byte": 0
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "trace": {
+                        "def": {
+                            "environment": "import-rotate",
+                            "begin": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            },
+                            "end": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            }
+                        }
+                    }
+                }
+            },
+            "schema": {
+                "properties": {
+                    "currentEnvironment": {
+                        "properties": {
+                            "name": {
+                                "type": "string",
+                                "const": "import-rotate"
+                            }
+                        },
+                        "type": "object",
+                        "required": [
+                            "name"
+                        ]
+                    },
+                    "pulumi": {
+                        "properties": {
+                            "user": {
+                                "properties": {
+                                    "id": {
+                                        "type": "string",
+                                        "const": "USER_123"
+                                    }
+                                },
+                                "type": "object",
+                                "required": [
+                                    "id"
+                                ]
+                            }
+                        },
+                        "type": "object",
+                        "required": [
+                            "user"
+                        ]
+                    },
+                    "rootEnvironment": {
+                        "properties": {
+                            "name": {
+                                "type": "string",
+                                "const": "import-rotate"
+                            }
+                        },
+                        "type": "object",
+                        "required": [
+                            "name"
+                        ]
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "currentEnvironment",
+                    "pulumi",
+                    "rootEnvironment"
+                ]
+            }
+        }
+    },
+    "rotateJson": {
+        "example": "[secret]"
+    }
+}
