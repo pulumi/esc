@@ -10,9 +10,9 @@
                         "byte": 24
                     },
                     "end": {
-                        "line": 25,
-                        "column": 21,
-                        "byte": 432
+                        "line": 34,
+                        "column": 19,
+                        "byte": 611
                     }
                 },
                 "schema": {
@@ -62,6 +62,7 @@
                                 "nested"
                             ]
                         },
+                        "embedded-in-another-fn": true,
                         "not-rotated": {
                             "properties": {
                                 "a": {
@@ -102,6 +103,7 @@
                     "type": "object",
                     "required": [
                         "deeply",
+                        "embedded-in-another-fn",
                         "not-rotated",
                         "subscript-path"
                     ]
@@ -118,6 +120,19 @@
                             "line": 17,
                             "column": 11,
                             "byte": 256
+                        }
+                    },
+                    "embedded-in-another-fn": {
+                        "environment": "rotate-paths",
+                        "begin": {
+                            "line": 27,
+                            "column": 5,
+                            "byte": 438
+                        },
+                        "end": {
+                            "line": 27,
+                            "column": 27,
+                            "byte": 460
                         }
                     },
                     "not-rotated": {
@@ -601,6 +616,301 @@
                                         }
                                     }
                                 ]
+                            }
+                        }
+                    },
+                    "embedded-in-another-fn": {
+                        "range": {
+                            "environment": "rotate-paths",
+                            "begin": {
+                                "line": 28,
+                                "column": 7,
+                                "byte": 468
+                            },
+                            "end": {
+                                "line": 34,
+                                "column": 19,
+                                "byte": 611
+                            }
+                        },
+                        "schema": true,
+                        "builtin": {
+                            "name": "fn::open::test",
+                            "nameRange": {
+                                "environment": "rotate-paths",
+                                "begin": {
+                                    "line": 28,
+                                    "column": 7,
+                                    "byte": 468
+                                },
+                                "end": {
+                                    "line": 28,
+                                    "column": 21,
+                                    "byte": 482
+                                }
+                            },
+                            "argSchema": true,
+                            "arg": {
+                                "range": {
+                                    "environment": "rotate-paths",
+                                    "begin": {
+                                        "line": 29,
+                                        "column": 9,
+                                        "byte": 492
+                                    },
+                                    "end": {
+                                        "line": 34,
+                                        "column": 19,
+                                        "byte": 611
+                                    }
+                                },
+                                "schema": {
+                                    "properties": {
+                                        "some-input": {
+                                            "properties": {
+                                                "a": {
+                                                    "type": "string"
+                                                },
+                                                "b": {
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "type": "object",
+                                            "required": [
+                                                "a",
+                                                "b"
+                                            ]
+                                        }
+                                    },
+                                    "type": "object",
+                                    "required": [
+                                        "some-input"
+                                    ]
+                                },
+                                "keyRanges": {
+                                    "some-input": {
+                                        "environment": "rotate-paths",
+                                        "begin": {
+                                            "line": 29,
+                                            "column": 9,
+                                            "byte": 492
+                                        },
+                                        "end": {
+                                            "line": 29,
+                                            "column": 19,
+                                            "byte": 502
+                                        }
+                                    }
+                                },
+                                "object": {
+                                    "some-input": {
+                                        "range": {
+                                            "environment": "rotate-paths",
+                                            "begin": {
+                                                "line": 30,
+                                                "column": 11,
+                                                "byte": 514
+                                            },
+                                            "end": {
+                                                "line": 34,
+                                                "column": 19,
+                                                "byte": 611
+                                            }
+                                        },
+                                        "schema": {
+                                            "properties": {
+                                                "a": {
+                                                    "type": "string"
+                                                },
+                                                "b": {
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "type": "object",
+                                            "required": [
+                                                "a",
+                                                "b"
+                                            ]
+                                        },
+                                        "builtin": {
+                                            "name": "fn::rotate::swap",
+                                            "nameRange": {
+                                                "environment": "rotate-paths",
+                                                "begin": {
+                                                    "line": 30,
+                                                    "column": 11,
+                                                    "byte": 514
+                                                },
+                                                "end": {
+                                                    "line": 30,
+                                                    "column": 27,
+                                                    "byte": 530
+                                                }
+                                            },
+                                            "argSchema": {
+                                                "properties": {
+                                                    "inputs": true,
+                                                    "state": {
+                                                        "properties": {
+                                                            "a": {
+                                                                "type": "string"
+                                                            },
+                                                            "b": {
+                                                                "type": "string"
+                                                            }
+                                                        },
+                                                        "type": "object",
+                                                        "required": [
+                                                            "a",
+                                                            "b"
+                                                        ]
+                                                    }
+                                                },
+                                                "type": "object",
+                                                "required": [
+                                                    "inputs",
+                                                    "state"
+                                                ]
+                                            },
+                                            "arg": {
+                                                "range": {
+                                                    "begin": {
+                                                        "line": 0,
+                                                        "column": 0,
+                                                        "byte": 0
+                                                    },
+                                                    "end": {
+                                                        "line": 0,
+                                                        "column": 0,
+                                                        "byte": 0
+                                                    }
+                                                },
+                                                "object": {
+                                                    "inputs": {
+                                                        "range": {
+                                                            "environment": "rotate-paths",
+                                                            "begin": {
+                                                                "line": 31,
+                                                                "column": 21,
+                                                                "byte": 552
+                                                            },
+                                                            "end": {
+                                                                "line": 31,
+                                                                "column": 21,
+                                                                "byte": 552
+                                                            }
+                                                        },
+                                                        "schema": {
+                                                            "type": "object"
+                                                        }
+                                                    },
+                                                    "state": {
+                                                        "range": {
+                                                            "environment": "rotate-paths",
+                                                            "begin": {
+                                                                "line": 33,
+                                                                "column": 15,
+                                                                "byte": 588
+                                                            },
+                                                            "end": {
+                                                                "line": 34,
+                                                                "column": 19,
+                                                                "byte": 611
+                                                            }
+                                                        },
+                                                        "schema": {
+                                                            "properties": {
+                                                                "a": {
+                                                                    "type": "string",
+                                                                    "const": "a"
+                                                                },
+                                                                "b": {
+                                                                    "type": "string",
+                                                                    "const": "b"
+                                                                }
+                                                            },
+                                                            "type": "object",
+                                                            "required": [
+                                                                "a",
+                                                                "b"
+                                                            ]
+                                                        },
+                                                        "keyRanges": {
+                                                            "a": {
+                                                                "environment": "rotate-paths",
+                                                                "begin": {
+                                                                    "line": 33,
+                                                                    "column": 15,
+                                                                    "byte": 588
+                                                                },
+                                                                "end": {
+                                                                    "line": 33,
+                                                                    "column": 16,
+                                                                    "byte": 589
+                                                                }
+                                                            },
+                                                            "b": {
+                                                                "environment": "rotate-paths",
+                                                                "begin": {
+                                                                    "line": 34,
+                                                                    "column": 15,
+                                                                    "byte": 607
+                                                                },
+                                                                "end": {
+                                                                    "line": 34,
+                                                                    "column": 16,
+                                                                    "byte": 608
+                                                                }
+                                                            }
+                                                        },
+                                                        "object": {
+                                                            "a": {
+                                                                "range": {
+                                                                    "environment": "rotate-paths",
+                                                                    "begin": {
+                                                                        "line": 33,
+                                                                        "column": 18,
+                                                                        "byte": 591
+                                                                    },
+                                                                    "end": {
+                                                                        "line": 33,
+                                                                        "column": 19,
+                                                                        "byte": 592
+                                                                    }
+                                                                },
+                                                                "schema": {
+                                                                    "type": "string",
+                                                                    "const": "a"
+                                                                },
+                                                                "literal": "a"
+                                                            },
+                                                            "b": {
+                                                                "range": {
+                                                                    "environment": "rotate-paths",
+                                                                    "begin": {
+                                                                        "line": 34,
+                                                                        "column": 18,
+                                                                        "byte": 610
+                                                                    },
+                                                                    "end": {
+                                                                        "line": 34,
+                                                                        "column": 19,
+                                                                        "byte": 611
+                                                                    }
+                                                                },
+                                                                "schema": {
+                                                                    "type": "string",
+                                                                    "const": "b"
+                                                                },
+                                                                "literal": "b"
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
                             }
                         }
                     },
@@ -1156,6 +1466,24 @@
                             }
                         }
                     },
+                    "embedded-in-another-fn": {
+                        "unknown": true,
+                        "trace": {
+                            "def": {
+                                "environment": "rotate-paths",
+                                "begin": {
+                                    "line": 28,
+                                    "column": 7,
+                                    "byte": 468
+                                },
+                                "end": {
+                                    "line": 34,
+                                    "column": 19,
+                                    "byte": 611
+                                }
+                            }
+                        }
+                    },
                     "not-rotated": {
                         "unknown": true,
                         "trace": {
@@ -1221,9 +1549,9 @@
                             "byte": 24
                         },
                         "end": {
-                            "line": 25,
-                            "column": 21,
-                            "byte": 432
+                            "line": 34,
+                            "column": 19,
+                            "byte": 611
                         }
                     }
                 }
@@ -1278,6 +1606,7 @@
                                 "nested"
                             ]
                         },
+                        "embedded-in-another-fn": true,
                         "not-rotated": {
                             "properties": {
                                 "a": {
@@ -1318,6 +1647,7 @@
                     "type": "object",
                     "required": [
                         "deeply",
+                        "embedded-in-another-fn",
                         "not-rotated",
                         "subscript-path"
                     ]
@@ -1528,6 +1858,7 @@
                     }
                 ]
             },
+            "embedded-in-another-fn": "[unknown]",
             "not-rotated": "[unknown]",
             "subscript-path": [
                 "[unknown]"
@@ -1545,9 +1876,9 @@
                         "byte": 24
                     },
                     "end": {
-                        "line": 25,
-                        "column": 21,
-                        "byte": 432
+                        "line": 34,
+                        "column": 19,
+                        "byte": 611
                     }
                 },
                 "schema": {
@@ -1599,6 +1930,31 @@
                                 "nested"
                             ]
                         },
+                        "embedded-in-another-fn": {
+                            "properties": {
+                                "some-input": {
+                                    "properties": {
+                                        "a": {
+                                            "type": "string",
+                                            "const": "a"
+                                        },
+                                        "b": {
+                                            "type": "string",
+                                            "const": "b"
+                                        }
+                                    },
+                                    "type": "object",
+                                    "required": [
+                                        "a",
+                                        "b"
+                                    ]
+                                }
+                            },
+                            "type": "object",
+                            "required": [
+                                "some-input"
+                            ]
+                        },
                         "not-rotated": {
                             "properties": {
                                 "a": {
@@ -1643,6 +1999,7 @@
                     "type": "object",
                     "required": [
                         "deeply",
+                        "embedded-in-another-fn",
                         "not-rotated",
                         "subscript-path"
                     ]
@@ -1659,6 +2016,19 @@
                             "line": 17,
                             "column": 11,
                             "byte": 256
+                        }
+                    },
+                    "embedded-in-another-fn": {
+                        "environment": "rotate-paths",
+                        "begin": {
+                            "line": 27,
+                            "column": 5,
+                            "byte": 438
+                        },
+                        "end": {
+                            "line": 27,
+                            "column": 27,
+                            "byte": 460
                         }
                     },
                     "not-rotated": {
@@ -2152,6 +2522,329 @@
                                         }
                                     }
                                 ]
+                            }
+                        }
+                    },
+                    "embedded-in-another-fn": {
+                        "range": {
+                            "environment": "rotate-paths",
+                            "begin": {
+                                "line": 28,
+                                "column": 7,
+                                "byte": 468
+                            },
+                            "end": {
+                                "line": 34,
+                                "column": 19,
+                                "byte": 611
+                            }
+                        },
+                        "schema": {
+                            "properties": {
+                                "some-input": {
+                                    "properties": {
+                                        "a": {
+                                            "type": "string",
+                                            "const": "a"
+                                        },
+                                        "b": {
+                                            "type": "string",
+                                            "const": "b"
+                                        }
+                                    },
+                                    "type": "object",
+                                    "required": [
+                                        "a",
+                                        "b"
+                                    ]
+                                }
+                            },
+                            "type": "object",
+                            "required": [
+                                "some-input"
+                            ]
+                        },
+                        "builtin": {
+                            "name": "fn::open::test",
+                            "nameRange": {
+                                "environment": "rotate-paths",
+                                "begin": {
+                                    "line": 28,
+                                    "column": 7,
+                                    "byte": 468
+                                },
+                                "end": {
+                                    "line": 28,
+                                    "column": 21,
+                                    "byte": 482
+                                }
+                            },
+                            "argSchema": true,
+                            "arg": {
+                                "range": {
+                                    "environment": "rotate-paths",
+                                    "begin": {
+                                        "line": 29,
+                                        "column": 9,
+                                        "byte": 492
+                                    },
+                                    "end": {
+                                        "line": 34,
+                                        "column": 19,
+                                        "byte": 611
+                                    }
+                                },
+                                "schema": {
+                                    "properties": {
+                                        "some-input": {
+                                            "properties": {
+                                                "a": {
+                                                    "type": "string",
+                                                    "const": "a"
+                                                },
+                                                "b": {
+                                                    "type": "string",
+                                                    "const": "b"
+                                                }
+                                            },
+                                            "type": "object",
+                                            "required": [
+                                                "a",
+                                                "b"
+                                            ]
+                                        }
+                                    },
+                                    "type": "object",
+                                    "required": [
+                                        "some-input"
+                                    ]
+                                },
+                                "keyRanges": {
+                                    "some-input": {
+                                        "environment": "rotate-paths",
+                                        "begin": {
+                                            "line": 29,
+                                            "column": 9,
+                                            "byte": 492
+                                        },
+                                        "end": {
+                                            "line": 29,
+                                            "column": 19,
+                                            "byte": 502
+                                        }
+                                    }
+                                },
+                                "object": {
+                                    "some-input": {
+                                        "range": {
+                                            "environment": "rotate-paths",
+                                            "begin": {
+                                                "line": 30,
+                                                "column": 11,
+                                                "byte": 514
+                                            },
+                                            "end": {
+                                                "line": 34,
+                                                "column": 19,
+                                                "byte": 611
+                                            }
+                                        },
+                                        "schema": {
+                                            "properties": {
+                                                "a": {
+                                                    "type": "string",
+                                                    "const": "a"
+                                                },
+                                                "b": {
+                                                    "type": "string",
+                                                    "const": "b"
+                                                }
+                                            },
+                                            "type": "object",
+                                            "required": [
+                                                "a",
+                                                "b"
+                                            ]
+                                        },
+                                        "builtin": {
+                                            "name": "fn::rotate::swap",
+                                            "nameRange": {
+                                                "environment": "rotate-paths",
+                                                "begin": {
+                                                    "line": 30,
+                                                    "column": 11,
+                                                    "byte": 514
+                                                },
+                                                "end": {
+                                                    "line": 30,
+                                                    "column": 27,
+                                                    "byte": 530
+                                                }
+                                            },
+                                            "argSchema": {
+                                                "properties": {
+                                                    "inputs": true,
+                                                    "state": {
+                                                        "properties": {
+                                                            "a": {
+                                                                "type": "string"
+                                                            },
+                                                            "b": {
+                                                                "type": "string"
+                                                            }
+                                                        },
+                                                        "type": "object",
+                                                        "required": [
+                                                            "a",
+                                                            "b"
+                                                        ]
+                                                    }
+                                                },
+                                                "type": "object",
+                                                "required": [
+                                                    "inputs",
+                                                    "state"
+                                                ]
+                                            },
+                                            "arg": {
+                                                "range": {
+                                                    "begin": {
+                                                        "line": 0,
+                                                        "column": 0,
+                                                        "byte": 0
+                                                    },
+                                                    "end": {
+                                                        "line": 0,
+                                                        "column": 0,
+                                                        "byte": 0
+                                                    }
+                                                },
+                                                "object": {
+                                                    "inputs": {
+                                                        "range": {
+                                                            "environment": "rotate-paths",
+                                                            "begin": {
+                                                                "line": 31,
+                                                                "column": 21,
+                                                                "byte": 552
+                                                            },
+                                                            "end": {
+                                                                "line": 31,
+                                                                "column": 21,
+                                                                "byte": 552
+                                                            }
+                                                        },
+                                                        "schema": {
+                                                            "type": "object"
+                                                        }
+                                                    },
+                                                    "state": {
+                                                        "range": {
+                                                            "environment": "rotate-paths",
+                                                            "begin": {
+                                                                "line": 33,
+                                                                "column": 15,
+                                                                "byte": 588
+                                                            },
+                                                            "end": {
+                                                                "line": 34,
+                                                                "column": 19,
+                                                                "byte": 611
+                                                            }
+                                                        },
+                                                        "schema": {
+                                                            "properties": {
+                                                                "a": {
+                                                                    "type": "string",
+                                                                    "const": "a"
+                                                                },
+                                                                "b": {
+                                                                    "type": "string",
+                                                                    "const": "b"
+                                                                }
+                                                            },
+                                                            "type": "object",
+                                                            "required": [
+                                                                "a",
+                                                                "b"
+                                                            ]
+                                                        },
+                                                        "keyRanges": {
+                                                            "a": {
+                                                                "environment": "rotate-paths",
+                                                                "begin": {
+                                                                    "line": 33,
+                                                                    "column": 15,
+                                                                    "byte": 588
+                                                                },
+                                                                "end": {
+                                                                    "line": 33,
+                                                                    "column": 16,
+                                                                    "byte": 589
+                                                                }
+                                                            },
+                                                            "b": {
+                                                                "environment": "rotate-paths",
+                                                                "begin": {
+                                                                    "line": 34,
+                                                                    "column": 15,
+                                                                    "byte": 607
+                                                                },
+                                                                "end": {
+                                                                    "line": 34,
+                                                                    "column": 16,
+                                                                    "byte": 608
+                                                                }
+                                                            }
+                                                        },
+                                                        "object": {
+                                                            "a": {
+                                                                "range": {
+                                                                    "environment": "rotate-paths",
+                                                                    "begin": {
+                                                                        "line": 33,
+                                                                        "column": 18,
+                                                                        "byte": 591
+                                                                    },
+                                                                    "end": {
+                                                                        "line": 33,
+                                                                        "column": 19,
+                                                                        "byte": 592
+                                                                    }
+                                                                },
+                                                                "schema": {
+                                                                    "type": "string",
+                                                                    "const": "a"
+                                                                },
+                                                                "literal": "a"
+                                                            },
+                                                            "b": {
+                                                                "range": {
+                                                                    "environment": "rotate-paths",
+                                                                    "begin": {
+                                                                        "line": 34,
+                                                                        "column": 18,
+                                                                        "byte": 610
+                                                                    },
+                                                                    "end": {
+                                                                        "line": 34,
+                                                                        "column": 19,
+                                                                        "byte": 611
+                                                                    }
+                                                                },
+                                                                "schema": {
+                                                                    "type": "string",
+                                                                    "const": "b"
+                                                                },
+                                                                "literal": "b"
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
                             }
                         }
                     },
@@ -2750,6 +3443,80 @@
                             }
                         }
                     },
+                    "embedded-in-another-fn": {
+                        "value": {
+                            "some-input": {
+                                "value": {
+                                    "a": {
+                                        "value": "a",
+                                        "trace": {
+                                            "def": {
+                                                "environment": "rotate-paths",
+                                                "begin": {
+                                                    "line": 28,
+                                                    "column": 7,
+                                                    "byte": 468
+                                                },
+                                                "end": {
+                                                    "line": 34,
+                                                    "column": 19,
+                                                    "byte": 611
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "b": {
+                                        "value": "b",
+                                        "trace": {
+                                            "def": {
+                                                "environment": "rotate-paths",
+                                                "begin": {
+                                                    "line": 28,
+                                                    "column": 7,
+                                                    "byte": 468
+                                                },
+                                                "end": {
+                                                    "line": 34,
+                                                    "column": 19,
+                                                    "byte": 611
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                "trace": {
+                                    "def": {
+                                        "environment": "rotate-paths",
+                                        "begin": {
+                                            "line": 28,
+                                            "column": 7,
+                                            "byte": 468
+                                        },
+                                        "end": {
+                                            "line": 34,
+                                            "column": 19,
+                                            "byte": 611
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "trace": {
+                            "def": {
+                                "environment": "rotate-paths",
+                                "begin": {
+                                    "line": 28,
+                                    "column": 7,
+                                    "byte": 468
+                                },
+                                "end": {
+                                    "line": 34,
+                                    "column": 19,
+                                    "byte": 611
+                                }
+                            }
+                        }
+                    },
                     "not-rotated": {
                         "value": {
                             "a": {
@@ -2889,9 +3656,9 @@
                             "byte": 24
                         },
                         "end": {
-                            "line": 25,
-                            "column": 21,
-                            "byte": 432
+                            "line": 34,
+                            "column": 19,
+                            "byte": 611
                         }
                     }
                 }
@@ -2948,6 +3715,31 @@
                                 "nested"
                             ]
                         },
+                        "embedded-in-another-fn": {
+                            "properties": {
+                                "some-input": {
+                                    "properties": {
+                                        "a": {
+                                            "type": "string",
+                                            "const": "a"
+                                        },
+                                        "b": {
+                                            "type": "string",
+                                            "const": "b"
+                                        }
+                                    },
+                                    "type": "object",
+                                    "required": [
+                                        "a",
+                                        "b"
+                                    ]
+                                }
+                            },
+                            "type": "object",
+                            "required": [
+                                "some-input"
+                            ]
+                        },
                         "not-rotated": {
                             "properties": {
                                 "a": {
@@ -2992,6 +3784,7 @@
                     "type": "object",
                     "required": [
                         "deeply",
+                        "embedded-in-another-fn",
                         "not-rotated",
                         "subscript-path"
                     ]
@@ -3205,6 +3998,12 @@
                     }
                 ]
             },
+            "embedded-in-another-fn": {
+                "some-input": {
+                    "a": "a",
+                    "b": "b"
+                }
+            },
             "not-rotated": {
                 "a": "a",
                 "b": "b"
@@ -3231,6 +4030,12 @@
                     }
                 ]
             },
+            "embedded-in-another-fn": {
+                "some-input": {
+                    "a": "a",
+                    "b": "b"
+                }
+            },
             "not-rotated": {
                 "a": "a",
                 "b": "b"
@@ -3254,9 +4059,9 @@
                         "byte": 24
                     },
                     "end": {
-                        "line": 25,
-                        "column": 21,
-                        "byte": 432
+                        "line": 34,
+                        "column": 19,
+                        "byte": 611
                     }
                 },
                 "schema": {
@@ -3308,6 +4113,31 @@
                                 "nested"
                             ]
                         },
+                        "embedded-in-another-fn": {
+                            "properties": {
+                                "some-input": {
+                                    "properties": {
+                                        "a": {
+                                            "type": "string",
+                                            "const": "b"
+                                        },
+                                        "b": {
+                                            "type": "string",
+                                            "const": "a"
+                                        }
+                                    },
+                                    "type": "object",
+                                    "required": [
+                                        "a",
+                                        "b"
+                                    ]
+                                }
+                            },
+                            "type": "object",
+                            "required": [
+                                "some-input"
+                            ]
+                        },
                         "not-rotated": {
                             "properties": {
                                 "a": {
@@ -3352,6 +4182,7 @@
                     "type": "object",
                     "required": [
                         "deeply",
+                        "embedded-in-another-fn",
                         "not-rotated",
                         "subscript-path"
                     ]
@@ -3368,6 +4199,19 @@
                             "line": 17,
                             "column": 11,
                             "byte": 256
+                        }
+                    },
+                    "embedded-in-another-fn": {
+                        "environment": "rotate-paths",
+                        "begin": {
+                            "line": 27,
+                            "column": 5,
+                            "byte": 438
+                        },
+                        "end": {
+                            "line": 27,
+                            "column": 27,
+                            "byte": 460
                         }
                     },
                     "not-rotated": {
@@ -3861,6 +4705,329 @@
                                         }
                                     }
                                 ]
+                            }
+                        }
+                    },
+                    "embedded-in-another-fn": {
+                        "range": {
+                            "environment": "rotate-paths",
+                            "begin": {
+                                "line": 28,
+                                "column": 7,
+                                "byte": 468
+                            },
+                            "end": {
+                                "line": 34,
+                                "column": 19,
+                                "byte": 611
+                            }
+                        },
+                        "schema": {
+                            "properties": {
+                                "some-input": {
+                                    "properties": {
+                                        "a": {
+                                            "type": "string",
+                                            "const": "b"
+                                        },
+                                        "b": {
+                                            "type": "string",
+                                            "const": "a"
+                                        }
+                                    },
+                                    "type": "object",
+                                    "required": [
+                                        "a",
+                                        "b"
+                                    ]
+                                }
+                            },
+                            "type": "object",
+                            "required": [
+                                "some-input"
+                            ]
+                        },
+                        "builtin": {
+                            "name": "fn::open::test",
+                            "nameRange": {
+                                "environment": "rotate-paths",
+                                "begin": {
+                                    "line": 28,
+                                    "column": 7,
+                                    "byte": 468
+                                },
+                                "end": {
+                                    "line": 28,
+                                    "column": 21,
+                                    "byte": 482
+                                }
+                            },
+                            "argSchema": true,
+                            "arg": {
+                                "range": {
+                                    "environment": "rotate-paths",
+                                    "begin": {
+                                        "line": 29,
+                                        "column": 9,
+                                        "byte": 492
+                                    },
+                                    "end": {
+                                        "line": 34,
+                                        "column": 19,
+                                        "byte": 611
+                                    }
+                                },
+                                "schema": {
+                                    "properties": {
+                                        "some-input": {
+                                            "properties": {
+                                                "a": {
+                                                    "type": "string",
+                                                    "const": "b"
+                                                },
+                                                "b": {
+                                                    "type": "string",
+                                                    "const": "a"
+                                                }
+                                            },
+                                            "type": "object",
+                                            "required": [
+                                                "a",
+                                                "b"
+                                            ]
+                                        }
+                                    },
+                                    "type": "object",
+                                    "required": [
+                                        "some-input"
+                                    ]
+                                },
+                                "keyRanges": {
+                                    "some-input": {
+                                        "environment": "rotate-paths",
+                                        "begin": {
+                                            "line": 29,
+                                            "column": 9,
+                                            "byte": 492
+                                        },
+                                        "end": {
+                                            "line": 29,
+                                            "column": 19,
+                                            "byte": 502
+                                        }
+                                    }
+                                },
+                                "object": {
+                                    "some-input": {
+                                        "range": {
+                                            "environment": "rotate-paths",
+                                            "begin": {
+                                                "line": 30,
+                                                "column": 11,
+                                                "byte": 514
+                                            },
+                                            "end": {
+                                                "line": 34,
+                                                "column": 19,
+                                                "byte": 611
+                                            }
+                                        },
+                                        "schema": {
+                                            "properties": {
+                                                "a": {
+                                                    "type": "string",
+                                                    "const": "b"
+                                                },
+                                                "b": {
+                                                    "type": "string",
+                                                    "const": "a"
+                                                }
+                                            },
+                                            "type": "object",
+                                            "required": [
+                                                "a",
+                                                "b"
+                                            ]
+                                        },
+                                        "builtin": {
+                                            "name": "fn::rotate::swap",
+                                            "nameRange": {
+                                                "environment": "rotate-paths",
+                                                "begin": {
+                                                    "line": 30,
+                                                    "column": 11,
+                                                    "byte": 514
+                                                },
+                                                "end": {
+                                                    "line": 30,
+                                                    "column": 27,
+                                                    "byte": 530
+                                                }
+                                            },
+                                            "argSchema": {
+                                                "properties": {
+                                                    "inputs": true,
+                                                    "state": {
+                                                        "properties": {
+                                                            "a": {
+                                                                "type": "string"
+                                                            },
+                                                            "b": {
+                                                                "type": "string"
+                                                            }
+                                                        },
+                                                        "type": "object",
+                                                        "required": [
+                                                            "a",
+                                                            "b"
+                                                        ]
+                                                    }
+                                                },
+                                                "type": "object",
+                                                "required": [
+                                                    "inputs",
+                                                    "state"
+                                                ]
+                                            },
+                                            "arg": {
+                                                "range": {
+                                                    "begin": {
+                                                        "line": 0,
+                                                        "column": 0,
+                                                        "byte": 0
+                                                    },
+                                                    "end": {
+                                                        "line": 0,
+                                                        "column": 0,
+                                                        "byte": 0
+                                                    }
+                                                },
+                                                "object": {
+                                                    "inputs": {
+                                                        "range": {
+                                                            "environment": "rotate-paths",
+                                                            "begin": {
+                                                                "line": 31,
+                                                                "column": 21,
+                                                                "byte": 552
+                                                            },
+                                                            "end": {
+                                                                "line": 31,
+                                                                "column": 21,
+                                                                "byte": 552
+                                                            }
+                                                        },
+                                                        "schema": {
+                                                            "type": "object"
+                                                        }
+                                                    },
+                                                    "state": {
+                                                        "range": {
+                                                            "environment": "rotate-paths",
+                                                            "begin": {
+                                                                "line": 33,
+                                                                "column": 15,
+                                                                "byte": 588
+                                                            },
+                                                            "end": {
+                                                                "line": 34,
+                                                                "column": 19,
+                                                                "byte": 611
+                                                            }
+                                                        },
+                                                        "schema": {
+                                                            "properties": {
+                                                                "a": {
+                                                                    "type": "string",
+                                                                    "const": "a"
+                                                                },
+                                                                "b": {
+                                                                    "type": "string",
+                                                                    "const": "b"
+                                                                }
+                                                            },
+                                                            "type": "object",
+                                                            "required": [
+                                                                "a",
+                                                                "b"
+                                                            ]
+                                                        },
+                                                        "keyRanges": {
+                                                            "a": {
+                                                                "environment": "rotate-paths",
+                                                                "begin": {
+                                                                    "line": 33,
+                                                                    "column": 15,
+                                                                    "byte": 588
+                                                                },
+                                                                "end": {
+                                                                    "line": 33,
+                                                                    "column": 16,
+                                                                    "byte": 589
+                                                                }
+                                                            },
+                                                            "b": {
+                                                                "environment": "rotate-paths",
+                                                                "begin": {
+                                                                    "line": 34,
+                                                                    "column": 15,
+                                                                    "byte": 607
+                                                                },
+                                                                "end": {
+                                                                    "line": 34,
+                                                                    "column": 16,
+                                                                    "byte": 608
+                                                                }
+                                                            }
+                                                        },
+                                                        "object": {
+                                                            "a": {
+                                                                "range": {
+                                                                    "environment": "rotate-paths",
+                                                                    "begin": {
+                                                                        "line": 33,
+                                                                        "column": 18,
+                                                                        "byte": 591
+                                                                    },
+                                                                    "end": {
+                                                                        "line": 33,
+                                                                        "column": 19,
+                                                                        "byte": 592
+                                                                    }
+                                                                },
+                                                                "schema": {
+                                                                    "type": "string",
+                                                                    "const": "a"
+                                                                },
+                                                                "literal": "a"
+                                                            },
+                                                            "b": {
+                                                                "range": {
+                                                                    "environment": "rotate-paths",
+                                                                    "begin": {
+                                                                        "line": 34,
+                                                                        "column": 18,
+                                                                        "byte": 610
+                                                                    },
+                                                                    "end": {
+                                                                        "line": 34,
+                                                                        "column": 19,
+                                                                        "byte": 611
+                                                                    }
+                                                                },
+                                                                "schema": {
+                                                                    "type": "string",
+                                                                    "const": "b"
+                                                                },
+                                                                "literal": "b"
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
                             }
                         }
                     },
@@ -4459,6 +5626,80 @@
                             }
                         }
                     },
+                    "embedded-in-another-fn": {
+                        "value": {
+                            "some-input": {
+                                "value": {
+                                    "a": {
+                                        "value": "b",
+                                        "trace": {
+                                            "def": {
+                                                "environment": "rotate-paths",
+                                                "begin": {
+                                                    "line": 28,
+                                                    "column": 7,
+                                                    "byte": 468
+                                                },
+                                                "end": {
+                                                    "line": 34,
+                                                    "column": 19,
+                                                    "byte": 611
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "b": {
+                                        "value": "a",
+                                        "trace": {
+                                            "def": {
+                                                "environment": "rotate-paths",
+                                                "begin": {
+                                                    "line": 28,
+                                                    "column": 7,
+                                                    "byte": 468
+                                                },
+                                                "end": {
+                                                    "line": 34,
+                                                    "column": 19,
+                                                    "byte": 611
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                "trace": {
+                                    "def": {
+                                        "environment": "rotate-paths",
+                                        "begin": {
+                                            "line": 28,
+                                            "column": 7,
+                                            "byte": 468
+                                        },
+                                        "end": {
+                                            "line": 34,
+                                            "column": 19,
+                                            "byte": 611
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "trace": {
+                            "def": {
+                                "environment": "rotate-paths",
+                                "begin": {
+                                    "line": 28,
+                                    "column": 7,
+                                    "byte": 468
+                                },
+                                "end": {
+                                    "line": 34,
+                                    "column": 19,
+                                    "byte": 611
+                                }
+                            }
+                        }
+                    },
                     "not-rotated": {
                         "value": {
                             "a": {
@@ -4598,9 +5839,9 @@
                             "byte": 24
                         },
                         "end": {
-                            "line": 25,
-                            "column": 21,
-                            "byte": 432
+                            "line": 34,
+                            "column": 19,
+                            "byte": 611
                         }
                     }
                 }
@@ -4657,6 +5898,31 @@
                                 "nested"
                             ]
                         },
+                        "embedded-in-another-fn": {
+                            "properties": {
+                                "some-input": {
+                                    "properties": {
+                                        "a": {
+                                            "type": "string",
+                                            "const": "b"
+                                        },
+                                        "b": {
+                                            "type": "string",
+                                            "const": "a"
+                                        }
+                                    },
+                                    "type": "object",
+                                    "required": [
+                                        "a",
+                                        "b"
+                                    ]
+                                }
+                            },
+                            "type": "object",
+                            "required": [
+                                "some-input"
+                            ]
+                        },
                         "not-rotated": {
                             "properties": {
                                 "a": {
@@ -4701,6 +5967,7 @@
                     "type": "object",
                     "required": [
                         "deeply",
+                        "embedded-in-another-fn",
                         "not-rotated",
                         "subscript-path"
                     ]
@@ -4914,6 +6181,12 @@
                     }
                 ]
             },
+            "embedded-in-another-fn": {
+                "some-input": {
+                    "a": "b",
+                    "b": "a"
+                }
+            },
             "not-rotated": {
                 "a": "a",
                 "b": "b"
@@ -4928,7 +6201,7 @@
     },
     "rotatePatches": [
         {
-            "DocPath": "examples.deeply.nested[0][\"quoted \\\"property\\\"\"].path[\"fn::rotate::swap\"].state",
+            "DocPath": "values.examples.deeply.nested[0][\"quoted \\\"property\\\"\"].path[\"fn::rotate::swap\"].state",
             "Replacement": {
                 "value": {
                     "a": {
@@ -4985,7 +6258,64 @@
             }
         },
         {
-            "DocPath": "examples[\"subscript-path\"][0][\"fn::rotate::swap\"].state",
+            "DocPath": "values.examples[\"embedded-in-another-fn\"][\"fn::open::test\"][\"some-input\"][\"fn::rotate::swap\"].state",
+            "Replacement": {
+                "value": {
+                    "a": {
+                        "value": "b",
+                        "trace": {
+                            "def": {
+                                "environment": "rotate-paths",
+                                "begin": {
+                                    "line": 34,
+                                    "column": 18,
+                                    "byte": 610
+                                },
+                                "end": {
+                                    "line": 34,
+                                    "column": 19,
+                                    "byte": 611
+                                }
+                            }
+                        }
+                    },
+                    "b": {
+                        "value": "a",
+                        "trace": {
+                            "def": {
+                                "environment": "rotate-paths",
+                                "begin": {
+                                    "line": 33,
+                                    "column": 18,
+                                    "byte": 591
+                                },
+                                "end": {
+                                    "line": 33,
+                                    "column": 19,
+                                    "byte": 592
+                                }
+                            }
+                        }
+                    }
+                },
+                "trace": {
+                    "def": {
+                        "begin": {
+                            "line": 0,
+                            "column": 0,
+                            "byte": 0
+                        },
+                        "end": {
+                            "line": 0,
+                            "column": 0,
+                            "byte": 0
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "DocPath": "values.examples[\"subscript-path\"][0][\"fn::rotate::swap\"].state",
             "Replacement": {
                 "value": {
                     "a": {

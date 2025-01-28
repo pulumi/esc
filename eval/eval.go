@@ -118,11 +118,11 @@ func RotateEnvironment(
 	execContext *esc.ExecContext,
 	paths []resource.PropertyPath,
 ) (*esc.Environment, []*Patch, syntax.Diagnostics) {
-	rotatePaths := make(map[string]bool, len(paths))
+	rotateDocPaths := make(map[string]bool, len(paths))
 	for _, path := range paths {
-		rotatePaths[path.String()] = true
+		rotateDocPaths["values."+path.String()] = true
 	}
-	return evalEnvironment(ctx, false, true, name, env, decrypter, providers, environments, execContext, true, rotatePaths)
+	return evalEnvironment(ctx, false, true, name, env, decrypter, providers, environments, execContext, true, rotateDocPaths)
 }
 
 // evalEnvironment evaluates an environment and exports the result of evaluation.
@@ -192,8 +192,8 @@ type evalContext struct {
 	root      *expr  // the root expression
 	base      *value // the base value
 
-	rotatePaths  map[string]bool // when `rotating`, the subset of paths to invoke rotation for. if empty, all rotators will be invoked.
-	patchOutputs []*Patch        // updated rotation state generated during evaluation, to be written back to the environment definition
+	rotateDocPaths map[string]bool // the subset of document paths to invoke rotation for when rotating. if empty, all rotators will be invoked.
+	patchOutputs   []*Patch        // updated rotation state generated during evaluation, to be written back to the environment definition
 
 	diags syntax.Diagnostics // diagnostics generated during evaluation
 }
@@ -210,21 +210,21 @@ func newEvalContext(
 	imports map[string]*imported,
 	execContext *esc.ExecContext,
 	showSecrets bool,
-	rotatePaths map[string]bool,
+	rotateDocPaths map[string]bool,
 ) *evalContext {
 	return &evalContext{
-		ctx:          ctx,
-		validating:   validating,
-		rotating:     rotating,
-		showSecrets:  showSecrets,
-		name:         name,
-		env:          env,
-		decrypter:    decrypter,
-		providers:    providers,
-		environments: environments,
-		imports:      imports,
-		execContext:  execContext.CopyForEnv(name),
-		rotatePaths:  rotatePaths,
+		ctx:            ctx,
+		validating:     validating,
+		rotating:       rotating,
+		showSecrets:    showSecrets,
+		name:           name,
+		env:            env,
+		decrypter:      decrypter,
+		providers:      providers,
+		environments:   environments,
+		imports:        imports,
+		execContext:    execContext.CopyForEnv(name),
+		rotateDocPaths: rotateDocPaths,
 	}
 }
 
@@ -1021,7 +1021,8 @@ func (e *evalContext) evaluateBuiltinRotate(x *expr, repr *rotateExpr) *value {
 	}
 
 	// if rotating, invoke prior to open
-	if e.shouldRotate(x.path) {
+	docPath := x.repr.syntax().Syntax().Syntax().Path()
+	if e.shouldRotate(docPath) {
 		newState, err := rotator.Rotate(
 			e.ctx,
 			inputs.export("").Value.(map[string]esc.Value),
@@ -1038,7 +1039,7 @@ func (e *evalContext) evaluateBuiltinRotate(x *expr, repr *rotateExpr) *value {
 
 		e.patchOutputs = append(e.patchOutputs, &Patch{
 			// rotation output is written back to the fn's `state` input
-			DocPath:     util.JoinKey(x.path, repr.node.Name().GetValue()) + ".state",
+			DocPath:     util.JoinKey(docPath, repr.node.Name().GetValue()) + ".state",
 			Replacement: newState,
 		})
 
@@ -1061,15 +1062,15 @@ func (e *evalContext) evaluateBuiltinRotate(x *expr, repr *rotateExpr) *value {
 }
 
 // shouldRotate returns true if the rotator at this path should be invoked.
-func (e *evalContext) shouldRotate(path string) bool {
+func (e *evalContext) shouldRotate(docPath string) bool {
 	if !e.rotating {
 		return false
 	}
-	if len(e.rotatePaths) == 0 {
+	if len(e.rotateDocPaths) == 0 {
 		// we're rotating the full environment
 		return true
 	}
-	return e.rotatePaths[path]
+	return e.rotateDocPaths[docPath]
 }
 
 // evaluateBuiltinJoin evaluates a call to the fn::join builtin.
