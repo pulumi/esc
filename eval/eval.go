@@ -19,7 +19,6 @@ import (
 	"encoding/base64"
 	"encoding/json"
 	"fmt"
-	"github.com/pulumi/pulumi/sdk/v3/go/common/resource"
 	"io"
 	"reflect"
 	"sort"
@@ -31,6 +30,7 @@ import (
 	"github.com/pulumi/esc/schema"
 	"github.com/pulumi/esc/syntax"
 	"github.com/pulumi/esc/syntax/encoding"
+	"github.com/pulumi/pulumi/sdk/v3/go/common/resource"
 	"golang.org/x/exp/maps"
 )
 
