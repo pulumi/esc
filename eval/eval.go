@@ -474,6 +474,10 @@ func (e *evalContext) evaluateImport(myImports map[string]*value, decl *ast.Impo
 	if decl.Meta != nil && decl.Meta.Merge != nil {
 		merge = decl.Meta.Merge.Value
 	}
+	rotationOnly := false
+	if decl.Meta != nil && decl.Meta.RotationOnly != nil {
+		rotationOnly = decl.Meta.RotationOnly.Value
+	}
 
 	var val *value
 	if imported, ok := e.imports[name]; ok {
@@ -482,6 +486,9 @@ func (e *evalContext) evaluateImport(myImports map[string]*value, decl *ast.Impo
 			return
 		}
 		val = imported.value
+	} else if rotationOnly && !e.rotating {
+		// this import should only be evaluated during rotation, and we're not rotating, so resolve it as unknown
+		val = &value{def: newMissingExpr("", nil), schema: schema.Always(), unknown: true}
 	} else {
 		bytes, dec, err := e.environments.LoadEnvironment(e.ctx, name)
 		if err != nil {
