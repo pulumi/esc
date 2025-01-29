@@ -421,6 +421,9 @@ func (x *rotateExpr) syntax() ast.Expr {
 	return x.node
 }
 
+type importExpr struct {
+}
+
 // toJSONExpr represents a call to the fn::toJSON builtin.
 type toJSONExpr struct {
 	node *ast.ToJSONExpr
@@ -451,6 +454,16 @@ type toStringExpr struct {
 }
 
 func (x *toStringExpr) syntax() ast.Expr {
+	return x.node
+}
+
+type inlineImportExpr struct {
+	node        *ast.InlineImportExpr
+	environment *expr
+	path        *expr
+}
+
+func (x *inlineImportExpr) syntax() ast.Expr {
 	return x.node
 }
 

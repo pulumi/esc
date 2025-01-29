@@ -469,6 +469,21 @@ func Rotate(provider string, inputs, state *ObjectExpr) *RotateExpr {
 	}
 }
 
+type InlineImportExpr struct {
+	builtinNode
+
+	Environment *StringExpr
+	Path        *SymbolExpr
+}
+
+func InlineImportSyntax(node *syntax.ObjectNode, name *StringExpr, args Expr, environment *StringExpr, path *SymbolExpr) *InlineImportExpr {
+	return &InlineImportExpr{
+		builtinNode: builtin(node, name, args),
+		Environment: environment,
+		Path:        path,
+	}
+}
+
 // ToJSON returns the underlying structure as a json string.
 type ToJSONExpr struct {
 	builtinNode
@@ -652,6 +667,8 @@ func tryParseFunction(node *syntax.ObjectNode) (Expr, syntax.Diagnostics, bool) 
 		parse = parseToJSON
 	case "fn::toString":
 		parse = parseToString
+	case "fn::import":
+		parse = parseInlineImport
 	default:
 		if strings.HasPrefix(kvp.Key.Value(), "fn::open::") {
 			parse = parseShortOpen
@@ -815,6 +832,28 @@ func parseShortRotate(node *syntax.ObjectNode, name *StringExpr, args Expr) (Exp
 	}
 
 	return RotateSyntax(node, name, args, provider, inputs, state), nil
+}
+
+func parseInlineImport(node *syntax.ObjectNode, name *StringExpr, args Expr) (Expr, syntax.Diagnostics) {
+	list, ok := args.(*ArrayExpr)
+	if !ok || len(list.Elements) != 2 {
+		diags := syntax.Diagnostics{ExprError(args, "the argument to fn::import must be a two-valued list")}
+		return InlineImportSyntax(node, name, args, nil, nil), diags
+	}
+
+	var diags syntax.Diagnostics
+	environment, ok := list.Elements[0].(*StringExpr)
+	if !ok {
+		diags.Extend(ExprError(list.Elements[0], "environment name must be a string literal"))
+	}
+	path, ok := list.Elements[1].(*StringExpr)
+	if !ok {
+		diags.Extend(ExprError(list.Elements[1], "path must be a string literal"))
+	}
+	_, _, propertyAccess, diags := parsePropertyAccess(path.Syntax(), 0, path.Value)
+	diags.Extend(diags...)
+
+	return InlineImportSyntax(node, name, list, environment, Symbol(propertyAccess.Accessors...)), nil
 }
 
 func parseJoin(node *syntax.ObjectNode, name *StringExpr, args Expr) (Expr, syntax.Diagnostics) {
