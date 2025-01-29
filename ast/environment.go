@@ -146,8 +146,8 @@ func (d *MapDecl[T]) parse(name string, node syntax.Node) syntax.Diagnostics {
 type ImportMetaDecl struct {
 	declNode
 
-	Merge        *BooleanExpr
-	RotationOnly *BooleanExpr
+	Merge      *BooleanExpr
+	RotateOnly *BooleanExpr
 }
 
 func (d *ImportMetaDecl) recordSyntax() *syntax.Node {
