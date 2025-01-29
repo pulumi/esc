@@ -354,13 +354,6 @@ func declare[Expr exprNode](e *evalContext, path string, x Expr, base *value) *e
 	case *ast.ToStringExpr:
 		repr := &toStringExpr{node: x, value: declare(e, "", x.Value, nil)}
 		return newExpr(path, repr, schema.String().Schema(), base)
-	case *ast.InlineImportExpr:
-		repr := &inlineImportExpr{
-			node:        x,
-			environment: declare(e, "", x.Environment, nil),
-			path:        declare(e, "", x.Path, nil),
-		}
-		return newExpr(path, repr, schema.Always().Schema(), base)
 	case *ast.ArrayExpr:
 		elements := make([]*expr, len(x.Elements))
 		for i, x := range x.Elements {
@@ -578,8 +571,6 @@ func (e *evalContext) evaluateExpr(x *expr) *value {
 		val = e.evaluateBuiltinFromJSON(x, repr)
 	case *joinExpr:
 		val = e.evaluateBuiltinJoin(x, repr)
-	case *inlineImportExpr:
-		val = e.evaluateBuiltinInlineImport(x, repr)
 	case *openExpr:
 		val = e.evaluateBuiltinOpen(x, repr)
 	case *rotateExpr:
@@ -1091,10 +1082,6 @@ func (e *evalContext) evaluateBuiltinJoin(x *expr, repr *joinExpr) *value {
 		v.repr = strings.Join(values, delim.repr.(string))
 	}
 	return v
-}
-
-func (e *evalContext) evaluateBuiltinInlineImport(x *expr, repr *inlineImportExpr) {
-	
 }
 
 // evaluateBuiltinFromBase64 evaluates a call from the fn::fromBase64 builtin.
