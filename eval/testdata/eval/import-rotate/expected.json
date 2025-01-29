@@ -105,6 +105,283 @@
                         }
                     }
                 ]
+            },
+            "example2": {
+                "range": {
+                    "environment": "import-rotate",
+                    "begin": {
+                        "line": 9,
+                        "column": 5,
+                        "byte": 190
+                    },
+                    "end": {
+                        "line": 15,
+                        "column": 13,
+                        "byte": 354
+                    }
+                },
+                "schema": {
+                    "properties": {
+                        "a": {
+                            "type": "string"
+                        },
+                        "b": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object",
+                    "required": [
+                        "a",
+                        "b"
+                    ]
+                },
+                "builtin": {
+                    "name": "fn::rotate::swap",
+                    "nameRange": {
+                        "environment": "import-rotate",
+                        "begin": {
+                            "line": 9,
+                            "column": 5,
+                            "byte": 190
+                        },
+                        "end": {
+                            "line": 9,
+                            "column": 21,
+                            "byte": 206
+                        }
+                    },
+                    "argSchema": {
+                        "properties": {
+                            "inputs": true,
+                            "state": {
+                                "properties": {
+                                    "a": {
+                                        "type": "string"
+                                    },
+                                    "b": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object",
+                                "required": [
+                                    "a",
+                                    "b"
+                                ]
+                            }
+                        },
+                        "type": "object",
+                        "required": [
+                            "inputs",
+                            "state"
+                        ]
+                    },
+                    "arg": {
+                        "range": {
+                            "begin": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            },
+                            "end": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            }
+                        },
+                        "object": {
+                            "inputs": {
+                                "range": {
+                                    "environment": "import-rotate",
+                                    "begin": {
+                                        "line": 12,
+                                        "column": 9,
+                                        "byte": 300
+                                    },
+                                    "end": {
+                                        "line": 12,
+                                        "column": 24,
+                                        "byte": 315
+                                    }
+                                },
+                                "schema": {
+                                    "properties": {
+                                        "foo": true
+                                    },
+                                    "type": "object",
+                                    "required": [
+                                        "foo"
+                                    ]
+                                },
+                                "keyRanges": {
+                                    "foo": {
+                                        "environment": "import-rotate",
+                                        "begin": {
+                                            "line": 12,
+                                            "column": 9,
+                                            "byte": 300
+                                        },
+                                        "end": {
+                                            "line": 12,
+                                            "column": 12,
+                                            "byte": 303
+                                        }
+                                    }
+                                },
+                                "object": {
+                                    "foo": {
+                                        "range": {
+                                            "environment": "import-rotate",
+                                            "begin": {
+                                                "line": 12,
+                                                "column": 14,
+                                                "byte": 305
+                                            },
+                                            "end": {
+                                                "line": 12,
+                                                "column": 24,
+                                                "byte": 315
+                                            }
+                                        },
+                                        "schema": true,
+                                        "symbol": [
+                                            {
+                                                "key": "example",
+                                                "range": {
+                                                    "environment": "import-rotate",
+                                                    "begin": {
+                                                        "line": 12,
+                                                        "column": 16,
+                                                        "byte": 307
+                                                    },
+                                                    "end": {
+                                                        "line": 12,
+                                                        "column": 23,
+                                                        "byte": 314
+                                                    }
+                                                },
+                                                "value": {
+                                                    "environment": "import-rotate",
+                                                    "begin": {
+                                                        "line": 6,
+                                                        "column": 12,
+                                                        "byte": 145
+                                                    },
+                                                    "end": {
+                                                        "line": 6,
+                                                        "column": 39,
+                                                        "byte": 172
+                                                    }
+                                                }
+                                            }
+                                        ]
+                                    }
+                                }
+                            },
+                            "state": {
+                                "range": {
+                                    "environment": "import-rotate",
+                                    "begin": {
+                                        "line": 14,
+                                        "column": 9,
+                                        "byte": 337
+                                    },
+                                    "end": {
+                                        "line": 15,
+                                        "column": 13,
+                                        "byte": 354
+                                    }
+                                },
+                                "schema": {
+                                    "properties": {
+                                        "a": {
+                                            "type": "string",
+                                            "const": "a"
+                                        },
+                                        "b": {
+                                            "type": "string",
+                                            "const": "b"
+                                        }
+                                    },
+                                    "type": "object",
+                                    "required": [
+                                        "a",
+                                        "b"
+                                    ]
+                                },
+                                "keyRanges": {
+                                    "a": {
+                                        "environment": "import-rotate",
+                                        "begin": {
+                                            "line": 14,
+                                            "column": 9,
+                                            "byte": 337
+                                        },
+                                        "end": {
+                                            "line": 14,
+                                            "column": 10,
+                                            "byte": 338
+                                        }
+                                    },
+                                    "b": {
+                                        "environment": "import-rotate",
+                                        "begin": {
+                                            "line": 15,
+                                            "column": 9,
+                                            "byte": 350
+                                        },
+                                        "end": {
+                                            "line": 15,
+                                            "column": 10,
+                                            "byte": 351
+                                        }
+                                    }
+                                },
+                                "object": {
+                                    "a": {
+                                        "range": {
+                                            "environment": "import-rotate",
+                                            "begin": {
+                                                "line": 14,
+                                                "column": 12,
+                                                "byte": 340
+                                            },
+                                            "end": {
+                                                "line": 14,
+                                                "column": 13,
+                                                "byte": 341
+                                            }
+                                        },
+                                        "schema": {
+                                            "type": "string",
+                                            "const": "a"
+                                        },
+                                        "literal": "a"
+                                    },
+                                    "b": {
+                                        "range": {
+                                            "environment": "import-rotate",
+                                            "begin": {
+                                                "line": 15,
+                                                "column": 12,
+                                                "byte": 353
+                                            },
+                                            "end": {
+                                                "line": 15,
+                                                "column": 13,
+                                                "byte": 354
+                                            }
+                                        },
+                                        "schema": {
+                                            "type": "string",
+                                            "const": "b"
+                                        },
+                                        "literal": "b"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
             }
         },
         "properties": {
@@ -125,15 +402,49 @@
                         }
                     }
                 }
+            },
+            "example2": {
+                "unknown": true,
+                "trace": {
+                    "def": {
+                        "environment": "import-rotate",
+                        "begin": {
+                            "line": 9,
+                            "column": 5,
+                            "byte": 190
+                        },
+                        "end": {
+                            "line": 15,
+                            "column": 13,
+                            "byte": 354
+                        }
+                    }
+                }
             }
         },
         "schema": {
             "properties": {
-                "example": true
+                "example": true,
+                "example2": {
+                    "properties": {
+                        "a": {
+                            "type": "string"
+                        },
+                        "b": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object",
+                    "required": [
+                        "a",
+                        "b"
+                    ]
+                }
             },
             "type": "object",
             "required": [
-                "example"
+                "example",
+                "example2"
             ]
         },
         "executionContext": {
@@ -326,7 +637,8 @@
         }
     },
     "checkJson": {
-        "example": "[unknown]"
+        "example": "[unknown]",
+        "example2": "[unknown]"
     },
     "eval": {
         "exprs": {
@@ -434,6 +746,285 @@
                         }
                     }
                 ]
+            },
+            "example2": {
+                "range": {
+                    "environment": "import-rotate",
+                    "begin": {
+                        "line": 9,
+                        "column": 5,
+                        "byte": 190
+                    },
+                    "end": {
+                        "line": 15,
+                        "column": 13,
+                        "byte": 354
+                    }
+                },
+                "schema": {
+                    "properties": {
+                        "a": {
+                            "type": "string",
+                            "const": "a"
+                        },
+                        "b": {
+                            "type": "string",
+                            "const": "b"
+                        }
+                    },
+                    "type": "object",
+                    "required": [
+                        "a",
+                        "b"
+                    ]
+                },
+                "builtin": {
+                    "name": "fn::rotate::swap",
+                    "nameRange": {
+                        "environment": "import-rotate",
+                        "begin": {
+                            "line": 9,
+                            "column": 5,
+                            "byte": 190
+                        },
+                        "end": {
+                            "line": 9,
+                            "column": 21,
+                            "byte": 206
+                        }
+                    },
+                    "argSchema": {
+                        "properties": {
+                            "inputs": true,
+                            "state": {
+                                "properties": {
+                                    "a": {
+                                        "type": "string"
+                                    },
+                                    "b": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object",
+                                "required": [
+                                    "a",
+                                    "b"
+                                ]
+                            }
+                        },
+                        "type": "object",
+                        "required": [
+                            "inputs",
+                            "state"
+                        ]
+                    },
+                    "arg": {
+                        "range": {
+                            "begin": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            },
+                            "end": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            }
+                        },
+                        "object": {
+                            "inputs": {
+                                "range": {
+                                    "environment": "import-rotate",
+                                    "begin": {
+                                        "line": 12,
+                                        "column": 9,
+                                        "byte": 300
+                                    },
+                                    "end": {
+                                        "line": 12,
+                                        "column": 24,
+                                        "byte": 315
+                                    }
+                                },
+                                "schema": {
+                                    "properties": {
+                                        "foo": true
+                                    },
+                                    "type": "object",
+                                    "required": [
+                                        "foo"
+                                    ]
+                                },
+                                "keyRanges": {
+                                    "foo": {
+                                        "environment": "import-rotate",
+                                        "begin": {
+                                            "line": 12,
+                                            "column": 9,
+                                            "byte": 300
+                                        },
+                                        "end": {
+                                            "line": 12,
+                                            "column": 12,
+                                            "byte": 303
+                                        }
+                                    }
+                                },
+                                "object": {
+                                    "foo": {
+                                        "range": {
+                                            "environment": "import-rotate",
+                                            "begin": {
+                                                "line": 12,
+                                                "column": 14,
+                                                "byte": 305
+                                            },
+                                            "end": {
+                                                "line": 12,
+                                                "column": 24,
+                                                "byte": 315
+                                            }
+                                        },
+                                        "schema": true,
+                                        "symbol": [
+                                            {
+                                                "key": "example",
+                                                "range": {
+                                                    "environment": "import-rotate",
+                                                    "begin": {
+                                                        "line": 12,
+                                                        "column": 16,
+                                                        "byte": 307
+                                                    },
+                                                    "end": {
+                                                        "line": 12,
+                                                        "column": 23,
+                                                        "byte": 314
+                                                    }
+                                                },
+                                                "value": {
+                                                    "environment": "import-rotate",
+                                                    "begin": {
+                                                        "line": 6,
+                                                        "column": 12,
+                                                        "byte": 145
+                                                    },
+                                                    "end": {
+                                                        "line": 6,
+                                                        "column": 39,
+                                                        "byte": 172
+                                                    }
+                                                }
+                                            }
+                                        ]
+                                    }
+                                }
+                            },
+                            "state": {
+                                "range": {
+                                    "environment": "import-rotate",
+                                    "begin": {
+                                        "line": 14,
+                                        "column": 9,
+                                        "byte": 337
+                                    },
+                                    "end": {
+                                        "line": 15,
+                                        "column": 13,
+                                        "byte": 354
+                                    }
+                                },
+                                "schema": {
+                                    "properties": {
+                                        "a": {
+                                            "type": "string",
+                                            "const": "a"
+                                        },
+                                        "b": {
+                                            "type": "string",
+                                            "const": "b"
+                                        }
+                                    },
+                                    "type": "object",
+                                    "required": [
+                                        "a",
+                                        "b"
+                                    ]
+                                },
+                                "keyRanges": {
+                                    "a": {
+                                        "environment": "import-rotate",
+                                        "begin": {
+                                            "line": 14,
+                                            "column": 9,
+                                            "byte": 337
+                                        },
+                                        "end": {
+                                            "line": 14,
+                                            "column": 10,
+                                            "byte": 338
+                                        }
+                                    },
+                                    "b": {
+                                        "environment": "import-rotate",
+                                        "begin": {
+                                            "line": 15,
+                                            "column": 9,
+                                            "byte": 350
+                                        },
+                                        "end": {
+                                            "line": 15,
+                                            "column": 10,
+                                            "byte": 351
+                                        }
+                                    }
+                                },
+                                "object": {
+                                    "a": {
+                                        "range": {
+                                            "environment": "import-rotate",
+                                            "begin": {
+                                                "line": 14,
+                                                "column": 12,
+                                                "byte": 340
+                                            },
+                                            "end": {
+                                                "line": 14,
+                                                "column": 13,
+                                                "byte": 341
+                                            }
+                                        },
+                                        "schema": {
+                                            "type": "string",
+                                            "const": "a"
+                                        },
+                                        "literal": "a"
+                                    },
+                                    "b": {
+                                        "range": {
+                                            "environment": "import-rotate",
+                                            "begin": {
+                                                "line": 15,
+                                                "column": 12,
+                                                "byte": 353
+                                            },
+                                            "end": {
+                                                "line": 15,
+                                                "column": 13,
+                                                "byte": 354
+                                            }
+                                        },
+                                        "schema": {
+                                            "type": "string",
+                                            "const": "b"
+                                        },
+                                        "literal": "b"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
             }
         },
         "properties": {
@@ -454,15 +1045,88 @@
                         }
                     }
                 }
+            },
+            "example2": {
+                "value": {
+                    "a": {
+                        "value": "a",
+                        "trace": {
+                            "def": {
+                                "environment": "import-rotate",
+                                "begin": {
+                                    "line": 9,
+                                    "column": 5,
+                                    "byte": 190
+                                },
+                                "end": {
+                                    "line": 15,
+                                    "column": 13,
+                                    "byte": 354
+                                }
+                            }
+                        }
+                    },
+                    "b": {
+                        "value": "b",
+                        "trace": {
+                            "def": {
+                                "environment": "import-rotate",
+                                "begin": {
+                                    "line": 9,
+                                    "column": 5,
+                                    "byte": 190
+                                },
+                                "end": {
+                                    "line": 15,
+                                    "column": 13,
+                                    "byte": 354
+                                }
+                            }
+                        }
+                    }
+                },
+                "trace": {
+                    "def": {
+                        "environment": "import-rotate",
+                        "begin": {
+                            "line": 9,
+                            "column": 5,
+                            "byte": 190
+                        },
+                        "end": {
+                            "line": 15,
+                            "column": 13,
+                            "byte": 354
+                        }
+                    }
+                }
             }
         },
         "schema": {
             "properties": {
-                "example": true
+                "example": true,
+                "example2": {
+                    "properties": {
+                        "a": {
+                            "type": "string",
+                            "const": "a"
+                        },
+                        "b": {
+                            "type": "string",
+                            "const": "b"
+                        }
+                    },
+                    "type": "object",
+                    "required": [
+                        "a",
+                        "b"
+                    ]
+                }
             },
             "type": "object",
             "required": [
-                "example"
+                "example",
+                "example2"
             ]
         },
         "executionContext": {
@@ -655,10 +1319,18 @@
         }
     },
     "evalJsonRedacted": {
-        "example": "[unknown]"
+        "example": "[unknown]",
+        "example2": {
+            "a": "a",
+            "b": "b"
+        }
     },
     "evalJSONRevealed": {
-        "example": "[unknown]"
+        "example": "[unknown]",
+        "example2": {
+            "a": "a",
+            "b": "b"
+        }
     },
     "rotate": {
         "exprs": {
@@ -769,6 +1441,291 @@
                         }
                     }
                 ]
+            },
+            "example2": {
+                "range": {
+                    "environment": "import-rotate",
+                    "begin": {
+                        "line": 9,
+                        "column": 5,
+                        "byte": 190
+                    },
+                    "end": {
+                        "line": 15,
+                        "column": 13,
+                        "byte": 354
+                    }
+                },
+                "schema": {
+                    "properties": {
+                        "a": {
+                            "type": "string",
+                            "const": "b"
+                        },
+                        "b": {
+                            "type": "string",
+                            "const": "a"
+                        }
+                    },
+                    "type": "object",
+                    "required": [
+                        "a",
+                        "b"
+                    ]
+                },
+                "builtin": {
+                    "name": "fn::rotate::swap",
+                    "nameRange": {
+                        "environment": "import-rotate",
+                        "begin": {
+                            "line": 9,
+                            "column": 5,
+                            "byte": 190
+                        },
+                        "end": {
+                            "line": 9,
+                            "column": 21,
+                            "byte": 206
+                        }
+                    },
+                    "argSchema": {
+                        "properties": {
+                            "inputs": true,
+                            "state": {
+                                "properties": {
+                                    "a": {
+                                        "type": "string"
+                                    },
+                                    "b": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object",
+                                "required": [
+                                    "a",
+                                    "b"
+                                ]
+                            }
+                        },
+                        "type": "object",
+                        "required": [
+                            "inputs",
+                            "state"
+                        ]
+                    },
+                    "arg": {
+                        "range": {
+                            "begin": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            },
+                            "end": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            }
+                        },
+                        "object": {
+                            "inputs": {
+                                "range": {
+                                    "environment": "import-rotate",
+                                    "begin": {
+                                        "line": 12,
+                                        "column": 9,
+                                        "byte": 300
+                                    },
+                                    "end": {
+                                        "line": 12,
+                                        "column": 24,
+                                        "byte": 315
+                                    }
+                                },
+                                "schema": {
+                                    "properties": {
+                                        "foo": {
+                                            "type": "string",
+                                            "const": "foobar"
+                                        }
+                                    },
+                                    "type": "object",
+                                    "required": [
+                                        "foo"
+                                    ]
+                                },
+                                "keyRanges": {
+                                    "foo": {
+                                        "environment": "import-rotate",
+                                        "begin": {
+                                            "line": 12,
+                                            "column": 9,
+                                            "byte": 300
+                                        },
+                                        "end": {
+                                            "line": 12,
+                                            "column": 12,
+                                            "byte": 303
+                                        }
+                                    }
+                                },
+                                "object": {
+                                    "foo": {
+                                        "range": {
+                                            "environment": "import-rotate",
+                                            "begin": {
+                                                "line": 12,
+                                                "column": 14,
+                                                "byte": 305
+                                            },
+                                            "end": {
+                                                "line": 12,
+                                                "column": 24,
+                                                "byte": 315
+                                            }
+                                        },
+                                        "schema": {
+                                            "type": "string",
+                                            "const": "foobar"
+                                        },
+                                        "symbol": [
+                                            {
+                                                "key": "example",
+                                                "range": {
+                                                    "environment": "import-rotate",
+                                                    "begin": {
+                                                        "line": 12,
+                                                        "column": 16,
+                                                        "byte": 307
+                                                    },
+                                                    "end": {
+                                                        "line": 12,
+                                                        "column": 23,
+                                                        "byte": 314
+                                                    }
+                                                },
+                                                "value": {
+                                                    "environment": "import-rotate",
+                                                    "begin": {
+                                                        "line": 6,
+                                                        "column": 12,
+                                                        "byte": 145
+                                                    },
+                                                    "end": {
+                                                        "line": 6,
+                                                        "column": 39,
+                                                        "byte": 172
+                                                    }
+                                                }
+                                            }
+                                        ]
+                                    }
+                                }
+                            },
+                            "state": {
+                                "range": {
+                                    "environment": "import-rotate",
+                                    "begin": {
+                                        "line": 14,
+                                        "column": 9,
+                                        "byte": 337
+                                    },
+                                    "end": {
+                                        "line": 15,
+                                        "column": 13,
+                                        "byte": 354
+                                    }
+                                },
+                                "schema": {
+                                    "properties": {
+                                        "a": {
+                                            "type": "string",
+                                            "const": "a"
+                                        },
+                                        "b": {
+                                            "type": "string",
+                                            "const": "b"
+                                        }
+                                    },
+                                    "type": "object",
+                                    "required": [
+                                        "a",
+                                        "b"
+                                    ]
+                                },
+                                "keyRanges": {
+                                    "a": {
+                                        "environment": "import-rotate",
+                                        "begin": {
+                                            "line": 14,
+                                            "column": 9,
+                                            "byte": 337
+                                        },
+                                        "end": {
+                                            "line": 14,
+                                            "column": 10,
+                                            "byte": 338
+                                        }
+                                    },
+                                    "b": {
+                                        "environment": "import-rotate",
+                                        "begin": {
+                                            "line": 15,
+                                            "column": 9,
+                                            "byte": 350
+                                        },
+                                        "end": {
+                                            "line": 15,
+                                            "column": 10,
+                                            "byte": 351
+                                        }
+                                    }
+                                },
+                                "object": {
+                                    "a": {
+                                        "range": {
+                                            "environment": "import-rotate",
+                                            "begin": {
+                                                "line": 14,
+                                                "column": 12,
+                                                "byte": 340
+                                            },
+                                            "end": {
+                                                "line": 14,
+                                                "column": 13,
+                                                "byte": 341
+                                            }
+                                        },
+                                        "schema": {
+                                            "type": "string",
+                                            "const": "a"
+                                        },
+                                        "literal": "a"
+                                    },
+                                    "b": {
+                                        "range": {
+                                            "environment": "import-rotate",
+                                            "begin": {
+                                                "line": 15,
+                                                "column": 12,
+                                                "byte": 353
+                                            },
+                                            "end": {
+                                                "line": 15,
+                                                "column": 13,
+                                                "byte": 354
+                                            }
+                                        },
+                                        "schema": {
+                                            "type": "string",
+                                            "const": "b"
+                                        },
+                                        "literal": "b"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
             }
         },
         "properties": {
@@ -790,6 +1747,61 @@
                         }
                     }
                 }
+            },
+            "example2": {
+                "value": {
+                    "a": {
+                        "value": "b",
+                        "trace": {
+                            "def": {
+                                "environment": "import-rotate",
+                                "begin": {
+                                    "line": 9,
+                                    "column": 5,
+                                    "byte": 190
+                                },
+                                "end": {
+                                    "line": 15,
+                                    "column": 13,
+                                    "byte": 354
+                                }
+                            }
+                        }
+                    },
+                    "b": {
+                        "value": "a",
+                        "trace": {
+                            "def": {
+                                "environment": "import-rotate",
+                                "begin": {
+                                    "line": 9,
+                                    "column": 5,
+                                    "byte": 190
+                                },
+                                "end": {
+                                    "line": 15,
+                                    "column": 13,
+                                    "byte": 354
+                                }
+                            }
+                        }
+                    }
+                },
+                "trace": {
+                    "def": {
+                        "environment": "import-rotate",
+                        "begin": {
+                            "line": 9,
+                            "column": 5,
+                            "byte": 190
+                        },
+                        "end": {
+                            "line": 15,
+                            "column": 13,
+                            "byte": 354
+                        }
+                    }
+                }
             }
         },
         "schema": {
@@ -797,11 +1809,29 @@
                 "example": {
                     "type": "string",
                     "const": "foobar"
+                },
+                "example2": {
+                    "properties": {
+                        "a": {
+                            "type": "string",
+                            "const": "b"
+                        },
+                        "b": {
+                            "type": "string",
+                            "const": "a"
+                        }
+                    },
+                    "type": "object",
+                    "required": [
+                        "a",
+                        "b"
+                    ]
                 }
             },
             "type": "object",
             "required": [
-                "example"
+                "example",
+                "example2"
             ]
         },
         "executionContext": {
@@ -994,6 +2024,69 @@
         }
     },
     "rotateJson": {
-        "example": "[secret]"
-    }
+        "example": "[secret]",
+        "example2": {
+            "a": "b",
+            "b": "a"
+        }
+    },
+    "rotatePatches": [
+        {
+            "DocPath": "example2[\"fn::rotate::swap\"].state",
+            "Replacement": {
+                "value": {
+                    "a": {
+                        "value": "b",
+                        "trace": {
+                            "def": {
+                                "environment": "import-rotate",
+                                "begin": {
+                                    "line": 15,
+                                    "column": 12,
+                                    "byte": 353
+                                },
+                                "end": {
+                                    "line": 15,
+                                    "column": 13,
+                                    "byte": 354
+                                }
+                            }
+                        }
+                    },
+                    "b": {
+                        "value": "a",
+                        "trace": {
+                            "def": {
+                                "environment": "import-rotate",
+                                "begin": {
+                                    "line": 14,
+                                    "column": 12,
+                                    "byte": 340
+                                },
+                                "end": {
+                                    "line": 14,
+                                    "column": 13,
+                                    "byte": 341
+                                }
+                            }
+                        }
+                    }
+                },
+                "trace": {
+                    "def": {
+                        "begin": {
+                            "line": 0,
+                            "column": 0,
+                            "byte": 0
+                        },
+                        "end": {
+                            "line": 0,
+                            "column": 0,
+                            "byte": 0
+                        }
+                    }
+                }
+            }
+        }
+    ]
 }

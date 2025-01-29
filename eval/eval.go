@@ -1012,7 +1012,7 @@ func (e *evalContext) evaluateBuiltinRotate(x *expr, repr *rotateExpr) *value {
 
 	inputs, inputsOK := e.evaluateTypedExpr(repr.inputs, repr.inputSchema)
 	state, stateOK := e.evaluateTypedExpr(repr.state, repr.stateSchema)
-	if !inputsOK || inputs.containsUnknowns() || !stateOK || state.containsUnknowns() || e.validating || err != nil {
+	if !inputsOK || !stateOK || e.validating || err != nil {
 		v.unknown = true
 		return v
 	}
