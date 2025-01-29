@@ -182,39 +182,7 @@ func (d *ImportDecl) parse(name string, node syntax.Node) syntax.Diagnostics {
 	}
 }
 
-type ImportListDecl struct {
-	declNode
-
-	Open   *ArrayDecl[*ImportDecl]
-	Rotate *ArrayDecl[*ImportDecl]
-}
-
-func (d *ImportListDecl) recordSyntax() *syntax.Node {
-	return &d.syntax
-}
-
-func (d *ImportListDecl) parse(name string, node syntax.Node) syntax.Diagnostics {
-	d.syntax = node
-	switch node := node.(type) {
-	case *syntax.ArrayNode:
-		// standard import list: treated as Open imports
-		return parseNode("imports", &d.Open, node)
-	case *syntax.ObjectNode:
-		// imports qualified by type
-		diags := parseRecord("imports", d, node, true)
-		for _, decl := range d.Rotate.GetElements() {
-			if decl.Meta == nil {
-				decl.Meta = &ImportMetaDecl{}
-			}
-			decl.Meta.RotationOnly = Boolean(true)
-		}
-		return diags
-
-	default:
-		return syntax.Diagnostics{syntax.NodeError(node, "imports must be an array or an object")}
-	}
-}
-
+type ImportListDecl = *ArrayDecl[*ImportDecl]
 type PropertyMapEntry = MapEntry[Expr]
 type PropertyMapDecl = *MapDecl[Expr]
 
@@ -225,7 +193,7 @@ type EnvironmentDecl struct {
 	syntax syntax.Node
 
 	Description *StringExpr
-	Imports     *ImportListDecl
+	Imports     ImportListDecl
 	Values      PropertyMapDecl
 }
 
@@ -252,7 +220,7 @@ func (d *EnvironmentDecl) NewDiagnosticWriter(w io.Writer, width uint, color boo
 	return newDiagnosticWriter(w, fileMap, width, color)
 }
 
-func EnvironmentSyntax(node *syntax.ObjectNode, description *StringExpr, imports *ImportListDecl, values PropertyMapDecl) *EnvironmentDecl {
+func EnvironmentSyntax(node *syntax.ObjectNode, description *StringExpr, imports ImportListDecl, values PropertyMapDecl) *EnvironmentDecl {
 	return &EnvironmentDecl{
 		syntax:      node,
 		Description: description,
@@ -261,7 +229,7 @@ func EnvironmentSyntax(node *syntax.ObjectNode, description *StringExpr, imports
 	}
 }
 
-func Environment(description *StringExpr, imports *ImportListDecl, values PropertyMapDecl) *EnvironmentDecl {
+func Environment(description *StringExpr, imports ImportListDecl, values PropertyMapDecl) *EnvironmentDecl {
 	return EnvironmentSyntax(nil, description, imports, values)
 }
 
