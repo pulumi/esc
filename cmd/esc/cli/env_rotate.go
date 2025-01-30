@@ -48,7 +48,7 @@ func newEnvRotateCmd(envcmd *envCommand) *cobra.Command {
 			for _, arg := range args[1:] {
 				_, err := resource.ParsePropertyPath(arg)
 				if err != nil {
-					return fmt.Errorf("invalid path: %w", err)
+					return fmt.Errorf("'%s' is an invalid property path: %w", arg, err)
 				}
 				rotationPaths = append(rotationPaths, arg)
 			}
