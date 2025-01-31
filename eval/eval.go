@@ -304,7 +304,7 @@ func declare[Expr exprNode](e *evalContext, path string, x Expr, base *value) *e
 			accessors[i] = &propertyAccessor{accessor: a}
 		}
 		property := &propertyAccess{accessors: accessors}
-		return newExpr(path, &symbolExpr{node: x, property: property}, schema.Always().Schema(), base)
+		return newExpr(path, &symbolExpr{node: x, property: property}, schema.Always().Schema(), base) // why always?
 	case *ast.FromBase64Expr:
 		repr := &fromBase64Expr{node: x, string: declare(e, "", x.String, nil)}
 		return newExpr(path, repr, schema.String().Schema(), base)
@@ -991,7 +991,10 @@ func (e *evalContext) evaluateBuiltinRotate(x *expr, repr *rotateExpr) *value {
 	if err != nil {
 		e.errorf(repr.syntax(), "%v", err)
 	} else {
-		inputSchema, stateSchema, outputSchema := rotator.Schema()
+		inputSchema, rotateInputSchema, stateSchema, outputSchema := rotator.Schema()
+		if e.rotating {
+			inputSchema = rotateInputSchema
+		}
 		if err := inputSchema.Compile(); err != nil {
 			e.errorf(repr.syntax(), "internal error: invalid input schema (%v)", err)
 		} else {

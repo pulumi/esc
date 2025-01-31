@@ -139,8 +139,9 @@ func (testProvider) Open(ctx context.Context, inputs map[string]esc.Value, conte
 
 type swapRotator struct{}
 
-func (swapRotator) Schema() (*schema.Schema, *schema.Schema, *schema.Schema) {
+func (swapRotator) Schema() (*schema.Schema, *schema.Schema, *schema.Schema, *schema.Schema) {
 	inputSchema := schema.Always()
+	rotateInputSchema := schema.Always()
 	stateSchema := schema.Record(schema.BuilderMap{
 		"a": schema.String(),
 		"b": schema.String(),
@@ -149,7 +150,7 @@ func (swapRotator) Schema() (*schema.Schema, *schema.Schema, *schema.Schema) {
 		"a": schema.String(),
 		"b": schema.String(),
 	}).Schema()
-	return inputSchema, stateSchema, outputSchema
+	return inputSchema, rotateInputSchema, stateSchema, outputSchema
 }
 
 func (swapRotator) Open(ctx context.Context, inputs, state map[string]esc.Value, context esc.EnvExecContext) (esc.Value, error) {
@@ -160,6 +161,49 @@ func (swapRotator) Rotate(ctx context.Context, inputs, state map[string]esc.Valu
 	newState := esc.NewValue(map[string]esc.Value{
 		"a": state["b"],
 		"b": state["a"],
+	})
+	return newState, nil
+}
+
+type echoRotator struct{}
+
+func (echoRotator) Schema() (*schema.Schema, *schema.Schema, *schema.Schema, *schema.Schema) {
+	inputSchema := schema.Record(schema.BuilderMap{
+		"caps": schema.Boolean(), // needed for open, not rotate
+	}).Schema()
+	rotateInputSchema := schema.Record(schema.BuilderMap{
+		"next": schema.String(), // needed for rotate, not for open
+	}).Schema()
+	stateSchema := schema.Record(schema.BuilderMap{
+		"current":  schema.String(),
+		"previous": schema.String(),
+	}).Schema()
+
+	outputSchema := stateSchema
+	return inputSchema, rotateInputSchema, stateSchema, outputSchema
+}
+
+func (echoRotator) Open(ctx context.Context, inputs, state map[string]esc.Value, context esc.EnvExecContext) (esc.Value, error) {
+	caps := inputs["caps"].Value.(bool)
+
+	current := state["current"].Value.(string)
+	previous := state["previous"].Value.(string)
+
+	if caps {
+		current = strings.ToUpper(current)
+		previous = strings.ToUpper(previous)
+	}
+
+	return esc.NewValue(map[string]esc.Value{
+		"current":  esc.NewValue(current),
+		"previous": esc.NewValue(previous),
+	}), nil
+}
+
+func (echoRotator) Rotate(ctx context.Context, inputs, state map[string]esc.Value, context esc.EnvExecContext) (esc.Value, error) {
+	newState := esc.NewValue(map[string]esc.Value{
+		"current":  inputs["next"],
+		"previous": state["current"],
 	})
 	return newState, nil
 }
@@ -186,6 +230,8 @@ func (testProviders) LoadRotator(ctx context.Context, name string) (esc.Rotator,
 	switch name {
 	case "swap":
 		return swapRotator{}, nil
+	case "echo":
+		return echoRotator{}, nil
 	}
 	return nil, fmt.Errorf("unknown rotator %q", name)
 }
@@ -301,6 +347,9 @@ func TestEval(t *testing.T) {
 
 	path := filepath.Join("testdata", "eval")
 	entries, err := os.ReadDir(path)
+	entries = slices.DeleteFunc(entries, func(entry os.DirEntry) bool {
+		return entry.Name() != "rotate-unknown"
+	})
 	require.NoError(t, err)
 	for _, e := range entries {
 		if e.Name() == "bench" {
