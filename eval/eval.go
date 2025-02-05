@@ -1073,6 +1073,7 @@ func (e *evalContext) shouldRotate(docPath string) bool {
 	}
 	return e.rotateDocPaths[docPath]
 }
+
 // cast to map[string]esc.Value, or nil
 func asObjectOrNil(v any) map[string]esc.Value {
 	cast, _ := v.(map[string]esc.Value)
