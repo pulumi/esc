@@ -5,14 +5,14 @@
                 "range": {
                     "environment": "rotate",
                     "begin": {
-                        "line": 3,
+                        "line": 10,
                         "column": 5,
-                        "byte": 20
+                        "byte": 126
                     },
                     "end": {
-                        "line": 8,
+                        "line": 15,
                         "column": 16,
-                        "byte": 114
+                        "byte": 220
                     }
                 },
                 "schema": {
@@ -35,14 +35,14 @@
                     "nameRange": {
                         "environment": "rotate",
                         "begin": {
-                            "line": 3,
+                            "line": 10,
                             "column": 5,
-                            "byte": 20
+                            "byte": 126
                         },
                         "end": {
-                            "line": 3,
+                            "line": 10,
                             "column": 15,
-                            "byte": 30
+                            "byte": 136
                         }
                     },
                     "argSchema": {
@@ -100,14 +100,14 @@
                                 "range": {
                                     "environment": "rotate",
                                     "begin": {
-                                        "line": 5,
+                                        "line": 12,
                                         "column": 15,
-                                        "byte": 67
+                                        "byte": 173
                                     },
                                     "end": {
-                                        "line": 5,
+                                        "line": 12,
                                         "column": 15,
-                                        "byte": 67
+                                        "byte": 173
                                     }
                                 },
                                 "schema": {
@@ -118,14 +118,14 @@
                                 "range": {
                                     "environment": "rotate",
                                     "begin": {
-                                        "line": 4,
+                                        "line": 11,
                                         "column": 17,
-                                        "byte": 48
+                                        "byte": 154
                                     },
                                     "end": {
-                                        "line": 4,
+                                        "line": 11,
                                         "column": 21,
-                                        "byte": 52
+                                        "byte": 158
                                     }
                                 },
                                 "schema": {
@@ -138,14 +138,14 @@
                                 "range": {
                                     "environment": "rotate",
                                     "begin": {
-                                        "line": 7,
+                                        "line": 14,
                                         "column": 9,
-                                        "byte": 91
+                                        "byte": 197
                                     },
                                     "end": {
-                                        "line": 8,
+                                        "line": 15,
                                         "column": 16,
-                                        "byte": 114
+                                        "byte": 220
                                     }
                                 },
                                 "schema": {
@@ -169,27 +169,27 @@
                                     "a": {
                                         "environment": "rotate",
                                         "begin": {
-                                            "line": 7,
+                                            "line": 14,
                                             "column": 9,
-                                            "byte": 91
+                                            "byte": 197
                                         },
                                         "end": {
-                                            "line": 7,
+                                            "line": 14,
                                             "column": 10,
-                                            "byte": 92
+                                            "byte": 198
                                         }
                                     },
                                     "b": {
                                         "environment": "rotate",
                                         "begin": {
-                                            "line": 8,
+                                            "line": 15,
                                             "column": 9,
-                                            "byte": 107
+                                            "byte": 213
                                         },
                                         "end": {
-                                            "line": 8,
+                                            "line": 15,
                                             "column": 10,
-                                            "byte": 108
+                                            "byte": 214
                                         }
                                     }
                                 },
@@ -198,14 +198,14 @@
                                         "range": {
                                             "environment": "rotate",
                                             "begin": {
-                                                "line": 7,
+                                                "line": 14,
                                                 "column": 12,
-                                                "byte": 94
+                                                "byte": 200
                                             },
                                             "end": {
-                                                "line": 7,
+                                                "line": 14,
                                                 "column": 16,
-                                                "byte": 98
+                                                "byte": 204
                                             }
                                         },
                                         "schema": {
@@ -218,14 +218,14 @@
                                         "range": {
                                             "environment": "rotate",
                                             "begin": {
-                                                "line": 8,
+                                                "line": 15,
                                                 "column": 12,
-                                                "byte": 110
+                                                "byte": 216
                                             },
                                             "end": {
-                                                "line": 8,
+                                                "line": 15,
                                                 "column": 16,
-                                                "byte": 114
+                                                "byte": 220
                                             }
                                         },
                                         "schema": {
@@ -240,206 +240,18 @@
                     }
                 }
             },
-            "reference": {
+            "invalid": {
                 "range": {
                     "environment": "rotate",
                     "begin": {
-                        "line": 17,
+                        "line": 3,
                         "column": 5,
-                        "byte": 0
+                        "byte": 23
                     },
                     "end": {
-                        "line": 17,
-                        "column": 31,
-                        "byte": 0
-                    }
-                },
-                "schema": {
-                    "properties": {
-                        "test": {
-                            "type": "string"
-                        }
-                    },
-                    "type": "object",
-                    "required": [
-                        "test"
-                    ]
-                },
-                "keyRanges": {
-                    "test": {
-                        "environment": "rotate",
-                        "begin": {
-                            "line": 17,
-                            "column": 5,
-                            "byte": 0
-                        },
-                        "end": {
-                            "line": 17,
-                            "column": 9,
-                            "byte": 0
-                        }
-                    }
-                },
-                "object": {
-                    "test": {
-                        "range": {
-                            "environment": "rotate",
-                            "begin": {
-                                "line": 17,
-                                "column": 11,
-                                "byte": 0
-                            },
-                            "end": {
-                                "line": 17,
-                                "column": 31,
-                                "byte": 0
-                            }
-                        },
-                        "schema": {
-                            "type": "string"
-                        },
-                        "interpolate": [
-                            {
-                                "value": [
-                                    {
-                                        "key": "full",
-                                        "range": {
-                                            "environment": "rotate",
-                                            "begin": {
-                                                "line": 17,
-                                                "column": 13,
-                                                "byte": 2
-                                            },
-                                            "end": {
-                                                "line": 17,
-                                                "column": 17,
-                                                "byte": 6
-                                            }
-                                        },
-                                        "value": {
-                                            "environment": "rotate",
-                                            "begin": {
-                                                "line": 3,
-                                                "column": 5,
-                                                "byte": 20
-                                            },
-                                            "end": {
-                                                "line": 8,
-                                                "column": 16,
-                                                "byte": 114
-                                            }
-                                        }
-                                    },
-                                    {
-                                        "key": "a",
-                                        "range": {
-                                            "environment": "rotate",
-                                            "begin": {
-                                                "line": 17,
-                                                "column": 17,
-                                                "byte": 6
-                                            },
-                                            "end": {
-                                                "line": 17,
-                                                "column": 19,
-                                                "byte": 8
-                                            }
-                                        },
-                                        "value": {
-                                            "environment": "rotate",
-                                            "begin": {
-                                                "line": 17,
-                                                "column": 11,
-                                                "byte": 0
-                                            },
-                                            "end": {
-                                                "line": 17,
-                                                "column": 31,
-                                                "byte": 0
-                                            }
-                                        }
-                                    }
-                                ]
-                            },
-                            {
-                                "text": " ",
-                                "value": [
-                                    {
-                                        "key": "short",
-                                        "range": {
-                                            "environment": "rotate",
-                                            "begin": {
-                                                "line": 17,
-                                                "column": 23,
-                                                "byte": 12
-                                            },
-                                            "end": {
-                                                "line": 17,
-                                                "column": 28,
-                                                "byte": 17
-                                            }
-                                        },
-                                        "value": {
-                                            "environment": "rotate",
-                                            "begin": {
-                                                "line": 10,
-                                                "column": 5,
-                                                "byte": 128
-                                            },
-                                            "end": {
-                                                "line": 14,
-                                                "column": 16,
-                                                "byte": 207
-                                            }
-                                        }
-                                    },
-                                    {
-                                        "key": "b",
-                                        "range": {
-                                            "environment": "rotate",
-                                            "begin": {
-                                                "line": 17,
-                                                "column": 28,
-                                                "byte": 17
-                                            },
-                                            "end": {
-                                                "line": 17,
-                                                "column": 30,
-                                                "byte": 19
-                                            }
-                                        },
-                                        "value": {
-                                            "environment": "rotate",
-                                            "begin": {
-                                                "line": 17,
-                                                "column": 11,
-                                                "byte": 0
-                                            },
-                                            "end": {
-                                                "line": 17,
-                                                "column": 31,
-                                                "byte": 0
-                                            }
-                                        }
-                                    }
-                                ]
-                            }
-                        ]
-                    }
-                }
-            },
-            "short": {
-                "range": {
-                    "environment": "rotate",
-                    "begin": {
-                        "line": 10,
-                        "column": 5,
-                        "byte": 128
-                    },
-                    "end": {
-                        "line": 14,
+                        "line": 7,
                         "column": 16,
-                        "byte": 207
+                        "byte": 112
                     }
                 },
                 "schema": {
@@ -462,14 +274,14 @@
                     "nameRange": {
                         "environment": "rotate",
                         "begin": {
-                            "line": 10,
+                            "line": 3,
                             "column": 5,
-                            "byte": 128
+                            "byte": 23
                         },
                         "end": {
-                            "line": 10,
+                            "line": 3,
                             "column": 21,
-                            "byte": 144
+                            "byte": 39
                         }
                     },
                     "argSchema": {
@@ -523,32 +335,30 @@
                                 "range": {
                                     "environment": "rotate",
                                     "begin": {
-                                        "line": 11,
-                                        "column": 15,
-                                        "byte": 160
+                                        "line": 0,
+                                        "column": 0,
+                                        "byte": 0
                                     },
                                     "end": {
-                                        "line": 11,
-                                        "column": 15,
-                                        "byte": 160
+                                        "line": 0,
+                                        "column": 0,
+                                        "byte": 0
                                     }
                                 },
-                                "schema": {
-                                    "type": "object"
-                                }
+                                "schema": true
                             },
                             "state": {
                                 "range": {
                                     "environment": "rotate",
                                     "begin": {
-                                        "line": 13,
+                                        "line": 6,
                                         "column": 9,
-                                        "byte": 184
+                                        "byte": 89
                                     },
                                     "end": {
-                                        "line": 14,
+                                        "line": 7,
                                         "column": 16,
-                                        "byte": 207
+                                        "byte": 112
                                     }
                                 },
                                 "schema": {
@@ -572,27 +382,27 @@
                                     "a": {
                                         "environment": "rotate",
                                         "begin": {
-                                            "line": 13,
+                                            "line": 6,
                                             "column": 9,
-                                            "byte": 184
+                                            "byte": 89
                                         },
                                         "end": {
-                                            "line": 13,
+                                            "line": 6,
                                             "column": 10,
-                                            "byte": 185
+                                            "byte": 90
                                         }
                                     },
                                     "b": {
                                         "environment": "rotate",
                                         "begin": {
-                                            "line": 14,
+                                            "line": 7,
                                             "column": 9,
-                                            "byte": 200
+                                            "byte": 105
                                         },
                                         "end": {
-                                            "line": 14,
+                                            "line": 7,
                                             "column": 10,
-                                            "byte": 201
+                                            "byte": 106
                                         }
                                     }
                                 },
@@ -601,14 +411,14 @@
                                         "range": {
                                             "environment": "rotate",
                                             "begin": {
-                                                "line": 13,
+                                                "line": 6,
                                                 "column": 12,
-                                                "byte": 187
+                                                "byte": 92
                                             },
                                             "end": {
-                                                "line": 13,
+                                                "line": 6,
                                                 "column": 16,
-                                                "byte": 191
+                                                "byte": 96
                                             }
                                         },
                                         "schema": {
@@ -621,14 +431,417 @@
                                         "range": {
                                             "environment": "rotate",
                                             "begin": {
-                                                "line": 14,
+                                                "line": 7,
                                                 "column": 12,
-                                                "byte": 203
+                                                "byte": 108
                                             },
                                             "end": {
-                                                "line": 14,
+                                                "line": 7,
                                                 "column": 16,
-                                                "byte": 207
+                                                "byte": 112
+                                            }
+                                        },
+                                        "schema": {
+                                            "type": "string",
+                                            "const": "bar2"
+                                        },
+                                        "literal": "bar2"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "reference": {
+                "range": {
+                    "environment": "rotate",
+                    "begin": {
+                        "line": 24,
+                        "column": 5,
+                        "byte": 0
+                    },
+                    "end": {
+                        "line": 24,
+                        "column": 31,
+                        "byte": 0
+                    }
+                },
+                "schema": {
+                    "properties": {
+                        "test": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object",
+                    "required": [
+                        "test"
+                    ]
+                },
+                "keyRanges": {
+                    "test": {
+                        "environment": "rotate",
+                        "begin": {
+                            "line": 24,
+                            "column": 5,
+                            "byte": 0
+                        },
+                        "end": {
+                            "line": 24,
+                            "column": 9,
+                            "byte": 0
+                        }
+                    }
+                },
+                "object": {
+                    "test": {
+                        "range": {
+                            "environment": "rotate",
+                            "begin": {
+                                "line": 24,
+                                "column": 11,
+                                "byte": 0
+                            },
+                            "end": {
+                                "line": 24,
+                                "column": 31,
+                                "byte": 0
+                            }
+                        },
+                        "schema": {
+                            "type": "string"
+                        },
+                        "interpolate": [
+                            {
+                                "value": [
+                                    {
+                                        "key": "full",
+                                        "range": {
+                                            "environment": "rotate",
+                                            "begin": {
+                                                "line": 24,
+                                                "column": 13,
+                                                "byte": 2
+                                            },
+                                            "end": {
+                                                "line": 24,
+                                                "column": 17,
+                                                "byte": 6
+                                            }
+                                        },
+                                        "value": {
+                                            "environment": "rotate",
+                                            "begin": {
+                                                "line": 10,
+                                                "column": 5,
+                                                "byte": 126
+                                            },
+                                            "end": {
+                                                "line": 15,
+                                                "column": 16,
+                                                "byte": 220
+                                            }
+                                        }
+                                    },
+                                    {
+                                        "key": "a",
+                                        "range": {
+                                            "environment": "rotate",
+                                            "begin": {
+                                                "line": 24,
+                                                "column": 17,
+                                                "byte": 6
+                                            },
+                                            "end": {
+                                                "line": 24,
+                                                "column": 19,
+                                                "byte": 8
+                                            }
+                                        },
+                                        "value": {
+                                            "environment": "rotate",
+                                            "begin": {
+                                                "line": 24,
+                                                "column": 11,
+                                                "byte": 0
+                                            },
+                                            "end": {
+                                                "line": 24,
+                                                "column": 31,
+                                                "byte": 0
+                                            }
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "text": " ",
+                                "value": [
+                                    {
+                                        "key": "short",
+                                        "range": {
+                                            "environment": "rotate",
+                                            "begin": {
+                                                "line": 24,
+                                                "column": 23,
+                                                "byte": 12
+                                            },
+                                            "end": {
+                                                "line": 24,
+                                                "column": 28,
+                                                "byte": 17
+                                            }
+                                        },
+                                        "value": {
+                                            "environment": "rotate",
+                                            "begin": {
+                                                "line": 17,
+                                                "column": 5,
+                                                "byte": 234
+                                            },
+                                            "end": {
+                                                "line": 21,
+                                                "column": 16,
+                                                "byte": 313
+                                            }
+                                        }
+                                    },
+                                    {
+                                        "key": "b",
+                                        "range": {
+                                            "environment": "rotate",
+                                            "begin": {
+                                                "line": 24,
+                                                "column": 28,
+                                                "byte": 17
+                                            },
+                                            "end": {
+                                                "line": 24,
+                                                "column": 30,
+                                                "byte": 19
+                                            }
+                                        },
+                                        "value": {
+                                            "environment": "rotate",
+                                            "begin": {
+                                                "line": 24,
+                                                "column": 11,
+                                                "byte": 0
+                                            },
+                                            "end": {
+                                                "line": 24,
+                                                "column": 31,
+                                                "byte": 0
+                                            }
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                }
+            },
+            "short": {
+                "range": {
+                    "environment": "rotate",
+                    "begin": {
+                        "line": 17,
+                        "column": 5,
+                        "byte": 234
+                    },
+                    "end": {
+                        "line": 21,
+                        "column": 16,
+                        "byte": 313
+                    }
+                },
+                "schema": {
+                    "properties": {
+                        "a": {
+                            "type": "string"
+                        },
+                        "b": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object",
+                    "required": [
+                        "a",
+                        "b"
+                    ]
+                },
+                "builtin": {
+                    "name": "fn::rotate::swap",
+                    "nameRange": {
+                        "environment": "rotate",
+                        "begin": {
+                            "line": 17,
+                            "column": 5,
+                            "byte": 234
+                        },
+                        "end": {
+                            "line": 17,
+                            "column": 21,
+                            "byte": 250
+                        }
+                    },
+                    "argSchema": {
+                        "properties": {
+                            "inputs": true,
+                            "state": {
+                                "oneOf": [
+                                    {
+                                        "properties": {
+                                            "a": {
+                                                "type": "string"
+                                            },
+                                            "b": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object",
+                                        "required": [
+                                            "a",
+                                            "b"
+                                        ]
+                                    },
+                                    {
+                                        "type": "null"
+                                    }
+                                ],
+                                "type": ""
+                            }
+                        },
+                        "type": "object",
+                        "required": [
+                            "inputs",
+                            "state"
+                        ]
+                    },
+                    "arg": {
+                        "range": {
+                            "begin": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            },
+                            "end": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            }
+                        },
+                        "object": {
+                            "inputs": {
+                                "range": {
+                                    "environment": "rotate",
+                                    "begin": {
+                                        "line": 18,
+                                        "column": 15,
+                                        "byte": 266
+                                    },
+                                    "end": {
+                                        "line": 18,
+                                        "column": 15,
+                                        "byte": 266
+                                    }
+                                },
+                                "schema": {
+                                    "type": "object"
+                                }
+                            },
+                            "state": {
+                                "range": {
+                                    "environment": "rotate",
+                                    "begin": {
+                                        "line": 20,
+                                        "column": 9,
+                                        "byte": 290
+                                    },
+                                    "end": {
+                                        "line": 21,
+                                        "column": 16,
+                                        "byte": 313
+                                    }
+                                },
+                                "schema": {
+                                    "properties": {
+                                        "a": {
+                                            "type": "string",
+                                            "const": "bar1"
+                                        },
+                                        "b": {
+                                            "type": "string",
+                                            "const": "bar2"
+                                        }
+                                    },
+                                    "type": "object",
+                                    "required": [
+                                        "a",
+                                        "b"
+                                    ]
+                                },
+                                "keyRanges": {
+                                    "a": {
+                                        "environment": "rotate",
+                                        "begin": {
+                                            "line": 20,
+                                            "column": 9,
+                                            "byte": 290
+                                        },
+                                        "end": {
+                                            "line": 20,
+                                            "column": 10,
+                                            "byte": 291
+                                        }
+                                    },
+                                    "b": {
+                                        "environment": "rotate",
+                                        "begin": {
+                                            "line": 21,
+                                            "column": 9,
+                                            "byte": 306
+                                        },
+                                        "end": {
+                                            "line": 21,
+                                            "column": 10,
+                                            "byte": 307
+                                        }
+                                    }
+                                },
+                                "object": {
+                                    "a": {
+                                        "range": {
+                                            "environment": "rotate",
+                                            "begin": {
+                                                "line": 20,
+                                                "column": 12,
+                                                "byte": 293
+                                            },
+                                            "end": {
+                                                "line": 20,
+                                                "column": 16,
+                                                "byte": 297
+                                            }
+                                        },
+                                        "schema": {
+                                            "type": "string",
+                                            "const": "bar1"
+                                        },
+                                        "literal": "bar1"
+                                    },
+                                    "b": {
+                                        "range": {
+                                            "environment": "rotate",
+                                            "begin": {
+                                                "line": 21,
+                                                "column": 12,
+                                                "byte": 309
+                                            },
+                                            "end": {
+                                                "line": 21,
+                                                "column": 16,
+                                                "byte": 313
                                             }
                                         },
                                         "schema": {
@@ -651,14 +864,32 @@
                     "def": {
                         "environment": "rotate",
                         "begin": {
-                            "line": 3,
+                            "line": 10,
                             "column": 5,
-                            "byte": 20
+                            "byte": 126
                         },
                         "end": {
-                            "line": 8,
+                            "line": 15,
                             "column": 16,
-                            "byte": 114
+                            "byte": 220
+                        }
+                    }
+                }
+            },
+            "invalid": {
+                "unknown": true,
+                "trace": {
+                    "def": {
+                        "environment": "rotate",
+                        "begin": {
+                            "line": 3,
+                            "column": 5,
+                            "byte": 23
+                        },
+                        "end": {
+                            "line": 7,
+                            "column": 16,
+                            "byte": 112
                         }
                     }
                 }
@@ -672,12 +903,12 @@
                             "def": {
                                 "environment": "rotate",
                                 "begin": {
-                                    "line": 17,
+                                    "line": 24,
                                     "column": 11,
                                     "byte": 0
                                 },
                                 "end": {
-                                    "line": 17,
+                                    "line": 24,
                                     "column": 31,
                                     "byte": 0
                                 }
@@ -689,12 +920,12 @@
                     "def": {
                         "environment": "rotate",
                         "begin": {
-                            "line": 17,
+                            "line": 24,
                             "column": 5,
                             "byte": 0
                         },
                         "end": {
-                            "line": 17,
+                            "line": 24,
                             "column": 31,
                             "byte": 0
                         }
@@ -707,14 +938,14 @@
                     "def": {
                         "environment": "rotate",
                         "begin": {
-                            "line": 10,
+                            "line": 17,
                             "column": 5,
-                            "byte": 128
+                            "byte": 234
                         },
                         "end": {
-                            "line": 14,
+                            "line": 21,
                             "column": 16,
-                            "byte": 207
+                            "byte": 313
                         }
                     }
                 }
@@ -723,6 +954,21 @@
         "schema": {
             "properties": {
                 "full": {
+                    "properties": {
+                        "a": {
+                            "type": "string"
+                        },
+                        "b": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object",
+                    "required": [
+                        "a",
+                        "b"
+                    ]
+                },
+                "invalid": {
                     "properties": {
                         "a": {
                             "type": "string"
@@ -767,6 +1013,7 @@
             "type": "object",
             "required": [
                 "full",
+                "invalid",
                 "reference",
                 "short"
             ]
@@ -962,6 +1209,7 @@
     },
     "checkJson": {
         "full": "[unknown]",
+        "invalid": "[unknown]",
         "reference": {
             "test": "[unknown]"
         },
@@ -973,14 +1221,14 @@
                 "range": {
                     "environment": "rotate",
                     "begin": {
-                        "line": 3,
+                        "line": 10,
                         "column": 5,
-                        "byte": 20
+                        "byte": 126
                     },
                     "end": {
-                        "line": 8,
+                        "line": 15,
                         "column": 16,
-                        "byte": 114
+                        "byte": 220
                     }
                 },
                 "schema": {
@@ -1005,14 +1253,14 @@
                     "nameRange": {
                         "environment": "rotate",
                         "begin": {
-                            "line": 3,
+                            "line": 10,
                             "column": 5,
-                            "byte": 20
+                            "byte": 126
                         },
                         "end": {
-                            "line": 3,
+                            "line": 10,
                             "column": 15,
-                            "byte": 30
+                            "byte": 136
                         }
                     },
                     "argSchema": {
@@ -1070,14 +1318,14 @@
                                 "range": {
                                     "environment": "rotate",
                                     "begin": {
-                                        "line": 5,
+                                        "line": 12,
                                         "column": 15,
-                                        "byte": 67
+                                        "byte": 173
                                     },
                                     "end": {
-                                        "line": 5,
+                                        "line": 12,
                                         "column": 15,
-                                        "byte": 67
+                                        "byte": 173
                                     }
                                 },
                                 "schema": {
@@ -1088,14 +1336,14 @@
                                 "range": {
                                     "environment": "rotate",
                                     "begin": {
-                                        "line": 4,
+                                        "line": 11,
                                         "column": 17,
-                                        "byte": 48
+                                        "byte": 154
                                     },
                                     "end": {
-                                        "line": 4,
+                                        "line": 11,
                                         "column": 21,
-                                        "byte": 52
+                                        "byte": 158
                                     }
                                 },
                                 "schema": {
@@ -1108,14 +1356,14 @@
                                 "range": {
                                     "environment": "rotate",
                                     "begin": {
-                                        "line": 7,
+                                        "line": 14,
                                         "column": 9,
-                                        "byte": 91
+                                        "byte": 197
                                     },
                                     "end": {
-                                        "line": 8,
+                                        "line": 15,
                                         "column": 16,
-                                        "byte": 114
+                                        "byte": 220
                                     }
                                 },
                                 "schema": {
@@ -1139,27 +1387,27 @@
                                     "a": {
                                         "environment": "rotate",
                                         "begin": {
-                                            "line": 7,
+                                            "line": 14,
                                             "column": 9,
-                                            "byte": 91
+                                            "byte": 197
                                         },
                                         "end": {
-                                            "line": 7,
+                                            "line": 14,
                                             "column": 10,
-                                            "byte": 92
+                                            "byte": 198
                                         }
                                     },
                                     "b": {
                                         "environment": "rotate",
                                         "begin": {
-                                            "line": 8,
+                                            "line": 15,
                                             "column": 9,
-                                            "byte": 107
+                                            "byte": 213
                                         },
                                         "end": {
-                                            "line": 8,
+                                            "line": 15,
                                             "column": 10,
-                                            "byte": 108
+                                            "byte": 214
                                         }
                                     }
                                 },
@@ -1168,14 +1416,14 @@
                                         "range": {
                                             "environment": "rotate",
                                             "begin": {
-                                                "line": 7,
+                                                "line": 14,
                                                 "column": 12,
-                                                "byte": 94
+                                                "byte": 200
                                             },
                                             "end": {
-                                                "line": 7,
+                                                "line": 14,
                                                 "column": 16,
-                                                "byte": 98
+                                                "byte": 204
                                             }
                                         },
                                         "schema": {
@@ -1188,14 +1436,14 @@
                                         "range": {
                                             "environment": "rotate",
                                             "begin": {
-                                                "line": 8,
+                                                "line": 15,
                                                 "column": 12,
-                                                "byte": 110
+                                                "byte": 216
                                             },
                                             "end": {
-                                                "line": 8,
+                                                "line": 15,
                                                 "column": 16,
-                                                "byte": 114
+                                                "byte": 220
                                             }
                                         },
                                         "schema": {
@@ -1210,217 +1458,27 @@
                     }
                 }
             },
-            "reference": {
+            "invalid": {
                 "range": {
                     "environment": "rotate",
                     "begin": {
-                        "line": 17,
+                        "line": 3,
                         "column": 5,
-                        "byte": 0
+                        "byte": 23
                     },
                     "end": {
-                        "line": 17,
-                        "column": 31,
-                        "byte": 0
-                    }
-                },
-                "schema": {
-                    "properties": {
-                        "test": {
-                            "type": "string"
-                        }
-                    },
-                    "type": "object",
-                    "required": [
-                        "test"
-                    ]
-                },
-                "keyRanges": {
-                    "test": {
-                        "environment": "rotate",
-                        "begin": {
-                            "line": 17,
-                            "column": 5,
-                            "byte": 0
-                        },
-                        "end": {
-                            "line": 17,
-                            "column": 9,
-                            "byte": 0
-                        }
-                    }
-                },
-                "object": {
-                    "test": {
-                        "range": {
-                            "environment": "rotate",
-                            "begin": {
-                                "line": 17,
-                                "column": 11,
-                                "byte": 0
-                            },
-                            "end": {
-                                "line": 17,
-                                "column": 31,
-                                "byte": 0
-                            }
-                        },
-                        "schema": {
-                            "type": "string"
-                        },
-                        "interpolate": [
-                            {
-                                "value": [
-                                    {
-                                        "key": "full",
-                                        "range": {
-                                            "environment": "rotate",
-                                            "begin": {
-                                                "line": 17,
-                                                "column": 13,
-                                                "byte": 2
-                                            },
-                                            "end": {
-                                                "line": 17,
-                                                "column": 17,
-                                                "byte": 6
-                                            }
-                                        },
-                                        "value": {
-                                            "environment": "rotate",
-                                            "begin": {
-                                                "line": 3,
-                                                "column": 5,
-                                                "byte": 20
-                                            },
-                                            "end": {
-                                                "line": 8,
-                                                "column": 16,
-                                                "byte": 114
-                                            }
-                                        }
-                                    },
-                                    {
-                                        "key": "a",
-                                        "range": {
-                                            "environment": "rotate",
-                                            "begin": {
-                                                "line": 17,
-                                                "column": 17,
-                                                "byte": 6
-                                            },
-                                            "end": {
-                                                "line": 17,
-                                                "column": 19,
-                                                "byte": 8
-                                            }
-                                        },
-                                        "value": {
-                                            "environment": "rotate",
-                                            "begin": {
-                                                "line": 3,
-                                                "column": 5,
-                                                "byte": 20
-                                            },
-                                            "end": {
-                                                "line": 8,
-                                                "column": 16,
-                                                "byte": 114
-                                            }
-                                        }
-                                    }
-                                ]
-                            },
-                            {
-                                "text": " ",
-                                "value": [
-                                    {
-                                        "key": "short",
-                                        "range": {
-                                            "environment": "rotate",
-                                            "begin": {
-                                                "line": 17,
-                                                "column": 23,
-                                                "byte": 12
-                                            },
-                                            "end": {
-                                                "line": 17,
-                                                "column": 28,
-                                                "byte": 17
-                                            }
-                                        },
-                                        "value": {
-                                            "environment": "rotate",
-                                            "begin": {
-                                                "line": 10,
-                                                "column": 5,
-                                                "byte": 128
-                                            },
-                                            "end": {
-                                                "line": 14,
-                                                "column": 16,
-                                                "byte": 207
-                                            }
-                                        }
-                                    },
-                                    {
-                                        "key": "b",
-                                        "range": {
-                                            "environment": "rotate",
-                                            "begin": {
-                                                "line": 17,
-                                                "column": 28,
-                                                "byte": 17
-                                            },
-                                            "end": {
-                                                "line": 17,
-                                                "column": 30,
-                                                "byte": 19
-                                            }
-                                        },
-                                        "value": {
-                                            "environment": "rotate",
-                                            "begin": {
-                                                "line": 10,
-                                                "column": 5,
-                                                "byte": 128
-                                            },
-                                            "end": {
-                                                "line": 14,
-                                                "column": 16,
-                                                "byte": 207
-                                            }
-                                        }
-                                    }
-                                ]
-                            }
-                        ]
-                    }
-                }
-            },
-            "short": {
-                "range": {
-                    "environment": "rotate",
-                    "begin": {
-                        "line": 10,
-                        "column": 5,
-                        "byte": 128
-                    },
-                    "end": {
-                        "line": 14,
+                        "line": 7,
                         "column": 16,
-                        "byte": 207
+                        "byte": 112
                     }
                 },
                 "schema": {
                     "properties": {
                         "a": {
-                            "type": "string",
-                            "const": "bar1"
+                            "type": "string"
                         },
                         "b": {
-                            "type": "string",
-                            "const": "bar2"
+                            "type": "string"
                         }
                     },
                     "type": "object",
@@ -1434,14 +1492,14 @@
                     "nameRange": {
                         "environment": "rotate",
                         "begin": {
-                            "line": 10,
+                            "line": 3,
                             "column": 5,
-                            "byte": 128
+                            "byte": 23
                         },
                         "end": {
-                            "line": 10,
+                            "line": 3,
                             "column": 21,
-                            "byte": 144
+                            "byte": 39
                         }
                     },
                     "argSchema": {
@@ -1495,32 +1553,30 @@
                                 "range": {
                                     "environment": "rotate",
                                     "begin": {
-                                        "line": 11,
-                                        "column": 15,
-                                        "byte": 160
+                                        "line": 0,
+                                        "column": 0,
+                                        "byte": 0
                                     },
                                     "end": {
-                                        "line": 11,
-                                        "column": 15,
-                                        "byte": 160
+                                        "line": 0,
+                                        "column": 0,
+                                        "byte": 0
                                     }
                                 },
-                                "schema": {
-                                    "type": "object"
-                                }
+                                "schema": true
                             },
                             "state": {
                                 "range": {
                                     "environment": "rotate",
                                     "begin": {
-                                        "line": 13,
+                                        "line": 6,
                                         "column": 9,
-                                        "byte": 184
+                                        "byte": 89
                                     },
                                     "end": {
-                                        "line": 14,
+                                        "line": 7,
                                         "column": 16,
-                                        "byte": 207
+                                        "byte": 112
                                     }
                                 },
                                 "schema": {
@@ -1544,27 +1600,27 @@
                                     "a": {
                                         "environment": "rotate",
                                         "begin": {
-                                            "line": 13,
+                                            "line": 6,
                                             "column": 9,
-                                            "byte": 184
+                                            "byte": 89
                                         },
                                         "end": {
-                                            "line": 13,
+                                            "line": 6,
                                             "column": 10,
-                                            "byte": 185
+                                            "byte": 90
                                         }
                                     },
                                     "b": {
                                         "environment": "rotate",
                                         "begin": {
-                                            "line": 14,
+                                            "line": 7,
                                             "column": 9,
-                                            "byte": 200
+                                            "byte": 105
                                         },
                                         "end": {
-                                            "line": 14,
+                                            "line": 7,
                                             "column": 10,
-                                            "byte": 201
+                                            "byte": 106
                                         }
                                     }
                                 },
@@ -1573,14 +1629,14 @@
                                         "range": {
                                             "environment": "rotate",
                                             "begin": {
-                                                "line": 13,
+                                                "line": 6,
                                                 "column": 12,
-                                                "byte": 187
+                                                "byte": 92
                                             },
                                             "end": {
-                                                "line": 13,
+                                                "line": 6,
                                                 "column": 16,
-                                                "byte": 191
+                                                "byte": 96
                                             }
                                         },
                                         "schema": {
@@ -1593,14 +1649,419 @@
                                         "range": {
                                             "environment": "rotate",
                                             "begin": {
-                                                "line": 14,
+                                                "line": 7,
                                                 "column": 12,
-                                                "byte": 203
+                                                "byte": 108
                                             },
                                             "end": {
-                                                "line": 14,
+                                                "line": 7,
                                                 "column": 16,
-                                                "byte": 207
+                                                "byte": 112
+                                            }
+                                        },
+                                        "schema": {
+                                            "type": "string",
+                                            "const": "bar2"
+                                        },
+                                        "literal": "bar2"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "reference": {
+                "range": {
+                    "environment": "rotate",
+                    "begin": {
+                        "line": 24,
+                        "column": 5,
+                        "byte": 0
+                    },
+                    "end": {
+                        "line": 24,
+                        "column": 31,
+                        "byte": 0
+                    }
+                },
+                "schema": {
+                    "properties": {
+                        "test": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object",
+                    "required": [
+                        "test"
+                    ]
+                },
+                "keyRanges": {
+                    "test": {
+                        "environment": "rotate",
+                        "begin": {
+                            "line": 24,
+                            "column": 5,
+                            "byte": 0
+                        },
+                        "end": {
+                            "line": 24,
+                            "column": 9,
+                            "byte": 0
+                        }
+                    }
+                },
+                "object": {
+                    "test": {
+                        "range": {
+                            "environment": "rotate",
+                            "begin": {
+                                "line": 24,
+                                "column": 11,
+                                "byte": 0
+                            },
+                            "end": {
+                                "line": 24,
+                                "column": 31,
+                                "byte": 0
+                            }
+                        },
+                        "schema": {
+                            "type": "string"
+                        },
+                        "interpolate": [
+                            {
+                                "value": [
+                                    {
+                                        "key": "full",
+                                        "range": {
+                                            "environment": "rotate",
+                                            "begin": {
+                                                "line": 24,
+                                                "column": 13,
+                                                "byte": 2
+                                            },
+                                            "end": {
+                                                "line": 24,
+                                                "column": 17,
+                                                "byte": 6
+                                            }
+                                        },
+                                        "value": {
+                                            "environment": "rotate",
+                                            "begin": {
+                                                "line": 10,
+                                                "column": 5,
+                                                "byte": 126
+                                            },
+                                            "end": {
+                                                "line": 15,
+                                                "column": 16,
+                                                "byte": 220
+                                            }
+                                        }
+                                    },
+                                    {
+                                        "key": "a",
+                                        "range": {
+                                            "environment": "rotate",
+                                            "begin": {
+                                                "line": 24,
+                                                "column": 17,
+                                                "byte": 6
+                                            },
+                                            "end": {
+                                                "line": 24,
+                                                "column": 19,
+                                                "byte": 8
+                                            }
+                                        },
+                                        "value": {
+                                            "environment": "rotate",
+                                            "begin": {
+                                                "line": 10,
+                                                "column": 5,
+                                                "byte": 126
+                                            },
+                                            "end": {
+                                                "line": 15,
+                                                "column": 16,
+                                                "byte": 220
+                                            }
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "text": " ",
+                                "value": [
+                                    {
+                                        "key": "short",
+                                        "range": {
+                                            "environment": "rotate",
+                                            "begin": {
+                                                "line": 24,
+                                                "column": 23,
+                                                "byte": 12
+                                            },
+                                            "end": {
+                                                "line": 24,
+                                                "column": 28,
+                                                "byte": 17
+                                            }
+                                        },
+                                        "value": {
+                                            "environment": "rotate",
+                                            "begin": {
+                                                "line": 17,
+                                                "column": 5,
+                                                "byte": 234
+                                            },
+                                            "end": {
+                                                "line": 21,
+                                                "column": 16,
+                                                "byte": 313
+                                            }
+                                        }
+                                    },
+                                    {
+                                        "key": "b",
+                                        "range": {
+                                            "environment": "rotate",
+                                            "begin": {
+                                                "line": 24,
+                                                "column": 28,
+                                                "byte": 17
+                                            },
+                                            "end": {
+                                                "line": 24,
+                                                "column": 30,
+                                                "byte": 19
+                                            }
+                                        },
+                                        "value": {
+                                            "environment": "rotate",
+                                            "begin": {
+                                                "line": 17,
+                                                "column": 5,
+                                                "byte": 234
+                                            },
+                                            "end": {
+                                                "line": 21,
+                                                "column": 16,
+                                                "byte": 313
+                                            }
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                }
+            },
+            "short": {
+                "range": {
+                    "environment": "rotate",
+                    "begin": {
+                        "line": 17,
+                        "column": 5,
+                        "byte": 234
+                    },
+                    "end": {
+                        "line": 21,
+                        "column": 16,
+                        "byte": 313
+                    }
+                },
+                "schema": {
+                    "properties": {
+                        "a": {
+                            "type": "string",
+                            "const": "bar1"
+                        },
+                        "b": {
+                            "type": "string",
+                            "const": "bar2"
+                        }
+                    },
+                    "type": "object",
+                    "required": [
+                        "a",
+                        "b"
+                    ]
+                },
+                "builtin": {
+                    "name": "fn::rotate::swap",
+                    "nameRange": {
+                        "environment": "rotate",
+                        "begin": {
+                            "line": 17,
+                            "column": 5,
+                            "byte": 234
+                        },
+                        "end": {
+                            "line": 17,
+                            "column": 21,
+                            "byte": 250
+                        }
+                    },
+                    "argSchema": {
+                        "properties": {
+                            "inputs": true,
+                            "state": {
+                                "oneOf": [
+                                    {
+                                        "properties": {
+                                            "a": {
+                                                "type": "string"
+                                            },
+                                            "b": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object",
+                                        "required": [
+                                            "a",
+                                            "b"
+                                        ]
+                                    },
+                                    {
+                                        "type": "null"
+                                    }
+                                ],
+                                "type": ""
+                            }
+                        },
+                        "type": "object",
+                        "required": [
+                            "inputs",
+                            "state"
+                        ]
+                    },
+                    "arg": {
+                        "range": {
+                            "begin": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            },
+                            "end": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            }
+                        },
+                        "object": {
+                            "inputs": {
+                                "range": {
+                                    "environment": "rotate",
+                                    "begin": {
+                                        "line": 18,
+                                        "column": 15,
+                                        "byte": 266
+                                    },
+                                    "end": {
+                                        "line": 18,
+                                        "column": 15,
+                                        "byte": 266
+                                    }
+                                },
+                                "schema": {
+                                    "type": "object"
+                                }
+                            },
+                            "state": {
+                                "range": {
+                                    "environment": "rotate",
+                                    "begin": {
+                                        "line": 20,
+                                        "column": 9,
+                                        "byte": 290
+                                    },
+                                    "end": {
+                                        "line": 21,
+                                        "column": 16,
+                                        "byte": 313
+                                    }
+                                },
+                                "schema": {
+                                    "properties": {
+                                        "a": {
+                                            "type": "string",
+                                            "const": "bar1"
+                                        },
+                                        "b": {
+                                            "type": "string",
+                                            "const": "bar2"
+                                        }
+                                    },
+                                    "type": "object",
+                                    "required": [
+                                        "a",
+                                        "b"
+                                    ]
+                                },
+                                "keyRanges": {
+                                    "a": {
+                                        "environment": "rotate",
+                                        "begin": {
+                                            "line": 20,
+                                            "column": 9,
+                                            "byte": 290
+                                        },
+                                        "end": {
+                                            "line": 20,
+                                            "column": 10,
+                                            "byte": 291
+                                        }
+                                    },
+                                    "b": {
+                                        "environment": "rotate",
+                                        "begin": {
+                                            "line": 21,
+                                            "column": 9,
+                                            "byte": 306
+                                        },
+                                        "end": {
+                                            "line": 21,
+                                            "column": 10,
+                                            "byte": 307
+                                        }
+                                    }
+                                },
+                                "object": {
+                                    "a": {
+                                        "range": {
+                                            "environment": "rotate",
+                                            "begin": {
+                                                "line": 20,
+                                                "column": 12,
+                                                "byte": 293
+                                            },
+                                            "end": {
+                                                "line": 20,
+                                                "column": 16,
+                                                "byte": 297
+                                            }
+                                        },
+                                        "schema": {
+                                            "type": "string",
+                                            "const": "bar1"
+                                        },
+                                        "literal": "bar1"
+                                    },
+                                    "b": {
+                                        "range": {
+                                            "environment": "rotate",
+                                            "begin": {
+                                                "line": 21,
+                                                "column": 12,
+                                                "byte": 309
+                                            },
+                                            "end": {
+                                                "line": 21,
+                                                "column": 16,
+                                                "byte": 313
                                             }
                                         },
                                         "schema": {
@@ -1625,14 +2086,14 @@
                             "def": {
                                 "environment": "rotate",
                                 "begin": {
-                                    "line": 3,
+                                    "line": 10,
                                     "column": 5,
-                                    "byte": 20
+                                    "byte": 126
                                 },
                                 "end": {
-                                    "line": 8,
+                                    "line": 15,
                                     "column": 16,
-                                    "byte": 114
+                                    "byte": 220
                                 }
                             }
                         }
@@ -1643,14 +2104,14 @@
                             "def": {
                                 "environment": "rotate",
                                 "begin": {
-                                    "line": 3,
+                                    "line": 10,
                                     "column": 5,
-                                    "byte": 20
+                                    "byte": 126
                                 },
                                 "end": {
-                                    "line": 8,
+                                    "line": 15,
                                     "column": 16,
-                                    "byte": 114
+                                    "byte": 220
                                 }
                             }
                         }
@@ -1660,14 +2121,32 @@
                     "def": {
                         "environment": "rotate",
                         "begin": {
-                            "line": 3,
+                            "line": 10,
                             "column": 5,
-                            "byte": 20
+                            "byte": 126
                         },
                         "end": {
-                            "line": 8,
+                            "line": 15,
                             "column": 16,
-                            "byte": 114
+                            "byte": 220
+                        }
+                    }
+                }
+            },
+            "invalid": {
+                "unknown": true,
+                "trace": {
+                    "def": {
+                        "environment": "rotate",
+                        "begin": {
+                            "line": 3,
+                            "column": 5,
+                            "byte": 23
+                        },
+                        "end": {
+                            "line": 7,
+                            "column": 16,
+                            "byte": 112
                         }
                     }
                 }
@@ -1680,12 +2159,12 @@
                             "def": {
                                 "environment": "rotate",
                                 "begin": {
-                                    "line": 17,
+                                    "line": 24,
                                     "column": 11,
                                     "byte": 0
                                 },
                                 "end": {
-                                    "line": 17,
+                                    "line": 24,
                                     "column": 31,
                                     "byte": 0
                                 }
@@ -1697,12 +2176,12 @@
                     "def": {
                         "environment": "rotate",
                         "begin": {
-                            "line": 17,
+                            "line": 24,
                             "column": 5,
                             "byte": 0
                         },
                         "end": {
-                            "line": 17,
+                            "line": 24,
                             "column": 31,
                             "byte": 0
                         }
@@ -1717,14 +2196,14 @@
                             "def": {
                                 "environment": "rotate",
                                 "begin": {
-                                    "line": 10,
+                                    "line": 17,
                                     "column": 5,
-                                    "byte": 128
+                                    "byte": 234
                                 },
                                 "end": {
-                                    "line": 14,
+                                    "line": 21,
                                     "column": 16,
-                                    "byte": 207
+                                    "byte": 313
                                 }
                             }
                         }
@@ -1735,14 +2214,14 @@
                             "def": {
                                 "environment": "rotate",
                                 "begin": {
-                                    "line": 10,
+                                    "line": 17,
                                     "column": 5,
-                                    "byte": 128
+                                    "byte": 234
                                 },
                                 "end": {
-                                    "line": 14,
+                                    "line": 21,
                                     "column": 16,
-                                    "byte": 207
+                                    "byte": 313
                                 }
                             }
                         }
@@ -1752,14 +2231,14 @@
                     "def": {
                         "environment": "rotate",
                         "begin": {
-                            "line": 10,
+                            "line": 17,
                             "column": 5,
-                            "byte": 128
+                            "byte": 234
                         },
                         "end": {
-                            "line": 14,
+                            "line": 21,
                             "column": 16,
-                            "byte": 207
+                            "byte": 313
                         }
                     }
                 }
@@ -1776,6 +2255,21 @@
                         "b": {
                             "type": "string",
                             "const": "bar2"
+                        }
+                    },
+                    "type": "object",
+                    "required": [
+                        "a",
+                        "b"
+                    ]
+                },
+                "invalid": {
+                    "properties": {
+                        "a": {
+                            "type": "string"
+                        },
+                        "b": {
+                            "type": "string"
                         }
                     },
                     "type": "object",
@@ -1816,6 +2310,7 @@
             "type": "object",
             "required": [
                 "full",
+                "invalid",
                 "reference",
                 "short"
             ]
@@ -2014,6 +2509,7 @@
             "a": "bar1",
             "b": "bar2"
         },
+        "invalid": "[unknown]",
         "reference": {
             "test": "bar1 bar2"
         },
@@ -2027,6 +2523,7 @@
             "a": "bar1",
             "b": "bar2"
         },
+        "invalid": "[unknown]",
         "reference": {
             "test": "bar1 bar2"
         },
@@ -2041,14 +2538,14 @@
                 "range": {
                     "environment": "rotate",
                     "begin": {
-                        "line": 3,
+                        "line": 10,
                         "column": 5,
-                        "byte": 20
+                        "byte": 126
                     },
                     "end": {
-                        "line": 8,
+                        "line": 15,
                         "column": 16,
-                        "byte": 114
+                        "byte": 220
                     }
                 },
                 "schema": {
@@ -2073,14 +2570,14 @@
                     "nameRange": {
                         "environment": "rotate",
                         "begin": {
-                            "line": 3,
+                            "line": 10,
                             "column": 5,
-                            "byte": 20
+                            "byte": 126
                         },
                         "end": {
-                            "line": 3,
+                            "line": 10,
                             "column": 15,
-                            "byte": 30
+                            "byte": 136
                         }
                     },
                     "argSchema": {
@@ -2138,14 +2635,14 @@
                                 "range": {
                                     "environment": "rotate",
                                     "begin": {
-                                        "line": 5,
+                                        "line": 12,
                                         "column": 15,
-                                        "byte": 67
+                                        "byte": 173
                                     },
                                     "end": {
-                                        "line": 5,
+                                        "line": 12,
                                         "column": 15,
-                                        "byte": 67
+                                        "byte": 173
                                     }
                                 },
                                 "schema": {
@@ -2156,14 +2653,14 @@
                                 "range": {
                                     "environment": "rotate",
                                     "begin": {
-                                        "line": 4,
+                                        "line": 11,
                                         "column": 17,
-                                        "byte": 48
+                                        "byte": 154
                                     },
                                     "end": {
-                                        "line": 4,
+                                        "line": 11,
                                         "column": 21,
-                                        "byte": 52
+                                        "byte": 158
                                     }
                                 },
                                 "schema": {
@@ -2176,14 +2673,14 @@
                                 "range": {
                                     "environment": "rotate",
                                     "begin": {
-                                        "line": 7,
+                                        "line": 14,
                                         "column": 9,
-                                        "byte": 91
+                                        "byte": 197
                                     },
                                     "end": {
-                                        "line": 8,
+                                        "line": 15,
                                         "column": 16,
-                                        "byte": 114
+                                        "byte": 220
                                     }
                                 },
                                 "schema": {
@@ -2207,27 +2704,27 @@
                                     "a": {
                                         "environment": "rotate",
                                         "begin": {
-                                            "line": 7,
+                                            "line": 14,
                                             "column": 9,
-                                            "byte": 91
+                                            "byte": 197
                                         },
                                         "end": {
-                                            "line": 7,
+                                            "line": 14,
                                             "column": 10,
-                                            "byte": 92
+                                            "byte": 198
                                         }
                                     },
                                     "b": {
                                         "environment": "rotate",
                                         "begin": {
-                                            "line": 8,
+                                            "line": 15,
                                             "column": 9,
-                                            "byte": 107
+                                            "byte": 213
                                         },
                                         "end": {
-                                            "line": 8,
+                                            "line": 15,
                                             "column": 10,
-                                            "byte": 108
+                                            "byte": 214
                                         }
                                     }
                                 },
@@ -2236,14 +2733,14 @@
                                         "range": {
                                             "environment": "rotate",
                                             "begin": {
-                                                "line": 7,
+                                                "line": 14,
                                                 "column": 12,
-                                                "byte": 94
+                                                "byte": 200
                                             },
                                             "end": {
-                                                "line": 7,
+                                                "line": 14,
                                                 "column": 16,
-                                                "byte": 98
+                                                "byte": 204
                                             }
                                         },
                                         "schema": {
@@ -2256,14 +2753,14 @@
                                         "range": {
                                             "environment": "rotate",
                                             "begin": {
-                                                "line": 8,
+                                                "line": 15,
                                                 "column": 12,
-                                                "byte": 110
+                                                "byte": 216
                                             },
                                             "end": {
-                                                "line": 8,
+                                                "line": 15,
                                                 "column": 16,
-                                                "byte": 114
+                                                "byte": 220
                                             }
                                         },
                                         "schema": {
@@ -2278,217 +2775,27 @@
                     }
                 }
             },
-            "reference": {
+            "invalid": {
                 "range": {
                     "environment": "rotate",
                     "begin": {
-                        "line": 17,
+                        "line": 3,
                         "column": 5,
-                        "byte": 0
+                        "byte": 23
                     },
                     "end": {
-                        "line": 17,
-                        "column": 31,
-                        "byte": 0
-                    }
-                },
-                "schema": {
-                    "properties": {
-                        "test": {
-                            "type": "string"
-                        }
-                    },
-                    "type": "object",
-                    "required": [
-                        "test"
-                    ]
-                },
-                "keyRanges": {
-                    "test": {
-                        "environment": "rotate",
-                        "begin": {
-                            "line": 17,
-                            "column": 5,
-                            "byte": 0
-                        },
-                        "end": {
-                            "line": 17,
-                            "column": 9,
-                            "byte": 0
-                        }
-                    }
-                },
-                "object": {
-                    "test": {
-                        "range": {
-                            "environment": "rotate",
-                            "begin": {
-                                "line": 17,
-                                "column": 11,
-                                "byte": 0
-                            },
-                            "end": {
-                                "line": 17,
-                                "column": 31,
-                                "byte": 0
-                            }
-                        },
-                        "schema": {
-                            "type": "string"
-                        },
-                        "interpolate": [
-                            {
-                                "value": [
-                                    {
-                                        "key": "full",
-                                        "range": {
-                                            "environment": "rotate",
-                                            "begin": {
-                                                "line": 17,
-                                                "column": 13,
-                                                "byte": 2
-                                            },
-                                            "end": {
-                                                "line": 17,
-                                                "column": 17,
-                                                "byte": 6
-                                            }
-                                        },
-                                        "value": {
-                                            "environment": "rotate",
-                                            "begin": {
-                                                "line": 3,
-                                                "column": 5,
-                                                "byte": 20
-                                            },
-                                            "end": {
-                                                "line": 8,
-                                                "column": 16,
-                                                "byte": 114
-                                            }
-                                        }
-                                    },
-                                    {
-                                        "key": "a",
-                                        "range": {
-                                            "environment": "rotate",
-                                            "begin": {
-                                                "line": 17,
-                                                "column": 17,
-                                                "byte": 6
-                                            },
-                                            "end": {
-                                                "line": 17,
-                                                "column": 19,
-                                                "byte": 8
-                                            }
-                                        },
-                                        "value": {
-                                            "environment": "rotate",
-                                            "begin": {
-                                                "line": 3,
-                                                "column": 5,
-                                                "byte": 20
-                                            },
-                                            "end": {
-                                                "line": 8,
-                                                "column": 16,
-                                                "byte": 114
-                                            }
-                                        }
-                                    }
-                                ]
-                            },
-                            {
-                                "text": " ",
-                                "value": [
-                                    {
-                                        "key": "short",
-                                        "range": {
-                                            "environment": "rotate",
-                                            "begin": {
-                                                "line": 17,
-                                                "column": 23,
-                                                "byte": 12
-                                            },
-                                            "end": {
-                                                "line": 17,
-                                                "column": 28,
-                                                "byte": 17
-                                            }
-                                        },
-                                        "value": {
-                                            "environment": "rotate",
-                                            "begin": {
-                                                "line": 10,
-                                                "column": 5,
-                                                "byte": 128
-                                            },
-                                            "end": {
-                                                "line": 14,
-                                                "column": 16,
-                                                "byte": 207
-                                            }
-                                        }
-                                    },
-                                    {
-                                        "key": "b",
-                                        "range": {
-                                            "environment": "rotate",
-                                            "begin": {
-                                                "line": 17,
-                                                "column": 28,
-                                                "byte": 17
-                                            },
-                                            "end": {
-                                                "line": 17,
-                                                "column": 30,
-                                                "byte": 19
-                                            }
-                                        },
-                                        "value": {
-                                            "environment": "rotate",
-                                            "begin": {
-                                                "line": 10,
-                                                "column": 5,
-                                                "byte": 128
-                                            },
-                                            "end": {
-                                                "line": 14,
-                                                "column": 16,
-                                                "byte": 207
-                                            }
-                                        }
-                                    }
-                                ]
-                            }
-                        ]
-                    }
-                }
-            },
-            "short": {
-                "range": {
-                    "environment": "rotate",
-                    "begin": {
-                        "line": 10,
-                        "column": 5,
-                        "byte": 128
-                    },
-                    "end": {
-                        "line": 14,
+                        "line": 7,
                         "column": 16,
-                        "byte": 207
+                        "byte": 112
                     }
                 },
                 "schema": {
                     "properties": {
                         "a": {
-                            "type": "string",
-                            "const": "bar2"
+                            "type": "string"
                         },
                         "b": {
-                            "type": "string",
-                            "const": "bar1"
+                            "type": "string"
                         }
                     },
                     "type": "object",
@@ -2502,14 +2809,14 @@
                     "nameRange": {
                         "environment": "rotate",
                         "begin": {
-                            "line": 10,
+                            "line": 3,
                             "column": 5,
-                            "byte": 128
+                            "byte": 23
                         },
                         "end": {
-                            "line": 10,
+                            "line": 3,
                             "column": 21,
-                            "byte": 144
+                            "byte": 39
                         }
                     },
                     "argSchema": {
@@ -2563,32 +2870,30 @@
                                 "range": {
                                     "environment": "rotate",
                                     "begin": {
-                                        "line": 11,
-                                        "column": 15,
-                                        "byte": 160
+                                        "line": 0,
+                                        "column": 0,
+                                        "byte": 0
                                     },
                                     "end": {
-                                        "line": 11,
-                                        "column": 15,
-                                        "byte": 160
+                                        "line": 0,
+                                        "column": 0,
+                                        "byte": 0
                                     }
                                 },
-                                "schema": {
-                                    "type": "object"
-                                }
+                                "schema": true
                             },
                             "state": {
                                 "range": {
                                     "environment": "rotate",
                                     "begin": {
-                                        "line": 13,
+                                        "line": 6,
                                         "column": 9,
-                                        "byte": 184
+                                        "byte": 89
                                     },
                                     "end": {
-                                        "line": 14,
+                                        "line": 7,
                                         "column": 16,
-                                        "byte": 207
+                                        "byte": 112
                                     }
                                 },
                                 "schema": {
@@ -2612,27 +2917,27 @@
                                     "a": {
                                         "environment": "rotate",
                                         "begin": {
-                                            "line": 13,
+                                            "line": 6,
                                             "column": 9,
-                                            "byte": 184
+                                            "byte": 89
                                         },
                                         "end": {
-                                            "line": 13,
+                                            "line": 6,
                                             "column": 10,
-                                            "byte": 185
+                                            "byte": 90
                                         }
                                     },
                                     "b": {
                                         "environment": "rotate",
                                         "begin": {
-                                            "line": 14,
+                                            "line": 7,
                                             "column": 9,
-                                            "byte": 200
+                                            "byte": 105
                                         },
                                         "end": {
-                                            "line": 14,
+                                            "line": 7,
                                             "column": 10,
-                                            "byte": 201
+                                            "byte": 106
                                         }
                                     }
                                 },
@@ -2641,14 +2946,14 @@
                                         "range": {
                                             "environment": "rotate",
                                             "begin": {
-                                                "line": 13,
+                                                "line": 6,
                                                 "column": 12,
-                                                "byte": 187
+                                                "byte": 92
                                             },
                                             "end": {
-                                                "line": 13,
+                                                "line": 6,
                                                 "column": 16,
-                                                "byte": 191
+                                                "byte": 96
                                             }
                                         },
                                         "schema": {
@@ -2661,14 +2966,419 @@
                                         "range": {
                                             "environment": "rotate",
                                             "begin": {
-                                                "line": 14,
+                                                "line": 7,
                                                 "column": 12,
-                                                "byte": 203
+                                                "byte": 108
                                             },
                                             "end": {
-                                                "line": 14,
+                                                "line": 7,
                                                 "column": 16,
-                                                "byte": 207
+                                                "byte": 112
+                                            }
+                                        },
+                                        "schema": {
+                                            "type": "string",
+                                            "const": "bar2"
+                                        },
+                                        "literal": "bar2"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "reference": {
+                "range": {
+                    "environment": "rotate",
+                    "begin": {
+                        "line": 24,
+                        "column": 5,
+                        "byte": 0
+                    },
+                    "end": {
+                        "line": 24,
+                        "column": 31,
+                        "byte": 0
+                    }
+                },
+                "schema": {
+                    "properties": {
+                        "test": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object",
+                    "required": [
+                        "test"
+                    ]
+                },
+                "keyRanges": {
+                    "test": {
+                        "environment": "rotate",
+                        "begin": {
+                            "line": 24,
+                            "column": 5,
+                            "byte": 0
+                        },
+                        "end": {
+                            "line": 24,
+                            "column": 9,
+                            "byte": 0
+                        }
+                    }
+                },
+                "object": {
+                    "test": {
+                        "range": {
+                            "environment": "rotate",
+                            "begin": {
+                                "line": 24,
+                                "column": 11,
+                                "byte": 0
+                            },
+                            "end": {
+                                "line": 24,
+                                "column": 31,
+                                "byte": 0
+                            }
+                        },
+                        "schema": {
+                            "type": "string"
+                        },
+                        "interpolate": [
+                            {
+                                "value": [
+                                    {
+                                        "key": "full",
+                                        "range": {
+                                            "environment": "rotate",
+                                            "begin": {
+                                                "line": 24,
+                                                "column": 13,
+                                                "byte": 2
+                                            },
+                                            "end": {
+                                                "line": 24,
+                                                "column": 17,
+                                                "byte": 6
+                                            }
+                                        },
+                                        "value": {
+                                            "environment": "rotate",
+                                            "begin": {
+                                                "line": 10,
+                                                "column": 5,
+                                                "byte": 126
+                                            },
+                                            "end": {
+                                                "line": 15,
+                                                "column": 16,
+                                                "byte": 220
+                                            }
+                                        }
+                                    },
+                                    {
+                                        "key": "a",
+                                        "range": {
+                                            "environment": "rotate",
+                                            "begin": {
+                                                "line": 24,
+                                                "column": 17,
+                                                "byte": 6
+                                            },
+                                            "end": {
+                                                "line": 24,
+                                                "column": 19,
+                                                "byte": 8
+                                            }
+                                        },
+                                        "value": {
+                                            "environment": "rotate",
+                                            "begin": {
+                                                "line": 10,
+                                                "column": 5,
+                                                "byte": 126
+                                            },
+                                            "end": {
+                                                "line": 15,
+                                                "column": 16,
+                                                "byte": 220
+                                            }
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "text": " ",
+                                "value": [
+                                    {
+                                        "key": "short",
+                                        "range": {
+                                            "environment": "rotate",
+                                            "begin": {
+                                                "line": 24,
+                                                "column": 23,
+                                                "byte": 12
+                                            },
+                                            "end": {
+                                                "line": 24,
+                                                "column": 28,
+                                                "byte": 17
+                                            }
+                                        },
+                                        "value": {
+                                            "environment": "rotate",
+                                            "begin": {
+                                                "line": 17,
+                                                "column": 5,
+                                                "byte": 234
+                                            },
+                                            "end": {
+                                                "line": 21,
+                                                "column": 16,
+                                                "byte": 313
+                                            }
+                                        }
+                                    },
+                                    {
+                                        "key": "b",
+                                        "range": {
+                                            "environment": "rotate",
+                                            "begin": {
+                                                "line": 24,
+                                                "column": 28,
+                                                "byte": 17
+                                            },
+                                            "end": {
+                                                "line": 24,
+                                                "column": 30,
+                                                "byte": 19
+                                            }
+                                        },
+                                        "value": {
+                                            "environment": "rotate",
+                                            "begin": {
+                                                "line": 17,
+                                                "column": 5,
+                                                "byte": 234
+                                            },
+                                            "end": {
+                                                "line": 21,
+                                                "column": 16,
+                                                "byte": 313
+                                            }
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                }
+            },
+            "short": {
+                "range": {
+                    "environment": "rotate",
+                    "begin": {
+                        "line": 17,
+                        "column": 5,
+                        "byte": 234
+                    },
+                    "end": {
+                        "line": 21,
+                        "column": 16,
+                        "byte": 313
+                    }
+                },
+                "schema": {
+                    "properties": {
+                        "a": {
+                            "type": "string",
+                            "const": "bar2"
+                        },
+                        "b": {
+                            "type": "string",
+                            "const": "bar1"
+                        }
+                    },
+                    "type": "object",
+                    "required": [
+                        "a",
+                        "b"
+                    ]
+                },
+                "builtin": {
+                    "name": "fn::rotate::swap",
+                    "nameRange": {
+                        "environment": "rotate",
+                        "begin": {
+                            "line": 17,
+                            "column": 5,
+                            "byte": 234
+                        },
+                        "end": {
+                            "line": 17,
+                            "column": 21,
+                            "byte": 250
+                        }
+                    },
+                    "argSchema": {
+                        "properties": {
+                            "inputs": true,
+                            "state": {
+                                "oneOf": [
+                                    {
+                                        "properties": {
+                                            "a": {
+                                                "type": "string"
+                                            },
+                                            "b": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object",
+                                        "required": [
+                                            "a",
+                                            "b"
+                                        ]
+                                    },
+                                    {
+                                        "type": "null"
+                                    }
+                                ],
+                                "type": ""
+                            }
+                        },
+                        "type": "object",
+                        "required": [
+                            "inputs",
+                            "state"
+                        ]
+                    },
+                    "arg": {
+                        "range": {
+                            "begin": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            },
+                            "end": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            }
+                        },
+                        "object": {
+                            "inputs": {
+                                "range": {
+                                    "environment": "rotate",
+                                    "begin": {
+                                        "line": 18,
+                                        "column": 15,
+                                        "byte": 266
+                                    },
+                                    "end": {
+                                        "line": 18,
+                                        "column": 15,
+                                        "byte": 266
+                                    }
+                                },
+                                "schema": {
+                                    "type": "object"
+                                }
+                            },
+                            "state": {
+                                "range": {
+                                    "environment": "rotate",
+                                    "begin": {
+                                        "line": 20,
+                                        "column": 9,
+                                        "byte": 290
+                                    },
+                                    "end": {
+                                        "line": 21,
+                                        "column": 16,
+                                        "byte": 313
+                                    }
+                                },
+                                "schema": {
+                                    "properties": {
+                                        "a": {
+                                            "type": "string",
+                                            "const": "bar1"
+                                        },
+                                        "b": {
+                                            "type": "string",
+                                            "const": "bar2"
+                                        }
+                                    },
+                                    "type": "object",
+                                    "required": [
+                                        "a",
+                                        "b"
+                                    ]
+                                },
+                                "keyRanges": {
+                                    "a": {
+                                        "environment": "rotate",
+                                        "begin": {
+                                            "line": 20,
+                                            "column": 9,
+                                            "byte": 290
+                                        },
+                                        "end": {
+                                            "line": 20,
+                                            "column": 10,
+                                            "byte": 291
+                                        }
+                                    },
+                                    "b": {
+                                        "environment": "rotate",
+                                        "begin": {
+                                            "line": 21,
+                                            "column": 9,
+                                            "byte": 306
+                                        },
+                                        "end": {
+                                            "line": 21,
+                                            "column": 10,
+                                            "byte": 307
+                                        }
+                                    }
+                                },
+                                "object": {
+                                    "a": {
+                                        "range": {
+                                            "environment": "rotate",
+                                            "begin": {
+                                                "line": 20,
+                                                "column": 12,
+                                                "byte": 293
+                                            },
+                                            "end": {
+                                                "line": 20,
+                                                "column": 16,
+                                                "byte": 297
+                                            }
+                                        },
+                                        "schema": {
+                                            "type": "string",
+                                            "const": "bar1"
+                                        },
+                                        "literal": "bar1"
+                                    },
+                                    "b": {
+                                        "range": {
+                                            "environment": "rotate",
+                                            "begin": {
+                                                "line": 21,
+                                                "column": 12,
+                                                "byte": 309
+                                            },
+                                            "end": {
+                                                "line": 21,
+                                                "column": 16,
+                                                "byte": 313
                                             }
                                         },
                                         "schema": {
@@ -2693,14 +3403,14 @@
                             "def": {
                                 "environment": "rotate",
                                 "begin": {
-                                    "line": 3,
+                                    "line": 10,
                                     "column": 5,
-                                    "byte": 20
+                                    "byte": 126
                                 },
                                 "end": {
-                                    "line": 8,
+                                    "line": 15,
                                     "column": 16,
-                                    "byte": 114
+                                    "byte": 220
                                 }
                             }
                         }
@@ -2711,14 +3421,14 @@
                             "def": {
                                 "environment": "rotate",
                                 "begin": {
-                                    "line": 3,
+                                    "line": 10,
                                     "column": 5,
-                                    "byte": 20
+                                    "byte": 126
                                 },
                                 "end": {
-                                    "line": 8,
+                                    "line": 15,
                                     "column": 16,
-                                    "byte": 114
+                                    "byte": 220
                                 }
                             }
                         }
@@ -2728,14 +3438,32 @@
                     "def": {
                         "environment": "rotate",
                         "begin": {
-                            "line": 3,
+                            "line": 10,
                             "column": 5,
-                            "byte": 20
+                            "byte": 126
                         },
                         "end": {
-                            "line": 8,
+                            "line": 15,
                             "column": 16,
-                            "byte": 114
+                            "byte": 220
+                        }
+                    }
+                }
+            },
+            "invalid": {
+                "unknown": true,
+                "trace": {
+                    "def": {
+                        "environment": "rotate",
+                        "begin": {
+                            "line": 3,
+                            "column": 5,
+                            "byte": 23
+                        },
+                        "end": {
+                            "line": 7,
+                            "column": 16,
+                            "byte": 112
                         }
                     }
                 }
@@ -2748,12 +3476,12 @@
                             "def": {
                                 "environment": "rotate",
                                 "begin": {
-                                    "line": 17,
+                                    "line": 24,
                                     "column": 11,
                                     "byte": 0
                                 },
                                 "end": {
-                                    "line": 17,
+                                    "line": 24,
                                     "column": 31,
                                     "byte": 0
                                 }
@@ -2765,12 +3493,12 @@
                     "def": {
                         "environment": "rotate",
                         "begin": {
-                            "line": 17,
+                            "line": 24,
                             "column": 5,
                             "byte": 0
                         },
                         "end": {
-                            "line": 17,
+                            "line": 24,
                             "column": 31,
                             "byte": 0
                         }
@@ -2785,14 +3513,14 @@
                             "def": {
                                 "environment": "rotate",
                                 "begin": {
-                                    "line": 10,
+                                    "line": 17,
                                     "column": 5,
-                                    "byte": 128
+                                    "byte": 234
                                 },
                                 "end": {
-                                    "line": 14,
+                                    "line": 21,
                                     "column": 16,
-                                    "byte": 207
+                                    "byte": 313
                                 }
                             }
                         }
@@ -2803,14 +3531,14 @@
                             "def": {
                                 "environment": "rotate",
                                 "begin": {
-                                    "line": 10,
+                                    "line": 17,
                                     "column": 5,
-                                    "byte": 128
+                                    "byte": 234
                                 },
                                 "end": {
-                                    "line": 14,
+                                    "line": 21,
                                     "column": 16,
-                                    "byte": 207
+                                    "byte": 313
                                 }
                             }
                         }
@@ -2820,14 +3548,14 @@
                     "def": {
                         "environment": "rotate",
                         "begin": {
-                            "line": 10,
+                            "line": 17,
                             "column": 5,
-                            "byte": 128
+                            "byte": 234
                         },
                         "end": {
-                            "line": 14,
+                            "line": 21,
                             "column": 16,
-                            "byte": 207
+                            "byte": 313
                         }
                     }
                 }
@@ -2844,6 +3572,21 @@
                         "b": {
                             "type": "string",
                             "const": "bar1"
+                        }
+                    },
+                    "type": "object",
+                    "required": [
+                        "a",
+                        "b"
+                    ]
+                },
+                "invalid": {
+                    "properties": {
+                        "a": {
+                            "type": "string"
+                        },
+                        "b": {
+                            "type": "string"
                         }
                     },
                     "type": "object",
@@ -2884,6 +3627,7 @@
             "type": "object",
             "required": [
                 "full",
+                "invalid",
                 "reference",
                 "short"
             ]
@@ -3082,6 +3826,7 @@
             "a": "bar2",
             "b": "bar1"
         },
+        "invalid": "[unknown]",
         "reference": {
             "test": "bar2 bar1"
         },
@@ -3101,14 +3846,14 @@
                             "def": {
                                 "environment": "rotate",
                                 "begin": {
-                                    "line": 8,
+                                    "line": 15,
                                     "column": 12,
-                                    "byte": 110
+                                    "byte": 216
                                 },
                                 "end": {
-                                    "line": 8,
+                                    "line": 15,
                                     "column": 16,
-                                    "byte": 114
+                                    "byte": 220
                                 }
                             }
                         }
@@ -3119,14 +3864,14 @@
                             "def": {
                                 "environment": "rotate",
                                 "begin": {
-                                    "line": 7,
+                                    "line": 14,
                                     "column": 12,
-                                    "byte": 94
+                                    "byte": 200
                                 },
                                 "end": {
-                                    "line": 7,
+                                    "line": 14,
                                     "column": 16,
-                                    "byte": 98
+                                    "byte": 204
                                 }
                             }
                         }
@@ -3158,14 +3903,14 @@
                             "def": {
                                 "environment": "rotate",
                                 "begin": {
-                                    "line": 14,
+                                    "line": 21,
                                     "column": 12,
-                                    "byte": 203
+                                    "byte": 309
                                 },
                                 "end": {
-                                    "line": 14,
+                                    "line": 21,
                                     "column": 16,
-                                    "byte": 207
+                                    "byte": 313
                                 }
                             }
                         }
@@ -3176,14 +3921,14 @@
                             "def": {
                                 "environment": "rotate",
                                 "begin": {
-                                    "line": 13,
+                                    "line": 20,
                                     "column": 12,
-                                    "byte": 187
+                                    "byte": 293
                                 },
                                 "end": {
-                                    "line": 13,
+                                    "line": 20,
                                     "column": 16,
-                                    "byte": 191
+                                    "byte": 297
                                 }
                             }
                         }
