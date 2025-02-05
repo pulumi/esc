@@ -48,7 +48,7 @@
         },
         {
             "Severity": 1,
-            "Summary": "at least one subschema must match",
+            "Summary": "exactly one subschema must match",
             "Detail": "",
             "Subject": {
                 "Filename": "rotate-bootstrap",
@@ -129,7 +129,7 @@
                                 ]
                             },
                             "state": {
-                                "anyOf": [
+                                "oneOf": [
                                     {
                                         "properties": {
                                             "current": {
@@ -398,7 +398,7 @@
                                 ]
                             },
                             "state": {
-                                "anyOf": [
+                                "oneOf": [
                                     {
                                         "properties": {
                                             "current": {
@@ -629,7 +629,7 @@
                                 ]
                             },
                             "state": {
-                                "anyOf": [
+                                "oneOf": [
                                     {
                                         "properties": {
                                             "current": {
@@ -814,7 +814,7 @@
                                 ]
                             },
                             "state": {
-                                "anyOf": [
+                                "oneOf": [
                                     {
                                         "properties": {
                                             "current": {
@@ -1374,7 +1374,7 @@
         },
         {
             "Severity": 1,
-            "Summary": "at least one subschema must match",
+            "Summary": "exactly one subschema must match",
             "Detail": "",
             "Subject": {
                 "Filename": "rotate-bootstrap",
@@ -1458,7 +1458,7 @@
                                 ]
                             },
                             "state": {
-                                "anyOf": [
+                                "oneOf": [
                                     {
                                         "properties": {
                                             "current": {
@@ -1727,7 +1727,7 @@
                                 ]
                             },
                             "state": {
-                                "anyOf": [
+                                "oneOf": [
                                     {
                                         "properties": {
                                             "current": {
@@ -1947,7 +1947,7 @@
                                 ]
                             },
                             "state": {
-                                "anyOf": [
+                                "oneOf": [
                                     {
                                         "properties": {
                                             "current": {
@@ -2130,7 +2130,7 @@
                                 ]
                             },
                             "state": {
-                                "anyOf": [
+                                "oneOf": [
                                     {
                                         "properties": {
                                             "current": {
@@ -2752,7 +2752,7 @@
         },
         {
             "Severity": 1,
-            "Summary": "at least one subschema must match",
+            "Summary": "exactly one subschema must match",
             "Detail": "",
             "Subject": {
                 "Filename": "rotate-bootstrap",
@@ -2836,7 +2836,7 @@
                                 ]
                             },
                             "state": {
-                                "anyOf": [
+                                "oneOf": [
                                     {
                                         "properties": {
                                             "current": {
@@ -3105,7 +3105,7 @@
                                 ]
                             },
                             "state": {
-                                "anyOf": [
+                                "oneOf": [
                                     {
                                         "properties": {
                                             "current": {
@@ -3338,7 +3338,7 @@
                                 ]
                             },
                             "state": {
-                                "anyOf": [
+                                "oneOf": [
                                     {
                                         "properties": {
                                             "current": {
@@ -3526,7 +3526,7 @@
                                 ]
                             },
                             "state": {
-                                "anyOf": [
+                                "oneOf": [
                                     {
                                         "properties": {
                                             "current": {
@@ -4166,7 +4166,7 @@
     },
     "rotatePatches": [
         {
-            "DocPath": "full-state[\"fn::rotate::echo\"].state",
+            "DocPath": "values[\"full-state\"][\"fn::rotate::echo\"].state",
             "Replacement": {
                 "value": {
                     "current": {
@@ -4223,7 +4223,7 @@
             }
         },
         {
-            "DocPath": "optional-state[\"fn::rotate::echo\"].state",
+            "DocPath": "values[\"optional-state\"][\"fn::rotate::echo\"].state",
             "Replacement": {
                 "value": {
                     "current": {
@@ -4278,7 +4278,7 @@
             }
         },
         {
-            "DocPath": "partial-state[\"fn::rotate::echo\"].state",
+            "DocPath": "values[\"partial-state\"][\"fn::rotate::echo\"].state",
             "Replacement": {
                 "value": {
                     "current": {

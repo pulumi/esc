@@ -52,19 +52,27 @@
                                 "type": "string"
                             },
                             "state": {
-                                "properties": {
-                                    "a": {
-                                        "type": "string"
+                                "oneOf": [
+                                    {
+                                        "properties": {
+                                            "a": {
+                                                "type": "string"
+                                            },
+                                            "b": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object",
+                                        "required": [
+                                            "a",
+                                            "b"
+                                        ]
                                     },
-                                    "b": {
-                                        "type": "string"
+                                    {
+                                        "type": "null"
                                     }
-                                },
-                                "type": "object",
-                                "required": [
-                                    "a",
-                                    "b"
-                                ]
+                                ],
+                                "type": ""
                             }
                         },
                         "type": "object",
@@ -468,19 +476,27 @@
                         "properties": {
                             "inputs": true,
                             "state": {
-                                "properties": {
-                                    "a": {
-                                        "type": "string"
+                                "oneOf": [
+                                    {
+                                        "properties": {
+                                            "a": {
+                                                "type": "string"
+                                            },
+                                            "b": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object",
+                                        "required": [
+                                            "a",
+                                            "b"
+                                        ]
                                     },
-                                    "b": {
-                                        "type": "string"
+                                    {
+                                        "type": "null"
                                     }
-                                },
-                                "type": "object",
-                                "required": [
-                                    "a",
-                                    "b"
-                                ]
+                                ],
+                                "type": ""
                             }
                         },
                         "type": "object",
@@ -1006,19 +1022,27 @@
                                 "type": "string"
                             },
                             "state": {
-                                "properties": {
-                                    "a": {
-                                        "type": "string"
+                                "oneOf": [
+                                    {
+                                        "properties": {
+                                            "a": {
+                                                "type": "string"
+                                            },
+                                            "b": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object",
+                                        "required": [
+                                            "a",
+                                            "b"
+                                        ]
                                     },
-                                    "b": {
-                                        "type": "string"
+                                    {
+                                        "type": "null"
                                     }
-                                },
-                                "type": "object",
-                                "required": [
-                                    "a",
-                                    "b"
-                                ]
+                                ],
+                                "type": ""
                             }
                         },
                         "type": "object",
@@ -1424,19 +1448,27 @@
                         "properties": {
                             "inputs": true,
                             "state": {
-                                "properties": {
-                                    "a": {
-                                        "type": "string"
+                                "oneOf": [
+                                    {
+                                        "properties": {
+                                            "a": {
+                                                "type": "string"
+                                            },
+                                            "b": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object",
+                                        "required": [
+                                            "a",
+                                            "b"
+                                        ]
                                     },
-                                    "b": {
-                                        "type": "string"
+                                    {
+                                        "type": "null"
                                     }
-                                },
-                                "type": "object",
-                                "required": [
-                                    "a",
-                                    "b"
-                                ]
+                                ],
+                                "type": ""
                             }
                         },
                         "type": "object",
@@ -2058,19 +2090,27 @@
                                 "type": "string"
                             },
                             "state": {
-                                "properties": {
-                                    "a": {
-                                        "type": "string"
+                                "oneOf": [
+                                    {
+                                        "properties": {
+                                            "a": {
+                                                "type": "string"
+                                            },
+                                            "b": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object",
+                                        "required": [
+                                            "a",
+                                            "b"
+                                        ]
                                     },
-                                    "b": {
-                                        "type": "string"
+                                    {
+                                        "type": "null"
                                     }
-                                },
-                                "type": "object",
-                                "required": [
-                                    "a",
-                                    "b"
-                                ]
+                                ],
+                                "type": ""
                             }
                         },
                         "type": "object",
@@ -2476,19 +2516,27 @@
                         "properties": {
                             "inputs": true,
                             "state": {
-                                "properties": {
-                                    "a": {
-                                        "type": "string"
+                                "oneOf": [
+                                    {
+                                        "properties": {
+                                            "a": {
+                                                "type": "string"
+                                            },
+                                            "b": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object",
+                                        "required": [
+                                            "a",
+                                            "b"
+                                        ]
                                     },
-                                    "b": {
-                                        "type": "string"
+                                    {
+                                        "type": "null"
                                     }
-                                },
-                                "type": "object",
-                                "required": [
-                                    "a",
-                                    "b"
-                                ]
+                                ],
+                                "type": ""
                             }
                         },
                         "type": "object",
