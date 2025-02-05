@@ -5,7 +5,7 @@
             "Summary": "missing required properties: current",
             "Detail": "",
             "Subject": {
-                "Filename": "rotate-bootstrap",
+                "Filename": "rotate-state",
                 "Start": {
                     "Line": 27,
                     "Column": 9,
@@ -28,7 +28,7 @@
             "Summary": "expected null, got object",
             "Detail": "",
             "Subject": {
-                "Filename": "rotate-bootstrap",
+                "Filename": "rotate-state",
                 "Start": {
                     "Line": 27,
                     "Column": 9,
@@ -51,7 +51,7 @@
             "Summary": "exactly one subschema must match",
             "Detail": "",
             "Subject": {
-                "Filename": "rotate-bootstrap",
+                "Filename": "rotate-state",
                 "Start": {
                     "Line": 27,
                     "Column": 9,
@@ -74,7 +74,7 @@
         "exprs": {
             "full-state": {
                 "range": {
-                    "environment": "rotate-bootstrap",
+                    "environment": "rotate-state",
                     "begin": {
                         "line": 15,
                         "column": 5,
@@ -103,7 +103,7 @@
                 "builtin": {
                     "name": "fn::rotate::echo",
                     "nameRange": {
-                        "environment": "rotate-bootstrap",
+                        "environment": "rotate-state",
                         "begin": {
                             "line": 15,
                             "column": 5,
@@ -173,7 +173,7 @@
                         "object": {
                             "inputs": {
                                 "range": {
-                                    "environment": "rotate-bootstrap",
+                                    "environment": "rotate-state",
                                     "begin": {
                                         "line": 17,
                                         "column": 9,
@@ -199,7 +199,7 @@
                                 },
                                 "keyRanges": {
                                     "next": {
-                                        "environment": "rotate-bootstrap",
+                                        "environment": "rotate-state",
                                         "begin": {
                                             "line": 17,
                                             "column": 9,
@@ -215,7 +215,7 @@
                                 "object": {
                                     "next": {
                                         "range": {
-                                            "environment": "rotate-bootstrap",
+                                            "environment": "rotate-state",
                                             "begin": {
                                                 "line": 17,
                                                 "column": 15,
@@ -237,7 +237,7 @@
                             },
                             "state": {
                                 "range": {
-                                    "environment": "rotate-bootstrap",
+                                    "environment": "rotate-state",
                                     "begin": {
                                         "line": 19,
                                         "column": 9,
@@ -268,7 +268,7 @@
                                 },
                                 "keyRanges": {
                                     "current": {
-                                        "environment": "rotate-bootstrap",
+                                        "environment": "rotate-state",
                                         "begin": {
                                             "line": 19,
                                             "column": 9,
@@ -281,7 +281,7 @@
                                         }
                                     },
                                     "previous": {
-                                        "environment": "rotate-bootstrap",
+                                        "environment": "rotate-state",
                                         "begin": {
                                             "line": 20,
                                             "column": 9,
@@ -297,7 +297,7 @@
                                 "object": {
                                     "current": {
                                         "range": {
-                                            "environment": "rotate-bootstrap",
+                                            "environment": "rotate-state",
                                             "begin": {
                                                 "line": 19,
                                                 "column": 18,
@@ -317,7 +317,7 @@
                                     },
                                     "previous": {
                                         "range": {
-                                            "environment": "rotate-bootstrap",
+                                            "environment": "rotate-state",
                                             "begin": {
                                                 "line": 20,
                                                 "column": 19,
@@ -343,7 +343,7 @@
             },
             "invalid-state": {
                 "range": {
-                    "environment": "rotate-bootstrap",
+                    "environment": "rotate-state",
                     "begin": {
                         "line": 23,
                         "column": 5,
@@ -372,7 +372,7 @@
                 "builtin": {
                     "name": "fn::rotate::echo",
                     "nameRange": {
-                        "environment": "rotate-bootstrap",
+                        "environment": "rotate-state",
                         "begin": {
                             "line": 23,
                             "column": 5,
@@ -442,7 +442,7 @@
                         "object": {
                             "inputs": {
                                 "range": {
-                                    "environment": "rotate-bootstrap",
+                                    "environment": "rotate-state",
                                     "begin": {
                                         "line": 25,
                                         "column": 9,
@@ -468,7 +468,7 @@
                                 },
                                 "keyRanges": {
                                     "next": {
-                                        "environment": "rotate-bootstrap",
+                                        "environment": "rotate-state",
                                         "begin": {
                                             "line": 25,
                                             "column": 9,
@@ -484,7 +484,7 @@
                                 "object": {
                                     "next": {
                                         "range": {
-                                            "environment": "rotate-bootstrap",
+                                            "environment": "rotate-state",
                                             "begin": {
                                                 "line": 25,
                                                 "column": 15,
@@ -506,7 +506,7 @@
                             },
                             "state": {
                                 "range": {
-                                    "environment": "rotate-bootstrap",
+                                    "environment": "rotate-state",
                                     "begin": {
                                         "line": 27,
                                         "column": 9,
@@ -532,7 +532,7 @@
                                 },
                                 "keyRanges": {
                                     "previous": {
-                                        "environment": "rotate-bootstrap",
+                                        "environment": "rotate-state",
                                         "begin": {
                                             "line": 27,
                                             "column": 9,
@@ -548,7 +548,7 @@
                                 "object": {
                                     "previous": {
                                         "range": {
-                                            "environment": "rotate-bootstrap",
+                                            "environment": "rotate-state",
                                             "begin": {
                                                 "line": 27,
                                                 "column": 19,
@@ -574,7 +574,7 @@
             },
             "optional-state": {
                 "range": {
-                    "environment": "rotate-bootstrap",
+                    "environment": "rotate-state",
                     "begin": {
                         "line": 3,
                         "column": 5,
@@ -603,7 +603,7 @@
                 "builtin": {
                     "name": "fn::rotate::echo",
                     "nameRange": {
-                        "environment": "rotate-bootstrap",
+                        "environment": "rotate-state",
                         "begin": {
                             "line": 3,
                             "column": 5,
@@ -673,7 +673,7 @@
                         "object": {
                             "inputs": {
                                 "range": {
-                                    "environment": "rotate-bootstrap",
+                                    "environment": "rotate-state",
                                     "begin": {
                                         "line": 5,
                                         "column": 9,
@@ -699,7 +699,7 @@
                                 },
                                 "keyRanges": {
                                     "next": {
-                                        "environment": "rotate-bootstrap",
+                                        "environment": "rotate-state",
                                         "begin": {
                                             "line": 5,
                                             "column": 9,
@@ -715,7 +715,7 @@
                                 "object": {
                                     "next": {
                                         "range": {
-                                            "environment": "rotate-bootstrap",
+                                            "environment": "rotate-state",
                                             "begin": {
                                                 "line": 5,
                                                 "column": 15,
@@ -737,7 +737,7 @@
                             },
                             "state": {
                                 "range": {
-                                    "environment": "rotate-bootstrap",
+                                    "environment": "rotate-state",
                                     "begin": {
                                         "line": 0,
                                         "column": 0,
@@ -759,7 +759,7 @@
             },
             "partial-state": {
                 "range": {
-                    "environment": "rotate-bootstrap",
+                    "environment": "rotate-state",
                     "begin": {
                         "line": 8,
                         "column": 5,
@@ -788,7 +788,7 @@
                 "builtin": {
                     "name": "fn::rotate::echo",
                     "nameRange": {
-                        "environment": "rotate-bootstrap",
+                        "environment": "rotate-state",
                         "begin": {
                             "line": 8,
                             "column": 5,
@@ -858,7 +858,7 @@
                         "object": {
                             "inputs": {
                                 "range": {
-                                    "environment": "rotate-bootstrap",
+                                    "environment": "rotate-state",
                                     "begin": {
                                         "line": 10,
                                         "column": 9,
@@ -884,7 +884,7 @@
                                 },
                                 "keyRanges": {
                                     "next": {
-                                        "environment": "rotate-bootstrap",
+                                        "environment": "rotate-state",
                                         "begin": {
                                             "line": 10,
                                             "column": 9,
@@ -900,7 +900,7 @@
                                 "object": {
                                     "next": {
                                         "range": {
-                                            "environment": "rotate-bootstrap",
+                                            "environment": "rotate-state",
                                             "begin": {
                                                 "line": 10,
                                                 "column": 15,
@@ -922,7 +922,7 @@
                             },
                             "state": {
                                 "range": {
-                                    "environment": "rotate-bootstrap",
+                                    "environment": "rotate-state",
                                     "begin": {
                                         "line": 12,
                                         "column": 9,
@@ -948,7 +948,7 @@
                                 },
                                 "keyRanges": {
                                     "current": {
-                                        "environment": "rotate-bootstrap",
+                                        "environment": "rotate-state",
                                         "begin": {
                                             "line": 12,
                                             "column": 9,
@@ -964,7 +964,7 @@
                                 "object": {
                                     "current": {
                                         "range": {
-                                            "environment": "rotate-bootstrap",
+                                            "environment": "rotate-state",
                                             "begin": {
                                                 "line": 12,
                                                 "column": 18,
@@ -994,7 +994,7 @@
                 "unknown": true,
                 "trace": {
                     "def": {
-                        "environment": "rotate-bootstrap",
+                        "environment": "rotate-state",
                         "begin": {
                             "line": 15,
                             "column": 5,
@@ -1012,7 +1012,7 @@
                 "unknown": true,
                 "trace": {
                     "def": {
-                        "environment": "rotate-bootstrap",
+                        "environment": "rotate-state",
                         "begin": {
                             "line": 23,
                             "column": 5,
@@ -1030,7 +1030,7 @@
                 "unknown": true,
                 "trace": {
                     "def": {
-                        "environment": "rotate-bootstrap",
+                        "environment": "rotate-state",
                         "begin": {
                             "line": 3,
                             "column": 5,
@@ -1048,7 +1048,7 @@
                 "unknown": true,
                 "trace": {
                     "def": {
-                        "environment": "rotate-bootstrap",
+                        "environment": "rotate-state",
                         "begin": {
                             "line": 8,
                             "column": 5,
@@ -1135,10 +1135,10 @@
                 "currentEnvironment": {
                     "value": {
                         "name": {
-                            "value": "rotate-bootstrap",
+                            "value": "rotate-state",
                             "trace": {
                                 "def": {
-                                    "environment": "rotate-bootstrap",
+                                    "environment": "rotate-state",
                                     "begin": {
                                         "line": 0,
                                         "column": 0,
@@ -1155,7 +1155,7 @@
                     },
                     "trace": {
                         "def": {
-                            "environment": "rotate-bootstrap",
+                            "environment": "rotate-state",
                             "begin": {
                                 "line": 0,
                                 "column": 0,
@@ -1177,7 +1177,7 @@
                                     "value": "USER_123",
                                     "trace": {
                                         "def": {
-                                            "environment": "rotate-bootstrap",
+                                            "environment": "rotate-state",
                                             "begin": {
                                                 "line": 0,
                                                 "column": 0,
@@ -1194,7 +1194,7 @@
                             },
                             "trace": {
                                 "def": {
-                                    "environment": "rotate-bootstrap",
+                                    "environment": "rotate-state",
                                     "begin": {
                                         "line": 0,
                                         "column": 0,
@@ -1211,7 +1211,7 @@
                     },
                     "trace": {
                         "def": {
-                            "environment": "rotate-bootstrap",
+                            "environment": "rotate-state",
                             "begin": {
                                 "line": 0,
                                 "column": 0,
@@ -1228,10 +1228,10 @@
                 "rootEnvironment": {
                     "value": {
                         "name": {
-                            "value": "rotate-bootstrap",
+                            "value": "rotate-state",
                             "trace": {
                                 "def": {
-                                    "environment": "rotate-bootstrap",
+                                    "environment": "rotate-state",
                                     "begin": {
                                         "line": 0,
                                         "column": 0,
@@ -1248,7 +1248,7 @@
                     },
                     "trace": {
                         "def": {
-                            "environment": "rotate-bootstrap",
+                            "environment": "rotate-state",
                             "begin": {
                                 "line": 0,
                                 "column": 0,
@@ -1269,7 +1269,7 @@
                         "properties": {
                             "name": {
                                 "type": "string",
-                                "const": "rotate-bootstrap"
+                                "const": "rotate-state"
                             }
                         },
                         "type": "object",
@@ -1301,7 +1301,7 @@
                         "properties": {
                             "name": {
                                 "type": "string",
-                                "const": "rotate-bootstrap"
+                                "const": "rotate-state"
                             }
                         },
                         "type": "object",
@@ -1331,7 +1331,7 @@
             "Summary": "missing required properties: current",
             "Detail": "",
             "Subject": {
-                "Filename": "rotate-bootstrap",
+                "Filename": "rotate-state",
                 "Start": {
                     "Line": 27,
                     "Column": 9,
@@ -1354,7 +1354,7 @@
             "Summary": "expected null, got object",
             "Detail": "",
             "Subject": {
-                "Filename": "rotate-bootstrap",
+                "Filename": "rotate-state",
                 "Start": {
                     "Line": 27,
                     "Column": 9,
@@ -1377,7 +1377,7 @@
             "Summary": "exactly one subschema must match",
             "Detail": "",
             "Subject": {
-                "Filename": "rotate-bootstrap",
+                "Filename": "rotate-state",
                 "Start": {
                     "Line": 27,
                     "Column": 9,
@@ -1400,7 +1400,7 @@
         "exprs": {
             "full-state": {
                 "range": {
-                    "environment": "rotate-bootstrap",
+                    "environment": "rotate-state",
                     "begin": {
                         "line": 15,
                         "column": 5,
@@ -1432,7 +1432,7 @@
                 "builtin": {
                     "name": "fn::rotate::echo",
                     "nameRange": {
-                        "environment": "rotate-bootstrap",
+                        "environment": "rotate-state",
                         "begin": {
                             "line": 15,
                             "column": 5,
@@ -1502,7 +1502,7 @@
                         "object": {
                             "inputs": {
                                 "range": {
-                                    "environment": "rotate-bootstrap",
+                                    "environment": "rotate-state",
                                     "begin": {
                                         "line": 17,
                                         "column": 9,
@@ -1528,7 +1528,7 @@
                                 },
                                 "keyRanges": {
                                     "next": {
-                                        "environment": "rotate-bootstrap",
+                                        "environment": "rotate-state",
                                         "begin": {
                                             "line": 17,
                                             "column": 9,
@@ -1544,7 +1544,7 @@
                                 "object": {
                                     "next": {
                                         "range": {
-                                            "environment": "rotate-bootstrap",
+                                            "environment": "rotate-state",
                                             "begin": {
                                                 "line": 17,
                                                 "column": 15,
@@ -1566,7 +1566,7 @@
                             },
                             "state": {
                                 "range": {
-                                    "environment": "rotate-bootstrap",
+                                    "environment": "rotate-state",
                                     "begin": {
                                         "line": 19,
                                         "column": 9,
@@ -1597,7 +1597,7 @@
                                 },
                                 "keyRanges": {
                                     "current": {
-                                        "environment": "rotate-bootstrap",
+                                        "environment": "rotate-state",
                                         "begin": {
                                             "line": 19,
                                             "column": 9,
@@ -1610,7 +1610,7 @@
                                         }
                                     },
                                     "previous": {
-                                        "environment": "rotate-bootstrap",
+                                        "environment": "rotate-state",
                                         "begin": {
                                             "line": 20,
                                             "column": 9,
@@ -1626,7 +1626,7 @@
                                 "object": {
                                     "current": {
                                         "range": {
-                                            "environment": "rotate-bootstrap",
+                                            "environment": "rotate-state",
                                             "begin": {
                                                 "line": 19,
                                                 "column": 18,
@@ -1646,7 +1646,7 @@
                                     },
                                     "previous": {
                                         "range": {
-                                            "environment": "rotate-bootstrap",
+                                            "environment": "rotate-state",
                                             "begin": {
                                                 "line": 20,
                                                 "column": 19,
@@ -1672,7 +1672,7 @@
             },
             "invalid-state": {
                 "range": {
-                    "environment": "rotate-bootstrap",
+                    "environment": "rotate-state",
                     "begin": {
                         "line": 23,
                         "column": 5,
@@ -1701,7 +1701,7 @@
                 "builtin": {
                     "name": "fn::rotate::echo",
                     "nameRange": {
-                        "environment": "rotate-bootstrap",
+                        "environment": "rotate-state",
                         "begin": {
                             "line": 23,
                             "column": 5,
@@ -1771,7 +1771,7 @@
                         "object": {
                             "inputs": {
                                 "range": {
-                                    "environment": "rotate-bootstrap",
+                                    "environment": "rotate-state",
                                     "begin": {
                                         "line": 25,
                                         "column": 9,
@@ -1797,7 +1797,7 @@
                                 },
                                 "keyRanges": {
                                     "next": {
-                                        "environment": "rotate-bootstrap",
+                                        "environment": "rotate-state",
                                         "begin": {
                                             "line": 25,
                                             "column": 9,
@@ -1813,7 +1813,7 @@
                                 "object": {
                                     "next": {
                                         "range": {
-                                            "environment": "rotate-bootstrap",
+                                            "environment": "rotate-state",
                                             "begin": {
                                                 "line": 25,
                                                 "column": 15,
@@ -1835,7 +1835,7 @@
                             },
                             "state": {
                                 "range": {
-                                    "environment": "rotate-bootstrap",
+                                    "environment": "rotate-state",
                                     "begin": {
                                         "line": 27,
                                         "column": 9,
@@ -1861,7 +1861,7 @@
                                 },
                                 "keyRanges": {
                                     "previous": {
-                                        "environment": "rotate-bootstrap",
+                                        "environment": "rotate-state",
                                         "begin": {
                                             "line": 27,
                                             "column": 9,
@@ -1877,7 +1877,7 @@
                                 "object": {
                                     "previous": {
                                         "range": {
-                                            "environment": "rotate-bootstrap",
+                                            "environment": "rotate-state",
                                             "begin": {
                                                 "line": 27,
                                                 "column": 19,
@@ -1903,7 +1903,7 @@
             },
             "optional-state": {
                 "range": {
-                    "environment": "rotate-bootstrap",
+                    "environment": "rotate-state",
                     "begin": {
                         "line": 3,
                         "column": 5,
@@ -1921,7 +1921,7 @@
                 "builtin": {
                     "name": "fn::rotate::echo",
                     "nameRange": {
-                        "environment": "rotate-bootstrap",
+                        "environment": "rotate-state",
                         "begin": {
                             "line": 3,
                             "column": 5,
@@ -1991,7 +1991,7 @@
                         "object": {
                             "inputs": {
                                 "range": {
-                                    "environment": "rotate-bootstrap",
+                                    "environment": "rotate-state",
                                     "begin": {
                                         "line": 5,
                                         "column": 9,
@@ -2017,7 +2017,7 @@
                                 },
                                 "keyRanges": {
                                     "next": {
-                                        "environment": "rotate-bootstrap",
+                                        "environment": "rotate-state",
                                         "begin": {
                                             "line": 5,
                                             "column": 9,
@@ -2033,7 +2033,7 @@
                                 "object": {
                                     "next": {
                                         "range": {
-                                            "environment": "rotate-bootstrap",
+                                            "environment": "rotate-state",
                                             "begin": {
                                                 "line": 5,
                                                 "column": 15,
@@ -2055,7 +2055,7 @@
                             },
                             "state": {
                                 "range": {
-                                    "environment": "rotate-bootstrap",
+                                    "environment": "rotate-state",
                                     "begin": {
                                         "line": 0,
                                         "column": 0,
@@ -2077,7 +2077,7 @@
             },
             "partial-state": {
                 "range": {
-                    "environment": "rotate-bootstrap",
+                    "environment": "rotate-state",
                     "begin": {
                         "line": 8,
                         "column": 5,
@@ -2104,7 +2104,7 @@
                 "builtin": {
                     "name": "fn::rotate::echo",
                     "nameRange": {
-                        "environment": "rotate-bootstrap",
+                        "environment": "rotate-state",
                         "begin": {
                             "line": 8,
                             "column": 5,
@@ -2174,7 +2174,7 @@
                         "object": {
                             "inputs": {
                                 "range": {
-                                    "environment": "rotate-bootstrap",
+                                    "environment": "rotate-state",
                                     "begin": {
                                         "line": 10,
                                         "column": 9,
@@ -2200,7 +2200,7 @@
                                 },
                                 "keyRanges": {
                                     "next": {
-                                        "environment": "rotate-bootstrap",
+                                        "environment": "rotate-state",
                                         "begin": {
                                             "line": 10,
                                             "column": 9,
@@ -2216,7 +2216,7 @@
                                 "object": {
                                     "next": {
                                         "range": {
-                                            "environment": "rotate-bootstrap",
+                                            "environment": "rotate-state",
                                             "begin": {
                                                 "line": 10,
                                                 "column": 15,
@@ -2238,7 +2238,7 @@
                             },
                             "state": {
                                 "range": {
-                                    "environment": "rotate-bootstrap",
+                                    "environment": "rotate-state",
                                     "begin": {
                                         "line": 12,
                                         "column": 9,
@@ -2264,7 +2264,7 @@
                                 },
                                 "keyRanges": {
                                     "current": {
-                                        "environment": "rotate-bootstrap",
+                                        "environment": "rotate-state",
                                         "begin": {
                                             "line": 12,
                                             "column": 9,
@@ -2280,7 +2280,7 @@
                                 "object": {
                                     "current": {
                                         "range": {
-                                            "environment": "rotate-bootstrap",
+                                            "environment": "rotate-state",
                                             "begin": {
                                                 "line": 12,
                                                 "column": 18,
@@ -2312,7 +2312,7 @@
                         "value": "update2",
                         "trace": {
                             "def": {
-                                "environment": "rotate-bootstrap",
+                                "environment": "rotate-state",
                                 "begin": {
                                     "line": 15,
                                     "column": 5,
@@ -2330,7 +2330,7 @@
                         "value": "update1",
                         "trace": {
                             "def": {
-                                "environment": "rotate-bootstrap",
+                                "environment": "rotate-state",
                                 "begin": {
                                     "line": 15,
                                     "column": 5,
@@ -2347,7 +2347,7 @@
                 },
                 "trace": {
                     "def": {
-                        "environment": "rotate-bootstrap",
+                        "environment": "rotate-state",
                         "begin": {
                             "line": 15,
                             "column": 5,
@@ -2365,7 +2365,7 @@
                 "unknown": true,
                 "trace": {
                     "def": {
-                        "environment": "rotate-bootstrap",
+                        "environment": "rotate-state",
                         "begin": {
                             "line": 23,
                             "column": 5,
@@ -2383,7 +2383,7 @@
                 "value": {},
                 "trace": {
                     "def": {
-                        "environment": "rotate-bootstrap",
+                        "environment": "rotate-state",
                         "begin": {
                             "line": 3,
                             "column": 5,
@@ -2403,7 +2403,7 @@
                         "value": "update1",
                         "trace": {
                             "def": {
-                                "environment": "rotate-bootstrap",
+                                "environment": "rotate-state",
                                 "begin": {
                                     "line": 8,
                                     "column": 5,
@@ -2420,7 +2420,7 @@
                 },
                 "trace": {
                     "def": {
-                        "environment": "rotate-bootstrap",
+                        "environment": "rotate-state",
                         "begin": {
                             "line": 8,
                             "column": 5,
@@ -2497,10 +2497,10 @@
                 "currentEnvironment": {
                     "value": {
                         "name": {
-                            "value": "rotate-bootstrap",
+                            "value": "rotate-state",
                             "trace": {
                                 "def": {
-                                    "environment": "rotate-bootstrap",
+                                    "environment": "rotate-state",
                                     "begin": {
                                         "line": 0,
                                         "column": 0,
@@ -2517,7 +2517,7 @@
                     },
                     "trace": {
                         "def": {
-                            "environment": "rotate-bootstrap",
+                            "environment": "rotate-state",
                             "begin": {
                                 "line": 0,
                                 "column": 0,
@@ -2539,7 +2539,7 @@
                                     "value": "USER_123",
                                     "trace": {
                                         "def": {
-                                            "environment": "rotate-bootstrap",
+                                            "environment": "rotate-state",
                                             "begin": {
                                                 "line": 0,
                                                 "column": 0,
@@ -2556,7 +2556,7 @@
                             },
                             "trace": {
                                 "def": {
-                                    "environment": "rotate-bootstrap",
+                                    "environment": "rotate-state",
                                     "begin": {
                                         "line": 0,
                                         "column": 0,
@@ -2573,7 +2573,7 @@
                     },
                     "trace": {
                         "def": {
-                            "environment": "rotate-bootstrap",
+                            "environment": "rotate-state",
                             "begin": {
                                 "line": 0,
                                 "column": 0,
@@ -2590,10 +2590,10 @@
                 "rootEnvironment": {
                     "value": {
                         "name": {
-                            "value": "rotate-bootstrap",
+                            "value": "rotate-state",
                             "trace": {
                                 "def": {
-                                    "environment": "rotate-bootstrap",
+                                    "environment": "rotate-state",
                                     "begin": {
                                         "line": 0,
                                         "column": 0,
@@ -2610,7 +2610,7 @@
                     },
                     "trace": {
                         "def": {
-                            "environment": "rotate-bootstrap",
+                            "environment": "rotate-state",
                             "begin": {
                                 "line": 0,
                                 "column": 0,
@@ -2631,7 +2631,7 @@
                         "properties": {
                             "name": {
                                 "type": "string",
-                                "const": "rotate-bootstrap"
+                                "const": "rotate-state"
                             }
                         },
                         "type": "object",
@@ -2663,7 +2663,7 @@
                         "properties": {
                             "name": {
                                 "type": "string",
-                                "const": "rotate-bootstrap"
+                                "const": "rotate-state"
                             }
                         },
                         "type": "object",
@@ -2709,7 +2709,7 @@
             "Summary": "missing required properties: current",
             "Detail": "",
             "Subject": {
-                "Filename": "rotate-bootstrap",
+                "Filename": "rotate-state",
                 "Start": {
                     "Line": 27,
                     "Column": 9,
@@ -2732,7 +2732,7 @@
             "Summary": "expected null, got object",
             "Detail": "",
             "Subject": {
-                "Filename": "rotate-bootstrap",
+                "Filename": "rotate-state",
                 "Start": {
                     "Line": 27,
                     "Column": 9,
@@ -2755,7 +2755,7 @@
             "Summary": "exactly one subschema must match",
             "Detail": "",
             "Subject": {
-                "Filename": "rotate-bootstrap",
+                "Filename": "rotate-state",
                 "Start": {
                     "Line": 27,
                     "Column": 9,
@@ -2778,7 +2778,7 @@
         "exprs": {
             "full-state": {
                 "range": {
-                    "environment": "rotate-bootstrap",
+                    "environment": "rotate-state",
                     "begin": {
                         "line": 15,
                         "column": 5,
@@ -2810,7 +2810,7 @@
                 "builtin": {
                     "name": "fn::rotate::echo",
                     "nameRange": {
-                        "environment": "rotate-bootstrap",
+                        "environment": "rotate-state",
                         "begin": {
                             "line": 15,
                             "column": 5,
@@ -2880,7 +2880,7 @@
                         "object": {
                             "inputs": {
                                 "range": {
-                                    "environment": "rotate-bootstrap",
+                                    "environment": "rotate-state",
                                     "begin": {
                                         "line": 17,
                                         "column": 9,
@@ -2906,7 +2906,7 @@
                                 },
                                 "keyRanges": {
                                     "next": {
-                                        "environment": "rotate-bootstrap",
+                                        "environment": "rotate-state",
                                         "begin": {
                                             "line": 17,
                                             "column": 9,
@@ -2922,7 +2922,7 @@
                                 "object": {
                                     "next": {
                                         "range": {
-                                            "environment": "rotate-bootstrap",
+                                            "environment": "rotate-state",
                                             "begin": {
                                                 "line": 17,
                                                 "column": 15,
@@ -2944,7 +2944,7 @@
                             },
                             "state": {
                                 "range": {
-                                    "environment": "rotate-bootstrap",
+                                    "environment": "rotate-state",
                                     "begin": {
                                         "line": 19,
                                         "column": 9,
@@ -2975,7 +2975,7 @@
                                 },
                                 "keyRanges": {
                                     "current": {
-                                        "environment": "rotate-bootstrap",
+                                        "environment": "rotate-state",
                                         "begin": {
                                             "line": 19,
                                             "column": 9,
@@ -2988,7 +2988,7 @@
                                         }
                                     },
                                     "previous": {
-                                        "environment": "rotate-bootstrap",
+                                        "environment": "rotate-state",
                                         "begin": {
                                             "line": 20,
                                             "column": 9,
@@ -3004,7 +3004,7 @@
                                 "object": {
                                     "current": {
                                         "range": {
-                                            "environment": "rotate-bootstrap",
+                                            "environment": "rotate-state",
                                             "begin": {
                                                 "line": 19,
                                                 "column": 18,
@@ -3024,7 +3024,7 @@
                                     },
                                     "previous": {
                                         "range": {
-                                            "environment": "rotate-bootstrap",
+                                            "environment": "rotate-state",
                                             "begin": {
                                                 "line": 20,
                                                 "column": 19,
@@ -3050,7 +3050,7 @@
             },
             "invalid-state": {
                 "range": {
-                    "environment": "rotate-bootstrap",
+                    "environment": "rotate-state",
                     "begin": {
                         "line": 23,
                         "column": 5,
@@ -3079,7 +3079,7 @@
                 "builtin": {
                     "name": "fn::rotate::echo",
                     "nameRange": {
-                        "environment": "rotate-bootstrap",
+                        "environment": "rotate-state",
                         "begin": {
                             "line": 23,
                             "column": 5,
@@ -3149,7 +3149,7 @@
                         "object": {
                             "inputs": {
                                 "range": {
-                                    "environment": "rotate-bootstrap",
+                                    "environment": "rotate-state",
                                     "begin": {
                                         "line": 25,
                                         "column": 9,
@@ -3175,7 +3175,7 @@
                                 },
                                 "keyRanges": {
                                     "next": {
-                                        "environment": "rotate-bootstrap",
+                                        "environment": "rotate-state",
                                         "begin": {
                                             "line": 25,
                                             "column": 9,
@@ -3191,7 +3191,7 @@
                                 "object": {
                                     "next": {
                                         "range": {
-                                            "environment": "rotate-bootstrap",
+                                            "environment": "rotate-state",
                                             "begin": {
                                                 "line": 25,
                                                 "column": 15,
@@ -3213,7 +3213,7 @@
                             },
                             "state": {
                                 "range": {
-                                    "environment": "rotate-bootstrap",
+                                    "environment": "rotate-state",
                                     "begin": {
                                         "line": 27,
                                         "column": 9,
@@ -3239,7 +3239,7 @@
                                 },
                                 "keyRanges": {
                                     "previous": {
-                                        "environment": "rotate-bootstrap",
+                                        "environment": "rotate-state",
                                         "begin": {
                                             "line": 27,
                                             "column": 9,
@@ -3255,7 +3255,7 @@
                                 "object": {
                                     "previous": {
                                         "range": {
-                                            "environment": "rotate-bootstrap",
+                                            "environment": "rotate-state",
                                             "begin": {
                                                 "line": 27,
                                                 "column": 19,
@@ -3281,7 +3281,7 @@
             },
             "optional-state": {
                 "range": {
-                    "environment": "rotate-bootstrap",
+                    "environment": "rotate-state",
                     "begin": {
                         "line": 3,
                         "column": 5,
@@ -3312,7 +3312,7 @@
                 "builtin": {
                     "name": "fn::rotate::echo",
                     "nameRange": {
-                        "environment": "rotate-bootstrap",
+                        "environment": "rotate-state",
                         "begin": {
                             "line": 3,
                             "column": 5,
@@ -3382,7 +3382,7 @@
                         "object": {
                             "inputs": {
                                 "range": {
-                                    "environment": "rotate-bootstrap",
+                                    "environment": "rotate-state",
                                     "begin": {
                                         "line": 5,
                                         "column": 9,
@@ -3408,7 +3408,7 @@
                                 },
                                 "keyRanges": {
                                     "next": {
-                                        "environment": "rotate-bootstrap",
+                                        "environment": "rotate-state",
                                         "begin": {
                                             "line": 5,
                                             "column": 9,
@@ -3424,7 +3424,7 @@
                                 "object": {
                                     "next": {
                                         "range": {
-                                            "environment": "rotate-bootstrap",
+                                            "environment": "rotate-state",
                                             "begin": {
                                                 "line": 5,
                                                 "column": 15,
@@ -3446,7 +3446,7 @@
                             },
                             "state": {
                                 "range": {
-                                    "environment": "rotate-bootstrap",
+                                    "environment": "rotate-state",
                                     "begin": {
                                         "line": 0,
                                         "column": 0,
@@ -3468,7 +3468,7 @@
             },
             "partial-state": {
                 "range": {
-                    "environment": "rotate-bootstrap",
+                    "environment": "rotate-state",
                     "begin": {
                         "line": 8,
                         "column": 5,
@@ -3500,7 +3500,7 @@
                 "builtin": {
                     "name": "fn::rotate::echo",
                     "nameRange": {
-                        "environment": "rotate-bootstrap",
+                        "environment": "rotate-state",
                         "begin": {
                             "line": 8,
                             "column": 5,
@@ -3570,7 +3570,7 @@
                         "object": {
                             "inputs": {
                                 "range": {
-                                    "environment": "rotate-bootstrap",
+                                    "environment": "rotate-state",
                                     "begin": {
                                         "line": 10,
                                         "column": 9,
@@ -3596,7 +3596,7 @@
                                 },
                                 "keyRanges": {
                                     "next": {
-                                        "environment": "rotate-bootstrap",
+                                        "environment": "rotate-state",
                                         "begin": {
                                             "line": 10,
                                             "column": 9,
@@ -3612,7 +3612,7 @@
                                 "object": {
                                     "next": {
                                         "range": {
-                                            "environment": "rotate-bootstrap",
+                                            "environment": "rotate-state",
                                             "begin": {
                                                 "line": 10,
                                                 "column": 15,
@@ -3634,7 +3634,7 @@
                             },
                             "state": {
                                 "range": {
-                                    "environment": "rotate-bootstrap",
+                                    "environment": "rotate-state",
                                     "begin": {
                                         "line": 12,
                                         "column": 9,
@@ -3660,7 +3660,7 @@
                                 },
                                 "keyRanges": {
                                     "current": {
-                                        "environment": "rotate-bootstrap",
+                                        "environment": "rotate-state",
                                         "begin": {
                                             "line": 12,
                                             "column": 9,
@@ -3676,7 +3676,7 @@
                                 "object": {
                                     "current": {
                                         "range": {
-                                            "environment": "rotate-bootstrap",
+                                            "environment": "rotate-state",
                                             "begin": {
                                                 "line": 12,
                                                 "column": 18,
@@ -3708,7 +3708,7 @@
                         "value": "update3",
                         "trace": {
                             "def": {
-                                "environment": "rotate-bootstrap",
+                                "environment": "rotate-state",
                                 "begin": {
                                     "line": 15,
                                     "column": 5,
@@ -3726,7 +3726,7 @@
                         "value": "update2",
                         "trace": {
                             "def": {
-                                "environment": "rotate-bootstrap",
+                                "environment": "rotate-state",
                                 "begin": {
                                     "line": 15,
                                     "column": 5,
@@ -3743,7 +3743,7 @@
                 },
                 "trace": {
                     "def": {
-                        "environment": "rotate-bootstrap",
+                        "environment": "rotate-state",
                         "begin": {
                             "line": 15,
                             "column": 5,
@@ -3761,7 +3761,7 @@
                 "unknown": true,
                 "trace": {
                     "def": {
-                        "environment": "rotate-bootstrap",
+                        "environment": "rotate-state",
                         "begin": {
                             "line": 23,
                             "column": 5,
@@ -3781,7 +3781,7 @@
                         "value": "hello world",
                         "trace": {
                             "def": {
-                                "environment": "rotate-bootstrap",
+                                "environment": "rotate-state",
                                 "begin": {
                                     "line": 3,
                                     "column": 5,
@@ -3798,7 +3798,7 @@
                     "previous": {
                         "trace": {
                             "def": {
-                                "environment": "rotate-bootstrap",
+                                "environment": "rotate-state",
                                 "begin": {
                                     "line": 3,
                                     "column": 5,
@@ -3815,7 +3815,7 @@
                 },
                 "trace": {
                     "def": {
-                        "environment": "rotate-bootstrap",
+                        "environment": "rotate-state",
                         "begin": {
                             "line": 3,
                             "column": 5,
@@ -3835,7 +3835,7 @@
                         "value": "update2",
                         "trace": {
                             "def": {
-                                "environment": "rotate-bootstrap",
+                                "environment": "rotate-state",
                                 "begin": {
                                     "line": 8,
                                     "column": 5,
@@ -3853,7 +3853,7 @@
                         "value": "update1",
                         "trace": {
                             "def": {
-                                "environment": "rotate-bootstrap",
+                                "environment": "rotate-state",
                                 "begin": {
                                     "line": 8,
                                     "column": 5,
@@ -3870,7 +3870,7 @@
                 },
                 "trace": {
                     "def": {
-                        "environment": "rotate-bootstrap",
+                        "environment": "rotate-state",
                         "begin": {
                             "line": 8,
                             "column": 5,
@@ -3965,10 +3965,10 @@
                 "currentEnvironment": {
                     "value": {
                         "name": {
-                            "value": "rotate-bootstrap",
+                            "value": "rotate-state",
                             "trace": {
                                 "def": {
-                                    "environment": "rotate-bootstrap",
+                                    "environment": "rotate-state",
                                     "begin": {
                                         "line": 0,
                                         "column": 0,
@@ -3985,7 +3985,7 @@
                     },
                     "trace": {
                         "def": {
-                            "environment": "rotate-bootstrap",
+                            "environment": "rotate-state",
                             "begin": {
                                 "line": 0,
                                 "column": 0,
@@ -4007,7 +4007,7 @@
                                     "value": "USER_123",
                                     "trace": {
                                         "def": {
-                                            "environment": "rotate-bootstrap",
+                                            "environment": "rotate-state",
                                             "begin": {
                                                 "line": 0,
                                                 "column": 0,
@@ -4024,7 +4024,7 @@
                             },
                             "trace": {
                                 "def": {
-                                    "environment": "rotate-bootstrap",
+                                    "environment": "rotate-state",
                                     "begin": {
                                         "line": 0,
                                         "column": 0,
@@ -4041,7 +4041,7 @@
                     },
                     "trace": {
                         "def": {
-                            "environment": "rotate-bootstrap",
+                            "environment": "rotate-state",
                             "begin": {
                                 "line": 0,
                                 "column": 0,
@@ -4058,10 +4058,10 @@
                 "rootEnvironment": {
                     "value": {
                         "name": {
-                            "value": "rotate-bootstrap",
+                            "value": "rotate-state",
                             "trace": {
                                 "def": {
-                                    "environment": "rotate-bootstrap",
+                                    "environment": "rotate-state",
                                     "begin": {
                                         "line": 0,
                                         "column": 0,
@@ -4078,7 +4078,7 @@
                     },
                     "trace": {
                         "def": {
-                            "environment": "rotate-bootstrap",
+                            "environment": "rotate-state",
                             "begin": {
                                 "line": 0,
                                 "column": 0,
@@ -4099,7 +4099,7 @@
                         "properties": {
                             "name": {
                                 "type": "string",
-                                "const": "rotate-bootstrap"
+                                "const": "rotate-state"
                             }
                         },
                         "type": "object",
@@ -4131,7 +4131,7 @@
                         "properties": {
                             "name": {
                                 "type": "string",
-                                "const": "rotate-bootstrap"
+                                "const": "rotate-state"
                             }
                         },
                         "type": "object",
@@ -4173,7 +4173,7 @@
                         "value": "update3",
                         "trace": {
                             "def": {
-                                "environment": "rotate-bootstrap",
+                                "environment": "rotate-state",
                                 "begin": {
                                     "line": 17,
                                     "column": 15,
@@ -4191,7 +4191,7 @@
                         "value": "update2",
                         "trace": {
                             "def": {
-                                "environment": "rotate-bootstrap",
+                                "environment": "rotate-state",
                                 "begin": {
                                     "line": 19,
                                     "column": 18,
@@ -4230,7 +4230,7 @@
                         "value": "hello world",
                         "trace": {
                             "def": {
-                                "environment": "rotate-bootstrap",
+                                "environment": "rotate-state",
                                 "begin": {
                                     "line": 5,
                                     "column": 15,
@@ -4285,7 +4285,7 @@
                         "value": "update2",
                         "trace": {
                             "def": {
-                                "environment": "rotate-bootstrap",
+                                "environment": "rotate-state",
                                 "begin": {
                                     "line": 10,
                                     "column": 15,
@@ -4303,7 +4303,7 @@
                         "value": "update1",
                         "trace": {
                             "def": {
-                                "environment": "rotate-bootstrap",
+                                "environment": "rotate-state",
                                 "begin": {
                                     "line": 12,
                                     "column": 18,
