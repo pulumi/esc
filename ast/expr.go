@@ -816,7 +816,7 @@ func parseShortRotate(node *syntax.ObjectNode, name *StringExpr, args Expr) (Exp
 		diags.Extend(ExprError(state, "rotation state must be an object literal"))
 	}
 
-	return RotateSyntax(node, name, args, provider, inputs, state), nil
+	return RotateSyntax(node, name, args, provider, inputs, state), diags
 }
 
 func parseJoin(node *syntax.ObjectNode, name *StringExpr, args Expr) (Expr, syntax.Diagnostics) {
