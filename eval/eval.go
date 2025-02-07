@@ -496,7 +496,7 @@ func (e *evalContext) evaluateImport(myImports map[string]*value, decl *ast.Impo
 	rotateOnly := false
 	if decl.Meta != nil && decl.Meta.RotateOnly != nil {
 		rotateOnly = decl.Meta.RotateOnly.Value
-		if decl.Meta.Merge != nil && decl.Meta.Merge.Value == true {
+		if decl.Meta.Merge != nil && decl.Meta.Merge.Value {
 			e.diags.Extend(syntax.Error(decl.Syntax().Syntax().Range(), "rotateOnly: true implies merge: false", decl.Syntax().Syntax().Path()))
 		}
 		merge = false
