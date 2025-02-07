@@ -422,6 +422,7 @@ func TestEval(t *testing.T) {
 				if doRotate {
 					rotated, patches, rotateDiags = RotateEnvironment(context.Background(), environmentName, env, rot128{}, testProviders{},
 						&testEnvironments{basePath}, execContext, rotatePaths)
+					sortEnvironmentDiagnostics(rotateDiags)
 				}
 
 				var checkJSON any

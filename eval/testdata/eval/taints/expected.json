@@ -4083,6 +4083,29 @@
     "rotateDiags": [
         {
             "Severity": 1,
+            "Summary": "cannot access rotateOnly values in a non fn::rotate context",
+            "Detail": "",
+            "Subject": {
+                "Filename": "taints",
+                "Start": {
+                    "Line": 4,
+                    "Column": 31,
+                    "Byte": 73
+                },
+                "End": {
+                    "Line": 4,
+                    "Column": 54,
+                    "Byte": 96
+                }
+            },
+            "Context": null,
+            "Expression": null,
+            "EvalContext": null,
+            "Extra": null,
+            "Path": "values[\"rotateOnly-ref-not-allowed\"]"
+        },
+        {
+            "Severity": 1,
             "Summary": "rotateOnly values cannot be used outside of rotateOnly inputs",
             "Detail": "",
             "Subject": {
@@ -4126,29 +4149,6 @@
             "EvalContext": null,
             "Extra": null,
             "Path": "values[\"rotateOnly-input-without-rotateOnly-value\"][\"fn::rotate::example\"].inputs.rotateOnly"
-        },
-        {
-            "Severity": 1,
-            "Summary": "cannot access rotateOnly values in a non fn::rotate context",
-            "Detail": "",
-            "Subject": {
-                "Filename": "taints",
-                "Start": {
-                    "Line": 4,
-                    "Column": 31,
-                    "Byte": 73
-                },
-                "End": {
-                    "Line": 4,
-                    "Column": 54,
-                    "Byte": 96
-                }
-            },
-            "Context": null,
-            "Expression": null,
-            "EvalContext": null,
-            "Extra": null,
-            "Path": "values[\"rotateOnly-ref-not-allowed\"]"
         }
     ],
     "rotate": {
