@@ -138,6 +138,26 @@ func (testProvider) Open(ctx context.Context, inputs map[string]esc.Value, conte
 	return esc.NewValue(inputs), nil
 }
 
+type exampleRotator struct{}
+
+func (exampleRotator) Schema() (*schema.Schema, *schema.Schema, *schema.Schema) {
+	inputSchema := schema.Object().Properties(schema.BuilderMap{
+		"plain":      schema.String(),
+		"rotateOnly": schema.String().RotateOnly(),
+	}).Schema()
+	stateSchema := schema.Never()
+	outputSchema := schema.Always()
+	return inputSchema, stateSchema, outputSchema
+}
+
+func (exampleRotator) Open(ctx context.Context, inputs, state map[string]esc.Value, context esc.EnvExecContext) (esc.Value, error) {
+	return esc.NewValue(inputs), nil
+}
+
+func (exampleRotator) Rotate(ctx context.Context, inputs, state map[string]esc.Value, context esc.EnvExecContext) (esc.Value, error) {
+	return esc.NewValue(map[string]esc.Value{}), nil
+}
+
 type swapRotator struct{}
 
 func (swapRotator) Schema() (*schema.Schema, *schema.Schema, *schema.Schema) {
@@ -217,6 +237,8 @@ func (tp testProviders) LoadProvider(ctx context.Context, name string) (esc.Prov
 
 func (testProviders) LoadRotator(ctx context.Context, name string) (esc.Rotator, error) {
 	switch name {
+	case "example":
+		return exampleRotator{}, nil
 	case "swap":
 		return swapRotator{}, nil
 	case "echo":

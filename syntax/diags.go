@@ -36,6 +36,14 @@ func Error(rng *hcl.Range, summary, path string) *Diagnostic {
 	}
 }
 
+// Warning creates a new warning-level diagnostic from the given subject, summary, and detail.
+func Warning(rng *hcl.Range, summary, path string) *Diagnostic {
+	return &Diagnostic{
+		Diagnostic: hcl.Diagnostic{Severity: hcl.DiagWarning, Subject: rng, Summary: summary},
+		Path:       path,
+	}
+}
+
 // NodeError creates a new error-level diagnostic from the given node, summary, and detail. If the node is non-nil,
 // the diagnostic will be associated with the range of its associated syntax, if any.
 func NodeError(node Node, summary string) *Diagnostic {

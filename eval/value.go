@@ -46,6 +46,7 @@ type value struct {
 	// fn::open)
 	unknown bool
 	secret  bool // true if the value is secret
+	taint   taintFlags
 
 	repr any // nil | bool | json.Number | string | []*value | map[string]*value
 }
@@ -108,6 +109,32 @@ func (v *value) containsSecrets() bool {
 	return false
 }
 
+func (v *value) containedTaints() taintFlags {
+	var combined taintFlags
+	v.walk(func(v *value) {
+		combined = combined | v.taint
+	})
+	return combined
+}
+
+// walk calls fn for every value contained in value
+func (v *value) walk(fn func(v *value)) {
+	if v == nil {
+		return
+	}
+	fn(v)
+	switch repr := v.repr.(type) {
+	case []*value:
+		for _, v := range repr {
+			v.walk(fn)
+		}
+	case map[string]*value:
+		for _, k := range v.keys() {
+			v.property(v.def.repr.syntax(), k).walk(fn)
+		}
+	}
+}
+
 // isObject returns true if this value is or may be an object.
 func (v *value) isObject() bool {
 	if v == nil {
@@ -146,6 +173,7 @@ func (v *value) combine(others ...*value) {
 	for _, o := range others {
 		v.unknown = v.containsUnknowns() || o.containsUnknowns()
 		v.secret = v.containsSecrets() || o.containsSecrets()
+		v.taint = v.containedTaints() | o.containedTaints()
 	}
 }
 
@@ -248,12 +276,12 @@ func (v *value) merge(base *value) {
 
 // toString returns the string representation of this value, whether the string is known, and whether the string is
 // secret.
-func (v *value) toString() (str string, unknown bool, secret bool) {
+func (v *value) toString() (str string, unknown bool, secret bool, taint taintFlags) {
 	if v.unknown {
-		return "[unknown]", true, v.secret
+		return "[unknown]", true, v.secret, v.taint
 	}
 
-	s, unknown, secret := "", false, v.secret
+	s, unknown, secret, taint := "", false, v.secret, v.taint
 	switch repr := v.repr.(type) {
 	case bool:
 		if repr {
@@ -268,8 +296,8 @@ func (v *value) toString() (str string, unknown bool, secret bool) {
 	case []*value:
 		vals := make([]string, len(repr))
 		for i, v := range repr {
-			vs, vunknown, vsecret := v.toString()
-			vals[i], unknown, secret = strconv.Quote(vs), unknown || vunknown, secret || vsecret
+			vs, vunknown, vsecret, vtaint := v.toString()
+			vals[i], unknown, secret, taint = strconv.Quote(vs), unknown || vunknown, secret || vsecret, taint|vtaint
 		}
 		s = strings.Join(vals, ",")
 	case map[string]*value:
@@ -278,12 +306,12 @@ func (v *value) toString() (str string, unknown bool, secret bool) {
 
 		pairs := make([]string, len(repr))
 		for i, k := range keys {
-			vs, vunknown, vsecret := repr[k].toString()
-			pairs[i], unknown, secret = fmt.Sprintf("%q=%q", k, vs), unknown || vunknown, secret || vsecret
+			vs, vunknown, vsecret, vtaint := repr[k].toString()
+			pairs[i], unknown, secret, taint = fmt.Sprintf("%q=%q", k, vs), unknown || vunknown, secret || vsecret, taint|vtaint
 		}
 		s = strings.Join(pairs, ",")
 	}
-	return s, unknown, secret
+	return s, unknown, secret, taint
 }
 
 // export converts the value into its serializable representation.
@@ -446,6 +474,7 @@ func (c copier) copy(v *value) *value {
 		schema:  v.schema,
 		unknown: v.unknown,
 		secret:  v.secret,
+		taint:   v.taint,
 		repr:    repr,
 	}
 	return copy

@@ -1,0 +1,4 @@
+values:
+  a_value: foo
+  a_secret:
+    fn::secret: foo-secret

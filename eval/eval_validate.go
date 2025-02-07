@@ -104,6 +104,17 @@ func (e *validator) errorf(loc validationLoc, format string, args ...any) bool {
 	return false
 }
 
+// warnf issues a validation warning at the given location.
+// this doesn't fail validation, but it does emit a diagnostic.
+func (e *validator) warnf(loc validationLoc, format string, args ...any) bool {
+	if loc.prefix {
+		format = fmt.Sprintf("%s: %s", loc.path, format)
+	}
+	diag := ast.ExprWarning(loc.x.repr.syntax(), fmt.Sprintf(format, args...))
+	e.diags.Extend(diag)
+	return true
+}
+
 // constError issues an error associated with an invalid value where a constant is expected.
 func (e *validator) constError(loc validationLoc, expected any) bool {
 	return e.errorf(loc, "expected %v", jsonRepr(expected))
@@ -429,7 +440,9 @@ func (e *validator) validateElement(v *value, accept *schema.Schema, loc validat
 		return false
 	}
 	if v.unknown {
-		return e.validateSchemaType(v.schema, accept, loc)
+		schemaTypeOK := e.validateSchemaType(v.schema, accept, loc)
+		taintOK := e.validateTaint(v, accept, loc)
+		return schemaTypeOK && taintOK
 	}
 
 	rok := accept.GetRef() == nil || e.validateElement(v, accept.GetRef(), loc)
@@ -438,7 +451,8 @@ func (e *validator) validateElement(v *value, accept *schema.Schema, loc validat
 	cok := e.validateConst(v, accept, loc)
 	eok := e.validateEnum(v, accept, loc)
 	tok := e.validateType(v, accept, loc)
-	return rok && aok && ook && cok && eok && tok
+	nok := e.validateTaint(v, accept, loc)
+	return rok && aok && ook && cok && eok && tok && nok
 }
 
 // validateAnyOf checks that the anyOf schema accept validates the input schema x.
@@ -677,6 +691,25 @@ func (e *validator) validateObject(v *value, accept *schema.Schema, loc validati
 	}
 	if len(missing) != 0 {
 		e.errorf(loc, "missing required properties: %s", strings.Join(missing, ", "))
+		ok = false
+	}
+
+	return ok
+}
+
+func (e *validator) validateTaint(v *value, accept *schema.Schema, loc validationLoc) bool {
+	ok := true
+
+	if accept.RotateOnly && !v.taint.has(taintRotateOnly) {
+		e.warnf(loc, "prefer using a rotateOnly value for rotateOnly inputs")
+	}
+	if !accept.RotateOnly && v.taint.has(taintRotateOnly) {
+		e.errorf(loc, "rotateOnly values cannot be used outside of rotateOnly inputs")
+		ok = false
+	}
+
+	if accept.Secret && !v.secret {
+		e.errorf(loc, "expected secret")
 		ok = false
 	}
 

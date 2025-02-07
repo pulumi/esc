@@ -70,6 +70,13 @@ func ExprError(expr Expr, summary string) *syntax.Diagnostic {
 	return syntax.Error(rng, summary, path)
 }
 
+// ExprWarning creates a warning-level diagnostic associated with the given expression. If the expression is non-nil and
+// has an underlying syntax node, the error will cover the underlying textual range.
+func ExprWarning(expr Expr, summary string) *syntax.Diagnostic {
+	rng, path := exprPosition(expr)
+	return syntax.Warning(rng, summary, path)
+}
+
 // AccessorError creates an error-level diagnostic associated with the given expression and accessor. If the accessor
 // has range information, the error will cover its textual range. Otherwise, the error will cover the textual range of
 // the parent expression.

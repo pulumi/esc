@@ -155,6 +155,15 @@ func evalEnvironment(
 		}
 	}
 
+	// Validate that no rotateOnly values remain in the root environment
+	// We have to do this here because we only do schema validation for open/rotate
+	v.walk(func(v *value) {
+		if v.taint.has(taintRotateOnly) {
+			diag := ast.ExprError(v.def.repr.syntax(), "cannot access rotateOnly values in a non fn::rotate context")
+			diags.Extend(diag)
+		}
+	})
+
 	executionContext := &esc.EvaluatedExecutionContext{
 		Properties: ec.myContext.export(name).Value.(map[string]esc.Value),
 		Schema:     ec.myContext.schema,
@@ -487,6 +496,10 @@ func (e *evalContext) evaluateImport(myImports map[string]*value, decl *ast.Impo
 	rotateOnly := false
 	if decl.Meta != nil && decl.Meta.RotateOnly != nil {
 		rotateOnly = decl.Meta.RotateOnly.Value
+		if decl.Meta.Merge != nil && decl.Meta.Merge.Value == true {
+			e.diags.Extend(syntax.Error(decl.Syntax().Syntax().Range(), "rotateOnly: true implies merge: false", decl.Syntax().Syntax().Path()))
+		}
+		merge = false
 	}
 
 	var val *value
@@ -520,6 +533,11 @@ func (e *evalContext) evaluateImport(myImports map[string]*value, decl *ast.Impo
 
 		val = v
 		e.imports[name].value = val
+	}
+
+	// taint the imported value if it is rotateOnly
+	if rotateOnly {
+		val.taint = val.taint | taintRotateOnly
 	}
 
 	myImports[name] = val
@@ -660,8 +678,8 @@ func (e *evalContext) evaluateInterpolate(x *expr, repr *interpolateExpr) *value
 
 		if i.value != nil {
 			pv := e.evaluatePropertyAccess(x, i.value.accessors)
-			s, unknown, secret := pv.toString()
-			v.unknown, v.secret = v.containsUnknowns() || unknown, v.containsSecrets() || secret
+			s, unknown, secret, taint := pv.toString()
+			v.unknown, v.secret, v.taint = v.containsUnknowns() || unknown, v.containsSecrets() || secret, v.taint|taint
 			if !unknown {
 				b.WriteString(s)
 			}
@@ -682,6 +700,18 @@ func (e *evalContext) evaluatePropertyAccess(x *expr, accessors []*propertyAcces
 	// value. We also stamp over the def with the provided expression in order to maintain proper error reporting.
 	v := newCopier().copy(e.evaluateExprAccess(x, accessors))
 	v.def = x
+
+	// propagate taints from the set of accessors to the result
+	for i := range accessors {
+		// accessor value is synthetic, so need to drill down further to get the real value of its expr
+		intermediate := accessors[i].value //.def.value
+		// intermediate value may not actually be evaluated yet
+		if intermediate != nil {
+			// v.secret = v.secret || intermediate.secret // we passed through a secret value -- I think this should also propagate?
+			v.taint = v.taint | intermediate.taint // we passed through a tainted value
+		}
+	}
+
 	return v
 }
 
@@ -1023,7 +1053,16 @@ func (e *evalContext) evaluateBuiltinRotate(x *expr, repr *rotateExpr) *value {
 
 	inputs, inputsOK := e.evaluateTypedExpr(repr.inputs, repr.inputSchema)
 	state, stateOK := e.evaluateTypedExpr(repr.state, repr.stateSchema)
-	if !inputsOK || inputs.containsUnknowns() || !stateOK || state.containsUnknowns() || e.validating || err != nil {
+
+	// we can tolerate unknowns during open if they are from rotateOnly values
+	inputsUnknown := false
+	inputs.walk(func(v *value) {
+		if v.unknown && !v.taint.has(taintRotateOnly) {
+			inputsUnknown = true
+		}
+	})
+
+	if !inputsOK || inputsUnknown || !stateOK || state.containsUnknowns() || e.validating || err != nil {
 		v.unknown = true
 		return v
 	}
@@ -1208,8 +1247,8 @@ func (e *evalContext) evaluateBuiltinToString(x *expr, repr *toStringExpr) *valu
 
 	value := e.evaluateExpr(repr.value)
 
-	s, unknown, secret := value.toString()
-	v.unknown, v.secret = unknown, secret
+	s, unknown, secret, taint := value.toString()
+	v.unknown, v.secret, v.taint = unknown, secret, taint
 	if !unknown {
 		v.repr = s
 	}

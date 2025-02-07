@@ -68,7 +68,7 @@ func TestValueToString(t *testing.T) {
 	}
 	for _, c := range cases {
 		t.Run(c.expected, func(t *testing.T) {
-			str, unknown, secret := c.value.toString()
+			str, unknown, secret, _ := c.value.toString()
 			assert.Equal(t, c.expected, str)
 			assert.Equal(t, c.unknown, unknown)
 			assert.Equal(t, c.secret, secret)
