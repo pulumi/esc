@@ -502,6 +502,11 @@ func (e *evalContext) evaluateImport(myImports map[string]*value, decl *ast.Impo
 		merge = false
 	}
 
+	rootEnv := false
+	if len(e.imports) == 1 {
+		rootEnv = true
+	}
+
 	var val *value
 	if imported, ok := e.imports[name]; ok {
 		if imported.evaluating {
@@ -509,8 +514,17 @@ func (e *evalContext) evaluateImport(myImports map[string]*value, decl *ast.Impo
 			return
 		}
 		val = imported.value
-	} else if rotateOnly && !e.rotating {
-		// this import should only be evaluated during rotation, and we're not rotating, so resolve it as unknown
+	} else if (rotateOnly && !e.rotating) && !(rotateOnly && e.validating && rootEnv) {
+		// if we're not rotating, rotateOnly imports are resolved as unknown.
+
+		// however, we also need to make sure the user has permission to access rotateOnly environments when they are editing an environment,
+		// to avoid privilege escalation from adding a reference to an environment that they don't have access to, but the scheduled rotator does.
+		// therefore we will still evaluate rotateOnly imports when validating the root environment.
+
+		// we only do this for the root environment, because only root environments are rotated,
+		// and it is permissible for a user to import a rotated environment that transitively uses managing credentials that they don't have access to:
+		// allowed: "my-environment" <-imports- "my-iam-user" <-rotateOnly- "privileged-creds" (no access)
+
 		val = &value{def: newMissingExpr("", nil), schema: schema.Always(), unknown: true}
 	} else {
 		bytes, dec, err := e.environments.LoadEnvironment(e.ctx, name)
