@@ -740,6 +740,7 @@ func (e *evalContext) evaluateExprAccess(x *expr, accessors []*propertyAccessor)
 
 	// Check for an imports access.
 	if ok && k == "imports" {
+		e.tryInlineImport(x, accessors[1:])
 		accessors[0].value = e.myImports
 		return e.evaluateValueAccess(x.repr.syntax(), e.myImports, accessors[1:])
 	}
@@ -800,6 +801,20 @@ func (e *evalContext) evaluateExprAccess(x *expr, accessors []*propertyAccessor)
 	}
 
 	return e.evaluateExpr(receiver)
+}
+
+func (e *evalContext) tryInlineImport(x *expr, accessors []*propertyAccessor) {
+	if len(accessors) == 0 {
+		return
+	}
+	name, ok := e.objectKey(x.repr.syntax(), accessors[0].accessor, true)
+	if !ok {
+		return
+	}
+	e.evaluateImport(e.myImports.repr.(map[string]*value), &ast.ImportDecl{
+		Meta:        &ast.ImportMetaDecl{Merge: ast.Boolean(false)},
+		Environment: ast.String(name),
+	})
 }
 
 // evaluateValueAccess evaluates a list of accessors relative to a value receiver.
