@@ -430,7 +430,7 @@ func (e *evalContext) evaluate() (*value, syntax.Diagnostics) {
 	}
 
 	// Evaluate the root value and return.
-	v := e.evaluateExpr(e.root)
+	v := e.evaluateExpr(e.root, schema.Always())
 	return v, e.diags
 }
 
@@ -530,7 +530,7 @@ func (e *evalContext) evaluateImport(expr ast.Expr, name string) (*value, bool) 
 // evaluateExpr evaluates an expression. If the expression has already been evaluated, it returns the
 // previously-computed result. evaluateExpr is also responsible for updating the expression's schema to that of its
 // final, merged value.
-func (e *evalContext) evaluateExpr(x *expr) *value {
+func (e *evalContext) evaluateExpr(x *expr, accept *schema.Schema) *value {
 	switch x.state {
 	case exprDone:
 		return x.value
@@ -566,7 +566,7 @@ func (e *evalContext) evaluateExpr(x *expr) *value {
 	case *interpolateExpr:
 		val = e.evaluateInterpolate(x, repr)
 	case *symbolExpr:
-		val = e.evaluatePropertyAccess(x, repr.property.accessors)
+		val = e.evaluatePropertyAccess(x, repr.property.accessors, accept)
 	case *fromBase64Expr:
 		val = e.evaluateBuiltinFromBase64(x, repr)
 	case *fromJSONExpr:
@@ -586,9 +586,9 @@ func (e *evalContext) evaluateExpr(x *expr) *value {
 	case *toStringExpr:
 		val = e.evaluateBuiltinToString(x, repr)
 	case *arrayExpr:
-		val = e.evaluateArray(x, repr)
+		val = e.evaluateArray(x, repr, accept)
 	case *objectExpr:
-		val = e.evaluateObject(x, repr)
+		val = e.evaluateObject(x, repr, accept)
 	default:
 		panic(fmt.Sprintf("fatal: invalid expr type %T", repr))
 	}
@@ -606,7 +606,7 @@ func (e *evalContext) evaluateExpr(x *expr) *value {
 // evaluateTypedExpr evaluates an expression and typechecks it against the given schema. Returns false if typechecking
 // fails.
 func (e *evalContext) evaluateTypedExpr(x *expr, accept *schema.Schema) (*value, bool) {
-	v := e.evaluateExpr(x)
+	v := e.evaluateExpr(x, accept)
 	vv := validator{}
 	ok := vv.validateValue(v, accept, validationLoc{x: x})
 	e.diags.Extend(vv.diags...)
@@ -614,12 +614,12 @@ func (e *evalContext) evaluateTypedExpr(x *expr, accept *schema.Schema) (*value,
 }
 
 // evaluateArray evaluates an array expression.
-func (e *evalContext) evaluateArray(x *expr, repr *arrayExpr) *value {
+func (e *evalContext) evaluateArray(x *expr, repr *arrayExpr, accept *schema.Schema) *value {
 	v := &value{def: x}
 
 	array, items := make([]*value, len(repr.elements)), make([]schema.Builder, len(repr.elements))
 	for i, elem := range repr.elements {
-		ev := e.evaluateExpr(elem)
+		ev := e.evaluateExpr(elem, accept.Item(i))
 		array[i], items[i] = ev, ev.schema
 	}
 
@@ -628,7 +628,7 @@ func (e *evalContext) evaluateArray(x *expr, repr *arrayExpr) *value {
 }
 
 // evaluateObject evaluates an object expression.
-func (e *evalContext) evaluateObject(x *expr, repr *objectExpr) *value {
+func (e *evalContext) evaluateObject(x *expr, repr *objectExpr, accept *schema.Schema) *value {
 	v := &value{def: x}
 
 	// NOTE: technically, evaluation order of maps is unspecified and the result should be independent of order.
@@ -639,7 +639,7 @@ func (e *evalContext) evaluateObject(x *expr, repr *objectExpr) *value {
 
 	object, properties := make(map[string]*value, len(keys)), make(schema.SchemaMap, len(keys))
 	for _, k := range keys {
-		pv := e.evaluateExpr(repr.properties[k])
+		pv := e.evaluateExpr(repr.properties[k], accept.Property(k))
 		object[k], properties[k] = pv, pv.schema
 	}
 
@@ -656,7 +656,7 @@ func (e *evalContext) evaluateInterpolate(x *expr, repr *interpolateExpr) *value
 		b.WriteString(i.syntax.Text)
 
 		if i.value != nil {
-			pv := e.evaluatePropertyAccess(x, i.value.accessors)
+			pv := e.evaluatePropertyAccess(x, i.value.accessors, schema.Always())
 			s, unknown, secret := pv.toString()
 			v.unknown, v.secret = v.containsUnknowns() || unknown, v.containsSecrets() || secret
 			if !unknown {
@@ -674,10 +674,10 @@ func (e *evalContext) evaluateInterpolate(x *expr, repr *interpolateExpr) *value
 }
 
 // evaluatePropertyAccess evaluates a property access.
-func (e *evalContext) evaluatePropertyAccess(x *expr, accessors []*propertyAccessor) *value {
+func (e *evalContext) evaluatePropertyAccess(x *expr, accessors []*propertyAccessor, accept *schema.Schema) *value {
 	// We make a copy of the resolved value here because evaluateExpr will merge it with its base, which mutates the
 	// value. We also stamp over the def with the provided expression in order to maintain proper error reporting.
-	v := newCopier().copy(e.evaluateExprAccess(x, accessors))
+	v := newCopier().copy(e.evaluateExprAccess(x, accessors, accept))
 	v.def = x
 	return v
 }
@@ -686,7 +686,7 @@ func (e *evalContext) evaluatePropertyAccess(x *expr, accessors []*propertyAcces
 // is an expression. If the receiver is a list, object, or secret  expression, it is _not evaluated_. If the receiver
 // is any other type of expression, it is evaluated and the result is passed to evaluateValueAccess. Once all accessors
 // have been processed, the resolved expression is evaluated.
-func (e *evalContext) evaluateExprAccess(x *expr, accessors []*propertyAccessor) *value {
+func (e *evalContext) evaluateExprAccess(x *expr, accessors []*propertyAccessor, accept *schema.Schema) *value {
 	receiver := e.root
 
 	k, ok := e.objectKey(x.repr.syntax(), accessors[0].accessor, false)
@@ -705,7 +705,7 @@ func (e *evalContext) evaluateExprAccess(x *expr, accessors []*propertyAccessor)
 
 	// Check for inline reference
 	if ok && k == "environments" {
-		return e.evaluateEnvironmentReferenceAccess(x, accessors)
+		return e.evaluateEnvironmentReferenceAccess(x, accessors, accept)
 	}
 
 	for len(accessors) > 0 {
@@ -745,7 +745,7 @@ func (e *evalContext) evaluateExprAccess(x *expr, accessors []*propertyAccessor)
 			receiver = repr.plaintext
 			continue
 		default:
-			return e.evaluateValueAccess(x.repr.syntax(), e.evaluateExpr(receiver), accessors)
+			return e.evaluateValueAccess(x.repr.syntax(), e.evaluateExpr(receiver, accept), accessors)
 		}
 
 		// Synthesize a value for the accessor.
@@ -757,12 +757,12 @@ func (e *evalContext) evaluateExprAccess(x *expr, accessors []*propertyAccessor)
 		accessor.value, accessors = val, accessors[1:]
 	}
 
-	return e.evaluateExpr(receiver)
+	return e.evaluateExpr(receiver, schema.Always())
 }
 
 // evaluateEnvironmentReferenceAccess performs an inline import of an environment.
 // The accessor is of the form ["environments", $project, $env, ...], which is transformed into an import name in the form "$project/$env"
-func (e *evalContext) evaluateEnvironmentReferenceAccess(x *expr, accessors []*propertyAccessor) *value {
+func (e *evalContext) evaluateEnvironmentReferenceAccess(x *expr, accessors []*propertyAccessor, accept *schema.Schema) *value {
 	if len(accessors) < 3 {
 		// need at least the first three elements to create an import name
 		return e.invalidPropertyAccess(x.repr.syntax(), accessors)
@@ -961,7 +961,7 @@ func (e *evalContext) objectKey(expr ast.Expr, accessor ast.PropertyAccessor, mu
 // during evaluation.
 func (e *evalContext) evaluateBuiltinSecret(x *expr, repr *secretExpr) *value {
 	if repr.plaintext != nil {
-		return e.evaluateExpr(repr.plaintext)
+		return e.evaluateExpr(repr.plaintext, schema.String().Schema())
 	}
 
 	v := &value{def: x, schema: x.schema, secret: true}
@@ -1236,7 +1236,7 @@ func (e *evalContext) evaluateBuiltinToBase64(x *expr, repr *toBase64Expr) *valu
 func (e *evalContext) evaluateBuiltinToJSON(x *expr, repr *toJSONExpr) *value {
 	v := &value{def: x, schema: x.schema}
 
-	value := e.evaluateExpr(repr.value)
+	value := e.evaluateExpr(repr.value, schema.Always())
 
 	v.combine(value)
 	if !v.unknown {
@@ -1255,7 +1255,7 @@ func (e *evalContext) evaluateBuiltinToJSON(x *expr, repr *toJSONExpr) *value {
 func (e *evalContext) evaluateBuiltinToString(x *expr, repr *toStringExpr) *value {
 	v := &value{def: x, schema: x.schema}
 
-	value := e.evaluateExpr(repr.value)
+	value := e.evaluateExpr(repr.value, schema.Always())
 
 	s, unknown, secret := value.toString()
 	v.unknown, v.secret = unknown, secret
