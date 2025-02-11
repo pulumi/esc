@@ -49,6 +49,11 @@ func (b *NullBuilder) Deprecated(deprecated bool) *NullBuilder {
 	return b
 }
 
+func (b *NullBuilder) RotateOnly(v bool) *NullBuilder {
+	b.s.RotateOnly = v
+	return b
+}
+
 func (b *NullBuilder) Schema() *Schema {
 	b.s.Type = "null"
 	return &b.s

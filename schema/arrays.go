@@ -104,6 +104,11 @@ func (b *ArrayBuilder) Examples(vals ...[]any) *ArrayBuilder {
 	return b
 }
 
+func (b *ArrayBuilder) RotateOnly(v bool) *ArrayBuilder {
+	b.s.RotateOnly = v
+	return b
+}
+
 func (b *ArrayBuilder) Schema() *Schema {
 	b.s.Type = "array"
 	return &b.s

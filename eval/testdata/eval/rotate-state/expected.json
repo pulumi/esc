@@ -120,7 +120,8 @@
                             "inputs": {
                                 "properties": {
                                     "next": {
-                                        "type": "string"
+                                        "type": "string",
+                                        "rotateOnly": true
                                     }
                                 },
                                 "type": "object",
@@ -187,10 +188,7 @@
                                 },
                                 "schema": {
                                     "properties": {
-                                        "next": {
-                                            "type": "string",
-                                            "const": "update3"
-                                        }
+                                        "next": true
                                     },
                                     "type": "object",
                                     "required": [
@@ -389,7 +387,8 @@
                             "inputs": {
                                 "properties": {
                                     "next": {
-                                        "type": "string"
+                                        "type": "string",
+                                        "rotateOnly": true
                                     }
                                 },
                                 "type": "object",
@@ -456,10 +455,7 @@
                                 },
                                 "schema": {
                                     "properties": {
-                                        "next": {
-                                            "type": "string",
-                                            "const": "beep"
-                                        }
+                                        "next": true
                                     },
                                     "type": "object",
                                     "required": [
@@ -620,7 +616,8 @@
                             "inputs": {
                                 "properties": {
                                     "next": {
-                                        "type": "string"
+                                        "type": "string",
+                                        "rotateOnly": true
                                     }
                                 },
                                 "type": "object",
@@ -687,10 +684,7 @@
                                 },
                                 "schema": {
                                     "properties": {
-                                        "next": {
-                                            "type": "string",
-                                            "const": "hello world"
-                                        }
+                                        "next": true
                                     },
                                     "type": "object",
                                     "required": [
@@ -805,7 +799,8 @@
                             "inputs": {
                                 "properties": {
                                     "next": {
-                                        "type": "string"
+                                        "type": "string",
+                                        "rotateOnly": true
                                     }
                                 },
                                 "type": "object",
@@ -872,10 +867,7 @@
                                 },
                                 "schema": {
                                     "properties": {
-                                        "next": {
-                                            "type": "string",
-                                            "const": "update2"
-                                        }
+                                        "next": true
                                     },
                                     "type": "object",
                                     "required": [
@@ -1449,7 +1441,8 @@
                             "inputs": {
                                 "properties": {
                                     "next": {
-                                        "type": "string"
+                                        "type": "string",
+                                        "rotateOnly": true
                                     }
                                 },
                                 "type": "object",
@@ -1516,10 +1509,7 @@
                                 },
                                 "schema": {
                                     "properties": {
-                                        "next": {
-                                            "type": "string",
-                                            "const": "update3"
-                                        }
+                                        "next": true
                                     },
                                     "type": "object",
                                     "required": [
@@ -1718,7 +1708,8 @@
                             "inputs": {
                                 "properties": {
                                     "next": {
-                                        "type": "string"
+                                        "type": "string",
+                                        "rotateOnly": true
                                     }
                                 },
                                 "type": "object",
@@ -1785,10 +1776,7 @@
                                 },
                                 "schema": {
                                     "properties": {
-                                        "next": {
-                                            "type": "string",
-                                            "const": "beep"
-                                        }
+                                        "next": true
                                     },
                                     "type": "object",
                                     "required": [
@@ -1938,7 +1926,8 @@
                             "inputs": {
                                 "properties": {
                                     "next": {
-                                        "type": "string"
+                                        "type": "string",
+                                        "rotateOnly": true
                                     }
                                 },
                                 "type": "object",
@@ -2005,10 +1994,7 @@
                                 },
                                 "schema": {
                                     "properties": {
-                                        "next": {
-                                            "type": "string",
-                                            "const": "hello world"
-                                        }
+                                        "next": true
                                     },
                                     "type": "object",
                                     "required": [
@@ -2121,7 +2107,8 @@
                             "inputs": {
                                 "properties": {
                                     "next": {
-                                        "type": "string"
+                                        "type": "string",
+                                        "rotateOnly": true
                                     }
                                 },
                                 "type": "object",
@@ -2188,10 +2175,7 @@
                                 },
                                 "schema": {
                                     "properties": {
-                                        "next": {
-                                            "type": "string",
-                                            "const": "update2"
-                                        }
+                                        "next": true
                                     },
                                     "type": "object",
                                     "required": [
@@ -2827,7 +2811,8 @@
                             "inputs": {
                                 "properties": {
                                     "next": {
-                                        "type": "string"
+                                        "type": "string",
+                                        "rotateOnly": true
                                     }
                                 },
                                 "type": "object",
@@ -3096,7 +3081,8 @@
                             "inputs": {
                                 "properties": {
                                     "next": {
-                                        "type": "string"
+                                        "type": "string",
+                                        "rotateOnly": true
                                     }
                                 },
                                 "type": "object",
@@ -3329,7 +3315,8 @@
                             "inputs": {
                                 "properties": {
                                     "next": {
-                                        "type": "string"
+                                        "type": "string",
+                                        "rotateOnly": true
                                     }
                                 },
                                 "type": "object",
@@ -3517,7 +3504,8 @@
                             "inputs": {
                                 "properties": {
                                     "next": {
-                                        "type": "string"
+                                        "type": "string",
+                                        "rotateOnly": true
                                     }
                                 },
                                 "type": "object",
