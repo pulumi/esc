@@ -120,7 +120,8 @@
                             "inputs": {
                                 "properties": {
                                     "next": {
-                                        "type": "string"
+                                        "type": "string",
+                                        "rotateOnly": true
                                     }
                                 },
                                 "type": "object",
@@ -389,7 +390,8 @@
                             "inputs": {
                                 "properties": {
                                     "next": {
-                                        "type": "string"
+                                        "type": "string",
+                                        "rotateOnly": true
                                     }
                                 },
                                 "type": "object",
@@ -620,7 +622,8 @@
                             "inputs": {
                                 "properties": {
                                     "next": {
-                                        "type": "string"
+                                        "type": "string",
+                                        "rotateOnly": true
                                     }
                                 },
                                 "type": "object",
@@ -805,7 +808,8 @@
                             "inputs": {
                                 "properties": {
                                     "next": {
-                                        "type": "string"
+                                        "type": "string",
+                                        "rotateOnly": true
                                     }
                                 },
                                 "type": "object",
@@ -1449,7 +1453,8 @@
                             "inputs": {
                                 "properties": {
                                     "next": {
-                                        "type": "string"
+                                        "type": "string",
+                                        "rotateOnly": true
                                     }
                                 },
                                 "type": "object",
@@ -1718,7 +1723,8 @@
                             "inputs": {
                                 "properties": {
                                     "next": {
-                                        "type": "string"
+                                        "type": "string",
+                                        "rotateOnly": true
                                     }
                                 },
                                 "type": "object",
@@ -1938,7 +1944,8 @@
                             "inputs": {
                                 "properties": {
                                     "next": {
-                                        "type": "string"
+                                        "type": "string",
+                                        "rotateOnly": true
                                     }
                                 },
                                 "type": "object",
@@ -2121,7 +2128,8 @@
                             "inputs": {
                                 "properties": {
                                     "next": {
-                                        "type": "string"
+                                        "type": "string",
+                                        "rotateOnly": true
                                     }
                                 },
                                 "type": "object",
@@ -2827,7 +2835,8 @@
                             "inputs": {
                                 "properties": {
                                     "next": {
-                                        "type": "string"
+                                        "type": "string",
+                                        "rotateOnly": true
                                     }
                                 },
                                 "type": "object",
@@ -3096,7 +3105,8 @@
                             "inputs": {
                                 "properties": {
                                     "next": {
-                                        "type": "string"
+                                        "type": "string",
+                                        "rotateOnly": true
                                     }
                                 },
                                 "type": "object",
@@ -3329,7 +3339,8 @@
                             "inputs": {
                                 "properties": {
                                     "next": {
-                                        "type": "string"
+                                        "type": "string",
+                                        "rotateOnly": true
                                     }
                                 },
                                 "type": "object",
@@ -3517,7 +3528,8 @@
                             "inputs": {
                                 "properties": {
                                     "next": {
-                                        "type": "string"
+                                        "type": "string",
+                                        "rotateOnly": true
                                     }
                                 },
                                 "type": "object",

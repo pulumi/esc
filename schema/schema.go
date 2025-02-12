@@ -120,7 +120,8 @@ type Schema struct {
 	Examples    []any  `json:"examples,omitempty"`
 
 	// Environments extensions
-	Secret bool `json:"secret,omitempty"`
+	Secret     bool `json:"secret,omitempty"`
+	RotateOnly bool `json:"rotateOnly,omitempty"`
 
 	ref              *Schema
 	multipleOf       *big.Float
