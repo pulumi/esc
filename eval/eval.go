@@ -399,7 +399,7 @@ func declare[Expr exprNode](e *evalContext, path string, x Expr, base *value) *e
 
 func (e *evalContext) isReserveTopLevelKey(k string) bool {
 	switch k {
-	case "imports", "context":
+	case "imports", "context", "environments":
 		return true
 	default:
 		return false
@@ -740,7 +740,6 @@ func (e *evalContext) evaluateExprAccess(x *expr, accessors []*propertyAccessor,
 
 	// Check for an imports access.
 	if ok && k == "imports" {
-		e.tryInlineImport(x, accessors[1:], accept)
 		accessors[0].value = e.myImports
 		return e.evaluateValueAccess(x.repr.syntax(), e.myImports, accessors[1:])
 	}
@@ -749,6 +748,11 @@ func (e *evalContext) evaluateExprAccess(x *expr, accessors []*propertyAccessor,
 	if ok && k == "context" {
 		accessors[0].value = e.myContext
 		return e.evaluateValueAccess(x.repr.syntax(), e.myContext, accessors[1:])
+	}
+
+	// Check for inline reference
+	if ok && k == "environments" {
+		return e.evaluateEnvironmentReferenceAccess(x, accessors, accept)
 	}
 
 	for len(accessors) > 0 {
@@ -803,21 +807,56 @@ func (e *evalContext) evaluateExprAccess(x *expr, accessors []*propertyAccessor,
 	return e.evaluateExpr(receiver, schema.Always())
 }
 
-func (e *evalContext) tryInlineImport(x *expr, accessors []*propertyAccessor, accept *schema.Schema) {
-	if len(accessors) == 0 {
-		return
+// evaluateEnvironmentReferenceAccess performs an inline import of an environment.
+// The sugared accessor is of the form ["environments", $project, $env, ...], which is desugared into the import name
+func (e *evalContext) evaluateEnvironmentReferenceAccess(x *expr, accessors []*propertyAccessor, accept *schema.Schema) *value {
+	if len(accessors) < 3 {
+		// need a full accessor to desugar
+		return e.invalidPropertyAccess(x.repr.syntax(), accessors)
 	}
-	name, ok := e.objectKey(x.repr.syntax(), accessors[0].accessor, true)
-	if !ok {
-		return
+
+	projName, projOk := e.objectKey(x.repr.syntax(), accessors[1].accessor, true)
+	envName, envOk := e.objectKey(x.repr.syntax(), accessors[2].accessor, true)
+	if !projOk || !envOk {
+		return nil
 	}
-	e.evaluateImport(e.myImports.repr.(map[string]*value), &ast.ImportDecl{
+	qualifiedName := fmt.Sprintf("%s/%s", projName, envName)
+
+	// create an isolated value to hold the inline import map
+	inlineImports := map[string]*value{}
+	e.evaluateImport(inlineImports, &ast.ImportDecl{
 		Meta: &ast.ImportMetaDecl{
 			Merge:      ast.Boolean(false),
 			RotateOnly: ast.Boolean(accept.RotateOnly),
 		},
-		Environment: ast.String(name),
+		Environment: ast.String(qualifiedName),
 	})
+
+	// construct a synthetic object literal of the reference which the sugared accessors can traverse
+	importedValue := inlineImports[qualifiedName]
+	environmentsValue := &value{
+		def: x,
+		repr: map[string]*value{
+			envName: importedValue,
+		},
+		schema: schema.Record(schema.SchemaMap{envName: importedValue.schema}).Schema(),
+	}
+	projectsValue := &value{
+		def: x,
+		repr: map[string]*value{
+			projName: environmentsValue,
+		},
+		schema: schema.Record(schema.SchemaMap{projName: environmentsValue.schema}).Schema(),
+	}
+	referenceValue := &value{
+		def: x,
+		repr: map[string]*value{
+			"environments": projectsValue,
+		},
+		schema: schema.Record(schema.SchemaMap{"environments": projectsValue.schema}).Schema(),
+	}
+
+	return e.evaluateValueAccess(x.repr.syntax(), referenceValue, accessors)
 }
 
 // evaluateValueAccess evaluates a list of accessors relative to a value receiver.

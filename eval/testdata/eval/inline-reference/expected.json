@@ -1,67 +1,18 @@
 {
     "check": {
         "exprs": {
-            "caveat": {
+            "reference": {
                 "range": {
-                    "environment": "import-inline",
-                    "begin": {
-                        "line": 6,
-                        "column": 11,
-                        "byte": 229
-                    },
-                    "end": {
-                        "line": 6,
-                        "column": 21,
-                        "byte": 239
-                    }
-                },
-                "schema": {
-                    "type": "object"
-                },
-                "symbol": [
-                    {
-                        "key": "imports",
-                        "range": {
-                            "environment": "import-inline",
-                            "begin": {
-                                "line": 6,
-                                "column": 13,
-                                "byte": 231
-                            },
-                            "end": {
-                                "line": 6,
-                                "column": 20,
-                                "byte": 238
-                            }
-                        },
-                        "value": {
-                            "environment": "import-inline",
-                            "begin": {
-                                "line": 0,
-                                "column": 0,
-                                "byte": 0
-                            },
-                            "end": {
-                                "line": 0,
-                                "column": 0,
-                                "byte": 0
-                            }
-                        }
-                    }
-                ]
-            },
-            "inline": {
-                "range": {
-                    "environment": "import-inline",
+                    "environment": "inline-reference",
                     "begin": {
                         "line": 2,
-                        "column": 11,
-                        "byte": 18
+                        "column": 14,
+                        "byte": 21
                     },
                     "end": {
                         "line": 2,
-                        "column": 36,
-                        "byte": 43
+                        "column": 48,
+                        "byte": 55
                     }
                 },
                 "schema": {
@@ -70,51 +21,80 @@
                 },
                 "symbol": [
                     {
-                        "key": "imports",
+                        "key": "environments",
                         "range": {
-                            "environment": "import-inline",
+                            "environment": "inline-reference",
                             "begin": {
                                 "line": 2,
-                                "column": 13,
-                                "byte": 20
+                                "column": 16,
+                                "byte": 23
                             },
                             "end": {
                                 "line": 2,
-                                "column": 20,
-                                "byte": 27
+                                "column": 28,
+                                "byte": 35
                             }
                         },
                         "value": {
-                            "environment": "import-inline",
+                            "environment": "inline-reference",
                             "begin": {
-                                "line": 0,
-                                "column": 0,
-                                "byte": 0
+                                "line": 2,
+                                "column": 14,
+                                "byte": 21
                             },
                             "end": {
-                                "line": 0,
-                                "column": 0,
-                                "byte": 0
+                                "line": 2,
+                                "column": 48,
+                                "byte": 55
                             }
                         }
                     },
                     {
                         "key": "foo",
                         "range": {
-                            "environment": "import-inline",
+                            "environment": "inline-reference",
                             "begin": {
                                 "line": 2,
-                                "column": 20,
-                                "byte": 27
+                                "column": 28,
+                                "byte": 35
                             },
                             "end": {
                                 "line": 2,
-                                "column": 24,
-                                "byte": 31
+                                "column": 32,
+                                "byte": 39
                             }
                         },
                         "value": {
-                            "environment": "import-inline",
+                            "environment": "inline-reference",
+                            "begin": {
+                                "line": 2,
+                                "column": 14,
+                                "byte": 21
+                            },
+                            "end": {
+                                "line": 2,
+                                "column": 48,
+                                "byte": 55
+                            }
+                        }
+                    },
+                    {
+                        "key": "bar",
+                        "range": {
+                            "environment": "inline-reference",
+                            "begin": {
+                                "line": 2,
+                                "column": 32,
+                                "byte": 39
+                            },
+                            "end": {
+                                "line": 2,
+                                "column": 36,
+                                "byte": 43
+                            }
+                        },
+                        "value": {
+                            "environment": "inline-reference",
                             "begin": {
                                 "line": 0,
                                 "column": 0,
@@ -130,20 +110,20 @@
                     {
                         "key": "some_value",
                         "range": {
-                            "environment": "import-inline",
+                            "environment": "inline-reference",
                             "begin": {
                                 "line": 2,
-                                "column": 24,
-                                "byte": 31
+                                "column": 36,
+                                "byte": 43
                             },
                             "end": {
                                 "line": 2,
-                                "column": 35,
-                                "byte": 42
+                                "column": 47,
+                                "byte": 54
                             }
                         },
                         "value": {
-                            "environment": "foo",
+                            "environment": "foo/bar",
                             "begin": {
                                 "line": 2,
                                 "column": 15,
@@ -160,38 +140,20 @@
             }
         },
         "properties": {
-            "caveat": {
-                "value": {},
-                "trace": {
-                    "def": {
-                        "environment": "import-inline",
-                        "begin": {
-                            "line": 6,
-                            "column": 11,
-                            "byte": 229
-                        },
-                        "end": {
-                            "line": 6,
-                            "column": 21,
-                            "byte": 239
-                        }
-                    }
-                }
-            },
-            "inline": {
+            "reference": {
                 "value": 42,
                 "trace": {
                     "def": {
-                        "environment": "import-inline",
+                        "environment": "inline-reference",
                         "begin": {
                             "line": 2,
-                            "column": 11,
-                            "byte": 18
+                            "column": 14,
+                            "byte": 21
                         },
                         "end": {
                             "line": 2,
-                            "column": 36,
-                            "byte": 43
+                            "column": 48,
+                            "byte": 55
                         }
                     }
                 }
@@ -199,18 +161,14 @@
         },
         "schema": {
             "properties": {
-                "caveat": {
-                    "type": "object"
-                },
-                "inline": {
+                "reference": {
                     "type": "number",
                     "const": 42
                 }
             },
             "type": "object",
             "required": [
-                "caveat",
-                "inline"
+                "reference"
             ]
         },
         "executionContext": {
@@ -218,10 +176,10 @@
                 "currentEnvironment": {
                     "value": {
                         "name": {
-                            "value": "import-inline",
+                            "value": "inline-reference",
                             "trace": {
                                 "def": {
-                                    "environment": "import-inline",
+                                    "environment": "inline-reference",
                                     "begin": {
                                         "line": 0,
                                         "column": 0,
@@ -238,7 +196,7 @@
                     },
                     "trace": {
                         "def": {
-                            "environment": "import-inline",
+                            "environment": "inline-reference",
                             "begin": {
                                 "line": 0,
                                 "column": 0,
@@ -260,7 +218,7 @@
                                     "value": "USER_123",
                                     "trace": {
                                         "def": {
-                                            "environment": "import-inline",
+                                            "environment": "inline-reference",
                                             "begin": {
                                                 "line": 0,
                                                 "column": 0,
@@ -277,7 +235,7 @@
                             },
                             "trace": {
                                 "def": {
-                                    "environment": "import-inline",
+                                    "environment": "inline-reference",
                                     "begin": {
                                         "line": 0,
                                         "column": 0,
@@ -294,7 +252,7 @@
                     },
                     "trace": {
                         "def": {
-                            "environment": "import-inline",
+                            "environment": "inline-reference",
                             "begin": {
                                 "line": 0,
                                 "column": 0,
@@ -311,10 +269,10 @@
                 "rootEnvironment": {
                     "value": {
                         "name": {
-                            "value": "import-inline",
+                            "value": "inline-reference",
                             "trace": {
                                 "def": {
-                                    "environment": "import-inline",
+                                    "environment": "inline-reference",
                                     "begin": {
                                         "line": 0,
                                         "column": 0,
@@ -331,7 +289,7 @@
                     },
                     "trace": {
                         "def": {
-                            "environment": "import-inline",
+                            "environment": "inline-reference",
                             "begin": {
                                 "line": 0,
                                 "column": 0,
@@ -352,7 +310,7 @@
                         "properties": {
                             "name": {
                                 "type": "string",
-                                "const": "import-inline"
+                                "const": "inline-reference"
                             }
                         },
                         "type": "object",
@@ -384,7 +342,7 @@
                         "properties": {
                             "name": {
                                 "type": "string",
-                                "const": "import-inline"
+                                "const": "inline-reference"
                             }
                         },
                         "type": "object",
@@ -403,72 +361,22 @@
         }
     },
     "checkJson": {
-        "caveat": {},
-        "inline": 42
+        "reference": 42
     },
     "eval": {
         "exprs": {
-            "caveat": {
+            "reference": {
                 "range": {
-                    "environment": "import-inline",
-                    "begin": {
-                        "line": 6,
-                        "column": 11,
-                        "byte": 229
-                    },
-                    "end": {
-                        "line": 6,
-                        "column": 21,
-                        "byte": 239
-                    }
-                },
-                "schema": {
-                    "type": "object"
-                },
-                "symbol": [
-                    {
-                        "key": "imports",
-                        "range": {
-                            "environment": "import-inline",
-                            "begin": {
-                                "line": 6,
-                                "column": 13,
-                                "byte": 231
-                            },
-                            "end": {
-                                "line": 6,
-                                "column": 20,
-                                "byte": 238
-                            }
-                        },
-                        "value": {
-                            "environment": "import-inline",
-                            "begin": {
-                                "line": 0,
-                                "column": 0,
-                                "byte": 0
-                            },
-                            "end": {
-                                "line": 0,
-                                "column": 0,
-                                "byte": 0
-                            }
-                        }
-                    }
-                ]
-            },
-            "inline": {
-                "range": {
-                    "environment": "import-inline",
+                    "environment": "inline-reference",
                     "begin": {
                         "line": 2,
-                        "column": 11,
-                        "byte": 18
+                        "column": 14,
+                        "byte": 21
                     },
                     "end": {
                         "line": 2,
-                        "column": 36,
-                        "byte": 43
+                        "column": 48,
+                        "byte": 55
                     }
                 },
                 "schema": {
@@ -477,51 +385,80 @@
                 },
                 "symbol": [
                     {
-                        "key": "imports",
+                        "key": "environments",
                         "range": {
-                            "environment": "import-inline",
+                            "environment": "inline-reference",
                             "begin": {
                                 "line": 2,
-                                "column": 13,
-                                "byte": 20
+                                "column": 16,
+                                "byte": 23
                             },
                             "end": {
                                 "line": 2,
-                                "column": 20,
-                                "byte": 27
+                                "column": 28,
+                                "byte": 35
                             }
                         },
                         "value": {
-                            "environment": "import-inline",
+                            "environment": "inline-reference",
                             "begin": {
-                                "line": 0,
-                                "column": 0,
-                                "byte": 0
+                                "line": 2,
+                                "column": 14,
+                                "byte": 21
                             },
                             "end": {
-                                "line": 0,
-                                "column": 0,
-                                "byte": 0
+                                "line": 2,
+                                "column": 48,
+                                "byte": 55
                             }
                         }
                     },
                     {
                         "key": "foo",
                         "range": {
-                            "environment": "import-inline",
+                            "environment": "inline-reference",
                             "begin": {
                                 "line": 2,
-                                "column": 20,
-                                "byte": 27
+                                "column": 28,
+                                "byte": 35
                             },
                             "end": {
                                 "line": 2,
-                                "column": 24,
-                                "byte": 31
+                                "column": 32,
+                                "byte": 39
                             }
                         },
                         "value": {
-                            "environment": "import-inline",
+                            "environment": "inline-reference",
+                            "begin": {
+                                "line": 2,
+                                "column": 14,
+                                "byte": 21
+                            },
+                            "end": {
+                                "line": 2,
+                                "column": 48,
+                                "byte": 55
+                            }
+                        }
+                    },
+                    {
+                        "key": "bar",
+                        "range": {
+                            "environment": "inline-reference",
+                            "begin": {
+                                "line": 2,
+                                "column": 32,
+                                "byte": 39
+                            },
+                            "end": {
+                                "line": 2,
+                                "column": 36,
+                                "byte": 43
+                            }
+                        },
+                        "value": {
+                            "environment": "inline-reference",
                             "begin": {
                                 "line": 0,
                                 "column": 0,
@@ -537,20 +474,20 @@
                     {
                         "key": "some_value",
                         "range": {
-                            "environment": "import-inline",
+                            "environment": "inline-reference",
                             "begin": {
                                 "line": 2,
-                                "column": 24,
-                                "byte": 31
+                                "column": 36,
+                                "byte": 43
                             },
                             "end": {
                                 "line": 2,
-                                "column": 35,
-                                "byte": 42
+                                "column": 47,
+                                "byte": 54
                             }
                         },
                         "value": {
-                            "environment": "foo",
+                            "environment": "foo/bar",
                             "begin": {
                                 "line": 2,
                                 "column": 15,
@@ -567,38 +504,20 @@
             }
         },
         "properties": {
-            "caveat": {
-                "value": {},
-                "trace": {
-                    "def": {
-                        "environment": "import-inline",
-                        "begin": {
-                            "line": 6,
-                            "column": 11,
-                            "byte": 229
-                        },
-                        "end": {
-                            "line": 6,
-                            "column": 21,
-                            "byte": 239
-                        }
-                    }
-                }
-            },
-            "inline": {
+            "reference": {
                 "value": 42,
                 "trace": {
                     "def": {
-                        "environment": "import-inline",
+                        "environment": "inline-reference",
                         "begin": {
                             "line": 2,
-                            "column": 11,
-                            "byte": 18
+                            "column": 14,
+                            "byte": 21
                         },
                         "end": {
                             "line": 2,
-                            "column": 36,
-                            "byte": 43
+                            "column": 48,
+                            "byte": 55
                         }
                     }
                 }
@@ -606,18 +525,14 @@
         },
         "schema": {
             "properties": {
-                "caveat": {
-                    "type": "object"
-                },
-                "inline": {
+                "reference": {
                     "type": "number",
                     "const": 42
                 }
             },
             "type": "object",
             "required": [
-                "caveat",
-                "inline"
+                "reference"
             ]
         },
         "executionContext": {
@@ -625,10 +540,10 @@
                 "currentEnvironment": {
                     "value": {
                         "name": {
-                            "value": "import-inline",
+                            "value": "inline-reference",
                             "trace": {
                                 "def": {
-                                    "environment": "import-inline",
+                                    "environment": "inline-reference",
                                     "begin": {
                                         "line": 0,
                                         "column": 0,
@@ -645,7 +560,7 @@
                     },
                     "trace": {
                         "def": {
-                            "environment": "import-inline",
+                            "environment": "inline-reference",
                             "begin": {
                                 "line": 0,
                                 "column": 0,
@@ -667,7 +582,7 @@
                                     "value": "USER_123",
                                     "trace": {
                                         "def": {
-                                            "environment": "import-inline",
+                                            "environment": "inline-reference",
                                             "begin": {
                                                 "line": 0,
                                                 "column": 0,
@@ -684,7 +599,7 @@
                             },
                             "trace": {
                                 "def": {
-                                    "environment": "import-inline",
+                                    "environment": "inline-reference",
                                     "begin": {
                                         "line": 0,
                                         "column": 0,
@@ -701,7 +616,7 @@
                     },
                     "trace": {
                         "def": {
-                            "environment": "import-inline",
+                            "environment": "inline-reference",
                             "begin": {
                                 "line": 0,
                                 "column": 0,
@@ -718,10 +633,10 @@
                 "rootEnvironment": {
                     "value": {
                         "name": {
-                            "value": "import-inline",
+                            "value": "inline-reference",
                             "trace": {
                                 "def": {
-                                    "environment": "import-inline",
+                                    "environment": "inline-reference",
                                     "begin": {
                                         "line": 0,
                                         "column": 0,
@@ -738,7 +653,7 @@
                     },
                     "trace": {
                         "def": {
-                            "environment": "import-inline",
+                            "environment": "inline-reference",
                             "begin": {
                                 "line": 0,
                                 "column": 0,
@@ -759,7 +674,7 @@
                         "properties": {
                             "name": {
                                 "type": "string",
-                                "const": "import-inline"
+                                "const": "inline-reference"
                             }
                         },
                         "type": "object",
@@ -791,7 +706,7 @@
                         "properties": {
                             "name": {
                                 "type": "string",
-                                "const": "import-inline"
+                                "const": "inline-reference"
                             }
                         },
                         "type": "object",
@@ -810,11 +725,9 @@
         }
     },
     "evalJsonRedacted": {
-        "caveat": {},
-        "inline": 42
+        "reference": 42
     },
     "evalJSONRevealed": {
-        "caveat": {},
-        "inline": 42
+        "reference": 42
     }
 }
