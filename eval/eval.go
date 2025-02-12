@@ -742,13 +742,13 @@ func (e *evalContext) evaluateExprAccess(x *expr, accessors []*propertyAccessor,
 	if ok && k == "imports" {
 		e.tryInlineImport(x, accessors[1:], accept)
 		accessors[0].value = e.myImports
-		return e.evaluateValueAccess(x.repr.syntax(), e.myImports, accessors[1:], accept)
+		return e.evaluateValueAccess(x.repr.syntax(), e.myImports, accessors[1:])
 	}
 
 	// Check for context interpolation.
 	if ok && k == "context" {
 		accessors[0].value = e.myContext
-		return e.evaluateValueAccess(x.repr.syntax(), e.myContext, accessors[1:], accept)
+		return e.evaluateValueAccess(x.repr.syntax(), e.myContext, accessors[1:])
 	}
 
 	for len(accessors) > 0 {
@@ -765,7 +765,6 @@ func (e *evalContext) evaluateExprAccess(x *expr, accessors []*propertyAccessor,
 				return e.invalidPropertyAccess(x.repr.syntax(), accessors)
 			}
 			receiver = repr.elements[index]
-			accept = accept.Item(index)
 		case *objectExpr:
 			key, ok := e.objectKey(x.repr.syntax(), accessor.accessor, true)
 			if !ok {
@@ -778,19 +777,18 @@ func (e *evalContext) evaluateExprAccess(x *expr, accessors []*propertyAccessor,
 			prop, ok := repr.properties[key]
 			if !ok {
 				if receiver.base.isObject() {
-					return e.evaluateValueAccess(x.repr.syntax(), receiver.base, accessors, accept)
+					return e.evaluateValueAccess(x.repr.syntax(), receiver.base, accessors)
 				}
 				e.accessorErrorf(x.repr.syntax(), accessor.accessor, "unknown property %q", key)
 				return e.invalidPropertyAccess(x.repr.syntax(), accessors)
 			}
 			receiver = prop
-			accept.Property(key)
 		case *secretExpr:
 			// Secret expressions are transparent to accessors.
 			receiver = repr.plaintext
 			continue
 		default:
-			return e.evaluateValueAccess(x.repr.syntax(), e.evaluateExpr(receiver, accept), accessors, accept)
+			return e.evaluateValueAccess(x.repr.syntax(), e.evaluateExpr(receiver, schema.Always()), accessors)
 		}
 
 		// Synthesize a value for the accessor.
@@ -802,7 +800,7 @@ func (e *evalContext) evaluateExprAccess(x *expr, accessors []*propertyAccessor,
 		accessor.value, accessors = val, accessors[1:]
 	}
 
-	return e.evaluateExpr(receiver, accept)
+	return e.evaluateExpr(receiver, schema.Always())
 }
 
 func (e *evalContext) tryInlineImport(x *expr, accessors []*propertyAccessor, accept *schema.Schema) {
@@ -823,7 +821,7 @@ func (e *evalContext) tryInlineImport(x *expr, accessors []*propertyAccessor, ac
 }
 
 // evaluateValueAccess evaluates a list of accessors relative to a value receiver.
-func (e *evalContext) evaluateValueAccess(syntax ast.Expr, receiver *value, accessors []*propertyAccessor, accept *schema.Schema) *value {
+func (e *evalContext) evaluateValueAccess(syntax ast.Expr, receiver *value, accessors []*propertyAccessor) *value {
 	for len(accessors) > 0 {
 		accessor := accessors[0]
 
@@ -838,7 +836,6 @@ func (e *evalContext) evaluateValueAccess(syntax ast.Expr, receiver *value, acce
 				return e.invalidPropertyAccess(syntax, accessors)
 			}
 			receiver = repr[index]
-			accept = accept.Item(index)
 		case map[string]*value:
 			key, ok := e.objectKey(syntax, accessor.accessor, true)
 			if !ok {
@@ -851,7 +848,7 @@ func (e *evalContext) evaluateValueAccess(syntax ast.Expr, receiver *value, acce
 			prop, ok := repr[key]
 			if !ok {
 				if receiver.base.isObject() {
-					return e.evaluateValueAccess(syntax, receiver.base, accessors, accept.Property(key))
+					return e.evaluateValueAccess(syntax, receiver.base, accessors)
 				}
 				e.accessorErrorf(syntax, accessor.accessor, "unknown property %q", key)
 				return e.invalidPropertyAccess(syntax, accessors)
