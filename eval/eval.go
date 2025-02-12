@@ -833,7 +833,11 @@ func (e *evalContext) evaluateEnvironmentReferenceAccess(x *expr, accessors []*p
 	})
 
 	// construct a synthetic object literal of the reference which the sugared accessors can traverse
-	importedValue := inlineImports[qualifiedName]
+	importedValue, ok := inlineImports[qualifiedName]
+	if !ok {
+		// failed to import, treat as missing
+		importedValue = &value{def: newMissingExpr("", nil), schema: schema.Always(), unknown: true}
+	}
 	environmentsValue := &value{
 		def: x,
 		repr: map[string]*value{
