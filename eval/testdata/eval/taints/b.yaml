@@ -1,0 +1,4 @@
+values:
+  b_value: foo
+  b_secret:
+    fn::secret: bar-secret

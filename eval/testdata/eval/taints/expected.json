@@ -68,6 +68,29 @@
             "EvalContext": null,
             "Extra": null,
             "Path": "values[\"rotateOnly-input-without-rotateOnly-value\"][\"fn::rotate::example\"].inputs.rotateOnly"
+        },
+        {
+            "Severity": 1,
+            "Summary": "cannot access rotateOnly values in a non fn::rotate context",
+            "Detail": "",
+            "Subject": {
+                "Filename": "taints",
+                "Start": {
+                    "Line": 49,
+                    "Column": 17,
+                    "Byte": 1502
+                },
+                "End": {
+                    "Line": 49,
+                    "Column": 37,
+                    "Byte": 1522
+                }
+            },
+            "Context": null,
+            "Expression": null,
+            "EvalContext": null,
+            "Extra": null,
+            "Path": "values.z_transitive"
         }
     ],
     "check": {
@@ -555,7 +578,10 @@
                         },
                         "schema": {
                             "properties": {
-                                "string": true
+                                "string": {
+                                    "type": "string",
+                                    "const": "foo"
+                                }
                             },
                             "type": "object",
                             "required": [
@@ -592,7 +618,10 @@
                                         "byte": 203
                                     }
                                 },
-                                "schema": true,
+                                "schema": {
+                                    "type": "string",
+                                    "const": "foo"
+                                },
                                 "symbol": [
                                     {
                                         "key": "imports",
@@ -668,16 +697,16 @@
                                             }
                                         },
                                         "value": {
-                                            "environment": "taints",
+                                            "environment": "a",
                                             "begin": {
-                                                "line": 8,
-                                                "column": 15,
-                                                "byte": 180
+                                                "line": 2,
+                                                "column": 12,
+                                                "byte": 19
                                             },
                                             "end": {
-                                                "line": 8,
-                                                "column": 38,
-                                                "byte": 203
+                                                "line": 2,
+                                                "column": 15,
+                                                "byte": 22
                                             }
                                         }
                                     }
@@ -777,7 +806,10 @@
                                 },
                                 "schema": {
                                     "properties": {
-                                        "rotateOnly": true
+                                        "rotateOnly": {
+                                            "type": "string",
+                                            "const": "foo"
+                                        }
                                     },
                                     "type": "object",
                                     "required": [
@@ -814,7 +846,10 @@
                                                 "byte": 338
                                             }
                                         },
-                                        "schema": true,
+                                        "schema": {
+                                            "type": "string",
+                                            "const": "foo"
+                                        },
                                         "symbol": [
                                             {
                                                 "key": "imports",
@@ -890,16 +925,16 @@
                                                     }
                                                 },
                                                 "value": {
-                                                    "environment": "taints",
+                                                    "environment": "a",
                                                     "begin": {
-                                                        "line": 13,
-                                                        "column": 21,
-                                                        "byte": 315
+                                                        "line": 2,
+                                                        "column": 12,
+                                                        "byte": 19
                                                     },
                                                     "end": {
-                                                        "line": 13,
-                                                        "column": 44,
-                                                        "byte": 338
+                                                        "line": 2,
+                                                        "column": 15,
+                                                        "byte": 22
                                                     }
                                                 }
                                             }
@@ -1103,7 +1138,10 @@
                         "byte": 96
                     }
                 },
-                "schema": true,
+                "schema": {
+                    "type": "string",
+                    "const": "foo"
+                },
                 "symbol": [
                     {
                         "key": "imports",
@@ -1179,16 +1217,16 @@
                             }
                         },
                         "value": {
-                            "environment": "taints",
+                            "environment": "a",
                             "begin": {
-                                "line": 4,
-                                "column": 31,
-                                "byte": 73
+                                "line": 2,
+                                "column": 12,
+                                "byte": 19
                             },
                             "end": {
-                                "line": 4,
-                                "column": 54,
-                                "byte": 96
+                                "line": 2,
+                                "column": 15,
+                                "byte": 22
                             }
                         }
                     }
@@ -1404,16 +1442,16 @@
                                                             }
                                                         },
                                                         "value": {
-                                                            "environment": "taints",
+                                                            "environment": "a",
                                                             "begin": {
-                                                                "line": 18,
-                                                                "column": 21,
-                                                                "byte": 458
+                                                                "line": 2,
+                                                                "column": 12,
+                                                                "byte": 19
                                                             },
                                                             "end": {
-                                                                "line": 18,
-                                                                "column": 51,
-                                                                "byte": 488
+                                                                "line": 2,
+                                                                "column": 15,
+                                                                "byte": 22
                                                             }
                                                         }
                                                     }
@@ -1444,6 +1482,295 @@
                         }
                     }
                 }
+            },
+            "rotateOnly-with-inline-import3": {
+                "range": {
+                    "environment": "taints",
+                    "begin": {
+                        "line": 51,
+                        "column": 5,
+                        "byte": 1561
+                    },
+                    "end": {
+                        "line": 53,
+                        "column": 36,
+                        "byte": 1631
+                    }
+                },
+                "schema": true,
+                "builtin": {
+                    "name": "fn::rotate::example",
+                    "nameRange": {
+                        "environment": "taints",
+                        "begin": {
+                            "line": 51,
+                            "column": 5,
+                            "byte": 1561
+                        },
+                        "end": {
+                            "line": 51,
+                            "column": 24,
+                            "byte": 1580
+                        }
+                    },
+                    "argSchema": {
+                        "properties": {
+                            "inputs": {
+                                "properties": {
+                                    "plain": {
+                                        "type": "string"
+                                    },
+                                    "rotateOnly": {
+                                        "type": "string",
+                                        "rotateOnly": true
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            "state": {
+                                "oneOf": [
+                                    false,
+                                    {
+                                        "type": "null"
+                                    }
+                                ],
+                                "type": ""
+                            }
+                        },
+                        "type": "object",
+                        "required": [
+                            "inputs",
+                            "state"
+                        ]
+                    },
+                    "arg": {
+                        "range": {
+                            "begin": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            },
+                            "end": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            }
+                        },
+                        "object": {
+                            "inputs": {
+                                "range": {
+                                    "environment": "taints",
+                                    "begin": {
+                                        "line": 53,
+                                        "column": 9,
+                                        "byte": 1604
+                                    },
+                                    "end": {
+                                        "line": 53,
+                                        "column": 36,
+                                        "byte": 1631
+                                    }
+                                },
+                                "schema": {
+                                    "properties": {
+                                        "rotateOnly": true
+                                    },
+                                    "type": "object",
+                                    "required": [
+                                        "rotateOnly"
+                                    ]
+                                },
+                                "keyRanges": {
+                                    "rotateOnly": {
+                                        "environment": "taints",
+                                        "begin": {
+                                            "line": 53,
+                                            "column": 9,
+                                            "byte": 1604
+                                        },
+                                        "end": {
+                                            "line": 53,
+                                            "column": 19,
+                                            "byte": 1614
+                                        }
+                                    }
+                                },
+                                "object": {
+                                    "rotateOnly": {
+                                        "range": {
+                                            "environment": "taints",
+                                            "begin": {
+                                                "line": 53,
+                                                "column": 21,
+                                                "byte": 1616
+                                            },
+                                            "end": {
+                                                "line": 53,
+                                                "column": 36,
+                                                "byte": 1631
+                                            }
+                                        },
+                                        "schema": true,
+                                        "symbol": [
+                                            {
+                                                "key": "z_transitive",
+                                                "range": {
+                                                    "environment": "taints",
+                                                    "begin": {
+                                                        "line": 53,
+                                                        "column": 23,
+                                                        "byte": 1618
+                                                    },
+                                                    "end": {
+                                                        "line": 53,
+                                                        "column": 35,
+                                                        "byte": 1630
+                                                    }
+                                                },
+                                                "value": {
+                                                    "environment": "taints",
+                                                    "begin": {
+                                                        "line": 49,
+                                                        "column": 17,
+                                                        "byte": 1502
+                                                    },
+                                                    "end": {
+                                                        "line": 49,
+                                                        "column": 37,
+                                                        "byte": 1522
+                                                    }
+                                                }
+                                            }
+                                        ]
+                                    }
+                                }
+                            },
+                            "state": {
+                                "range": {
+                                    "environment": "taints",
+                                    "begin": {
+                                        "line": 0,
+                                        "column": 0,
+                                        "byte": 0
+                                    },
+                                    "end": {
+                                        "line": 0,
+                                        "column": 0,
+                                        "byte": 0
+                                    }
+                                },
+                                "schema": {
+                                    "type": "null"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "z_transitive": {
+                "range": {
+                    "environment": "taints",
+                    "begin": {
+                        "line": 49,
+                        "column": 17,
+                        "byte": 1502
+                    },
+                    "end": {
+                        "line": 49,
+                        "column": 37,
+                        "byte": 1522
+                    }
+                },
+                "schema": true,
+                "symbol": [
+                    {
+                        "key": "imports",
+                        "range": {
+                            "environment": "taints",
+                            "begin": {
+                                "line": 49,
+                                "column": 19,
+                                "byte": 1504
+                            },
+                            "end": {
+                                "line": 49,
+                                "column": 26,
+                                "byte": 1511
+                            }
+                        },
+                        "value": {
+                            "environment": "taints",
+                            "begin": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            },
+                            "end": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            }
+                        }
+                    },
+                    {
+                        "key": "b",
+                        "range": {
+                            "environment": "taints",
+                            "begin": {
+                                "line": 49,
+                                "column": 26,
+                                "byte": 1511
+                            },
+                            "end": {
+                                "line": 49,
+                                "column": 28,
+                                "byte": 1513
+                            }
+                        },
+                        "value": {
+                            "environment": "taints",
+                            "begin": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            },
+                            "end": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            }
+                        }
+                    },
+                    {
+                        "key": "b_value",
+                        "range": {
+                            "environment": "taints",
+                            "begin": {
+                                "line": 49,
+                                "column": 28,
+                                "byte": 1513
+                            },
+                            "end": {
+                                "line": 49,
+                                "column": 36,
+                                "byte": 1521
+                            }
+                        },
+                        "value": {
+                            "environment": "taints",
+                            "begin": {
+                                "line": 49,
+                                "column": 17,
+                                "byte": 1502
+                            },
+                            "end": {
+                                "line": 49,
+                                "column": 37,
+                                "byte": 1522
+                            }
+                        }
+                    }
+                ]
             }
         },
         "properties": {
@@ -1502,7 +1829,7 @@
                 }
             },
             "rotateOnly-ref-not-allowed": {
-                "unknown": true,
+                "value": "foo",
                 "trace": {
                     "def": {
                         "environment": "taints",
@@ -1533,6 +1860,42 @@
                             "line": 18,
                             "column": 51,
                             "byte": 488
+                        }
+                    }
+                }
+            },
+            "rotateOnly-with-inline-import3": {
+                "unknown": true,
+                "trace": {
+                    "def": {
+                        "environment": "taints",
+                        "begin": {
+                            "line": 51,
+                            "column": 5,
+                            "byte": 1561
+                        },
+                        "end": {
+                            "line": 53,
+                            "column": 36,
+                            "byte": 1631
+                        }
+                    }
+                }
+            },
+            "z_transitive": {
+                "unknown": true,
+                "trace": {
+                    "def": {
+                        "environment": "taints",
+                        "begin": {
+                            "line": 49,
+                            "column": 17,
+                            "byte": 1502
+                        },
+                        "end": {
+                            "line": 49,
+                            "column": 37,
+                            "byte": 1522
                         }
                     }
                 }
@@ -1761,8 +2124,13 @@
                 },
                 "rotateOnly-input-with-rotateOnly-value": true,
                 "rotateOnly-input-without-rotateOnly-value": true,
-                "rotateOnly-ref-not-allowed": true,
-                "rotateOnly-taint-propagates-through-interpolation": true
+                "rotateOnly-ref-not-allowed": {
+                    "type": "string",
+                    "const": "foo"
+                },
+                "rotateOnly-taint-propagates-through-interpolation": true,
+                "rotateOnly-with-inline-import3": true,
+                "z_transitive": true
             },
             "type": "object",
             "required": [
@@ -1770,7 +2138,9 @@
                 "rotateOnly-input-with-rotateOnly-value",
                 "rotateOnly-input-without-rotateOnly-value",
                 "rotateOnly-ref-not-allowed",
-                "rotateOnly-taint-propagates-through-interpolation"
+                "rotateOnly-taint-propagates-through-interpolation",
+                "rotateOnly-with-inline-import3",
+                "z_transitive"
             ]
         },
         "executionContext": {
@@ -1966,8 +2336,10 @@
         "open-cannot-use-rotateOnly-values": "[unknown]",
         "rotateOnly-input-with-rotateOnly-value": "[unknown]",
         "rotateOnly-input-without-rotateOnly-value": "[unknown]",
-        "rotateOnly-ref-not-allowed": "[unknown]",
-        "rotateOnly-taint-propagates-through-interpolation": "[unknown]"
+        "rotateOnly-ref-not-allowed": "foo",
+        "rotateOnly-taint-propagates-through-interpolation": "[unknown]",
+        "rotateOnly-with-inline-import3": "[unknown]",
+        "z_transitive": "[unknown]"
     },
     "evalDiags": [
         {
@@ -1994,29 +2366,6 @@
             "Path": "values[\"rotateOnly-ref-not-allowed\"]"
         },
         {
-            "Severity": 1,
-            "Summary": "rotateOnly values cannot be used outside of rotateOnly inputs",
-            "Detail": "",
-            "Subject": {
-                "Filename": "taints",
-                "Start": {
-                    "Line": 8,
-                    "Column": 15,
-                    "Byte": 180
-                },
-                "End": {
-                    "Line": 8,
-                    "Column": 38,
-                    "Byte": 203
-                }
-            },
-            "Context": null,
-            "Expression": null,
-            "EvalContext": null,
-            "Extra": null,
-            "Path": "values[\"open-cannot-use-rotateOnly-values\"][\"fn::open::schema\"].string"
-        },
-        {
             "Severity": 2,
             "Summary": "prefer using a rotateOnly value for rotateOnly inputs",
             "Detail": "",
@@ -2038,6 +2387,29 @@
             "EvalContext": null,
             "Extra": null,
             "Path": "values[\"rotateOnly-input-without-rotateOnly-value\"][\"fn::rotate::example\"].inputs.rotateOnly"
+        },
+        {
+            "Severity": 1,
+            "Summary": "cannot access rotateOnly values in a non fn::rotate context",
+            "Detail": "",
+            "Subject": {
+                "Filename": "taints",
+                "Start": {
+                    "Line": 49,
+                    "Column": 17,
+                    "Byte": 1502
+                },
+                "End": {
+                    "Line": 49,
+                    "Column": 37,
+                    "Byte": 1522
+                }
+            },
+            "Context": null,
+            "Expression": null,
+            "EvalContext": null,
+            "Extra": null,
+            "Path": "values.z_transitive"
         }
     ],
     "eval": {
@@ -2057,223 +2429,16 @@
                     }
                 },
                 "schema": {
-                    "$defs": {
-                        "defRecord": {
-                            "properties": {
-                                "baz": {
-                                    "type": "string",
-                                    "const": "qux"
-                                }
-                            },
-                            "type": "object",
-                            "required": [
-                                "baz"
-                            ]
-                        }
-                    },
                     "properties": {
-                        "always": true,
-                        "anyOf": {
-                            "anyOf": [
-                                {
-                                    "type": "string"
-                                },
-                                {
-                                    "type": "number"
-                                }
-                            ],
-                            "type": ""
-                        },
-                        "array": {
-                            "items": true,
-                            "type": "array"
-                        },
-                        "boolean": {
-                            "type": "boolean"
-                        },
-                        "const-array": {
-                            "type": "array",
-                            "const": [
-                                "hello",
-                                42
-                            ]
-                        },
-                        "const-object": {
-                            "type": "object",
-                            "const": {
-                                "hello": "world"
-                            }
-                        },
-                        "dependentReq": {
-                            "properties": {
-                                "bar": {
-                                    "type": "number"
-                                },
-                                "foo": {
-                                    "type": "string"
-                                }
-                            },
-                            "type": "object",
-                            "dependentRequired": {
-                                "foo": [
-                                    "bar"
-                                ]
-                            }
-                        },
-                        "double": {
-                            "prefixItems": [
-                                {
-                                    "type": "string"
-                                },
-                                {
-                                    "type": "number"
-                                }
-                            ],
-                            "items": false,
-                            "type": "array"
-                        },
-                        "enum": {
-                            "type": "string",
-                            "enum": [
-                                "foo",
-                                "bar"
-                            ]
-                        },
-                        "exclusiveMaximum": {
-                            "type": "number",
-                            "exclusiveMaximum": 1
-                        },
-                        "exclusiveMinimum": {
-                            "type": "number",
-                            "exclusiveMinimum": 1
-                        },
-                        "false": {
-                            "type": "boolean",
-                            "const": false
-                        },
-                        "hello": {
-                            "type": "string",
-                            "const": "hello"
-                        },
-                        "map": {
-                            "additionalProperties": true,
-                            "type": "object"
-                        },
-                        "maxItems": {
-                            "type": "array",
-                            "maxItems": 2
-                        },
-                        "maxLength": {
-                            "type": "string",
-                            "maxLength": 1
-                        },
-                        "maxProperties": {
-                            "type": "object",
-                            "maxProperties": 1
-                        },
-                        "maximum": {
-                            "type": "number",
-                            "maximum": 1
-                        },
-                        "minItems": {
-                            "type": "array",
-                            "minItems": 3
-                        },
-                        "minLength": {
-                            "type": "string",
-                            "minLength": 1
-                        },
-                        "minProperties": {
-                            "type": "object",
-                            "minProperties": 1
-                        },
-                        "minimum": {
-                            "type": "number",
-                            "minimum": 1
-                        },
-                        "multiple": {
-                            "type": "number",
-                            "multipleOf": 2
-                        },
-                        "never": false,
-                        "null": {
-                            "type": "null"
-                        },
-                        "number": {
-                            "type": "number"
-                        },
-                        "oneOf": {
-                            "oneOf": [
-                                {
-                                    "type": "string"
-                                },
-                                {
-                                    "type": "number"
-                                }
-                            ],
-                            "type": ""
-                        },
-                        "pattern": {
-                            "type": "string",
-                            "pattern": "^foo[0-9]+$"
-                        },
-                        "pi": {
-                            "type": "number",
-                            "const": 3.14
-                        },
-                        "record": {
-                            "properties": {
-                                "foo": {
-                                    "type": "string"
-                                }
-                            },
-                            "type": "object",
-                            "required": [
-                                "foo"
-                            ]
-                        },
-                        "ref": {
-                            "$ref": "#/$defs/defRecord",
-                            "type": ""
-                        },
                         "string": {
-                            "type": "string"
-                        },
-                        "triple": {
-                            "prefixItems": [
-                                {
-                                    "type": "string"
-                                },
-                                {
-                                    "type": "number"
-                                },
-                                {
-                                    "type": "boolean"
-                                }
-                            ],
-                            "items": false,
-                            "type": "array"
-                        },
-                        "true": {
-                            "type": "boolean",
-                            "const": true
-                        },
-                        "tuple": {
-                            "prefixItems": [
-                                {
-                                    "type": "string",
-                                    "const": "hello"
-                                },
-                                {
-                                    "type": "string",
-                                    "const": "world"
-                                }
-                            ],
-                            "items": false,
-                            "type": "array"
+                            "type": "string",
+                            "const": "foo"
                         }
                     },
-                    "type": "object"
+                    "type": "object",
+                    "required": [
+                        "string"
+                    ]
                 },
                 "builtin": {
                     "name": "fn::open::schema",
@@ -2525,7 +2690,10 @@
                         },
                         "schema": {
                             "properties": {
-                                "string": true
+                                "string": {
+                                    "type": "string",
+                                    "const": "foo"
+                                }
                             },
                             "type": "object",
                             "required": [
@@ -2562,7 +2730,10 @@
                                         "byte": 203
                                     }
                                 },
-                                "schema": true,
+                                "schema": {
+                                    "type": "string",
+                                    "const": "foo"
+                                },
                                 "symbol": [
                                     {
                                         "key": "imports",
@@ -2638,16 +2809,16 @@
                                             }
                                         },
                                         "value": {
-                                            "environment": "taints",
+                                            "environment": "a",
                                             "begin": {
-                                                "line": 8,
-                                                "column": 15,
-                                                "byte": 180
+                                                "line": 2,
+                                                "column": 12,
+                                                "byte": 19
                                             },
                                             "end": {
-                                                "line": 8,
-                                                "column": 38,
-                                                "byte": 203
+                                                "line": 2,
+                                                "column": 15,
+                                                "byte": 22
                                             }
                                         }
                                     }
@@ -2674,7 +2845,8 @@
                 "schema": {
                     "properties": {
                         "rotateOnly": {
-                            "type": "null"
+                            "type": "string",
+                            "const": "foo"
                         }
                     },
                     "type": "object",
@@ -2757,7 +2929,10 @@
                                 },
                                 "schema": {
                                     "properties": {
-                                        "rotateOnly": true
+                                        "rotateOnly": {
+                                            "type": "string",
+                                            "const": "foo"
+                                        }
                                     },
                                     "type": "object",
                                     "required": [
@@ -2794,7 +2969,10 @@
                                                 "byte": 338
                                             }
                                         },
-                                        "schema": true,
+                                        "schema": {
+                                            "type": "string",
+                                            "const": "foo"
+                                        },
                                         "symbol": [
                                             {
                                                 "key": "imports",
@@ -2870,16 +3048,16 @@
                                                     }
                                                 },
                                                 "value": {
-                                                    "environment": "taints",
+                                                    "environment": "a",
                                                     "begin": {
-                                                        "line": 13,
-                                                        "column": 21,
-                                                        "byte": 315
+                                                        "line": 2,
+                                                        "column": 12,
+                                                        "byte": 19
                                                     },
                                                     "end": {
-                                                        "line": 13,
-                                                        "column": 44,
-                                                        "byte": 338
+                                                        "line": 2,
+                                                        "column": 15,
+                                                        "byte": 22
                                                     }
                                                 }
                                             }
@@ -3094,7 +3272,10 @@
                         "byte": 96
                     }
                 },
-                "schema": true,
+                "schema": {
+                    "type": "string",
+                    "const": "foo"
+                },
                 "symbol": [
                     {
                         "key": "imports",
@@ -3170,16 +3351,16 @@
                             }
                         },
                         "value": {
-                            "environment": "taints",
+                            "environment": "a",
                             "begin": {
-                                "line": 4,
-                                "column": 31,
-                                "byte": 73
+                                "line": 2,
+                                "column": 12,
+                                "byte": 19
                             },
                             "end": {
-                                "line": 4,
-                                "column": 54,
-                                "byte": 96
+                                "line": 2,
+                                "column": 15,
+                                "byte": 22
                             }
                         }
                     }
@@ -3203,7 +3384,7 @@
                     "properties": {
                         "rotateOnly": {
                             "type": "string",
-                            "const": "[unknown]"
+                            "const": "Bearer foo"
                         }
                     },
                     "type": "object",
@@ -3406,16 +3587,16 @@
                                                             }
                                                         },
                                                         "value": {
-                                                            "environment": "taints",
+                                                            "environment": "a",
                                                             "begin": {
-                                                                "line": 18,
-                                                                "column": 21,
-                                                                "byte": 458
+                                                                "line": 2,
+                                                                "column": 12,
+                                                                "byte": 19
                                                             },
                                                             "end": {
-                                                                "line": 18,
-                                                                "column": 51,
-                                                                "byte": 488
+                                                                "line": 2,
+                                                                "column": 15,
+                                                                "byte": 22
                                                             }
                                                         }
                                                     }
@@ -3446,11 +3627,329 @@
                         }
                     }
                 }
+            },
+            "rotateOnly-with-inline-import3": {
+                "range": {
+                    "environment": "taints",
+                    "begin": {
+                        "line": 51,
+                        "column": 5,
+                        "byte": 1561
+                    },
+                    "end": {
+                        "line": 53,
+                        "column": 36,
+                        "byte": 1631
+                    }
+                },
+                "schema": {
+                    "properties": {
+                        "rotateOnly": {
+                            "type": "null"
+                        }
+                    },
+                    "type": "object",
+                    "required": [
+                        "rotateOnly"
+                    ]
+                },
+                "builtin": {
+                    "name": "fn::rotate::example",
+                    "nameRange": {
+                        "environment": "taints",
+                        "begin": {
+                            "line": 51,
+                            "column": 5,
+                            "byte": 1561
+                        },
+                        "end": {
+                            "line": 51,
+                            "column": 24,
+                            "byte": 1580
+                        }
+                    },
+                    "argSchema": {
+                        "properties": {
+                            "inputs": {
+                                "properties": {
+                                    "plain": {
+                                        "type": "string"
+                                    },
+                                    "rotateOnly": {
+                                        "type": "string",
+                                        "rotateOnly": true
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            "state": {
+                                "oneOf": [
+                                    false,
+                                    {
+                                        "type": "null"
+                                    }
+                                ],
+                                "type": ""
+                            }
+                        },
+                        "type": "object",
+                        "required": [
+                            "inputs",
+                            "state"
+                        ]
+                    },
+                    "arg": {
+                        "range": {
+                            "begin": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            },
+                            "end": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            }
+                        },
+                        "object": {
+                            "inputs": {
+                                "range": {
+                                    "environment": "taints",
+                                    "begin": {
+                                        "line": 53,
+                                        "column": 9,
+                                        "byte": 1604
+                                    },
+                                    "end": {
+                                        "line": 53,
+                                        "column": 36,
+                                        "byte": 1631
+                                    }
+                                },
+                                "schema": {
+                                    "properties": {
+                                        "rotateOnly": true
+                                    },
+                                    "type": "object",
+                                    "required": [
+                                        "rotateOnly"
+                                    ]
+                                },
+                                "keyRanges": {
+                                    "rotateOnly": {
+                                        "environment": "taints",
+                                        "begin": {
+                                            "line": 53,
+                                            "column": 9,
+                                            "byte": 1604
+                                        },
+                                        "end": {
+                                            "line": 53,
+                                            "column": 19,
+                                            "byte": 1614
+                                        }
+                                    }
+                                },
+                                "object": {
+                                    "rotateOnly": {
+                                        "range": {
+                                            "environment": "taints",
+                                            "begin": {
+                                                "line": 53,
+                                                "column": 21,
+                                                "byte": 1616
+                                            },
+                                            "end": {
+                                                "line": 53,
+                                                "column": 36,
+                                                "byte": 1631
+                                            }
+                                        },
+                                        "schema": true,
+                                        "symbol": [
+                                            {
+                                                "key": "z_transitive",
+                                                "range": {
+                                                    "environment": "taints",
+                                                    "begin": {
+                                                        "line": 53,
+                                                        "column": 23,
+                                                        "byte": 1618
+                                                    },
+                                                    "end": {
+                                                        "line": 53,
+                                                        "column": 35,
+                                                        "byte": 1630
+                                                    }
+                                                },
+                                                "value": {
+                                                    "environment": "taints",
+                                                    "begin": {
+                                                        "line": 49,
+                                                        "column": 17,
+                                                        "byte": 1502
+                                                    },
+                                                    "end": {
+                                                        "line": 49,
+                                                        "column": 37,
+                                                        "byte": 1522
+                                                    }
+                                                }
+                                            }
+                                        ]
+                                    }
+                                }
+                            },
+                            "state": {
+                                "range": {
+                                    "environment": "taints",
+                                    "begin": {
+                                        "line": 0,
+                                        "column": 0,
+                                        "byte": 0
+                                    },
+                                    "end": {
+                                        "line": 0,
+                                        "column": 0,
+                                        "byte": 0
+                                    }
+                                },
+                                "schema": {
+                                    "type": "null"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "z_transitive": {
+                "range": {
+                    "environment": "taints",
+                    "begin": {
+                        "line": 49,
+                        "column": 17,
+                        "byte": 1502
+                    },
+                    "end": {
+                        "line": 49,
+                        "column": 37,
+                        "byte": 1522
+                    }
+                },
+                "schema": true,
+                "symbol": [
+                    {
+                        "key": "imports",
+                        "range": {
+                            "environment": "taints",
+                            "begin": {
+                                "line": 49,
+                                "column": 19,
+                                "byte": 1504
+                            },
+                            "end": {
+                                "line": 49,
+                                "column": 26,
+                                "byte": 1511
+                            }
+                        },
+                        "value": {
+                            "environment": "taints",
+                            "begin": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            },
+                            "end": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            }
+                        }
+                    },
+                    {
+                        "key": "b",
+                        "range": {
+                            "environment": "taints",
+                            "begin": {
+                                "line": 49,
+                                "column": 26,
+                                "byte": 1511
+                            },
+                            "end": {
+                                "line": 49,
+                                "column": 28,
+                                "byte": 1513
+                            }
+                        },
+                        "value": {
+                            "environment": "taints",
+                            "begin": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            },
+                            "end": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            }
+                        }
+                    },
+                    {
+                        "key": "b_value",
+                        "range": {
+                            "environment": "taints",
+                            "begin": {
+                                "line": 49,
+                                "column": 28,
+                                "byte": 1513
+                            },
+                            "end": {
+                                "line": 49,
+                                "column": 36,
+                                "byte": 1521
+                            }
+                        },
+                        "value": {
+                            "environment": "taints",
+                            "begin": {
+                                "line": 49,
+                                "column": 17,
+                                "byte": 1502
+                            },
+                            "end": {
+                                "line": 49,
+                                "column": 37,
+                                "byte": 1522
+                            }
+                        }
+                    }
+                ]
             }
         },
         "properties": {
             "open-cannot-use-rotateOnly-values": {
-                "unknown": true,
+                "value": {
+                    "string": {
+                        "value": "foo",
+                        "trace": {
+                            "def": {
+                                "environment": "taints",
+                                "begin": {
+                                    "line": 7,
+                                    "column": 5,
+                                    "byte": 148
+                                },
+                                "end": {
+                                    "line": 8,
+                                    "column": 38,
+                                    "byte": 203
+                                }
+                            }
+                        }
+                    }
+                },
                 "trace": {
                     "def": {
                         "environment": "taints",
@@ -3470,7 +3969,7 @@
             "rotateOnly-input-with-rotateOnly-value": {
                 "value": {
                     "rotateOnly": {
-                        "unknown": true,
+                        "value": "foo",
                         "trace": {
                             "def": {
                                 "environment": "taints",
@@ -3542,7 +4041,7 @@
                 }
             },
             "rotateOnly-ref-not-allowed": {
-                "unknown": true,
+                "value": "foo",
                 "trace": {
                     "def": {
                         "environment": "taints",
@@ -3562,8 +4061,7 @@
             "rotateOnly-taint-propagates-through-interpolation": {
                 "value": {
                     "rotateOnly": {
-                        "value": "[unknown]",
-                        "unknown": true,
+                        "value": "Bearer foo",
                         "trace": {
                             "def": {
                                 "environment": "taints",
@@ -3596,233 +4094,82 @@
                         }
                     }
                 }
+            },
+            "rotateOnly-with-inline-import3": {
+                "value": {
+                    "rotateOnly": {
+                        "unknown": true,
+                        "trace": {
+                            "def": {
+                                "environment": "taints",
+                                "begin": {
+                                    "line": 51,
+                                    "column": 5,
+                                    "byte": 1561
+                                },
+                                "end": {
+                                    "line": 53,
+                                    "column": 36,
+                                    "byte": 1631
+                                }
+                            }
+                        }
+                    }
+                },
+                "trace": {
+                    "def": {
+                        "environment": "taints",
+                        "begin": {
+                            "line": 51,
+                            "column": 5,
+                            "byte": 1561
+                        },
+                        "end": {
+                            "line": 53,
+                            "column": 36,
+                            "byte": 1631
+                        }
+                    }
+                }
+            },
+            "z_transitive": {
+                "unknown": true,
+                "trace": {
+                    "def": {
+                        "environment": "taints",
+                        "begin": {
+                            "line": 49,
+                            "column": 17,
+                            "byte": 1502
+                        },
+                        "end": {
+                            "line": 49,
+                            "column": 37,
+                            "byte": 1522
+                        }
+                    }
+                }
             }
         },
         "schema": {
             "properties": {
                 "open-cannot-use-rotateOnly-values": {
-                    "$defs": {
-                        "defRecord": {
-                            "properties": {
-                                "baz": {
-                                    "type": "string",
-                                    "const": "qux"
-                                }
-                            },
-                            "type": "object",
-                            "required": [
-                                "baz"
-                            ]
-                        }
-                    },
                     "properties": {
-                        "always": true,
-                        "anyOf": {
-                            "anyOf": [
-                                {
-                                    "type": "string"
-                                },
-                                {
-                                    "type": "number"
-                                }
-                            ],
-                            "type": ""
-                        },
-                        "array": {
-                            "items": true,
-                            "type": "array"
-                        },
-                        "boolean": {
-                            "type": "boolean"
-                        },
-                        "const-array": {
-                            "type": "array",
-                            "const": [
-                                "hello",
-                                42
-                            ]
-                        },
-                        "const-object": {
-                            "type": "object",
-                            "const": {
-                                "hello": "world"
-                            }
-                        },
-                        "dependentReq": {
-                            "properties": {
-                                "bar": {
-                                    "type": "number"
-                                },
-                                "foo": {
-                                    "type": "string"
-                                }
-                            },
-                            "type": "object",
-                            "dependentRequired": {
-                                "foo": [
-                                    "bar"
-                                ]
-                            }
-                        },
-                        "double": {
-                            "prefixItems": [
-                                {
-                                    "type": "string"
-                                },
-                                {
-                                    "type": "number"
-                                }
-                            ],
-                            "items": false,
-                            "type": "array"
-                        },
-                        "enum": {
-                            "type": "string",
-                            "enum": [
-                                "foo",
-                                "bar"
-                            ]
-                        },
-                        "exclusiveMaximum": {
-                            "type": "number",
-                            "exclusiveMaximum": 1
-                        },
-                        "exclusiveMinimum": {
-                            "type": "number",
-                            "exclusiveMinimum": 1
-                        },
-                        "false": {
-                            "type": "boolean",
-                            "const": false
-                        },
-                        "hello": {
-                            "type": "string",
-                            "const": "hello"
-                        },
-                        "map": {
-                            "additionalProperties": true,
-                            "type": "object"
-                        },
-                        "maxItems": {
-                            "type": "array",
-                            "maxItems": 2
-                        },
-                        "maxLength": {
-                            "type": "string",
-                            "maxLength": 1
-                        },
-                        "maxProperties": {
-                            "type": "object",
-                            "maxProperties": 1
-                        },
-                        "maximum": {
-                            "type": "number",
-                            "maximum": 1
-                        },
-                        "minItems": {
-                            "type": "array",
-                            "minItems": 3
-                        },
-                        "minLength": {
-                            "type": "string",
-                            "minLength": 1
-                        },
-                        "minProperties": {
-                            "type": "object",
-                            "minProperties": 1
-                        },
-                        "minimum": {
-                            "type": "number",
-                            "minimum": 1
-                        },
-                        "multiple": {
-                            "type": "number",
-                            "multipleOf": 2
-                        },
-                        "never": false,
-                        "null": {
-                            "type": "null"
-                        },
-                        "number": {
-                            "type": "number"
-                        },
-                        "oneOf": {
-                            "oneOf": [
-                                {
-                                    "type": "string"
-                                },
-                                {
-                                    "type": "number"
-                                }
-                            ],
-                            "type": ""
-                        },
-                        "pattern": {
-                            "type": "string",
-                            "pattern": "^foo[0-9]+$"
-                        },
-                        "pi": {
-                            "type": "number",
-                            "const": 3.14
-                        },
-                        "record": {
-                            "properties": {
-                                "foo": {
-                                    "type": "string"
-                                }
-                            },
-                            "type": "object",
-                            "required": [
-                                "foo"
-                            ]
-                        },
-                        "ref": {
-                            "$ref": "#/$defs/defRecord",
-                            "type": ""
-                        },
                         "string": {
-                            "type": "string"
-                        },
-                        "triple": {
-                            "prefixItems": [
-                                {
-                                    "type": "string"
-                                },
-                                {
-                                    "type": "number"
-                                },
-                                {
-                                    "type": "boolean"
-                                }
-                            ],
-                            "items": false,
-                            "type": "array"
-                        },
-                        "true": {
-                            "type": "boolean",
-                            "const": true
-                        },
-                        "tuple": {
-                            "prefixItems": [
-                                {
-                                    "type": "string",
-                                    "const": "hello"
-                                },
-                                {
-                                    "type": "string",
-                                    "const": "world"
-                                }
-                            ],
-                            "items": false,
-                            "type": "array"
+                            "type": "string",
+                            "const": "foo"
                         }
                     },
-                    "type": "object"
+                    "type": "object",
+                    "required": [
+                        "string"
+                    ]
                 },
                 "rotateOnly-input-with-rotateOnly-value": {
                     "properties": {
                         "rotateOnly": {
-                            "type": "null"
+                            "type": "string",
+                            "const": "foo"
                         }
                     },
                     "type": "object",
@@ -3842,19 +4189,34 @@
                         "rotateOnly"
                     ]
                 },
-                "rotateOnly-ref-not-allowed": true,
+                "rotateOnly-ref-not-allowed": {
+                    "type": "string",
+                    "const": "foo"
+                },
                 "rotateOnly-taint-propagates-through-interpolation": {
                     "properties": {
                         "rotateOnly": {
                             "type": "string",
-                            "const": "[unknown]"
+                            "const": "Bearer foo"
                         }
                     },
                     "type": "object",
                     "required": [
                         "rotateOnly"
                     ]
-                }
+                },
+                "rotateOnly-with-inline-import3": {
+                    "properties": {
+                        "rotateOnly": {
+                            "type": "null"
+                        }
+                    },
+                    "type": "object",
+                    "required": [
+                        "rotateOnly"
+                    ]
+                },
+                "z_transitive": true
             },
             "type": "object",
             "required": [
@@ -3862,7 +4224,9 @@
                 "rotateOnly-input-with-rotateOnly-value",
                 "rotateOnly-input-without-rotateOnly-value",
                 "rotateOnly-ref-not-allowed",
-                "rotateOnly-taint-propagates-through-interpolation"
+                "rotateOnly-taint-propagates-through-interpolation",
+                "rotateOnly-with-inline-import3",
+                "z_transitive"
             ]
         },
         "executionContext": {
@@ -4055,30 +4419,42 @@
         }
     },
     "evalJsonRedacted": {
-        "open-cannot-use-rotateOnly-values": "[unknown]",
+        "open-cannot-use-rotateOnly-values": {
+            "string": "foo"
+        },
         "rotateOnly-input-with-rotateOnly-value": {
-            "rotateOnly": "[unknown]"
+            "rotateOnly": "foo"
         },
         "rotateOnly-input-without-rotateOnly-value": {
             "rotateOnly": "not-rotateOnly"
         },
-        "rotateOnly-ref-not-allowed": "[unknown]",
+        "rotateOnly-ref-not-allowed": "foo",
         "rotateOnly-taint-propagates-through-interpolation": {
+            "rotateOnly": "Bearer foo"
+        },
+        "rotateOnly-with-inline-import3": {
             "rotateOnly": "[unknown]"
-        }
+        },
+        "z_transitive": "[unknown]"
     },
     "evalJSONRevealed": {
-        "open-cannot-use-rotateOnly-values": "[unknown]",
+        "open-cannot-use-rotateOnly-values": {
+            "string": "foo"
+        },
         "rotateOnly-input-with-rotateOnly-value": {
-            "rotateOnly": "[unknown]"
+            "rotateOnly": "foo"
         },
         "rotateOnly-input-without-rotateOnly-value": {
             "rotateOnly": "not-rotateOnly"
         },
-        "rotateOnly-ref-not-allowed": "[unknown]",
+        "rotateOnly-ref-not-allowed": "foo",
         "rotateOnly-taint-propagates-through-interpolation": {
+            "rotateOnly": "Bearer foo"
+        },
+        "rotateOnly-with-inline-import3": {
             "rotateOnly": "[unknown]"
-        }
+        },
+        "z_transitive": "[unknown]"
     },
     "rotateDiags": [
         {
@@ -4149,6 +4525,29 @@
             "EvalContext": null,
             "Extra": null,
             "Path": "values[\"rotateOnly-input-without-rotateOnly-value\"][\"fn::rotate::example\"].inputs.rotateOnly"
+        },
+        {
+            "Severity": 1,
+            "Summary": "cannot access rotateOnly values in a non fn::rotate context",
+            "Detail": "",
+            "Subject": {
+                "Filename": "taints",
+                "Start": {
+                    "Line": 49,
+                    "Column": 17,
+                    "Byte": 1502
+                },
+                "End": {
+                    "Line": 49,
+                    "Column": 37,
+                    "Byte": 1522
+                }
+            },
+            "Context": null,
+            "Expression": null,
+            "EvalContext": null,
+            "Extra": null,
+            "Path": "values.z_transitive"
         }
     ],
     "rotate": {
@@ -5573,6 +5972,315 @@
                         }
                     }
                 }
+            },
+            "rotateOnly-with-inline-import3": {
+                "range": {
+                    "environment": "taints",
+                    "begin": {
+                        "line": 51,
+                        "column": 5,
+                        "byte": 1561
+                    },
+                    "end": {
+                        "line": 53,
+                        "column": 36,
+                        "byte": 1631
+                    }
+                },
+                "schema": {
+                    "properties": {
+                        "rotateOnly": {
+                            "type": "string",
+                            "const": "foo"
+                        }
+                    },
+                    "type": "object",
+                    "required": [
+                        "rotateOnly"
+                    ]
+                },
+                "builtin": {
+                    "name": "fn::rotate::example",
+                    "nameRange": {
+                        "environment": "taints",
+                        "begin": {
+                            "line": 51,
+                            "column": 5,
+                            "byte": 1561
+                        },
+                        "end": {
+                            "line": 51,
+                            "column": 24,
+                            "byte": 1580
+                        }
+                    },
+                    "argSchema": {
+                        "properties": {
+                            "inputs": {
+                                "properties": {
+                                    "plain": {
+                                        "type": "string"
+                                    },
+                                    "rotateOnly": {
+                                        "type": "string",
+                                        "rotateOnly": true
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            "state": {
+                                "oneOf": [
+                                    false,
+                                    {
+                                        "type": "null"
+                                    }
+                                ],
+                                "type": ""
+                            }
+                        },
+                        "type": "object",
+                        "required": [
+                            "inputs",
+                            "state"
+                        ]
+                    },
+                    "arg": {
+                        "range": {
+                            "begin": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            },
+                            "end": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            }
+                        },
+                        "object": {
+                            "inputs": {
+                                "range": {
+                                    "environment": "taints",
+                                    "begin": {
+                                        "line": 53,
+                                        "column": 9,
+                                        "byte": 1604
+                                    },
+                                    "end": {
+                                        "line": 53,
+                                        "column": 36,
+                                        "byte": 1631
+                                    }
+                                },
+                                "schema": {
+                                    "properties": {
+                                        "rotateOnly": {
+                                            "type": "string",
+                                            "const": "foo"
+                                        }
+                                    },
+                                    "type": "object",
+                                    "required": [
+                                        "rotateOnly"
+                                    ]
+                                },
+                                "keyRanges": {
+                                    "rotateOnly": {
+                                        "environment": "taints",
+                                        "begin": {
+                                            "line": 53,
+                                            "column": 9,
+                                            "byte": 1604
+                                        },
+                                        "end": {
+                                            "line": 53,
+                                            "column": 19,
+                                            "byte": 1614
+                                        }
+                                    }
+                                },
+                                "object": {
+                                    "rotateOnly": {
+                                        "range": {
+                                            "environment": "taints",
+                                            "begin": {
+                                                "line": 53,
+                                                "column": 21,
+                                                "byte": 1616
+                                            },
+                                            "end": {
+                                                "line": 53,
+                                                "column": 36,
+                                                "byte": 1631
+                                            }
+                                        },
+                                        "schema": {
+                                            "type": "string",
+                                            "const": "foo"
+                                        },
+                                        "symbol": [
+                                            {
+                                                "key": "z_transitive",
+                                                "range": {
+                                                    "environment": "taints",
+                                                    "begin": {
+                                                        "line": 53,
+                                                        "column": 23,
+                                                        "byte": 1618
+                                                    },
+                                                    "end": {
+                                                        "line": 53,
+                                                        "column": 35,
+                                                        "byte": 1630
+                                                    }
+                                                },
+                                                "value": {
+                                                    "environment": "taints",
+                                                    "begin": {
+                                                        "line": 49,
+                                                        "column": 17,
+                                                        "byte": 1502
+                                                    },
+                                                    "end": {
+                                                        "line": 49,
+                                                        "column": 37,
+                                                        "byte": 1522
+                                                    }
+                                                }
+                                            }
+                                        ]
+                                    }
+                                }
+                            },
+                            "state": {
+                                "range": {
+                                    "environment": "taints",
+                                    "begin": {
+                                        "line": 0,
+                                        "column": 0,
+                                        "byte": 0
+                                    },
+                                    "end": {
+                                        "line": 0,
+                                        "column": 0,
+                                        "byte": 0
+                                    }
+                                },
+                                "schema": {
+                                    "type": "null"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "z_transitive": {
+                "range": {
+                    "environment": "taints",
+                    "begin": {
+                        "line": 49,
+                        "column": 17,
+                        "byte": 1502
+                    },
+                    "end": {
+                        "line": 49,
+                        "column": 37,
+                        "byte": 1522
+                    }
+                },
+                "schema": {
+                    "type": "string",
+                    "const": "foo"
+                },
+                "symbol": [
+                    {
+                        "key": "imports",
+                        "range": {
+                            "environment": "taints",
+                            "begin": {
+                                "line": 49,
+                                "column": 19,
+                                "byte": 1504
+                            },
+                            "end": {
+                                "line": 49,
+                                "column": 26,
+                                "byte": 1511
+                            }
+                        },
+                        "value": {
+                            "environment": "taints",
+                            "begin": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            },
+                            "end": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            }
+                        }
+                    },
+                    {
+                        "key": "b",
+                        "range": {
+                            "environment": "taints",
+                            "begin": {
+                                "line": 49,
+                                "column": 26,
+                                "byte": 1511
+                            },
+                            "end": {
+                                "line": 49,
+                                "column": 28,
+                                "byte": 1513
+                            }
+                        },
+                        "value": {
+                            "environment": "taints",
+                            "begin": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            },
+                            "end": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            }
+                        }
+                    },
+                    {
+                        "key": "b_value",
+                        "range": {
+                            "environment": "taints",
+                            "begin": {
+                                "line": 49,
+                                "column": 28,
+                                "byte": 1513
+                            },
+                            "end": {
+                                "line": 49,
+                                "column": 36,
+                                "byte": 1521
+                            }
+                        },
+                        "value": {
+                            "environment": "b",
+                            "begin": {
+                                "line": 2,
+                                "column": 12,
+                                "byte": 19
+                            },
+                            "end": {
+                                "line": 2,
+                                "column": 15,
+                                "byte": 22
+                            }
+                        }
+                    }
+                ]
             }
         },
         "properties": {
@@ -5719,6 +6427,61 @@
                             "line": 18,
                             "column": 51,
                             "byte": 488
+                        }
+                    }
+                }
+            },
+            "rotateOnly-with-inline-import3": {
+                "value": {
+                    "rotateOnly": {
+                        "value": "foo",
+                        "trace": {
+                            "def": {
+                                "environment": "taints",
+                                "begin": {
+                                    "line": 51,
+                                    "column": 5,
+                                    "byte": 1561
+                                },
+                                "end": {
+                                    "line": 53,
+                                    "column": 36,
+                                    "byte": 1631
+                                }
+                            }
+                        }
+                    }
+                },
+                "trace": {
+                    "def": {
+                        "environment": "taints",
+                        "begin": {
+                            "line": 51,
+                            "column": 5,
+                            "byte": 1561
+                        },
+                        "end": {
+                            "line": 53,
+                            "column": 36,
+                            "byte": 1631
+                        }
+                    }
+                }
+            },
+            "z_transitive": {
+                "value": "foo",
+                "trace": {
+                    "def": {
+                        "environment": "taints",
+                        "begin": {
+                            "line": 49,
+                            "column": 17,
+                            "byte": 1502
+                        },
+                        "end": {
+                            "line": 49,
+                            "column": 37,
+                            "byte": 1522
                         }
                     }
                 }
@@ -5984,6 +6747,22 @@
                     "required": [
                         "rotateOnly"
                     ]
+                },
+                "rotateOnly-with-inline-import3": {
+                    "properties": {
+                        "rotateOnly": {
+                            "type": "string",
+                            "const": "foo"
+                        }
+                    },
+                    "type": "object",
+                    "required": [
+                        "rotateOnly"
+                    ]
+                },
+                "z_transitive": {
+                    "type": "string",
+                    "const": "foo"
                 }
             },
             "type": "object",
@@ -5992,7 +6771,9 @@
                 "rotateOnly-input-with-rotateOnly-value",
                 "rotateOnly-input-without-rotateOnly-value",
                 "rotateOnly-ref-not-allowed",
-                "rotateOnly-taint-propagates-through-interpolation"
+                "rotateOnly-taint-propagates-through-interpolation",
+                "rotateOnly-with-inline-import3",
+                "z_transitive"
             ]
         },
         "executionContext": {
@@ -6195,7 +6976,11 @@
         "rotateOnly-ref-not-allowed": "foo",
         "rotateOnly-taint-propagates-through-interpolation": {
             "rotateOnly": "Bearer foo"
-        }
+        },
+        "rotateOnly-with-inline-import3": {
+            "rotateOnly": "foo"
+        },
+        "z_transitive": "foo"
     },
     "rotatePatches": [
         {
@@ -6240,6 +7025,26 @@
         },
         {
             "DocPath": "values[\"rotateOnly-taint-propagates-through-interpolation\"][\"fn::rotate::example\"].state",
+            "Replacement": {
+                "value": {},
+                "trace": {
+                    "def": {
+                        "begin": {
+                            "line": 0,
+                            "column": 0,
+                            "byte": 0
+                        },
+                        "end": {
+                            "line": 0,
+                            "column": 0,
+                            "byte": 0
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "DocPath": "values[\"rotateOnly-with-inline-import3\"][\"fn::rotate::example\"].state",
             "Replacement": {
                 "value": {},
                 "trace": {
