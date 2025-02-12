@@ -763,11 +763,27 @@ func (e *evalContext) evaluateExprAccess(x *expr, accessors []*propertyAccessor,
 // evaluateEnvironmentReferenceAccess performs an inline import of an environment.
 // The accessor is of the form ["environments", $project, $env, ...], which is transformed into an import name in the form "$project/$env"
 func (e *evalContext) evaluateEnvironmentReferenceAccess(x *expr, accessors []*propertyAccessor, accept *schema.Schema) *value {
+	// if we're not rotating, rotateOnly imports are resolved as unknown.
+	//
+	// however, we also need to make sure the user has permission to access rotateOnly environments when they are editing an environment to
+	// avoid privilege escalation from adding a reference to an environment that they don't have access to, but the scheduled rotator does.
+	// therefore we will still evaluate rotateOnly imports when validating the root environment.
+	//
+	// we only do this for the root environment, because only root environments are rotated, and it is permissible for a user to import a
+	// rotated environment that transitively uses managing credentials that they don't have access to:
+	// allowed: "my-environment" <-imports- "my-iam-user" <-rotateOnly- "privileged-creds" (no access)
+	isRootEnv := e.execContext.GetCurrentEnvironmentName() == e.execContext.GetRootEnvironmentName()
+	if (accept.RotateOnly && !e.rotating) && !(accept.RotateOnly && e.validating && isRootEnv) {
+		val := e.invalidPropertyAccess(x.repr.syntax(), accessors)
+		val.rotateOnly = accept.RotateOnly
+		return val
+	}
+
+	// desugar accessor path into import name
 	if len(accessors) < 3 {
 		// need at least the first three elements to create an import name
 		return e.invalidPropertyAccess(x.repr.syntax(), accessors)
 	}
-
 	projName, projOk := e.objectKey(x.repr.syntax(), accessors[1].accessor, true)
 	envName, envOk := e.objectKey(x.repr.syntax(), accessors[2].accessor, true)
 	if !projOk || !envOk {
@@ -804,6 +820,7 @@ func (e *evalContext) evaluateEnvironmentReferenceAccess(x *expr, accessors []*p
 		schema: schema.Record(schema.SchemaMap{"environments": projectsValue.schema}).Schema(),
 	}
 
+	referenceValue.rotateOnly = true
 	return e.evaluateValueAccess(x.repr.syntax(), referenceValue, accessors)
 }
 
@@ -1072,7 +1089,7 @@ func (e *evalContext) evaluateBuiltinRotate(x *expr, repr *rotateExpr) *value {
 
 	inputs, inputsOK := e.evaluateTypedExpr(repr.inputs, repr.inputSchema)
 	state, stateOK := e.evaluateTypedExpr(repr.state, repr.stateSchema)
-	if !inputsOK || inputs.containsUnknowns() || !stateOK || state.containsUnknowns() || e.validating || err != nil {
+	if !inputsOK || inputs.containsObservableUnknowns(e.rotating) || !stateOK || state.containsUnknowns() || e.validating || err != nil {
 		v.unknown = true
 		return v
 	}
