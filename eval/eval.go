@@ -1089,7 +1089,8 @@ func asObjectOrNil(v any) map[string]esc.Value {
 	return cast
 }
 
-// retryProvider implements a default retryProvider policy that retries invoking a provider function on temporary error.
+// retryProvider implements a default retry policy that retries invoking a provider function on temporary error.
+// temporary errors indicated by being wrapped by esc.RetryableError
 func (e *evalContext) retryProvider(fn func() (esc.Value, error)) (esc.Value, error) {
 	_, result, err := retry.Until(e.ctx, retry.Acceptor{
 		Accept: func(try int, _ time.Duration) (bool, interface{}, error) {
