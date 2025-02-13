@@ -104,6 +104,11 @@ func (b *NumberBuilder) Examples(ns ...json.Number) *NumberBuilder {
 	return b
 }
 
+func (b *NumberBuilder) RotateOnly() *NumberBuilder {
+	b.s.RotateOnly = true
+	return b
+}
+
 func (b *NumberBuilder) Schema() *Schema {
 	b.s.Type = "number"
 	return &b.s
