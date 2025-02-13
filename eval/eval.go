@@ -447,7 +447,29 @@ func (e *evalContext) evaluateImports() {
 
 	myImports := map[string]*value{}
 	for _, entry := range e.env.Imports.GetElements() {
-		e.evaluateImport(myImports, entry)
+		// If the import does not have a name, there's nothing we can do. This can happen for environments
+		// with parse errors.
+		if entry.Environment == nil {
+			continue
+		}
+		name := entry.Environment.Value
+
+		merge := true
+		if entry.Meta != nil && entry.Meta.Merge != nil {
+			merge = entry.Meta.Merge.Value
+		}
+
+		val, ok := e.evaluateImport(entry.Environment, name)
+		if !ok {
+			continue
+		}
+
+		myImports[name] = val
+		if merge {
+			val = newCopier().copy(val)
+			val.merge(e.base)
+			e.base = val
+		}
 	}
 
 	properties := make(schema.SchemaMap, len(myImports))
@@ -472,38 +494,26 @@ func (e *evalContext) evaluateImports() {
 // evaluateImport evaluates an imported environment.
 //
 // Each environment in the import closure is only evaluated once.
-func (e *evalContext) evaluateImport(myImports map[string]*value, decl *ast.ImportDecl) {
-	// If the import does not have a name, there's nothing we can do. This can happen for environments
-	// with parse errors.
-	if decl.Environment == nil {
-		return
-	}
-	name := decl.Environment.Value
-
-	merge := true
-	if decl.Meta != nil && decl.Meta.Merge != nil {
-		merge = decl.Meta.Merge.Value
-	}
-
+func (e *evalContext) evaluateImport(expr ast.Expr, name string) (*value, bool) {
 	var val *value
 	if imported, ok := e.imports[name]; ok {
 		if imported.evaluating {
-			e.diags.Extend(syntax.Error(decl.Syntax().Syntax().Range(), fmt.Sprintf("cyclic import of %v", name), decl.Syntax().Syntax().Path()))
-			return
+			e.diags.Extend(syntax.Error(expr.Syntax().Syntax().Range(), fmt.Sprintf("cyclic import of %v", name), expr.Syntax().Syntax().Path()))
+			return nil, false
 		}
 		val = imported.value
 	} else {
 		bytes, dec, err := e.environments.LoadEnvironment(e.ctx, name)
 		if err != nil {
-			e.errorf(decl.Environment, "%s", err.Error())
-			return
+			e.errorf(expr, "%s", err.Error())
+			return nil, false
 		}
 
 		env, diags, err := LoadYAMLBytes(name, bytes)
 		e.diags.Extend(diags...)
 		if err != nil {
-			e.errorf(decl.Environment, "%s", err.Error())
-			return
+			e.errorf(expr, "%s", err.Error())
+			return nil, false
 		}
 
 		// we only want to rotate the root environment, so set rotating flag to false when evaluating imports
@@ -514,13 +524,7 @@ func (e *evalContext) evaluateImport(myImports map[string]*value, decl *ast.Impo
 		val = v
 		e.imports[name].value = val
 	}
-
-	myImports[name] = val
-	if merge {
-		val = newCopier().copy(val)
-		val.merge(e.base)
-		e.base = val
-	}
+	return val, true
 }
 
 // evaluateExpr evaluates an expression. If the expression has already been evaluated, it returns the
@@ -757,10 +761,10 @@ func (e *evalContext) evaluateExprAccess(x *expr, accessors []*propertyAccessor)
 }
 
 // evaluateEnvironmentReferenceAccess performs an inline import of an environment.
-// The sugared accessor is of the form ["environments", $project, $env, ...], which is desugared into the import name
+// The accessor is of the form ["environments", $project, $env, ...], which is transformed into an import name in the form "$project/$env"
 func (e *evalContext) evaluateEnvironmentReferenceAccess(x *expr, accessors []*propertyAccessor) *value {
 	if len(accessors) < 3 {
-		// need a full accessor to desugar
+		// need at least the first three elements to create an import name
 		return e.invalidPropertyAccess(x.repr.syntax(), accessors)
 	}
 
@@ -771,21 +775,13 @@ func (e *evalContext) evaluateEnvironmentReferenceAccess(x *expr, accessors []*p
 	}
 	qualifiedName := fmt.Sprintf("%s/%s", projName, envName)
 
-	// create an isolated value to hold the inline import map
-	inlineImports := map[string]*value{}
-	e.evaluateImport(inlineImports, &ast.ImportDecl{
-		Meta: &ast.ImportMetaDecl{
-			Merge: ast.Boolean(false),
-		},
-		Environment: ast.String(qualifiedName),
-	})
-
-	// construct a synthetic object literal of the reference which the sugared accessors can traverse
-	importedValue, ok := inlineImports[qualifiedName]
+	importedValue, ok := e.evaluateImport(x.repr.syntax(), qualifiedName)
 	if !ok {
 		// failed to import, treat as missing
 		importedValue = &value{def: newMissingExpr("", nil), schema: schema.Always(), unknown: true}
 	}
+
+	// construct a synthetic object literal of the reference which the accessors can traverse
 	environmentsValue := &value{
 		def: x,
 		repr: map[string]*value{

@@ -4,12 +4,24 @@
             "Severity": 1,
             "Summary": "open testdata/eval/inline-reference/foo/unknown.yaml: no such file or directory",
             "Detail": "",
-            "Subject": null,
+            "Subject": {
+                "Filename": "inline-reference",
+                "Start": {
+                    "Line": 6,
+                    "Column": 13,
+                    "Byte": 129
+                },
+                "End": {
+                    "Line": 6,
+                    "Column": 40,
+                    "Byte": 156
+                }
+            },
             "Context": null,
             "Expression": null,
             "EvalContext": null,
             "Extra": null,
-            "Path": ""
+            "Path": "values.invalid3"
         }
     ],
     "check": {
@@ -672,12 +684,24 @@
             "Severity": 1,
             "Summary": "open testdata/eval/inline-reference/foo/unknown.yaml: no such file or directory",
             "Detail": "",
-            "Subject": null,
+            "Subject": {
+                "Filename": "inline-reference",
+                "Start": {
+                    "Line": 6,
+                    "Column": 13,
+                    "Byte": 129
+                },
+                "End": {
+                    "Line": 6,
+                    "Column": 40,
+                    "Byte": 156
+                }
+            },
             "Context": null,
             "Expression": null,
             "EvalContext": null,
             "Extra": null,
-            "Path": ""
+            "Path": "values.invalid3"
         }
     ],
     "eval": {
