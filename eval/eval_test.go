@@ -213,14 +213,9 @@ func (errorRotator) Open(ctx context.Context, inputs, state map[string]esc.Value
 }
 
 func (errorRotator) Rotate(ctx context.Context, inputs, state map[string]esc.Value, context esc.EnvExecContext) (esc.Value, error) {
-	if state == nil {
-		state = map[string]esc.Value{}
-	}
-
 	if inputs["temporary"].Value.(bool) {
-		return esc.Value{}, esc.RetryableError{fmt.Errorf("temporary error")}
+		return esc.Value{}, esc.RetryableError{Err: fmt.Errorf("temporary error")}
 	}
-
 	return esc.Value{}, fmt.Errorf("permanent error")
 }
 
