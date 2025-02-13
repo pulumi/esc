@@ -632,16 +632,6 @@ func (e *evalContext) evaluateSkippedExpr(x *expr, accept *schema.Schema) (*valu
 		return nil, false
 	}
 
-	// special cases to fill out accessor values so that export doesn't die
-	if repr, ok := x.repr.(*symbolExpr); ok {
-		e.invalidPropertyAccess(repr.syntax(), repr.property.accessors)
-	}
-	if repr, ok := x.repr.(*interpolateExpr); ok {
-		for _, part := range repr.parts {
-			e.invalidPropertyAccess(repr.syntax(), part.value.accessors)
-		}
-	}
-
 	return &value{def: newMissingExpr(x.path, x.base), schema: schema.Always(), unknown: true, rotateOnly: accept.RotateOnly}, true
 }
 
