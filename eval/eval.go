@@ -143,7 +143,7 @@ func evalEnvironment(
 		return nil, nil, nil
 	}
 
-	ec := newEvalContext(ctx, validating, rotating, name, env, decrypter, providers, envs, map[string]*imported{}, execContext, showSecrets, rotatePaths)
+	ec := newEvalContext(ctx, validating, rotating, name, env, true, decrypter, providers, envs, map[string]*imported{}, execContext, showSecrets, rotatePaths)
 	v, diags := ec.evaluate()
 
 	s := schema.Never().Schema()
@@ -181,6 +181,7 @@ type evalContext struct {
 	showSecrets  bool                 // true if secrets should be decrypted during validation
 	name         string               // the name of the environment
 	env          *ast.EnvironmentDecl // the root of the environment AST
+	isRootEnv    bool                 // true if this environment is the root of evaluation (not an import)
 	decrypter    Decrypter            // the decrypter to use for the environment
 	providers    ProviderLoader       // the provider loader to use
 	environments EnvironmentLoader    // the environment loader to use
@@ -204,6 +205,7 @@ func newEvalContext(
 	rotating bool,
 	name string,
 	env *ast.EnvironmentDecl,
+	isRootEnv bool,
 	decrypter Decrypter,
 	providers ProviderLoader,
 	environments EnvironmentLoader,
@@ -219,6 +221,7 @@ func newEvalContext(
 		showSecrets:    showSecrets,
 		name:           name,
 		env:            env,
+		isRootEnv:      isRootEnv,
 		decrypter:      decrypter,
 		providers:      providers,
 		environments:   environments,
@@ -517,7 +520,7 @@ func (e *evalContext) evaluateImport(expr ast.Expr, name string) (*value, bool) 
 		}
 
 		// we only want to rotate the root environment, so set rotating flag to false when evaluating imports
-		imp := newEvalContext(e.ctx, e.validating, false, name, env, dec, e.providers, e.environments, e.imports, e.execContext, e.showSecrets, nil)
+		imp := newEvalContext(e.ctx, e.validating, false, name, env, false, dec, e.providers, e.environments, e.imports, e.execContext, e.showSecrets, nil)
 		v, diags := imp.evaluate()
 		e.diags.Extend(diags...)
 
@@ -546,6 +549,11 @@ func (e *evalContext) evaluateExpr(x *expr, accept *schema.Schema) *value {
 		defer func() {
 			x.state = exprDone
 		}()
+	}
+
+	// terminate evaluation early if necessary
+	if val, done := e.evaluateSkippedExpr(x, accept); done {
+		return val
 	}
 
 	val := (*value)(nil)
@@ -593,6 +601,9 @@ func (e *evalContext) evaluateExpr(x *expr, accept *schema.Schema) *value {
 		panic(fmt.Sprintf("fatal: invalid expr type %T", repr))
 	}
 
+	if accept.RotateOnly {
+		val.rotateOnly = true
+	}
 	if x.secret {
 		val.secret = true
 	}
@@ -601,6 +612,37 @@ func (e *evalContext) evaluateExpr(x *expr, accept *schema.Schema) *value {
 	x.schema = val.schema
 	x.value = val
 	return val
+}
+
+// evaluateSkippedExpr returns a missing value if it's necessary to stop evaluating this expr early
+func (e *evalContext) evaluateSkippedExpr(x *expr, accept *schema.Schema) (*value, bool) {
+	// if we're not rotating, rotateOnly inputs are resolved as unknown.
+	//
+	// however, we also need to make sure the user has permission to access rotateOnly environments when they are editing an environment to
+	// avoid privilege escalation from adding a reference to an environment that they don't have access to, but the scheduled rotator does.
+	// therefore we will still evaluate rotateOnly imports when validating the root environment.
+	//
+	// we only do this for the root environment, because only root environments are rotated, and it is permissible for a user to import a
+	// rotated environment that transitively uses managing credentials that they don't have access to:
+	// allowed: "my-environment" <-imports- "my-iam-user" <-rotateOnly- "privileged-creds" (no access)
+	//
+	// thus, we want to skip evaluation if in a rotateOnly context and opening the root environment
+	// or if this is an imported env
+	if skipEval := accept.RotateOnly && (!e.rotating && !e.validating || !e.isRootEnv); !skipEval {
+		return nil, false
+	}
+
+	// special cases to fill out accessor values so that export doesn't die
+	if repr, ok := x.repr.(*symbolExpr); ok {
+		e.invalidPropertyAccess(repr.syntax(), repr.property.accessors)
+	}
+	if repr, ok := x.repr.(*interpolateExpr); ok {
+		for _, part := range repr.parts {
+			e.invalidPropertyAccess(repr.syntax(), part.value.accessors)
+		}
+	}
+
+	return &value{def: newMissingExpr(x.path, x.base), schema: schema.Always(), unknown: true, rotateOnly: accept.RotateOnly}, true
 }
 
 // evaluateTypedExpr evaluates an expression and typechecks it against the given schema. Returns false if typechecking
@@ -763,22 +805,6 @@ func (e *evalContext) evaluateExprAccess(x *expr, accessors []*propertyAccessor,
 // evaluateEnvironmentReferenceAccess performs an inline import of an environment.
 // The accessor is of the form ["environments", $project, $env, ...], which is transformed into an import name in the form "$project/$env"
 func (e *evalContext) evaluateEnvironmentReferenceAccess(x *expr, accessors []*propertyAccessor, accept *schema.Schema) *value {
-	// if we're not rotating, rotateOnly imports are resolved as unknown.
-	//
-	// however, we also need to make sure the user has permission to access rotateOnly environments when they are editing an environment to
-	// avoid privilege escalation from adding a reference to an environment that they don't have access to, but the scheduled rotator does.
-	// therefore we will still evaluate rotateOnly imports when validating the root environment.
-	//
-	// we only do this for the root environment, because only root environments are rotated, and it is permissible for a user to import a
-	// rotated environment that transitively uses managing credentials that they don't have access to:
-	// allowed: "my-environment" <-imports- "my-iam-user" <-rotateOnly- "privileged-creds" (no access)
-	isRootEnv := e.execContext.GetCurrentEnvironmentName() == e.execContext.GetRootEnvironmentName()
-	if (accept.RotateOnly && !e.rotating) && !(accept.RotateOnly && e.validating && isRootEnv) {
-		val := e.invalidPropertyAccess(x.repr.syntax(), accessors)
-		val.rotateOnly = accept.RotateOnly
-		return val
-	}
-
 	// desugar accessor path into import name
 	if len(accessors) < 3 {
 		// need at least the first three elements to create an import name

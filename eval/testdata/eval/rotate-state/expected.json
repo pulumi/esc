@@ -1521,10 +1521,7 @@
                                 },
                                 "schema": {
                                     "properties": {
-                                        "next": {
-                                            "type": "string",
-                                            "const": "update3"
-                                        }
+                                        "next": true
                                     },
                                     "type": "object",
                                     "required": [
@@ -1791,10 +1788,7 @@
                                 },
                                 "schema": {
                                     "properties": {
-                                        "next": {
-                                            "type": "string",
-                                            "const": "beep"
-                                        }
+                                        "next": true
                                     },
                                     "type": "object",
                                     "required": [
@@ -2012,10 +2006,7 @@
                                 },
                                 "schema": {
                                     "properties": {
-                                        "next": {
-                                            "type": "string",
-                                            "const": "hello world"
-                                        }
+                                        "next": true
                                     },
                                     "type": "object",
                                     "required": [
@@ -2196,10 +2187,7 @@
                                 },
                                 "schema": {
                                     "properties": {
-                                        "next": {
-                                            "type": "string",
-                                            "const": "update2"
-                                        }
+                                        "next": true
                                     },
                                     "type": "object",
                                     "required": [

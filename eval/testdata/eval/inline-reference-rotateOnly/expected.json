@@ -4,12 +4,24 @@
             "Severity": 1,
             "Summary": "open testdata/eval/inline-reference-rotateOnly/fake/inaccessible1.yaml: no such file or directory",
             "Detail": "",
-            "Subject": null,
+            "Subject": {
+                "Filename": "inline-reference-rotateOnly",
+                "Start": {
+                    "Line": 11,
+                    "Column": 15,
+                    "Byte": 398
+                },
+                "End": {
+                    "Line": 11,
+                    "Column": 72,
+                    "Byte": 455
+                }
+            },
             "Context": null,
             "Expression": null,
             "EvalContext": null,
             "Extra": null,
-            "Path": ""
+            "Path": "values.invalid1[\"fn::rotate::echo\"].inputs.next"
         }
     ],
     "check": {
@@ -124,13 +136,15 @@
                                     },
                                     "end": {
                                         "line": 11,
-                                        "column": 60,
-                                        "byte": 443
+                                        "column": 72,
+                                        "byte": 455
                                     }
                                 },
                                 "schema": {
                                     "properties": {
-                                        "next": true
+                                        "next": {
+                                            "type": "string"
+                                        }
                                     },
                                     "type": "object",
                                     "required": [
@@ -163,127 +177,134 @@
                                             },
                                             "end": {
                                                 "line": 11,
-                                                "column": 60,
-                                                "byte": 443
+                                                "column": 72,
+                                                "byte": 455
                                             }
                                         },
-                                        "schema": true,
-                                        "symbol": [
+                                        "schema": {
+                                            "type": "string"
+                                        },
+                                        "interpolate": [
                                             {
-                                                "key": "environments",
-                                                "range": {
-                                                    "environment": "inline-reference-rotateOnly",
-                                                    "begin": {
-                                                        "line": 11,
-                                                        "column": 17,
-                                                        "byte": 400
+                                                "text": "interpolate ",
+                                                "value": [
+                                                    {
+                                                        "key": "environments",
+                                                        "range": {
+                                                            "environment": "inline-reference-rotateOnly",
+                                                            "begin": {
+                                                                "line": 11,
+                                                                "column": 29,
+                                                                "byte": 412
+                                                            },
+                                                            "end": {
+                                                                "line": 11,
+                                                                "column": 41,
+                                                                "byte": 424
+                                                            }
+                                                        },
+                                                        "value": {
+                                                            "environment": "inline-reference-rotateOnly",
+                                                            "begin": {
+                                                                "line": 11,
+                                                                "column": 15,
+                                                                "byte": 398
+                                                            },
+                                                            "end": {
+                                                                "line": 11,
+                                                                "column": 72,
+                                                                "byte": 455
+                                                            }
+                                                        }
                                                     },
-                                                    "end": {
-                                                        "line": 11,
-                                                        "column": 29,
-                                                        "byte": 412
-                                                    }
-                                                },
-                                                "value": {
-                                                    "environment": "inline-reference-rotateOnly",
-                                                    "begin": {
-                                                        "line": 11,
-                                                        "column": 15,
-                                                        "byte": 398
+                                                    {
+                                                        "key": "fake",
+                                                        "range": {
+                                                            "environment": "inline-reference-rotateOnly",
+                                                            "begin": {
+                                                                "line": 11,
+                                                                "column": 41,
+                                                                "byte": 424
+                                                            },
+                                                            "end": {
+                                                                "line": 11,
+                                                                "column": 46,
+                                                                "byte": 429
+                                                            }
+                                                        },
+                                                        "value": {
+                                                            "environment": "inline-reference-rotateOnly",
+                                                            "begin": {
+                                                                "line": 11,
+                                                                "column": 15,
+                                                                "byte": 398
+                                                            },
+                                                            "end": {
+                                                                "line": 11,
+                                                                "column": 72,
+                                                                "byte": 455
+                                                            }
+                                                        }
                                                     },
-                                                    "end": {
-                                                        "line": 11,
-                                                        "column": 60,
-                                                        "byte": 443
-                                                    }
-                                                }
-                                            },
-                                            {
-                                                "key": "fake",
-                                                "range": {
-                                                    "environment": "inline-reference-rotateOnly",
-                                                    "begin": {
-                                                        "line": 11,
-                                                        "column": 29,
-                                                        "byte": 412
+                                                    {
+                                                        "key": "inaccessible1",
+                                                        "range": {
+                                                            "environment": "inline-reference-rotateOnly",
+                                                            "begin": {
+                                                                "line": 11,
+                                                                "column": 46,
+                                                                "byte": 429
+                                                            },
+                                                            "end": {
+                                                                "line": 11,
+                                                                "column": 60,
+                                                                "byte": 443
+                                                            }
+                                                        },
+                                                        "value": {
+                                                            "environment": "inline-reference-rotateOnly",
+                                                            "begin": {
+                                                                "line": 0,
+                                                                "column": 0,
+                                                                "byte": 0
+                                                            },
+                                                            "end": {
+                                                                "line": 0,
+                                                                "column": 0,
+                                                                "byte": 0
+                                                            }
+                                                        }
                                                     },
-                                                    "end": {
-                                                        "line": 11,
-                                                        "column": 34,
-                                                        "byte": 417
+                                                    {
+                                                        "key": "some_value",
+                                                        "range": {
+                                                            "environment": "inline-reference-rotateOnly",
+                                                            "begin": {
+                                                                "line": 11,
+                                                                "column": 60,
+                                                                "byte": 443
+                                                            },
+                                                            "end": {
+                                                                "line": 11,
+                                                                "column": 71,
+                                                                "byte": 454
+                                                            }
+                                                        },
+                                                        "value": {
+                                                            "environment": "inline-reference-rotateOnly",
+                                                            "begin": {
+                                                                "line": 11,
+                                                                "column": 15,
+                                                                "byte": 398
+                                                            },
+                                                            "end": {
+                                                                "line": 11,
+                                                                "column": 72,
+                                                                "byte": 455
+                                                            }
+                                                        }
                                                     }
-                                                },
-                                                "value": {
-                                                    "environment": "inline-reference-rotateOnly",
-                                                    "begin": {
-                                                        "line": 11,
-                                                        "column": 15,
-                                                        "byte": 398
-                                                    },
-                                                    "end": {
-                                                        "line": 11,
-                                                        "column": 60,
-                                                        "byte": 443
-                                                    }
-                                                }
-                                            },
-                                            {
-                                                "key": "inaccessible1",
-                                                "range": {
-                                                    "environment": "inline-reference-rotateOnly",
-                                                    "begin": {
-                                                        "line": 11,
-                                                        "column": 34,
-                                                        "byte": 417
-                                                    },
-                                                    "end": {
-                                                        "line": 11,
-                                                        "column": 48,
-                                                        "byte": 431
-                                                    }
-                                                },
-                                                "value": {
-                                                    "environment": "inline-reference-rotateOnly",
-                                                    "begin": {
-                                                        "line": 0,
-                                                        "column": 0,
-                                                        "byte": 0
-                                                    },
-                                                    "end": {
-                                                        "line": 0,
-                                                        "column": 0,
-                                                        "byte": 0
-                                                    }
-                                                }
-                                            },
-                                            {
-                                                "key": "some_value",
-                                                "range": {
-                                                    "environment": "inline-reference-rotateOnly",
-                                                    "begin": {
-                                                        "line": 11,
-                                                        "column": 48,
-                                                        "byte": 431
-                                                    },
-                                                    "end": {
-                                                        "line": 11,
-                                                        "column": 59,
-                                                        "byte": 442
-                                                    }
-                                                },
-                                                "value": {
-                                                    "environment": "inline-reference-rotateOnly",
-                                                    "begin": {
-                                                        "line": 11,
-                                                        "column": 15,
-                                                        "byte": 398
-                                                    },
-                                                    "end": {
-                                                        "line": 11,
-                                                        "column": 60,
-                                                        "byte": 443
-                                                    }
-                                                }
+                                                ]
                                             }
                                         ]
                                     }
@@ -737,8 +758,8 @@
                                     },
                                     "end": {
                                         "line": 11,
-                                        "column": 60,
-                                        "byte": 443
+                                        "column": 72,
+                                        "byte": 455
                                     }
                                 },
                                 "schema": {
@@ -776,127 +797,134 @@
                                             },
                                             "end": {
                                                 "line": 11,
-                                                "column": 60,
-                                                "byte": 443
+                                                "column": 72,
+                                                "byte": 455
                                             }
                                         },
-                                        "schema": true,
-                                        "symbol": [
+                                        "schema": {
+                                            "type": "string"
+                                        },
+                                        "interpolate": [
                                             {
-                                                "key": "environments",
-                                                "range": {
-                                                    "environment": "inline-reference-rotateOnly",
-                                                    "begin": {
-                                                        "line": 11,
-                                                        "column": 17,
-                                                        "byte": 400
+                                                "text": "interpolate ",
+                                                "value": [
+                                                    {
+                                                        "key": "environments",
+                                                        "range": {
+                                                            "environment": "inline-reference-rotateOnly",
+                                                            "begin": {
+                                                                "line": 11,
+                                                                "column": 29,
+                                                                "byte": 412
+                                                            },
+                                                            "end": {
+                                                                "line": 11,
+                                                                "column": 41,
+                                                                "byte": 424
+                                                            }
+                                                        },
+                                                        "value": {
+                                                            "environment": "inline-reference-rotateOnly",
+                                                            "begin": {
+                                                                "line": 11,
+                                                                "column": 15,
+                                                                "byte": 398
+                                                            },
+                                                            "end": {
+                                                                "line": 11,
+                                                                "column": 72,
+                                                                "byte": 455
+                                                            }
+                                                        }
                                                     },
-                                                    "end": {
-                                                        "line": 11,
-                                                        "column": 29,
-                                                        "byte": 412
-                                                    }
-                                                },
-                                                "value": {
-                                                    "environment": "inline-reference-rotateOnly",
-                                                    "begin": {
-                                                        "line": 11,
-                                                        "column": 15,
-                                                        "byte": 398
+                                                    {
+                                                        "key": "fake",
+                                                        "range": {
+                                                            "environment": "inline-reference-rotateOnly",
+                                                            "begin": {
+                                                                "line": 11,
+                                                                "column": 41,
+                                                                "byte": 424
+                                                            },
+                                                            "end": {
+                                                                "line": 11,
+                                                                "column": 46,
+                                                                "byte": 429
+                                                            }
+                                                        },
+                                                        "value": {
+                                                            "environment": "inline-reference-rotateOnly",
+                                                            "begin": {
+                                                                "line": 11,
+                                                                "column": 15,
+                                                                "byte": 398
+                                                            },
+                                                            "end": {
+                                                                "line": 11,
+                                                                "column": 72,
+                                                                "byte": 455
+                                                            }
+                                                        }
                                                     },
-                                                    "end": {
-                                                        "line": 11,
-                                                        "column": 60,
-                                                        "byte": 443
-                                                    }
-                                                }
-                                            },
-                                            {
-                                                "key": "fake",
-                                                "range": {
-                                                    "environment": "inline-reference-rotateOnly",
-                                                    "begin": {
-                                                        "line": 11,
-                                                        "column": 29,
-                                                        "byte": 412
+                                                    {
+                                                        "key": "inaccessible1",
+                                                        "range": {
+                                                            "environment": "inline-reference-rotateOnly",
+                                                            "begin": {
+                                                                "line": 11,
+                                                                "column": 46,
+                                                                "byte": 429
+                                                            },
+                                                            "end": {
+                                                                "line": 11,
+                                                                "column": 60,
+                                                                "byte": 443
+                                                            }
+                                                        },
+                                                        "value": {
+                                                            "environment": "inline-reference-rotateOnly",
+                                                            "begin": {
+                                                                "line": 11,
+                                                                "column": 15,
+                                                                "byte": 398
+                                                            },
+                                                            "end": {
+                                                                "line": 11,
+                                                                "column": 72,
+                                                                "byte": 455
+                                                            }
+                                                        }
                                                     },
-                                                    "end": {
-                                                        "line": 11,
-                                                        "column": 34,
-                                                        "byte": 417
+                                                    {
+                                                        "key": "some_value",
+                                                        "range": {
+                                                            "environment": "inline-reference-rotateOnly",
+                                                            "begin": {
+                                                                "line": 11,
+                                                                "column": 60,
+                                                                "byte": 443
+                                                            },
+                                                            "end": {
+                                                                "line": 11,
+                                                                "column": 71,
+                                                                "byte": 454
+                                                            }
+                                                        },
+                                                        "value": {
+                                                            "environment": "inline-reference-rotateOnly",
+                                                            "begin": {
+                                                                "line": 11,
+                                                                "column": 15,
+                                                                "byte": 398
+                                                            },
+                                                            "end": {
+                                                                "line": 11,
+                                                                "column": 72,
+                                                                "byte": 455
+                                                            }
+                                                        }
                                                     }
-                                                },
-                                                "value": {
-                                                    "environment": "inline-reference-rotateOnly",
-                                                    "begin": {
-                                                        "line": 11,
-                                                        "column": 15,
-                                                        "byte": 398
-                                                    },
-                                                    "end": {
-                                                        "line": 11,
-                                                        "column": 60,
-                                                        "byte": 443
-                                                    }
-                                                }
-                                            },
-                                            {
-                                                "key": "inaccessible1",
-                                                "range": {
-                                                    "environment": "inline-reference-rotateOnly",
-                                                    "begin": {
-                                                        "line": 11,
-                                                        "column": 34,
-                                                        "byte": 417
-                                                    },
-                                                    "end": {
-                                                        "line": 11,
-                                                        "column": 48,
-                                                        "byte": 431
-                                                    }
-                                                },
-                                                "value": {
-                                                    "environment": "inline-reference-rotateOnly",
-                                                    "begin": {
-                                                        "line": 11,
-                                                        "column": 15,
-                                                        "byte": 398
-                                                    },
-                                                    "end": {
-                                                        "line": 11,
-                                                        "column": 60,
-                                                        "byte": 443
-                                                    }
-                                                }
-                                            },
-                                            {
-                                                "key": "some_value",
-                                                "range": {
-                                                    "environment": "inline-reference-rotateOnly",
-                                                    "begin": {
-                                                        "line": 11,
-                                                        "column": 48,
-                                                        "byte": 431
-                                                    },
-                                                    "end": {
-                                                        "line": 11,
-                                                        "column": 59,
-                                                        "byte": 442
-                                                    }
-                                                },
-                                                "value": {
-                                                    "environment": "inline-reference-rotateOnly",
-                                                    "begin": {
-                                                        "line": 11,
-                                                        "column": 15,
-                                                        "byte": 398
-                                                    },
-                                                    "end": {
-                                                        "line": 11,
-                                                        "column": 60,
-                                                        "byte": 443
-                                                    }
-                                                }
+                                                ]
                                             }
                                         ]
                                     }
@@ -1290,35 +1318,24 @@
             "Severity": 1,
             "Summary": "open testdata/eval/inline-reference-rotateOnly/fake/inaccessible1.yaml: no such file or directory",
             "Detail": "",
-            "Subject": null,
-            "Context": null,
-            "Expression": null,
-            "EvalContext": null,
-            "Extra": null,
-            "Path": ""
-        },
-        {
-            "Severity": 1,
-            "Summary": "rotate: oh no! rotateOnly inputs were not evaluated during rotation",
-            "Detail": "",
             "Subject": {
                 "Filename": "inline-reference-rotateOnly",
                 "Start": {
-                    "Line": 5,
-                    "Column": 5,
-                    "Byte": 48
+                    "Line": 11,
+                    "Column": 15,
+                    "Byte": 398
                 },
                 "End": {
-                    "Line": 13,
-                    "Column": 23,
-                    "Byte": 0
+                    "Line": 11,
+                    "Column": 72,
+                    "Byte": 455
                 }
             },
             "Context": null,
             "Expression": null,
             "EvalContext": null,
             "Extra": null,
-            "Path": "values.invalid1"
+            "Path": "values.invalid1[\"fn::rotate::echo\"].inputs.next"
         }
     ],
     "rotate": {
@@ -1433,13 +1450,15 @@
                                     },
                                     "end": {
                                         "line": 11,
-                                        "column": 60,
-                                        "byte": 443
+                                        "column": 72,
+                                        "byte": 455
                                     }
                                 },
                                 "schema": {
                                     "properties": {
-                                        "next": true
+                                        "next": {
+                                            "type": "string"
+                                        }
                                     },
                                     "type": "object",
                                     "required": [
@@ -1472,127 +1491,134 @@
                                             },
                                             "end": {
                                                 "line": 11,
-                                                "column": 60,
-                                                "byte": 443
+                                                "column": 72,
+                                                "byte": 455
                                             }
                                         },
-                                        "schema": true,
-                                        "symbol": [
+                                        "schema": {
+                                            "type": "string"
+                                        },
+                                        "interpolate": [
                                             {
-                                                "key": "environments",
-                                                "range": {
-                                                    "environment": "inline-reference-rotateOnly",
-                                                    "begin": {
-                                                        "line": 11,
-                                                        "column": 17,
-                                                        "byte": 400
+                                                "text": "interpolate ",
+                                                "value": [
+                                                    {
+                                                        "key": "environments",
+                                                        "range": {
+                                                            "environment": "inline-reference-rotateOnly",
+                                                            "begin": {
+                                                                "line": 11,
+                                                                "column": 29,
+                                                                "byte": 412
+                                                            },
+                                                            "end": {
+                                                                "line": 11,
+                                                                "column": 41,
+                                                                "byte": 424
+                                                            }
+                                                        },
+                                                        "value": {
+                                                            "environment": "inline-reference-rotateOnly",
+                                                            "begin": {
+                                                                "line": 11,
+                                                                "column": 15,
+                                                                "byte": 398
+                                                            },
+                                                            "end": {
+                                                                "line": 11,
+                                                                "column": 72,
+                                                                "byte": 455
+                                                            }
+                                                        }
                                                     },
-                                                    "end": {
-                                                        "line": 11,
-                                                        "column": 29,
-                                                        "byte": 412
-                                                    }
-                                                },
-                                                "value": {
-                                                    "environment": "inline-reference-rotateOnly",
-                                                    "begin": {
-                                                        "line": 11,
-                                                        "column": 15,
-                                                        "byte": 398
+                                                    {
+                                                        "key": "fake",
+                                                        "range": {
+                                                            "environment": "inline-reference-rotateOnly",
+                                                            "begin": {
+                                                                "line": 11,
+                                                                "column": 41,
+                                                                "byte": 424
+                                                            },
+                                                            "end": {
+                                                                "line": 11,
+                                                                "column": 46,
+                                                                "byte": 429
+                                                            }
+                                                        },
+                                                        "value": {
+                                                            "environment": "inline-reference-rotateOnly",
+                                                            "begin": {
+                                                                "line": 11,
+                                                                "column": 15,
+                                                                "byte": 398
+                                                            },
+                                                            "end": {
+                                                                "line": 11,
+                                                                "column": 72,
+                                                                "byte": 455
+                                                            }
+                                                        }
                                                     },
-                                                    "end": {
-                                                        "line": 11,
-                                                        "column": 60,
-                                                        "byte": 443
-                                                    }
-                                                }
-                                            },
-                                            {
-                                                "key": "fake",
-                                                "range": {
-                                                    "environment": "inline-reference-rotateOnly",
-                                                    "begin": {
-                                                        "line": 11,
-                                                        "column": 29,
-                                                        "byte": 412
+                                                    {
+                                                        "key": "inaccessible1",
+                                                        "range": {
+                                                            "environment": "inline-reference-rotateOnly",
+                                                            "begin": {
+                                                                "line": 11,
+                                                                "column": 46,
+                                                                "byte": 429
+                                                            },
+                                                            "end": {
+                                                                "line": 11,
+                                                                "column": 60,
+                                                                "byte": 443
+                                                            }
+                                                        },
+                                                        "value": {
+                                                            "environment": "inline-reference-rotateOnly",
+                                                            "begin": {
+                                                                "line": 0,
+                                                                "column": 0,
+                                                                "byte": 0
+                                                            },
+                                                            "end": {
+                                                                "line": 0,
+                                                                "column": 0,
+                                                                "byte": 0
+                                                            }
+                                                        }
                                                     },
-                                                    "end": {
-                                                        "line": 11,
-                                                        "column": 34,
-                                                        "byte": 417
+                                                    {
+                                                        "key": "some_value",
+                                                        "range": {
+                                                            "environment": "inline-reference-rotateOnly",
+                                                            "begin": {
+                                                                "line": 11,
+                                                                "column": 60,
+                                                                "byte": 443
+                                                            },
+                                                            "end": {
+                                                                "line": 11,
+                                                                "column": 71,
+                                                                "byte": 454
+                                                            }
+                                                        },
+                                                        "value": {
+                                                            "environment": "inline-reference-rotateOnly",
+                                                            "begin": {
+                                                                "line": 11,
+                                                                "column": 15,
+                                                                "byte": 398
+                                                            },
+                                                            "end": {
+                                                                "line": 11,
+                                                                "column": 72,
+                                                                "byte": 455
+                                                            }
+                                                        }
                                                     }
-                                                },
-                                                "value": {
-                                                    "environment": "inline-reference-rotateOnly",
-                                                    "begin": {
-                                                        "line": 11,
-                                                        "column": 15,
-                                                        "byte": 398
-                                                    },
-                                                    "end": {
-                                                        "line": 11,
-                                                        "column": 60,
-                                                        "byte": 443
-                                                    }
-                                                }
-                                            },
-                                            {
-                                                "key": "inaccessible1",
-                                                "range": {
-                                                    "environment": "inline-reference-rotateOnly",
-                                                    "begin": {
-                                                        "line": 11,
-                                                        "column": 34,
-                                                        "byte": 417
-                                                    },
-                                                    "end": {
-                                                        "line": 11,
-                                                        "column": 48,
-                                                        "byte": 431
-                                                    }
-                                                },
-                                                "value": {
-                                                    "environment": "inline-reference-rotateOnly",
-                                                    "begin": {
-                                                        "line": 0,
-                                                        "column": 0,
-                                                        "byte": 0
-                                                    },
-                                                    "end": {
-                                                        "line": 0,
-                                                        "column": 0,
-                                                        "byte": 0
-                                                    }
-                                                }
-                                            },
-                                            {
-                                                "key": "some_value",
-                                                "range": {
-                                                    "environment": "inline-reference-rotateOnly",
-                                                    "begin": {
-                                                        "line": 11,
-                                                        "column": 48,
-                                                        "byte": 431
-                                                    },
-                                                    "end": {
-                                                        "line": 11,
-                                                        "column": 59,
-                                                        "byte": 442
-                                                    }
-                                                },
-                                                "value": {
-                                                    "environment": "inline-reference-rotateOnly",
-                                                    "begin": {
-                                                        "line": 11,
-                                                        "column": 15,
-                                                        "byte": 398
-                                                    },
-                                                    "end": {
-                                                        "line": 11,
-                                                        "column": 60,
-                                                        "byte": 443
-                                                    }
-                                                }
+                                                ]
                                             }
                                         ]
                                     }
