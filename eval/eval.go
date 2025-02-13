@@ -1095,15 +1095,17 @@ func (e *evalContext) retryProvider(fn func() (esc.Value, error)) (esc.Value, er
 		Accept: func(try int, _ time.Duration) (bool, interface{}, error) {
 			result, err := fn()
 
-			var retryableErr *esc.RetryableError
-			if errors.As(err, &retryableErr) && try < 3 {
-				// temporary error
+			if errors.As(err, &esc.RetryableError{}) && try < 3 {
+				// temporary error, we can retry
 				return false, nil, nil
-			}
-			if err != nil {
-				// permanent error, or max retries
+			} else if errors.As(err, &esc.RetryableError{}) {
+				// ran out of retries
+				return false, nil, fmt.Errorf("gave up after %d attempts: %w", try, err)
+			} else if err != nil {
+				// non-retryable error
 				return false, nil, err
 			}
+
 			return true, result, nil
 		},
 	})

@@ -1,0 +1,1751 @@
+{
+    "check": {
+        "exprs": {
+            "dead": {
+                "range": {
+                    "environment": "rotate-retry",
+                    "begin": {
+                        "line": 4,
+                        "column": 5,
+                        "byte": 94
+                    },
+                    "end": {
+                        "line": 6,
+                        "column": 25,
+                        "byte": 151
+                    }
+                },
+                "schema": true,
+                "builtin": {
+                    "name": "fn::rotate::error",
+                    "nameRange": {
+                        "environment": "rotate-retry",
+                        "begin": {
+                            "line": 4,
+                            "column": 5,
+                            "byte": 94
+                        },
+                        "end": {
+                            "line": 4,
+                            "column": 22,
+                            "byte": 111
+                        }
+                    },
+                    "argSchema": {
+                        "properties": {
+                            "inputs": {
+                                "properties": {
+                                    "temporary": {
+                                        "type": "boolean"
+                                    }
+                                },
+                                "type": "object",
+                                "required": [
+                                    "temporary"
+                                ]
+                            },
+                            "state": {
+                                "oneOf": [
+                                    false,
+                                    {
+                                        "type": "null"
+                                    }
+                                ],
+                                "type": ""
+                            }
+                        },
+                        "type": "object",
+                        "required": [
+                            "inputs",
+                            "state"
+                        ]
+                    },
+                    "arg": {
+                        "range": {
+                            "begin": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            },
+                            "end": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            }
+                        },
+                        "object": {
+                            "inputs": {
+                                "range": {
+                                    "environment": "rotate-retry",
+                                    "begin": {
+                                        "line": 6,
+                                        "column": 9,
+                                        "byte": 135
+                                    },
+                                    "end": {
+                                        "line": 6,
+                                        "column": 25,
+                                        "byte": 151
+                                    }
+                                },
+                                "schema": {
+                                    "properties": {
+                                        "temporary": {
+                                            "type": "boolean",
+                                            "const": false
+                                        }
+                                    },
+                                    "type": "object",
+                                    "required": [
+                                        "temporary"
+                                    ]
+                                },
+                                "keyRanges": {
+                                    "temporary": {
+                                        "environment": "rotate-retry",
+                                        "begin": {
+                                            "line": 6,
+                                            "column": 9,
+                                            "byte": 135
+                                        },
+                                        "end": {
+                                            "line": 6,
+                                            "column": 18,
+                                            "byte": 144
+                                        }
+                                    }
+                                },
+                                "object": {
+                                    "temporary": {
+                                        "range": {
+                                            "environment": "rotate-retry",
+                                            "begin": {
+                                                "line": 6,
+                                                "column": 20,
+                                                "byte": 146
+                                            },
+                                            "end": {
+                                                "line": 6,
+                                                "column": 25,
+                                                "byte": 151
+                                            }
+                                        },
+                                        "schema": {
+                                            "type": "boolean",
+                                            "const": false
+                                        },
+                                        "literal": false
+                                    }
+                                }
+                            },
+                            "state": {
+                                "range": {
+                                    "environment": "rotate-retry",
+                                    "begin": {
+                                        "line": 0,
+                                        "column": 0,
+                                        "byte": 0
+                                    },
+                                    "end": {
+                                        "line": 0,
+                                        "column": 0,
+                                        "byte": 0
+                                    }
+                                },
+                                "schema": {
+                                    "type": "null"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "mostlyDead": {
+                "range": {
+                    "environment": "rotate-retry",
+                    "begin": {
+                        "line": 10,
+                        "column": 5,
+                        "byte": 263
+                    },
+                    "end": {
+                        "line": 12,
+                        "column": 24,
+                        "byte": 319
+                    }
+                },
+                "schema": true,
+                "builtin": {
+                    "name": "fn::rotate::error",
+                    "nameRange": {
+                        "environment": "rotate-retry",
+                        "begin": {
+                            "line": 10,
+                            "column": 5,
+                            "byte": 263
+                        },
+                        "end": {
+                            "line": 10,
+                            "column": 22,
+                            "byte": 280
+                        }
+                    },
+                    "argSchema": {
+                        "properties": {
+                            "inputs": {
+                                "properties": {
+                                    "temporary": {
+                                        "type": "boolean"
+                                    }
+                                },
+                                "type": "object",
+                                "required": [
+                                    "temporary"
+                                ]
+                            },
+                            "state": {
+                                "oneOf": [
+                                    false,
+                                    {
+                                        "type": "null"
+                                    }
+                                ],
+                                "type": ""
+                            }
+                        },
+                        "type": "object",
+                        "required": [
+                            "inputs",
+                            "state"
+                        ]
+                    },
+                    "arg": {
+                        "range": {
+                            "begin": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            },
+                            "end": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            }
+                        },
+                        "object": {
+                            "inputs": {
+                                "range": {
+                                    "environment": "rotate-retry",
+                                    "begin": {
+                                        "line": 12,
+                                        "column": 9,
+                                        "byte": 304
+                                    },
+                                    "end": {
+                                        "line": 12,
+                                        "column": 24,
+                                        "byte": 319
+                                    }
+                                },
+                                "schema": {
+                                    "properties": {
+                                        "temporary": {
+                                            "type": "boolean",
+                                            "const": true
+                                        }
+                                    },
+                                    "type": "object",
+                                    "required": [
+                                        "temporary"
+                                    ]
+                                },
+                                "keyRanges": {
+                                    "temporary": {
+                                        "environment": "rotate-retry",
+                                        "begin": {
+                                            "line": 12,
+                                            "column": 9,
+                                            "byte": 304
+                                        },
+                                        "end": {
+                                            "line": 12,
+                                            "column": 18,
+                                            "byte": 313
+                                        }
+                                    }
+                                },
+                                "object": {
+                                    "temporary": {
+                                        "range": {
+                                            "environment": "rotate-retry",
+                                            "begin": {
+                                                "line": 12,
+                                                "column": 20,
+                                                "byte": 315
+                                            },
+                                            "end": {
+                                                "line": 12,
+                                                "column": 24,
+                                                "byte": 319
+                                            }
+                                        },
+                                        "schema": {
+                                            "type": "boolean",
+                                            "const": true
+                                        },
+                                        "literal": true
+                                    }
+                                }
+                            },
+                            "state": {
+                                "range": {
+                                    "environment": "rotate-retry",
+                                    "begin": {
+                                        "line": 0,
+                                        "column": 0,
+                                        "byte": 0
+                                    },
+                                    "end": {
+                                        "line": 0,
+                                        "column": 0,
+                                        "byte": 0
+                                    }
+                                },
+                                "schema": {
+                                    "type": "null"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "properties": {
+            "dead": {
+                "unknown": true,
+                "trace": {
+                    "def": {
+                        "environment": "rotate-retry",
+                        "begin": {
+                            "line": 4,
+                            "column": 5,
+                            "byte": 94
+                        },
+                        "end": {
+                            "line": 6,
+                            "column": 25,
+                            "byte": 151
+                        }
+                    }
+                }
+            },
+            "mostlyDead": {
+                "unknown": true,
+                "trace": {
+                    "def": {
+                        "environment": "rotate-retry",
+                        "begin": {
+                            "line": 10,
+                            "column": 5,
+                            "byte": 263
+                        },
+                        "end": {
+                            "line": 12,
+                            "column": 24,
+                            "byte": 319
+                        }
+                    }
+                }
+            }
+        },
+        "schema": {
+            "properties": {
+                "dead": true,
+                "mostlyDead": true
+            },
+            "type": "object",
+            "required": [
+                "dead",
+                "mostlyDead"
+            ]
+        },
+        "executionContext": {
+            "properties": {
+                "currentEnvironment": {
+                    "value": {
+                        "name": {
+                            "value": "rotate-retry",
+                            "trace": {
+                                "def": {
+                                    "environment": "rotate-retry",
+                                    "begin": {
+                                        "line": 0,
+                                        "column": 0,
+                                        "byte": 0
+                                    },
+                                    "end": {
+                                        "line": 0,
+                                        "column": 0,
+                                        "byte": 0
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "trace": {
+                        "def": {
+                            "environment": "rotate-retry",
+                            "begin": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            },
+                            "end": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            }
+                        }
+                    }
+                },
+                "pulumi": {
+                    "value": {
+                        "user": {
+                            "value": {
+                                "id": {
+                                    "value": "USER_123",
+                                    "trace": {
+                                        "def": {
+                                            "environment": "rotate-retry",
+                                            "begin": {
+                                                "line": 0,
+                                                "column": 0,
+                                                "byte": 0
+                                            },
+                                            "end": {
+                                                "line": 0,
+                                                "column": 0,
+                                                "byte": 0
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            "trace": {
+                                "def": {
+                                    "environment": "rotate-retry",
+                                    "begin": {
+                                        "line": 0,
+                                        "column": 0,
+                                        "byte": 0
+                                    },
+                                    "end": {
+                                        "line": 0,
+                                        "column": 0,
+                                        "byte": 0
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "trace": {
+                        "def": {
+                            "environment": "rotate-retry",
+                            "begin": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            },
+                            "end": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            }
+                        }
+                    }
+                },
+                "rootEnvironment": {
+                    "value": {
+                        "name": {
+                            "value": "rotate-retry",
+                            "trace": {
+                                "def": {
+                                    "environment": "rotate-retry",
+                                    "begin": {
+                                        "line": 0,
+                                        "column": 0,
+                                        "byte": 0
+                                    },
+                                    "end": {
+                                        "line": 0,
+                                        "column": 0,
+                                        "byte": 0
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "trace": {
+                        "def": {
+                            "environment": "rotate-retry",
+                            "begin": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            },
+                            "end": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            }
+                        }
+                    }
+                }
+            },
+            "schema": {
+                "properties": {
+                    "currentEnvironment": {
+                        "properties": {
+                            "name": {
+                                "type": "string",
+                                "const": "rotate-retry"
+                            }
+                        },
+                        "type": "object",
+                        "required": [
+                            "name"
+                        ]
+                    },
+                    "pulumi": {
+                        "properties": {
+                            "user": {
+                                "properties": {
+                                    "id": {
+                                        "type": "string",
+                                        "const": "USER_123"
+                                    }
+                                },
+                                "type": "object",
+                                "required": [
+                                    "id"
+                                ]
+                            }
+                        },
+                        "type": "object",
+                        "required": [
+                            "user"
+                        ]
+                    },
+                    "rootEnvironment": {
+                        "properties": {
+                            "name": {
+                                "type": "string",
+                                "const": "rotate-retry"
+                            }
+                        },
+                        "type": "object",
+                        "required": [
+                            "name"
+                        ]
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "currentEnvironment",
+                    "pulumi",
+                    "rootEnvironment"
+                ]
+            }
+        }
+    },
+    "checkJson": {
+        "dead": "[unknown]",
+        "mostlyDead": "[unknown]"
+    },
+    "eval": {
+        "exprs": {
+            "dead": {
+                "range": {
+                    "environment": "rotate-retry",
+                    "begin": {
+                        "line": 4,
+                        "column": 5,
+                        "byte": 94
+                    },
+                    "end": {
+                        "line": 6,
+                        "column": 25,
+                        "byte": 151
+                    }
+                },
+                "schema": {
+                    "type": "object"
+                },
+                "builtin": {
+                    "name": "fn::rotate::error",
+                    "nameRange": {
+                        "environment": "rotate-retry",
+                        "begin": {
+                            "line": 4,
+                            "column": 5,
+                            "byte": 94
+                        },
+                        "end": {
+                            "line": 4,
+                            "column": 22,
+                            "byte": 111
+                        }
+                    },
+                    "argSchema": {
+                        "properties": {
+                            "inputs": {
+                                "properties": {
+                                    "temporary": {
+                                        "type": "boolean"
+                                    }
+                                },
+                                "type": "object",
+                                "required": [
+                                    "temporary"
+                                ]
+                            },
+                            "state": {
+                                "oneOf": [
+                                    false,
+                                    {
+                                        "type": "null"
+                                    }
+                                ],
+                                "type": ""
+                            }
+                        },
+                        "type": "object",
+                        "required": [
+                            "inputs",
+                            "state"
+                        ]
+                    },
+                    "arg": {
+                        "range": {
+                            "begin": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            },
+                            "end": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            }
+                        },
+                        "object": {
+                            "inputs": {
+                                "range": {
+                                    "environment": "rotate-retry",
+                                    "begin": {
+                                        "line": 6,
+                                        "column": 9,
+                                        "byte": 135
+                                    },
+                                    "end": {
+                                        "line": 6,
+                                        "column": 25,
+                                        "byte": 151
+                                    }
+                                },
+                                "schema": {
+                                    "properties": {
+                                        "temporary": {
+                                            "type": "boolean",
+                                            "const": false
+                                        }
+                                    },
+                                    "type": "object",
+                                    "required": [
+                                        "temporary"
+                                    ]
+                                },
+                                "keyRanges": {
+                                    "temporary": {
+                                        "environment": "rotate-retry",
+                                        "begin": {
+                                            "line": 6,
+                                            "column": 9,
+                                            "byte": 135
+                                        },
+                                        "end": {
+                                            "line": 6,
+                                            "column": 18,
+                                            "byte": 144
+                                        }
+                                    }
+                                },
+                                "object": {
+                                    "temporary": {
+                                        "range": {
+                                            "environment": "rotate-retry",
+                                            "begin": {
+                                                "line": 6,
+                                                "column": 20,
+                                                "byte": 146
+                                            },
+                                            "end": {
+                                                "line": 6,
+                                                "column": 25,
+                                                "byte": 151
+                                            }
+                                        },
+                                        "schema": {
+                                            "type": "boolean",
+                                            "const": false
+                                        },
+                                        "literal": false
+                                    }
+                                }
+                            },
+                            "state": {
+                                "range": {
+                                    "environment": "rotate-retry",
+                                    "begin": {
+                                        "line": 0,
+                                        "column": 0,
+                                        "byte": 0
+                                    },
+                                    "end": {
+                                        "line": 0,
+                                        "column": 0,
+                                        "byte": 0
+                                    }
+                                },
+                                "schema": {
+                                    "type": "null"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "mostlyDead": {
+                "range": {
+                    "environment": "rotate-retry",
+                    "begin": {
+                        "line": 10,
+                        "column": 5,
+                        "byte": 263
+                    },
+                    "end": {
+                        "line": 12,
+                        "column": 24,
+                        "byte": 319
+                    }
+                },
+                "schema": {
+                    "type": "object"
+                },
+                "builtin": {
+                    "name": "fn::rotate::error",
+                    "nameRange": {
+                        "environment": "rotate-retry",
+                        "begin": {
+                            "line": 10,
+                            "column": 5,
+                            "byte": 263
+                        },
+                        "end": {
+                            "line": 10,
+                            "column": 22,
+                            "byte": 280
+                        }
+                    },
+                    "argSchema": {
+                        "properties": {
+                            "inputs": {
+                                "properties": {
+                                    "temporary": {
+                                        "type": "boolean"
+                                    }
+                                },
+                                "type": "object",
+                                "required": [
+                                    "temporary"
+                                ]
+                            },
+                            "state": {
+                                "oneOf": [
+                                    false,
+                                    {
+                                        "type": "null"
+                                    }
+                                ],
+                                "type": ""
+                            }
+                        },
+                        "type": "object",
+                        "required": [
+                            "inputs",
+                            "state"
+                        ]
+                    },
+                    "arg": {
+                        "range": {
+                            "begin": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            },
+                            "end": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            }
+                        },
+                        "object": {
+                            "inputs": {
+                                "range": {
+                                    "environment": "rotate-retry",
+                                    "begin": {
+                                        "line": 12,
+                                        "column": 9,
+                                        "byte": 304
+                                    },
+                                    "end": {
+                                        "line": 12,
+                                        "column": 24,
+                                        "byte": 319
+                                    }
+                                },
+                                "schema": {
+                                    "properties": {
+                                        "temporary": {
+                                            "type": "boolean",
+                                            "const": true
+                                        }
+                                    },
+                                    "type": "object",
+                                    "required": [
+                                        "temporary"
+                                    ]
+                                },
+                                "keyRanges": {
+                                    "temporary": {
+                                        "environment": "rotate-retry",
+                                        "begin": {
+                                            "line": 12,
+                                            "column": 9,
+                                            "byte": 304
+                                        },
+                                        "end": {
+                                            "line": 12,
+                                            "column": 18,
+                                            "byte": 313
+                                        }
+                                    }
+                                },
+                                "object": {
+                                    "temporary": {
+                                        "range": {
+                                            "environment": "rotate-retry",
+                                            "begin": {
+                                                "line": 12,
+                                                "column": 20,
+                                                "byte": 315
+                                            },
+                                            "end": {
+                                                "line": 12,
+                                                "column": 24,
+                                                "byte": 319
+                                            }
+                                        },
+                                        "schema": {
+                                            "type": "boolean",
+                                            "const": true
+                                        },
+                                        "literal": true
+                                    }
+                                }
+                            },
+                            "state": {
+                                "range": {
+                                    "environment": "rotate-retry",
+                                    "begin": {
+                                        "line": 0,
+                                        "column": 0,
+                                        "byte": 0
+                                    },
+                                    "end": {
+                                        "line": 0,
+                                        "column": 0,
+                                        "byte": 0
+                                    }
+                                },
+                                "schema": {
+                                    "type": "null"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "properties": {
+            "dead": {
+                "value": {},
+                "trace": {
+                    "def": {
+                        "environment": "rotate-retry",
+                        "begin": {
+                            "line": 4,
+                            "column": 5,
+                            "byte": 94
+                        },
+                        "end": {
+                            "line": 6,
+                            "column": 25,
+                            "byte": 151
+                        }
+                    }
+                }
+            },
+            "mostlyDead": {
+                "value": {},
+                "trace": {
+                    "def": {
+                        "environment": "rotate-retry",
+                        "begin": {
+                            "line": 10,
+                            "column": 5,
+                            "byte": 263
+                        },
+                        "end": {
+                            "line": 12,
+                            "column": 24,
+                            "byte": 319
+                        }
+                    }
+                }
+            }
+        },
+        "schema": {
+            "properties": {
+                "dead": {
+                    "type": "object"
+                },
+                "mostlyDead": {
+                    "type": "object"
+                }
+            },
+            "type": "object",
+            "required": [
+                "dead",
+                "mostlyDead"
+            ]
+        },
+        "executionContext": {
+            "properties": {
+                "currentEnvironment": {
+                    "value": {
+                        "name": {
+                            "value": "rotate-retry",
+                            "trace": {
+                                "def": {
+                                    "environment": "rotate-retry",
+                                    "begin": {
+                                        "line": 0,
+                                        "column": 0,
+                                        "byte": 0
+                                    },
+                                    "end": {
+                                        "line": 0,
+                                        "column": 0,
+                                        "byte": 0
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "trace": {
+                        "def": {
+                            "environment": "rotate-retry",
+                            "begin": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            },
+                            "end": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            }
+                        }
+                    }
+                },
+                "pulumi": {
+                    "value": {
+                        "user": {
+                            "value": {
+                                "id": {
+                                    "value": "USER_123",
+                                    "trace": {
+                                        "def": {
+                                            "environment": "rotate-retry",
+                                            "begin": {
+                                                "line": 0,
+                                                "column": 0,
+                                                "byte": 0
+                                            },
+                                            "end": {
+                                                "line": 0,
+                                                "column": 0,
+                                                "byte": 0
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            "trace": {
+                                "def": {
+                                    "environment": "rotate-retry",
+                                    "begin": {
+                                        "line": 0,
+                                        "column": 0,
+                                        "byte": 0
+                                    },
+                                    "end": {
+                                        "line": 0,
+                                        "column": 0,
+                                        "byte": 0
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "trace": {
+                        "def": {
+                            "environment": "rotate-retry",
+                            "begin": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            },
+                            "end": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            }
+                        }
+                    }
+                },
+                "rootEnvironment": {
+                    "value": {
+                        "name": {
+                            "value": "rotate-retry",
+                            "trace": {
+                                "def": {
+                                    "environment": "rotate-retry",
+                                    "begin": {
+                                        "line": 0,
+                                        "column": 0,
+                                        "byte": 0
+                                    },
+                                    "end": {
+                                        "line": 0,
+                                        "column": 0,
+                                        "byte": 0
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "trace": {
+                        "def": {
+                            "environment": "rotate-retry",
+                            "begin": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            },
+                            "end": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            }
+                        }
+                    }
+                }
+            },
+            "schema": {
+                "properties": {
+                    "currentEnvironment": {
+                        "properties": {
+                            "name": {
+                                "type": "string",
+                                "const": "rotate-retry"
+                            }
+                        },
+                        "type": "object",
+                        "required": [
+                            "name"
+                        ]
+                    },
+                    "pulumi": {
+                        "properties": {
+                            "user": {
+                                "properties": {
+                                    "id": {
+                                        "type": "string",
+                                        "const": "USER_123"
+                                    }
+                                },
+                                "type": "object",
+                                "required": [
+                                    "id"
+                                ]
+                            }
+                        },
+                        "type": "object",
+                        "required": [
+                            "user"
+                        ]
+                    },
+                    "rootEnvironment": {
+                        "properties": {
+                            "name": {
+                                "type": "string",
+                                "const": "rotate-retry"
+                            }
+                        },
+                        "type": "object",
+                        "required": [
+                            "name"
+                        ]
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "currentEnvironment",
+                    "pulumi",
+                    "rootEnvironment"
+                ]
+            }
+        }
+    },
+    "evalJsonRedacted": {
+        "dead": {},
+        "mostlyDead": {}
+    },
+    "evalJSONRevealed": {
+        "dead": {},
+        "mostlyDead": {}
+    },
+    "rotateDiags": [
+        {
+            "Severity": 1,
+            "Summary": "rotate: permanent error",
+            "Detail": "",
+            "Subject": {
+                "Filename": "rotate-retry",
+                "Start": {
+                    "Line": 4,
+                    "Column": 5,
+                    "Byte": 94
+                },
+                "End": {
+                    "Line": 6,
+                    "Column": 25,
+                    "Byte": 151
+                }
+            },
+            "Context": null,
+            "Expression": null,
+            "EvalContext": null,
+            "Extra": null,
+            "Path": "values.dead"
+        },
+        {
+            "Severity": 1,
+            "Summary": "rotate: gave up after 3 attempts: temporary error",
+            "Detail": "",
+            "Subject": {
+                "Filename": "rotate-retry",
+                "Start": {
+                    "Line": 10,
+                    "Column": 5,
+                    "Byte": 263
+                },
+                "End": {
+                    "Line": 12,
+                    "Column": 24,
+                    "Byte": 319
+                }
+            },
+            "Context": null,
+            "Expression": null,
+            "EvalContext": null,
+            "Extra": null,
+            "Path": "values.mostlyDead"
+        }
+    ],
+    "rotate": {
+        "exprs": {
+            "dead": {
+                "range": {
+                    "environment": "rotate-retry",
+                    "begin": {
+                        "line": 4,
+                        "column": 5,
+                        "byte": 94
+                    },
+                    "end": {
+                        "line": 6,
+                        "column": 25,
+                        "byte": 151
+                    }
+                },
+                "schema": true,
+                "builtin": {
+                    "name": "fn::rotate::error",
+                    "nameRange": {
+                        "environment": "rotate-retry",
+                        "begin": {
+                            "line": 4,
+                            "column": 5,
+                            "byte": 94
+                        },
+                        "end": {
+                            "line": 4,
+                            "column": 22,
+                            "byte": 111
+                        }
+                    },
+                    "argSchema": {
+                        "properties": {
+                            "inputs": {
+                                "properties": {
+                                    "temporary": {
+                                        "type": "boolean"
+                                    }
+                                },
+                                "type": "object",
+                                "required": [
+                                    "temporary"
+                                ]
+                            },
+                            "state": {
+                                "oneOf": [
+                                    false,
+                                    {
+                                        "type": "null"
+                                    }
+                                ],
+                                "type": ""
+                            }
+                        },
+                        "type": "object",
+                        "required": [
+                            "inputs",
+                            "state"
+                        ]
+                    },
+                    "arg": {
+                        "range": {
+                            "begin": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            },
+                            "end": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            }
+                        },
+                        "object": {
+                            "inputs": {
+                                "range": {
+                                    "environment": "rotate-retry",
+                                    "begin": {
+                                        "line": 6,
+                                        "column": 9,
+                                        "byte": 135
+                                    },
+                                    "end": {
+                                        "line": 6,
+                                        "column": 25,
+                                        "byte": 151
+                                    }
+                                },
+                                "schema": {
+                                    "properties": {
+                                        "temporary": {
+                                            "type": "boolean",
+                                            "const": false
+                                        }
+                                    },
+                                    "type": "object",
+                                    "required": [
+                                        "temporary"
+                                    ]
+                                },
+                                "keyRanges": {
+                                    "temporary": {
+                                        "environment": "rotate-retry",
+                                        "begin": {
+                                            "line": 6,
+                                            "column": 9,
+                                            "byte": 135
+                                        },
+                                        "end": {
+                                            "line": 6,
+                                            "column": 18,
+                                            "byte": 144
+                                        }
+                                    }
+                                },
+                                "object": {
+                                    "temporary": {
+                                        "range": {
+                                            "environment": "rotate-retry",
+                                            "begin": {
+                                                "line": 6,
+                                                "column": 20,
+                                                "byte": 146
+                                            },
+                                            "end": {
+                                                "line": 6,
+                                                "column": 25,
+                                                "byte": 151
+                                            }
+                                        },
+                                        "schema": {
+                                            "type": "boolean",
+                                            "const": false
+                                        },
+                                        "literal": false
+                                    }
+                                }
+                            },
+                            "state": {
+                                "range": {
+                                    "environment": "rotate-retry",
+                                    "begin": {
+                                        "line": 0,
+                                        "column": 0,
+                                        "byte": 0
+                                    },
+                                    "end": {
+                                        "line": 0,
+                                        "column": 0,
+                                        "byte": 0
+                                    }
+                                },
+                                "schema": {
+                                    "type": "null"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "mostlyDead": {
+                "range": {
+                    "environment": "rotate-retry",
+                    "begin": {
+                        "line": 10,
+                        "column": 5,
+                        "byte": 263
+                    },
+                    "end": {
+                        "line": 12,
+                        "column": 24,
+                        "byte": 319
+                    }
+                },
+                "schema": true,
+                "builtin": {
+                    "name": "fn::rotate::error",
+                    "nameRange": {
+                        "environment": "rotate-retry",
+                        "begin": {
+                            "line": 10,
+                            "column": 5,
+                            "byte": 263
+                        },
+                        "end": {
+                            "line": 10,
+                            "column": 22,
+                            "byte": 280
+                        }
+                    },
+                    "argSchema": {
+                        "properties": {
+                            "inputs": {
+                                "properties": {
+                                    "temporary": {
+                                        "type": "boolean"
+                                    }
+                                },
+                                "type": "object",
+                                "required": [
+                                    "temporary"
+                                ]
+                            },
+                            "state": {
+                                "oneOf": [
+                                    false,
+                                    {
+                                        "type": "null"
+                                    }
+                                ],
+                                "type": ""
+                            }
+                        },
+                        "type": "object",
+                        "required": [
+                            "inputs",
+                            "state"
+                        ]
+                    },
+                    "arg": {
+                        "range": {
+                            "begin": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            },
+                            "end": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            }
+                        },
+                        "object": {
+                            "inputs": {
+                                "range": {
+                                    "environment": "rotate-retry",
+                                    "begin": {
+                                        "line": 12,
+                                        "column": 9,
+                                        "byte": 304
+                                    },
+                                    "end": {
+                                        "line": 12,
+                                        "column": 24,
+                                        "byte": 319
+                                    }
+                                },
+                                "schema": {
+                                    "properties": {
+                                        "temporary": {
+                                            "type": "boolean",
+                                            "const": true
+                                        }
+                                    },
+                                    "type": "object",
+                                    "required": [
+                                        "temporary"
+                                    ]
+                                },
+                                "keyRanges": {
+                                    "temporary": {
+                                        "environment": "rotate-retry",
+                                        "begin": {
+                                            "line": 12,
+                                            "column": 9,
+                                            "byte": 304
+                                        },
+                                        "end": {
+                                            "line": 12,
+                                            "column": 18,
+                                            "byte": 313
+                                        }
+                                    }
+                                },
+                                "object": {
+                                    "temporary": {
+                                        "range": {
+                                            "environment": "rotate-retry",
+                                            "begin": {
+                                                "line": 12,
+                                                "column": 20,
+                                                "byte": 315
+                                            },
+                                            "end": {
+                                                "line": 12,
+                                                "column": 24,
+                                                "byte": 319
+                                            }
+                                        },
+                                        "schema": {
+                                            "type": "boolean",
+                                            "const": true
+                                        },
+                                        "literal": true
+                                    }
+                                }
+                            },
+                            "state": {
+                                "range": {
+                                    "environment": "rotate-retry",
+                                    "begin": {
+                                        "line": 0,
+                                        "column": 0,
+                                        "byte": 0
+                                    },
+                                    "end": {
+                                        "line": 0,
+                                        "column": 0,
+                                        "byte": 0
+                                    }
+                                },
+                                "schema": {
+                                    "type": "null"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "properties": {
+            "dead": {
+                "unknown": true,
+                "trace": {
+                    "def": {
+                        "environment": "rotate-retry",
+                        "begin": {
+                            "line": 4,
+                            "column": 5,
+                            "byte": 94
+                        },
+                        "end": {
+                            "line": 6,
+                            "column": 25,
+                            "byte": 151
+                        }
+                    }
+                }
+            },
+            "mostlyDead": {
+                "unknown": true,
+                "trace": {
+                    "def": {
+                        "environment": "rotate-retry",
+                        "begin": {
+                            "line": 10,
+                            "column": 5,
+                            "byte": 263
+                        },
+                        "end": {
+                            "line": 12,
+                            "column": 24,
+                            "byte": 319
+                        }
+                    }
+                }
+            }
+        },
+        "schema": {
+            "properties": {
+                "dead": true,
+                "mostlyDead": true
+            },
+            "type": "object",
+            "required": [
+                "dead",
+                "mostlyDead"
+            ]
+        },
+        "executionContext": {
+            "properties": {
+                "currentEnvironment": {
+                    "value": {
+                        "name": {
+                            "value": "rotate-retry",
+                            "trace": {
+                                "def": {
+                                    "environment": "rotate-retry",
+                                    "begin": {
+                                        "line": 0,
+                                        "column": 0,
+                                        "byte": 0
+                                    },
+                                    "end": {
+                                        "line": 0,
+                                        "column": 0,
+                                        "byte": 0
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "trace": {
+                        "def": {
+                            "environment": "rotate-retry",
+                            "begin": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            },
+                            "end": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            }
+                        }
+                    }
+                },
+                "pulumi": {
+                    "value": {
+                        "user": {
+                            "value": {
+                                "id": {
+                                    "value": "USER_123",
+                                    "trace": {
+                                        "def": {
+                                            "environment": "rotate-retry",
+                                            "begin": {
+                                                "line": 0,
+                                                "column": 0,
+                                                "byte": 0
+                                            },
+                                            "end": {
+                                                "line": 0,
+                                                "column": 0,
+                                                "byte": 0
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            "trace": {
+                                "def": {
+                                    "environment": "rotate-retry",
+                                    "begin": {
+                                        "line": 0,
+                                        "column": 0,
+                                        "byte": 0
+                                    },
+                                    "end": {
+                                        "line": 0,
+                                        "column": 0,
+                                        "byte": 0
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "trace": {
+                        "def": {
+                            "environment": "rotate-retry",
+                            "begin": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            },
+                            "end": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            }
+                        }
+                    }
+                },
+                "rootEnvironment": {
+                    "value": {
+                        "name": {
+                            "value": "rotate-retry",
+                            "trace": {
+                                "def": {
+                                    "environment": "rotate-retry",
+                                    "begin": {
+                                        "line": 0,
+                                        "column": 0,
+                                        "byte": 0
+                                    },
+                                    "end": {
+                                        "line": 0,
+                                        "column": 0,
+                                        "byte": 0
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "trace": {
+                        "def": {
+                            "environment": "rotate-retry",
+                            "begin": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            },
+                            "end": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            }
+                        }
+                    }
+                }
+            },
+            "schema": {
+                "properties": {
+                    "currentEnvironment": {
+                        "properties": {
+                            "name": {
+                                "type": "string",
+                                "const": "rotate-retry"
+                            }
+                        },
+                        "type": "object",
+                        "required": [
+                            "name"
+                        ]
+                    },
+                    "pulumi": {
+                        "properties": {
+                            "user": {
+                                "properties": {
+                                    "id": {
+                                        "type": "string",
+                                        "const": "USER_123"
+                                    }
+                                },
+                                "type": "object",
+                                "required": [
+                                    "id"
+                                ]
+                            }
+                        },
+                        "type": "object",
+                        "required": [
+                            "user"
+                        ]
+                    },
+                    "rootEnvironment": {
+                        "properties": {
+                            "name": {
+                                "type": "string",
+                                "const": "rotate-retry"
+                            }
+                        },
+                        "type": "object",
+                        "required": [
+                            "name"
+                        ]
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "currentEnvironment",
+                    "pulumi",
+                    "rootEnvironment"
+                ]
+            }
+        }
+    },
+    "rotateJson": {
+        "dead": "[unknown]",
+        "mostlyDead": "[unknown]"
+    }
+}
