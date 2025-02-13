@@ -18,7 +18,6 @@ import (
 	"context"
 	"encoding/base64"
 	"encoding/json"
-	"errors"
 	"fmt"
 	"io"
 	"reflect"
@@ -1096,10 +1095,10 @@ func (e *evalContext) retryProvider(fn func() (esc.Value, error)) (esc.Value, er
 		Accept: func(try int, _ time.Duration) (bool, interface{}, error) {
 			result, err := fn()
 
-			if errors.As(err, &esc.RetryableError{}) && try < 3 {
+			if esc.IsRetryableError(err) && try < 3 {
 				// temporary error, we can retry
 				return false, nil, nil
-			} else if errors.As(err, &esc.RetryableError{}) {
+			} else if esc.IsRetryableError(err) {
 				// ran out of retries
 				return false, nil, fmt.Errorf("gave up after %d attempts: %w", try, err)
 			} else if err != nil {

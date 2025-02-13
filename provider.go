@@ -16,6 +16,7 @@ package esc
 
 import (
 	"context"
+	"errors"
 
 	"github.com/pulumi/esc/schema"
 )
@@ -43,16 +44,24 @@ type Rotator interface {
 	Rotate(ctx context.Context, inputs, state map[string]Value, executionContext EnvExecContext) (Value, error)
 }
 
-// RetryableError indicates a temporary error was encountered by a provider.
-// Providers can wrap an error with this type  to indicate to the evaluator that it may retry calling the provider.
-type RetryableError struct {
-	Err error
+// RetryableError wraps an error to indicate an error is temporary.
+// Providers can use this to tell the evaluator that it may retry calling the provider.
+func RetryableError(err error) error {
+	return retryableError{err}
 }
 
-func (e RetryableError) Error() string {
-	return e.Err.Error()
+func IsRetryableError(err error) bool {
+	return errors.As(err, &retryableError{})
 }
 
-func (e RetryableError) Unwrap() error {
-	return e.Err
+type retryableError struct {
+	wrapped error
+}
+
+func (e retryableError) Error() string {
+	return e.wrapped.Error()
+}
+
+func (e retryableError) Unwrap() error {
+	return e.wrapped
 }
