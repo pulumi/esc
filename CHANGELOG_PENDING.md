@@ -7,6 +7,8 @@
   [#433](https://github.com/pulumi/esc/pull/433)
 - Add ability to pass specific paths to rotate with the `rotate` CLI command
   [#440](https://github.com/pulumi/esc/pull/440)
+- Introduce inline environment reference syntax
+  [#443](https://github.com/pulumi/esc/pull/443)
 
 ### Bug Fixes
 
