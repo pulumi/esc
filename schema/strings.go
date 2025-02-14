@@ -97,11 +97,6 @@ func (b *StringBuilder) Examples(ns ...string) *StringBuilder {
 	return b
 }
 
-func (b *StringBuilder) RotateOnly() *StringBuilder {
-	b.s.RotateOnly = true
-	return b
-}
-
 func (b *StringBuilder) Schema() *Schema {
 	b.s.Type = "string"
 	return &b.s

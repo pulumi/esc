@@ -169,8 +169,8 @@ type echoRotator struct{}
 
 func (echoRotator) Schema() (*schema.Schema, *schema.Schema, *schema.Schema) {
 	inputSchema := schema.Record(schema.BuilderMap{
-		"next": schema.String().RotateOnly(),
-	}).Schema()
+		"next": schema.String(),
+	}).RotateOnly("next").Schema()
 	stateSchema := schema.Object().Properties(schema.BuilderMap{
 		"current":  schema.String(),
 		"previous": schema.String(),

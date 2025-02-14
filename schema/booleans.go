@@ -59,11 +59,6 @@ func (b *BooleanBuilder) Deprecated(deprecated bool) *BooleanBuilder {
 	return b
 }
 
-func (b *BooleanBuilder) RotateOnly() *BooleanBuilder {
-	b.s.RotateOnly = true
-	return b
-}
-
 func (b *BooleanBuilder) Schema() *Schema {
 	b.s.Type = "boolean"
 	return &b.s
