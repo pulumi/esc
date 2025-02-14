@@ -824,16 +824,15 @@
                                                             }
                                                         },
                                                         "value": {
-                                                            "environment": "inline-reference-rotateOnly",
                                                             "begin": {
-                                                                "line": 11,
-                                                                "column": 15,
-                                                                "byte": 398
+                                                                "line": 0,
+                                                                "column": 0,
+                                                                "byte": 0
                                                             },
                                                             "end": {
-                                                                "line": 11,
-                                                                "column": 72,
-                                                                "byte": 455
+                                                                "line": 0,
+                                                                "column": 0,
+                                                                "byte": 0
                                                             }
                                                         }
                                                     },
@@ -853,16 +852,15 @@
                                                             }
                                                         },
                                                         "value": {
-                                                            "environment": "inline-reference-rotateOnly",
                                                             "begin": {
-                                                                "line": 11,
-                                                                "column": 15,
-                                                                "byte": 398
+                                                                "line": 0,
+                                                                "column": 0,
+                                                                "byte": 0
                                                             },
                                                             "end": {
-                                                                "line": 11,
-                                                                "column": 72,
-                                                                "byte": 455
+                                                                "line": 0,
+                                                                "column": 0,
+                                                                "byte": 0
                                                             }
                                                         }
                                                     },
@@ -882,16 +880,15 @@
                                                             }
                                                         },
                                                         "value": {
-                                                            "environment": "inline-reference-rotateOnly",
                                                             "begin": {
-                                                                "line": 11,
-                                                                "column": 15,
-                                                                "byte": 398
+                                                                "line": 0,
+                                                                "column": 0,
+                                                                "byte": 0
                                                             },
                                                             "end": {
-                                                                "line": 11,
-                                                                "column": 72,
-                                                                "byte": 455
+                                                                "line": 0,
+                                                                "column": 0,
+                                                                "byte": 0
                                                             }
                                                         }
                                                     },
@@ -911,16 +908,15 @@
                                                             }
                                                         },
                                                         "value": {
-                                                            "environment": "inline-reference-rotateOnly",
                                                             "begin": {
-                                                                "line": 11,
-                                                                "column": 15,
-                                                                "byte": 398
+                                                                "line": 0,
+                                                                "column": 0,
+                                                                "byte": 0
                                                             },
                                                             "end": {
-                                                                "line": 11,
-                                                                "column": 72,
-                                                                "byte": 455
+                                                                "line": 0,
+                                                                "column": 0,
+                                                                "byte": 0
                                                             }
                                                         }
                                                     }
