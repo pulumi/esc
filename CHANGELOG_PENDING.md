@@ -9,6 +9,8 @@
   [#440](https://github.com/pulumi/esc/pull/440)
 - Introduce inline environment reference syntax
   [#443](https://github.com/pulumi/esc/pull/443)
+- Introduce rotateOnly inputs
+  [#444](https://github.com/pulumi/esc/pull/444)
 
 ### Bug Fixes
 
