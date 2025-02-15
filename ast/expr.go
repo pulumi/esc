@@ -718,6 +718,18 @@ func Validate(schemaExpr, valueExpr Expr) *ValidateExpr {
 	}
 }
 
+type TemplateExpr struct {
+	builtinNode
+
+	//TemplateDef Expr
+}
+
+type EvalExpr struct {
+	builtinNode
+
+	//TemplateValue Expr
+}
+
 func tryParseFunction(node *syntax.ObjectNode) (Expr, syntax.Diagnostics, bool) {
 	var diags syntax.Diagnostics
 	if node.Len() != 1 {
@@ -760,6 +772,18 @@ func tryParseFunction(node *syntax.ObjectNode) (Expr, syntax.Diagnostics, bool) 
 		parse = parseToJSON
 	case "fn::toString":
 		parse = parseToString
+	case "fn::template":
+		parse = func(node *syntax.ObjectNode, name *StringExpr, args Expr) (Expr, syntax.Diagnostics) {
+			return &TemplateExpr{
+				builtinNode: builtin(node, name, args),
+			}, nil
+		}
+	case "fn::eval":
+		parse = func(node *syntax.ObjectNode, name *StringExpr, args Expr) (Expr, syntax.Diagnostics) {
+			return &EvalExpr{
+				builtinNode: builtin(node, name, args),
+			}, nil
+		}
 	default:
 		if strings.HasPrefix(kvp.Key.Value(), "fn::open::") {
 			parse = parseShortOpen

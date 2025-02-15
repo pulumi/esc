@@ -1,0 +1,4 @@
+values:
+  name: "foo"
+  example:
+    fn::eval: ${environments.example.defn.hello}

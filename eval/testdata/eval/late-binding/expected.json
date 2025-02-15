@@ -1,0 +1,1202 @@
+{
+    "check": {
+        "exprs": {
+            "a": {
+                "range": {
+                    "environment": "late-binding",
+                    "begin": {
+                        "line": 2,
+                        "column": 6,
+                        "byte": 13
+                    },
+                    "end": {
+                        "line": 2,
+                        "column": 31,
+                        "byte": 38
+                    }
+                },
+                "schema": {
+                    "properties": {
+                        "example": {
+                            "type": "string"
+                        },
+                        "name": {
+                            "type": "string",
+                            "const": "foo"
+                        }
+                    },
+                    "type": "object",
+                    "required": [
+                        "example",
+                        "name"
+                    ]
+                },
+                "symbol": [
+                    {
+                        "key": "environments",
+                        "range": {
+                            "environment": "late-binding",
+                            "begin": {
+                                "line": 2,
+                                "column": 8,
+                                "byte": 15
+                            },
+                            "end": {
+                                "line": 2,
+                                "column": 20,
+                                "byte": 27
+                            }
+                        },
+                        "value": {
+                            "environment": "late-binding",
+                            "begin": {
+                                "line": 2,
+                                "column": 6,
+                                "byte": 13
+                            },
+                            "end": {
+                                "line": 2,
+                                "column": 31,
+                                "byte": 38
+                            }
+                        }
+                    },
+                    {
+                        "key": "example",
+                        "range": {
+                            "environment": "late-binding",
+                            "begin": {
+                                "line": 2,
+                                "column": 20,
+                                "byte": 27
+                            },
+                            "end": {
+                                "line": 2,
+                                "column": 28,
+                                "byte": 35
+                            }
+                        },
+                        "value": {
+                            "environment": "late-binding",
+                            "begin": {
+                                "line": 2,
+                                "column": 6,
+                                "byte": 13
+                            },
+                            "end": {
+                                "line": 2,
+                                "column": 31,
+                                "byte": 38
+                            }
+                        }
+                    },
+                    {
+                        "key": "a",
+                        "range": {
+                            "environment": "late-binding",
+                            "begin": {
+                                "line": 2,
+                                "column": 28,
+                                "byte": 35
+                            },
+                            "end": {
+                                "line": 2,
+                                "column": 30,
+                                "byte": 37
+                            }
+                        },
+                        "value": {
+                            "environment": "late-binding",
+                            "begin": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            },
+                            "end": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            }
+                        }
+                    }
+                ]
+            },
+            "b": {
+                "range": {
+                    "environment": "late-binding",
+                    "begin": {
+                        "line": 3,
+                        "column": 6,
+                        "byte": 0
+                    },
+                    "end": {
+                        "line": 3,
+                        "column": 31,
+                        "byte": 0
+                    }
+                },
+                "schema": {
+                    "properties": {
+                        "example": {
+                            "type": "string"
+                        },
+                        "name": {
+                            "type": "string",
+                            "const": "bar"
+                        }
+                    },
+                    "type": "object",
+                    "required": [
+                        "example",
+                        "name"
+                    ]
+                },
+                "symbol": [
+                    {
+                        "key": "environments",
+                        "range": {
+                            "environment": "late-binding",
+                            "begin": {
+                                "line": 3,
+                                "column": 8,
+                                "byte": 2
+                            },
+                            "end": {
+                                "line": 3,
+                                "column": 20,
+                                "byte": 14
+                            }
+                        },
+                        "value": {
+                            "environment": "late-binding",
+                            "begin": {
+                                "line": 3,
+                                "column": 6,
+                                "byte": 0
+                            },
+                            "end": {
+                                "line": 3,
+                                "column": 31,
+                                "byte": 0
+                            }
+                        }
+                    },
+                    {
+                        "key": "example",
+                        "range": {
+                            "environment": "late-binding",
+                            "begin": {
+                                "line": 3,
+                                "column": 20,
+                                "byte": 14
+                            },
+                            "end": {
+                                "line": 3,
+                                "column": 28,
+                                "byte": 22
+                            }
+                        },
+                        "value": {
+                            "environment": "late-binding",
+                            "begin": {
+                                "line": 3,
+                                "column": 6,
+                                "byte": 0
+                            },
+                            "end": {
+                                "line": 3,
+                                "column": 31,
+                                "byte": 0
+                            }
+                        }
+                    },
+                    {
+                        "key": "b",
+                        "range": {
+                            "environment": "late-binding",
+                            "begin": {
+                                "line": 3,
+                                "column": 28,
+                                "byte": 22
+                            },
+                            "end": {
+                                "line": 3,
+                                "column": 30,
+                                "byte": 24
+                            }
+                        },
+                        "value": {
+                            "environment": "late-binding",
+                            "begin": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            },
+                            "end": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            }
+                        }
+                    }
+                ]
+            }
+        },
+        "properties": {
+            "a": {
+                "value": {
+                    "example": {
+                        "value": "Hello foo!",
+                        "trace": {
+                            "def": {
+                                "environment": "example/defn",
+                                "begin": {
+                                    "line": 3,
+                                    "column": 19,
+                                    "byte": 35
+                                },
+                                "end": {
+                                    "line": 3,
+                                    "column": 33,
+                                    "byte": 49
+                                }
+                            }
+                        }
+                    },
+                    "name": {
+                        "value": "foo",
+                        "trace": {
+                            "def": {
+                                "environment": "example/a",
+                                "begin": {
+                                    "line": 2,
+                                    "column": 9,
+                                    "byte": 16
+                                },
+                                "end": {
+                                    "line": 2,
+                                    "column": 12,
+                                    "byte": 19
+                                }
+                            }
+                        }
+                    }
+                },
+                "trace": {
+                    "def": {
+                        "environment": "late-binding",
+                        "begin": {
+                            "line": 2,
+                            "column": 6,
+                            "byte": 13
+                        },
+                        "end": {
+                            "line": 2,
+                            "column": 31,
+                            "byte": 38
+                        }
+                    }
+                }
+            },
+            "b": {
+                "value": {
+                    "example": {
+                        "value": "Hello bar!",
+                        "trace": {
+                            "def": {
+                                "environment": "example/defn",
+                                "begin": {
+                                    "line": 3,
+                                    "column": 19,
+                                    "byte": 35
+                                },
+                                "end": {
+                                    "line": 3,
+                                    "column": 33,
+                                    "byte": 49
+                                }
+                            }
+                        }
+                    },
+                    "name": {
+                        "value": "bar",
+                        "trace": {
+                            "def": {
+                                "environment": "example/b",
+                                "begin": {
+                                    "line": 2,
+                                    "column": 9,
+                                    "byte": 16
+                                },
+                                "end": {
+                                    "line": 2,
+                                    "column": 12,
+                                    "byte": 19
+                                }
+                            }
+                        }
+                    }
+                },
+                "trace": {
+                    "def": {
+                        "environment": "late-binding",
+                        "begin": {
+                            "line": 3,
+                            "column": 6,
+                            "byte": 0
+                        },
+                        "end": {
+                            "line": 3,
+                            "column": 31,
+                            "byte": 0
+                        }
+                    }
+                }
+            }
+        },
+        "schema": {
+            "properties": {
+                "a": {
+                    "properties": {
+                        "example": {
+                            "type": "string"
+                        },
+                        "name": {
+                            "type": "string",
+                            "const": "foo"
+                        }
+                    },
+                    "type": "object",
+                    "required": [
+                        "example",
+                        "name"
+                    ]
+                },
+                "b": {
+                    "properties": {
+                        "example": {
+                            "type": "string"
+                        },
+                        "name": {
+                            "type": "string",
+                            "const": "bar"
+                        }
+                    },
+                    "type": "object",
+                    "required": [
+                        "example",
+                        "name"
+                    ]
+                }
+            },
+            "type": "object",
+            "required": [
+                "a",
+                "b"
+            ]
+        },
+        "executionContext": {
+            "properties": {
+                "currentEnvironment": {
+                    "value": {
+                        "name": {
+                            "value": "late-binding",
+                            "trace": {
+                                "def": {
+                                    "environment": "late-binding",
+                                    "begin": {
+                                        "line": 0,
+                                        "column": 0,
+                                        "byte": 0
+                                    },
+                                    "end": {
+                                        "line": 0,
+                                        "column": 0,
+                                        "byte": 0
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "trace": {
+                        "def": {
+                            "environment": "late-binding",
+                            "begin": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            },
+                            "end": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            }
+                        }
+                    }
+                },
+                "pulumi": {
+                    "value": {
+                        "user": {
+                            "value": {
+                                "id": {
+                                    "value": "USER_123",
+                                    "trace": {
+                                        "def": {
+                                            "environment": "late-binding",
+                                            "begin": {
+                                                "line": 0,
+                                                "column": 0,
+                                                "byte": 0
+                                            },
+                                            "end": {
+                                                "line": 0,
+                                                "column": 0,
+                                                "byte": 0
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            "trace": {
+                                "def": {
+                                    "environment": "late-binding",
+                                    "begin": {
+                                        "line": 0,
+                                        "column": 0,
+                                        "byte": 0
+                                    },
+                                    "end": {
+                                        "line": 0,
+                                        "column": 0,
+                                        "byte": 0
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "trace": {
+                        "def": {
+                            "environment": "late-binding",
+                            "begin": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            },
+                            "end": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            }
+                        }
+                    }
+                },
+                "rootEnvironment": {
+                    "value": {
+                        "name": {
+                            "value": "late-binding",
+                            "trace": {
+                                "def": {
+                                    "environment": "late-binding",
+                                    "begin": {
+                                        "line": 0,
+                                        "column": 0,
+                                        "byte": 0
+                                    },
+                                    "end": {
+                                        "line": 0,
+                                        "column": 0,
+                                        "byte": 0
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "trace": {
+                        "def": {
+                            "environment": "late-binding",
+                            "begin": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            },
+                            "end": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            }
+                        }
+                    }
+                }
+            },
+            "schema": {
+                "properties": {
+                    "currentEnvironment": {
+                        "properties": {
+                            "name": {
+                                "type": "string",
+                                "const": "late-binding"
+                            }
+                        },
+                        "type": "object",
+                        "required": [
+                            "name"
+                        ]
+                    },
+                    "pulumi": {
+                        "properties": {
+                            "user": {
+                                "properties": {
+                                    "id": {
+                                        "type": "string",
+                                        "const": "USER_123"
+                                    }
+                                },
+                                "type": "object",
+                                "required": [
+                                    "id"
+                                ]
+                            }
+                        },
+                        "type": "object",
+                        "required": [
+                            "user"
+                        ]
+                    },
+                    "rootEnvironment": {
+                        "properties": {
+                            "name": {
+                                "type": "string",
+                                "const": "late-binding"
+                            }
+                        },
+                        "type": "object",
+                        "required": [
+                            "name"
+                        ]
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "currentEnvironment",
+                    "pulumi",
+                    "rootEnvironment"
+                ]
+            }
+        }
+    },
+    "checkJson": {
+        "a": {
+            "example": "Hello foo!",
+            "name": "foo"
+        },
+        "b": {
+            "example": "Hello bar!",
+            "name": "bar"
+        }
+    },
+    "eval": {
+        "exprs": {
+            "a": {
+                "range": {
+                    "environment": "late-binding",
+                    "begin": {
+                        "line": 2,
+                        "column": 6,
+                        "byte": 13
+                    },
+                    "end": {
+                        "line": 2,
+                        "column": 31,
+                        "byte": 38
+                    }
+                },
+                "schema": {
+                    "properties": {
+                        "example": {
+                            "type": "string"
+                        },
+                        "name": {
+                            "type": "string",
+                            "const": "foo"
+                        }
+                    },
+                    "type": "object",
+                    "required": [
+                        "example",
+                        "name"
+                    ]
+                },
+                "symbol": [
+                    {
+                        "key": "environments",
+                        "range": {
+                            "environment": "late-binding",
+                            "begin": {
+                                "line": 2,
+                                "column": 8,
+                                "byte": 15
+                            },
+                            "end": {
+                                "line": 2,
+                                "column": 20,
+                                "byte": 27
+                            }
+                        },
+                        "value": {
+                            "environment": "late-binding",
+                            "begin": {
+                                "line": 2,
+                                "column": 6,
+                                "byte": 13
+                            },
+                            "end": {
+                                "line": 2,
+                                "column": 31,
+                                "byte": 38
+                            }
+                        }
+                    },
+                    {
+                        "key": "example",
+                        "range": {
+                            "environment": "late-binding",
+                            "begin": {
+                                "line": 2,
+                                "column": 20,
+                                "byte": 27
+                            },
+                            "end": {
+                                "line": 2,
+                                "column": 28,
+                                "byte": 35
+                            }
+                        },
+                        "value": {
+                            "environment": "late-binding",
+                            "begin": {
+                                "line": 2,
+                                "column": 6,
+                                "byte": 13
+                            },
+                            "end": {
+                                "line": 2,
+                                "column": 31,
+                                "byte": 38
+                            }
+                        }
+                    },
+                    {
+                        "key": "a",
+                        "range": {
+                            "environment": "late-binding",
+                            "begin": {
+                                "line": 2,
+                                "column": 28,
+                                "byte": 35
+                            },
+                            "end": {
+                                "line": 2,
+                                "column": 30,
+                                "byte": 37
+                            }
+                        },
+                        "value": {
+                            "environment": "late-binding",
+                            "begin": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            },
+                            "end": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            }
+                        }
+                    }
+                ]
+            },
+            "b": {
+                "range": {
+                    "environment": "late-binding",
+                    "begin": {
+                        "line": 3,
+                        "column": 6,
+                        "byte": 0
+                    },
+                    "end": {
+                        "line": 3,
+                        "column": 31,
+                        "byte": 0
+                    }
+                },
+                "schema": {
+                    "properties": {
+                        "example": {
+                            "type": "string"
+                        },
+                        "name": {
+                            "type": "string",
+                            "const": "bar"
+                        }
+                    },
+                    "type": "object",
+                    "required": [
+                        "example",
+                        "name"
+                    ]
+                },
+                "symbol": [
+                    {
+                        "key": "environments",
+                        "range": {
+                            "environment": "late-binding",
+                            "begin": {
+                                "line": 3,
+                                "column": 8,
+                                "byte": 2
+                            },
+                            "end": {
+                                "line": 3,
+                                "column": 20,
+                                "byte": 14
+                            }
+                        },
+                        "value": {
+                            "environment": "late-binding",
+                            "begin": {
+                                "line": 3,
+                                "column": 6,
+                                "byte": 0
+                            },
+                            "end": {
+                                "line": 3,
+                                "column": 31,
+                                "byte": 0
+                            }
+                        }
+                    },
+                    {
+                        "key": "example",
+                        "range": {
+                            "environment": "late-binding",
+                            "begin": {
+                                "line": 3,
+                                "column": 20,
+                                "byte": 14
+                            },
+                            "end": {
+                                "line": 3,
+                                "column": 28,
+                                "byte": 22
+                            }
+                        },
+                        "value": {
+                            "environment": "late-binding",
+                            "begin": {
+                                "line": 3,
+                                "column": 6,
+                                "byte": 0
+                            },
+                            "end": {
+                                "line": 3,
+                                "column": 31,
+                                "byte": 0
+                            }
+                        }
+                    },
+                    {
+                        "key": "b",
+                        "range": {
+                            "environment": "late-binding",
+                            "begin": {
+                                "line": 3,
+                                "column": 28,
+                                "byte": 22
+                            },
+                            "end": {
+                                "line": 3,
+                                "column": 30,
+                                "byte": 24
+                            }
+                        },
+                        "value": {
+                            "environment": "late-binding",
+                            "begin": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            },
+                            "end": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            }
+                        }
+                    }
+                ]
+            }
+        },
+        "properties": {
+            "a": {
+                "value": {
+                    "example": {
+                        "value": "Hello foo!",
+                        "trace": {
+                            "def": {
+                                "environment": "example/defn",
+                                "begin": {
+                                    "line": 3,
+                                    "column": 19,
+                                    "byte": 35
+                                },
+                                "end": {
+                                    "line": 3,
+                                    "column": 33,
+                                    "byte": 49
+                                }
+                            }
+                        }
+                    },
+                    "name": {
+                        "value": "foo",
+                        "trace": {
+                            "def": {
+                                "environment": "example/a",
+                                "begin": {
+                                    "line": 2,
+                                    "column": 9,
+                                    "byte": 16
+                                },
+                                "end": {
+                                    "line": 2,
+                                    "column": 12,
+                                    "byte": 19
+                                }
+                            }
+                        }
+                    }
+                },
+                "trace": {
+                    "def": {
+                        "environment": "late-binding",
+                        "begin": {
+                            "line": 2,
+                            "column": 6,
+                            "byte": 13
+                        },
+                        "end": {
+                            "line": 2,
+                            "column": 31,
+                            "byte": 38
+                        }
+                    }
+                }
+            },
+            "b": {
+                "value": {
+                    "example": {
+                        "value": "Hello bar!",
+                        "trace": {
+                            "def": {
+                                "environment": "example/defn",
+                                "begin": {
+                                    "line": 3,
+                                    "column": 19,
+                                    "byte": 35
+                                },
+                                "end": {
+                                    "line": 3,
+                                    "column": 33,
+                                    "byte": 49
+                                }
+                            }
+                        }
+                    },
+                    "name": {
+                        "value": "bar",
+                        "trace": {
+                            "def": {
+                                "environment": "example/b",
+                                "begin": {
+                                    "line": 2,
+                                    "column": 9,
+                                    "byte": 16
+                                },
+                                "end": {
+                                    "line": 2,
+                                    "column": 12,
+                                    "byte": 19
+                                }
+                            }
+                        }
+                    }
+                },
+                "trace": {
+                    "def": {
+                        "environment": "late-binding",
+                        "begin": {
+                            "line": 3,
+                            "column": 6,
+                            "byte": 0
+                        },
+                        "end": {
+                            "line": 3,
+                            "column": 31,
+                            "byte": 0
+                        }
+                    }
+                }
+            }
+        },
+        "schema": {
+            "properties": {
+                "a": {
+                    "properties": {
+                        "example": {
+                            "type": "string"
+                        },
+                        "name": {
+                            "type": "string",
+                            "const": "foo"
+                        }
+                    },
+                    "type": "object",
+                    "required": [
+                        "example",
+                        "name"
+                    ]
+                },
+                "b": {
+                    "properties": {
+                        "example": {
+                            "type": "string"
+                        },
+                        "name": {
+                            "type": "string",
+                            "const": "bar"
+                        }
+                    },
+                    "type": "object",
+                    "required": [
+                        "example",
+                        "name"
+                    ]
+                }
+            },
+            "type": "object",
+            "required": [
+                "a",
+                "b"
+            ]
+        },
+        "executionContext": {
+            "properties": {
+                "currentEnvironment": {
+                    "value": {
+                        "name": {
+                            "value": "late-binding",
+                            "trace": {
+                                "def": {
+                                    "environment": "late-binding",
+                                    "begin": {
+                                        "line": 0,
+                                        "column": 0,
+                                        "byte": 0
+                                    },
+                                    "end": {
+                                        "line": 0,
+                                        "column": 0,
+                                        "byte": 0
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "trace": {
+                        "def": {
+                            "environment": "late-binding",
+                            "begin": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            },
+                            "end": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            }
+                        }
+                    }
+                },
+                "pulumi": {
+                    "value": {
+                        "user": {
+                            "value": {
+                                "id": {
+                                    "value": "USER_123",
+                                    "trace": {
+                                        "def": {
+                                            "environment": "late-binding",
+                                            "begin": {
+                                                "line": 0,
+                                                "column": 0,
+                                                "byte": 0
+                                            },
+                                            "end": {
+                                                "line": 0,
+                                                "column": 0,
+                                                "byte": 0
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            "trace": {
+                                "def": {
+                                    "environment": "late-binding",
+                                    "begin": {
+                                        "line": 0,
+                                        "column": 0,
+                                        "byte": 0
+                                    },
+                                    "end": {
+                                        "line": 0,
+                                        "column": 0,
+                                        "byte": 0
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "trace": {
+                        "def": {
+                            "environment": "late-binding",
+                            "begin": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            },
+                            "end": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            }
+                        }
+                    }
+                },
+                "rootEnvironment": {
+                    "value": {
+                        "name": {
+                            "value": "late-binding",
+                            "trace": {
+                                "def": {
+                                    "environment": "late-binding",
+                                    "begin": {
+                                        "line": 0,
+                                        "column": 0,
+                                        "byte": 0
+                                    },
+                                    "end": {
+                                        "line": 0,
+                                        "column": 0,
+                                        "byte": 0
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "trace": {
+                        "def": {
+                            "environment": "late-binding",
+                            "begin": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            },
+                            "end": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            }
+                        }
+                    }
+                }
+            },
+            "schema": {
+                "properties": {
+                    "currentEnvironment": {
+                        "properties": {
+                            "name": {
+                                "type": "string",
+                                "const": "late-binding"
+                            }
+                        },
+                        "type": "object",
+                        "required": [
+                            "name"
+                        ]
+                    },
+                    "pulumi": {
+                        "properties": {
+                            "user": {
+                                "properties": {
+                                    "id": {
+                                        "type": "string",
+                                        "const": "USER_123"
+                                    }
+                                },
+                                "type": "object",
+                                "required": [
+                                    "id"
+                                ]
+                            }
+                        },
+                        "type": "object",
+                        "required": [
+                            "user"
+                        ]
+                    },
+                    "rootEnvironment": {
+                        "properties": {
+                            "name": {
+                                "type": "string",
+                                "const": "late-binding"
+                            }
+                        },
+                        "type": "object",
+                        "required": [
+                            "name"
+                        ]
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "currentEnvironment",
+                    "pulumi",
+                    "rootEnvironment"
+                ]
+            }
+        }
+    },
+    "evalJsonRedacted": {
+        "a": {
+            "example": "Hello foo!",
+            "name": "foo"
+        },
+        "b": {
+            "example": "Hello bar!",
+            "name": "bar"
+        }
+    },
+    "evalJSONRevealed": {
+        "a": {
+            "example": "Hello foo!",
+            "name": "foo"
+        },
+        "b": {
+            "example": "Hello bar!",
+            "name": "bar"
+        }
+    }
+}
