@@ -1,0 +1,3 @@
+values:
+  hello:
+    fn::template: Hello ${name}!

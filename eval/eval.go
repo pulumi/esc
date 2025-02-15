@@ -367,6 +367,12 @@ func declare[Expr exprNode](e *evalContext, path string, x Expr, base *value) *e
 	case *ast.ToStringExpr:
 		repr := &toStringExpr{node: x, value: declare(e, "", x.Value, nil)}
 		return newExpr(path, repr, schema.String().Schema(), base)
+	case *ast.TemplateExpr:
+		repr := &templateExpr{node: x, template: declare(e, "", x.Args(), nil)}
+		return newExpr(path, repr, schema.Never().Schema(), base)
+	case *ast.EvalExpr:
+		repr := &evalExpr{node: x, value: declare(e, "", x.Args(), base)}
+		return newExpr(path, repr, schema.Always().Schema(), base)
 	case *ast.ArrayExpr:
 		elements := make([]*expr, len(x.Elements))
 		for i, x := range x.Elements {
@@ -593,6 +599,12 @@ func (e *evalContext) evaluateExpr(x *expr, accept *schema.Schema) *value {
 		val = e.evaluateBuiltinToJSON(x, repr)
 	case *toStringExpr:
 		val = e.evaluateBuiltinToString(x, repr)
+	case *templateExpr:
+		val = &value{def: x, schema: x.schema, repr: repr, unknown: true} // templates defer evaluation
+	case *evalExpr:
+		defn := e.evaluateExpr(repr.value, schema.Always())                // deref template expr
+		expr := declare(e, "", defn.repr.(*templateExpr).node.Args(), nil) // clone its ast node into a new expr
+		val = e.evaluateExpr(expr, schema.Always())                        // evaluate it
 	case *arrayExpr:
 		val = e.evaluateArray(x, repr, accept)
 	case *objectExpr:

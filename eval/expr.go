@@ -300,6 +300,10 @@ func (x *expr) export(environment string) esc.Expr {
 		for k, v := range repr.properties {
 			ex.Object[k] = v.export(environment)
 		}
+	case *templateExpr:
+		// not evaluated
+	case *evalExpr:
+		return repr.value.export(environment)
 	default:
 		panic(fmt.Sprintf("fatal: invalid expr type %T", repr))
 	}
@@ -505,5 +509,25 @@ type fromBase64Expr struct {
 }
 
 func (x *fromBase64Expr) syntax() ast.Expr {
+	return x.node
+}
+
+type templateExpr struct {
+	node *ast.TemplateExpr
+
+	template *expr
+}
+
+func (x *templateExpr) syntax() ast.Expr {
+	return x.node
+}
+
+type evalExpr struct {
+	node *ast.EvalExpr
+
+	value *expr
+}
+
+func (x *evalExpr) syntax() ast.Expr {
 	return x.node
 }

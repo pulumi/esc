@@ -624,6 +624,18 @@ func FromBase64(value Expr) *FromBase64Expr {
 	return FromBase64Syntax(nil, name, value)
 }
 
+type TemplateExpr struct {
+	builtinNode
+
+	//TemplateDef Expr
+}
+
+type EvalExpr struct {
+	builtinNode
+
+	//TemplateValue Expr
+}
+
 func tryParseFunction(node *syntax.ObjectNode) (Expr, syntax.Diagnostics, bool) {
 	if node.Len() != 1 {
 		return nil, nil, false
@@ -652,6 +664,18 @@ func tryParseFunction(node *syntax.ObjectNode) (Expr, syntax.Diagnostics, bool) 
 		parse = parseToJSON
 	case "fn::toString":
 		parse = parseToString
+	case "fn::template":
+		parse = func(node *syntax.ObjectNode, name *StringExpr, args Expr) (Expr, syntax.Diagnostics) {
+			return &TemplateExpr{
+				builtinNode: builtin(node, name, args),
+			}, nil
+		}
+	case "fn::eval":
+		parse = func(node *syntax.ObjectNode, name *StringExpr, args Expr) (Expr, syntax.Diagnostics) {
+			return &EvalExpr{
+				builtinNode: builtin(node, name, args),
+			}, nil
+		}
 	default:
 		if strings.HasPrefix(kvp.Key.Value(), "fn::open::") {
 			parse = parseShortOpen

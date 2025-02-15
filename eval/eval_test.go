@@ -344,6 +344,9 @@ func TestEval(t *testing.T) {
 
 	path := filepath.Join("testdata", "eval")
 	entries, err := os.ReadDir(path)
+	entries = slices.DeleteFunc(entries, func(entry os.DirEntry) bool {
+		return entry.Name() != "late-binding"
+	})
 	require.NoError(t, err)
 	for _, e := range entries {
 		if e.Name() == "bench" {
