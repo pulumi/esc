@@ -128,6 +128,9 @@ func (d *MapDecl[T]) parse(name string, node syntax.Node) syntax.Diagnostics {
 
 		var v T
 		vname := name + "." + kvp.Key.Value()
+		if strings.HasPrefix(kvp.Key.Value(), "fn::") {
+			diags.Extend(syntax.NodeError(kvp.Key, "fn expression not allowed at the top level"))
+		}
 		vdiags := parseNode(vname, &v, kvp.Value)
 		diags.Extend(vdiags...)
 
