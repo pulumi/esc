@@ -634,6 +634,8 @@ type EvalExpr struct {
 	builtinNode
 
 	//TemplateValue Expr
+	// either a symbol or a template expr?
+	// or just allow anything but behave as pass-thru for non-templates?
 }
 
 func tryParseFunction(node *syntax.ObjectNode) (Expr, syntax.Diagnostics, bool) {
