@@ -25,9 +25,7 @@ const (
 )
 
 // A RotationResult stores the result of secret rotations
-type RotationResult struct {
-	Rotations []*Rotation // rotations performed
-}
+type RotationResult []*Rotation
 
 // A Rotation stores secret rotation information and diagnostics
 type Rotation struct {
@@ -39,7 +37,7 @@ type Rotation struct {
 
 func (r *RotationResult) Patches() []*Patch {
 	var patches []*Patch
-	for _, rotation := range r.Rotations {
+	for _, rotation := range *r {
 		if rotation.Patch != nil {
 			patches = append(patches, rotation.Patch)
 		}

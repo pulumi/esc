@@ -1109,7 +1109,7 @@ func (e *evalContext) evaluateBuiltinRotate(x *expr, repr *rotateExpr) *value {
 	state, stateOK := e.evaluateTypedExpr(repr.state, repr.stateSchema)
 	if !inputsOK || inputs.containsObservableUnknowns(e.rotating) || !stateOK || state.containsUnknowns() || e.validating || err != nil {
 		if e.shouldRotate(docPath) {
-			e.rotationResult.Rotations = append(e.rotationResult.Rotations, &Rotation{
+			e.rotationResult = append(e.rotationResult, &Rotation{
 				Path:   docPath,
 				Status: RotationNotEvaluated,
 			})
@@ -1129,19 +1129,18 @@ func (e *evalContext) evaluateBuiltinRotate(x *expr, repr *rotateExpr) *value {
 		)
 		if err != nil {
 			diag := ast.ExprError(repr.syntax(), err.Error())
-			rotation := Rotation{
+			e.rotationResult = append(e.rotationResult, &Rotation{
 				Path:   docPath,
 				Status: RotationFailed,
 				Diags:  []*syntax.Diagnostic{diag},
-			}
-			e.rotationResult.Rotations = append(e.rotationResult.Rotations, &rotation)
+			})
 
 			e.errorf(repr.syntax(), "rotate: %s", err.Error())
 			v.unknown = true
 			return v
 		}
 
-		rotation := Rotation{
+		e.rotationResult = append(e.rotationResult, &Rotation{
 			Path:   docPath,
 			Status: RotationSucceeded,
 			Patch: &Patch{
@@ -1149,8 +1148,7 @@ func (e *evalContext) evaluateBuiltinRotate(x *expr, repr *rotateExpr) *value {
 				DocPath:     util.JoinKey(docPath, repr.node.Name().GetValue()) + ".state",
 				Replacement: newState,
 			},
-		}
-		e.rotationResult.Rotations = append(e.rotationResult.Rotations, &rotation)
+		})
 
 		// todo: validate newState conforms to state schema
 
