@@ -628,11 +628,12 @@ func tryParseFunction(node *syntax.ObjectNode) (Expr, syntax.Diagnostics, bool) 
 	var diags syntax.Diagnostics
 	if node.Len() != 1 {
 		for i := 0; i < node.Len(); i++ {
-			if strings.HasPrefix(node.Index(i).Key.Value(), "fn::") {
-				diags = append(diags, syntax.NodeError(node, "fn:: expression must be the only key within object"))
-				return nil, diags, false
+			if k := node.Index(i).Key.Value(); strings.HasPrefix(k, "fn::") {
+				diags = append(diags, syntax.NodeError(node, fmt.Sprintf("illegal call to builtin function: %q must be the only key within its containing object", k)))
+
 			}
 		}
+		return nil, diags, false
 		return nil, nil, false
 	}
 

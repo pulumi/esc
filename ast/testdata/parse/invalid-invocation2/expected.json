@@ -18,7 +18,7 @@
     "diags": [
         {
             "Severity": 1,
-            "Summary": "fn expression not allowed at the top level",
+            "Summary": "builtin function call \"fn::secret\" not allowed at the top level",
             "Detail": "",
             "Subject": {
                 "Filename": "invalid-invocation2",

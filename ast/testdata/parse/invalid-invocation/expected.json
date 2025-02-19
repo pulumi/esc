@@ -53,7 +53,7 @@
     "diags": [
         {
             "Severity": 1,
-            "Summary": "fn:: expression must be the only key within object",
+            "Summary": "illegal call to builtin function: \"fn::rotate::provider\" must be the only key within its containing object",
             "Detail": "",
             "Subject": {
                 "Filename": "invalid-invocation",
