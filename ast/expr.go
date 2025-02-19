@@ -634,7 +634,6 @@ func tryParseFunction(node *syntax.ObjectNode) (Expr, syntax.Diagnostics, bool) 
 			}
 		}
 		return nil, diags, false
-		return nil, nil, false
 	}
 
 	kvp := node.Index(0)
