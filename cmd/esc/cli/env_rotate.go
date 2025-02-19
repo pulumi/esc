@@ -70,6 +70,9 @@ func newEnvRotateCmd(envcmd *envCommand) *cobra.Command {
 					fmt.Fprintf(&b, "%vEnvironment '%s' rotated with errors.%v\n", colors.SpecWarning, args[0], colors.Reset)
 				}
 			}
+			if event.PostRotationRevision != nil {
+				fmt.Fprintf(&b, "New revision '%d' was created.\n", *event.PostRotationRevision)
+			}
 
 			var failedRotations []client.SecretRotation
 			for _, rotation := range event.Rotations {
