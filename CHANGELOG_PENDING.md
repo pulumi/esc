@@ -11,6 +11,8 @@
   [#443](https://github.com/pulumi/esc/pull/443)
 - Introduce rotateOnly inputs
   [#444](https://github.com/pulumi/esc/pull/444)
+- Release rotate environment CLI command
+  [#459](https://github.com/pulumi/esc/pull/459)
 
 ### Bug Fixes
 
