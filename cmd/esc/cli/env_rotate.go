@@ -18,7 +18,6 @@ func newEnvRotateCmd(envcmd *envCommand) *cobra.Command {
 			"\n" +
 			"Optionally accepts any number of Property Paths as additional arguments. If given any paths, will only rotate secrets at those paths.\n",
 		SilenceUsage: true,
-		Hidden:       true,
 		RunE: func(cmd *cobra.Command, args []string) error {
 			ctx := context.Background()
 
