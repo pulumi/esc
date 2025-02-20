@@ -719,27 +719,18 @@ func (e *evalContext) evaluatePropertyAccess(x *expr, accessors []*propertyAcces
 // is any other type of expression, it is evaluated and the result is passed to evaluateValueAccess. Once all accessors
 // have been processed, the resolved expression is evaluated.
 func (e *evalContext) evaluateExprAccess(x *expr, accessors []*propertyAccessor, accept *schema.Schema) *value {
-	receiver := e.root
-
 	k, ok := e.objectKey(x.repr.syntax(), accessors[0].accessor, false)
 
-	// Check for an imports access.
-	if ok && k == "imports" {
-		accessors[0].value = e.myImports
-		return e.evaluateValueAccess(x.repr.syntax(), e.myImports, accessors[1:])
+	// root access
+	if ok && k == "" {
+		return e.evaluateRootAccess(x, accessors[1:], accept)
+	}
+	// reserved top-level key access -- these keys are reserved within the context of `values`
+	if ok && e.isReserveTopLevelKey(k) {
+		return e.evaluateRootAccess(x, accessors, accept)
 	}
 
-	// Check for context interpolation.
-	if ok && k == "context" {
-		accessors[0].value = e.myContext
-		return e.evaluateValueAccess(x.repr.syntax(), e.myContext, accessors[1:])
-	}
-
-	// Check for inline reference
-	if ok && k == "environments" {
-		return e.evaluateEnvironmentReferenceAccess(x, accessors, accept)
-	}
-
+	receiver := e.root
 	for len(accessors) > 0 {
 		accessor := accessors[0]
 		if receiver == nil {
@@ -792,9 +783,44 @@ func (e *evalContext) evaluateExprAccess(x *expr, accessors []*propertyAccessor,
 	return e.evaluateExpr(receiver, schema.Always())
 }
 
+// evaluateRootAccess evaluates access to the reserved keys "mounted" at document root
+func (e *evalContext) evaluateRootAccess(x *expr, accessors []*propertyAccessor, accept *schema.Schema) *value {
+	k, ok := e.objectKey(x.repr.syntax(), accessors[0].accessor, false)
+
+	// Check for an imports access.
+	if ok && k == "imports" {
+		accessors[0].value = e.myImports
+		return e.evaluateValueAccess(x.repr.syntax(), e.myImports, accessors[1:])
+	}
+
+	// Check for context interpolation.
+	if ok && k == "context" {
+		accessors[0].value = e.myContext
+		return e.evaluateValueAccess(x.repr.syntax(), e.myContext, accessors[1:])
+	}
+
+	// Check for environment reference
+	if ok && k == "environments" {
+		return e.evaluateEnvironmentReferenceAccess(x, accessors)
+	}
+
+	// Check for values access.
+	// There isn't really any reason for a user to do this, because ${.values.foo} === ${foo}, it's just for consistency
+	if ok && k == "values" {
+		if len(accessors) == 1 {
+			// referencing ${.values} is inherently cyclical
+			e.errorf(x.repr.syntax(), "cyclic reference to values")
+			return &value{def: x, schema: schema.Always().Schema(), unknown: true}
+		}
+		return e.evaluateExprAccess(x, accessors[1:], accept)
+	}
+
+	return e.invalidPropertyAccess(x.repr.syntax(), accessors)
+}
+
 // evaluateEnvironmentReferenceAccess performs an inline import of an environment.
 // The accessor is of the form ["environments", $project, $env, ...], which is transformed into an import name in the form "$project/$env"
-func (e *evalContext) evaluateEnvironmentReferenceAccess(x *expr, accessors []*propertyAccessor, accept *schema.Schema) *value {
+func (e *evalContext) evaluateEnvironmentReferenceAccess(x *expr, accessors []*propertyAccessor) *value {
 	// desugar accessor path into import name
 	if len(accessors) < 3 {
 		// need at least the first three elements to create an import name
