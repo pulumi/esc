@@ -5,21 +5,22 @@ package cli
 import (
 	"context"
 	"fmt"
-	"regexp"
-	"strconv"
-
 	"github.com/ccojocar/zxcvbn-go"
-	"github.com/spf13/cobra"
-	"gopkg.in/yaml.v3"
-
 	"github.com/pulumi/esc/syntax/encoding"
 	"github.com/pulumi/pulumi/sdk/v3/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v3/go/common/util/contract"
+	"github.com/spf13/cobra"
+	"gopkg.in/yaml.v3"
+	"io"
+	"os"
+	"regexp"
+	"strconv"
 )
 
 func newEnvSetCmd(env *envCommand) *cobra.Command {
 	var secret bool
 	var plaintext bool
+	var filename string
 
 	cmd := &cobra.Command{
 		Use:   "set [<org-name>/][<project-name>/]<environment-name> <path> <value>",
@@ -45,7 +46,12 @@ func newEnvSetCmd(env *envCommand) *cobra.Command {
 			if ref.version != "" {
 				return fmt.Errorf("the set command does not accept versions")
 			}
-			if len(args) < 2 {
+			reqArgs := 2
+			if filename != "" {
+				// if filename is provided, we only need a path
+				reqArgs = 1
+			}
+			if len(args) < reqArgs {
 				return fmt.Errorf("expected a path and a value")
 			}
 
@@ -57,8 +63,18 @@ func newEnvSetCmd(env *envCommand) *cobra.Command {
 				return fmt.Errorf("path must contain at least one element")
 			}
 
+			var value []byte
+			if filename == "" {
+				value = []byte(args[1])
+			} else {
+				value, err = readFileInput(filename)
+				if err != nil {
+					return err
+				}
+			}
+
 			var yamlValue yaml.Node
-			if err := yaml.Unmarshal([]byte(args[1]), &yamlValue); err != nil {
+			if err := yaml.Unmarshal(value, &yamlValue); err != nil {
 				return fmt.Errorf("invalid value: %w", err)
 			}
 			if len(yamlValue.Content) == 0 {
@@ -147,8 +163,26 @@ func newEnvSetCmd(env *envCommand) *cobra.Command {
 	cmd.Flags().BoolVar(
 		&plaintext, "plaintext", false,
 		"true to leave the value in plaintext")
+	cmd.Flags().StringVar(
+		&filename, "file", "", "read value from file. use `-` to read from stdin.")
 
 	return cmd
+}
+
+// readFileInput reads the full content of filename, or stdin if filename is `-`
+func readFileInput(filename string) (input []byte, err error) {
+	if filename == "-" {
+		input, err = io.ReadAll(os.Stdin)
+		if err != nil {
+			return nil, fmt.Errorf("reading stdin: %w", err)
+		}
+	} else {
+		input, err = os.ReadFile(filename)
+		if err != nil {
+			return nil, fmt.Errorf("reading file: %w", err)
+		}
+	}
+	return input, err
 }
 
 // keyPattern is the regular expression a configuration key must match before we check (and error) if we think
