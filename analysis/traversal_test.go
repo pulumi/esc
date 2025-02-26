@@ -26,8 +26,7 @@ import (
 )
 
 func TestExpressionAt(t *testing.T) {
-	syntax, diags, err := eval.LoadYAMLBytes("def", []byte(def))
-	require.NoError(t, err)
+	syntax, diags := eval.LoadYAMLBytes("def", []byte(def))
 	require.Empty(t, diags)
 
 	execContext, err := esc.NewExecContext(make(map[string]esc.Value))

@@ -27,8 +27,7 @@ import (
 )
 
 func TestDescribe(t *testing.T) {
-	syntax, diags, err := eval.LoadYAMLBytes("def", []byte(def))
-	require.NoError(t, err)
+	syntax, diags := eval.LoadYAMLBytes("def", []byte(def))
 	require.Empty(t, diags)
 
 	execContext, err := esc.NewExecContext(make(map[string]esc.Value))
@@ -101,8 +100,7 @@ func TestDescribe(t *testing.T) {
 }
 
 func TestDescribeOpen(t *testing.T) {
-	syntax, diags, err := eval.LoadYAMLBytes("def", []byte(`{"values": {"open": {"fn::open": {"provider": "test", "inputs": {"address": "foo"}}}}}`))
-	require.NoError(t, err)
+	syntax, diags := eval.LoadYAMLBytes("def", []byte(`{"values": {"open": {"fn::open": {"provider": "test", "inputs": {"address": "foo"}}}}}`))
 	require.Empty(t, diags)
 
 	execContext, err := esc.NewExecContext(make(map[string]esc.Value))

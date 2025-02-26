@@ -390,10 +390,7 @@ func (c *testPulumiClient) getEnvironment(orgName, projectName, envName, version
 }
 
 func (c *testPulumiClient) checkEnvironment(ctx context.Context, orgName, envName string, yaml []byte, opts []client.CheckYAMLOption) (*esc.Environment, []client.EnvironmentDiagnostic, error) {
-	environment, diags, err := eval.LoadYAMLBytes(envName, yaml)
-	if err != nil {
-		return nil, nil, fmt.Errorf("loading environment: %w", err)
-	}
+	environment, diags := eval.LoadYAMLBytes(envName, yaml)
 	if diags.HasErrors() {
 		return nil, mapDiags(diags), nil
 	}
@@ -422,10 +419,7 @@ func (c *testPulumiClient) openEnvironment(ctx context.Context, orgName, name st
 		return "", nil, err
 	}
 
-	decl, diags, err := eval.LoadYAMLBytes(name, yaml)
-	if err != nil {
-		return "", nil, fmt.Errorf("loading environment: %w", err)
-	}
+	decl, diags := eval.LoadYAMLBytes(name, yaml)
 	if diags.HasErrors() {
 		return "", mapDiags(diags), nil
 	}

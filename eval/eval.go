@@ -54,26 +54,27 @@ func LoadYAML(filename string, r io.Reader) (*ast.EnvironmentDecl, syntax.Diagno
 	if err != nil {
 		return nil, nil, err
 	}
-	return LoadYAMLBytes(filename, bytes)
+	env, diags := LoadYAMLBytes(filename, bytes)
+	return env, diags, nil
 }
 
 // LoadYAMLBytes decodes a YAML template from a byte array.
-func LoadYAMLBytes(filename string, source []byte) (*ast.EnvironmentDecl, syntax.Diagnostics, error) {
+func LoadYAMLBytes(filename string, source []byte) (*ast.EnvironmentDecl, syntax.Diagnostics) {
 	var diags syntax.Diagnostics
 
 	syn, sdiags := encoding.DecodeYAMLBytes(filename, source, TagDecoder)
 	diags.Extend(sdiags...)
 	if sdiags.HasErrors() {
-		return nil, diags, nil
+		return nil, diags
 	}
 
 	t, tdiags := ast.ParseEnvironment(source, syn)
 	diags.Extend(tdiags...)
 	if tdiags.HasErrors() {
-		return nil, diags, nil
+		return nil, diags
 	}
 
-	return t, diags, nil
+	return t, diags
 }
 
 // EvalEnvironment evaluates the given environment.
@@ -512,12 +513,8 @@ func (e *evalContext) evaluateImport(expr ast.Expr, name string) (*value, bool) 
 			return nil, false
 		}
 
-		env, diags, err := LoadYAMLBytes(name, bytes)
+		env, diags := LoadYAMLBytes(name, bytes)
 		e.diags.Extend(diags...)
-		if err != nil {
-			e.errorf(expr, "%s", err.Error())
-			return nil, false
-		}
 		if diags.HasErrors() {
 			return nil, false
 		}
