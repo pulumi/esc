@@ -59,7 +59,15 @@ func newEnvSetCmd(env *envCommand) *cobra.Command {
 
 			var yamlValue yaml.Node
 			if err := yaml.Unmarshal([]byte(args[1]), &yamlValue); err != nil {
-				return fmt.Errorf("invalid value: %w", err)
+				// Default to a string value
+				yamlValue = yaml.Node{
+					Content: []*yaml.Node{
+						{
+							Kind:  yaml.ScalarNode,
+							Value: args[1],
+						},
+					},
+				}
 			}
 			if len(yamlValue.Content) == 0 {
 				// This can happen when the value is empty (e.g. when "" is present on the command line). Treat this
