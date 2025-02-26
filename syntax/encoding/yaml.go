@@ -136,6 +136,7 @@ func (s YAMLSyntax) Set(prefix, path resource.PropertyPath, new yaml.Node) (*yam
 		s.Kind = new.Kind
 		s.Tag = new.Tag
 		s.Value = new.Value
+		s.Style = new.Style
 		return s.Node, nil
 	}
 
