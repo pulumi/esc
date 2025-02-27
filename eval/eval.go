@@ -513,12 +513,12 @@ func (e *evalContext) evaluateImport(expr ast.Expr, name string) (*value, bool) 
 		}
 
 		env, diags, err := LoadYAMLBytes(name, bytes)
+		e.diags.Extend(diags...)
 		if err != nil {
 			e.errorf(expr, "%s", err.Error())
 			return nil, false
 		}
 		if diags.HasErrors() {
-			e.diags.Extend(diags...)
 			return nil, false
 		}
 
