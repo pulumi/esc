@@ -4,6 +4,7 @@ package cli
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 	"regexp"
 	"strconv"
@@ -20,6 +21,7 @@ import (
 func newEnvSetCmd(env *envCommand) *cobra.Command {
 	var secret bool
 	var plaintext bool
+	var rawString bool
 
 	cmd := &cobra.Command{
 		Use:   "set [<org-name>/][<project-name>/]<environment-name> <path> <value>",
@@ -57,8 +59,17 @@ func newEnvSetCmd(env *envCommand) *cobra.Command {
 				return fmt.Errorf("path must contain at least one element")
 			}
 
+			input := args[1]
+			if rawString {
+				js, err := json.Marshal(input)
+				if err != nil {
+					return fmt.Errorf("internal error: %w", err)
+				}
+				input = string(js)
+			}
+
 			var yamlValue yaml.Node
-			if err := yaml.Unmarshal([]byte(args[1]), &yamlValue); err != nil {
+			if err := yaml.Unmarshal([]byte(input), &yamlValue); err != nil {
 				return fmt.Errorf("invalid value: %w", err)
 			}
 			if len(yamlValue.Content) == 0 {
@@ -147,6 +158,9 @@ func newEnvSetCmd(env *envCommand) *cobra.Command {
 	cmd.Flags().BoolVar(
 		&plaintext, "plaintext", false,
 		"true to leave the value in plaintext")
+	cmd.Flags().BoolVar(
+		&rawString, "string", false,
+		"true to treat the value as a string rather than attempting to parse it as YAML")
 
 	return cmd
 }
