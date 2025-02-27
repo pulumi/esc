@@ -389,7 +389,7 @@ func TestEval(t *testing.T) {
 			}
 
 			if accept() {
-				env, loadDiags := LoadYAMLBytes(environmentName, envBytes)
+				env, loadDiags, err := LoadYAMLBytes(environmentName, envBytes)
 				require.NoError(t, err)
 				sortEnvironmentDiagnostics(loadDiags)
 
@@ -460,7 +460,8 @@ func TestEval(t *testing.T) {
 			err = dec.Decode(&expected)
 			require.NoError(t, err)
 
-			env, diags := LoadYAMLBytes(environmentName, envBytes)
+			env, diags, err := LoadYAMLBytes(environmentName, envBytes)
+			require.NoError(t, err)
 			sortEnvironmentDiagnostics(diags)
 			require.Equal(t, expected.LoadDiags, diags)
 
@@ -558,7 +559,8 @@ func benchmarkEval(b *testing.B, openDelay, loadDelay time.Duration) {
 
 		environmentName := "bench"
 
-		env, loadDiags := LoadYAMLBytes(environmentName, envBytes)
+		env, loadDiags, err := LoadYAMLBytes(environmentName, envBytes)
+		require.NoError(b, err)
 		require.Empty(b, loadDiags)
 
 		_, evalDiags := EvalEnvironment(context.Background(), environmentName, env, rot128{}, testProviders{benchDelay: openDelay},

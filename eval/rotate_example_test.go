@@ -43,7 +43,7 @@ values:
               fn::secret: a
             b: b
 `
-	env, _ := LoadYAMLBytes("<stdin>", []byte(def))
+	env, _, _ := LoadYAMLBytes("<stdin>", []byte(def))
 
 	// rotate the environment
 	execContext, _ := esc.NewExecContext(nil)
