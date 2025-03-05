@@ -101,8 +101,10 @@ func New(opts *Options) *cobra.Command {
 	}
 
 	cmd := &cobra.Command{
-		Use:   "esc",
-		Short: "Pulumi ESC command line",
+		Use:           "esc",
+		Short:         "Pulumi ESC command line",
+		SilenceErrors: true,
+		SilenceUsage:  true,
 		Long: fmt.Sprintf("Pulumi ESC - Manage environments, secrets, and configuration\n"+
 			"\n"+
 			"To begin working with Pulumi ESC, run the `%[1]s env init` command:\n"+
