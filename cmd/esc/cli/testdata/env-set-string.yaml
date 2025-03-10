@@ -1,14 +1,26 @@
 run: |
   esc env init default/test
   esc env set default/test path "[a" --string
-  esc env get default/test path --value string
-stdout: |
+  esc env get default/test
+stdout: |+
   > esc env init default/test
   Environment created: test-user/default/test
   > esc env set default/test path [a --string
-  > esc env get default/test path --value string
-  [a
+  > esc env get default/test
+  # Value
+  ```json
+  {
+    "path": "[a"
+  }
+  ```
+  # Definition
+  ```yaml
+  values:
+    path: '[a'
+
+  ```
+
 stderr: |
   > esc env init default/test
   > esc env set default/test path [a --string
-  > esc env get default/test path --value string
+  > esc env get default/test
