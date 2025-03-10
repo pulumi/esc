@@ -1,0 +1,12 @@
+run: |
+  esc env init default/test
+  esc env set default/test path "[a"
+error: exit status 1
+stdout: |
+  > esc env init default/test
+  Environment created: test-user/default/test
+  > esc env set default/test path [a
+stderr: |
+  > esc env init default/test
+  > esc env set default/test path [a
+  Error: invalid value: yaml: line 1: did not find expected ',' or ']'

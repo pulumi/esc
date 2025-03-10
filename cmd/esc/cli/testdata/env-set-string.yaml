@@ -1,0 +1,10 @@
+run: |
+  esc env init default/test
+  esc env set default/test path "[a" --string
+stdout: |
+  > esc env init default/test
+  Environment created: test-user/default/test
+  > esc env set default/test path [a --string
+stderr: |
+  > esc env init default/test
+  > esc env set default/test path [a --string
