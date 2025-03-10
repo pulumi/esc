@@ -4,10 +4,10 @@ package cli
 
 import (
 	"context"
-	"encoding/json"
 	"fmt"
 	"regexp"
 	"strconv"
+	"strings"
 
 	"github.com/ccojocar/zxcvbn-go"
 	"github.com/spf13/cobra"
@@ -60,25 +60,24 @@ func newEnvSetCmd(env *envCommand) *cobra.Command {
 			}
 
 			input := args[1]
-			if rawString {
-				js, err := json.Marshal(input)
-				if err != nil {
-					return fmt.Errorf("internal error: %w", err)
-				}
-				input = string(js)
-			}
-
 			var yamlValue yaml.Node
-			if err := yaml.Unmarshal([]byte(input), &yamlValue); err != nil {
-				return fmt.Errorf("invalid value: %w", err)
+			if rawString {
+				yamlValue.SetString(input)
+				if mustEscape := strings.ContainsFunc(input, func(r rune) bool { return !strconv.IsPrint(r) }); mustEscape {
+					yamlValue.Style = yaml.DoubleQuotedStyle
+				}
+			} else {
+				if err := yaml.Unmarshal([]byte(input), &yamlValue); err != nil {
+					return fmt.Errorf("invalid value: %w", err)
+				}
+				if len(yamlValue.Content) == 0 {
+					// This can happen when the value is empty (e.g. when "" is present on the command line). Treat this
+					// as the empty string.
+					err = yaml.Unmarshal([]byte(`""`), &yamlValue)
+					contract.IgnoreError(err)
+				}
+				yamlValue = *yamlValue.Content[0]
 			}
-			if len(yamlValue.Content) == 0 {
-				// This can happen when the value is empty (e.g. when "" is present on the command line). Treat this
-				// as the empty string.
-				err = yaml.Unmarshal([]byte(`""`), &yamlValue)
-				contract.IgnoreError(err)
-			}
-			yamlValue = *yamlValue.Content[0]
 
 			if looksLikeSecret(path, yamlValue) && !secret && !plaintext {
 				return fmt.Errorf("value looks like a secret; rerun with --secret to mark it as such, or --plaintext if you meant to leave it as plaintext")
