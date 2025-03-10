@@ -153,9 +153,18 @@ func (esc *escCommand) getCachedClient(ctx context.Context) error {
 	if err != nil {
 		return fmt.Errorf("could not determine current cloud: %w", err)
 	}
-	if account == nil {
-		backendURL := esc.workspace.GetCurrentCloudURL(nil)
 
+	backendURL := esc.workspace.GetCurrentCloudURL(account)
+
+	// If backendURL is overridden via env var, try to get a matching existing account
+	if backendURL != account.BackendURL {
+		account, err = esc.workspace.GetAccount(backendURL)
+		if err != nil {
+			return fmt.Errorf("could not determine current cloud: %w", err)
+		}
+	}
+
+	if account == nil {
 		nAccount, err := esc.login.Login(
 			ctx,
 			backendURL,
@@ -178,11 +187,11 @@ func (esc *escCommand) getCachedClient(ctx context.Context) error {
 
 		account = &workspace.Account{
 			Account:    *nAccount,
-			BackendURL: backendURL,
 			DefaultOrg: defaultOrg,
 		}
 	}
 
+	account.BackendURL = backendURL
 	if err := esc.checkBackendURL(account.BackendURL); err != nil {
 		return err
 	}
