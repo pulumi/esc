@@ -156,15 +156,7 @@ func (esc *escCommand) getCachedClient(ctx context.Context) error {
 
 	backendURL := esc.workspace.GetCurrentCloudURL(account)
 
-	// If backendURL is overridden via env var, try to get a matching existing account
-	if backendURL != account.BackendURL {
-		account, err = esc.workspace.GetAccount(backendURL)
-		if err != nil {
-			return fmt.Errorf("could not determine current cloud: %w", err)
-		}
-	}
-
-	if account == nil {
+	if account == nil || account.BackendURL != backendURL {
 		nAccount, err := esc.login.Login(
 			ctx,
 			backendURL,
