@@ -36,6 +36,10 @@ type Rotation struct {
 }
 
 func (r *RotationResult) Patches() []*Patch {
+	if r == nil {
+		return nil
+	}
+
 	var patches []*Patch
 	for _, rotation := range *r {
 		if rotation.Patch != nil {

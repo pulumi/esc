@@ -1231,7 +1231,7 @@ func (e *evalContext) evaluateBuiltinFromBase64(x *expr, repr *fromBase64Expr) *
 			v.unknown = true
 			return v
 		}
-		v.repr = string(b)
+		v.repr = b
 	}
 	return v
 }

@@ -229,6 +229,11 @@ func (e *Environment) GetTemporaryFiles() map[string]Value {
 			} else {
 				files[k] = NewValue(str)
 			}
+		case []byte:
+			if files == nil {
+				files = make(map[string]Value)
+			}
+			files[k] = v
 		}
 	}
 	return files
