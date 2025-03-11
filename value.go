@@ -146,7 +146,7 @@ func (v *Value) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-// FromJSON converts a plain-old-JSON value (i.e. a value of type nil, bool, json.Number, string, []byte, []any, or
+// FromJSON converts a plain-old-JSON value (i.e. a value of type nil, bool, json.Number, string, []any, or
 // map[string]any) into a Value.
 func FromJSON(v any, secret bool) (Value, error) {
 	return fromJSON("", v, secret)
@@ -167,11 +167,6 @@ func fromJSON(path string, v any, secret bool) (Value, error) {
 		}
 		return NewValue(v), nil
 	case string:
-		if secret {
-			return NewSecret(v), nil
-		}
-		return NewValue(v), nil
-	case []byte:
 		if secret {
 			return NewSecret(v), nil
 		}
@@ -209,7 +204,7 @@ func fromJSON(path string, v any, secret bool) (Value, error) {
 	}
 }
 
-// ToJSON converts a Value into a plain-old-JSON value (i.e. a value of type nil, bool, json.Number, string, []byte, []any, or
+// ToJSON converts a Value into a plain-old-JSON value (i.e. a value of type nil, bool, json.Number, string, []any, or
 // map[string]any). If redact is true, secrets are replaced with [secret].
 func (v Value) ToJSON(redact bool) any {
 	if v.Secret && redact {
@@ -232,6 +227,8 @@ func (v Value) ToJSON(redact bool) any {
 			m[k] = v.ToJSON(redact)
 		}
 		return m
+	case []byte:
+		return base64.StdEncoding.EncodeToString(pv)
 	default:
 		return pv
 	}
