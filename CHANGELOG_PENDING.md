@@ -7,6 +7,8 @@
   [#491](https://github.com/pulumi/esc/pull/491)
 - Make CLI prefer environment variable `PULUMI_BACKEND_URL` over account backend URL
   [#477](https://github.com/pulumi/esc/pull/477)
+- Adding cascading secrets `NewSecret` method
+  [#488](https://github.com/pulumi/esc/pull/488)
 
 ### Breaking changes
 

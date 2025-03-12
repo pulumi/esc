@@ -443,7 +443,7 @@ func (e *evalContext) evaluate() (*value, syntax.Diagnostics) {
 
 func (e *evalContext) evaluateContext() {
 	def := declare(e, "", ast.Symbol(&ast.PropertyName{Name: "context"}), nil)
-	e.myContext = unexport(esc.NewValue(e.execContext.Values()), def)
+	e.myContext = unexport(esc.NewValue(e.execContext.Values()), def, false)
 }
 
 // evaluateImports evaluates an environment's imports.
@@ -1068,7 +1068,7 @@ func (e *evalContext) evaluateBuiltinOpen(x *expr, repr *openExpr) *value {
 		v.unknown = true
 		return v
 	}
-	return unexport(output, x)
+	return unexport(output, x, v.secret)
 }
 
 // evaluateBuiltinOpen evaluates a call to the fn::rotate builtin.
@@ -1156,7 +1156,7 @@ func (e *evalContext) evaluateBuiltinRotate(x *expr, repr *rotateExpr) *value {
 		// todo: validate newState conforms to state schema
 
 		// pass the updated state to open, as if it were already persisted
-		state = unexport(newState, x)
+		state = unexport(newState, x, v.secret)
 	}
 
 	output, err := rotator.Open(
@@ -1170,7 +1170,7 @@ func (e *evalContext) evaluateBuiltinRotate(x *expr, repr *rotateExpr) *value {
 		v.unknown = true
 		return v
 	}
-	return unexport(output, x)
+	return unexport(output, x, v.secret)
 }
 
 // shouldRotate returns true if the rotator at this path should be invoked.
@@ -1258,14 +1258,14 @@ func (e *evalContext) evaluateBuiltinFromJSON(x *expr, repr *fromJSONExpr) *valu
 			return v
 		}
 
-		ev, err := esc.FromJSON(jv, v.secret)
+		ev, err := esc.FromJSON(jv)
 		if err != nil {
 			e.errorf(repr.syntax(), "internal error: decoding JSON value: %v", err)
 			v.unknown = true
 			return v
 		}
 
-		return unexport(ev, x)
+		return unexport(ev, x, v.secret)
 	}
 	return v
 }
