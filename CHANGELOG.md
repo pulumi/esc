@@ -1,5 +1,5 @@
-CHANGELOG
-=========
+<!-- markdownlint-configure-file { "MD024":{ "siblings_only": true}, "MD033": false} -->
+# CHANGELOG
 
 ## 0.13.0
 
@@ -84,7 +84,6 @@ CHANGELOG
 
 - Add project filter flag to env ls command.
   [#382](https://github.com/pulumi/esc/pull/382)
-
 
 ### Bug Fixes
 
