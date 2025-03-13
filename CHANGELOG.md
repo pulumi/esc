@@ -1,4 +1,3 @@
-<!-- markdownlint-configure-file { "MD024":{ "siblings_only": true}, "MD033": false} -->
 # CHANGELOG
 
 ## 0.13.0

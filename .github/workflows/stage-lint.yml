@@ -34,8 +34,7 @@ jobs:
       - name: Install golangci-lint
         uses: golangci/golangci-lint-action@v3
         with:
-          version: v1.54.2
-          args: --version
+          version: v1.64.7
 
       - name: Lint
         run: make lint-golang
