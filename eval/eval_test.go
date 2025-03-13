@@ -135,7 +135,8 @@ func (testProvider) Schema() (*schema.Schema, *schema.Schema) {
 }
 
 func (testProvider) Open(ctx context.Context, inputs map[string]esc.Value, context esc.EnvExecContext) (esc.Value, error) {
-	return esc.NewValue(inputs), nil
+	_, ok := inputs["makeSecret"]
+	return esc.Value{Value: inputs, Secret: ok}, nil
 }
 
 type swapRotator struct{}
