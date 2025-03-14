@@ -7,6 +7,9 @@
 
 ### Bug Fixes
 
+- Make CLI prefer environment variable `PULUMI_BACKEND_URL` over account backend URL
+  [#477](https://github.com/pulumi/esc/pull/477)
+
 ### Breaking changes
 
 - It is now a syntax error to call a builtin function incorrectly.
