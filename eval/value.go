@@ -362,8 +362,8 @@ func (v *value) export(environment string) esc.Value {
 
 // unexport creates a value from a Value. This is used when interacting with providers, as the Provider API works on
 // Values, but the evaluator needs values.
-func unexport(v esc.Value, x *expr, isParentSecret bool) *value {
-	vv := &value{def: x, secret: v.Secret || x.secret || isParentSecret, unknown: v.Unknown}
+func unexport(v esc.Value, x *expr) *value {
+	vv := &value{def: x, secret: v.Secret || x.secret, unknown: v.Unknown}
 	switch pv := v.Value.(type) {
 	case nil:
 		vv.repr, vv.schema = nil, schema.Null().Schema()
@@ -376,14 +376,14 @@ func unexport(v esc.Value, x *expr, isParentSecret bool) *value {
 	case []esc.Value:
 		a, items := make([]*value, len(pv)), make([]schema.Builder, len(pv))
 		for i, v := range pv {
-			uv := unexport(v, x, vv.secret)
+			uv := unexport(v, x)
 			a[i], items[i] = uv, uv.schema
 		}
 		vv.repr, vv.schema = a, schema.Tuple(items...).Schema()
 	case map[string]esc.Value:
 		m, properties := make(map[string]*value, len(pv)), make(schema.SchemaMap, len(pv))
 		for k, v := range pv {
-			uv := unexport(v, x, vv.secret)
+			uv := unexport(v, x)
 			m[k], properties[k] = uv, uv.schema
 		}
 		vv.repr, vv.schema = m, schema.Record(properties).Schema()

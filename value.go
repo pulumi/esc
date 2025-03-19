@@ -55,7 +55,42 @@ func NewValue[T ValueType](v T) Value {
 
 // NewSecret creates a new secret value with the given representation.
 func NewSecret[T ValueType](v T) Value {
+	switch v := any(v).(type) {
+	case map[string]Value:
+		for k, e := range v {
+			if !e.Secret {
+				v[k] = CascadeSecret(e)
+			}
+		}
+	case []Value:
+		for i, e := range v {
+			if !e.Secret {
+				v[i] = CascadeSecret(e)
+			}
+		}
+	}
 	return Value{Value: v, Secret: true}
+}
+
+func CascadeSecret(v any) Value {
+	value, ok := (v.(Value))
+	if ok {
+		v = value.Value
+	}
+	switch v := v.(type) {
+	case map[string]Value:
+		return NewSecret(v)
+	case []Value:
+		return NewSecret(v)
+	case string:
+		return NewSecret(v)
+	case json.Number:
+		return NewSecret(v)
+	case bool:
+		return NewSecret(v)
+	default:
+		return Value{Value: nil, Secret: true}
+	}
 }
 
 // Trace holds information about the expression and base of a value.
