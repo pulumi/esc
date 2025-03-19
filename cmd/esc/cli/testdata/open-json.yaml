@@ -39,6 +39,7 @@ environments:
   "hello": "world"
 }
 > esc open default/test@1
+{}
 > esc open default/test@2
 {
   "foo": "bar"
