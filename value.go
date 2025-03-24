@@ -28,7 +28,7 @@ import (
 
 // ValueType defines the types of concrete values stored inside a Value.
 type ValueType interface {
-	bool | json.Number | string | []Value | map[string]Value
+	bool | json.Number | string | []Value | map[string]Value | Value
 }
 
 // A Value is the result of evaluating an expression within an environment definition.
@@ -50,47 +50,35 @@ type Value struct {
 
 // NewValue creates a new value with the given representation.
 func NewValue[T ValueType](v T) Value {
+	value, ok := (any(v).(Value))
+	if ok {
+		return value
+	}
 	return Value{Value: v}
 }
 
 // NewSecret creates a new secret value with the given representation.
 func NewSecret[T ValueType](v T) Value {
-	switch v := any(v).(type) {
+	anyV := any(v)
+	value, ok := anyV.(Value)
+	if ok {
+		anyV = value.Value
+	}
+	switch v := anyV.(type) {
 	case map[string]Value:
 		for k, e := range v {
 			if !e.Secret {
-				v[k] = CascadeSecret(e)
+				v[k] = NewSecret(e)
 			}
 		}
 	case []Value:
 		for i, e := range v {
 			if !e.Secret {
-				v[i] = CascadeSecret(e)
+				v[i] = NewSecret(e)
 			}
 		}
 	}
-	return Value{Value: v, Secret: true}
-}
-
-func CascadeSecret(v any) Value {
-	value, ok := (v.(Value))
-	if ok {
-		v = value.Value
-	}
-	switch v := v.(type) {
-	case map[string]Value:
-		return NewSecret(v)
-	case []Value:
-		return NewSecret(v)
-	case string:
-		return NewSecret(v)
-	case json.Number:
-		return NewSecret(v)
-	case bool:
-		return NewSecret(v)
-	default:
-		return Value{Value: nil, Secret: true}
-	}
+	return Value{Value: anyV, Secret: true}
 }
 
 // Trace holds information about the expression and base of a value.
