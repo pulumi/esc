@@ -1069,7 +1069,7 @@ func (e *evalContext) evaluateBuiltinOpen(x *expr, repr *openExpr) *value {
 		return v
 	}
 	if v.secret || output.Secret {
-		output = esc.NewSecret(output)
+		output = output.MakeSecret()
 	}
 	return unexport(output, x)
 }
@@ -1160,7 +1160,7 @@ func (e *evalContext) evaluateBuiltinRotate(x *expr, repr *rotateExpr) *value {
 
 		// pass the updated state to open, as if it were already persisted
 		if v.secret || newState.Secret {
-			newState = esc.NewSecret(newState)
+			newState = newState.MakeSecret()
 		}
 		state = unexport(newState, x)
 	}
@@ -1177,7 +1177,7 @@ func (e *evalContext) evaluateBuiltinRotate(x *expr, repr *rotateExpr) *value {
 		return v
 	}
 	if v.secret || output.Secret {
-		output = esc.NewSecret(output)
+		output = output.MakeSecret()
 	}
 	return unexport(output, x)
 }
@@ -1275,7 +1275,7 @@ func (e *evalContext) evaluateBuiltinFromJSON(x *expr, repr *fromJSONExpr) *valu
 		}
 
 		if v.secret || ev.Secret {
-			ev = esc.NewSecret(ev)
+			ev = ev.MakeSecret()
 		}
 		return unexport(ev, x)
 	}
