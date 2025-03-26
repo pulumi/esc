@@ -6,6 +6,8 @@ on:
       - 'CHANGELOG.md'
       - 'CHANGELOG_PENDING.md'
 
+permissions: read-all
+
 jobs:
   lint:
     uses: ./.github/workflows/stage-lint.yml
