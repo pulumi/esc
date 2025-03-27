@@ -1,5 +1,4 @@
-CHANGELOG
-=========
+# CHANGELOG
 
 ## 0.13.0
 
@@ -84,7 +83,6 @@ CHANGELOG
 
 - Add project filter flag to env ls command.
   [#382](https://github.com/pulumi/esc/pull/382)
-
 
 ### Bug Fixes
 

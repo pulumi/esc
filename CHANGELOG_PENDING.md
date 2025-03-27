@@ -1,5 +1,7 @@
 ### Improvements
 
+- Updated to go 1.23
+
 ### Bug Fixes
 
 - cmd/esc/cli/env.go: Modified the writeYAMLEnvironmentDiagnostics function to instantiate hcl.NewDiagnosticTextWriter with a width of 0 initially, and then conditionally reinstantiate it with the specified width if it is greater than 0, addressing gosec G115. [#494](https://github.com/pulumi/esc/pull/494)
@@ -11,4 +13,3 @@
   [#488](https://github.com/pulumi/esc/pull/488)
 
 ### Breaking changes
-
