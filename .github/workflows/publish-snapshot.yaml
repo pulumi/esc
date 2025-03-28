@@ -11,6 +11,11 @@ on:
 env:
   GITHUB_TOKEN: ${{ secrets.PULUMI_BOT_TOKEN }}
 
+permissions:
+  contents: write  # Needed to publish releases
+  packages: write  # If publishing packages
+  # Add other specific permissions as needed
+
 jobs:
   lint:
     uses: ./.github/workflows/stage-lint.yml
