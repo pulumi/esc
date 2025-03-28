@@ -44,6 +44,7 @@ func newEnvRotateCmd(envcmd *envCommand) *cobra.Command {
 				if err != nil {
 					return fmt.Errorf("'%s' is an invalid property path: %w", arg, err)
 				}
+				// implicitly prefix the given path with the values top level key
 				path = slices.Insert(path, 0, "values")
 				rotationPaths = append(rotationPaths, path.String())
 			}
