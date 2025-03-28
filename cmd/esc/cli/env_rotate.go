@@ -5,6 +5,7 @@ package cli
 import (
 	"context"
 	"fmt"
+	"slices"
 	"strings"
 
 	"github.com/pulumi/esc/cmd/esc/cli/client"
@@ -39,11 +40,12 @@ func newEnvRotateCmd(envcmd *envCommand) *cobra.Command {
 
 			rotationPaths := []string{}
 			for _, arg := range args[1:] {
-				_, err := resource.ParsePropertyPath(arg)
+				path, err := resource.ParsePropertyPath(arg)
 				if err != nil {
 					return fmt.Errorf("'%s' is an invalid property path: %w", arg, err)
 				}
-				rotationPaths = append(rotationPaths, arg)
+				path = slices.Insert(path, 0, "values")
+				rotationPaths = append(rotationPaths, path.String())
 			}
 
 			resp, diags, err := envcmd.esc.client.RotateEnvironment(ctx, ref.orgName, ref.projectName, ref.envName, rotationPaths)
