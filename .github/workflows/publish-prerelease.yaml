@@ -11,6 +11,18 @@ env:
 permissions:
   contents: write  # Needed to publish releases
   packages: write  # If publishing packages
+  id-token: write
+  actions: read
+  attestations: read
+  checks: read
+  deployments: read
+  discussions: read
+  issues: read
+  pages: read
+  pull-requests: read
+  repository-projects: read
+  statuses: read
+  security-events: read
 
 jobs:
   lint:
