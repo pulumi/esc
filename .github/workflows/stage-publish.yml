@@ -7,6 +7,10 @@ on:
         required: true
         type: string
 
+permissions:
+  contents: write  # Needed for publishing releases
+  packages: write  # Needed for publishing packages
+
 env:
   GITHUB_TOKEN: ${{ secrets.PULUMI_BOT_TOKEN }}
 

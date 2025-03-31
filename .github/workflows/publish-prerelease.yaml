@@ -8,6 +8,10 @@ on:
 env:
   GITHUB_TOKEN: ${{ secrets.PULUMI_BOT_TOKEN }}
 
+permissions:
+  contents: write  # Needed to publish releases
+  packages: write  # If publishing packages
+
 jobs:
   lint:
     uses: ./.github/workflows/stage-lint.yml
