@@ -137,7 +137,7 @@ func TestEnvVarOverridesAccounts(t *testing.T) {
 
 	// Configure a default org to skip mocking a client call for default org
 	backendConfig := make(map[string]pulumi_workspace.BackendConfig, len(creds.Accounts))
-	for url, _ := range creds.Accounts {
+	for url := range creds.Accounts {
 		backendConfig[url] = pulumi_workspace.BackendConfig{DefaultOrg: "test-user-org"}
 	}
 
