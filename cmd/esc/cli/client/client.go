@@ -467,7 +467,7 @@ func (pc *client) GetDefaultOrg(ctx context.Context) (string, error) {
 		}
 		return "", err
 	}
-	return resp.GitHubLogin, nil
+	return resp.Organization, nil
 }
 
 func (pc *client) ListEnvironments(

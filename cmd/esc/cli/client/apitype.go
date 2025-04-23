@@ -213,5 +213,5 @@ type RetractEnvironmentRevisionRequest struct {
 type GetDefaultOrganizationResponse struct {
 	// Returns the organization name.
 	// Can be an empty string, if the user is a member of no organizations
-	GitHubLogin string
+	Organization string `json:"gitHubLogin"`
 }
