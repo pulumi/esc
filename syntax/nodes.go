@@ -343,7 +343,7 @@ func (n *ObjectNode) String() string {
 	return fmt.Sprintf("{ %s }", strings.Join(s, ", "))
 }
 
-// A DocumentNode represents a complete document. A DocumentNode wraps a single nodes and mostly exists as a holder for
+// A DocumentNode represents a complete document. A DocumentNode wraps a single node and mostly exists as a holder for
 // additional syntactical trivia or metadata (e.g. comments). A DocumentNode should only appear at the root of a syntax tree.
 type DocumentNode struct {
 	node
