@@ -6,7 +6,8 @@ on:
       - 'CHANGELOG.md'
       - 'CHANGELOG_PENDING.md'
 
-permissions: read-all
+permissions:
+  contents: read
 
 jobs:
   lint:
