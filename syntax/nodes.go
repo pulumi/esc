@@ -342,3 +342,48 @@ func (n *ObjectNode) String() string {
 	}
 	return fmt.Sprintf("{ %s }", strings.Join(s, ", "))
 }
+
+// A DocumentNode represents a complete document. A DocumentNode wraps a single nodes and mostly exists as a holder for
+// additional syntactical trivia or metadata (e.g. comments). A DocumentNode should only appear at the root of a syntax tree.
+type DocumentNode struct {
+	node
+
+	content Node
+}
+
+// DocumentSyntax creates a new document with the given contents and associated syntax.
+func DocumentSyntax(syntax Syntax, content Node) *DocumentNode {
+	return &DocumentNode{node: node{syntax: syntax}, content: content}
+}
+
+// Document creates a new document with the given content.
+func Document(content Node) *DocumentNode {
+	return DocumentSyntax(NoSyntax, content)
+}
+
+// Content returns the document's content.
+func (n *DocumentNode) Content() Node {
+	return n.content
+}
+
+// SetContent sets the document's content.
+func (n *DocumentNode) SetContent(content Node) {
+	n.content = content
+}
+
+func (n *DocumentNode) GoString() string {
+	var b strings.Builder
+	b.WriteString("syntax.Document(")
+	if n.content != nil {
+		b.WriteString(n.content.GoString())
+	}
+	b.WriteString(")")
+	return b.String()
+}
+
+func (n *DocumentNode) String() string {
+	if n.content == nil {
+		return "( )"
+	}
+	return fmt.Sprintf("( %v )", n.content)
+}

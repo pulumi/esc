@@ -309,12 +309,23 @@ func parseField(name string, dest reflect.Value, node syntax.Node) syntax.Diagno
 }
 
 func parseRecord(objName string, dest recordDecl, node syntax.Node, noMatchWarning bool) syntax.Diagnostics {
+	syn := node
+
+	// Peek through documents.
+	if doc, ok := node.(*syntax.DocumentNode); ok {
+		// Allow empty documents.
+		if node = doc.Content(); node == nil {
+			*dest.recordSyntax() = doc
+			return nil
+		}
+	}
+
 	obj, ok := node.(*syntax.ObjectNode)
 	if !ok {
 		return syntax.Diagnostics{syntax.NodeError(node, fmt.Sprintf("%v must be an object", objName))}
 	}
-	*dest.recordSyntax() = obj
-	contract.Assertf(*dest.recordSyntax() == obj, "%s.recordSyntax took by value, so the assignment failed", objName)
+	*dest.recordSyntax() = syn
+	contract.Assertf(*dest.recordSyntax() == syn, "%s.recordSyntax took by value, so the assignment failed", objName)
 
 	v := reflect.ValueOf(dest).Elem()
 	t := v.Type()

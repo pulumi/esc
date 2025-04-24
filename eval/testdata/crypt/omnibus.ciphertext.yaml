@@ -1,3 +1,5 @@
+# Doc header
+
 imports:
   - a
 values:
@@ -27,3 +29,5 @@ values:
     fn::open::test: ${open}
   interp: hello, ${toString}
   access: ${open["baz"]}
+
+# Doc footer

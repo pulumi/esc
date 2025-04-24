@@ -1,0 +1,15 @@
+# Document head
+
+# Mapping head
+{
+  # Entry head 1
+  k1: v1, # Entry line 1
+  # Entry foot 1
+
+  # Entry head 2
+  k2: v2, # Entry line 2
+  # Entry foot 2
+}
+# Mapping foot
+
+# Document foot
