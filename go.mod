@@ -4,6 +4,8 @@ go 1.23.0
 
 toolchain go1.23.6
 
+retract v0.14.0
+
 require (
 	github.com/alecthomas/chroma/v2 v2.13.0
 	github.com/ccojocar/zxcvbn-go v1.0.1
