@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## 0.13.2
+
+### Bug Fixes
+
+- handle nil in MakeSecret
+ [#518](https://github.com/pulumi/esc/pull/518)
+
 ## 0.13.1
 
 ### Improvements
