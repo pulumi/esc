@@ -27,10 +27,11 @@ type NodeProperty struct {
 }
 
 type Node struct {
-	Literal any            `json:"literal,omitempty"`
-	Array   []Node         `json:"array,omitempty"`
-	Object  []NodeProperty `json:"object,omitempty"`
-	Range   *hcl.Range     `json:"range,omitempty"`
+	Literal  any            `json:"literal,omitempty"`
+	Array    []Node         `json:"array,omitempty"`
+	Object   []NodeProperty `json:"object,omitempty"`
+	Document *Node          `json:"document,omitempty"`
+	Range    *hcl.Range     `json:"range,omitempty"`
 }
 
 func NewNode(n syntax.Node) Node {
@@ -58,6 +59,9 @@ func NewNode(n syntax.Node) Node {
 			obj[i] = NodeProperty{Key: NewNode(prop.Key), Value: NewNode(prop.Value)}
 		}
 		return Node{Object: obj, Range: n.Syntax().Range()}
+	case *syntax.DocumentNode:
+		content := NewNode(n.Content())
+		return Node{Document: &content, Range: n.Syntax().Range()}
 	default:
 		panic(fmt.Errorf("unexpected node of type %T", n))
 	}

@@ -1,0 +1,102 @@
+{
+    "syntax": {
+        "document": {
+            "object": [
+                {
+                    "key": {
+                        "literal": "k1",
+                        "range": {
+                            "Filename": "comments",
+                            "Start": {
+                                "Line": 6,
+                                "Column": 3,
+                                "Byte": 53
+                            },
+                            "End": {
+                                "Line": 6,
+                                "Column": 5,
+                                "Byte": 55
+                            }
+                        }
+                    },
+                    "value": {
+                        "literal": "v1",
+                        "range": {
+                            "Filename": "comments",
+                            "Start": {
+                                "Line": 6,
+                                "Column": 7,
+                                "Byte": 57
+                            },
+                            "End": {
+                                "Line": 6,
+                                "Column": 9,
+                                "Byte": 59
+                            }
+                        }
+                    }
+                },
+                {
+                    "key": {
+                        "literal": "k2",
+                        "range": {
+                            "Filename": "comments",
+                            "Start": {
+                                "Line": 10,
+                                "Column": 3,
+                                "Byte": 113
+                            },
+                            "End": {
+                                "Line": 10,
+                                "Column": 5,
+                                "Byte": 115
+                            }
+                        }
+                    },
+                    "value": {
+                        "literal": "v2",
+                        "range": {
+                            "Filename": "comments",
+                            "Start": {
+                                "Line": 10,
+                                "Column": 7,
+                                "Byte": 117
+                            },
+                            "End": {
+                                "Line": 10,
+                                "Column": 9,
+                                "Byte": 119
+                            }
+                        }
+                    }
+                }
+            ],
+            "range": {
+                "Filename": "comments",
+                "Start": {
+                    "Line": 4,
+                    "Column": 1,
+                    "Byte": 32
+                },
+                "End": {
+                    "Line": 10,
+                    "Column": 9,
+                    "Byte": 119
+                }
+            }
+        },
+        "range": {
+            "Filename": "comments",
+            "Start": {
+                "Line": 4,
+                "Column": 1,
+                "Byte": 32
+            },
+            "End": {
+                "Line": 10,
+                "Column": 9,
+                "Byte": 119
+            }
+        }
+    }
+}

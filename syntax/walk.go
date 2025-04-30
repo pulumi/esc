@@ -37,6 +37,15 @@ func Walk(n Node, visitor func(n Node) (Node, Diagnostics, error)) (Node, Diagno
 			}
 			n.entries[i] = ObjectProperty(e.Key, v)
 		}
+	case *DocumentNode:
+		if n.content != nil {
+			c, d, err := Walk(n.content, visitor)
+			diags.Extend(d...)
+			if err != nil {
+				return nil, diags, err
+			}
+			n.content = c
+		}
 	}
 
 	n, d, err := visitor(n)

@@ -361,7 +361,19 @@ func unmarshalYAMLNode(filename string, positions positionIndex, n *yaml.Node, t
 
 	var diags syntax.Diagnostics
 	switch n.Kind {
-	case yaml.DocumentNode, yaml.SequenceNode:
+	case yaml.DocumentNode:
+		switch len(n.Content) {
+		case 0:
+			return syntax.DocumentSyntax(YAMLSyntax{n, rng, path, nil}, nil), nil
+		case 1:
+			// OK
+		default:
+			diags.Extend(syntax.Error(rng, "Documents must only contain a single value", ""))
+		}
+		content, cdiags := unmarshalYAML(filename, positions, n.Content[0], tags)
+		diags.Extend(cdiags...)
+		return syntax.DocumentSyntax(YAMLSyntax{n, rng, path, nil}, content), diags
+	case yaml.SequenceNode:
 		var elements []syntax.Node
 		if len(n.Content) != 0 {
 			elements = make([]syntax.Node, len(n.Content))
@@ -568,49 +580,44 @@ func MarshalYAML(n syntax.Node) (*yaml.Node, syntax.Diagnostics) {
 			}
 		}
 		yamlNode.Content = content
+	case *syntax.DocumentNode:
+		yamlNode.Kind = yaml.DocumentNode
+
+		if c := n.Content(); c != nil {
+			cv, cdiags := MarshalYAML(c)
+			diags.Extend(cdiags...)
+			yamlNode.Content = []*yaml.Node{cv}
+		}
 	}
 
 	return &yamlNode, diags
 }
 
-type yamlValue struct {
-	filename  string
-	positions positionIndex
-	node      syntax.Node
-	tags      TagDecoder
-	diags     syntax.Diagnostics
-}
-
-func (v *yamlValue) UnmarshalYAML(n *yaml.Node) error {
-	v.node, v.diags = unmarshalYAML(v.filename, v.positions, n, v.tags)
-	return nil
-}
-
-// DecodeYAMLBytes decodes a YAML value from the given decoder into a syntax node. See UnmarshalYAML for mode details on the
+// DecodeYAMLBytes decodes a YAML value from the given decoder into a document. See UnmarshalYAML for mode details on the
 // decoding process.
 func DecodeYAMLBytes(filename string, bytes []byte, tags TagDecoder) (syntax.Node, syntax.Diagnostics) {
 	// If this is an empty file, return an empty object node.
 	if len(bytes) == 0 {
-		return &syntax.ObjectNode{}, nil
+		return &syntax.DocumentNode{}, nil
 	}
-	v := yamlValue{filename: filename, positions: newPositionIndex(bytes), tags: tags}
-	if err := yaml.Unmarshal(bytes, &v); err != nil {
+	var n yaml.Node
+	if err := yaml.Unmarshal(bytes, &n); err != nil {
 		return nil, syntax.Diagnostics{syntax.Error(nil, err.Error(), "")}
 	}
-	return v.node, v.diags
+	return unmarshalYAML(filename, newPositionIndex(bytes), &n, tags)
 }
 
-// DecodeYAML decodes a YAML value from the given decoder into a syntax node. See UnmarshalYAML for mode details on the
+// DecodeYAML decodes a YAML value from the given decoder into a document. See UnmarshalYAML for mode details on the
 // decoding process.
 func DecodeYAML(filename string, d *yaml.Decoder, tags TagDecoder) (syntax.Node, syntax.Diagnostics) {
-	v := yamlValue{filename: filename, tags: tags}
-	if err := d.Decode(&v); err != nil {
+	var n yaml.Node
+	if err := d.Decode(&n); err != nil {
 		if errors.Is(err, io.EOF) {
-			return &syntax.ObjectNode{}, v.diags
+			return syntax.Document(nil), nil
 		}
 		return nil, syntax.Diagnostics{syntax.Error(nil, err.Error(), "")}
 	}
-	return v.node, v.diags
+	return unmarshalYAML(filename, positionIndex{}, &n, tags)
 }
 
 // EncodeYAML encodes a syntax node into YAML text using the given encoder. See MarshalYAML for mode details on the

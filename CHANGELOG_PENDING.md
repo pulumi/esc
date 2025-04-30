@@ -11,5 +11,7 @@
   [#477](https://github.com/pulumi/esc/pull/477)
 - Adding cascading secrets into `NewSecret` method
   [#488](https://github.com/pulumi/esc/pull/488)
+- Top-level comments are no longer dropped when encrypting secrets.
+  [#512](https://github.com/pulumi/esc/pull/512)
 
 ### Breaking changes

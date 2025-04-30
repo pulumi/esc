@@ -117,7 +117,7 @@ func RotateEnvironment(
 	environments EnvironmentLoader,
 	execContext *esc.ExecContext,
 	paths []resource.PropertyPath,
-) (*esc.Environment, *RotationResult, syntax.Diagnostics) {
+) (*esc.Environment, RotationResult, syntax.Diagnostics) {
 	rotateDocPaths := make(map[string]bool, len(paths))
 	for _, path := range paths {
 		rotateDocPaths["values."+path.String()] = true
@@ -138,7 +138,7 @@ func evalEnvironment(
 	execContext *esc.ExecContext,
 	showSecrets bool,
 	rotatePaths map[string]bool,
-) (*esc.Environment, *RotationResult, syntax.Diagnostics) {
+) (*esc.Environment, RotationResult, syntax.Diagnostics) {
 	if env == nil || (len(env.Values.GetEntries()) == 0 && len(env.Imports.GetElements()) == 0) {
 		return nil, nil, nil
 	}
@@ -165,7 +165,7 @@ func evalEnvironment(
 		Properties:       v.export(name).Value.(map[string]esc.Value),
 		Schema:           s,
 		ExecutionContext: executionContext,
-	}, &ec.rotationResult, diags
+	}, ec.rotationResult, diags
 }
 
 type imported struct {
