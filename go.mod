@@ -16,7 +16,7 @@ require (
 	github.com/hashicorp/hcl/v2 v2.22.0
 	github.com/hexops/gotextdiff v1.0.3
 	github.com/muesli/termenv v0.15.2
-	github.com/petar-dambovaliev/aho-corasick v0.0.0-20230725210150-fb29fc3c913e
+	github.com/pgavlin/aho-corasick v0.5.1
 	github.com/pgavlin/fx/v2 v2.0.3
 	github.com/pulumi/pulumi/pkg/v3 v3.154.0
 	github.com/pulumi/pulumi/sdk/v3 v3.154.0
