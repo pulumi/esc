@@ -15,6 +15,7 @@ run: |
   esc env set default/test 'imports[0]' default/test2 && esc env get default/test
   esc env init default/test3
   esc env set default/test 'imports[1]' default/test3 && esc env get default/test
+  esc env set default/test binary '{"fn::fromBase64": "SJ5zicDxjGWXv1Y53mDw/A=="}' && esc env get default/test && esc env get --value=detailed default/test binary
 
 ---
 > esc env init default/test
@@ -494,6 +495,76 @@ imports:
 
 ```
 
+> esc env set default/test binary {"fn::fromBase64": "SJ5zicDxjGWXv1Y53mDw/A=="}
+> esc env get default/test
+# Value
+```json
+{
+  "array": [
+    "hello",
+    "esc",
+    {
+      "foo": ""
+    }
+  ],
+  "binary": "SJ5zicDxjGWXv1Y53mDw/A==",
+  "foo": {
+    "bar": {
+      "alpha": "zed",
+      "baz": "qux"
+    },
+    "beta": [
+      "gamma",
+      42
+    ]
+  },
+  "open": "[unknown]"
+}
+```
+# Definition
+```yaml
+values:
+  foo:
+    bar:
+      baz: qux
+      alpha: zed
+    beta:
+      - gamma
+      - 42
+  open:
+    "fn::open::test": "cse"
+  array:
+    - hello
+    - esc
+    - {foo: ""}
+  binary:
+    "fn::fromBase64": "SJ5zicDxjGWXv1Y53mDw/A=="
+imports:
+  - default/test2
+  - default/test3
+
+```
+
+> esc env get --value=detailed default/test binary
+{
+  "value": "SJ5zicDxjGWXv1Y53mDw/A==",
+  "binary": true,
+  "trace": {
+    "def": {
+      "environment": "\u003cyaml\u003e",
+      "begin": {
+        "line": 16,
+        "column": 5,
+        "byte": 188
+      },
+      "end": {
+        "line": 16,
+        "column": 47,
+        "byte": 230
+      }
+    }
+  }
+}
 
 ---
 > esc env init default/test
@@ -525,3 +596,6 @@ imports:
 > esc env init default/test3
 > esc env set default/test imports[1] default/test3
 > esc env get default/test
+> esc env set default/test binary {"fn::fromBase64": "SJ5zicDxjGWXv1Y53mDw/A=="}
+> esc env get default/test
+> esc env get --value=detailed default/test binary
