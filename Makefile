@@ -31,10 +31,10 @@ format:
 	find . -iname "*.go" -print0 | xargs -r0 gofmt -s -w
 
 build:: ensure
-	${GO} install -ldflags "-X github.com/pulumi/esc/cmd/internal/version.Version=${VERSION}" ./cmd/esc
+	${GO} install -ldflags "-X github.com/pulumi/esc/cmd/esc/cli/version.Version=${VERSION}" ./cmd/esc
 
 build_debug:: ensure
-	${GO} install -gcflags="all=-N -l" -ldflags "-X github.com/pulumi/esc/cmd/internal/version.Version=${VERSION}" ./cmd/esc
+	${GO} install -gcflags="all=-N -l" -ldflags "-X github.com/pulumi/esc/cmd/esc/cli/version.Version=${VERSION}" ./cmd/esc
 
 test:: build
 	${GO} test --timeout 30m -short -count 1 -parallel ${CONCURRENCY} ./...
