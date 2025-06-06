@@ -131,14 +131,13 @@ func newEnvRunCmd(envcmd *envCommand) *cobra.Command {
 			if cmd.ArgsLenAtDash() == 0 {
 				return fmt.Errorf("no environment specified")
 			}
-
-			if len(args) == 1 {
-				return fmt.Errorf("no command specified")
-			}
-
 			ref, args, err := envcmd.getExistingEnvRef(ctx, args)
 			if err != nil {
 				return err
+			}
+
+			if len(args) == 0 {
+				return fmt.Errorf("no command specified")
 			}
 
 			command, err := envcmd.esc.exec.LookPath(args[0])
