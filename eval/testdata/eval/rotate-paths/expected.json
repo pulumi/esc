@@ -6336,20 +6336,6 @@
                             }
                         }
                     }
-                },
-                "trace": {
-                    "def": {
-                        "begin": {
-                            "line": 0,
-                            "column": 0,
-                            "byte": 0
-                        },
-                        "end": {
-                            "line": 0,
-                            "column": 0,
-                            "byte": 0
-                        }
-                    }
                 }
             }
         },
@@ -6393,20 +6379,6 @@
                             }
                         }
                     }
-                },
-                "trace": {
-                    "def": {
-                        "begin": {
-                            "line": 0,
-                            "column": 0,
-                            "byte": 0
-                        },
-                        "end": {
-                            "line": 0,
-                            "column": 0,
-                            "byte": 0
-                        }
-                    }
                 }
             }
         },
@@ -6448,20 +6420,6 @@
                                     "byte": 227
                                 }
                             }
-                        }
-                    }
-                },
-                "trace": {
-                    "def": {
-                        "begin": {
-                            "line": 0,
-                            "column": 0,
-                            "byte": 0
-                        },
-                        "end": {
-                            "line": 0,
-                            "column": 0,
-                            "byte": 0
                         }
                     }
                 }
