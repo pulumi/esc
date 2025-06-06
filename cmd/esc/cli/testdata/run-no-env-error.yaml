@@ -1,0 +1,10 @@
+run: |
+  esc run cat
+error: exit status 1
+
+---
+> esc run cat
+
+---
+> esc run cat
+Error: no command specified

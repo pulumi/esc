@@ -1,0 +1,10 @@
+run: |
+  esc run -- cat file.txt
+error: exit status 1
+
+---
+> esc run -- cat file.txt
+
+---
+> esc run -- cat file.txt
+Error: resolving command: command not found

@@ -97,8 +97,11 @@ func newEnvRunCmd(envcmd *envCommand) *cobra.Command {
 	shell := valueOrDefault(filepath.Base(envcmd.esc.environ.Get("SHELL")), "sh")
 
 	cmd := &cobra.Command{
-		Use:   "run [<org-name>/][<project-name>/]<environment-name> [flags] -- [command]",
-		Args:  cobra.ArbitraryArgs,
+		Use: "run [<org-name>/][<project-name>/]<environment-name> [flags] [--] [command]",
+		Args: func(cmd *cobra.Command, args []string) error {
+			// Custom args validation to detect -- usage
+			return nil
+		},
 		Short: "Open the environment with the given name and run a command.",
 		Long: fmt.Sprintf("Open the environment with the given name and run a command\n"+
 			"\n"+
@@ -109,7 +112,7 @@ func newEnvRunCmd(envcmd *envCommand) *cobra.Command {
 			"references in the command are not expanded by default. You should invoke the command\n"+
 			"inside a shell if you need environment variable expansion:\n"+
 			"\n"+
-			"    run -- %[1]s -c '\"echo $MY_ENV_VAR\"'\n"+
+			"    run <environment-name> -- %[1]s -c '\"echo $MY_ENV_VAR\"'\n"+
 			"\n"+
 			"The command to run is assumed to be non-interactive by default and its output\n"+
 			"streams are filtered to remove any secret values. Use the -i flag to run interactive\n"+
@@ -127,19 +130,28 @@ func newEnvRunCmd(envcmd *envCommand) *cobra.Command {
 				return err
 			}
 
-			ref, args, err := envcmd.getExistingEnvRef(ctx, args)
+			if len(args) == 0 {
+				return fmt.Errorf("no environment specified")
+			}
+
+			if len(args) == 1 {
+				return fmt.Errorf("no command specified")
+			}
+
+			// First argument is always the environment name
+			envRefArgs := args[:1]
+			commandArgs := args[1:]
+
+			ref, _, err := envcmd.getExistingEnvRef(ctx, envRefArgs)
 			if err != nil {
 				return err
 			}
 
-			if len(args) == 0 {
-				return fmt.Errorf("no command specified")
-			}
-			command, err := envcmd.esc.exec.LookPath(args[0])
+			command, err := envcmd.esc.exec.LookPath(commandArgs[0])
 			if err != nil {
 				return fmt.Errorf("resolving command: %w", err)
 			}
-			args = args[1:]
+			commandArgs = commandArgs[1:]
 
 			env, diags, err := envcmd.openEnvironment(ctx, ref, duration)
 			if err != nil {
@@ -156,7 +168,7 @@ func newEnvRunCmd(envcmd *envCommand) *cobra.Command {
 			defer envcmd.removeTemporaryFiles(files)
 
 			envV := esc.NewValue(env.Properties)
-			for i, v := range args {
+			for i, v := range commandArgs {
 				interp, diags := ast.Interpolate(v)
 				if !diags.HasErrors() {
 					var arg strings.Builder
@@ -184,11 +196,11 @@ func newEnvRunCmd(envcmd *envCommand) *cobra.Command {
 							}
 						}
 					}
-					args[i] = arg.String()
+					commandArgs[i] = arg.String()
 				}
 			}
 
-			runCmd := exec.Command(command, args...)
+			runCmd := exec.Command(command, commandArgs...)
 			runCmd.Env = append(envcmd.esc.environ.Vars(), environ...)
 
 			stdout, stderr := envcmd.esc.stdout, envcmd.esc.stderr
