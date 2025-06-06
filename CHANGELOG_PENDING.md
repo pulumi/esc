@@ -1,5 +1,8 @@
 ### Improvements
 
+- `esc run` expects environment to be passed before `--`
+  [#545](https://github.com/pulumi/esc/pull/546)
+
 ### Bug Fixes
 
 - Fix `esc version`
