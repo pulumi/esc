@@ -1,6 +1,6 @@
 ### Improvements
 
-- `esc run` will expect environment to be pased before `--`
+- `esc run` expects environment to be passed before `--`
   [#545](https://github.com/pulumi/esc/pull/545)
 
 ### Bug Fixes
