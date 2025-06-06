@@ -130,7 +130,8 @@ func newEnvRunCmd(envcmd *envCommand) *cobra.Command {
 				return err
 			}
 
-			if len(args) == 0 {
+			// If -- was used but there's no arguments, it means no environment was specified before the command
+			if len(args) == 0 || cmd.ArgsLenAtDash() == 0 {
 				return fmt.Errorf("no environment specified")
 			}
 
