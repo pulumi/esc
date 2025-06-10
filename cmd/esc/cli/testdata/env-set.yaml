@@ -349,7 +349,7 @@ values:
   array:
     - hello
     - esc
-    - {foo: bar}
+    - foo: bar
 
 ```
 
@@ -393,7 +393,7 @@ values:
   array:
     - hello
     - esc
-    - {foo: ""}
+    - foo: ""
 
 ```
 
@@ -408,6 +408,7 @@ Environment created: test-user/default/test2
     "hello",
     "esc",
     {
+      "boom": "baz",
       "foo": ""
     }
   ],
@@ -439,7 +440,8 @@ values:
   array:
     - hello
     - esc
-    - {foo: ""}
+    - foo: ""
+      boom: baz
 imports:
   - default/test2
 
@@ -456,6 +458,7 @@ Environment created: test-user/default/test3
     "hello",
     "esc",
     {
+      "boom": "baz",
       "foo": ""
     }
   ],
@@ -487,7 +490,8 @@ values:
   array:
     - hello
     - esc
-    - {foo: ""}
+    - foo: ""
+      boom: baz
 imports:
   - default/test2
   - default/test3
