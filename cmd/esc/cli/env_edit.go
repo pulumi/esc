@@ -30,6 +30,7 @@ type envEditCommand struct {
 func newEnvEditCmd(env *envCommand) *cobra.Command {
 	var file string
 	var showSecrets bool
+	var draft bool
 
 	edit := &envEditCommand{env: env}
 
@@ -74,12 +75,22 @@ func newEnvEditCmd(env *envCommand) *cobra.Command {
 					return fmt.Errorf("reading environment definition: %w", err)
 				}
 
-				diags, err := edit.env.esc.client.UpdateEnvironmentWithProject(ctx, ref.orgName, ref.projectName, ref.envName, yaml, "")
+				var changeRequestID string
+				var diags []client.EnvironmentDiagnostic
+				if draft {
+					changeRequestID, diags, err = edit.env.esc.client.CreateEnvironmentDraft(ctx, ref.orgName, ref.projectName, ref.envName, yaml, "")
+				} else {
+					diags, err = edit.env.esc.client.UpdateEnvironmentWithProject(ctx, ref.orgName, ref.projectName, ref.envName, yaml, "")
+				}
 				if err != nil {
 					return fmt.Errorf("updating environment definition: %w", err)
 				}
 				if len(diags) == 0 {
-					fmt.Fprintln(edit.env.esc.stdout, "Environment updated.")
+					if draft {
+						fmt.Fprintf(edit.env.esc.stdout, "Change request created: %v\n", changeRequestID)
+					} else {
+						fmt.Fprintln(edit.env.esc.stdout, "Environment updated.")
+					}
 					return nil
 				}
 
@@ -112,12 +123,22 @@ func newEnvEditCmd(env *envCommand) *cobra.Command {
 					return nil
 				}
 
-				diags, err = edit.env.esc.client.UpdateEnvironmentWithProject(ctx, ref.orgName, ref.projectName, ref.envName, newYAML, tag)
+				var changeRequestID string
+				var diags []client.EnvironmentDiagnostic
+				if draft {
+					changeRequestID, diags, err = edit.env.esc.client.CreateEnvironmentDraft(ctx, ref.orgName, ref.projectName, ref.envName, newYAML, tag)
+				} else {
+					diags, err = edit.env.esc.client.UpdateEnvironmentWithProject(ctx, ref.orgName, ref.projectName, ref.envName, newYAML, tag)
+				}
 				if err != nil {
 					return fmt.Errorf("updating environment definition: %w", err)
 				}
 				if len(diags) == 0 {
-					fmt.Fprintln(edit.env.esc.stdout, "Environment updated.")
+					if draft {
+						fmt.Fprintf(edit.env.esc.stdout, "Change request created: %v\n", changeRequestID)
+					} else {
+						fmt.Fprintln(edit.env.esc.stdout, "Environment updated.")
+					}
 					return nil
 				}
 
@@ -149,6 +170,10 @@ func newEnvEditCmd(env *envCommand) *cobra.Command {
 	cmd.Flags().BoolVar(
 		&showSecrets, "show-secrets", false,
 		"Show static secrets in plaintext rather than ciphertext")
+
+	cmd.Flags().BoolVar(
+		&draft, "draft", false,
+		"true to create a draft rather than saving changes directly, returns a Change Request ID")
 
 	return cmd
 }

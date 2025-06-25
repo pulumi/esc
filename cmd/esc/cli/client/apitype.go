@@ -139,6 +139,11 @@ type UpdateEnvironmentRevisionTagRequest struct {
 	Revision *int `json:"revision,omitempty"`
 }
 
+type CreateEnvironmentDraftResponse struct {
+	ChangeRequestID      string `json:"changeRequestId"`
+	LatestRevisionNumber int    `json:"latestRevisionNumber"`
+}
+
 type EnvironmentTag struct {
 	ID          string    `json:"id"`
 	Name        string    `json:"name"`
