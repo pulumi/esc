@@ -389,3 +389,17 @@ func (cmd *envCommand) writePropertyEnvironmentDiagnostics(out io.Writer, diags 
 
 	return nil
 }
+
+// changeRequestURL returns a URL to the change request in the Pulumi Cloud Console, rooted at cloudURL.
+// If there is an error, returns "".
+func (esc *escCommand) changeRequestURL(ref environmentRef, changeRequestID string) string {
+	return esc.cloudConsoleURL(
+		esc.client.URL(),
+		ref.orgName,
+		"esc",
+		ref.projectName,
+		ref.envName,
+		"change-requests",
+		changeRequestID,
+	)
+}

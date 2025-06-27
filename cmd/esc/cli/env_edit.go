@@ -30,6 +30,7 @@ type envEditCommand struct {
 func newEnvEditCmd(env *envCommand) *cobra.Command {
 	var file string
 	var showSecrets bool
+	var draft bool
 
 	edit := &envEditCommand{env: env}
 
@@ -74,13 +75,32 @@ func newEnvEditCmd(env *envCommand) *cobra.Command {
 					return fmt.Errorf("reading environment definition: %w", err)
 				}
 
-				diags, err := edit.env.esc.client.UpdateEnvironmentWithProject(ctx, ref.orgName, ref.projectName, ref.envName, yaml, "")
-				if err != nil {
-					return fmt.Errorf("updating environment definition: %w", err)
-				}
-				if len(diags) == 0 {
-					fmt.Fprintln(edit.env.esc.stdout, "Environment updated.")
-					return nil
+				var diags []client.EnvironmentDiagnostic
+				if draft {
+					changeRequestID, diags, err := edit.env.esc.client.CreateEnvironmentDraft(ctx, ref.orgName, ref.projectName, ref.envName, yaml, "")
+					if err != nil {
+						return fmt.Errorf("creating environment draft: %w", err)
+					}
+					if len(diags) == 0 {
+						fmt.Fprintf(edit.env.esc.stdout, "Change request created: %v\n", changeRequestID)
+						fmt.Fprintf(edit.env.esc.stdout, "Change request URL: %v\n", edit.env.esc.changeRequestURL(ref, changeRequestID))
+
+						err = edit.env.esc.client.SubmitChangeRequest(ctx, ref.orgName, changeRequestID)
+						if err != nil {
+							return fmt.Errorf("submitting change request: %w", err)
+						}
+						fmt.Fprintln(edit.env.esc.stdout, "Change request submitted")
+						return nil
+					}
+				} else {
+					diags, err = edit.env.esc.client.UpdateEnvironmentWithProject(ctx, ref.orgName, ref.projectName, ref.envName, yaml, "")
+					if err != nil {
+						return fmt.Errorf("updating environment definition: %w", err)
+					}
+					if len(diags) == 0 {
+						fmt.Fprintln(edit.env.esc.stdout, "Environment updated.")
+						return nil
+					}
 				}
 
 				return edit.env.writeYAMLEnvironmentDiagnostics(edit.env.esc.stderr, ref.envName, yaml, diags)
@@ -112,13 +132,31 @@ func newEnvEditCmd(env *envCommand) *cobra.Command {
 					return nil
 				}
 
-				diags, err = edit.env.esc.client.UpdateEnvironmentWithProject(ctx, ref.orgName, ref.projectName, ref.envName, newYAML, tag)
-				if err != nil {
-					return fmt.Errorf("updating environment definition: %w", err)
-				}
-				if len(diags) == 0 {
-					fmt.Fprintln(edit.env.esc.stdout, "Environment updated.")
-					return nil
+				if draft {
+					changeRequestID, diags, err := edit.env.esc.client.CreateEnvironmentDraft(ctx, ref.orgName, ref.projectName, ref.envName, newYAML, tag)
+					if err != nil {
+						return fmt.Errorf("creating environment draft: %w", err)
+					}
+					if len(diags) == 0 {
+						fmt.Fprintf(edit.env.esc.stdout, "Change request created: %v\n", changeRequestID)
+						fmt.Fprintf(edit.env.esc.stdout, "Change request URL: %v\n", edit.env.esc.changeRequestURL(ref, changeRequestID))
+
+						err = edit.env.esc.client.SubmitChangeRequest(ctx, ref.orgName, changeRequestID)
+						if err != nil {
+							return fmt.Errorf("submitting change request: %w", err)
+						}
+						fmt.Fprintln(edit.env.esc.stdout, "Change request submitted")
+						return nil
+					}
+				} else {
+					diags, err = edit.env.esc.client.UpdateEnvironmentWithProject(ctx, ref.orgName, ref.projectName, ref.envName, newYAML, tag)
+					if err != nil {
+						return fmt.Errorf("updating environment definition: %w", err)
+					}
+					if len(diags) == 0 {
+						fmt.Fprintln(edit.env.esc.stdout, "Environment updated.")
+						return nil
+					}
 				}
 
 				err = edit.env.writeYAMLEnvironmentDiagnostics(edit.env.esc.stderr, ref.envName, newYAML, diags)
@@ -149,6 +187,14 @@ func newEnvEditCmd(env *envCommand) *cobra.Command {
 	cmd.Flags().BoolVar(
 		&showSecrets, "show-secrets", false,
 		"Show static secrets in plaintext rather than ciphertext")
+
+	cmd.Flags().BoolVar(
+		&draft, "draft", false,
+		"true to create a draft rather than saving changes directly, returns a submitted Change Request ID and its URL")
+	err := cmd.Flags().MarkHidden("draft") // hide while in preview
+	if err != nil {
+		panic(err)
+	}
 
 	return cmd
 }

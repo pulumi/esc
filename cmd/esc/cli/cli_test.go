@@ -662,6 +662,25 @@ func (c *testPulumiClient) UpdateEnvironmentWithRevision(
 	return diags, env.revisionTags["latest"], err
 }
 
+func (c *testPulumiClient) CreateEnvironmentDraft(
+	ctx context.Context,
+	orgName string,
+	projectName string,
+	envName string,
+	yaml []byte,
+	etag string,
+) (string, []client.EnvironmentDiagnostic, error) {
+	return "", []client.EnvironmentDiagnostic{}, nil
+}
+
+func (c *testPulumiClient) SubmitChangeRequest(
+	ctx context.Context,
+	orgName string,
+	changeRequestID string,
+) error {
+	return errors.New("NYI")
+}
+
 func (c *testPulumiClient) DeleteEnvironment(ctx context.Context, orgName, projectName, envName string) error {
 	name := path.Join(orgName, projectName, envName)
 	if _, ok := c.environments[name]; !ok {

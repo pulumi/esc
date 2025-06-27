@@ -12,6 +12,8 @@ import (
 )
 
 func newEnvVersionRollbackCmd(env *envCommand) *cobra.Command {
+	var draft bool
+
 	cmd := &cobra.Command{
 		Use:   "rollback [<org-name>/][<project-name>/]<environment-name>@<version>",
 		Args:  cobra.ExactArgs(1),
@@ -42,18 +44,46 @@ func newEnvVersionRollbackCmd(env *envCommand) *cobra.Command {
 			if err != nil {
 				return err
 			}
-			diags, err := env.esc.client.UpdateEnvironmentWithProject(ctx, ref.orgName, ref.projectName, ref.envName, yaml, "")
-			if err != nil {
-				return err
+			if draft {
+				changeRequestID, diags, err := env.esc.client.CreateEnvironmentDraft(ctx, ref.orgName, ref.projectName, ref.envName, yaml, "")
+				if err != nil {
+					return err
+				}
+				if len(diags) != 0 {
+					err = env.writeYAMLEnvironmentDiagnostics(env.esc.stderr, ref.envName, yaml, diags)
+					contract.IgnoreError(err)
+					return errors.New("could not roll back: too many errors")
+				}
+				fmt.Fprintf(env.esc.stdout, "Change request created: %v\n", changeRequestID)
+				fmt.Fprintf(env.esc.stdout, "Change request URL: %v\n", env.esc.changeRequestURL(ref, changeRequestID))
+
+				err = env.esc.client.SubmitChangeRequest(ctx, ref.orgName, changeRequestID)
+				if err != nil {
+					return fmt.Errorf("submitting change request: %w", err)
+				}
+				fmt.Fprintln(env.esc.stdout, "Change request submitted")
+			} else {
+				diags, err := env.esc.client.UpdateEnvironmentWithProject(ctx, ref.orgName, ref.projectName, ref.envName, yaml, "")
+				if err != nil {
+					return err
+				}
+				if len(diags) != 0 {
+					err = env.writeYAMLEnvironmentDiagnostics(env.esc.stderr, ref.envName, yaml, diags)
+					contract.IgnoreError(err)
+					return errors.New("could not roll back: too many errors")
+				}
+				fmt.Fprintln(env.esc.stdout, "Environment updated.")
 			}
-			if len(diags) != 0 {
-				err = env.writeYAMLEnvironmentDiagnostics(env.esc.stderr, ref.envName, yaml, diags)
-				contract.IgnoreError(err)
-				return errors.New("could not roll back: too many errors")
-			}
-			fmt.Fprintln(env.esc.stdout, "Environment updated.")
 			return nil
 		},
+	}
+
+	cmd.Flags().BoolVar(
+		&draft, "draft", false,
+		"true to create a draft rather than saving changes directly, returns a submitted Change Request ID and its URL")
+	err := cmd.Flags().MarkHidden("draft") // hide while in preview
+	if err != nil {
+		panic(err)
 	}
 
 	return cmd
