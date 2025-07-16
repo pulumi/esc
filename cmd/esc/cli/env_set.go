@@ -5,9 +5,11 @@ package cli
 import (
 	"context"
 	"fmt"
+	"os"
 	"regexp"
 	"strconv"
 	"strings"
+	"unicode/utf8"
 
 	"github.com/ccojocar/zxcvbn-go"
 	"github.com/spf13/cobra"
@@ -22,6 +24,7 @@ func newEnvSetCmd(env *envCommand) *cobra.Command {
 	var secret bool
 	var plaintext bool
 	var rawString bool
+	var fromFile bool
 
 	cmd := &cobra.Command{
 		Use:   "set [<org-name>/][<project-name>/]<environment-name> <path> <value>",
@@ -59,7 +62,25 @@ func newEnvSetCmd(env *envCommand) *cobra.Command {
 				return fmt.Errorf("path must contain at least one element")
 			}
 
-			input := args[1]
+			var input string
+			if fromFile {
+				fileContent, readFileErr := os.ReadFile(args[1])
+
+				if readFileErr != nil {
+					return fmt.Errorf("could not read file: %w", readFileErr)
+				}
+
+				if !utf8.Valid(fileContent) {
+					return fmt.Errorf("file contents must be valid UTF-8")
+				}
+
+				rawString = true
+
+				input = string(fileContent)
+			} else {
+				input = args[1]
+			}
+
 			var yamlValue yaml.Node
 			if rawString {
 				yamlValue.SetString(input)
@@ -160,6 +181,7 @@ func newEnvSetCmd(env *envCommand) *cobra.Command {
 	cmd.Flags().BoolVar(
 		&rawString, "string", false,
 		"true to treat the value as a string rather than attempting to parse it as YAML")
+	cmd.Flags().BoolVar(&fromFile, "from-file", false, "If set, the key value is read from the specified file.")
 
 	return cmd
 }
