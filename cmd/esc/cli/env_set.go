@@ -141,31 +141,15 @@ func newEnvSetCmd(env *envCommand) *cobra.Command {
 				return fmt.Errorf("marshaling definition: %w", err)
 			}
 
-			if draft {
-				changeRequestID, diags, err := env.esc.client.CreateEnvironmentDraft(ctx, ref.orgName, ref.projectName, ref.envName, newYAML, tag)
-				if err != nil {
-					return fmt.Errorf("creating environment draft: %w", err)
-				}
-				if len(diags) != 0 {
-					return env.writePropertyEnvironmentDiagnostics(env.esc.stderr, diags)
-				}
-				fmt.Fprintf(env.esc.stdout, "Change request created: %v\n", changeRequestID)
-				fmt.Fprintf(env.esc.stdout, "Change request URL: %v\n", env.esc.changeRequestURL(ref, changeRequestID))
-
-				err = env.esc.client.SubmitChangeRequest(ctx, ref.orgName, changeRequestID, nil)
-				if err != nil {
-					return fmt.Errorf("submitting change request: %w", err)
-				}
-				fmt.Fprintln(env.esc.stdout, "Change request submitted")
-			} else {
-				diags, err := env.esc.client.UpdateEnvironmentWithProject(ctx, ref.orgName, ref.projectName, ref.envName, newYAML, tag)
-				if err != nil {
-					return fmt.Errorf("updating environment definition: %w", err)
-				}
-				if len(diags) != 0 {
-					return env.writePropertyEnvironmentDiagnostics(env.esc.stderr, diags)
-				}
+			diags, err := env.esc.updateEnvironment(ctx, ref, draft, newYAML, tag, "")
+			if err != nil {
+				return err
 			}
+
+			if len(diags) != 0 {
+				return env.writePropertyEnvironmentDiagnostics(env.esc.stderr, diags)
+			}
+
 			return nil
 		},
 	}

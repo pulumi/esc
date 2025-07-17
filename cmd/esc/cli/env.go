@@ -403,3 +403,41 @@ func (esc *escCommand) changeRequestURL(ref environmentRef, changeRequestID stri
 		changeRequestID,
 	)
 }
+
+// updateEnvironment updates an environment. If draft is true, a change request is created and submitted.
+// Progress is logged to stdout. However, diagnostics are not logged, that is left up to the caller.
+func (esc *escCommand) updateEnvironment(
+	ctx context.Context,
+	ref environmentRef,
+	draft bool,
+	yaml []byte,
+	tag string,
+	envUpdateSuccessMessage string,
+) ([]client.EnvironmentDiagnostic, error) {
+	if draft {
+		changeRequestID, diags, err := esc.client.CreateEnvironmentDraft(ctx, ref.orgName, ref.projectName, ref.envName, yaml, tag)
+		if err != nil {
+			return nil, fmt.Errorf("creating environment draft: %w", err)
+		}
+		if len(diags) == 0 {
+			fmt.Fprintf(esc.stdout, "Change request created: %v\n", changeRequestID)
+			fmt.Fprintf(esc.stdout, "Change request URL: %v\n", esc.changeRequestURL(ref, changeRequestID))
+
+			err = esc.client.SubmitChangeRequest(ctx, ref.orgName, changeRequestID, nil)
+			if err != nil {
+				return nil, fmt.Errorf("submitting change request: %w", err)
+			}
+			fmt.Fprintln(esc.stdout, "Change request submitted")
+		}
+		return diags, nil
+	} else {
+		diags, err := esc.client.UpdateEnvironmentWithProject(ctx, ref.orgName, ref.projectName, ref.envName, yaml, tag)
+		if err != nil {
+			return nil, fmt.Errorf("updating environment definition: %w", err)
+		}
+		if len(diags) == 0 && envUpdateSuccessMessage != "" {
+			fmt.Fprintln(esc.stdout, envUpdateSuccessMessage)
+		}
+		return diags, nil
+	}
+}

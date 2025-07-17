@@ -75,35 +75,16 @@ func newEnvEditCmd(env *envCommand) *cobra.Command {
 					return fmt.Errorf("reading environment definition: %w", err)
 				}
 
-				var diags []client.EnvironmentDiagnostic
-				if draft {
-					changeRequestID, diags, err := edit.env.esc.client.CreateEnvironmentDraft(ctx, ref.orgName, ref.projectName, ref.envName, yaml, "")
-					if err != nil {
-						return fmt.Errorf("creating environment draft: %w", err)
-					}
-					if len(diags) == 0 {
-						fmt.Fprintf(edit.env.esc.stdout, "Change request created: %v\n", changeRequestID)
-						fmt.Fprintf(edit.env.esc.stdout, "Change request URL: %v\n", edit.env.esc.changeRequestURL(ref, changeRequestID))
-
-						err = edit.env.esc.client.SubmitChangeRequest(ctx, ref.orgName, changeRequestID, nil)
-						if err != nil {
-							return fmt.Errorf("submitting change request: %w", err)
-						}
-						fmt.Fprintln(edit.env.esc.stdout, "Change request submitted")
-						return nil
-					}
-				} else {
-					diags, err = edit.env.esc.client.UpdateEnvironmentWithProject(ctx, ref.orgName, ref.projectName, ref.envName, yaml, "")
-					if err != nil {
-						return fmt.Errorf("updating environment definition: %w", err)
-					}
-					if len(diags) == 0 {
-						fmt.Fprintln(edit.env.esc.stdout, "Environment updated.")
-						return nil
-					}
+				diags, err := edit.env.esc.updateEnvironment(ctx, ref, draft, yaml, "", "Environment updated.")
+				if err != nil {
+					return err
 				}
 
-				return edit.env.writeYAMLEnvironmentDiagnostics(edit.env.esc.stderr, ref.envName, yaml, diags)
+				if len(diags) != 0 {
+					return edit.env.writeYAMLEnvironmentDiagnostics(edit.env.esc.stderr, ref.envName, yaml, diags)
+				}
+
+				return nil
 			}
 
 			editor, err := edit.getEditor()
@@ -132,31 +113,13 @@ func newEnvEditCmd(env *envCommand) *cobra.Command {
 					return nil
 				}
 
-				if draft {
-					changeRequestID, diags, err := edit.env.esc.client.CreateEnvironmentDraft(ctx, ref.orgName, ref.projectName, ref.envName, newYAML, tag)
-					if err != nil {
-						return fmt.Errorf("creating environment draft: %w", err)
-					}
-					if len(diags) == 0 {
-						fmt.Fprintf(edit.env.esc.stdout, "Change request created: %v\n", changeRequestID)
-						fmt.Fprintf(edit.env.esc.stdout, "Change request URL: %v\n", edit.env.esc.changeRequestURL(ref, changeRequestID))
+				diags, err := edit.env.esc.updateEnvironment(ctx, ref, draft, newYAML, tag, "Environment updated.")
+				if err != nil {
+					return err
+				}
 
-						err = edit.env.esc.client.SubmitChangeRequest(ctx, ref.orgName, changeRequestID, nil)
-						if err != nil {
-							return fmt.Errorf("submitting change request: %w", err)
-						}
-						fmt.Fprintln(edit.env.esc.stdout, "Change request submitted")
-						return nil
-					}
-				} else {
-					diags, err = edit.env.esc.client.UpdateEnvironmentWithProject(ctx, ref.orgName, ref.projectName, ref.envName, newYAML, tag)
-					if err != nil {
-						return fmt.Errorf("updating environment definition: %w", err)
-					}
-					if len(diags) == 0 {
-						fmt.Fprintln(edit.env.esc.stdout, "Environment updated.")
-						return nil
-					}
+				if len(diags) == 0 {
+					return nil
 				}
 
 				err = edit.env.writeYAMLEnvironmentDiagnostics(edit.env.esc.stderr, ref.envName, newYAML, diags)

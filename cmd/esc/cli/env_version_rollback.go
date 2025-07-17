@@ -5,7 +5,6 @@ package cli
 import (
 	"context"
 	"errors"
-	"fmt"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/common/util/contract"
 	"github.com/spf13/cobra"
@@ -44,36 +43,18 @@ func newEnvVersionRollbackCmd(env *envCommand) *cobra.Command {
 			if err != nil {
 				return err
 			}
-			if draft {
-				changeRequestID, diags, err := env.esc.client.CreateEnvironmentDraft(ctx, ref.orgName, ref.projectName, ref.envName, yaml, "")
-				if err != nil {
-					return err
-				}
-				if len(diags) != 0 {
-					err = env.writeYAMLEnvironmentDiagnostics(env.esc.stderr, ref.envName, yaml, diags)
-					contract.IgnoreError(err)
-					return errors.New("could not roll back: too many errors")
-				}
-				fmt.Fprintf(env.esc.stdout, "Change request created: %v\n", changeRequestID)
-				fmt.Fprintf(env.esc.stdout, "Change request URL: %v\n", env.esc.changeRequestURL(ref, changeRequestID))
 
-				err = env.esc.client.SubmitChangeRequest(ctx, ref.orgName, changeRequestID, nil)
-				if err != nil {
-					return fmt.Errorf("submitting change request: %w", err)
-				}
-				fmt.Fprintln(env.esc.stdout, "Change request submitted")
-			} else {
-				diags, err := env.esc.client.UpdateEnvironmentWithProject(ctx, ref.orgName, ref.projectName, ref.envName, yaml, "")
-				if err != nil {
-					return err
-				}
-				if len(diags) != 0 {
-					err = env.writeYAMLEnvironmentDiagnostics(env.esc.stderr, ref.envName, yaml, diags)
-					contract.IgnoreError(err)
-					return errors.New("could not roll back: too many errors")
-				}
-				fmt.Fprintln(env.esc.stdout, "Environment updated.")
+			diags, err := env.esc.updateEnvironment(ctx, ref, draft, yaml, "", "Environment updated.")
+			if err != nil {
+				return err
 			}
+
+			if len(diags) != 0 {
+				err = env.writeYAMLEnvironmentDiagnostics(env.esc.stderr, ref.envName, yaml, diags)
+				contract.IgnoreError(err)
+				return errors.New("could not roll back: too many errors")
+			}
+
 			return nil
 		},
 	}
