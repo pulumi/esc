@@ -677,6 +677,7 @@ func (c *testPulumiClient) SubmitChangeRequest(
 	ctx context.Context,
 	orgName string,
 	changeRequestID string,
+	description *string,
 ) error {
 	return errors.New("NYI")
 }

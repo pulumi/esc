@@ -57,7 +57,7 @@ func newEnvVersionRollbackCmd(env *envCommand) *cobra.Command {
 				fmt.Fprintf(env.esc.stdout, "Change request created: %v\n", changeRequestID)
 				fmt.Fprintf(env.esc.stdout, "Change request URL: %v\n", env.esc.changeRequestURL(ref, changeRequestID))
 
-				err = env.esc.client.SubmitChangeRequest(ctx, ref.orgName, changeRequestID)
+				err = env.esc.client.SubmitChangeRequest(ctx, ref.orgName, changeRequestID, nil)
 				if err != nil {
 					return fmt.Errorf("submitting change request: %w", err)
 				}

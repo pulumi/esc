@@ -85,7 +85,7 @@ func newEnvEditCmd(env *envCommand) *cobra.Command {
 						fmt.Fprintf(edit.env.esc.stdout, "Change request created: %v\n", changeRequestID)
 						fmt.Fprintf(edit.env.esc.stdout, "Change request URL: %v\n", edit.env.esc.changeRequestURL(ref, changeRequestID))
 
-						err = edit.env.esc.client.SubmitChangeRequest(ctx, ref.orgName, changeRequestID)
+						err = edit.env.esc.client.SubmitChangeRequest(ctx, ref.orgName, changeRequestID, nil)
 						if err != nil {
 							return fmt.Errorf("submitting change request: %w", err)
 						}
@@ -141,7 +141,7 @@ func newEnvEditCmd(env *envCommand) *cobra.Command {
 						fmt.Fprintf(edit.env.esc.stdout, "Change request created: %v\n", changeRequestID)
 						fmt.Fprintf(edit.env.esc.stdout, "Change request URL: %v\n", edit.env.esc.changeRequestURL(ref, changeRequestID))
 
-						err = edit.env.esc.client.SubmitChangeRequest(ctx, ref.orgName, changeRequestID)
+						err = edit.env.esc.client.SubmitChangeRequest(ctx, ref.orgName, changeRequestID, nil)
 						if err != nil {
 							return fmt.Errorf("submitting change request: %w", err)
 						}

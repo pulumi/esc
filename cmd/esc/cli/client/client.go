@@ -170,10 +170,12 @@ type Client interface {
 	) (string, []EnvironmentDiagnostic, error)
 
 	// SubmitChangeRequest submits the change request with the specified ID in org orgName.
+	// Optionally provide a description for the change request.
 	SubmitChangeRequest(
 		ctx context.Context,
 		orgName string,
 		changeRequestID string,
+		description *string,
 	) error
 
 	// DeleteEnvironment deletes the environment envName in org orgName.
@@ -686,8 +688,9 @@ func (pc *client) SubmitChangeRequest(
 	ctx context.Context,
 	orgName string,
 	changeRequestID string,
+	description *string,
 ) error {
-	req := SubmitChangeRequestRequest{}
+	req := SubmitChangeRequestRequest{Description: description}
 	path := fmt.Sprintf("/api/preview/change-requests/%v/%v/submit", orgName, changeRequestID)
 	err := pc.restCall(ctx, http.MethodPost, path, nil, &req, nil)
 	return err

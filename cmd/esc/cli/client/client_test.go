@@ -500,7 +500,7 @@ func TestCreateEnvironmentDraft(t *testing.T) {
 }
 
 func TestSubmitChangeRequest(t *testing.T) {
-	t.Run("OK", func(t *testing.T) {
+	t.Run("OK - nil description", func(t *testing.T) {
 		client := newTestClient(t, http.MethodPost, "/api/preview/change-requests/test-org/EXAMPLE/submit", func(w http.ResponseWriter, r *http.Request) {
 			expectedBody := SubmitChangeRequestRequest{}
 			expectedBodyJSON, err := json.Marshal(expectedBody)
@@ -512,7 +512,41 @@ func TestSubmitChangeRequest(t *testing.T) {
 			w.WriteHeader(http.StatusOK)
 		})
 
-		err := client.SubmitChangeRequest(context.Background(), "test-org", "EXAMPLE")
+		err := client.SubmitChangeRequest(context.Background(), "test-org", "EXAMPLE", nil)
+		require.NoError(t, err)
+	})
+
+	t.Run("OK - empty description", func(t *testing.T) {
+		client := newTestClient(t, http.MethodPost, "/api/preview/change-requests/test-org/EXAMPLE/submit", func(w http.ResponseWriter, r *http.Request) {
+			expectedBody := SubmitChangeRequestRequest{}
+			expectedBodyJSON, err := json.Marshal(expectedBody)
+			require.NoError(t, err)
+			body, err := io.ReadAll(r.Body)
+			require.NoError(t, err)
+			assert.Equal(t, expectedBodyJSON, body)
+
+			w.WriteHeader(http.StatusOK)
+		})
+
+		err := client.SubmitChangeRequest(context.Background(), "test-org", "EXAMPLE", nil)
+		require.NoError(t, err)
+	})
+
+	t.Run("OK - description provided", func(t *testing.T) {
+		client := newTestClient(t, http.MethodPost, "/api/preview/change-requests/test-org/EXAMPLE/submit", func(w http.ResponseWriter, r *http.Request) {
+			description := "test description"
+			expectedBody := SubmitChangeRequestRequest{Description: &description}
+			expectedBodyJSON, err := json.Marshal(expectedBody)
+			require.NoError(t, err)
+			body, err := io.ReadAll(r.Body)
+			require.NoError(t, err)
+			assert.Equal(t, expectedBodyJSON, body)
+
+			w.WriteHeader(http.StatusOK)
+		})
+
+		description := "test description"
+		err := client.SubmitChangeRequest(context.Background(), "test-org", "EXAMPLE", &description)
 		require.NoError(t, err)
 	})
 
@@ -527,7 +561,7 @@ func TestSubmitChangeRequest(t *testing.T) {
 			require.NoError(t, err)
 		})
 
-		err := client.SubmitChangeRequest(context.Background(), "test-org", "EXAMPLE")
+		err := client.SubmitChangeRequest(context.Background(), "test-org", "EXAMPLE", nil)
 		assert.ErrorContains(t, err, "change request must be in draft status to submit ")
 	})
 }
