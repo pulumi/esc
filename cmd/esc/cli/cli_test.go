@@ -458,7 +458,7 @@ func (c *testPulumiClient) Insecure() bool {
 
 // URL returns the URL of the API endpoint this client interacts with
 func (c *testPulumiClient) URL() string {
-	return "http://fake.pulumi.api"
+	return "https://api.fake.pulumi.com"
 }
 
 // GetPulumiAccountDetails returns the user implied by the API token associated with this client.
@@ -1382,13 +1382,13 @@ func loadTestcase(path string) (*cliTestcaseYAML, *cliTestcase, error) {
 	}
 
 	creds := workspace.Credentials{
-		Current: "http://fake.pulumi.api",
+		Current: "https://api.fake.pulumi.com",
 		Accounts: map[string]workspace.Account{
 			"https://api.pulumi.com": {
 				Username:    "test-user",
 				AccessToken: "access-token",
 			},
-			"http://fake.pulumi.api": {
+			"https://api.fake.pulumi.com": {
 				Username:    "test-user",
 				AccessToken: "access-token",
 			},
