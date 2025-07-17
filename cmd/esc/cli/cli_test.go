@@ -670,7 +670,20 @@ func (c *testPulumiClient) CreateEnvironmentDraft(
 	yaml []byte,
 	etag string,
 ) (string, []client.EnvironmentDiagnostic, error) {
-	return "", []client.EnvironmentDiagnostic{}, nil
+	_, latest, err := c.getEnvironment(orgName, projectName, envName, "")
+	if err != nil {
+		return "", nil, err
+	}
+
+	if etag != "" && etag != latest.etag {
+		return "", nil, errors.New("etag mismatch")
+	}
+
+	_, diags, err := c.checkEnvironment(ctx, orgName, envName, yaml, nil)
+	if err == nil && len(diags) == 0 {
+		return "00000000-0000-0000-0000-000000000000", []client.EnvironmentDiagnostic{}, nil
+	}
+	return "", diags, err
 }
 
 func (c *testPulumiClient) SubmitChangeRequest(
@@ -679,7 +692,7 @@ func (c *testPulumiClient) SubmitChangeRequest(
 	changeRequestID string,
 	description *string,
 ) error {
-	return errors.New("NYI")
+	return nil
 }
 
 func (c *testPulumiClient) DeleteEnvironment(ctx context.Context, orgName, projectName, envName string) error {
