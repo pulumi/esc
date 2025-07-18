@@ -153,7 +153,7 @@ func DecryptSecrets(ctx context.Context, filename string, source []byte, decrypt
 
 		// Don't attempt to decrypt secrets outside of "values"
 		path := n.Syntax().Path()
-		if !strings.HasPrefix(path, "values.") {
+		if !strings.HasPrefix(path, "values.") && !strings.HasPrefix(path, "values[") {
 			return n, nil, nil
 		}
 
