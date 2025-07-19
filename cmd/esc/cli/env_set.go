@@ -5,6 +5,7 @@ package cli
 import (
 	"context"
 	"fmt"
+	"io"
 	"os"
 	"regexp"
 	"strconv"
@@ -24,11 +25,11 @@ func newEnvSetCmd(env *envCommand) *cobra.Command {
 	var secret bool
 	var plaintext bool
 	var rawString bool
-	var fromFile bool
+	var file string
 
 	cmd := &cobra.Command{
 		Use:   "set [<org-name>/][<project-name>/]<environment-name> <path> <value>",
-		Args:  cobra.RangeArgs(2, 3),
+		Args:  cobra.RangeArgs(1, 3),
 		Short: "Set a value within an environment.",
 		Long: "Set a value within an environment\n" +
 			"\n" +
@@ -50,12 +51,14 @@ func newEnvSetCmd(env *envCommand) *cobra.Command {
 			if ref.version != "" {
 				return fmt.Errorf("the set command does not accept versions")
 			}
-			if len(args) < 2 {
+
+			if len(args) < 2 && file == "" {
 				return fmt.Errorf("expected a path and a value")
 			}
 
 			path, err := resource.ParsePropertyPath(args[0])
 			if err != nil {
+
 				return fmt.Errorf("invalid path: %w", err)
 			}
 			if len(path) == 0 {
@@ -63,20 +66,23 @@ func newEnvSetCmd(env *envCommand) *cobra.Command {
 			}
 
 			var input string
-			if fromFile {
-				fileContent, readFileErr := os.ReadFile(args[1])
+			if file != "" {
+				var content []byte
+				switch file {
+				case "-":
+					content, err = io.ReadAll(env.esc.stdin)
+				default:
+					content, err = os.ReadFile(file)
+					if err != nil {
+						return fmt.Errorf("could not read file: %w", err)
+					}
 
-				if readFileErr != nil {
-					return fmt.Errorf("could not read file: %w", readFileErr)
+					if !utf8.Valid(content) {
+						return fmt.Errorf("file content must be valid UTF-8")
+					}
 				}
 
-				if !utf8.Valid(fileContent) {
-					return fmt.Errorf("file contents must be valid UTF-8")
-				}
-
-				rawString = true
-
-				input = string(fileContent)
+				input = string(content)
 			} else {
 				input = args[1]
 			}
@@ -181,7 +187,7 @@ func newEnvSetCmd(env *envCommand) *cobra.Command {
 	cmd.Flags().BoolVar(
 		&rawString, "string", false,
 		"true to treat the value as a string rather than attempting to parse it as YAML")
-	cmd.Flags().BoolVar(&fromFile, "from-file", false, "If set, the key value is read from the specified file.")
+	cmd.Flags().StringVar(&file, "file", "", "If set, the key value is read from the specified file. Pass `-` to read from standard input.")
 
 	return cmd
 }
