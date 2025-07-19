@@ -79,7 +79,7 @@ func newEnvOpenCmd(envcmd *envCommand) *cobra.Command {
 		"the lifetime of the opened environment in the form HhMm (e.g. 2h, 1h30m, 15m)")
 	cmd.Flags().StringVarP(
 		&format, "format", "f", "json",
-		"the output format to use. May be 'dotenv', 'json', 'yaml', 'detailed', or 'shell'")
+		"the output format to use. May be 'dotenv', 'json', 'yaml', 'detailed', 'shell' or 'string'")
 
 	return cmd
 }
