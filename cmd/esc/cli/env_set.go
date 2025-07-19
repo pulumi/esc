@@ -72,7 +72,9 @@ func newEnvSetCmd(env *envCommand) *cobra.Command {
 				switch file {
 				case "-":
 					content, err = io.ReadAll(env.esc.stdin)
-					break
+					if err != nil {
+						return fmt.Errorf("could not read from stdin: %w", err)
+					}
 				default:
 					content, err = os.ReadFile(file)
 					if err != nil {
