@@ -7,6 +7,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
+	"strings"
 	"time"
 
 	"github.com/pulumi/esc"
@@ -138,7 +139,12 @@ func (env *envCommand) renderValue(
 		}
 		return nil
 	case "string":
-		fmt.Fprintf(out, "%v\n", val.ToString(!showSecrets))
+		s := val.ToString(!showSecrets)
+		if strings.HasSuffix(s, "\n") {
+			fmt.Fprintf(out, "%v", s)
+		} else {
+			fmt.Fprintf(out, "%v\n", s)
+		}
 		return nil
 	default:
 		// NOTE: we shouldn't get here. This was checked at the beginning of the function.
