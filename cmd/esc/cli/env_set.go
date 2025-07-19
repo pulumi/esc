@@ -80,10 +80,10 @@ func newEnvSetCmd(env *envCommand) *cobra.Command {
 					if err != nil {
 						return fmt.Errorf("could not read file: %w", err)
 					}
+				}
 
-					if !utf8.Valid(content) {
-						return fmt.Errorf("file content must be valid UTF-8")
-					}
+				if !utf8.Valid(content) {
+					return fmt.Errorf("file content must be valid UTF-8")
 				}
 
 				input = string(content)
