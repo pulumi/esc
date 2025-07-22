@@ -1,8 +1,11 @@
 run: |
-  echo 'hello' | esc env set default/test foo -f=-
+  echo "hello" | esc env set default/test foo -f=-
   esc env get default/test
-  echo 'hello world' >test.file
+  echo "hello world" >test.file
   esc env set default/test foo -f=test.file
+  esc env get default/test
+  esc env get default/test --value string
+  esc env set default/test foo -f=test.file --string
   esc env get default/test
   esc env set default/test -f=test.file || echo -n ""
   esc env set -f=test.file || echo -n ""
@@ -42,6 +45,24 @@ values:
 
 ```
 
+> esc env get default/test --value string
+"foo"="hello world"
+> esc env set default/test foo -f=test.file --string
+> esc env get default/test
+# Value
+```json
+{
+  "foo": "hello world\n"
+}
+```
+# Definition
+```yaml
+values:
+  foo: |
+    hello world
+
+```
+
 > esc env set default/test -f=test.file
 > esc env set -f=test.file
 
@@ -49,6 +70,9 @@ values:
 > esc env set default/test foo -f=-
 > esc env get default/test
 > esc env set default/test foo -f=test.file
+> esc env get default/test
+> esc env get default/test --value string
+> esc env set default/test foo -f=test.file --string
 > esc env get default/test
 > esc env set default/test -f=test.file
 Error: expected a path
