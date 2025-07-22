@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	"io"
-	"os"
 	"regexp"
 	"strconv"
 	"strings"
@@ -53,8 +52,11 @@ func newEnvSetCmd(env *envCommand) *cobra.Command {
 				return fmt.Errorf("the set command does not accept versions")
 			}
 
-			if len(args) < 2 && file == "" {
+			switch {
+			case file == "" && len(args) < 2:
 				return fmt.Errorf("expected a path and a value")
+			case file != "" && len(args) < 1:
+				return fmt.Errorf("expected a path")
 			}
 
 			path, err := resource.ParsePropertyPath(args[0])
@@ -76,7 +78,7 @@ func newEnvSetCmd(env *envCommand) *cobra.Command {
 						return fmt.Errorf("could not read from stdin: %w", err)
 					}
 				default:
-					content, err = os.ReadFile(file)
+					content, err = env.esc.fs.ReadFile(file)
 					if err != nil {
 						return fmt.Errorf("could not read file: %w", err)
 					}
