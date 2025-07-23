@@ -195,7 +195,7 @@ func newEnvSetCmd(env *envCommand) *cobra.Command {
 	cmd.Flags().BoolVar(
 		&rawString, "string", false,
 		"true to treat the value as a string rather than attempting to parse it as YAML")
-	cmd.Flags().StringVarP(&file, "file", "f", "", "If set, the key value is read from the specified file. Pass `-` to read from standard input.")
+	cmd.Flags().StringVarP(&file, "file", "f", "", "If set, the value is read from the specified file. Pass `-` to read from standard input.")
 	cmd.Flags().BoolVar(
 		&draft, "draft", false,
 		"true to create a draft rather than saving changes directly, returns a submitted Change Request ID and its URL")
