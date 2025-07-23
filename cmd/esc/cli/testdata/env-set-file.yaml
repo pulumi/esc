@@ -9,6 +9,11 @@ run: |
   esc env get default/test
   esc env set default/test -f=test.file || echo -n ""
   esc env set -f=test.file || echo -n ""
+  esc env set default/test -f=binary foo || echo -n ""
+  esc env set -f=- default/test foo <binary || echo -n ""
+process:
+  fs:
+    binary: !!binary sFOZJGpvmbYHwHRLnCYSnQ==
 environments:
   test-user/default/test:
     values:
@@ -65,6 +70,8 @@ values:
 
 > esc env set default/test -f=test.file
 > esc env set -f=test.file
+> esc env set default/test -f=binary foo
+> esc env set -f=- default/test foo
 
 ---
 > esc env set default/test foo -f=-
@@ -78,3 +85,7 @@ values:
 Error: expected a path
 > esc env set -f=test.file
 Error: accepts between 1 and 3 arg(s), received 0
+> esc env set default/test -f=binary foo
+Error: file content must be valid UTF-8
+> esc env set -f=- default/test foo
+Error: file content must be valid UTF-8
