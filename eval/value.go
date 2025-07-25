@@ -15,6 +15,7 @@
 package eval
 
 import (
+	"encoding/base64"
 	"encoding/json"
 	"fmt"
 	"sort"
@@ -48,7 +49,7 @@ type value struct {
 	rotateOnly bool
 	secret     bool // true if the value is secret
 
-	repr any // nil | bool | json.Number | string | []*value | map[string]*value
+	repr any // nil | bool | json.Number | string | []byte | []*value | map[string]*value
 }
 
 func (v *value) GoString() string {
@@ -295,6 +296,8 @@ func (v *value) toString() (str string, unknown bool, secret bool) {
 		s = repr.String()
 	case string:
 		s = repr
+	case []byte:
+		s = base64.StdEncoding.EncodeToString(repr)
 	case []*value:
 		vals := make([]string, len(repr))
 		for i, v := range repr {
@@ -373,6 +376,8 @@ func unexport(v esc.Value, x *expr) *value {
 		vv.repr, vv.schema = pv, schema.Number().Const(pv).Schema()
 	case string:
 		vv.repr, vv.schema = pv, schema.String().Const(pv).Schema()
+	case []byte:
+		vv.repr, vv.schema = pv, schema.String().Const(base64.StdEncoding.EncodeToString(pv)).Schema()
 	case []esc.Value:
 		a, items := make([]*value, len(pv)), make([]schema.Builder, len(pv))
 		for i, v := range pv {

@@ -16,6 +16,7 @@ package esc
 
 import (
 	"bytes"
+	"encoding/base64"
 	"encoding/json"
 	"fmt"
 	"sort"
@@ -28,24 +29,24 @@ import (
 
 // ValueType defines the types of concrete values stored inside a Value.
 type ValueType interface {
-	bool | json.Number | string | []Value | map[string]Value
+	bool | json.Number | string | []byte | []Value | map[string]Value
 }
 
 // A Value is the result of evaluating an expression within an environment definition.
 type Value struct {
-	// Value holds the concrete representation of the value. May be nil, bool, json.Number, string, []Value, or
+	// Value holds the concrete representation of the value. May be nil, bool, json.Number, string, []byte, []Value, or
 	// map[string]Value.
-	Value any `json:"value,omitempty"`
+	Value any
 
 	// Secret is true if this value is secret.
-	Secret bool `json:"secret,omitempty"`
+	Secret bool
 
 	// Unknown is true if this value is unknown.
-	Unknown bool `json:"unknown,omitempty"`
+	Unknown bool
 
 	// Trace holds information about the expression that computed this value and the value (if any) with which it was
 	// merged.
-	Trace Trace `json:"trace"`
+	Trace Trace
 }
 
 // NewValue creates a new value with the given representation.
@@ -102,9 +103,32 @@ type Trace struct {
 	Base *Value `json:"base,omitempty"`
 }
 
+func (v Value) MarshalJSON() ([]byte, error) {
+	var raw struct {
+		Value   any   `json:"value,omitempty"`
+		Binary  bool  `json:"binary,omitempty"`
+		Secret  bool  `json:"secret,omitempty"`
+		Unknown bool  `json:"unknown,omitempty"`
+		Trace   Trace `json:"trace"`
+	}
+	raw.Secret = v.Secret
+	raw.Unknown = v.Unknown
+	raw.Trace = v.Trace
+
+	if bytes, ok := v.Value.([]byte); ok {
+		raw.Binary = true
+		raw.Value = base64.StdEncoding.EncodeToString(bytes)
+	} else {
+		raw.Value = v.Value
+	}
+
+	return json.Marshal(raw)
+}
+
 func (v *Value) UnmarshalJSON(data []byte) error {
 	var raw struct {
 		Value   json.RawMessage `json:"value,omitempty"`
+		Binary  bool            `json:"binary,omitempty"`
 		Secret  bool            `json:"secret,omitempty"`
 		Unknown bool            `json:"unknown,omitempty"`
 		Trace   Trace           `json:"trace"`
@@ -139,7 +163,19 @@ func (v *Value) UnmarshalJSON(data []byte) error {
 			}
 			v.Value = obj
 		default:
-			v.Value = tok
+			if raw.Binary {
+				b64, ok := tok.(string)
+				if !ok {
+					return fmt.Errorf("binary data must be a valid base64 string")
+				}
+				bytes, err := base64.StdEncoding.DecodeString(b64)
+				if err != nil {
+					return fmt.Errorf("binary data must be a valid base64 string")
+				}
+				v.Value = bytes
+			} else {
+				v.Value = tok
+			}
 		}
 	}
 	return nil
@@ -211,6 +247,8 @@ func (v Value) ToJSON(redact bool) any {
 			m[k] = v.ToJSON(redact)
 		}
 		return m
+	case []byte:
+		return base64.StdEncoding.EncodeToString(pv)
 	default:
 		return pv
 	}
@@ -235,6 +273,8 @@ func (v Value) ToString(redact bool) string {
 		return pv.String()
 	case string:
 		return pv
+	case []byte:
+		return base64.StdEncoding.EncodeToString(pv)
 	case []Value:
 		vals := make([]string, len(pv))
 		for i, v := range pv {
