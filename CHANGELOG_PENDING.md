@@ -1,12 +1,10 @@
 ### Improvements
 
-- `esc env set` now supports --file parameter to read content from a file or stdin [#556](https://github.com/pulumi/esc/pull/556)
-- `--draft` flag for `esc env set`, `esc env edit`, `esc env versions rollback` to create a change request rather than updating directly. **Warning: this feature is in preview, limited to specific orgs, and subject to change.**
-  [#552](https://github.com/pulumi/esc/pull/552)
+- Update a draft via `--draft=<change-request-id>` for `env edit`, `env set`, and `env version rollback`. **Warning: this feature is in preview, limited to specific orgs, and subject to change.**
+  [#565](https://github.com/pulumi/esc/pull/565)
+- Open a draft via `--draft=<change-request-id>` for `env run` and `env open`. **Warning: this feature is in preview, limited to specific orgs, and subject to change.**
+  [#565](https://github.com/pulumi/esc/pull/565)
 
 ### Bug Fixes
-
-- Fix decryption error with keys with dashes
-  [#559](https://github.com/pulumi/esc/pull/559)
 
 ### Breaking changes
