@@ -404,8 +404,10 @@ func (esc *escCommand) changeRequestURL(ref environmentRef, changeRequestID stri
 	)
 }
 
-// updateEnvironment updates an environment. If draft is "new", a change request is created and submitted.
-// If draft is an ID, an existing change request is updated.
+// updateEnvironment updates an environment.
+// If draft is empty, the environment is directly updated.
+// If draft is "new", a change request is created and submitted.
+// If draft is a change request ID, an existing change request is updated.
 // Progress is logged to stdout. However, diagnostics are not logged, that is left up to the caller.
 func (esc *escCommand) updateEnvironment(
 	ctx context.Context,

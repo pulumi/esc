@@ -117,11 +117,9 @@ type Client interface {
 		decrypt bool,
 	) (yaml []byte, etag string, revision int, err error)
 
-	// GetEnvironmentDraft returns the YAML + ETag for the draft env specified. If decrypt is
-	// true, any { fn::secret: { ciphertext: "..." } } constructs in the definition will be decrypted and
-	// replaced with { fn::secret: "plaintext" }.
+	// GetEnvironmentDraft returns the YAML + ETag for the draft env specified.
 	//
-	// The etag returned by GetEnvironmentDraft can be passed to UpdateEnvironmentDraft in order to avoid RMW issues
+	// The returned etag  must be passed to UpdateEnvironmentDraft in order to avoid RMW issues
 	// when editing drafts.
 	GetEnvironmentDraft(
 		ctx context.Context,
@@ -187,9 +185,8 @@ type Client interface {
 	//
 	// If the updated environment definition contains errors, the creation will fail with diagnostics.
 	//
-	// If etag is not the empty string and the draft's current etag does not match the provided etag
-	// (i.e. because a different entity has called UpdateEnvironment), the creation will fail with a 409
-	// error.
+	// If the draft's current etag does not match the provided etag (i.e. because a different entity
+	// has called UpdateEnvironment), the creation will fail with a 409 error.
 	UpdateEnvironmentDraft(
 		ctx context.Context,
 		orgName string,
@@ -761,9 +758,7 @@ func (pc *client) UpdateEnvironmentDraft(
 	etag string,
 ) ([]EnvironmentDiagnostic, error) {
 	header := http.Header{}
-	if etag != "" {
-		header.Set("If-Match", etag)
-	}
+	header.Set("If-Match", etag)
 
 	var errResp EnvironmentErrorResponse
 	path := fmt.Sprintf("/api/preview/esc/environments/%v/%v/%v/drafts/%v", orgName, projectName, envName, changeRequestID)
