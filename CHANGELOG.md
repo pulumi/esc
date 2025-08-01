@@ -1,5 +1,17 @@
 # CHANGELOG
 
+## 0.16.1
+
+### Improvements
+
+- Internal preparation for the upcoming Approvals launch
+  [#569](https://github.com/pulumi/esc/pull/569)
+
+### Bug Fixes
+
+- Fix broken change request URL that links to web console when using `--draft` with `env set`, `env edit` and `env version rollback`.
+  [#571](https://github.com/pulumi/esc/pull/571)
+
 ## 0.16.0
 
 ### Improvements
@@ -34,14 +46,14 @@
 ### Bug Fixes
 
 - Fix `esc version`
- [#541](https://github.com/pulumi/esc/pull/541)
+  [#541](https://github.com/pulumi/esc/pull/541)
 
 ## 0.13.2
 
 ### Bug Fixes
 
 - handle nil in MakeSecret
- [#518](https://github.com/pulumi/esc/pull/518)
+  [#518](https://github.com/pulumi/esc/pull/518)
 
 ## 0.13.1
 
@@ -183,7 +195,6 @@
 
 - Add support for displaying changed between environment revisions.
   [#295](https://github.com/pulumi/esc/pull/295)
-  
 - Finalize command tree for version management.
   [#304](https://github.com/pulumi/esc/pull/304)
 
@@ -254,7 +265,7 @@
 
 - Add support for execution context interpolation.
   [#239](https://github.com/pulumi/esc/pull/239)
-  
+
 ## 0.7.0
 
 ### Bug Fixes
@@ -285,7 +296,6 @@
 
 - Include paths in diagnostics.
   [#157](https://github.com/pulumi/esc/pull/157)
-  
 - Support secret elision in definitions via encryption and decryption
   [#155](https://github.com/pulumi/esc/pull/155)
 
@@ -311,7 +321,6 @@
 
 - Do not panic when `env set` is passed an empty value.
   [#110](https://github.com/pulumi/esc/pull/110)
-  
 - Fix behavior for `esc login` when no existing credentials are present
   [#111](https://github.com/pulumi/esc/pull/111)
 
