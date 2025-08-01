@@ -100,13 +100,20 @@ func createTemporaryFiles(e *esc.Environment, opts PrepareOptions) (paths, envir
 	return paths, environ, secrets, nil
 }
 
+// EscEnvVars contains the environment variables to include when using `esc run`.
+type EscEnvVars struct {
+	Org         string
+	Project     string
+	Environment string
+}
+
 // PrepareOptions contains options for PrepareEnvironment.
 type PrepareOptions struct {
-	Quote   bool // True to quote environment variable values
-	Pretend bool // True to skip actually writing temporary files
-	Redact  bool // True to redact secrets. Ignored unless Pretend is set.
-
-	fs escFS // The filesystem for temporary files
+	Quote      bool     // True to quote environment variable values
+	Pretend    bool     // True to skip actually writing temporary files
+	Redact     bool     // True to redact secrets. Ignored unless Pretend is set.
+	EscEnvVars []string // ESC-specific environment variables to include
+	fs         escFS    // The filesystem for temporary files
 }
 
 // PrepareEnvironment prepares the envvar and temporary file projections for an environment. Returns the paths to
@@ -127,6 +134,9 @@ func PrepareEnvironment(e *esc.Environment, opts *PrepareOptions) (files, enviro
 	}
 
 	environ = append(envVars, fileVars...)
+	if opts.EscEnvVars != nil {
+		environ = append(environ, opts.EscEnvVars...)
+	}
 	secrets = append(envSecrets, fileSecrets...)
 	return filePaths, environ, secrets, nil
 }

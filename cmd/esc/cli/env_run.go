@@ -92,6 +92,7 @@ func (w *redactor) Close() error {
 
 func newEnvRunCmd(envcmd *envCommand) *cobra.Command {
 	var interactive bool
+	var excludeEnvVars bool
 	var duration time.Duration
 	var draft string
 
@@ -154,7 +155,16 @@ func newEnvRunCmd(envcmd *envCommand) *cobra.Command {
 				return envcmd.writePropertyEnvironmentDiagnostics(envcmd.esc.stderr, diags)
 			}
 
-			files, environ, secrets, err := envcmd.prepareEnvironment(env, PrepareOptions{})
+			var escEnvVars []string
+			if !excludeEnvVars {
+				escEnvVars = []string{
+					fmt.Sprintf("PULUMI_ESC_ORG=%v", ref.orgName),
+					fmt.Sprintf("PULUMI_ESC_PROJECT=%v", ref.projectName),
+					fmt.Sprintf("PULUMI_ESC_ENVIRONMENT=%v", ref.envName),
+				}
+			}
+
+			files, environ, secrets, err := envcmd.prepareEnvironment(env, PrepareOptions{EscEnvVars: escEnvVars})
 			if err != nil {
 				return err
 			}
@@ -212,6 +222,7 @@ func newEnvRunCmd(envcmd *envCommand) *cobra.Command {
 		},
 	}
 
+	cmd.Flags().BoolVarP(&excludeEnvVars, "exclude-env-vars", "x", false, "Exclude ESC-specific environment variables")
 	cmd.Flags().BoolVarP(&interactive, "interactive", "i", false, "true to treat the command as interactive and disable output filters")
 	cmd.Flags().DurationVarP(&duration, "lifetime", "l", 2*time.Hour, "the lifetime of the opened environment")
 	cmd.Flags().StringVar(

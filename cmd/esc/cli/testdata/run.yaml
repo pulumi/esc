@@ -7,10 +7,14 @@ run: |
   esc env run -i default/test source-file
   esc env run default/test -- echo -n hunter2
   esc env run default/test -i -- echo -n hunter2
+  esc env run default/test dump-pulumi-esc-vars
+  esc env run -x default/test dump-pulumi-esc-vars
 process:
   commands:
     dump-env: |
       echo "secret: $SECRET, plain: $PLAIN, bool: $BOOL, num: $NUM, file: $FILE, boolFile: $BOOL_FILE, numFile: $NUM_FILE"
+    dump-pulumi-esc-vars: |
+      echo "PULUMI_ESC_ORG: ${PULUMI_ESC_ORG:="not set"}, PULUMI_ESC_PROJECT: ${PULUMI_ESC_PROJECT:="not set"}, PULUMI_ESC_ENVIRONMENT: ${PULUMI_ESC_ENVIRONMENT:="not set"}"
     echo: |
       echo $*
     source-file: |
@@ -50,7 +54,11 @@ secret: [secret], plain: plaintext
 secret: hunter2, plain: plaintext
 > esc env run default/test -- echo -n hunter2
 [secret]> esc env run default/test -i -- echo -n hunter2
-hunter2
+hunter2> esc env run default/test dump-pulumi-esc-vars
+PULUMI_ESC_ORG: test-user, PULUMI_ESC_PROJECT: default, PULUMI_ESC_ENVIRONMENT: test
+> esc env run -x default/test dump-pulumi-esc-vars
+PULUMI_ESC_ORG: not set, PULUMI_ESC_PROJECT: not set, PULUMI_ESC_ENVIRONMENT: not set
+
 ---
 > esc env run default/test dump-env
 > esc env run -i default/test dump-env
@@ -60,3 +68,5 @@ hunter2
 > esc env run -i default/test source-file
 > esc env run default/test -- echo -n hunter2
 > esc env run default/test -i -- echo -n hunter2
+> esc env run default/test dump-pulumi-esc-vars
+> esc env run -x default/test dump-pulumi-esc-vars
