@@ -1,8 +1,6 @@
 module github.com/pulumi/esc
 
-go 1.23.0
-
-toolchain go1.23.6
+go 1.23.11
 
 retract v0.14.0
 
@@ -18,8 +16,8 @@ require (
 	github.com/muesli/termenv v0.15.2
 	github.com/pgavlin/aho-corasick v0.5.1
 	github.com/pgavlin/fx/v2 v2.0.3
-	github.com/pulumi/pulumi/pkg/v3 v3.185.0
-	github.com/pulumi/pulumi/sdk/v3 v3.185.0
+	github.com/pulumi/pulumi/pkg/v3 v3.192.0
+	github.com/pulumi/pulumi/sdk/v3 v3.192.0
 	github.com/rivo/uniseg v0.4.4
 	github.com/rogpeppe/go-internal v1.13.1
 	github.com/spf13/cobra v1.8.0
