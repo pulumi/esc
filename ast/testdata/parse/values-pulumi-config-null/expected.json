@@ -1,0 +1,41 @@
+{
+    "decl": {
+        "Description": null,
+        "Imports": null,
+        "Values": {
+            "Entries": [
+                {
+                    "Key": {
+                        "Value": "pulumiConfig"
+                    },
+                    "Value": {}
+                }
+            ]
+        }
+    },
+    "diags": [
+        {
+            "Severity": 1,
+            "Summary": "pulumiConfig must be an object",
+            "Detail": "",
+            "Subject": {
+                "Filename": "values-pulumi-config-null",
+                "Start": {
+                    "Line": 2,
+                    "Column": 3,
+                    "Byte": 10
+                },
+                "End": {
+                    "Line": 2,
+                    "Column": 21,
+                    "Byte": 28
+                }
+            },
+            "Context": null,
+            "Expression": null,
+            "EvalContext": null,
+            "Extra": null,
+            "Path": "values"
+        }
+    ]
+}
