@@ -7,14 +7,14 @@
             "Subject": {
                 "Filename": "builtin-concat-errors",
                 "Start": {
-                    "Line": 4,
+                    "Line": 3,
                     "Column": 17,
-                    "Byte": 83
+                    "Byte": 40
                 },
                 "End": {
-                    "Line": 4,
+                    "Line": 3,
                     "Column": 29,
-                    "Byte": 95
+                    "Byte": 52
                 }
             },
             "Context": null,
