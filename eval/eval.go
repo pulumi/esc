@@ -1241,11 +1241,7 @@ func (e *evalContext) evaluateBuiltinConcat(x *expr, repr *concatExpr) *value {
 	if !v.unknown {
 		var result []*value
 		for _, arrayVal := range arrays.repr.([]*value) {
-			if arrayVal.repr != nil {
-				if arr, isArray := arrayVal.repr.([]*value); isArray {
-					result = append(result, arr...)
-				}
-			}
+			result = append(result, arrayVal.repr.([]*value)...)
 		}
 		v.repr = result
 	}
