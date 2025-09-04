@@ -27,6 +27,9 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/common/util/contract"
 )
 
+// See https://www.pulumi.com/docs/esc/reference/reserved-properties/
+var reservedProperties = []string{"values.pulumiConfig", "values.files", "values.environmentVariables"}
+
 type declNode struct {
 	syntax syntax.Node
 }
@@ -131,6 +134,14 @@ func (d *MapDecl[T]) parse(name string, node syntax.Node) syntax.Diagnostics {
 		if strings.HasPrefix(kvp.Key.Value(), "fn::") {
 			diags.Extend(syntax.NodeError(kvp.Key, fmt.Sprintf("builtin function call %q not allowed at the top level", kvp.Key.Value())))
 		}
+
+		_, propertyIsObject := kvp.Value.(*syntax.ObjectNode)
+		for _, reservedProperty := range reservedProperties {
+			if reservedProperty == vname && !propertyIsObject {
+				diags.Extend(syntax.NodeError(node, fmt.Sprintf("%v must be an object", kvp.Key.Value())))
+			}
+		}
+
 		vdiags := parseNode(vname, &v, kvp.Value)
 		diags.Extend(vdiags...)
 

@@ -1,0 +1,41 @@
+{
+    "decl": {
+        "Description": null,
+        "Imports": null,
+        "Values": {
+            "Entries": [
+                {
+                    "Key": {
+                        "Value": "environmentVariables"
+                    },
+                    "Value": {}
+                }
+            ]
+        }
+    },
+    "diags": [
+        {
+            "Severity": 1,
+            "Summary": "environmentVariables must be an object",
+            "Detail": "",
+            "Subject": {
+                "Filename": "values-environment-variables-null",
+                "Start": {
+                    "Line": 2,
+                    "Column": 3,
+                    "Byte": 10
+                },
+                "End": {
+                    "Line": 2,
+                    "Column": 29,
+                    "Byte": 36
+                }
+            },
+            "Context": null,
+            "Expression": null,
+            "EvalContext": null,
+            "Extra": null,
+            "Path": "values"
+        }
+    ]
+}
