@@ -6,6 +6,7 @@ import (
 	"bytes"
 	"context"
 	"encoding/base64"
+	"encoding/json"
 	"errors"
 	"fmt"
 	"hash/fnv"
@@ -447,7 +448,17 @@ func (c *testPulumiClient) openEnvironment(ctx context.Context, orgName, name st
 		return "", mapDiags(diags), nil
 	}
 
-	c.openEnvs[id.String()] = openEnv
+	// round-trip through JSON for better fidelity with service-backed scenarios
+	encoded, err := json.Marshal(openEnv)
+	if err != nil {
+		return "", nil, nil
+	}
+	var decoded esc.Environment
+	if err = json.Unmarshal(encoded, &decoded); err != nil {
+		return "", nil, nil
+	}
+
+	c.openEnvs[id.String()] = &decoded
 	return id.String(), mapDiags(diags), nil
 }
 

@@ -77,15 +77,22 @@ func createTemporaryFiles(e *esc.Environment, opts PrepareOptions) (paths, envir
 
 	for _, k := range keys {
 		v := files[k]
-		s := v.Value.(string)
+
+		var contents []byte
+		switch v := v.Value.(type) {
+		case string:
+			contents = []byte(v)
+		case []byte:
+			contents = v
+		}
 
 		if v.Secret {
-			secrets = append(secrets, s)
+			secrets = append(secrets, string(contents))
 		}
 
 		path := "[unknown]"
 		if !opts.Pretend {
-			path, err = createTemporaryFile(opts.fs, []byte(s))
+			path, err = createTemporaryFile(opts.fs, contents)
 			if err != nil {
 				removeTemporaryFiles(opts.fs, paths)
 				return nil, nil, nil, err

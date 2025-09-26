@@ -1195,7 +1195,8 @@
                 }
             },
             "fromBase64": {
-                "value": "hello,world",
+                "value": "aGVsbG8sd29ybGQ=",
+                "binary": true,
                 "trace": {
                     "def": {
                         "environment": "omnibus",
@@ -1719,7 +1720,7 @@
     },
     "checkJson": {
         "access": "[unknown]",
-        "fromBase64": "hello,world",
+        "fromBase64": "aGVsbG8sd29ybGQ=",
         "fromJSON": "[unknown]",
         "interp": "[unknown]",
         "join": "hello,world",
@@ -3179,7 +3180,8 @@
                 }
             },
             "fromBase64": {
-                "value": "hello,world",
+                "value": "aGVsbG8sd29ybGQ=",
+                "binary": true,
                 "trace": {
                     "def": {
                         "environment": "omnibus",
@@ -4209,7 +4211,7 @@
     },
     "evalJsonRedacted": {
         "access": "qux",
-        "fromBase64": "hello,world",
+        "fromBase64": "aGVsbG8sd29ybGQ=",
         "fromJSON": {
             "a": null,
             "b": true,
@@ -4253,7 +4255,7 @@
     },
     "evalJSONRevealed": {
         "access": "qux",
-        "fromBase64": "hello,world",
+        "fromBase64": "aGVsbG8sd29ybGQ=",
         "fromJSON": {
             "a": null,
             "b": true,
