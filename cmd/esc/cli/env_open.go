@@ -21,6 +21,9 @@ func newEnvOpenCmd(envcmd *envCommand) *cobra.Command {
 	var duration time.Duration
 	var format string
 	var draft string
+	var request bool
+	var grantExpirationSeconds int
+	var accessDurationSeconds int
 
 	cmd := &cobra.Command{
 		Use:   "open [<org-name>/][<project-name>/]<environment-name>[@<version>] [property path]",
@@ -41,6 +44,18 @@ func newEnvOpenCmd(envcmd *envCommand) *cobra.Command {
 			ref, args, err := envcmd.getExistingEnvRef(ctx, args)
 			if err != nil {
 				return err
+			}
+
+			// Handle request mode for protected environments
+			if request {
+				return envcmd.esc.client.CreateEnvironmentOpenRequest(
+					ctx,
+					ref.orgName,
+					ref.projectName,
+					ref.envName,
+					grantExpirationSeconds,
+					accessDurationSeconds,
+				)
 			}
 
 			var path resource.PropertyPath
@@ -84,6 +99,15 @@ func newEnvOpenCmd(envcmd *envCommand) *cobra.Command {
 	cmd.Flags().StringVar(
 		&draft, "draft", "",
 		"open an environment draft with --draft=<change-request-id>")
+	cmd.Flags().BoolVar(
+		&request, "request", false,
+		"create a request for opening a protected environment")
+	cmd.Flags().IntVar(
+		&grantExpirationSeconds, "grant-expiration-seconds", 90000,
+		"expiration time for the grant in seconds (default: 90000)")
+	cmd.Flags().IntVar(
+		&accessDurationSeconds, "access-duration-seconds", 259200,
+		"duration of access in seconds (default: 259200)")
 
 	return cmd
 }
