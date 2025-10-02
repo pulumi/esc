@@ -386,7 +386,7 @@ type Client interface {
 		envName string,
 		grantExpirationSeconds int,
 		accessDurationSeconds int,
-	) error
+	) (*CreateEnvironmentOpenRequestResponse, error)
 }
 
 type client struct {
@@ -1283,7 +1283,7 @@ func (pc *client) CreateEnvironmentOpenRequest(
 	envName string,
 	grantExpirationSeconds int,
 	accessDurationSeconds int,
-) error {
+) (*CreateEnvironmentOpenRequestResponse, error) {
 	path := fmt.Sprintf("/api/esc/environments/%v/%v/%v/open/request", orgName, projectName, envName)
 
 	req := struct {
@@ -1294,7 +1294,13 @@ func (pc *client) CreateEnvironmentOpenRequest(
 		AccessDurationSeconds:  accessDurationSeconds,
 	}
 
-	return pc.restCall(ctx, http.MethodPost, path, nil, req, nil)
+	var resp CreateEnvironmentOpenRequestResponse
+	err := pc.restCall(ctx, http.MethodPost, path, nil, req, &resp)
+	if err != nil {
+		return nil, err
+	}
+
+	return &resp, nil
 }
 
 type httpCallOptions struct {

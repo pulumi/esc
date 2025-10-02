@@ -4,6 +4,7 @@ package cli
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/spf13/cobra"
 )
@@ -33,7 +34,7 @@ func newEnvOpenRequestCmd(envcmd *envCommand) *cobra.Command {
 				return err
 			}
 
-			return envcmd.esc.client.CreateEnvironmentOpenRequest(
+			resp, err := envcmd.esc.client.CreateEnvironmentOpenRequest(
 				ctx,
 				ref.orgName,
 				ref.projectName,
@@ -41,6 +42,13 @@ func newEnvOpenRequestCmd(envcmd *envCommand) *cobra.Command {
 				grantExpirationSeconds,
 				accessDurationSeconds,
 			)
+			if err != nil {
+				return err
+			}
+
+			fmt.Printf("Created environment open request with ID: %s\n", resp.ChangeRequests[0].ChangeRequestID)
+
+			return nil
 		},
 	}
 
