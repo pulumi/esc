@@ -1,7 +1,6 @@
 ### Improvements
 
-- Added support for `fn::concat` built-in function to concatenate arrays.
-  [#582](https://github.com/pulumi/esc/pull/582)
+- Added support for Open Approvals [#592](https://github.com/pulumi/esc/pull/592)
 
 ### Bug Fixes
 
