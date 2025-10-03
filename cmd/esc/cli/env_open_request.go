@@ -46,7 +46,7 @@ func newEnvOpenRequestCmd(envcmd *envCommand) *cobra.Command {
 				return err
 			}
 
-			fmt.Printf("Created environment open request with ID: %s\n", resp.ChangeRequests[0].ChangeRequestID)
+			fmt.Fprintf(envcmd.esc.stdout, "Created environment open request with ID: %s\n", resp.ChangeRequests[0].ChangeRequestID)
 
 			return nil
 		},
