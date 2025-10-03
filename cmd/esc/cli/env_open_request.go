@@ -5,13 +5,14 @@ package cli
 import (
 	"context"
 	"fmt"
+	"time"
 
 	"github.com/spf13/cobra"
 )
 
 func newEnvOpenRequestCmd(envcmd *envCommand) *cobra.Command {
-	var grantExpirationSeconds int
-	var accessDurationSeconds int
+	var grantExpiration time.Duration
+	var accessDuration time.Duration
 
 	cmd := &cobra.Command{
 		Use:   "open-request [<org-name>/][<project-name>/]<environment-name>[@<version>]",
@@ -21,7 +22,7 @@ func newEnvOpenRequestCmd(envcmd *envCommand) *cobra.Command {
 			"\n" +
 			"This command creates a request to open a protected environment. The request must be\n" +
 			"approved before the environment can be accessed.\n",
-		SilenceUsage: true,
+		Hidden: true,
 		RunE: func(cmd *cobra.Command, args []string) error {
 			ctx := context.Background()
 
@@ -39,8 +40,8 @@ func newEnvOpenRequestCmd(envcmd *envCommand) *cobra.Command {
 				ref.orgName,
 				ref.projectName,
 				ref.envName,
-				grantExpirationSeconds,
-				accessDurationSeconds,
+				int(grantExpiration.Seconds()),
+				int(accessDuration.Seconds()),
 			)
 			if err != nil {
 				return err
@@ -52,12 +53,12 @@ func newEnvOpenRequestCmd(envcmd *envCommand) *cobra.Command {
 		},
 	}
 
-	cmd.Flags().IntVar(
-		&grantExpirationSeconds, "grant-expiration-seconds", 90000,
-		"expiration time for the grant in seconds (default: 90000)")
-	cmd.Flags().IntVar(
-		&accessDurationSeconds, "access-duration-seconds", 259200,
-		"duration of access in seconds (default: 259200)")
+	cmd.Flags().DurationVar(
+		&grantExpiration, "grant-expiration-seconds", 90000*time.Second,
+		"expiration time for the grant in seconds")
+	cmd.Flags().DurationVar(
+		&accessDuration, "access-duration-seconds", 259200*time.Second,
+		"duration of access in seconds")
 
 	return cmd
 }
