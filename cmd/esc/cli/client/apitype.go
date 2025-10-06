@@ -222,11 +222,11 @@ type CreateEnvironmentOpenRequestResponse struct {
 }
 
 type EnvironmentOpenRequestChangeRequest struct {
-	ProjectName            string `json:"projectName"`
-	EnvironmentName        string `json:"environmentName"`
-	ChangeRequestID        string `json:"changeRequestId"`
-	LatestRevisionNumber   int    `json:"latestRevisionNumber"`
-	ETag                   string `json:"etag"`
+	ProjectName          string `json:"projectName"`
+	EnvironmentName      string `json:"environmentName"`
+	ChangeRequestID      string `json:"changeRequestId"`
+	LatestRevisionNumber int    `json:"latestRevisionNumber"`
+	ETag                 string `json:"etag"`
 }
 
 type RetractEnvironmentRevisionRequest struct {
