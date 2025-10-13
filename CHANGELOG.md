@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 0.19.0
+
+### Improvements
+
+- Added support for Open Approvals [#592](https://github.com/pulumi/esc/pull/592)
+
 ## 0.18.0
 
 ### Improvements
