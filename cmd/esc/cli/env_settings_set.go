@@ -13,6 +13,8 @@ import (
 	"github.com/spf13/cobra"
 )
 
+// This command should maintain interface compatibility as a subset of env set.
+// See env_settings_contract_test.go for basic validation.
 func newEnvSettingsSetCmd(env *envCommand, registry *EnvSettingsRegistry) *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "set [<org-name>/][<project-name>/]<environment-name> <setting-name> <setting-value>",

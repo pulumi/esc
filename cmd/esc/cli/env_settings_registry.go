@@ -8,6 +8,10 @@ import (
 	"github.com/pulumi/esc/cmd/esc/cli/client"
 )
 
+// Settings commands (env settings get/set) maintain interface compatibility as
+// a subset of env commands (env get/set). Flags in settings commands should exist
+// in their parent commands. See env_settings_contract_test.go for some basic validation.
+//
 // To add a new setting:
 //
 // 1. Add fields in client/apitype.go:
