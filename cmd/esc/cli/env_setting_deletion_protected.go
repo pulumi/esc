@@ -20,6 +20,10 @@ func (s *DeletionProtectedSetting) HelpText() string {
 	return "Enable or disable deletion protection"
 }
 
+// ValidateValue accepts only "true" and "false" strings, unlike the general env {get,set} commands
+// which parse YAML and accept broader boolean values like "yes", "no", "on", "off", etc.
+// This restriction maintains compatibility while limiting the accepted subset to a well-defined
+// interface that can be reliably parsed and validated.
 func (s *DeletionProtectedSetting) ValidateValue(raw string) (bool, error) {
 	if raw != "true" && raw != "false" {
 		return false, fmt.Errorf("invalid value for %s: %s (expected true or false)", s.KebabName(), raw)
