@@ -9,4 +9,6 @@
 
 ### Bug Fixes
 
+- Environment declarations are now returned even in the face of syntax errors.
+
 ### Breaking changes
