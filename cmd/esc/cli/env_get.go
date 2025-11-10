@@ -235,14 +235,14 @@ func (get *envGetCommand) getEnvironment(
 		return nil, fmt.Errorf("getting environment definition: %w", err)
 	}
 	if len(path) == 0 {
-		return get.getEntireEnvironment(ctx, ref.orgName, def, showSecrets)
+		return get.getEntireEnvironment(ctx, ref, def, showSecrets)
 	}
-	return get.getEnvironmentMember(ctx, ref.orgName, ref.envName, def, path, showSecrets)
+	return get.getEnvironmentMember(ctx, ref, def, path, showSecrets)
 }
 
 func (get *envGetCommand) getEntireEnvironment(
 	ctx context.Context,
-	orgName string,
+	ref environmentRef,
 	def []byte,
 	showSecrets bool,
 ) (*envGetTemplateData, error) {
@@ -254,7 +254,7 @@ func (get *envGetCommand) getEntireEnvironment(
 		return &envGetTemplateData{Definition: string(def)}, nil
 	}
 
-	env, _, err := get.env.esc.client.CheckYAMLEnvironment(ctx, orgName, def, client.CheckYAMLOption{ShowSecrets: showSecrets})
+	env, _, err := get.env.esc.client.CheckEnvironment(ctx, ref.orgName, ref.projectName, ref.envName, client.CheckYAMLOption{ShowSecrets: showSecrets})
 	if err != nil {
 		return nil, fmt.Errorf("getting environment metadata: %w", err)
 	}
@@ -280,8 +280,7 @@ func (get *envGetCommand) getEntireEnvironment(
 
 func (get *envGetCommand) getEnvironmentMember(
 	ctx context.Context,
-	orgName string,
-	envName string,
+	ref environmentRef,
 	def []byte,
 	path resource.PropertyPath,
 	showSecrets bool,
@@ -306,7 +305,7 @@ func (get *envGetCommand) getEnvironmentMember(
 		return &envGetTemplateData{Definition: def}, nil
 	}
 
-	env, _, err := get.env.esc.client.CheckYAMLEnvironment(ctx, orgName, def, client.CheckYAMLOption{ShowSecrets: showSecrets})
+	env, _, err := get.env.esc.client.CheckEnvironment(ctx, ref.orgName, ref.projectName, ref.envName, client.CheckYAMLOption{ShowSecrets: showSecrets})
 	if err != nil {
 		return nil, fmt.Errorf("getting environment metadata: %w", err)
 	}
@@ -349,7 +348,7 @@ func (get *envGetCommand) getEnvironmentMember(
 			rng := stacker.Range()
 			env := rng.Environment
 			if env == "<yaml>" {
-				env = envName
+				env = ref.envName
 			}
 			stack = append(stack, fmt.Sprintf("%v:%v:%v", env, rng.Begin.Line, rng.Begin.Column))
 		}

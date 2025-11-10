@@ -270,6 +270,18 @@ type Client interface {
 		duration time.Duration,
 	) (string, []EnvironmentDiagnostic, error)
 
+	// CheckEnvironment checks the given environment for errors.
+	//
+	// This call returns the checked environment's AST, values, schema, and any diagnostics issued by the
+	// evaluator.
+	CheckEnvironment(
+		ctx context.Context,
+		orgName string,
+		projectName string,
+		envName string,
+		opts ...CheckYAMLOption,
+	) (*esc.Environment, []EnvironmentDiagnostic, error)
+
 	// Deprecated: Use GetOpenEnvironmentWithProject instead
 	GetOpenEnvironment(ctx context.Context, orgName, envName, openEnvID string) (*esc.Environment, error)
 	// GetOpenEnvironmentWithProject returns the AST, values, and schema for the open environment with ID openEnvID in
@@ -987,6 +999,36 @@ func (pc *client) OpenYAMLEnvironment(
 		return "", nil, err
 	}
 	return resp.ID, nil, nil
+}
+
+func (pc *client) CheckEnvironment(
+	ctx context.Context,
+	orgName string,
+	projectName string,
+	envName string,
+	opts ...CheckYAMLOption,
+) (*esc.Environment, []EnvironmentDiagnostic, error) {
+	path := fmt.Sprintf("/api/esc/environments/%v/%v/%v/check", orgName, projectName, envName)
+
+	queryObj := struct {
+		ShowSecrets bool `url:"showSecrets"`
+	}{
+		ShowSecrets: firstOrDefault(opts).ShowSecrets,
+	}
+
+	var resp esc.Environment
+	var errResp EnvironmentErrorResponse
+	err := pc.restCallWithOptions(ctx, http.MethodPost, path, queryObj, nil, &resp, httpCallOptions{
+		ErrorResponse: &errResp,
+	})
+	if err != nil {
+		var diags *EnvironmentErrorResponse
+		if errors.As(err, &diags) && diags.Code == http.StatusBadRequest && len(diags.Diagnostics) != 0 {
+			return nil, diags.Diagnostics, nil
+		}
+		return nil, nil, err
+	}
+	return &resp, nil, nil
 }
 
 // Deprecated
