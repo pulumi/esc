@@ -179,6 +179,7 @@ func DecryptSecrets(ctx context.Context, filename string, source []byte, decrypt
 	})
 }
 
+// EncryptSecret encrypts a given secret and returns the encoded ciphertext
 func EncryptSecret(ctx context.Context, encrypter Encrypter, plaintext []byte) ([]byte, error) {
 	ciphertext, err := encrypter.Encrypt(ctx, plaintext)
 	if err != nil {
