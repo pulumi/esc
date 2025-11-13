@@ -119,7 +119,7 @@ func EncryptSecrets(ctx context.Context, filename string, source []byte, encrypt
 		}
 
 		// Encrypt the plaintext.
-		ciphertext, err := EncryptPlaintext(ctx, encrypter, []byte(plaintext.Value()))
+		ciphertext, err := EncryptSecret(ctx, encrypter, []byte(plaintext.Value()))
 		if err != nil {
 			return nil, nil, err
 		}
@@ -179,7 +179,7 @@ func DecryptSecrets(ctx context.Context, filename string, source []byte, decrypt
 	})
 }
 
-func EncryptPlaintext(ctx context.Context, encrypter Encrypter, plaintext []byte) ([]byte, error) {
+func EncryptSecret(ctx context.Context, encrypter Encrypter, plaintext []byte) ([]byte, error) {
 	ciphertext, err := encrypter.Encrypt(ctx, plaintext)
 	if err != nil {
 		return nil, err
