@@ -136,7 +136,7 @@ func evalEnvironment(
 	showSecrets bool,
 	rotatePaths map[string]bool,
 ) (*esc.Environment, RotationResult, syntax.Diagnostics) {
-	if env == nil || (len(env.Values.GetEntries()) == 0 && len(env.Imports.GetElements()) == 0) {
+	if env == nil || (len(env.Values.Entries) == 0 && len(env.Imports.GetElements()) == 0) {
 		return nil, nil, nil
 	}
 
@@ -163,8 +163,9 @@ func evalEnvironment(
 	envProperties, exportDiags := v.export(name)
 	diags.Extend(exportDiags...)
 
+	rootExpr := ec.root.export(name)
 	return &esc.Environment{
-		Exprs:            ec.root.export(name).Object,
+		Exprs:            &rootExpr,
 		Properties:       envProperties.Value.(map[string]esc.Value),
 		Schema:           s,
 		ExecutionContext: executionContext,
@@ -433,18 +434,18 @@ func (e *evalContext) evaluate() (*value, syntax.Diagnostics) {
 
 	// Build the root value. We do this manually b/c the AST uses a declaration rather than an expression for the
 	// root.
-	properties := make(map[string]*expr, len(e.env.Values.GetEntries()))
+	properties := make(map[string]*expr, len(e.env.Values.Entries))
 	e.root = &expr{
 		path: "<" + e.name + ">",
 		repr: &objectExpr{
-			node:       ast.Object(),
+			node:       e.env.Values,
 			properties: properties,
 		},
 		base: e.base,
 	}
 
 	// Declare the root value's properties.
-	for _, entry := range e.env.Values.GetEntries() {
+	for _, entry := range e.env.Values.Entries {
 		key := entry.Key.GetValue()
 
 		if e.isReserveTopLevelKey(key) {

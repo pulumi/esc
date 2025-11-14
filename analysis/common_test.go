@@ -144,7 +144,7 @@ func visitExprs(env *esc.Environment, visitor func(path string, x esc.Expr)) {
 		}
 	}
 
-	for _, key := range sortedKeys(env.Exprs) {
-		visit(env.Exprs[key], key)
+	for _, key := range sortedKeys(env.Exprs.Object) {
+		visit(env.Exprs.Object[key], key)
 	}
 }
