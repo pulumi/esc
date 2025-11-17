@@ -19,6 +19,7 @@ import (
 
 	"github.com/pulumi/esc"
 	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 )
 
 func TestApplyValuePatches(t *testing.T) {
@@ -32,7 +33,7 @@ values:
       state: null
 `)
 
-		// Create a patch with a secret object (non-primitive)
+		// Create a patch with a secret object
 		patches := []*Patch{
 			{
 				DocPath: "values.mySecret[\"fn::rotate\"].state",
@@ -53,7 +54,7 @@ values:
 		t.Logf("Result YAML:\n%s", string(result))
 
 		// Verify the patched YAML can be parsed without errors
-		// This ensures the round-trip works (patch -> YAML -> parse)
+		// to ensure the round-trip works (patch -> YAML -> parse)
 		env, diags, err := LoadYAMLBytes("test", result)
 		assert.NoError(t, err)
 		assert.Empty(t, diags, "patched YAML should parse without errors")
@@ -63,16 +64,33 @@ values:
 
 func TestValueToSecretJSON(t *testing.T) {
 	t.Run("nested secrets", func(t *testing.T) {
-		actual := valueToSecretJSON(esc.NewValue(map[string]esc.Value{
+		actual, err := valueToSecretJSON(esc.NewValue(map[string]esc.Value{
 			"foo": esc.NewValue(map[string]esc.Value{
 				"bar": esc.NewSecret("secret"),
 			}),
 		}))
+		require.NoError(t, err)
 		expected := map[string]any{
 			"foo": map[string]any{
 				"bar": map[string]any{
 					"fn::secret": "secret",
 				},
+			},
+		}
+		assert.Equal(t, expected, actual)
+	})
+
+	t.Run("secret object", func(t *testing.T) {
+		// When we have a secret object, fn::secret can't handle it directly because it only accepts string literals.
+		// Therefore we JSON-encode the object and use fn::fromJSON + fn::secret to decode it.
+		actual, err := valueToSecretJSON(esc.NewSecret(map[string]esc.Value{
+			"username": esc.NewValue("admin"),
+			"password": esc.NewValue("secret123"),
+		}))
+		require.NoError(t, err)
+		expected := map[string]any{
+			"fn::fromJSON": map[string]any{
+				"fn::secret": `{"password":"secret123","username":"admin"}`,
 			},
 		}
 		assert.Equal(t, expected, actual)
