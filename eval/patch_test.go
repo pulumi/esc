@@ -15,10 +15,51 @@
 package eval
 
 import (
-	"github.com/pulumi/esc"
-	"github.com/stretchr/testify/require"
 	"testing"
+
+	"github.com/pulumi/esc"
+	"github.com/stretchr/testify/assert"
 )
+
+func TestApplyValuePatches(t *testing.T) {
+	t.Run("secret object patch", func(t *testing.T) {
+		source := []byte(`# example.yaml
+values:
+  mySecret:
+    fn::rotate:
+      provider: test
+      inputs: {}
+      state: null
+`)
+
+		// Create a patch with a secret object (non-primitive)
+		patches := []*Patch{
+			{
+				DocPath: "values.mySecret[\"fn::rotate\"].state",
+				Replacement: esc.NewValue(map[string]esc.Value{
+					"credentials": esc.NewSecret(map[string]esc.Value{
+						"username": esc.NewValue("admin"),
+						"password": esc.NewValue("secret123"),
+						"metadata": esc.NewValue(map[string]esc.Value{
+							"rotatedAt": esc.NewValue("2024-01-01"),
+						}),
+					}),
+				}),
+			},
+		}
+
+		result, err := ApplyValuePatches(source, patches)
+		assert.NoError(t, err)
+		t.Logf("Result YAML:\n%s", string(result))
+
+		// Verify the patched YAML can be parsed without errors
+		// This ensures the round-trip works (patch -> YAML -> parse)
+		env, diags, err := LoadYAMLBytes("test", result)
+		assert.NoError(t, err)
+		assert.Empty(t, diags, "patched YAML should parse without errors")
+		assert.NotNil(t, env, "should successfully parse environment")
+	})
+}
 
 func TestValueToSecretJSON(t *testing.T) {
 	t.Run("nested secrets", func(t *testing.T) {
@@ -34,6 +75,6 @@ func TestValueToSecretJSON(t *testing.T) {
 				},
 			},
 		}
-		require.Equal(t, expected, actual)
+		assert.Equal(t, expected, actual)
 	})
 }
