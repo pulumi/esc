@@ -196,7 +196,7 @@ type EnvironmentDecl struct {
 
 	Description *StringExpr
 	Imports     ImportListDecl
-	Values      PropertyMapDecl
+	Values      *ObjectExpr
 }
 
 func (d *EnvironmentDecl) Syntax() syntax.Node {
@@ -222,7 +222,7 @@ func (d *EnvironmentDecl) NewDiagnosticWriter(w io.Writer, width uint, color boo
 	return newDiagnosticWriter(w, fileMap, width, color)
 }
 
-func EnvironmentSyntax(node *syntax.ObjectNode, description *StringExpr, imports ImportListDecl, values PropertyMapDecl) *EnvironmentDecl {
+func EnvironmentSyntax(node *syntax.ObjectNode, description *StringExpr, imports ImportListDecl, values *ObjectExpr) *EnvironmentDecl {
 	return &EnvironmentDecl{
 		syntax:      node,
 		Description: description,
@@ -231,7 +231,7 @@ func EnvironmentSyntax(node *syntax.ObjectNode, description *StringExpr, imports
 	}
 }
 
-func Environment(description *StringExpr, imports ImportListDecl, values PropertyMapDecl) *EnvironmentDecl {
+func Environment(description *StringExpr, imports ImportListDecl, values *ObjectExpr) *EnvironmentDecl {
 	return EnvironmentSyntax(nil, description, imports, values)
 }
 
