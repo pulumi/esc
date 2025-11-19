@@ -184,7 +184,7 @@ func EncryptSecret(ctx context.Context, encrypter Encrypter, plaintext []byte) (
 	return encodeCiphertext(ciphertext), nil
 }
 
-// DecryptSecret decrypts a given base64-encoded secret and returns the plaintext
+// DecryptSecret decrypts a given encoded ciphertext and returns the plaintext
 func DecryptSecret(ctx context.Context, decrypter Decrypter, encodedCiphertext string) ([]byte, error) {
 	ciphertext, err := decodeCiphertext(encodedCiphertext)
 	if err != nil {
