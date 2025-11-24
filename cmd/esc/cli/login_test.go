@@ -303,13 +303,13 @@ func TestDefaultOrgConfiguration(t *testing.T) {
 }
 
 type oidcLoginManager struct {
-	creds                      pulumi_workspace.Credentials
-	capturedOIDCTokenSource    string
-	capturedOrganization       string
-	capturedScope              string
-	capturedExpiration         time.Duration
-	loginWithOIDCTokenError    error
-	loginWithOIDCTokenAccount  *pulumi_workspace.Account
+	creds                     pulumi_workspace.Credentials
+	capturedOIDCTokenSource   string
+	capturedOrganization      string
+	capturedScope             string
+	capturedExpiration        time.Duration
+	loginWithOIDCTokenError   error
+	loginWithOIDCTokenAccount *pulumi_workspace.Account
 }
 
 func (lm *oidcLoginManager) Current(ctx context.Context, cloudURL string, insecure, setCurrent bool) (*pulumi_workspace.Account, error) {
