@@ -1,5 +1,14 @@
 # CHANGELOG
 
+## 0.21.0
+
+### Improvements
+
+- Added support for `fn::split` built-in function to split strings into arrays.
+  [#281](https://github.com/pulumi/esc/issues/281)
+- Add native support for OIDC token exchange when logging into Pulumi Cloud. Run `esc login --help` for more
+  information. [#607](https://github.com/pulumi/esc/pull/607)
+
 ## 0.20.0
 
 ### Improvements
@@ -75,14 +84,14 @@
 ### Bug Fixes
 
 - Fix `esc version`
- [#541](https://github.com/pulumi/esc/pull/541)
+  [#541](https://github.com/pulumi/esc/pull/541)
 
 ## 0.13.2
 
 ### Bug Fixes
 
 - handle nil in MakeSecret
- [#518](https://github.com/pulumi/esc/pull/518)
+  [#518](https://github.com/pulumi/esc/pull/518)
 
 ## 0.13.1
 
@@ -224,7 +233,6 @@
 
 - Add support for displaying changed between environment revisions.
   [#295](https://github.com/pulumi/esc/pull/295)
-  
 - Finalize command tree for version management.
   [#304](https://github.com/pulumi/esc/pull/304)
 
@@ -295,7 +303,7 @@
 
 - Add support for execution context interpolation.
   [#239](https://github.com/pulumi/esc/pull/239)
-  
+
 ## 0.7.0
 
 ### Bug Fixes
@@ -326,7 +334,6 @@
 
 - Include paths in diagnostics.
   [#157](https://github.com/pulumi/esc/pull/157)
-  
 - Support secret elision in definitions via encryption and decryption
   [#155](https://github.com/pulumi/esc/pull/155)
 
@@ -352,7 +359,6 @@
 
 - Do not panic when `env set` is passed an empty value.
   [#110](https://github.com/pulumi/esc/pull/110)
-  
 - Fix behavior for `esc login` when no existing credentials are present
   [#111](https://github.com/pulumi/esc/pull/111)
 
