@@ -143,6 +143,12 @@ func (p *propertyAccessParser) peek() (byte, bool) {
 
 // Parses a property access. See the comment on parsePropertyAccess for the grammar and examples.
 func (p *propertyAccessParser) parse() (int, string, *PropertyAccess, syntax.Diagnostics) {
+	if c, ok := p.peek(); ok && c == '.' {
+		// treating an empty initial property name (which is otherwise illegal) as access to the document root
+		// (conceptually the first property for `.foo` is empty)
+		p.append(&PropertyName{Name: "", AccessorRange: p.rangeFrom(p.offset)})
+	}
+
 	for {
 		c, ok := p.peek()
 		if !ok {
