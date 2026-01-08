@@ -174,7 +174,7 @@ func (x *expr) export(environment string) esc.Expr {
 			Name:      repr.node.Name().Value,
 			NameRange: convertRange(repr.node.Name().Syntax().Syntax().Range(), environment),
 			ArgSchema: schema.Record(schema.SchemaMap{
-				"schema": schema.Always(),
+				"schema": schema.JSONSchemaSchema(),
 				"value":  schema.Always(),
 			}).Schema(),
 			Arg: esc.Expr{

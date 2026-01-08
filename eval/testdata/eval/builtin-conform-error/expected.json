@@ -107,7 +107,171 @@
                     },
                     "argSchema": {
                         "properties": {
-                            "schema": true,
+                            "schema": {
+                                "$defs": {
+                                    "schema": {
+                                        "anyOf": [
+                                            {
+                                                "type": "boolean"
+                                            },
+                                            {
+                                                "properties": {
+                                                    "$defs": {
+                                                        "additionalProperties": {
+                                                            "$ref": "#/$defs/schema",
+                                                            "type": ""
+                                                        },
+                                                        "type": "object"
+                                                    },
+                                                    "$ref": {
+                                                        "type": "string"
+                                                    },
+                                                    "additionalProperties": {
+                                                        "$ref": "#/$defs/schema",
+                                                        "type": ""
+                                                    },
+                                                    "anyOf": {
+                                                        "items": {
+                                                            "$ref": "#/$defs/schema",
+                                                            "type": ""
+                                                        },
+                                                        "type": "array"
+                                                    },
+                                                    "const": {
+                                                        "type": ""
+                                                    },
+                                                    "default": {
+                                                        "type": ""
+                                                    },
+                                                    "dependentRequired": {
+                                                        "additionalProperties": {
+                                                            "items": {
+                                                                "type": "string"
+                                                            },
+                                                            "type": "array"
+                                                        },
+                                                        "type": "object"
+                                                    },
+                                                    "deprecated": {
+                                                        "type": "boolean"
+                                                    },
+                                                    "description": {
+                                                        "type": "string"
+                                                    },
+                                                    "enum": {
+                                                        "type": "array"
+                                                    },
+                                                    "examples": {
+                                                        "type": "array"
+                                                    },
+                                                    "exclusiveMaximum": {
+                                                        "type": "number"
+                                                    },
+                                                    "exclusiveMinimum": {
+                                                        "type": "number"
+                                                    },
+                                                    "items": {
+                                                        "$ref": "#/$defs/schema",
+                                                        "type": ""
+                                                    },
+                                                    "maxItems": {
+                                                        "type": "number"
+                                                    },
+                                                    "maxLength": {
+                                                        "type": "number"
+                                                    },
+                                                    "maxProperties": {
+                                                        "type": "number"
+                                                    },
+                                                    "maximum": {
+                                                        "type": "number"
+                                                    },
+                                                    "minItems": {
+                                                        "type": "number"
+                                                    },
+                                                    "minLength": {
+                                                        "type": "number"
+                                                    },
+                                                    "minProperties": {
+                                                        "type": "number"
+                                                    },
+                                                    "minimum": {
+                                                        "type": "number"
+                                                    },
+                                                    "multipleOf": {
+                                                        "type": "number"
+                                                    },
+                                                    "oneOf": {
+                                                        "items": {
+                                                            "$ref": "#/$defs/schema",
+                                                            "type": ""
+                                                        },
+                                                        "type": "array"
+                                                    },
+                                                    "pattern": {
+                                                        "type": "string"
+                                                    },
+                                                    "prefixItems": {
+                                                        "items": {
+                                                            "$ref": "#/$defs/schema",
+                                                            "type": ""
+                                                        },
+                                                        "type": "array"
+                                                    },
+                                                    "properties": {
+                                                        "additionalProperties": {
+                                                            "$ref": "#/$defs/schema",
+                                                            "type": ""
+                                                        },
+                                                        "type": "object"
+                                                    },
+                                                    "required": {
+                                                        "items": {
+                                                            "type": "string"
+                                                        },
+                                                        "type": "array"
+                                                    },
+                                                    "rotateOnly": {
+                                                        "items": {
+                                                            "type": "string"
+                                                        },
+                                                        "type": "array"
+                                                    },
+                                                    "secret": {
+                                                        "type": "boolean"
+                                                    },
+                                                    "title": {
+                                                        "type": "string"
+                                                    },
+                                                    "type": {
+                                                        "anyOf": [
+                                                            {
+                                                                "type": "string",
+                                                                "enum": [
+                                                                    "string",
+                                                                    "number",
+                                                                    "boolean",
+                                                                    "array",
+                                                                    "object",
+                                                                    "null"
+                                                                ]
+                                                            }
+                                                        ],
+                                                        "type": ""
+                                                    },
+                                                    "uniqueItems": {
+                                                        "type": "boolean"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        ],
+                                        "type": ""
+                                    }
+                                },
+                                "$ref": "#/$defs/schema",
+                                "type": ""
+                            },
                             "value": true
                         },
                         "type": "object",
@@ -203,7 +367,171 @@
                     },
                     "argSchema": {
                         "properties": {
-                            "schema": true,
+                            "schema": {
+                                "$defs": {
+                                    "schema": {
+                                        "anyOf": [
+                                            {
+                                                "type": "boolean"
+                                            },
+                                            {
+                                                "properties": {
+                                                    "$defs": {
+                                                        "additionalProperties": {
+                                                            "$ref": "#/$defs/schema",
+                                                            "type": ""
+                                                        },
+                                                        "type": "object"
+                                                    },
+                                                    "$ref": {
+                                                        "type": "string"
+                                                    },
+                                                    "additionalProperties": {
+                                                        "$ref": "#/$defs/schema",
+                                                        "type": ""
+                                                    },
+                                                    "anyOf": {
+                                                        "items": {
+                                                            "$ref": "#/$defs/schema",
+                                                            "type": ""
+                                                        },
+                                                        "type": "array"
+                                                    },
+                                                    "const": {
+                                                        "type": ""
+                                                    },
+                                                    "default": {
+                                                        "type": ""
+                                                    },
+                                                    "dependentRequired": {
+                                                        "additionalProperties": {
+                                                            "items": {
+                                                                "type": "string"
+                                                            },
+                                                            "type": "array"
+                                                        },
+                                                        "type": "object"
+                                                    },
+                                                    "deprecated": {
+                                                        "type": "boolean"
+                                                    },
+                                                    "description": {
+                                                        "type": "string"
+                                                    },
+                                                    "enum": {
+                                                        "type": "array"
+                                                    },
+                                                    "examples": {
+                                                        "type": "array"
+                                                    },
+                                                    "exclusiveMaximum": {
+                                                        "type": "number"
+                                                    },
+                                                    "exclusiveMinimum": {
+                                                        "type": "number"
+                                                    },
+                                                    "items": {
+                                                        "$ref": "#/$defs/schema",
+                                                        "type": ""
+                                                    },
+                                                    "maxItems": {
+                                                        "type": "number"
+                                                    },
+                                                    "maxLength": {
+                                                        "type": "number"
+                                                    },
+                                                    "maxProperties": {
+                                                        "type": "number"
+                                                    },
+                                                    "maximum": {
+                                                        "type": "number"
+                                                    },
+                                                    "minItems": {
+                                                        "type": "number"
+                                                    },
+                                                    "minLength": {
+                                                        "type": "number"
+                                                    },
+                                                    "minProperties": {
+                                                        "type": "number"
+                                                    },
+                                                    "minimum": {
+                                                        "type": "number"
+                                                    },
+                                                    "multipleOf": {
+                                                        "type": "number"
+                                                    },
+                                                    "oneOf": {
+                                                        "items": {
+                                                            "$ref": "#/$defs/schema",
+                                                            "type": ""
+                                                        },
+                                                        "type": "array"
+                                                    },
+                                                    "pattern": {
+                                                        "type": "string"
+                                                    },
+                                                    "prefixItems": {
+                                                        "items": {
+                                                            "$ref": "#/$defs/schema",
+                                                            "type": ""
+                                                        },
+                                                        "type": "array"
+                                                    },
+                                                    "properties": {
+                                                        "additionalProperties": {
+                                                            "$ref": "#/$defs/schema",
+                                                            "type": ""
+                                                        },
+                                                        "type": "object"
+                                                    },
+                                                    "required": {
+                                                        "items": {
+                                                            "type": "string"
+                                                        },
+                                                        "type": "array"
+                                                    },
+                                                    "rotateOnly": {
+                                                        "items": {
+                                                            "type": "string"
+                                                        },
+                                                        "type": "array"
+                                                    },
+                                                    "secret": {
+                                                        "type": "boolean"
+                                                    },
+                                                    "title": {
+                                                        "type": "string"
+                                                    },
+                                                    "type": {
+                                                        "anyOf": [
+                                                            {
+                                                                "type": "string",
+                                                                "enum": [
+                                                                    "string",
+                                                                    "number",
+                                                                    "boolean",
+                                                                    "array",
+                                                                    "object",
+                                                                    "null"
+                                                                ]
+                                                            }
+                                                        ],
+                                                        "type": ""
+                                                    },
+                                                    "uniqueItems": {
+                                                        "type": "boolean"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        ],
+                                        "type": ""
+                                    }
+                                },
+                                "$ref": "#/$defs/schema",
+                                "type": ""
+                            },
                             "value": true
                         },
                         "type": "object",
@@ -343,7 +671,171 @@
                     },
                     "argSchema": {
                         "properties": {
-                            "schema": true,
+                            "schema": {
+                                "$defs": {
+                                    "schema": {
+                                        "anyOf": [
+                                            {
+                                                "type": "boolean"
+                                            },
+                                            {
+                                                "properties": {
+                                                    "$defs": {
+                                                        "additionalProperties": {
+                                                            "$ref": "#/$defs/schema",
+                                                            "type": ""
+                                                        },
+                                                        "type": "object"
+                                                    },
+                                                    "$ref": {
+                                                        "type": "string"
+                                                    },
+                                                    "additionalProperties": {
+                                                        "$ref": "#/$defs/schema",
+                                                        "type": ""
+                                                    },
+                                                    "anyOf": {
+                                                        "items": {
+                                                            "$ref": "#/$defs/schema",
+                                                            "type": ""
+                                                        },
+                                                        "type": "array"
+                                                    },
+                                                    "const": {
+                                                        "type": ""
+                                                    },
+                                                    "default": {
+                                                        "type": ""
+                                                    },
+                                                    "dependentRequired": {
+                                                        "additionalProperties": {
+                                                            "items": {
+                                                                "type": "string"
+                                                            },
+                                                            "type": "array"
+                                                        },
+                                                        "type": "object"
+                                                    },
+                                                    "deprecated": {
+                                                        "type": "boolean"
+                                                    },
+                                                    "description": {
+                                                        "type": "string"
+                                                    },
+                                                    "enum": {
+                                                        "type": "array"
+                                                    },
+                                                    "examples": {
+                                                        "type": "array"
+                                                    },
+                                                    "exclusiveMaximum": {
+                                                        "type": "number"
+                                                    },
+                                                    "exclusiveMinimum": {
+                                                        "type": "number"
+                                                    },
+                                                    "items": {
+                                                        "$ref": "#/$defs/schema",
+                                                        "type": ""
+                                                    },
+                                                    "maxItems": {
+                                                        "type": "number"
+                                                    },
+                                                    "maxLength": {
+                                                        "type": "number"
+                                                    },
+                                                    "maxProperties": {
+                                                        "type": "number"
+                                                    },
+                                                    "maximum": {
+                                                        "type": "number"
+                                                    },
+                                                    "minItems": {
+                                                        "type": "number"
+                                                    },
+                                                    "minLength": {
+                                                        "type": "number"
+                                                    },
+                                                    "minProperties": {
+                                                        "type": "number"
+                                                    },
+                                                    "minimum": {
+                                                        "type": "number"
+                                                    },
+                                                    "multipleOf": {
+                                                        "type": "number"
+                                                    },
+                                                    "oneOf": {
+                                                        "items": {
+                                                            "$ref": "#/$defs/schema",
+                                                            "type": ""
+                                                        },
+                                                        "type": "array"
+                                                    },
+                                                    "pattern": {
+                                                        "type": "string"
+                                                    },
+                                                    "prefixItems": {
+                                                        "items": {
+                                                            "$ref": "#/$defs/schema",
+                                                            "type": ""
+                                                        },
+                                                        "type": "array"
+                                                    },
+                                                    "properties": {
+                                                        "additionalProperties": {
+                                                            "$ref": "#/$defs/schema",
+                                                            "type": ""
+                                                        },
+                                                        "type": "object"
+                                                    },
+                                                    "required": {
+                                                        "items": {
+                                                            "type": "string"
+                                                        },
+                                                        "type": "array"
+                                                    },
+                                                    "rotateOnly": {
+                                                        "items": {
+                                                            "type": "string"
+                                                        },
+                                                        "type": "array"
+                                                    },
+                                                    "secret": {
+                                                        "type": "boolean"
+                                                    },
+                                                    "title": {
+                                                        "type": "string"
+                                                    },
+                                                    "type": {
+                                                        "anyOf": [
+                                                            {
+                                                                "type": "string",
+                                                                "enum": [
+                                                                    "string",
+                                                                    "number",
+                                                                    "boolean",
+                                                                    "array",
+                                                                    "object",
+                                                                    "null"
+                                                                ]
+                                                            }
+                                                        ],
+                                                        "type": ""
+                                                    },
+                                                    "uniqueItems": {
+                                                        "type": "boolean"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        ],
+                                        "type": ""
+                                    }
+                                },
+                                "$ref": "#/$defs/schema",
+                                "type": ""
+                            },
                             "value": true
                         },
                         "type": "object",
@@ -707,7 +1199,171 @@
                     },
                     "argSchema": {
                         "properties": {
-                            "schema": true,
+                            "schema": {
+                                "$defs": {
+                                    "schema": {
+                                        "anyOf": [
+                                            {
+                                                "type": "boolean"
+                                            },
+                                            {
+                                                "properties": {
+                                                    "$defs": {
+                                                        "additionalProperties": {
+                                                            "$ref": "#/$defs/schema",
+                                                            "type": ""
+                                                        },
+                                                        "type": "object"
+                                                    },
+                                                    "$ref": {
+                                                        "type": "string"
+                                                    },
+                                                    "additionalProperties": {
+                                                        "$ref": "#/$defs/schema",
+                                                        "type": ""
+                                                    },
+                                                    "anyOf": {
+                                                        "items": {
+                                                            "$ref": "#/$defs/schema",
+                                                            "type": ""
+                                                        },
+                                                        "type": "array"
+                                                    },
+                                                    "const": {
+                                                        "type": ""
+                                                    },
+                                                    "default": {
+                                                        "type": ""
+                                                    },
+                                                    "dependentRequired": {
+                                                        "additionalProperties": {
+                                                            "items": {
+                                                                "type": "string"
+                                                            },
+                                                            "type": "array"
+                                                        },
+                                                        "type": "object"
+                                                    },
+                                                    "deprecated": {
+                                                        "type": "boolean"
+                                                    },
+                                                    "description": {
+                                                        "type": "string"
+                                                    },
+                                                    "enum": {
+                                                        "type": "array"
+                                                    },
+                                                    "examples": {
+                                                        "type": "array"
+                                                    },
+                                                    "exclusiveMaximum": {
+                                                        "type": "number"
+                                                    },
+                                                    "exclusiveMinimum": {
+                                                        "type": "number"
+                                                    },
+                                                    "items": {
+                                                        "$ref": "#/$defs/schema",
+                                                        "type": ""
+                                                    },
+                                                    "maxItems": {
+                                                        "type": "number"
+                                                    },
+                                                    "maxLength": {
+                                                        "type": "number"
+                                                    },
+                                                    "maxProperties": {
+                                                        "type": "number"
+                                                    },
+                                                    "maximum": {
+                                                        "type": "number"
+                                                    },
+                                                    "minItems": {
+                                                        "type": "number"
+                                                    },
+                                                    "minLength": {
+                                                        "type": "number"
+                                                    },
+                                                    "minProperties": {
+                                                        "type": "number"
+                                                    },
+                                                    "minimum": {
+                                                        "type": "number"
+                                                    },
+                                                    "multipleOf": {
+                                                        "type": "number"
+                                                    },
+                                                    "oneOf": {
+                                                        "items": {
+                                                            "$ref": "#/$defs/schema",
+                                                            "type": ""
+                                                        },
+                                                        "type": "array"
+                                                    },
+                                                    "pattern": {
+                                                        "type": "string"
+                                                    },
+                                                    "prefixItems": {
+                                                        "items": {
+                                                            "$ref": "#/$defs/schema",
+                                                            "type": ""
+                                                        },
+                                                        "type": "array"
+                                                    },
+                                                    "properties": {
+                                                        "additionalProperties": {
+                                                            "$ref": "#/$defs/schema",
+                                                            "type": ""
+                                                        },
+                                                        "type": "object"
+                                                    },
+                                                    "required": {
+                                                        "items": {
+                                                            "type": "string"
+                                                        },
+                                                        "type": "array"
+                                                    },
+                                                    "rotateOnly": {
+                                                        "items": {
+                                                            "type": "string"
+                                                        },
+                                                        "type": "array"
+                                                    },
+                                                    "secret": {
+                                                        "type": "boolean"
+                                                    },
+                                                    "title": {
+                                                        "type": "string"
+                                                    },
+                                                    "type": {
+                                                        "anyOf": [
+                                                            {
+                                                                "type": "string",
+                                                                "enum": [
+                                                                    "string",
+                                                                    "number",
+                                                                    "boolean",
+                                                                    "array",
+                                                                    "object",
+                                                                    "null"
+                                                                ]
+                                                            }
+                                                        ],
+                                                        "type": ""
+                                                    },
+                                                    "uniqueItems": {
+                                                        "type": "boolean"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        ],
+                                        "type": ""
+                                    }
+                                },
+                                "$ref": "#/$defs/schema",
+                                "type": ""
+                            },
                             "value": true
                         },
                         "type": "object",
@@ -803,7 +1459,171 @@
                     },
                     "argSchema": {
                         "properties": {
-                            "schema": true,
+                            "schema": {
+                                "$defs": {
+                                    "schema": {
+                                        "anyOf": [
+                                            {
+                                                "type": "boolean"
+                                            },
+                                            {
+                                                "properties": {
+                                                    "$defs": {
+                                                        "additionalProperties": {
+                                                            "$ref": "#/$defs/schema",
+                                                            "type": ""
+                                                        },
+                                                        "type": "object"
+                                                    },
+                                                    "$ref": {
+                                                        "type": "string"
+                                                    },
+                                                    "additionalProperties": {
+                                                        "$ref": "#/$defs/schema",
+                                                        "type": ""
+                                                    },
+                                                    "anyOf": {
+                                                        "items": {
+                                                            "$ref": "#/$defs/schema",
+                                                            "type": ""
+                                                        },
+                                                        "type": "array"
+                                                    },
+                                                    "const": {
+                                                        "type": ""
+                                                    },
+                                                    "default": {
+                                                        "type": ""
+                                                    },
+                                                    "dependentRequired": {
+                                                        "additionalProperties": {
+                                                            "items": {
+                                                                "type": "string"
+                                                            },
+                                                            "type": "array"
+                                                        },
+                                                        "type": "object"
+                                                    },
+                                                    "deprecated": {
+                                                        "type": "boolean"
+                                                    },
+                                                    "description": {
+                                                        "type": "string"
+                                                    },
+                                                    "enum": {
+                                                        "type": "array"
+                                                    },
+                                                    "examples": {
+                                                        "type": "array"
+                                                    },
+                                                    "exclusiveMaximum": {
+                                                        "type": "number"
+                                                    },
+                                                    "exclusiveMinimum": {
+                                                        "type": "number"
+                                                    },
+                                                    "items": {
+                                                        "$ref": "#/$defs/schema",
+                                                        "type": ""
+                                                    },
+                                                    "maxItems": {
+                                                        "type": "number"
+                                                    },
+                                                    "maxLength": {
+                                                        "type": "number"
+                                                    },
+                                                    "maxProperties": {
+                                                        "type": "number"
+                                                    },
+                                                    "maximum": {
+                                                        "type": "number"
+                                                    },
+                                                    "minItems": {
+                                                        "type": "number"
+                                                    },
+                                                    "minLength": {
+                                                        "type": "number"
+                                                    },
+                                                    "minProperties": {
+                                                        "type": "number"
+                                                    },
+                                                    "minimum": {
+                                                        "type": "number"
+                                                    },
+                                                    "multipleOf": {
+                                                        "type": "number"
+                                                    },
+                                                    "oneOf": {
+                                                        "items": {
+                                                            "$ref": "#/$defs/schema",
+                                                            "type": ""
+                                                        },
+                                                        "type": "array"
+                                                    },
+                                                    "pattern": {
+                                                        "type": "string"
+                                                    },
+                                                    "prefixItems": {
+                                                        "items": {
+                                                            "$ref": "#/$defs/schema",
+                                                            "type": ""
+                                                        },
+                                                        "type": "array"
+                                                    },
+                                                    "properties": {
+                                                        "additionalProperties": {
+                                                            "$ref": "#/$defs/schema",
+                                                            "type": ""
+                                                        },
+                                                        "type": "object"
+                                                    },
+                                                    "required": {
+                                                        "items": {
+                                                            "type": "string"
+                                                        },
+                                                        "type": "array"
+                                                    },
+                                                    "rotateOnly": {
+                                                        "items": {
+                                                            "type": "string"
+                                                        },
+                                                        "type": "array"
+                                                    },
+                                                    "secret": {
+                                                        "type": "boolean"
+                                                    },
+                                                    "title": {
+                                                        "type": "string"
+                                                    },
+                                                    "type": {
+                                                        "anyOf": [
+                                                            {
+                                                                "type": "string",
+                                                                "enum": [
+                                                                    "string",
+                                                                    "number",
+                                                                    "boolean",
+                                                                    "array",
+                                                                    "object",
+                                                                    "null"
+                                                                ]
+                                                            }
+                                                        ],
+                                                        "type": ""
+                                                    },
+                                                    "uniqueItems": {
+                                                        "type": "boolean"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        ],
+                                        "type": ""
+                                    }
+                                },
+                                "$ref": "#/$defs/schema",
+                                "type": ""
+                            },
                             "value": true
                         },
                         "type": "object",
@@ -943,7 +1763,171 @@
                     },
                     "argSchema": {
                         "properties": {
-                            "schema": true,
+                            "schema": {
+                                "$defs": {
+                                    "schema": {
+                                        "anyOf": [
+                                            {
+                                                "type": "boolean"
+                                            },
+                                            {
+                                                "properties": {
+                                                    "$defs": {
+                                                        "additionalProperties": {
+                                                            "$ref": "#/$defs/schema",
+                                                            "type": ""
+                                                        },
+                                                        "type": "object"
+                                                    },
+                                                    "$ref": {
+                                                        "type": "string"
+                                                    },
+                                                    "additionalProperties": {
+                                                        "$ref": "#/$defs/schema",
+                                                        "type": ""
+                                                    },
+                                                    "anyOf": {
+                                                        "items": {
+                                                            "$ref": "#/$defs/schema",
+                                                            "type": ""
+                                                        },
+                                                        "type": "array"
+                                                    },
+                                                    "const": {
+                                                        "type": ""
+                                                    },
+                                                    "default": {
+                                                        "type": ""
+                                                    },
+                                                    "dependentRequired": {
+                                                        "additionalProperties": {
+                                                            "items": {
+                                                                "type": "string"
+                                                            },
+                                                            "type": "array"
+                                                        },
+                                                        "type": "object"
+                                                    },
+                                                    "deprecated": {
+                                                        "type": "boolean"
+                                                    },
+                                                    "description": {
+                                                        "type": "string"
+                                                    },
+                                                    "enum": {
+                                                        "type": "array"
+                                                    },
+                                                    "examples": {
+                                                        "type": "array"
+                                                    },
+                                                    "exclusiveMaximum": {
+                                                        "type": "number"
+                                                    },
+                                                    "exclusiveMinimum": {
+                                                        "type": "number"
+                                                    },
+                                                    "items": {
+                                                        "$ref": "#/$defs/schema",
+                                                        "type": ""
+                                                    },
+                                                    "maxItems": {
+                                                        "type": "number"
+                                                    },
+                                                    "maxLength": {
+                                                        "type": "number"
+                                                    },
+                                                    "maxProperties": {
+                                                        "type": "number"
+                                                    },
+                                                    "maximum": {
+                                                        "type": "number"
+                                                    },
+                                                    "minItems": {
+                                                        "type": "number"
+                                                    },
+                                                    "minLength": {
+                                                        "type": "number"
+                                                    },
+                                                    "minProperties": {
+                                                        "type": "number"
+                                                    },
+                                                    "minimum": {
+                                                        "type": "number"
+                                                    },
+                                                    "multipleOf": {
+                                                        "type": "number"
+                                                    },
+                                                    "oneOf": {
+                                                        "items": {
+                                                            "$ref": "#/$defs/schema",
+                                                            "type": ""
+                                                        },
+                                                        "type": "array"
+                                                    },
+                                                    "pattern": {
+                                                        "type": "string"
+                                                    },
+                                                    "prefixItems": {
+                                                        "items": {
+                                                            "$ref": "#/$defs/schema",
+                                                            "type": ""
+                                                        },
+                                                        "type": "array"
+                                                    },
+                                                    "properties": {
+                                                        "additionalProperties": {
+                                                            "$ref": "#/$defs/schema",
+                                                            "type": ""
+                                                        },
+                                                        "type": "object"
+                                                    },
+                                                    "required": {
+                                                        "items": {
+                                                            "type": "string"
+                                                        },
+                                                        "type": "array"
+                                                    },
+                                                    "rotateOnly": {
+                                                        "items": {
+                                                            "type": "string"
+                                                        },
+                                                        "type": "array"
+                                                    },
+                                                    "secret": {
+                                                        "type": "boolean"
+                                                    },
+                                                    "title": {
+                                                        "type": "string"
+                                                    },
+                                                    "type": {
+                                                        "anyOf": [
+                                                            {
+                                                                "type": "string",
+                                                                "enum": [
+                                                                    "string",
+                                                                    "number",
+                                                                    "boolean",
+                                                                    "array",
+                                                                    "object",
+                                                                    "null"
+                                                                ]
+                                                            }
+                                                        ],
+                                                        "type": ""
+                                                    },
+                                                    "uniqueItems": {
+                                                        "type": "boolean"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        ],
+                                        "type": ""
+                                    }
+                                },
+                                "$ref": "#/$defs/schema",
+                                "type": ""
+                            },
                             "value": true
                         },
                         "type": "object",

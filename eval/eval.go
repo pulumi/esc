@@ -1343,10 +1343,20 @@ func (e *evalContext) evaluateBuiltinFromBase64(x *expr, repr *fromBase64Expr) *
 func (e *evalContext) evaluateBuiltinConform(x *expr, repr *conformExpr) *value {
 	v := &value{def: x}
 
-	// Evaluate the schema expression first
-	schemaVal := e.evaluateExpr(repr.schemaExpr, schema.Always())
+	// Evaluate and validate the schema expression against the JSON schema schema
+	schemaVal, schemaOk := e.evaluateTypedExpr(repr.schemaExpr, schema.JSONSchemaSchema())
 	if schemaVal.containsUnknowns() {
 		// If schema is unknown, we can't validate - just return the value
+		val := e.evaluateExpr(repr.value, schema.Always())
+		v.schema = val.schema
+		v.repr = val.repr
+		v.combine(val)
+		return v
+	}
+
+	// If schema validation failed, still try to convert and use it
+	// (the error has already been reported)
+	if !schemaOk {
 		val := e.evaluateExpr(repr.value, schema.Always())
 		v.schema = val.schema
 		v.repr = val.repr
