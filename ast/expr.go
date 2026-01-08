@@ -671,6 +671,34 @@ func FromBase64(value Expr) *FromBase64Expr {
 	return FromBase64Syntax(nil, name, value)
 }
 
+// ConformExpr validates a value against a JSON schema.
+type ConformExpr struct {
+	builtinNode
+
+	Schema Expr // The JSON schema to validate against
+	Value  Expr // The value to validate
+}
+
+func ConformSyntax(node *syntax.ObjectNode, name *StringExpr, args, schemaExpr, valueExpr Expr) *ConformExpr {
+	return &ConformExpr{
+		builtinNode: builtin(node, name, args),
+		Schema:      schemaExpr,
+		Value:       valueExpr,
+	}
+}
+
+func Conform(schemaExpr, valueExpr Expr) *ConformExpr {
+	name := String("fn::conform")
+	return &ConformExpr{
+		builtinNode: builtin(nil, name, Object(
+			ObjectProperty{Key: String("schema"), Value: schemaExpr},
+			ObjectProperty{Key: String("value"), Value: valueExpr},
+		)),
+		Schema: schemaExpr,
+		Value:  valueExpr,
+	}
+}
+
 func tryParseFunction(node *syntax.ObjectNode) (Expr, syntax.Diagnostics, bool) {
 	var diags syntax.Diagnostics
 	if node.Len() != 1 {
@@ -689,6 +717,8 @@ func tryParseFunction(node *syntax.ObjectNode) (Expr, syntax.Diagnostics, bool) 
 	switch kvp.Key.Value() {
 	case "fn::concat":
 		parse = parseConcat
+	case "fn::conform":
+		parse = parseConform
 	case "fn::fromJSON":
 		parse = parseFromJSON
 	case "fn::fromBase64":
@@ -943,4 +973,33 @@ func parseSecret(node *syntax.ObjectNode, name *StringExpr, value Expr) (Expr, s
 		diags = syntax.Diagnostics{ExprError(value, "secret values must be string literals")}
 	}
 	return PlaintextSyntax(node, name, str), diags
+}
+
+func parseConform(node *syntax.ObjectNode, name *StringExpr, args Expr) (Expr, syntax.Diagnostics) {
+	obj, ok := args.(*ObjectExpr)
+	if !ok {
+		diags := syntax.Diagnostics{ExprError(args, "the argument to fn::conform must be an object containing 'schema' and 'value'")}
+		return ConformSyntax(node, name, args, nil, nil), diags
+	}
+
+	var schemaExpr, valueExpr Expr
+	var diags syntax.Diagnostics
+
+	for _, kvp := range obj.Entries {
+		switch kvp.Key.GetValue() {
+		case "schema":
+			schemaExpr = kvp.Value
+		case "value":
+			valueExpr = kvp.Value
+		}
+	}
+
+	if schemaExpr == nil {
+		diags.Extend(ExprError(obj, "missing required property 'schema'"))
+	}
+	if valueExpr == nil {
+		diags.Extend(ExprError(obj, "missing required property 'value'"))
+	}
+
+	return ConformSyntax(node, name, obj, schemaExpr, valueExpr), diags
 }

@@ -1,0 +1,1278 @@
+{
+    "loadDiags": [
+        {
+            "Severity": 1,
+            "Summary": "missing required property 'schema'",
+            "Detail": "",
+            "Subject": {
+                "Filename": "builtin-conform-error",
+                "Start": {
+                    "Line": 5,
+                    "Column": 7,
+                    "Byte": 68
+                },
+                "End": {
+                    "Line": 5,
+                    "Column": 18,
+                    "Byte": 79
+                }
+            },
+            "Context": null,
+            "Expression": null,
+            "EvalContext": null,
+            "Extra": null,
+            "Path": "values[\"missing-schema\"][\"fn::conform\"]"
+        },
+        {
+            "Severity": 1,
+            "Summary": "missing required property 'value'",
+            "Detail": "",
+            "Subject": {
+                "Filename": "builtin-conform-error",
+                "Start": {
+                    "Line": 10,
+                    "Column": 7,
+                    "Byte": 141
+                },
+                "End": {
+                    "Line": 10,
+                    "Column": 29,
+                    "Byte": 163
+                }
+            },
+            "Context": null,
+            "Expression": null,
+            "EvalContext": null,
+            "Extra": null,
+            "Path": "values[\"missing-value\"][\"fn::conform\"]"
+        },
+        {
+            "Severity": 1,
+            "Summary": "the argument to fn::conform must be an object containing 'schema' and 'value'",
+            "Detail": "",
+            "Subject": {
+                "Filename": "builtin-conform-error",
+                "Start": {
+                    "Line": 14,
+                    "Column": 18,
+                    "Byte": 216
+                },
+                "End": {
+                    "Line": 14,
+                    "Column": 25,
+                    "Byte": 223
+                }
+            },
+            "Context": null,
+            "Expression": null,
+            "EvalContext": null,
+            "Extra": null,
+            "Path": "values[\"not-object\"][\"fn::conform\"]"
+        }
+    ],
+    "check": {
+        "exprs": {
+            "missing-schema": {
+                "range": {
+                    "environment": "builtin-conform-error",
+                    "begin": {
+                        "line": 4,
+                        "column": 5,
+                        "byte": 49
+                    },
+                    "end": {
+                        "line": 5,
+                        "column": 18,
+                        "byte": 79
+                    }
+                },
+                "schema": {
+                    "type": "string",
+                    "const": "test"
+                },
+                "builtin": {
+                    "name": "fn::conform",
+                    "nameRange": {
+                        "environment": "builtin-conform-error",
+                        "begin": {
+                            "line": 4,
+                            "column": 5,
+                            "byte": 49
+                        },
+                        "end": {
+                            "line": 4,
+                            "column": 16,
+                            "byte": 60
+                        }
+                    },
+                    "argSchema": {
+                        "properties": {
+                            "schema": true,
+                            "value": true
+                        },
+                        "type": "object",
+                        "required": [
+                            "schema",
+                            "value"
+                        ]
+                    },
+                    "arg": {
+                        "range": {
+                            "environment": "builtin-conform-error",
+                            "begin": {
+                                "line": 5,
+                                "column": 7,
+                                "byte": 68
+                            },
+                            "end": {
+                                "line": 5,
+                                "column": 18,
+                                "byte": 79
+                            }
+                        },
+                        "object": {
+                            "schema": {
+                                "range": {
+                                    "environment": "builtin-conform-error",
+                                    "begin": {
+                                        "line": 0,
+                                        "column": 0,
+                                        "byte": 0
+                                    },
+                                    "end": {
+                                        "line": 0,
+                                        "column": 0,
+                                        "byte": 0
+                                    }
+                                },
+                                "schema": true
+                            },
+                            "value": {
+                                "range": {
+                                    "environment": "builtin-conform-error",
+                                    "begin": {
+                                        "line": 5,
+                                        "column": 14,
+                                        "byte": 75
+                                    },
+                                    "end": {
+                                        "line": 5,
+                                        "column": 18,
+                                        "byte": 79
+                                    }
+                                },
+                                "schema": {
+                                    "type": "string",
+                                    "const": "test"
+                                },
+                                "literal": "test"
+                            }
+                        }
+                    }
+                }
+            },
+            "missing-value": {
+                "range": {
+                    "environment": "builtin-conform-error",
+                    "begin": {
+                        "line": 9,
+                        "column": 5,
+                        "byte": 122
+                    },
+                    "end": {
+                        "line": 10,
+                        "column": 29,
+                        "byte": 163
+                    }
+                },
+                "schema": true,
+                "builtin": {
+                    "name": "fn::conform",
+                    "nameRange": {
+                        "environment": "builtin-conform-error",
+                        "begin": {
+                            "line": 9,
+                            "column": 5,
+                            "byte": 122
+                        },
+                        "end": {
+                            "line": 9,
+                            "column": 16,
+                            "byte": 133
+                        }
+                    },
+                    "argSchema": {
+                        "properties": {
+                            "schema": true,
+                            "value": true
+                        },
+                        "type": "object",
+                        "required": [
+                            "schema",
+                            "value"
+                        ]
+                    },
+                    "arg": {
+                        "range": {
+                            "environment": "builtin-conform-error",
+                            "begin": {
+                                "line": 10,
+                                "column": 7,
+                                "byte": 141
+                            },
+                            "end": {
+                                "line": 10,
+                                "column": 29,
+                                "byte": 163
+                            }
+                        },
+                        "object": {
+                            "schema": {
+                                "range": {
+                                    "environment": "builtin-conform-error",
+                                    "begin": {
+                                        "line": 10,
+                                        "column": 15,
+                                        "byte": 149
+                                    },
+                                    "end": {
+                                        "line": 10,
+                                        "column": 29,
+                                        "byte": 163
+                                    }
+                                },
+                                "schema": {
+                                    "properties": {
+                                        "type": {
+                                            "type": "string",
+                                            "const": "string"
+                                        }
+                                    },
+                                    "type": "object",
+                                    "required": [
+                                        "type"
+                                    ]
+                                },
+                                "keyRanges": {
+                                    "type": {
+                                        "environment": "builtin-conform-error",
+                                        "begin": {
+                                            "line": 10,
+                                            "column": 17,
+                                            "byte": 151
+                                        },
+                                        "end": {
+                                            "line": 10,
+                                            "column": 21,
+                                            "byte": 155
+                                        }
+                                    }
+                                },
+                                "object": {
+                                    "type": {
+                                        "range": {
+                                            "environment": "builtin-conform-error",
+                                            "begin": {
+                                                "line": 10,
+                                                "column": 23,
+                                                "byte": 157
+                                            },
+                                            "end": {
+                                                "line": 10,
+                                                "column": 29,
+                                                "byte": 163
+                                            }
+                                        },
+                                        "schema": {
+                                            "type": "string",
+                                            "const": "string"
+                                        },
+                                        "literal": "string"
+                                    }
+                                }
+                            },
+                            "value": {
+                                "range": {
+                                    "environment": "builtin-conform-error",
+                                    "begin": {
+                                        "line": 0,
+                                        "column": 0,
+                                        "byte": 0
+                                    },
+                                    "end": {
+                                        "line": 0,
+                                        "column": 0,
+                                        "byte": 0
+                                    }
+                                },
+                                "schema": true
+                            }
+                        }
+                    }
+                }
+            },
+            "not-object": {
+                "range": {
+                    "environment": "builtin-conform-error",
+                    "begin": {
+                        "line": 14,
+                        "column": 5,
+                        "byte": 203
+                    },
+                    "end": {
+                        "line": 14,
+                        "column": 25,
+                        "byte": 223
+                    }
+                },
+                "schema": true,
+                "builtin": {
+                    "name": "fn::conform",
+                    "nameRange": {
+                        "environment": "builtin-conform-error",
+                        "begin": {
+                            "line": 14,
+                            "column": 5,
+                            "byte": 203
+                        },
+                        "end": {
+                            "line": 14,
+                            "column": 16,
+                            "byte": 214
+                        }
+                    },
+                    "argSchema": {
+                        "properties": {
+                            "schema": true,
+                            "value": true
+                        },
+                        "type": "object",
+                        "required": [
+                            "schema",
+                            "value"
+                        ]
+                    },
+                    "arg": {
+                        "range": {
+                            "environment": "builtin-conform-error",
+                            "begin": {
+                                "line": 14,
+                                "column": 18,
+                                "byte": 216
+                            },
+                            "end": {
+                                "line": 14,
+                                "column": 25,
+                                "byte": 223
+                            }
+                        },
+                        "object": {
+                            "schema": {
+                                "range": {
+                                    "environment": "builtin-conform-error",
+                                    "begin": {
+                                        "line": 0,
+                                        "column": 0,
+                                        "byte": 0
+                                    },
+                                    "end": {
+                                        "line": 0,
+                                        "column": 0,
+                                        "byte": 0
+                                    }
+                                },
+                                "schema": true
+                            },
+                            "value": {
+                                "range": {
+                                    "environment": "builtin-conform-error",
+                                    "begin": {
+                                        "line": 0,
+                                        "column": 0,
+                                        "byte": 0
+                                    },
+                                    "end": {
+                                        "line": 0,
+                                        "column": 0,
+                                        "byte": 0
+                                    }
+                                },
+                                "schema": true
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "properties": {
+            "missing-schema": {
+                "value": "test",
+                "trace": {
+                    "def": {
+                        "environment": "builtin-conform-error",
+                        "begin": {
+                            "line": 4,
+                            "column": 5,
+                            "byte": 49
+                        },
+                        "end": {
+                            "line": 5,
+                            "column": 18,
+                            "byte": 79
+                        }
+                    }
+                }
+            },
+            "missing-value": {
+                "unknown": true,
+                "trace": {
+                    "def": {
+                        "environment": "builtin-conform-error",
+                        "begin": {
+                            "line": 9,
+                            "column": 5,
+                            "byte": 122
+                        },
+                        "end": {
+                            "line": 10,
+                            "column": 29,
+                            "byte": 163
+                        }
+                    }
+                }
+            },
+            "not-object": {
+                "unknown": true,
+                "trace": {
+                    "def": {
+                        "environment": "builtin-conform-error",
+                        "begin": {
+                            "line": 14,
+                            "column": 5,
+                            "byte": 203
+                        },
+                        "end": {
+                            "line": 14,
+                            "column": 25,
+                            "byte": 223
+                        }
+                    }
+                }
+            }
+        },
+        "schema": {
+            "properties": {
+                "missing-schema": {
+                    "type": "string",
+                    "const": "test"
+                },
+                "missing-value": true,
+                "not-object": true
+            },
+            "type": "object",
+            "required": [
+                "missing-schema",
+                "missing-value",
+                "not-object"
+            ]
+        },
+        "executionContext": {
+            "properties": {
+                "currentEnvironment": {
+                    "value": {
+                        "name": {
+                            "value": "builtin-conform-error",
+                            "trace": {
+                                "def": {
+                                    "environment": "builtin-conform-error",
+                                    "begin": {
+                                        "line": 0,
+                                        "column": 0,
+                                        "byte": 0
+                                    },
+                                    "end": {
+                                        "line": 0,
+                                        "column": 0,
+                                        "byte": 0
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "trace": {
+                        "def": {
+                            "environment": "builtin-conform-error",
+                            "begin": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            },
+                            "end": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            }
+                        }
+                    }
+                },
+                "pulumi": {
+                    "value": {
+                        "user": {
+                            "value": {
+                                "id": {
+                                    "value": "USER_123",
+                                    "trace": {
+                                        "def": {
+                                            "environment": "builtin-conform-error",
+                                            "begin": {
+                                                "line": 0,
+                                                "column": 0,
+                                                "byte": 0
+                                            },
+                                            "end": {
+                                                "line": 0,
+                                                "column": 0,
+                                                "byte": 0
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            "trace": {
+                                "def": {
+                                    "environment": "builtin-conform-error",
+                                    "begin": {
+                                        "line": 0,
+                                        "column": 0,
+                                        "byte": 0
+                                    },
+                                    "end": {
+                                        "line": 0,
+                                        "column": 0,
+                                        "byte": 0
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "trace": {
+                        "def": {
+                            "environment": "builtin-conform-error",
+                            "begin": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            },
+                            "end": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            }
+                        }
+                    }
+                },
+                "rootEnvironment": {
+                    "value": {
+                        "name": {
+                            "value": "builtin-conform-error",
+                            "trace": {
+                                "def": {
+                                    "environment": "builtin-conform-error",
+                                    "begin": {
+                                        "line": 0,
+                                        "column": 0,
+                                        "byte": 0
+                                    },
+                                    "end": {
+                                        "line": 0,
+                                        "column": 0,
+                                        "byte": 0
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "trace": {
+                        "def": {
+                            "environment": "builtin-conform-error",
+                            "begin": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            },
+                            "end": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            }
+                        }
+                    }
+                }
+            },
+            "schema": {
+                "properties": {
+                    "currentEnvironment": {
+                        "properties": {
+                            "name": {
+                                "type": "string",
+                                "const": "builtin-conform-error"
+                            }
+                        },
+                        "type": "object",
+                        "required": [
+                            "name"
+                        ]
+                    },
+                    "pulumi": {
+                        "properties": {
+                            "user": {
+                                "properties": {
+                                    "id": {
+                                        "type": "string",
+                                        "const": "USER_123"
+                                    }
+                                },
+                                "type": "object",
+                                "required": [
+                                    "id"
+                                ]
+                            }
+                        },
+                        "type": "object",
+                        "required": [
+                            "user"
+                        ]
+                    },
+                    "rootEnvironment": {
+                        "properties": {
+                            "name": {
+                                "type": "string",
+                                "const": "builtin-conform-error"
+                            }
+                        },
+                        "type": "object",
+                        "required": [
+                            "name"
+                        ]
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "currentEnvironment",
+                    "pulumi",
+                    "rootEnvironment"
+                ]
+            }
+        }
+    },
+    "checkJson": {
+        "missing-schema": "test",
+        "missing-value": "[unknown]",
+        "not-object": "[unknown]"
+    },
+    "eval": {
+        "exprs": {
+            "missing-schema": {
+                "range": {
+                    "environment": "builtin-conform-error",
+                    "begin": {
+                        "line": 4,
+                        "column": 5,
+                        "byte": 49
+                    },
+                    "end": {
+                        "line": 5,
+                        "column": 18,
+                        "byte": 79
+                    }
+                },
+                "schema": {
+                    "type": "string",
+                    "const": "test"
+                },
+                "builtin": {
+                    "name": "fn::conform",
+                    "nameRange": {
+                        "environment": "builtin-conform-error",
+                        "begin": {
+                            "line": 4,
+                            "column": 5,
+                            "byte": 49
+                        },
+                        "end": {
+                            "line": 4,
+                            "column": 16,
+                            "byte": 60
+                        }
+                    },
+                    "argSchema": {
+                        "properties": {
+                            "schema": true,
+                            "value": true
+                        },
+                        "type": "object",
+                        "required": [
+                            "schema",
+                            "value"
+                        ]
+                    },
+                    "arg": {
+                        "range": {
+                            "environment": "builtin-conform-error",
+                            "begin": {
+                                "line": 5,
+                                "column": 7,
+                                "byte": 68
+                            },
+                            "end": {
+                                "line": 5,
+                                "column": 18,
+                                "byte": 79
+                            }
+                        },
+                        "object": {
+                            "schema": {
+                                "range": {
+                                    "environment": "builtin-conform-error",
+                                    "begin": {
+                                        "line": 0,
+                                        "column": 0,
+                                        "byte": 0
+                                    },
+                                    "end": {
+                                        "line": 0,
+                                        "column": 0,
+                                        "byte": 0
+                                    }
+                                },
+                                "schema": true
+                            },
+                            "value": {
+                                "range": {
+                                    "environment": "builtin-conform-error",
+                                    "begin": {
+                                        "line": 5,
+                                        "column": 14,
+                                        "byte": 75
+                                    },
+                                    "end": {
+                                        "line": 5,
+                                        "column": 18,
+                                        "byte": 79
+                                    }
+                                },
+                                "schema": {
+                                    "type": "string",
+                                    "const": "test"
+                                },
+                                "literal": "test"
+                            }
+                        }
+                    }
+                }
+            },
+            "missing-value": {
+                "range": {
+                    "environment": "builtin-conform-error",
+                    "begin": {
+                        "line": 9,
+                        "column": 5,
+                        "byte": 122
+                    },
+                    "end": {
+                        "line": 10,
+                        "column": 29,
+                        "byte": 163
+                    }
+                },
+                "schema": true,
+                "builtin": {
+                    "name": "fn::conform",
+                    "nameRange": {
+                        "environment": "builtin-conform-error",
+                        "begin": {
+                            "line": 9,
+                            "column": 5,
+                            "byte": 122
+                        },
+                        "end": {
+                            "line": 9,
+                            "column": 16,
+                            "byte": 133
+                        }
+                    },
+                    "argSchema": {
+                        "properties": {
+                            "schema": true,
+                            "value": true
+                        },
+                        "type": "object",
+                        "required": [
+                            "schema",
+                            "value"
+                        ]
+                    },
+                    "arg": {
+                        "range": {
+                            "environment": "builtin-conform-error",
+                            "begin": {
+                                "line": 10,
+                                "column": 7,
+                                "byte": 141
+                            },
+                            "end": {
+                                "line": 10,
+                                "column": 29,
+                                "byte": 163
+                            }
+                        },
+                        "object": {
+                            "schema": {
+                                "range": {
+                                    "environment": "builtin-conform-error",
+                                    "begin": {
+                                        "line": 10,
+                                        "column": 15,
+                                        "byte": 149
+                                    },
+                                    "end": {
+                                        "line": 10,
+                                        "column": 29,
+                                        "byte": 163
+                                    }
+                                },
+                                "schema": {
+                                    "properties": {
+                                        "type": {
+                                            "type": "string",
+                                            "const": "string"
+                                        }
+                                    },
+                                    "type": "object",
+                                    "required": [
+                                        "type"
+                                    ]
+                                },
+                                "keyRanges": {
+                                    "type": {
+                                        "environment": "builtin-conform-error",
+                                        "begin": {
+                                            "line": 10,
+                                            "column": 17,
+                                            "byte": 151
+                                        },
+                                        "end": {
+                                            "line": 10,
+                                            "column": 21,
+                                            "byte": 155
+                                        }
+                                    }
+                                },
+                                "object": {
+                                    "type": {
+                                        "range": {
+                                            "environment": "builtin-conform-error",
+                                            "begin": {
+                                                "line": 10,
+                                                "column": 23,
+                                                "byte": 157
+                                            },
+                                            "end": {
+                                                "line": 10,
+                                                "column": 29,
+                                                "byte": 163
+                                            }
+                                        },
+                                        "schema": {
+                                            "type": "string",
+                                            "const": "string"
+                                        },
+                                        "literal": "string"
+                                    }
+                                }
+                            },
+                            "value": {
+                                "range": {
+                                    "environment": "builtin-conform-error",
+                                    "begin": {
+                                        "line": 0,
+                                        "column": 0,
+                                        "byte": 0
+                                    },
+                                    "end": {
+                                        "line": 0,
+                                        "column": 0,
+                                        "byte": 0
+                                    }
+                                },
+                                "schema": true
+                            }
+                        }
+                    }
+                }
+            },
+            "not-object": {
+                "range": {
+                    "environment": "builtin-conform-error",
+                    "begin": {
+                        "line": 14,
+                        "column": 5,
+                        "byte": 203
+                    },
+                    "end": {
+                        "line": 14,
+                        "column": 25,
+                        "byte": 223
+                    }
+                },
+                "schema": true,
+                "builtin": {
+                    "name": "fn::conform",
+                    "nameRange": {
+                        "environment": "builtin-conform-error",
+                        "begin": {
+                            "line": 14,
+                            "column": 5,
+                            "byte": 203
+                        },
+                        "end": {
+                            "line": 14,
+                            "column": 16,
+                            "byte": 214
+                        }
+                    },
+                    "argSchema": {
+                        "properties": {
+                            "schema": true,
+                            "value": true
+                        },
+                        "type": "object",
+                        "required": [
+                            "schema",
+                            "value"
+                        ]
+                    },
+                    "arg": {
+                        "range": {
+                            "environment": "builtin-conform-error",
+                            "begin": {
+                                "line": 14,
+                                "column": 18,
+                                "byte": 216
+                            },
+                            "end": {
+                                "line": 14,
+                                "column": 25,
+                                "byte": 223
+                            }
+                        },
+                        "object": {
+                            "schema": {
+                                "range": {
+                                    "environment": "builtin-conform-error",
+                                    "begin": {
+                                        "line": 0,
+                                        "column": 0,
+                                        "byte": 0
+                                    },
+                                    "end": {
+                                        "line": 0,
+                                        "column": 0,
+                                        "byte": 0
+                                    }
+                                },
+                                "schema": true
+                            },
+                            "value": {
+                                "range": {
+                                    "environment": "builtin-conform-error",
+                                    "begin": {
+                                        "line": 0,
+                                        "column": 0,
+                                        "byte": 0
+                                    },
+                                    "end": {
+                                        "line": 0,
+                                        "column": 0,
+                                        "byte": 0
+                                    }
+                                },
+                                "schema": true
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "properties": {
+            "missing-schema": {
+                "value": "test",
+                "trace": {
+                    "def": {
+                        "environment": "builtin-conform-error",
+                        "begin": {
+                            "line": 4,
+                            "column": 5,
+                            "byte": 49
+                        },
+                        "end": {
+                            "line": 5,
+                            "column": 18,
+                            "byte": 79
+                        }
+                    }
+                }
+            },
+            "missing-value": {
+                "unknown": true,
+                "trace": {
+                    "def": {
+                        "environment": "builtin-conform-error",
+                        "begin": {
+                            "line": 9,
+                            "column": 5,
+                            "byte": 122
+                        },
+                        "end": {
+                            "line": 10,
+                            "column": 29,
+                            "byte": 163
+                        }
+                    }
+                }
+            },
+            "not-object": {
+                "unknown": true,
+                "trace": {
+                    "def": {
+                        "environment": "builtin-conform-error",
+                        "begin": {
+                            "line": 14,
+                            "column": 5,
+                            "byte": 203
+                        },
+                        "end": {
+                            "line": 14,
+                            "column": 25,
+                            "byte": 223
+                        }
+                    }
+                }
+            }
+        },
+        "schema": {
+            "properties": {
+                "missing-schema": {
+                    "type": "string",
+                    "const": "test"
+                },
+                "missing-value": true,
+                "not-object": true
+            },
+            "type": "object",
+            "required": [
+                "missing-schema",
+                "missing-value",
+                "not-object"
+            ]
+        },
+        "executionContext": {
+            "properties": {
+                "currentEnvironment": {
+                    "value": {
+                        "name": {
+                            "value": "builtin-conform-error",
+                            "trace": {
+                                "def": {
+                                    "environment": "builtin-conform-error",
+                                    "begin": {
+                                        "line": 0,
+                                        "column": 0,
+                                        "byte": 0
+                                    },
+                                    "end": {
+                                        "line": 0,
+                                        "column": 0,
+                                        "byte": 0
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "trace": {
+                        "def": {
+                            "environment": "builtin-conform-error",
+                            "begin": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            },
+                            "end": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            }
+                        }
+                    }
+                },
+                "pulumi": {
+                    "value": {
+                        "user": {
+                            "value": {
+                                "id": {
+                                    "value": "USER_123",
+                                    "trace": {
+                                        "def": {
+                                            "environment": "builtin-conform-error",
+                                            "begin": {
+                                                "line": 0,
+                                                "column": 0,
+                                                "byte": 0
+                                            },
+                                            "end": {
+                                                "line": 0,
+                                                "column": 0,
+                                                "byte": 0
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            "trace": {
+                                "def": {
+                                    "environment": "builtin-conform-error",
+                                    "begin": {
+                                        "line": 0,
+                                        "column": 0,
+                                        "byte": 0
+                                    },
+                                    "end": {
+                                        "line": 0,
+                                        "column": 0,
+                                        "byte": 0
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "trace": {
+                        "def": {
+                            "environment": "builtin-conform-error",
+                            "begin": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            },
+                            "end": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            }
+                        }
+                    }
+                },
+                "rootEnvironment": {
+                    "value": {
+                        "name": {
+                            "value": "builtin-conform-error",
+                            "trace": {
+                                "def": {
+                                    "environment": "builtin-conform-error",
+                                    "begin": {
+                                        "line": 0,
+                                        "column": 0,
+                                        "byte": 0
+                                    },
+                                    "end": {
+                                        "line": 0,
+                                        "column": 0,
+                                        "byte": 0
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "trace": {
+                        "def": {
+                            "environment": "builtin-conform-error",
+                            "begin": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            },
+                            "end": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            }
+                        }
+                    }
+                }
+            },
+            "schema": {
+                "properties": {
+                    "currentEnvironment": {
+                        "properties": {
+                            "name": {
+                                "type": "string",
+                                "const": "builtin-conform-error"
+                            }
+                        },
+                        "type": "object",
+                        "required": [
+                            "name"
+                        ]
+                    },
+                    "pulumi": {
+                        "properties": {
+                            "user": {
+                                "properties": {
+                                    "id": {
+                                        "type": "string",
+                                        "const": "USER_123"
+                                    }
+                                },
+                                "type": "object",
+                                "required": [
+                                    "id"
+                                ]
+                            }
+                        },
+                        "type": "object",
+                        "required": [
+                            "user"
+                        ]
+                    },
+                    "rootEnvironment": {
+                        "properties": {
+                            "name": {
+                                "type": "string",
+                                "const": "builtin-conform-error"
+                            }
+                        },
+                        "type": "object",
+                        "required": [
+                            "name"
+                        ]
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "currentEnvironment",
+                    "pulumi",
+                    "rootEnvironment"
+                ]
+            }
+        }
+    },
+    "evalJsonRedacted": {
+        "missing-schema": "test",
+        "missing-value": "[unknown]",
+        "not-object": "[unknown]"
+    },
+    "evalJSONRevealed": {
+        "missing-schema": "test",
+        "missing-value": "[unknown]",
+        "not-object": "[unknown]"
+    }
+}
