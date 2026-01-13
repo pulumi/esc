@@ -31,6 +31,7 @@ Available Commands:
   logout      Log out of the Pulumi Cloud
   open        Open the environment with the given name.
   run         Open the environment with the given name and run a command.
+  setup       Setup cloud integrations for Pulumi ESC
   version     Print esc's version number
 
 Flags:
