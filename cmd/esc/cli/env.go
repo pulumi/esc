@@ -110,10 +110,14 @@ func (r *environmentRef) String() string {
 }
 
 func (cmd *envCommand) parseRef(refStr string) environmentRef {
+	return parseEnvRef(refStr, cmd.esc.account.DefaultOrg)
+}
+
+func parseEnvRef(refStr, defaultOrg string) environmentRef {
 	var orgName, projectName, envNameAndVersion string
 
 	hasAmbiguousPath := false
-	orgName = cmd.esc.account.DefaultOrg
+	orgName = defaultOrg
 	projectName = client.DefaultProject
 	isUsingLegacyID := false
 
