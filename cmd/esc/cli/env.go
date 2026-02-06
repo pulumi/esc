@@ -35,6 +35,8 @@ type envCommand struct {
 	esc *escCommand
 
 	envNameFlag string
+
+	warnedAmbiguousRefs map[string]struct{}
 }
 
 func newEnvCmd(esc *escCommand) *cobra.Command {
@@ -107,6 +109,44 @@ func (r *environmentRef) String() string {
 		s = fmt.Sprintf("%s/%s", r.orgName, s)
 	}
 	return s
+}
+
+func (cmd *envCommand) warnIfAmbiguousTwoPartRef(ctx context.Context, refString string, ref environmentRef) {
+	if !ref.hasAmbiguousPath || strings.Count(refString, "/") != 1 {
+		return
+	}
+
+	// Only warn when the first segment could be interpreted as an org name the user belongs to.
+	// In that case, `<a>/<b>` may be either `<project>/<environment>` or `<org>/default/<environment>`.
+	_, orgs, _, err := cmd.esc.client.GetPulumiAccountDetails(ctx)
+	if err != nil {
+		return
+	}
+
+	inOrgs := false
+	for _, org := range orgs {
+		if strings.EqualFold(org, ref.projectName) {
+			inOrgs = true
+			break
+		}
+	}
+	if !inOrgs {
+		return
+	}
+
+	if cmd.warnedAmbiguousRefs == nil {
+		cmd.warnedAmbiguousRefs = map[string]struct{}{}
+	}
+	if _, ok := cmd.warnedAmbiguousRefs[refString]; ok {
+		return
+	}
+	cmd.warnedAmbiguousRefs[refString] = struct{}{}
+
+	fmt.Fprintf(
+		cmd.esc.stderr,
+		"warning: environment reference %q is ambiguous (could be <project>/<environment> or <org>/default/<environment>); prefer <org>/<project>/<environment>.\n",
+		refString,
+	)
 }
 
 func (cmd *envCommand) parseRef(refStr string) environmentRef {
@@ -194,6 +234,8 @@ func (cmd *envCommand) getNewEnvRef(
 		return ref, args, nil
 	}
 
+	cmd.warnIfAmbiguousTwoPartRef(ctx, cmd.envNameFlag, ref)
+
 	// Check if project at <org-name>/<project-name> exists. Assume not if listing environments errors
 	allEnvs, _ := cmd.listEnvironments(ctx, "", "")
 	existsProject := false
@@ -258,6 +300,8 @@ func (cmd *envCommand) getExistingEnvRefWithRelative(
 	if !ref.hasAmbiguousPath {
 		return ref, nil
 	}
+
+	cmd.warnIfAmbiguousTwoPartRef(ctx, refString, ref)
 
 	// Check <org-name>/<project-name>/<environment-name>
 	exists, _ := cmd.esc.client.EnvironmentExists(ctx, ref.orgName, ref.projectName, ref.envName)

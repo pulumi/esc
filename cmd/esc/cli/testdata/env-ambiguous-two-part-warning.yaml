@@ -1,0 +1,17 @@
+run: |
+  esc env get test-org/env --definition
+orgs:
+  - test-org
+environments:
+  test-user/test-org/env:
+    values:
+      string: esc
+
+---
+> esc env get test-org/env --definition
+values:
+  string: esc
+
+---
+> esc env get test-org/env --definition
+warning: environment reference "test-org/env" is ambiguous (could be <project>/<environment> or <org>/default/<environment>); prefer <org>/<project>/<environment>.
