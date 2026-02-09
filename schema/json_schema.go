@@ -40,8 +40,8 @@ func JSONSchemaSchema() *Schema {
 								Type:  "array",
 								Items: &Schema{Ref: "#/$defs/schema"},
 							},
-							"items":                &Schema{Ref: "#/$defs/schema"},
-							"additionalProperties": &Schema{Ref: "#/$defs/schema"},
+							"items":                {Ref: "#/$defs/schema"},
+							"additionalProperties": {Ref: "#/$defs/schema"},
 							"properties": {
 								Type:                 "object",
 								AdditionalProperties: &Schema{Ref: "#/$defs/schema"},
@@ -49,12 +49,8 @@ func JSONSchemaSchema() *Schema {
 
 							// Validation vocabulary
 							"type": {
-								AnyOf: []*Schema{
-									{
-										Type: "string",
-										Enum: []any{"string", "number", "boolean", "array", "object", "null"},
-									},
-								},
+								Type: "string",
+								Enum: []any{"string", "number", "boolean", "array", "object", "null"},
 							},
 							"const":            {}, // Any value
 							"enum":             {Type: "array"},
@@ -71,7 +67,10 @@ func JSONSchemaSchema() *Schema {
 							"uniqueItems":      {Type: "boolean"},
 							"maxProperties":    {Type: "number"},
 							"minProperties":    {Type: "number"},
-							"required":         {Type: "array", Items: &Schema{Type: "string"}},
+							"required": {
+								Type:  "array",
+								Items: &Schema{Type: "string"},
+							},
 							"dependentRequired": {
 								Type:                 "object",
 								AdditionalProperties: &Schema{Type: "array", Items: &Schema{Type: "string"}},
@@ -83,10 +82,6 @@ func JSONSchemaSchema() *Schema {
 							"default":     {}, // Any value
 							"deprecated":  {Type: "boolean"},
 							"examples":    {Type: "array"},
-
-							// ESC extensions
-							"secret":     {Type: "boolean"},
-							"rotateOnly": {Type: "array", Items: &Schema{Type: "string"}},
 						},
 					},
 				},

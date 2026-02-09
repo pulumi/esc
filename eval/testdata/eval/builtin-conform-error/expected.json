@@ -231,33 +231,19 @@
                                                         },
                                                         "type": "array"
                                                     },
-                                                    "rotateOnly": {
-                                                        "items": {
-                                                            "type": "string"
-                                                        },
-                                                        "type": "array"
-                                                    },
-                                                    "secret": {
-                                                        "type": "boolean"
-                                                    },
                                                     "title": {
                                                         "type": "string"
                                                     },
                                                     "type": {
-                                                        "anyOf": [
-                                                            {
-                                                                "type": "string",
-                                                                "enum": [
-                                                                    "string",
-                                                                    "number",
-                                                                    "boolean",
-                                                                    "array",
-                                                                    "object",
-                                                                    "null"
-                                                                ]
-                                                            }
-                                                        ],
-                                                        "type": ""
+                                                        "type": "string",
+                                                        "enum": [
+                                                            "string",
+                                                            "number",
+                                                            "boolean",
+                                                            "array",
+                                                            "object",
+                                                            "null"
+                                                        ]
                                                     },
                                                     "uniqueItems": {
                                                         "type": "boolean"
@@ -491,33 +477,19 @@
                                                         },
                                                         "type": "array"
                                                     },
-                                                    "rotateOnly": {
-                                                        "items": {
-                                                            "type": "string"
-                                                        },
-                                                        "type": "array"
-                                                    },
-                                                    "secret": {
-                                                        "type": "boolean"
-                                                    },
                                                     "title": {
                                                         "type": "string"
                                                     },
                                                     "type": {
-                                                        "anyOf": [
-                                                            {
-                                                                "type": "string",
-                                                                "enum": [
-                                                                    "string",
-                                                                    "number",
-                                                                    "boolean",
-                                                                    "array",
-                                                                    "object",
-                                                                    "null"
-                                                                ]
-                                                            }
-                                                        ],
-                                                        "type": ""
+                                                        "type": "string",
+                                                        "enum": [
+                                                            "string",
+                                                            "number",
+                                                            "boolean",
+                                                            "array",
+                                                            "object",
+                                                            "null"
+                                                        ]
                                                     },
                                                     "uniqueItems": {
                                                         "type": "boolean"
@@ -795,33 +767,19 @@
                                                         },
                                                         "type": "array"
                                                     },
-                                                    "rotateOnly": {
-                                                        "items": {
-                                                            "type": "string"
-                                                        },
-                                                        "type": "array"
-                                                    },
-                                                    "secret": {
-                                                        "type": "boolean"
-                                                    },
                                                     "title": {
                                                         "type": "string"
                                                     },
                                                     "type": {
-                                                        "anyOf": [
-                                                            {
-                                                                "type": "string",
-                                                                "enum": [
-                                                                    "string",
-                                                                    "number",
-                                                                    "boolean",
-                                                                    "array",
-                                                                    "object",
-                                                                    "null"
-                                                                ]
-                                                            }
-                                                        ],
-                                                        "type": ""
+                                                        "type": "string",
+                                                        "enum": [
+                                                            "string",
+                                                            "number",
+                                                            "boolean",
+                                                            "array",
+                                                            "object",
+                                                            "null"
+                                                        ]
                                                     },
                                                     "uniqueItems": {
                                                         "type": "boolean"
@@ -1323,33 +1281,19 @@
                                                         },
                                                         "type": "array"
                                                     },
-                                                    "rotateOnly": {
-                                                        "items": {
-                                                            "type": "string"
-                                                        },
-                                                        "type": "array"
-                                                    },
-                                                    "secret": {
-                                                        "type": "boolean"
-                                                    },
                                                     "title": {
                                                         "type": "string"
                                                     },
                                                     "type": {
-                                                        "anyOf": [
-                                                            {
-                                                                "type": "string",
-                                                                "enum": [
-                                                                    "string",
-                                                                    "number",
-                                                                    "boolean",
-                                                                    "array",
-                                                                    "object",
-                                                                    "null"
-                                                                ]
-                                                            }
-                                                        ],
-                                                        "type": ""
+                                                        "type": "string",
+                                                        "enum": [
+                                                            "string",
+                                                            "number",
+                                                            "boolean",
+                                                            "array",
+                                                            "object",
+                                                            "null"
+                                                        ]
                                                     },
                                                     "uniqueItems": {
                                                         "type": "boolean"
@@ -1583,33 +1527,19 @@
                                                         },
                                                         "type": "array"
                                                     },
-                                                    "rotateOnly": {
-                                                        "items": {
-                                                            "type": "string"
-                                                        },
-                                                        "type": "array"
-                                                    },
-                                                    "secret": {
-                                                        "type": "boolean"
-                                                    },
                                                     "title": {
                                                         "type": "string"
                                                     },
                                                     "type": {
-                                                        "anyOf": [
-                                                            {
-                                                                "type": "string",
-                                                                "enum": [
-                                                                    "string",
-                                                                    "number",
-                                                                    "boolean",
-                                                                    "array",
-                                                                    "object",
-                                                                    "null"
-                                                                ]
-                                                            }
-                                                        ],
-                                                        "type": ""
+                                                        "type": "string",
+                                                        "enum": [
+                                                            "string",
+                                                            "number",
+                                                            "boolean",
+                                                            "array",
+                                                            "object",
+                                                            "null"
+                                                        ]
                                                     },
                                                     "uniqueItems": {
                                                         "type": "boolean"
@@ -1887,33 +1817,19 @@
                                                         },
                                                         "type": "array"
                                                     },
-                                                    "rotateOnly": {
-                                                        "items": {
-                                                            "type": "string"
-                                                        },
-                                                        "type": "array"
-                                                    },
-                                                    "secret": {
-                                                        "type": "boolean"
-                                                    },
                                                     "title": {
                                                         "type": "string"
                                                     },
                                                     "type": {
-                                                        "anyOf": [
-                                                            {
-                                                                "type": "string",
-                                                                "enum": [
-                                                                    "string",
-                                                                    "number",
-                                                                    "boolean",
-                                                                    "array",
-                                                                    "object",
-                                                                    "null"
-                                                                ]
-                                                            }
-                                                        ],
-                                                        "type": ""
+                                                        "type": "string",
+                                                        "enum": [
+                                                            "string",
+                                                            "number",
+                                                            "boolean",
+                                                            "array",
+                                                            "object",
+                                                            "null"
+                                                        ]
                                                     },
                                                     "uniqueItems": {
                                                         "type": "boolean"
