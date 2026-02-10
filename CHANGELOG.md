@@ -1,5 +1,14 @@
 # CHANGELOG
 
+## 0.22.0
+
+### Improvements
+
+- Add warning when an environment has duplicate top-level keys
+  [#615](https://github.com/pulumi/esc/issues/615)
+- Add support for `fn::validate` built-in function that validates an input against a json schema.
+  [#618](https://github.com/pulumi/esc/pulls/618)
+
 ## 0.21.0
 
 ### Improvements
