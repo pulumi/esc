@@ -169,7 +169,7 @@ func (x *expr) export(environment string) esc.Expr {
 			ArgSchema: schema.String().Schema(),
 			Arg:       repr.string.export(environment),
 		}
-	case *conformExpr:
+	case *validateExpr:
 		ex.Builtin = &esc.BuiltinExpr{
 			Name:      repr.node.Name().Value,
 			NameRange: convertRange(repr.node.Name().Syntax().Syntax().Range(), environment),
@@ -568,9 +568,9 @@ func (x *fromBase64Expr) syntax() ast.Expr {
 	return x.node
 }
 
-// conformExpr represents a call to the fn::conform builtin.
-type conformExpr struct {
-	node *ast.ConformExpr
+// validateExpr represents a call to the fn::validate builtin.
+type validateExpr struct {
+	node *ast.ValidateExpr
 
 	schemaExpr *expr // The schema expression (evaluated to get schema value)
 	value      *expr // The value expression to validate
@@ -578,6 +578,6 @@ type conformExpr struct {
 	conformSchema *schema.Schema // Computed schema (populated during evaluation)
 }
 
-func (x *conformExpr) syntax() ast.Expr {
+func (x *validateExpr) syntax() ast.Expr {
 	return x.node
 }

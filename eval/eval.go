@@ -332,8 +332,8 @@ func declare[Expr exprNode](e *evalContext, path string, x Expr, base *value) *e
 	case *ast.FromBase64Expr:
 		repr := &fromBase64Expr{node: x, string: declare(e, "", x.String, nil)}
 		return newExpr(path, repr, schema.String().Schema(), base)
-	case *ast.ConformExpr:
-		repr := &conformExpr{
+	case *ast.ValidateExpr:
+		repr := &validateExpr{
 			node:       x,
 			schemaExpr: declare(e, "", x.Schema, nil),
 			value:      declare(e, "", x.Value, nil),
@@ -611,8 +611,8 @@ func (e *evalContext) evaluateExpr(x *expr, accept *schema.Schema) *value {
 		val = e.evaluateBuiltinConcat(x, repr)
 	case *fromBase64Expr:
 		val = e.evaluateBuiltinFromBase64(x, repr)
-	case *conformExpr:
-		val = e.evaluateBuiltinConform(x, repr)
+	case *validateExpr:
+		val = e.evaluateBuiltinValidate(x, repr)
 	case *fromJSONExpr:
 		val = e.evaluateBuiltinFromJSON(x, repr)
 	case *joinExpr:
@@ -1337,10 +1337,10 @@ func (e *evalContext) evaluateBuiltinFromBase64(x *expr, repr *fromBase64Expr) *
 	return v
 }
 
-// evaluateBuiltinConform evaluates a call to the fn::conform builtin.
+// evaluateBuiltinValidate evaluates a call to the fn::validate builtin.
 // It validates the value against the provided schema and emits diagnostics on failure.
 // The value is always returned (pass-through semantics).
-func (e *evalContext) evaluateBuiltinConform(x *expr, repr *conformExpr) *value {
+func (e *evalContext) evaluateBuiltinValidate(x *expr, repr *validateExpr) *value {
 	v := &value{def: x}
 
 	// Evaluate and validate the schema expression against the JSON schema schema
@@ -1365,7 +1365,7 @@ func (e *evalContext) evaluateBuiltinConform(x *expr, repr *conformExpr) *value 
 	}
 
 	// Convert the evaluated schema value to a *schema.Schema
-	conformSchema, err := e.valueToSchema(schemaVal)
+	validationSchema, err := e.valueToSchema(schemaVal)
 	if err != nil {
 		e.errorf(repr.schemaExpr.repr.syntax(), "invalid schema: %v", err)
 		val := e.evaluateExpr(repr.value, schema.Always())
@@ -1374,10 +1374,10 @@ func (e *evalContext) evaluateBuiltinConform(x *expr, repr *conformExpr) *value 
 		v.combine(val)
 		return v
 	}
-	repr.conformSchema = conformSchema
+	repr.conformSchema = validationSchema
 
 	// Compile the schema (like fn::open does with provider schemas)
-	if err := conformSchema.Compile(); err != nil {
+	if err := validationSchema.Compile(); err != nil {
 		e.errorf(repr.schemaExpr.repr.syntax(), "invalid schema: %v", err)
 		val := e.evaluateExpr(repr.value, schema.Always())
 		v.schema = val.schema
@@ -1388,7 +1388,7 @@ func (e *evalContext) evaluateBuiltinConform(x *expr, repr *conformExpr) *value 
 
 	// Validate value against the conform schema using evaluateTypedExpr
 	// This follows the same pattern as fn::open: inputs, ok := e.evaluateTypedExpr(repr.inputs, repr.inputSchema)
-	val, _ := e.evaluateTypedExpr(repr.value, conformSchema)
+	val, _ := e.evaluateTypedExpr(repr.value, validationSchema)
 
 	// Return the value with its schema (pass-through semantics)
 	v.schema = val.schema

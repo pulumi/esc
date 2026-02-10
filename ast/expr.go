@@ -671,25 +671,25 @@ func FromBase64(value Expr) *FromBase64Expr {
 	return FromBase64Syntax(nil, name, value)
 }
 
-// ConformExpr validates a value against a JSON schema.
-type ConformExpr struct {
+// ValidateExpr validates a value against a JSON schema.
+type ValidateExpr struct {
 	builtinNode
 
 	Schema Expr // The JSON schema to validate against
 	Value  Expr // The value to validate
 }
 
-func ConformSyntax(node *syntax.ObjectNode, name *StringExpr, args, schemaExpr, valueExpr Expr) *ConformExpr {
-	return &ConformExpr{
+func ValidateSyntax(node *syntax.ObjectNode, name *StringExpr, args, schemaExpr, valueExpr Expr) *ValidateExpr {
+	return &ValidateExpr{
 		builtinNode: builtin(node, name, args),
 		Schema:      schemaExpr,
 		Value:       valueExpr,
 	}
 }
 
-func Conform(schemaExpr, valueExpr Expr) *ConformExpr {
-	name := String("fn::conform")
-	return &ConformExpr{
+func Validate(schemaExpr, valueExpr Expr) *ValidateExpr {
+	name := String("fn::validate")
+	return &ValidateExpr{
 		builtinNode: builtin(nil, name, Object(
 			ObjectProperty{Key: String("schema"), Value: schemaExpr},
 			ObjectProperty{Key: String("value"), Value: valueExpr},
@@ -717,8 +717,8 @@ func tryParseFunction(node *syntax.ObjectNode) (Expr, syntax.Diagnostics, bool) 
 	switch kvp.Key.Value() {
 	case "fn::concat":
 		parse = parseConcat
-	case "fn::conform":
-		parse = parseConform
+	case "fn::validate":
+		parse = parseValidate
 	case "fn::fromJSON":
 		parse = parseFromJSON
 	case "fn::fromBase64":
@@ -975,11 +975,11 @@ func parseSecret(node *syntax.ObjectNode, name *StringExpr, value Expr) (Expr, s
 	return PlaintextSyntax(node, name, str), diags
 }
 
-func parseConform(node *syntax.ObjectNode, name *StringExpr, args Expr) (Expr, syntax.Diagnostics) {
+func parseValidate(node *syntax.ObjectNode, name *StringExpr, args Expr) (Expr, syntax.Diagnostics) {
 	obj, ok := args.(*ObjectExpr)
 	if !ok {
-		diags := syntax.Diagnostics{ExprError(args, "the argument to fn::conform must be an object containing 'schema' and 'value'")}
-		return ConformSyntax(node, name, args, nil, nil), diags
+		diags := syntax.Diagnostics{ExprError(args, "the argument to fn::validate must be an object containing 'schema' and 'value'")}
+		return ValidateSyntax(node, name, args, nil, nil), diags
 	}
 
 	var schemaExpr, valueExpr Expr
@@ -1001,5 +1001,5 @@ func parseConform(node *syntax.ObjectNode, name *StringExpr, args Expr) (Expr, s
 		diags.Extend(ExprError(obj, "missing required property 'value'"))
 	}
 
-	return ConformSyntax(node, name, obj, schemaExpr, valueExpr), diags
+	return ValidateSyntax(node, name, obj, schemaExpr, valueExpr), diags
 }
