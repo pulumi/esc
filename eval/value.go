@@ -369,7 +369,7 @@ func (v *value) export(environment string) (esc.Value, syntax.Diagnostics) {
 		Value:   pv,
 		Secret:  v.secret,
 		Unknown: v.unknown,
-		Trace: esc.Trace{
+		Trace: &esc.Trace{
 			Def:  v.def.defRange(environment),
 			Base: base,
 		},
