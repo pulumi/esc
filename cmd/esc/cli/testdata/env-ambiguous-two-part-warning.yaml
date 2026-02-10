@@ -1,9 +1,7 @@
 run: |
   esc env get test-org/env --definition
-orgs:
-  - test-org
 environments:
-  test-user/test-org/env:
+  test-org/default/env:
     values:
       string: esc
 

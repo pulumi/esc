@@ -291,7 +291,6 @@ func (env *testEnvironment) latest() *testEnvironmentRevision {
 
 type testPulumiClient struct {
 	user         string
-	orgs         []string
 	defaultOrg   string
 	environments map[string]*testEnvironment
 	openEnvs     map[string]*esc.Environment
@@ -498,7 +497,7 @@ func (c *testPulumiClient) URL() string {
 
 // GetPulumiAccountDetails returns the user implied by the API token associated with this client.
 func (c *testPulumiClient) GetPulumiAccountDetails(ctx context.Context) (string, []string, *workspace.TokenInformation, error) {
-	return c.user, c.orgs, nil, nil
+	return c.user, nil, nil, nil
 }
 
 func (c *testPulumiClient) GetRevisionNumber(ctx context.Context, orgName, projectName, envName, version string) (int, error) {
@@ -1204,7 +1203,8 @@ func (c *testPulumiClient) EnvironmentExists(
 	projectName string,
 	envName string,
 ) (bool, error) {
-	return false, nil
+	_, ok := c.environments[path.Join(orgName, projectName, envName)]
+	return ok, nil
 }
 
 func (c *testPulumiClient) CreateEnvironmentOpenRequest(
@@ -1441,8 +1441,6 @@ type cliTestcaseYAML struct {
 
 	Process *cliTestcaseProcess `yaml:"process,omitempty"`
 
-	Orgs []string `yaml:"orgs,omitempty"`
-
 	Environments map[string]yaml.Node `yaml:"environments,omitempty"`
 }
 
@@ -1568,7 +1566,6 @@ func loadTestcase(path string) (*cliTestcaseYAML, *cliTestcase, error) {
 	exec.login = &testLoginManager{creds: creds}
 	exec.client = &testPulumiClient{
 		user:         "test-user",
-		orgs:         testcase.Orgs,
 		environments: environments,
 		openEnvs:     map[string]*esc.Environment{},
 	}
