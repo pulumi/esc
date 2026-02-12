@@ -46,7 +46,7 @@ func (a *Analysis) ExpressionAtPos(pos esc.Pos) (*esc.Expr, bool) {
 // (nil, nil, false). The returned expression is the "smallest" expression that contains pos. The path to the given
 // expression is also returned.
 func (a *Analysis) expressionAtPos(pos esc.Pos) (*esc.Expr, []traverser, bool) {
-	for key, x := range a.env.Exprs {
+	for key, x := range a.env.Exprs.Object {
 		if x, where, ok := expressionAtPos(x, []traverser{newRootTraverser(key)}, pos); ok {
 			return x, where, true
 		}

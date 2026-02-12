@@ -164,8 +164,9 @@ func evalEnvironment(
 	envProperties, exportDiags := v.export(name)
 	diags.Extend(exportDiags...)
 
+	rootExpr := ec.root.export(name)
 	return &esc.Environment{
-		Exprs:            ec.root.export(name).Object,
+		Exprs:            &rootExpr,
 		Properties:       envProperties.Value.(map[string]esc.Value),
 		Schema:           s,
 		ExecutionContext: executionContext,
@@ -446,7 +447,7 @@ func (e *evalContext) evaluate() (*value, syntax.Diagnostics) {
 	e.root = &expr{
 		path: "<" + e.name + ">",
 		repr: &objectExpr{
-			node:       ast.Object(),
+			node:       e.env.Values,
 			properties: properties,
 		},
 		base: e.base,

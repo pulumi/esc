@@ -758,7 +758,9 @@ func TestCheckYAMLEnvironment(t *testing.T) {
 		yaml := []byte(`{"values":{"foo":"bar"}}`)
 
 		expected := &esc.Environment{
-			Exprs:      map[string]esc.Expr{"foo": {Literal: "bar"}},
+			Exprs: &esc.Expr{
+				Object: map[string]esc.Expr{"foo": {Literal: "bar"}},
+			},
 			Properties: map[string]esc.Value{"foo": esc.NewValue("bar")},
 			Schema:     schema.Record(schema.BuilderMap{"foo": schema.String().Const("bar")}).Schema(),
 		}
@@ -884,7 +886,9 @@ func TestOpenYAMLEnvironment(t *testing.T) {
 func TestGetOpenEnvironment(t *testing.T) {
 	t.Run("OK", func(t *testing.T) {
 		expected := &esc.Environment{
-			Exprs:      map[string]esc.Expr{"foo": {Literal: "bar"}},
+			Exprs: &esc.Expr{
+				Object: map[string]esc.Expr{"foo": {Literal: "bar"}},
+			},
 			Properties: map[string]esc.Value{"foo": esc.NewValue("bar")},
 			Schema:     schema.Record(schema.BuilderMap{"foo": schema.String().Const("bar")}).Schema(),
 		}
@@ -918,7 +922,9 @@ func TestGetOpenEnvironment(t *testing.T) {
 func TestGetAnonymousOpenEnvironment(t *testing.T) {
 	t.Run("OK", func(t *testing.T) {
 		expected := &esc.Environment{
-			Exprs:      map[string]esc.Expr{"foo": {Literal: "bar"}},
+			Exprs: &esc.Expr{
+				Object: map[string]esc.Expr{"foo": {Literal: "bar"}},
+			},
 			Properties: map[string]esc.Value{"foo": esc.NewValue("bar")},
 			Schema:     schema.Record(schema.BuilderMap{"foo": schema.String().Const("bar")}).Schema(),
 		}
