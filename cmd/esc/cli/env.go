@@ -291,10 +291,6 @@ func (cmd *envCommand) getExistingEnvRefWithRelative(
 		legacyRef.envName,
 	)
 
-	if existsLegacyPath {
-		cmd.warnIfAmbiguousTwoPartRef(refString)
-	}
-
 	// Require unambiguous path if both paths exist
 	if exists && existsLegacyPath {
 		return ref, ambiguousIdentifierError{
@@ -304,6 +300,7 @@ func (cmd *envCommand) getExistingEnvRefWithRelative(
 	}
 
 	if existsLegacyPath {
+		cmd.warnIfAmbiguousTwoPartRef(refString)
 		return legacyRef, nil
 	}
 
