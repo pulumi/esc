@@ -118,7 +118,7 @@ func RotateEnvironment(
 ) (*esc.Environment, RotationResult, syntax.Diagnostics) {
 	rotateDocPaths := make(map[string]bool, len(paths))
 	for _, path := range paths {
-		rotateDocPaths["values."+path.String()] = true
+		rotateDocPaths[path.String()] = true
 	}
 	return evalEnvironment(ctx, false, true, name, env, decrypter, providers, environments, execContext, true, rotateDocPaths)
 }
