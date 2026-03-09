@@ -1,7 +1,7 @@
 {
     "checkDiags": [
         {
-            "Severity": 1,
+            "Severity": 2,
             "Summary": "cannot override final value",
             "Detail": "",
             "Subject": {
@@ -24,7 +24,7 @@
             "Path": "values.final_scalar"
         },
         {
-            "Severity": 1,
+            "Severity": 2,
             "Summary": "cannot override final value",
             "Detail": "",
             "Subject": {
@@ -47,7 +47,7 @@
             "Path": "values.final_object"
         },
         {
-            "Severity": 1,
+            "Severity": 2,
             "Summary": "cannot override final value",
             "Detail": "",
             "Subject": {
@@ -1240,7 +1240,7 @@
     },
     "evalDiags": [
         {
-            "Severity": 1,
+            "Severity": 2,
             "Summary": "cannot override final value",
             "Detail": "",
             "Subject": {
@@ -1263,7 +1263,7 @@
             "Path": "values.final_scalar"
         },
         {
-            "Severity": 1,
+            "Severity": 2,
             "Summary": "cannot override final value",
             "Detail": "",
             "Subject": {
@@ -1286,7 +1286,7 @@
             "Path": "values.final_object"
         },
         {
-            "Severity": 1,
+            "Severity": 2,
             "Summary": "cannot override final value",
             "Detail": "",
             "Subject": {

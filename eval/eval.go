@@ -26,6 +26,7 @@ import (
 	"slices"
 	"strings"
 
+	"github.com/hashicorp/hcl/v2"
 	"github.com/pulumi/esc"
 	"github.com/pulumi/esc/ast"
 	"github.com/pulumi/esc/internal/spell"
@@ -593,7 +594,9 @@ func (e *evalContext) evaluateExpr(x *expr, accept *schema.Schema) *value {
 
 	// Check if the base value is final. If so, the child cannot override it.
 	if x.base != nil && x.base.final {
-		e.errorf(x.repr.syntax(), "cannot override final value")
+		diag := ast.ExprError(x.repr.syntax(), "cannot override final value")
+		diag.Severity = hcl.DiagWarning
+		e.diags.Extend(diag)
 		val := x.base
 		x.schema = val.schema
 		x.value = val
