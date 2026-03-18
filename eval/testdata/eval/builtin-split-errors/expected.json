@@ -120,29 +120,131 @@
     ],
     "check": {
         "exprs": {
-            "invalidDelim": {
-                "range": {
-                    "environment": "builtin-split-errors",
-                    "begin": {
-                        "line": 16,
-                        "column": 5,
-                        "byte": 312
+            "range": {
+                "environment": "builtin-split-errors",
+                "begin": {
+                    "line": 3,
+                    "column": 3,
+                    "byte": 43
+                },
+                "end": {
+                    "line": 20,
+                    "column": 25,
+                    "byte": 427
+                }
+            },
+            "schema": {
+                "properties": {
+                    "invalidDelim": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array"
                     },
-                    "end": {
-                        "line": 16,
-                        "column": 28,
-                        "byte": 335
+                    "invalidInput": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array"
+                    },
+                    "invalidString": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array"
+                    },
+                    "oneElement": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array"
+                    },
+                    "threeElements": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array"
                     }
                 },
-                "schema": {
-                    "items": {
-                        "type": "string"
+                "type": "object",
+                "required": [
+                    "invalidDelim",
+                    "invalidInput",
+                    "invalidString",
+                    "oneElement",
+                    "threeElements"
+                ]
+            },
+            "keyRanges": {
+                "invalidDelim": {
+                    "environment": "builtin-split-errors",
+                    "begin": {
+                        "line": 15,
+                        "column": 3,
+                        "byte": 294
                     },
-                    "type": "array"
+                    "end": {
+                        "line": 15,
+                        "column": 15,
+                        "byte": 306
+                    }
                 },
-                "builtin": {
-                    "name": "fn::split",
-                    "nameRange": {
+                "invalidInput": {
+                    "environment": "builtin-split-errors",
+                    "begin": {
+                        "line": 3,
+                        "column": 3,
+                        "byte": 43
+                    },
+                    "end": {
+                        "line": 3,
+                        "column": 15,
+                        "byte": 55
+                    }
+                },
+                "invalidString": {
+                    "environment": "builtin-split-errors",
+                    "begin": {
+                        "line": 19,
+                        "column": 3,
+                        "byte": 388
+                    },
+                    "end": {
+                        "line": 19,
+                        "column": 16,
+                        "byte": 401
+                    }
+                },
+                "oneElement": {
+                    "environment": "builtin-split-errors",
+                    "begin": {
+                        "line": 7,
+                        "column": 3,
+                        "byte": 121
+                    },
+                    "end": {
+                        "line": 7,
+                        "column": 13,
+                        "byte": 131
+                    }
+                },
+                "threeElements": {
+                    "environment": "builtin-split-errors",
+                    "begin": {
+                        "line": 11,
+                        "column": 3,
+                        "byte": 193
+                    },
+                    "end": {
+                        "line": 11,
+                        "column": 16,
+                        "byte": 206
+                    }
+                }
+            },
+            "object": {
+                "invalidDelim": {
+                    "range": {
                         "environment": "builtin-split-errors",
                         "begin": {
                             "line": 16,
@@ -151,104 +253,104 @@
                         },
                         "end": {
                             "line": 16,
-                            "column": 14,
-                            "byte": 321
+                            "column": 28,
+                            "byte": 335
                         }
                     },
-                    "argSchema": {
-                        "prefixItems": [
-                            {
-                                "type": "string"
-                            },
-                            {
-                                "type": "string"
-                            }
-                        ],
-                        "items": false,
+                    "schema": {
+                        "items": {
+                            "type": "string"
+                        },
                         "type": "array"
                     },
-                    "arg": {
-                        "range": {
+                    "builtin": {
+                        "name": "fn::split",
+                        "nameRange": {
                             "environment": "builtin-split-errors",
                             "begin": {
                                 "line": 16,
-                                "column": 16,
-                                "byte": 323
+                                "column": 5,
+                                "byte": 312
                             },
                             "end": {
                                 "line": 16,
-                                "column": 28,
-                                "byte": 335
+                                "column": 14,
+                                "byte": 321
                             }
                         },
-                        "list": [
-                            {
-                                "range": {
-                                    "environment": "builtin-split-errors",
-                                    "begin": {
-                                        "line": 16,
-                                        "column": 17,
-                                        "byte": 324
-                                    },
-                                    "end": {
-                                        "line": 16,
-                                        "column": 20,
-                                        "byte": 327
-                                    }
+                        "argSchema": {
+                            "prefixItems": [
+                                {
+                                    "type": "string"
                                 },
-                                "schema": {
-                                    "type": "number",
-                                    "const": 123
+                                {
+                                    "type": "string"
+                                }
+                            ],
+                            "items": false,
+                            "type": "array"
+                        },
+                        "arg": {
+                            "range": {
+                                "environment": "builtin-split-errors",
+                                "begin": {
+                                    "line": 16,
+                                    "column": 16,
+                                    "byte": 323
                                 },
-                                "literal": 123
+                                "end": {
+                                    "line": 16,
+                                    "column": 28,
+                                    "byte": 335
+                                }
                             },
-                            {
-                                "range": {
-                                    "environment": "builtin-split-errors",
-                                    "begin": {
-                                        "line": 16,
-                                        "column": 22,
-                                        "byte": 329
+                            "list": [
+                                {
+                                    "range": {
+                                        "environment": "builtin-split-errors",
+                                        "begin": {
+                                            "line": 16,
+                                            "column": 17,
+                                            "byte": 324
+                                        },
+                                        "end": {
+                                            "line": 16,
+                                            "column": 20,
+                                            "byte": 327
+                                        }
                                     },
-                                    "end": {
-                                        "line": 16,
-                                        "column": 28,
-                                        "byte": 335
-                                    }
+                                    "schema": {
+                                        "type": "number",
+                                        "const": 123
+                                    },
+                                    "literal": 123
                                 },
-                                "schema": {
-                                    "type": "string",
-                                    "const": "string"
-                                },
-                                "literal": "string"
-                            }
-                        ]
-                    }
-                }
-            },
-            "invalidInput": {
-                "range": {
-                    "environment": "builtin-split-errors",
-                    "begin": {
-                        "line": 4,
-                        "column": 5,
-                        "byte": 61
-                    },
-                    "end": {
-                        "line": 4,
-                        "column": 28,
-                        "byte": 84
+                                {
+                                    "range": {
+                                        "environment": "builtin-split-errors",
+                                        "begin": {
+                                            "line": 16,
+                                            "column": 22,
+                                            "byte": 329
+                                        },
+                                        "end": {
+                                            "line": 16,
+                                            "column": 28,
+                                            "byte": 335
+                                        }
+                                    },
+                                    "schema": {
+                                        "type": "string",
+                                        "const": "string"
+                                    },
+                                    "literal": "string"
+                                }
+                            ]
+                        }
                     }
                 },
-                "schema": {
-                    "items": {
-                        "type": "string"
-                    },
-                    "type": "array"
-                },
-                "builtin": {
-                    "name": "fn::split",
-                    "nameRange": {
+                "invalidInput": {
+                    "range": {
                         "environment": "builtin-split-errors",
                         "begin": {
                             "line": 4,
@@ -257,96 +359,96 @@
                         },
                         "end": {
                             "line": 4,
-                            "column": 14,
-                            "byte": 70
+                            "column": 28,
+                            "byte": 84
                         }
                     },
-                    "argSchema": {
-                        "prefixItems": [
-                            {
-                                "type": "string"
-                            },
-                            {
-                                "type": "string"
-                            }
-                        ],
-                        "items": false,
+                    "schema": {
+                        "items": {
+                            "type": "string"
+                        },
                         "type": "array"
                     },
-                    "arg": {
-                        "range": {
+                    "builtin": {
+                        "name": "fn::split",
+                        "nameRange": {
                             "environment": "builtin-split-errors",
                             "begin": {
                                 "line": 4,
-                                "column": 16,
-                                "byte": 72
+                                "column": 5,
+                                "byte": 61
                             },
                             "end": {
                                 "line": 4,
-                                "column": 28,
-                                "byte": 84
+                                "column": 14,
+                                "byte": 70
                             }
                         },
-                        "list": [
-                            {
-                                "range": {
-                                    "environment": "builtin-split-errors",
-                                    "begin": {
-                                        "line": 0,
-                                        "column": 0,
-                                        "byte": 0
-                                    },
-                                    "end": {
-                                        "line": 0,
-                                        "column": 0,
-                                        "byte": 0
-                                    }
+                        "argSchema": {
+                            "prefixItems": [
+                                {
+                                    "type": "string"
                                 },
-                                "schema": true
+                                {
+                                    "type": "string"
+                                }
+                            ],
+                            "items": false,
+                            "type": "array"
+                        },
+                        "arg": {
+                            "range": {
+                                "environment": "builtin-split-errors",
+                                "begin": {
+                                    "line": 4,
+                                    "column": 16,
+                                    "byte": 72
+                                },
+                                "end": {
+                                    "line": 4,
+                                    "column": 28,
+                                    "byte": 84
+                                }
                             },
-                            {
-                                "range": {
-                                    "environment": "builtin-split-errors",
-                                    "begin": {
-                                        "line": 0,
-                                        "column": 0,
-                                        "byte": 0
+                            "list": [
+                                {
+                                    "range": {
+                                        "environment": "builtin-split-errors",
+                                        "begin": {
+                                            "line": 0,
+                                            "column": 0,
+                                            "byte": 0
+                                        },
+                                        "end": {
+                                            "line": 0,
+                                            "column": 0,
+                                            "byte": 0
+                                        }
                                     },
-                                    "end": {
-                                        "line": 0,
-                                        "column": 0,
-                                        "byte": 0
-                                    }
+                                    "schema": true
                                 },
-                                "schema": true
-                            }
-                        ]
-                    }
-                }
-            },
-            "invalidString": {
-                "range": {
-                    "environment": "builtin-split-errors",
-                    "begin": {
-                        "line": 20,
-                        "column": 5,
-                        "byte": 407
-                    },
-                    "end": {
-                        "line": 20,
-                        "column": 25,
-                        "byte": 427
+                                {
+                                    "range": {
+                                        "environment": "builtin-split-errors",
+                                        "begin": {
+                                            "line": 0,
+                                            "column": 0,
+                                            "byte": 0
+                                        },
+                                        "end": {
+                                            "line": 0,
+                                            "column": 0,
+                                            "byte": 0
+                                        }
+                                    },
+                                    "schema": true
+                                }
+                            ]
+                        }
                     }
                 },
-                "schema": {
-                    "items": {
-                        "type": "string"
-                    },
-                    "type": "array"
-                },
-                "builtin": {
-                    "name": "fn::split",
-                    "nameRange": {
+                "invalidString": {
+                    "range": {
                         "environment": "builtin-split-errors",
                         "begin": {
                             "line": 20,
@@ -355,104 +457,104 @@
                         },
                         "end": {
                             "line": 20,
-                            "column": 14,
-                            "byte": 416
+                            "column": 25,
+                            "byte": 427
                         }
                     },
-                    "argSchema": {
-                        "prefixItems": [
-                            {
-                                "type": "string"
-                            },
-                            {
-                                "type": "string"
-                            }
-                        ],
-                        "items": false,
+                    "schema": {
+                        "items": {
+                            "type": "string"
+                        },
                         "type": "array"
                     },
-                    "arg": {
-                        "range": {
+                    "builtin": {
+                        "name": "fn::split",
+                        "nameRange": {
                             "environment": "builtin-split-errors",
                             "begin": {
                                 "line": 20,
-                                "column": 16,
-                                "byte": 418
+                                "column": 5,
+                                "byte": 407
                             },
                             "end": {
                                 "line": 20,
-                                "column": 25,
-                                "byte": 427
+                                "column": 14,
+                                "byte": 416
                             }
                         },
-                        "list": [
-                            {
-                                "range": {
-                                    "environment": "builtin-split-errors",
-                                    "begin": {
-                                        "line": 20,
-                                        "column": 17,
-                                        "byte": 419
-                                    },
-                                    "end": {
-                                        "line": 20,
-                                        "column": 18,
-                                        "byte": 420
-                                    }
+                        "argSchema": {
+                            "prefixItems": [
+                                {
+                                    "type": "string"
                                 },
-                                "schema": {
-                                    "type": "string",
-                                    "const": ","
+                                {
+                                    "type": "string"
+                                }
+                            ],
+                            "items": false,
+                            "type": "array"
+                        },
+                        "arg": {
+                            "range": {
+                                "environment": "builtin-split-errors",
+                                "begin": {
+                                    "line": 20,
+                                    "column": 16,
+                                    "byte": 418
                                 },
-                                "literal": ","
+                                "end": {
+                                    "line": 20,
+                                    "column": 25,
+                                    "byte": 427
+                                }
                             },
-                            {
-                                "range": {
-                                    "environment": "builtin-split-errors",
-                                    "begin": {
-                                        "line": 20,
-                                        "column": 22,
-                                        "byte": 424
+                            "list": [
+                                {
+                                    "range": {
+                                        "environment": "builtin-split-errors",
+                                        "begin": {
+                                            "line": 20,
+                                            "column": 17,
+                                            "byte": 419
+                                        },
+                                        "end": {
+                                            "line": 20,
+                                            "column": 18,
+                                            "byte": 420
+                                        }
                                     },
-                                    "end": {
-                                        "line": 20,
-                                        "column": 25,
-                                        "byte": 427
-                                    }
+                                    "schema": {
+                                        "type": "string",
+                                        "const": ","
+                                    },
+                                    "literal": ","
                                 },
-                                "schema": {
-                                    "type": "number",
-                                    "const": 456
-                                },
-                                "literal": 456
-                            }
-                        ]
-                    }
-                }
-            },
-            "oneElement": {
-                "range": {
-                    "environment": "builtin-split-errors",
-                    "begin": {
-                        "line": 8,
-                        "column": 5,
-                        "byte": 137
-                    },
-                    "end": {
-                        "line": 8,
-                        "column": 25,
-                        "byte": 157
+                                {
+                                    "range": {
+                                        "environment": "builtin-split-errors",
+                                        "begin": {
+                                            "line": 20,
+                                            "column": 22,
+                                            "byte": 424
+                                        },
+                                        "end": {
+                                            "line": 20,
+                                            "column": 25,
+                                            "byte": 427
+                                        }
+                                    },
+                                    "schema": {
+                                        "type": "number",
+                                        "const": 456
+                                    },
+                                    "literal": 456
+                                }
+                            ]
+                        }
                     }
                 },
-                "schema": {
-                    "items": {
-                        "type": "string"
-                    },
-                    "type": "array"
-                },
-                "builtin": {
-                    "name": "fn::split",
-                    "nameRange": {
+                "oneElement": {
+                    "range": {
                         "environment": "builtin-split-errors",
                         "begin": {
                             "line": 8,
@@ -461,96 +563,96 @@
                         },
                         "end": {
                             "line": 8,
-                            "column": 14,
-                            "byte": 146
+                            "column": 25,
+                            "byte": 157
                         }
                     },
-                    "argSchema": {
-                        "prefixItems": [
-                            {
-                                "type": "string"
-                            },
-                            {
-                                "type": "string"
-                            }
-                        ],
-                        "items": false,
+                    "schema": {
+                        "items": {
+                            "type": "string"
+                        },
                         "type": "array"
                     },
-                    "arg": {
-                        "range": {
+                    "builtin": {
+                        "name": "fn::split",
+                        "nameRange": {
                             "environment": "builtin-split-errors",
                             "begin": {
                                 "line": 8,
-                                "column": 16,
-                                "byte": 148
+                                "column": 5,
+                                "byte": 137
                             },
                             "end": {
                                 "line": 8,
-                                "column": 25,
-                                "byte": 157
+                                "column": 14,
+                                "byte": 146
                             }
                         },
-                        "list": [
-                            {
-                                "range": {
-                                    "environment": "builtin-split-errors",
-                                    "begin": {
-                                        "line": 0,
-                                        "column": 0,
-                                        "byte": 0
-                                    },
-                                    "end": {
-                                        "line": 0,
-                                        "column": 0,
-                                        "byte": 0
-                                    }
+                        "argSchema": {
+                            "prefixItems": [
+                                {
+                                    "type": "string"
                                 },
-                                "schema": true
+                                {
+                                    "type": "string"
+                                }
+                            ],
+                            "items": false,
+                            "type": "array"
+                        },
+                        "arg": {
+                            "range": {
+                                "environment": "builtin-split-errors",
+                                "begin": {
+                                    "line": 8,
+                                    "column": 16,
+                                    "byte": 148
+                                },
+                                "end": {
+                                    "line": 8,
+                                    "column": 25,
+                                    "byte": 157
+                                }
                             },
-                            {
-                                "range": {
-                                    "environment": "builtin-split-errors",
-                                    "begin": {
-                                        "line": 0,
-                                        "column": 0,
-                                        "byte": 0
+                            "list": [
+                                {
+                                    "range": {
+                                        "environment": "builtin-split-errors",
+                                        "begin": {
+                                            "line": 0,
+                                            "column": 0,
+                                            "byte": 0
+                                        },
+                                        "end": {
+                                            "line": 0,
+                                            "column": 0,
+                                            "byte": 0
+                                        }
                                     },
-                                    "end": {
-                                        "line": 0,
-                                        "column": 0,
-                                        "byte": 0
-                                    }
+                                    "schema": true
                                 },
-                                "schema": true
-                            }
-                        ]
-                    }
-                }
-            },
-            "threeElements": {
-                "range": {
-                    "environment": "builtin-split-errors",
-                    "begin": {
-                        "line": 12,
-                        "column": 5,
-                        "byte": 212
-                    },
-                    "end": {
-                        "line": 12,
-                        "column": 40,
-                        "byte": 247
+                                {
+                                    "range": {
+                                        "environment": "builtin-split-errors",
+                                        "begin": {
+                                            "line": 0,
+                                            "column": 0,
+                                            "byte": 0
+                                        },
+                                        "end": {
+                                            "line": 0,
+                                            "column": 0,
+                                            "byte": 0
+                                        }
+                                    },
+                                    "schema": true
+                                }
+                            ]
+                        }
                     }
                 },
-                "schema": {
-                    "items": {
-                        "type": "string"
-                    },
-                    "type": "array"
-                },
-                "builtin": {
-                    "name": "fn::split",
-                    "nameRange": {
+                "threeElements": {
+                    "range": {
                         "environment": "builtin-split-errors",
                         "begin": {
                             "line": 12,
@@ -559,70 +661,92 @@
                         },
                         "end": {
                             "line": 12,
-                            "column": 14,
-                            "byte": 221
+                            "column": 40,
+                            "byte": 247
                         }
                     },
-                    "argSchema": {
-                        "prefixItems": [
-                            {
-                                "type": "string"
-                            },
-                            {
-                                "type": "string"
-                            }
-                        ],
-                        "items": false,
+                    "schema": {
+                        "items": {
+                            "type": "string"
+                        },
                         "type": "array"
                     },
-                    "arg": {
-                        "range": {
+                    "builtin": {
+                        "name": "fn::split",
+                        "nameRange": {
                             "environment": "builtin-split-errors",
                             "begin": {
                                 "line": 12,
-                                "column": 16,
-                                "byte": 223
+                                "column": 5,
+                                "byte": 212
                             },
                             "end": {
                                 "line": 12,
-                                "column": 40,
-                                "byte": 247
+                                "column": 14,
+                                "byte": 221
                             }
                         },
-                        "list": [
-                            {
-                                "range": {
-                                    "environment": "builtin-split-errors",
-                                    "begin": {
-                                        "line": 0,
-                                        "column": 0,
-                                        "byte": 0
-                                    },
-                                    "end": {
-                                        "line": 0,
-                                        "column": 0,
-                                        "byte": 0
-                                    }
+                        "argSchema": {
+                            "prefixItems": [
+                                {
+                                    "type": "string"
                                 },
-                                "schema": true
+                                {
+                                    "type": "string"
+                                }
+                            ],
+                            "items": false,
+                            "type": "array"
+                        },
+                        "arg": {
+                            "range": {
+                                "environment": "builtin-split-errors",
+                                "begin": {
+                                    "line": 12,
+                                    "column": 16,
+                                    "byte": 223
+                                },
+                                "end": {
+                                    "line": 12,
+                                    "column": 40,
+                                    "byte": 247
+                                }
                             },
-                            {
-                                "range": {
-                                    "environment": "builtin-split-errors",
-                                    "begin": {
-                                        "line": 0,
-                                        "column": 0,
-                                        "byte": 0
+                            "list": [
+                                {
+                                    "range": {
+                                        "environment": "builtin-split-errors",
+                                        "begin": {
+                                            "line": 0,
+                                            "column": 0,
+                                            "byte": 0
+                                        },
+                                        "end": {
+                                            "line": 0,
+                                            "column": 0,
+                                            "byte": 0
+                                        }
                                     },
-                                    "end": {
-                                        "line": 0,
-                                        "column": 0,
-                                        "byte": 0
-                                    }
+                                    "schema": true
                                 },
-                                "schema": true
-                            }
-                        ]
+                                {
+                                    "range": {
+                                        "environment": "builtin-split-errors",
+                                        "begin": {
+                                            "line": 0,
+                                            "column": 0,
+                                            "byte": 0
+                                        },
+                                        "end": {
+                                            "line": 0,
+                                            "column": 0,
+                                            "byte": 0
+                                        }
+                                    },
+                                    "schema": true
+                                }
+                            ]
+                        }
                     }
                 }
             }
@@ -1007,29 +1131,131 @@
     ],
     "eval": {
         "exprs": {
-            "invalidDelim": {
-                "range": {
-                    "environment": "builtin-split-errors",
-                    "begin": {
-                        "line": 16,
-                        "column": 5,
-                        "byte": 312
+            "range": {
+                "environment": "builtin-split-errors",
+                "begin": {
+                    "line": 3,
+                    "column": 3,
+                    "byte": 43
+                },
+                "end": {
+                    "line": 20,
+                    "column": 25,
+                    "byte": 427
+                }
+            },
+            "schema": {
+                "properties": {
+                    "invalidDelim": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array"
                     },
-                    "end": {
-                        "line": 16,
-                        "column": 28,
-                        "byte": 335
+                    "invalidInput": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array"
+                    },
+                    "invalidString": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array"
+                    },
+                    "oneElement": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array"
+                    },
+                    "threeElements": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array"
                     }
                 },
-                "schema": {
-                    "items": {
-                        "type": "string"
+                "type": "object",
+                "required": [
+                    "invalidDelim",
+                    "invalidInput",
+                    "invalidString",
+                    "oneElement",
+                    "threeElements"
+                ]
+            },
+            "keyRanges": {
+                "invalidDelim": {
+                    "environment": "builtin-split-errors",
+                    "begin": {
+                        "line": 15,
+                        "column": 3,
+                        "byte": 294
                     },
-                    "type": "array"
+                    "end": {
+                        "line": 15,
+                        "column": 15,
+                        "byte": 306
+                    }
                 },
-                "builtin": {
-                    "name": "fn::split",
-                    "nameRange": {
+                "invalidInput": {
+                    "environment": "builtin-split-errors",
+                    "begin": {
+                        "line": 3,
+                        "column": 3,
+                        "byte": 43
+                    },
+                    "end": {
+                        "line": 3,
+                        "column": 15,
+                        "byte": 55
+                    }
+                },
+                "invalidString": {
+                    "environment": "builtin-split-errors",
+                    "begin": {
+                        "line": 19,
+                        "column": 3,
+                        "byte": 388
+                    },
+                    "end": {
+                        "line": 19,
+                        "column": 16,
+                        "byte": 401
+                    }
+                },
+                "oneElement": {
+                    "environment": "builtin-split-errors",
+                    "begin": {
+                        "line": 7,
+                        "column": 3,
+                        "byte": 121
+                    },
+                    "end": {
+                        "line": 7,
+                        "column": 13,
+                        "byte": 131
+                    }
+                },
+                "threeElements": {
+                    "environment": "builtin-split-errors",
+                    "begin": {
+                        "line": 11,
+                        "column": 3,
+                        "byte": 193
+                    },
+                    "end": {
+                        "line": 11,
+                        "column": 16,
+                        "byte": 206
+                    }
+                }
+            },
+            "object": {
+                "invalidDelim": {
+                    "range": {
                         "environment": "builtin-split-errors",
                         "begin": {
                             "line": 16,
@@ -1038,104 +1264,104 @@
                         },
                         "end": {
                             "line": 16,
-                            "column": 14,
-                            "byte": 321
+                            "column": 28,
+                            "byte": 335
                         }
                     },
-                    "argSchema": {
-                        "prefixItems": [
-                            {
-                                "type": "string"
-                            },
-                            {
-                                "type": "string"
-                            }
-                        ],
-                        "items": false,
+                    "schema": {
+                        "items": {
+                            "type": "string"
+                        },
                         "type": "array"
                     },
-                    "arg": {
-                        "range": {
+                    "builtin": {
+                        "name": "fn::split",
+                        "nameRange": {
                             "environment": "builtin-split-errors",
                             "begin": {
                                 "line": 16,
-                                "column": 16,
-                                "byte": 323
+                                "column": 5,
+                                "byte": 312
                             },
                             "end": {
                                 "line": 16,
-                                "column": 28,
-                                "byte": 335
+                                "column": 14,
+                                "byte": 321
                             }
                         },
-                        "list": [
-                            {
-                                "range": {
-                                    "environment": "builtin-split-errors",
-                                    "begin": {
-                                        "line": 16,
-                                        "column": 17,
-                                        "byte": 324
-                                    },
-                                    "end": {
-                                        "line": 16,
-                                        "column": 20,
-                                        "byte": 327
-                                    }
+                        "argSchema": {
+                            "prefixItems": [
+                                {
+                                    "type": "string"
                                 },
-                                "schema": {
-                                    "type": "number",
-                                    "const": 123
+                                {
+                                    "type": "string"
+                                }
+                            ],
+                            "items": false,
+                            "type": "array"
+                        },
+                        "arg": {
+                            "range": {
+                                "environment": "builtin-split-errors",
+                                "begin": {
+                                    "line": 16,
+                                    "column": 16,
+                                    "byte": 323
                                 },
-                                "literal": 123
+                                "end": {
+                                    "line": 16,
+                                    "column": 28,
+                                    "byte": 335
+                                }
                             },
-                            {
-                                "range": {
-                                    "environment": "builtin-split-errors",
-                                    "begin": {
-                                        "line": 16,
-                                        "column": 22,
-                                        "byte": 329
+                            "list": [
+                                {
+                                    "range": {
+                                        "environment": "builtin-split-errors",
+                                        "begin": {
+                                            "line": 16,
+                                            "column": 17,
+                                            "byte": 324
+                                        },
+                                        "end": {
+                                            "line": 16,
+                                            "column": 20,
+                                            "byte": 327
+                                        }
                                     },
-                                    "end": {
-                                        "line": 16,
-                                        "column": 28,
-                                        "byte": 335
-                                    }
+                                    "schema": {
+                                        "type": "number",
+                                        "const": 123
+                                    },
+                                    "literal": 123
                                 },
-                                "schema": {
-                                    "type": "string",
-                                    "const": "string"
-                                },
-                                "literal": "string"
-                            }
-                        ]
-                    }
-                }
-            },
-            "invalidInput": {
-                "range": {
-                    "environment": "builtin-split-errors",
-                    "begin": {
-                        "line": 4,
-                        "column": 5,
-                        "byte": 61
-                    },
-                    "end": {
-                        "line": 4,
-                        "column": 28,
-                        "byte": 84
+                                {
+                                    "range": {
+                                        "environment": "builtin-split-errors",
+                                        "begin": {
+                                            "line": 16,
+                                            "column": 22,
+                                            "byte": 329
+                                        },
+                                        "end": {
+                                            "line": 16,
+                                            "column": 28,
+                                            "byte": 335
+                                        }
+                                    },
+                                    "schema": {
+                                        "type": "string",
+                                        "const": "string"
+                                    },
+                                    "literal": "string"
+                                }
+                            ]
+                        }
                     }
                 },
-                "schema": {
-                    "items": {
-                        "type": "string"
-                    },
-                    "type": "array"
-                },
-                "builtin": {
-                    "name": "fn::split",
-                    "nameRange": {
+                "invalidInput": {
+                    "range": {
                         "environment": "builtin-split-errors",
                         "begin": {
                             "line": 4,
@@ -1144,96 +1370,96 @@
                         },
                         "end": {
                             "line": 4,
-                            "column": 14,
-                            "byte": 70
+                            "column": 28,
+                            "byte": 84
                         }
                     },
-                    "argSchema": {
-                        "prefixItems": [
-                            {
-                                "type": "string"
-                            },
-                            {
-                                "type": "string"
-                            }
-                        ],
-                        "items": false,
+                    "schema": {
+                        "items": {
+                            "type": "string"
+                        },
                         "type": "array"
                     },
-                    "arg": {
-                        "range": {
+                    "builtin": {
+                        "name": "fn::split",
+                        "nameRange": {
                             "environment": "builtin-split-errors",
                             "begin": {
                                 "line": 4,
-                                "column": 16,
-                                "byte": 72
+                                "column": 5,
+                                "byte": 61
                             },
                             "end": {
                                 "line": 4,
-                                "column": 28,
-                                "byte": 84
+                                "column": 14,
+                                "byte": 70
                             }
                         },
-                        "list": [
-                            {
-                                "range": {
-                                    "environment": "builtin-split-errors",
-                                    "begin": {
-                                        "line": 0,
-                                        "column": 0,
-                                        "byte": 0
-                                    },
-                                    "end": {
-                                        "line": 0,
-                                        "column": 0,
-                                        "byte": 0
-                                    }
+                        "argSchema": {
+                            "prefixItems": [
+                                {
+                                    "type": "string"
                                 },
-                                "schema": true
+                                {
+                                    "type": "string"
+                                }
+                            ],
+                            "items": false,
+                            "type": "array"
+                        },
+                        "arg": {
+                            "range": {
+                                "environment": "builtin-split-errors",
+                                "begin": {
+                                    "line": 4,
+                                    "column": 16,
+                                    "byte": 72
+                                },
+                                "end": {
+                                    "line": 4,
+                                    "column": 28,
+                                    "byte": 84
+                                }
                             },
-                            {
-                                "range": {
-                                    "environment": "builtin-split-errors",
-                                    "begin": {
-                                        "line": 0,
-                                        "column": 0,
-                                        "byte": 0
+                            "list": [
+                                {
+                                    "range": {
+                                        "environment": "builtin-split-errors",
+                                        "begin": {
+                                            "line": 0,
+                                            "column": 0,
+                                            "byte": 0
+                                        },
+                                        "end": {
+                                            "line": 0,
+                                            "column": 0,
+                                            "byte": 0
+                                        }
                                     },
-                                    "end": {
-                                        "line": 0,
-                                        "column": 0,
-                                        "byte": 0
-                                    }
+                                    "schema": true
                                 },
-                                "schema": true
-                            }
-                        ]
-                    }
-                }
-            },
-            "invalidString": {
-                "range": {
-                    "environment": "builtin-split-errors",
-                    "begin": {
-                        "line": 20,
-                        "column": 5,
-                        "byte": 407
-                    },
-                    "end": {
-                        "line": 20,
-                        "column": 25,
-                        "byte": 427
+                                {
+                                    "range": {
+                                        "environment": "builtin-split-errors",
+                                        "begin": {
+                                            "line": 0,
+                                            "column": 0,
+                                            "byte": 0
+                                        },
+                                        "end": {
+                                            "line": 0,
+                                            "column": 0,
+                                            "byte": 0
+                                        }
+                                    },
+                                    "schema": true
+                                }
+                            ]
+                        }
                     }
                 },
-                "schema": {
-                    "items": {
-                        "type": "string"
-                    },
-                    "type": "array"
-                },
-                "builtin": {
-                    "name": "fn::split",
-                    "nameRange": {
+                "invalidString": {
+                    "range": {
                         "environment": "builtin-split-errors",
                         "begin": {
                             "line": 20,
@@ -1242,104 +1468,104 @@
                         },
                         "end": {
                             "line": 20,
-                            "column": 14,
-                            "byte": 416
+                            "column": 25,
+                            "byte": 427
                         }
                     },
-                    "argSchema": {
-                        "prefixItems": [
-                            {
-                                "type": "string"
-                            },
-                            {
-                                "type": "string"
-                            }
-                        ],
-                        "items": false,
+                    "schema": {
+                        "items": {
+                            "type": "string"
+                        },
                         "type": "array"
                     },
-                    "arg": {
-                        "range": {
+                    "builtin": {
+                        "name": "fn::split",
+                        "nameRange": {
                             "environment": "builtin-split-errors",
                             "begin": {
                                 "line": 20,
-                                "column": 16,
-                                "byte": 418
+                                "column": 5,
+                                "byte": 407
                             },
                             "end": {
                                 "line": 20,
-                                "column": 25,
-                                "byte": 427
+                                "column": 14,
+                                "byte": 416
                             }
                         },
-                        "list": [
-                            {
-                                "range": {
-                                    "environment": "builtin-split-errors",
-                                    "begin": {
-                                        "line": 20,
-                                        "column": 17,
-                                        "byte": 419
-                                    },
-                                    "end": {
-                                        "line": 20,
-                                        "column": 18,
-                                        "byte": 420
-                                    }
+                        "argSchema": {
+                            "prefixItems": [
+                                {
+                                    "type": "string"
                                 },
-                                "schema": {
-                                    "type": "string",
-                                    "const": ","
+                                {
+                                    "type": "string"
+                                }
+                            ],
+                            "items": false,
+                            "type": "array"
+                        },
+                        "arg": {
+                            "range": {
+                                "environment": "builtin-split-errors",
+                                "begin": {
+                                    "line": 20,
+                                    "column": 16,
+                                    "byte": 418
                                 },
-                                "literal": ","
+                                "end": {
+                                    "line": 20,
+                                    "column": 25,
+                                    "byte": 427
+                                }
                             },
-                            {
-                                "range": {
-                                    "environment": "builtin-split-errors",
-                                    "begin": {
-                                        "line": 20,
-                                        "column": 22,
-                                        "byte": 424
+                            "list": [
+                                {
+                                    "range": {
+                                        "environment": "builtin-split-errors",
+                                        "begin": {
+                                            "line": 20,
+                                            "column": 17,
+                                            "byte": 419
+                                        },
+                                        "end": {
+                                            "line": 20,
+                                            "column": 18,
+                                            "byte": 420
+                                        }
                                     },
-                                    "end": {
-                                        "line": 20,
-                                        "column": 25,
-                                        "byte": 427
-                                    }
+                                    "schema": {
+                                        "type": "string",
+                                        "const": ","
+                                    },
+                                    "literal": ","
                                 },
-                                "schema": {
-                                    "type": "number",
-                                    "const": 456
-                                },
-                                "literal": 456
-                            }
-                        ]
-                    }
-                }
-            },
-            "oneElement": {
-                "range": {
-                    "environment": "builtin-split-errors",
-                    "begin": {
-                        "line": 8,
-                        "column": 5,
-                        "byte": 137
-                    },
-                    "end": {
-                        "line": 8,
-                        "column": 25,
-                        "byte": 157
+                                {
+                                    "range": {
+                                        "environment": "builtin-split-errors",
+                                        "begin": {
+                                            "line": 20,
+                                            "column": 22,
+                                            "byte": 424
+                                        },
+                                        "end": {
+                                            "line": 20,
+                                            "column": 25,
+                                            "byte": 427
+                                        }
+                                    },
+                                    "schema": {
+                                        "type": "number",
+                                        "const": 456
+                                    },
+                                    "literal": 456
+                                }
+                            ]
+                        }
                     }
                 },
-                "schema": {
-                    "items": {
-                        "type": "string"
-                    },
-                    "type": "array"
-                },
-                "builtin": {
-                    "name": "fn::split",
-                    "nameRange": {
+                "oneElement": {
+                    "range": {
                         "environment": "builtin-split-errors",
                         "begin": {
                             "line": 8,
@@ -1348,96 +1574,96 @@
                         },
                         "end": {
                             "line": 8,
-                            "column": 14,
-                            "byte": 146
+                            "column": 25,
+                            "byte": 157
                         }
                     },
-                    "argSchema": {
-                        "prefixItems": [
-                            {
-                                "type": "string"
-                            },
-                            {
-                                "type": "string"
-                            }
-                        ],
-                        "items": false,
+                    "schema": {
+                        "items": {
+                            "type": "string"
+                        },
                         "type": "array"
                     },
-                    "arg": {
-                        "range": {
+                    "builtin": {
+                        "name": "fn::split",
+                        "nameRange": {
                             "environment": "builtin-split-errors",
                             "begin": {
                                 "line": 8,
-                                "column": 16,
-                                "byte": 148
+                                "column": 5,
+                                "byte": 137
                             },
                             "end": {
                                 "line": 8,
-                                "column": 25,
-                                "byte": 157
+                                "column": 14,
+                                "byte": 146
                             }
                         },
-                        "list": [
-                            {
-                                "range": {
-                                    "environment": "builtin-split-errors",
-                                    "begin": {
-                                        "line": 0,
-                                        "column": 0,
-                                        "byte": 0
-                                    },
-                                    "end": {
-                                        "line": 0,
-                                        "column": 0,
-                                        "byte": 0
-                                    }
+                        "argSchema": {
+                            "prefixItems": [
+                                {
+                                    "type": "string"
                                 },
-                                "schema": true
+                                {
+                                    "type": "string"
+                                }
+                            ],
+                            "items": false,
+                            "type": "array"
+                        },
+                        "arg": {
+                            "range": {
+                                "environment": "builtin-split-errors",
+                                "begin": {
+                                    "line": 8,
+                                    "column": 16,
+                                    "byte": 148
+                                },
+                                "end": {
+                                    "line": 8,
+                                    "column": 25,
+                                    "byte": 157
+                                }
                             },
-                            {
-                                "range": {
-                                    "environment": "builtin-split-errors",
-                                    "begin": {
-                                        "line": 0,
-                                        "column": 0,
-                                        "byte": 0
+                            "list": [
+                                {
+                                    "range": {
+                                        "environment": "builtin-split-errors",
+                                        "begin": {
+                                            "line": 0,
+                                            "column": 0,
+                                            "byte": 0
+                                        },
+                                        "end": {
+                                            "line": 0,
+                                            "column": 0,
+                                            "byte": 0
+                                        }
                                     },
-                                    "end": {
-                                        "line": 0,
-                                        "column": 0,
-                                        "byte": 0
-                                    }
+                                    "schema": true
                                 },
-                                "schema": true
-                            }
-                        ]
-                    }
-                }
-            },
-            "threeElements": {
-                "range": {
-                    "environment": "builtin-split-errors",
-                    "begin": {
-                        "line": 12,
-                        "column": 5,
-                        "byte": 212
-                    },
-                    "end": {
-                        "line": 12,
-                        "column": 40,
-                        "byte": 247
+                                {
+                                    "range": {
+                                        "environment": "builtin-split-errors",
+                                        "begin": {
+                                            "line": 0,
+                                            "column": 0,
+                                            "byte": 0
+                                        },
+                                        "end": {
+                                            "line": 0,
+                                            "column": 0,
+                                            "byte": 0
+                                        }
+                                    },
+                                    "schema": true
+                                }
+                            ]
+                        }
                     }
                 },
-                "schema": {
-                    "items": {
-                        "type": "string"
-                    },
-                    "type": "array"
-                },
-                "builtin": {
-                    "name": "fn::split",
-                    "nameRange": {
+                "threeElements": {
+                    "range": {
                         "environment": "builtin-split-errors",
                         "begin": {
                             "line": 12,
@@ -1446,70 +1672,92 @@
                         },
                         "end": {
                             "line": 12,
-                            "column": 14,
-                            "byte": 221
+                            "column": 40,
+                            "byte": 247
                         }
                     },
-                    "argSchema": {
-                        "prefixItems": [
-                            {
-                                "type": "string"
-                            },
-                            {
-                                "type": "string"
-                            }
-                        ],
-                        "items": false,
+                    "schema": {
+                        "items": {
+                            "type": "string"
+                        },
                         "type": "array"
                     },
-                    "arg": {
-                        "range": {
+                    "builtin": {
+                        "name": "fn::split",
+                        "nameRange": {
                             "environment": "builtin-split-errors",
                             "begin": {
                                 "line": 12,
-                                "column": 16,
-                                "byte": 223
+                                "column": 5,
+                                "byte": 212
                             },
                             "end": {
                                 "line": 12,
-                                "column": 40,
-                                "byte": 247
+                                "column": 14,
+                                "byte": 221
                             }
                         },
-                        "list": [
-                            {
-                                "range": {
-                                    "environment": "builtin-split-errors",
-                                    "begin": {
-                                        "line": 0,
-                                        "column": 0,
-                                        "byte": 0
-                                    },
-                                    "end": {
-                                        "line": 0,
-                                        "column": 0,
-                                        "byte": 0
-                                    }
+                        "argSchema": {
+                            "prefixItems": [
+                                {
+                                    "type": "string"
                                 },
-                                "schema": true
+                                {
+                                    "type": "string"
+                                }
+                            ],
+                            "items": false,
+                            "type": "array"
+                        },
+                        "arg": {
+                            "range": {
+                                "environment": "builtin-split-errors",
+                                "begin": {
+                                    "line": 12,
+                                    "column": 16,
+                                    "byte": 223
+                                },
+                                "end": {
+                                    "line": 12,
+                                    "column": 40,
+                                    "byte": 247
+                                }
                             },
-                            {
-                                "range": {
-                                    "environment": "builtin-split-errors",
-                                    "begin": {
-                                        "line": 0,
-                                        "column": 0,
-                                        "byte": 0
+                            "list": [
+                                {
+                                    "range": {
+                                        "environment": "builtin-split-errors",
+                                        "begin": {
+                                            "line": 0,
+                                            "column": 0,
+                                            "byte": 0
+                                        },
+                                        "end": {
+                                            "line": 0,
+                                            "column": 0,
+                                            "byte": 0
+                                        }
                                     },
-                                    "end": {
-                                        "line": 0,
-                                        "column": 0,
-                                        "byte": 0
-                                    }
+                                    "schema": true
                                 },
-                                "schema": true
-                            }
-                        ]
+                                {
+                                    "range": {
+                                        "environment": "builtin-split-errors",
+                                        "begin": {
+                                            "line": 0,
+                                            "column": 0,
+                                            "byte": 0
+                                        },
+                                        "end": {
+                                            "line": 0,
+                                            "column": 0,
+                                            "byte": 0
+                                        }
+                                    },
+                                    "schema": true
+                                }
+                            ]
+                        }
                     }
                 }
             }

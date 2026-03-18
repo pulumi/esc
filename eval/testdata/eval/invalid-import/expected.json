@@ -26,25 +26,67 @@
     ],
     "check": {
         "exprs": {
-            "foo": {
-                "range": {
+            "range": {
+                "environment": "invalid-import",
+                "begin": {
+                    "line": 4,
+                    "column": 3,
+                    "byte": 24
+                },
+                "end": {
+                    "line": 4,
+                    "column": 11,
+                    "byte": 32
+                }
+            },
+            "schema": {
+                "properties": {
+                    "foo": {
+                        "type": "string",
+                        "const": "bar"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "foo"
+                ]
+            },
+            "keyRanges": {
+                "foo": {
                     "environment": "invalid-import",
                     "begin": {
                         "line": 4,
-                        "column": 8,
-                        "byte": 29
+                        "column": 3,
+                        "byte": 24
                     },
                     "end": {
                         "line": 4,
-                        "column": 11,
-                        "byte": 32
+                        "column": 6,
+                        "byte": 27
                     }
-                },
-                "schema": {
-                    "type": "string",
-                    "const": "bar"
-                },
-                "literal": "bar"
+                }
+            },
+            "object": {
+                "foo": {
+                    "range": {
+                        "environment": "invalid-import",
+                        "begin": {
+                            "line": 4,
+                            "column": 8,
+                            "byte": 29
+                        },
+                        "end": {
+                            "line": 4,
+                            "column": 11,
+                            "byte": 32
+                        }
+                    },
+                    "schema": {
+                        "type": "string",
+                        "const": "bar"
+                    },
+                    "literal": "bar"
+                }
             }
         },
         "properties": {
@@ -273,25 +315,67 @@
     },
     "eval": {
         "exprs": {
-            "foo": {
-                "range": {
+            "range": {
+                "environment": "invalid-import",
+                "begin": {
+                    "line": 4,
+                    "column": 3,
+                    "byte": 24
+                },
+                "end": {
+                    "line": 4,
+                    "column": 11,
+                    "byte": 32
+                }
+            },
+            "schema": {
+                "properties": {
+                    "foo": {
+                        "type": "string",
+                        "const": "bar"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "foo"
+                ]
+            },
+            "keyRanges": {
+                "foo": {
                     "environment": "invalid-import",
                     "begin": {
                         "line": 4,
-                        "column": 8,
-                        "byte": 29
+                        "column": 3,
+                        "byte": 24
                     },
                     "end": {
                         "line": 4,
-                        "column": 11,
-                        "byte": 32
+                        "column": 6,
+                        "byte": 27
                     }
-                },
-                "schema": {
-                    "type": "string",
-                    "const": "bar"
-                },
-                "literal": "bar"
+                }
+            },
+            "object": {
+                "foo": {
+                    "range": {
+                        "environment": "invalid-import",
+                        "begin": {
+                            "line": 4,
+                            "column": 8,
+                            "byte": 29
+                        },
+                        "end": {
+                            "line": 4,
+                            "column": 11,
+                            "byte": 32
+                        }
+                    },
+                    "schema": {
+                        "type": "string",
+                        "const": "bar"
+                    },
+                    "literal": "bar"
+                }
             }
         },
         "properties": {

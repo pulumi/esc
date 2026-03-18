@@ -1,63 +1,93 @@
 {
     "check": {
         "exprs": {
-            "open": {
+            "range": {
+                "environment": "merge-unknown",
+                "begin": {
+                    "line": 4,
+                    "column": 3,
+                    "byte": 25
+                },
+                "end": {
+                    "line": 7,
+                    "column": 15,
+                    "byte": 67
+                }
+            },
+            "schema": {
+                "properties": {
+                    "open": {
+                        "properties": {
+                            "baz": {
+                                "properties": {
+                                    "qux": {
+                                        "type": "string",
+                                        "const": "zed"
+                                    }
+                                },
+                                "type": "object",
+                                "required": [
+                                    "qux"
+                                ]
+                            },
+                            "foo": {
+                                "type": "string",
+                                "const": "bar"
+                            }
+                        },
+                        "type": "object",
+                        "required": [
+                            "baz",
+                            "foo"
+                        ]
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "open"
+                ]
+            },
+            "base": {
                 "range": {
-                    "environment": "merge-unknown",
+                    "environment": "a",
                     "begin": {
-                        "line": 5,
-                        "column": 5,
-                        "byte": 35
+                        "line": 2,
+                        "column": 3,
+                        "byte": 10
                     },
                     "end": {
-                        "line": 7,
+                        "line": 4,
                         "column": 15,
-                        "byte": 67
+                        "byte": 50
                     }
                 },
                 "schema": {
                     "properties": {
-                        "baz": {
-                            "properties": {
-                                "qux": {
-                                    "type": "string",
-                                    "const": "zed"
-                                }
-                            },
-                            "type": "object",
-                            "required": [
-                                "qux"
-                            ]
-                        },
-                        "foo": {
-                            "type": "string",
-                            "const": "bar"
-                        }
+                        "open": true
                     },
                     "type": "object",
                     "required": [
-                        "baz",
-                        "foo"
+                        "open"
                     ]
                 },
-                "base": {
-                    "range": {
+                "keyRanges": {
+                    "open": {
                         "environment": "a",
                         "begin": {
-                            "line": 3,
-                            "column": 5,
-                            "byte": 20
+                            "line": 2,
+                            "column": 3,
+                            "byte": 10
                         },
                         "end": {
-                            "line": 4,
-                            "column": 15,
-                            "byte": 50
+                            "line": 2,
+                            "column": 7,
+                            "byte": 14
                         }
-                    },
-                    "schema": true,
-                    "builtin": {
-                        "name": "fn::open::test",
-                        "nameRange": {
+                    }
+                },
+                "object": {
+                    "open": {
+                        "range": {
                             "environment": "a",
                             "begin": {
                                 "line": 3,
@@ -65,40 +95,30 @@
                                 "byte": 20
                             },
                             "end": {
-                                "line": 3,
-                                "column": 19,
-                                "byte": 34
+                                "line": 4,
+                                "column": 15,
+                                "byte": 50
                             }
                         },
-                        "argSchema": true,
-                        "arg": {
-                            "range": {
+                        "schema": true,
+                        "builtin": {
+                            "name": "fn::open::test",
+                            "nameRange": {
                                 "environment": "a",
                                 "begin": {
-                                    "line": 4,
-                                    "column": 7,
-                                    "byte": 42
+                                    "line": 3,
+                                    "column": 5,
+                                    "byte": 20
                                 },
                                 "end": {
-                                    "line": 4,
-                                    "column": 15,
-                                    "byte": 50
+                                    "line": 3,
+                                    "column": 19,
+                                    "byte": 34
                                 }
                             },
-                            "schema": {
-                                "properties": {
-                                    "baz": {
-                                        "type": "string",
-                                        "const": "qux"
-                                    }
-                                },
-                                "type": "object",
-                                "required": [
-                                    "baz"
-                                ]
-                            },
-                            "keyRanges": {
-                                "baz": {
+                            "argSchema": true,
+                            "arg": {
+                                "range": {
                                     "environment": "a",
                                     "begin": {
                                         "line": 4,
@@ -107,51 +127,82 @@
                                     },
                                     "end": {
                                         "line": 4,
-                                        "column": 10,
-                                        "byte": 45
+                                        "column": 15,
+                                        "byte": 50
                                     }
-                                }
-                            },
-                            "object": {
-                                "baz": {
-                                    "range": {
+                                },
+                                "schema": {
+                                    "properties": {
+                                        "baz": {
+                                            "type": "string",
+                                            "const": "qux"
+                                        }
+                                    },
+                                    "type": "object",
+                                    "required": [
+                                        "baz"
+                                    ]
+                                },
+                                "keyRanges": {
+                                    "baz": {
                                         "environment": "a",
                                         "begin": {
                                             "line": 4,
-                                            "column": 12,
-                                            "byte": 47
+                                            "column": 7,
+                                            "byte": 42
                                         },
                                         "end": {
                                             "line": 4,
-                                            "column": 15,
-                                            "byte": 50
+                                            "column": 10,
+                                            "byte": 45
                                         }
-                                    },
-                                    "schema": {
-                                        "type": "string",
-                                        "const": "qux"
-                                    },
-                                    "literal": "qux"
+                                    }
+                                },
+                                "object": {
+                                    "baz": {
+                                        "range": {
+                                            "environment": "a",
+                                            "begin": {
+                                                "line": 4,
+                                                "column": 12,
+                                                "byte": 47
+                                            },
+                                            "end": {
+                                                "line": 4,
+                                                "column": 15,
+                                                "byte": 50
+                                            }
+                                        },
+                                        "schema": {
+                                            "type": "string",
+                                            "const": "qux"
+                                        },
+                                        "literal": "qux"
+                                    }
                                 }
                             }
                         }
                     }
-                },
-                "keyRanges": {
-                    "baz": {
-                        "environment": "merge-unknown",
-                        "begin": {
-                            "line": 6,
-                            "column": 5,
-                            "byte": 48
-                        },
-                        "end": {
-                            "line": 6,
-                            "column": 8,
-                            "byte": 51
-                        }
+                }
+            },
+            "keyRanges": {
+                "open": {
+                    "environment": "merge-unknown",
+                    "begin": {
+                        "line": 4,
+                        "column": 3,
+                        "byte": 25
                     },
-                    "foo": {
+                    "end": {
+                        "line": 4,
+                        "column": 7,
+                        "byte": 29
+                    }
+                }
+            },
+            "object": {
+                "open": {
+                    "range": {
                         "environment": "merge-unknown",
                         "begin": {
                             "line": 5,
@@ -159,61 +210,74 @@
                             "byte": 35
                         },
                         "end": {
-                            "line": 5,
-                            "column": 8,
-                            "byte": 38
+                            "line": 7,
+                            "column": 15,
+                            "byte": 67
                         }
-                    }
-                },
-                "object": {
-                    "baz": {
-                        "range": {
-                            "environment": "merge-unknown",
-                            "begin": {
-                                "line": 7,
-                                "column": 7,
-                                "byte": 59
+                    },
+                    "schema": {
+                        "properties": {
+                            "baz": {
+                                "properties": {
+                                    "qux": {
+                                        "type": "string",
+                                        "const": "zed"
+                                    }
+                                },
+                                "type": "object",
+                                "required": [
+                                    "qux"
+                                ]
                             },
-                            "end": {
-                                "line": 7,
-                                "column": 15,
-                                "byte": 67
+                            "foo": {
+                                "type": "string",
+                                "const": "bar"
                             }
                         },
-                        "schema": {
-                            "properties": {
-                                "qux": {
-                                    "type": "string",
-                                    "const": "zed"
-                                }
+                        "type": "object",
+                        "required": [
+                            "baz",
+                            "foo"
+                        ]
+                    },
+                    "base": {
+                        "range": {
+                            "environment": "a",
+                            "begin": {
+                                "line": 3,
+                                "column": 5,
+                                "byte": 20
                             },
-                            "type": "object",
-                            "required": [
-                                "qux"
-                            ]
+                            "end": {
+                                "line": 4,
+                                "column": 15,
+                                "byte": 50
+                            }
                         },
-                        "base": {
-                            "range": {
-                                "environment": "merge-unknown",
+                        "schema": true,
+                        "builtin": {
+                            "name": "fn::open::test",
+                            "nameRange": {
+                                "environment": "a",
                                 "begin": {
-                                    "line": 6,
+                                    "line": 3,
                                     "column": 5,
-                                    "byte": 48
+                                    "byte": 20
                                 },
                                 "end": {
-                                    "line": 6,
-                                    "column": 8,
-                                    "byte": 51
+                                    "line": 3,
+                                    "column": 19,
+                                    "byte": 34
                                 }
                             },
-                            "schema": false,
-                            "access": {
-                                "receiver": {
+                            "argSchema": true,
+                            "arg": {
+                                "range": {
                                     "environment": "a",
                                     "begin": {
-                                        "line": 3,
-                                        "column": 5,
-                                        "byte": 20
+                                        "line": 4,
+                                        "column": 7,
+                                        "byte": 42
                                     },
                                     "end": {
                                         "line": 4,
@@ -221,28 +285,89 @@
                                         "byte": 50
                                     }
                                 },
-                                "accessors": [
-                                    {
-                                        "key": "baz",
-                                        "range": {
-                                            "environment": "merge-unknown",
-                                            "begin": {
-                                                "line": 0,
-                                                "column": 0,
-                                                "byte": 0
-                                            },
-                                            "end": {
-                                                "line": 0,
-                                                "column": 0,
-                                                "byte": 0
-                                            }
+                                "schema": {
+                                    "properties": {
+                                        "baz": {
+                                            "type": "string",
+                                            "const": "qux"
+                                        }
+                                    },
+                                    "type": "object",
+                                    "required": [
+                                        "baz"
+                                    ]
+                                },
+                                "keyRanges": {
+                                    "baz": {
+                                        "environment": "a",
+                                        "begin": {
+                                            "line": 4,
+                                            "column": 7,
+                                            "byte": 42
+                                        },
+                                        "end": {
+                                            "line": 4,
+                                            "column": 10,
+                                            "byte": 45
                                         }
                                     }
-                                ]
+                                },
+                                "object": {
+                                    "baz": {
+                                        "range": {
+                                            "environment": "a",
+                                            "begin": {
+                                                "line": 4,
+                                                "column": 12,
+                                                "byte": 47
+                                            },
+                                            "end": {
+                                                "line": 4,
+                                                "column": 15,
+                                                "byte": 50
+                                            }
+                                        },
+                                        "schema": {
+                                            "type": "string",
+                                            "const": "qux"
+                                        },
+                                        "literal": "qux"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "keyRanges": {
+                        "baz": {
+                            "environment": "merge-unknown",
+                            "begin": {
+                                "line": 6,
+                                "column": 5,
+                                "byte": 48
+                            },
+                            "end": {
+                                "line": 6,
+                                "column": 8,
+                                "byte": 51
                             }
                         },
-                        "keyRanges": {
-                            "qux": {
+                        "foo": {
+                            "environment": "merge-unknown",
+                            "begin": {
+                                "line": 5,
+                                "column": 5,
+                                "byte": 35
+                            },
+                            "end": {
+                                "line": 5,
+                                "column": 8,
+                                "byte": 38
+                            }
+                        }
+                    },
+                    "object": {
+                        "baz": {
+                            "range": {
                                 "environment": "merge-unknown",
                                 "begin": {
                                     "line": 7,
@@ -251,167 +376,243 @@
                                 },
                                 "end": {
                                     "line": 7,
-                                    "column": 10,
-                                    "byte": 62
+                                    "column": 15,
+                                    "byte": 67
                                 }
-                            }
-                        },
-                        "object": {
-                            "qux": {
+                            },
+                            "schema": {
+                                "properties": {
+                                    "qux": {
+                                        "type": "string",
+                                        "const": "zed"
+                                    }
+                                },
+                                "type": "object",
+                                "required": [
+                                    "qux"
+                                ]
+                            },
+                            "base": {
                                 "range": {
                                     "environment": "merge-unknown",
                                     "begin": {
+                                        "line": 6,
+                                        "column": 5,
+                                        "byte": 48
+                                    },
+                                    "end": {
+                                        "line": 6,
+                                        "column": 8,
+                                        "byte": 51
+                                    }
+                                },
+                                "schema": false,
+                                "access": {
+                                    "receiver": {
+                                        "environment": "a",
+                                        "begin": {
+                                            "line": 3,
+                                            "column": 5,
+                                            "byte": 20
+                                        },
+                                        "end": {
+                                            "line": 4,
+                                            "column": 15,
+                                            "byte": 50
+                                        }
+                                    },
+                                    "accessors": [
+                                        {
+                                            "key": "baz",
+                                            "range": {
+                                                "environment": "merge-unknown",
+                                                "begin": {
+                                                    "line": 0,
+                                                    "column": 0,
+                                                    "byte": 0
+                                                },
+                                                "end": {
+                                                    "line": 0,
+                                                    "column": 0,
+                                                    "byte": 0
+                                                }
+                                            }
+                                        }
+                                    ]
+                                }
+                            },
+                            "keyRanges": {
+                                "qux": {
+                                    "environment": "merge-unknown",
+                                    "begin": {
                                         "line": 7,
-                                        "column": 12,
-                                        "byte": 64
+                                        "column": 7,
+                                        "byte": 59
                                     },
                                     "end": {
                                         "line": 7,
-                                        "column": 15,
-                                        "byte": 67
+                                        "column": 10,
+                                        "byte": 62
                                     }
-                                },
-                                "schema": {
-                                    "type": "string",
-                                    "const": "zed"
-                                },
-                                "base": {
+                                }
+                            },
+                            "object": {
+                                "qux": {
                                     "range": {
                                         "environment": "merge-unknown",
                                         "begin": {
-                                            "line": 6,
-                                            "column": 5,
-                                            "byte": 48
+                                            "line": 7,
+                                            "column": 12,
+                                            "byte": 64
                                         },
                                         "end": {
-                                            "line": 6,
-                                            "column": 8,
-                                            "byte": 51
+                                            "line": 7,
+                                            "column": 15,
+                                            "byte": 67
                                         }
                                     },
-                                    "schema": false,
-                                    "access": {
-                                        "receiver": {
-                                            "environment": "a",
+                                    "schema": {
+                                        "type": "string",
+                                        "const": "zed"
+                                    },
+                                    "base": {
+                                        "range": {
+                                            "environment": "merge-unknown",
                                             "begin": {
-                                                "line": 3,
+                                                "line": 6,
                                                 "column": 5,
-                                                "byte": 20
+                                                "byte": 48
                                             },
                                             "end": {
-                                                "line": 4,
-                                                "column": 15,
-                                                "byte": 50
+                                                "line": 6,
+                                                "column": 8,
+                                                "byte": 51
                                             }
                                         },
-                                        "accessors": [
-                                            {
-                                                "key": "baz",
-                                                "range": {
-                                                    "environment": "merge-unknown",
-                                                    "begin": {
-                                                        "line": 0,
-                                                        "column": 0,
-                                                        "byte": 0
-                                                    },
-                                                    "end": {
-                                                        "line": 0,
-                                                        "column": 0,
-                                                        "byte": 0
-                                                    }
+                                        "schema": false,
+                                        "access": {
+                                            "receiver": {
+                                                "environment": "a",
+                                                "begin": {
+                                                    "line": 3,
+                                                    "column": 5,
+                                                    "byte": 20
+                                                },
+                                                "end": {
+                                                    "line": 4,
+                                                    "column": 15,
+                                                    "byte": 50
                                                 }
                                             },
-                                            {
-                                                "key": "qux",
-                                                "range": {
-                                                    "environment": "merge-unknown",
-                                                    "begin": {
-                                                        "line": 0,
-                                                        "column": 0,
-                                                        "byte": 0
-                                                    },
-                                                    "end": {
-                                                        "line": 0,
-                                                        "column": 0,
-                                                        "byte": 0
+                                            "accessors": [
+                                                {
+                                                    "key": "baz",
+                                                    "range": {
+                                                        "environment": "merge-unknown",
+                                                        "begin": {
+                                                            "line": 0,
+                                                            "column": 0,
+                                                            "byte": 0
+                                                        },
+                                                        "end": {
+                                                            "line": 0,
+                                                            "column": 0,
+                                                            "byte": 0
+                                                        }
+                                                    }
+                                                },
+                                                {
+                                                    "key": "qux",
+                                                    "range": {
+                                                        "environment": "merge-unknown",
+                                                        "begin": {
+                                                            "line": 0,
+                                                            "column": 0,
+                                                            "byte": 0
+                                                        },
+                                                        "end": {
+                                                            "line": 0,
+                                                            "column": 0,
+                                                            "byte": 0
+                                                        }
                                                     }
                                                 }
-                                            }
-                                        ]
-                                    }
-                                },
-                                "literal": "zed"
-                            }
-                        }
-                    },
-                    "foo": {
-                        "range": {
-                            "environment": "merge-unknown",
-                            "begin": {
-                                "line": 5,
-                                "column": 10,
-                                "byte": 40
-                            },
-                            "end": {
-                                "line": 5,
-                                "column": 13,
-                                "byte": 43
+                                            ]
+                                        }
+                                    },
+                                    "literal": "zed"
+                                }
                             }
                         },
-                        "schema": {
-                            "type": "string",
-                            "const": "bar"
-                        },
-                        "base": {
+                        "foo": {
                             "range": {
                                 "environment": "merge-unknown",
                                 "begin": {
                                     "line": 5,
-                                    "column": 5,
-                                    "byte": 35
+                                    "column": 10,
+                                    "byte": 40
                                 },
                                 "end": {
                                     "line": 5,
-                                    "column": 8,
-                                    "byte": 38
+                                    "column": 13,
+                                    "byte": 43
                                 }
                             },
-                            "schema": false,
-                            "access": {
-                                "receiver": {
-                                    "environment": "a",
+                            "schema": {
+                                "type": "string",
+                                "const": "bar"
+                            },
+                            "base": {
+                                "range": {
+                                    "environment": "merge-unknown",
                                     "begin": {
-                                        "line": 3,
+                                        "line": 5,
                                         "column": 5,
-                                        "byte": 20
+                                        "byte": 35
                                     },
                                     "end": {
-                                        "line": 4,
-                                        "column": 15,
-                                        "byte": 50
+                                        "line": 5,
+                                        "column": 8,
+                                        "byte": 38
                                     }
                                 },
-                                "accessors": [
-                                    {
-                                        "key": "foo",
-                                        "range": {
-                                            "environment": "merge-unknown",
-                                            "begin": {
-                                                "line": 0,
-                                                "column": 0,
-                                                "byte": 0
-                                            },
-                                            "end": {
-                                                "line": 0,
-                                                "column": 0,
-                                                "byte": 0
+                                "schema": false,
+                                "access": {
+                                    "receiver": {
+                                        "environment": "a",
+                                        "begin": {
+                                            "line": 3,
+                                            "column": 5,
+                                            "byte": 20
+                                        },
+                                        "end": {
+                                            "line": 4,
+                                            "column": 15,
+                                            "byte": 50
+                                        }
+                                    },
+                                    "accessors": [
+                                        {
+                                            "key": "foo",
+                                            "range": {
+                                                "environment": "merge-unknown",
+                                                "begin": {
+                                                    "line": 0,
+                                                    "column": 0,
+                                                    "byte": 0
+                                                },
+                                                "end": {
+                                                    "line": 0,
+                                                    "column": 0,
+                                                    "byte": 0
+                                                }
                                             }
                                         }
-                                    }
-                                ]
-                            }
-                        },
-                        "literal": "bar"
+                                    ]
+                                }
+                            },
+                            "literal": "bar"
+                        }
                     }
                 }
             }
@@ -796,74 +997,104 @@
     },
     "eval": {
         "exprs": {
-            "open": {
-                "range": {
-                    "environment": "merge-unknown",
-                    "begin": {
-                        "line": 5,
-                        "column": 5,
-                        "byte": 35
-                    },
-                    "end": {
-                        "line": 7,
-                        "column": 15,
-                        "byte": 67
-                    }
+            "range": {
+                "environment": "merge-unknown",
+                "begin": {
+                    "line": 4,
+                    "column": 3,
+                    "byte": 25
                 },
-                "schema": {
-                    "properties": {
-                        "baz": {
-                            "properties": {
-                                "qux": {
-                                    "type": "string",
-                                    "const": "zed"
-                                }
-                            },
-                            "type": "object",
-                            "required": [
-                                "qux"
-                            ]
-                        },
-                        "foo": {
-                            "type": "string",
-                            "const": "bar"
-                        }
-                    },
-                    "type": "object",
-                    "required": [
-                        "baz",
-                        "foo"
-                    ]
-                },
-                "base": {
-                    "range": {
-                        "environment": "a",
-                        "begin": {
-                            "line": 3,
-                            "column": 5,
-                            "byte": 20
-                        },
-                        "end": {
-                            "line": 4,
-                            "column": 15,
-                            "byte": 50
-                        }
-                    },
-                    "schema": {
+                "end": {
+                    "line": 7,
+                    "column": 15,
+                    "byte": 67
+                }
+            },
+            "schema": {
+                "properties": {
+                    "open": {
                         "properties": {
                             "baz": {
+                                "properties": {
+                                    "qux": {
+                                        "type": "string",
+                                        "const": "zed"
+                                    }
+                                },
+                                "type": "object",
+                                "required": [
+                                    "qux"
+                                ]
+                            },
+                            "foo": {
                                 "type": "string",
-                                "const": "qux"
+                                "const": "bar"
                             }
                         },
                         "type": "object",
                         "required": [
-                            "baz"
+                            "baz",
+                            "foo"
                         ]
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "open"
+                ]
+            },
+            "base": {
+                "range": {
+                    "environment": "a",
+                    "begin": {
+                        "line": 2,
+                        "column": 3,
+                        "byte": 10
                     },
-                    "builtin": {
-                        "name": "fn::open::test",
-                        "nameRange": {
+                    "end": {
+                        "line": 4,
+                        "column": 15,
+                        "byte": 50
+                    }
+                },
+                "schema": {
+                    "properties": {
+                        "open": {
+                            "properties": {
+                                "baz": {
+                                    "type": "string",
+                                    "const": "qux"
+                                }
+                            },
+                            "type": "object",
+                            "required": [
+                                "baz"
+                            ]
+                        }
+                    },
+                    "type": "object",
+                    "required": [
+                        "open"
+                    ]
+                },
+                "keyRanges": {
+                    "open": {
+                        "environment": "a",
+                        "begin": {
+                            "line": 2,
+                            "column": 3,
+                            "byte": 10
+                        },
+                        "end": {
+                            "line": 2,
+                            "column": 7,
+                            "byte": 14
+                        }
+                    }
+                },
+                "object": {
+                    "open": {
+                        "range": {
                             "environment": "a",
                             "begin": {
                                 "line": 3,
@@ -871,40 +1102,41 @@
                                 "byte": 20
                             },
                             "end": {
-                                "line": 3,
-                                "column": 19,
-                                "byte": 34
+                                "line": 4,
+                                "column": 15,
+                                "byte": 50
                             }
                         },
-                        "argSchema": true,
-                        "arg": {
-                            "range": {
-                                "environment": "a",
-                                "begin": {
-                                    "line": 4,
-                                    "column": 7,
-                                    "byte": 42
-                                },
-                                "end": {
-                                    "line": 4,
-                                    "column": 15,
-                                    "byte": 50
+                        "schema": {
+                            "properties": {
+                                "baz": {
+                                    "type": "string",
+                                    "const": "qux"
                                 }
                             },
-                            "schema": {
-                                "properties": {
-                                    "baz": {
-                                        "type": "string",
-                                        "const": "qux"
-                                    }
+                            "type": "object",
+                            "required": [
+                                "baz"
+                            ]
+                        },
+                        "builtin": {
+                            "name": "fn::open::test",
+                            "nameRange": {
+                                "environment": "a",
+                                "begin": {
+                                    "line": 3,
+                                    "column": 5,
+                                    "byte": 20
                                 },
-                                "type": "object",
-                                "required": [
-                                    "baz"
-                                ]
+                                "end": {
+                                    "line": 3,
+                                    "column": 19,
+                                    "byte": 34
+                                }
                             },
-                            "keyRanges": {
-                                "baz": {
+                            "argSchema": true,
+                            "arg": {
+                                "range": {
                                     "environment": "a",
                                     "begin": {
                                         "line": 4,
@@ -913,135 +1145,24 @@
                                     },
                                     "end": {
                                         "line": 4,
-                                        "column": 10,
-                                        "byte": 45
+                                        "column": 15,
+                                        "byte": 50
                                     }
-                                }
-                            },
-                            "object": {
-                                "baz": {
-                                    "range": {
-                                        "environment": "a",
-                                        "begin": {
-                                            "line": 4,
-                                            "column": 12,
-                                            "byte": 47
-                                        },
-                                        "end": {
-                                            "line": 4,
-                                            "column": 15,
-                                            "byte": 50
+                                },
+                                "schema": {
+                                    "properties": {
+                                        "baz": {
+                                            "type": "string",
+                                            "const": "qux"
                                         }
                                     },
-                                    "schema": {
-                                        "type": "string",
-                                        "const": "qux"
-                                    },
-                                    "literal": "qux"
-                                }
-                            }
-                        }
-                    }
-                },
-                "keyRanges": {
-                    "baz": {
-                        "environment": "merge-unknown",
-                        "begin": {
-                            "line": 6,
-                            "column": 5,
-                            "byte": 48
-                        },
-                        "end": {
-                            "line": 6,
-                            "column": 8,
-                            "byte": 51
-                        }
-                    },
-                    "foo": {
-                        "environment": "merge-unknown",
-                        "begin": {
-                            "line": 5,
-                            "column": 5,
-                            "byte": 35
-                        },
-                        "end": {
-                            "line": 5,
-                            "column": 8,
-                            "byte": 38
-                        }
-                    }
-                },
-                "object": {
-                    "baz": {
-                        "range": {
-                            "environment": "merge-unknown",
-                            "begin": {
-                                "line": 7,
-                                "column": 7,
-                                "byte": 59
-                            },
-                            "end": {
-                                "line": 7,
-                                "column": 15,
-                                "byte": 67
-                            }
-                        },
-                        "schema": {
-                            "properties": {
-                                "qux": {
-                                    "type": "string",
-                                    "const": "zed"
-                                }
-                            },
-                            "type": "object",
-                            "required": [
-                                "qux"
-                            ]
-                        },
-                        "base": {
-                            "range": {
-                                "environment": "a",
-                                "begin": {
-                                    "line": 3,
-                                    "column": 5,
-                                    "byte": 20
+                                    "type": "object",
+                                    "required": [
+                                        "baz"
+                                    ]
                                 },
-                                "end": {
-                                    "line": 4,
-                                    "column": 15,
-                                    "byte": 50
-                                }
-                            },
-                            "schema": {
-                                "properties": {
+                                "keyRanges": {
                                     "baz": {
-                                        "type": "string",
-                                        "const": "qux"
-                                    }
-                                },
-                                "type": "object",
-                                "required": [
-                                    "baz"
-                                ]
-                            },
-                            "builtin": {
-                                "name": "fn::open::test",
-                                "nameRange": {
-                                    "environment": "a",
-                                    "begin": {
-                                        "line": 3,
-                                        "column": 5,
-                                        "byte": 20
-                                    },
-                                    "end": {
-                                        "line": 3,
-                                        "column": 19,
-                                        "byte": 34
-                                    }
-                                },
-                                "argSchema": true,
-                                "arg": {
-                                    "range": {
                                         "environment": "a",
                                         "begin": {
                                             "line": 4,
@@ -1050,64 +1171,232 @@
                                         },
                                         "end": {
                                             "line": 4,
-                                            "column": 15,
-                                            "byte": 50
+                                            "column": 10,
+                                            "byte": 45
                                         }
-                                    },
-                                    "schema": {
-                                        "properties": {
-                                            "baz": {
-                                                "type": "string",
-                                                "const": "qux"
-                                            }
-                                        },
-                                        "type": "object",
-                                        "required": [
-                                            "baz"
-                                        ]
-                                    },
-                                    "keyRanges": {
-                                        "baz": {
+                                    }
+                                },
+                                "object": {
+                                    "baz": {
+                                        "range": {
                                             "environment": "a",
                                             "begin": {
                                                 "line": 4,
-                                                "column": 7,
-                                                "byte": 42
+                                                "column": 12,
+                                                "byte": 47
                                             },
                                             "end": {
                                                 "line": 4,
-                                                "column": 10,
-                                                "byte": 45
+                                                "column": 15,
+                                                "byte": 50
                                             }
-                                        }
-                                    },
-                                    "object": {
-                                        "baz": {
-                                            "range": {
-                                                "environment": "a",
-                                                "begin": {
-                                                    "line": 4,
-                                                    "column": 12,
-                                                    "byte": 47
-                                                },
-                                                "end": {
-                                                    "line": 4,
-                                                    "column": 15,
-                                                    "byte": 50
-                                                }
-                                            },
-                                            "schema": {
-                                                "type": "string",
-                                                "const": "qux"
-                                            },
-                                            "literal": "qux"
-                                        }
+                                        },
+                                        "schema": {
+                                            "type": "string",
+                                            "const": "qux"
+                                        },
+                                        "literal": "qux"
                                     }
                                 }
                             }
+                        }
+                    }
+                }
+            },
+            "keyRanges": {
+                "open": {
+                    "environment": "merge-unknown",
+                    "begin": {
+                        "line": 4,
+                        "column": 3,
+                        "byte": 25
+                    },
+                    "end": {
+                        "line": 4,
+                        "column": 7,
+                        "byte": 29
+                    }
+                }
+            },
+            "object": {
+                "open": {
+                    "range": {
+                        "environment": "merge-unknown",
+                        "begin": {
+                            "line": 5,
+                            "column": 5,
+                            "byte": 35
                         },
-                        "keyRanges": {
-                            "qux": {
+                        "end": {
+                            "line": 7,
+                            "column": 15,
+                            "byte": 67
+                        }
+                    },
+                    "schema": {
+                        "properties": {
+                            "baz": {
+                                "properties": {
+                                    "qux": {
+                                        "type": "string",
+                                        "const": "zed"
+                                    }
+                                },
+                                "type": "object",
+                                "required": [
+                                    "qux"
+                                ]
+                            },
+                            "foo": {
+                                "type": "string",
+                                "const": "bar"
+                            }
+                        },
+                        "type": "object",
+                        "required": [
+                            "baz",
+                            "foo"
+                        ]
+                    },
+                    "base": {
+                        "range": {
+                            "environment": "a",
+                            "begin": {
+                                "line": 3,
+                                "column": 5,
+                                "byte": 20
+                            },
+                            "end": {
+                                "line": 4,
+                                "column": 15,
+                                "byte": 50
+                            }
+                        },
+                        "schema": {
+                            "properties": {
+                                "baz": {
+                                    "type": "string",
+                                    "const": "qux"
+                                }
+                            },
+                            "type": "object",
+                            "required": [
+                                "baz"
+                            ]
+                        },
+                        "builtin": {
+                            "name": "fn::open::test",
+                            "nameRange": {
+                                "environment": "a",
+                                "begin": {
+                                    "line": 3,
+                                    "column": 5,
+                                    "byte": 20
+                                },
+                                "end": {
+                                    "line": 3,
+                                    "column": 19,
+                                    "byte": 34
+                                }
+                            },
+                            "argSchema": true,
+                            "arg": {
+                                "range": {
+                                    "environment": "a",
+                                    "begin": {
+                                        "line": 4,
+                                        "column": 7,
+                                        "byte": 42
+                                    },
+                                    "end": {
+                                        "line": 4,
+                                        "column": 15,
+                                        "byte": 50
+                                    }
+                                },
+                                "schema": {
+                                    "properties": {
+                                        "baz": {
+                                            "type": "string",
+                                            "const": "qux"
+                                        }
+                                    },
+                                    "type": "object",
+                                    "required": [
+                                        "baz"
+                                    ]
+                                },
+                                "keyRanges": {
+                                    "baz": {
+                                        "environment": "a",
+                                        "begin": {
+                                            "line": 4,
+                                            "column": 7,
+                                            "byte": 42
+                                        },
+                                        "end": {
+                                            "line": 4,
+                                            "column": 10,
+                                            "byte": 45
+                                        }
+                                    }
+                                },
+                                "object": {
+                                    "baz": {
+                                        "range": {
+                                            "environment": "a",
+                                            "begin": {
+                                                "line": 4,
+                                                "column": 12,
+                                                "byte": 47
+                                            },
+                                            "end": {
+                                                "line": 4,
+                                                "column": 15,
+                                                "byte": 50
+                                            }
+                                        },
+                                        "schema": {
+                                            "type": "string",
+                                            "const": "qux"
+                                        },
+                                        "literal": "qux"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "keyRanges": {
+                        "baz": {
+                            "environment": "merge-unknown",
+                            "begin": {
+                                "line": 6,
+                                "column": 5,
+                                "byte": 48
+                            },
+                            "end": {
+                                "line": 6,
+                                "column": 8,
+                                "byte": 51
+                            }
+                        },
+                        "foo": {
+                            "environment": "merge-unknown",
+                            "begin": {
+                                "line": 5,
+                                "column": 5,
+                                "byte": 35
+                            },
+                            "end": {
+                                "line": 5,
+                                "column": 8,
+                                "byte": 38
+                            }
+                        }
+                    },
+                    "object": {
+                        "baz": {
+                            "range": {
                                 "environment": "merge-unknown",
                                 "begin": {
                                     "line": 7,
@@ -1116,53 +1405,188 @@
                                 },
                                 "end": {
                                     "line": 7,
-                                    "column": 10,
-                                    "byte": 62
+                                    "column": 15,
+                                    "byte": 67
                                 }
-                            }
-                        },
-                        "object": {
-                            "qux": {
+                            },
+                            "schema": {
+                                "properties": {
+                                    "qux": {
+                                        "type": "string",
+                                        "const": "zed"
+                                    }
+                                },
+                                "type": "object",
+                                "required": [
+                                    "qux"
+                                ]
+                            },
+                            "base": {
                                 "range": {
-                                    "environment": "merge-unknown",
+                                    "environment": "a",
                                     "begin": {
-                                        "line": 7,
-                                        "column": 12,
-                                        "byte": 64
+                                        "line": 3,
+                                        "column": 5,
+                                        "byte": 20
                                     },
                                     "end": {
-                                        "line": 7,
+                                        "line": 4,
                                         "column": 15,
-                                        "byte": 67
+                                        "byte": 50
                                     }
                                 },
                                 "schema": {
-                                    "type": "string",
-                                    "const": "zed"
+                                    "properties": {
+                                        "baz": {
+                                            "type": "string",
+                                            "const": "qux"
+                                        }
+                                    },
+                                    "type": "object",
+                                    "required": [
+                                        "baz"
+                                    ]
                                 },
-                                "literal": "zed"
-                            }
-                        }
-                    },
-                    "foo": {
-                        "range": {
-                            "environment": "merge-unknown",
-                            "begin": {
-                                "line": 5,
-                                "column": 10,
-                                "byte": 40
+                                "builtin": {
+                                    "name": "fn::open::test",
+                                    "nameRange": {
+                                        "environment": "a",
+                                        "begin": {
+                                            "line": 3,
+                                            "column": 5,
+                                            "byte": 20
+                                        },
+                                        "end": {
+                                            "line": 3,
+                                            "column": 19,
+                                            "byte": 34
+                                        }
+                                    },
+                                    "argSchema": true,
+                                    "arg": {
+                                        "range": {
+                                            "environment": "a",
+                                            "begin": {
+                                                "line": 4,
+                                                "column": 7,
+                                                "byte": 42
+                                            },
+                                            "end": {
+                                                "line": 4,
+                                                "column": 15,
+                                                "byte": 50
+                                            }
+                                        },
+                                        "schema": {
+                                            "properties": {
+                                                "baz": {
+                                                    "type": "string",
+                                                    "const": "qux"
+                                                }
+                                            },
+                                            "type": "object",
+                                            "required": [
+                                                "baz"
+                                            ]
+                                        },
+                                        "keyRanges": {
+                                            "baz": {
+                                                "environment": "a",
+                                                "begin": {
+                                                    "line": 4,
+                                                    "column": 7,
+                                                    "byte": 42
+                                                },
+                                                "end": {
+                                                    "line": 4,
+                                                    "column": 10,
+                                                    "byte": 45
+                                                }
+                                            }
+                                        },
+                                        "object": {
+                                            "baz": {
+                                                "range": {
+                                                    "environment": "a",
+                                                    "begin": {
+                                                        "line": 4,
+                                                        "column": 12,
+                                                        "byte": 47
+                                                    },
+                                                    "end": {
+                                                        "line": 4,
+                                                        "column": 15,
+                                                        "byte": 50
+                                                    }
+                                                },
+                                                "schema": {
+                                                    "type": "string",
+                                                    "const": "qux"
+                                                },
+                                                "literal": "qux"
+                                            }
+                                        }
+                                    }
+                                }
                             },
-                            "end": {
-                                "line": 5,
-                                "column": 13,
-                                "byte": 43
+                            "keyRanges": {
+                                "qux": {
+                                    "environment": "merge-unknown",
+                                    "begin": {
+                                        "line": 7,
+                                        "column": 7,
+                                        "byte": 59
+                                    },
+                                    "end": {
+                                        "line": 7,
+                                        "column": 10,
+                                        "byte": 62
+                                    }
+                                }
+                            },
+                            "object": {
+                                "qux": {
+                                    "range": {
+                                        "environment": "merge-unknown",
+                                        "begin": {
+                                            "line": 7,
+                                            "column": 12,
+                                            "byte": 64
+                                        },
+                                        "end": {
+                                            "line": 7,
+                                            "column": 15,
+                                            "byte": 67
+                                        }
+                                    },
+                                    "schema": {
+                                        "type": "string",
+                                        "const": "zed"
+                                    },
+                                    "literal": "zed"
+                                }
                             }
                         },
-                        "schema": {
-                            "type": "string",
-                            "const": "bar"
-                        },
-                        "literal": "bar"
+                        "foo": {
+                            "range": {
+                                "environment": "merge-unknown",
+                                "begin": {
+                                    "line": 5,
+                                    "column": 10,
+                                    "byte": 40
+                                },
+                                "end": {
+                                    "line": 5,
+                                    "column": 13,
+                                    "byte": 43
+                                }
+                            },
+                            "schema": {
+                                "type": "string",
+                                "const": "bar"
+                            },
+                            "literal": "bar"
+                        }
                     }
                 }
             }

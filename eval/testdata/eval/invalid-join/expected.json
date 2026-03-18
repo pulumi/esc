@@ -26,26 +26,66 @@
     ],
     "check": {
         "exprs": {
-            "join": {
-                "range": {
-                    "environment": "invalid-join",
-                    "begin": {
-                        "line": 3,
-                        "column": 5,
-                        "byte": 20
+            "range": {
+                "environment": "invalid-join",
+                "begin": {
+                    "line": 2,
+                    "column": 3,
+                    "byte": 10
+                },
+                "end": {
+                    "line": 4,
+                    "column": 15,
+                    "byte": 49
+                }
+            },
+            "schema": {
+                "properties": {
+                    "join": {
+                        "type": "string"
                     },
-                    "end": {
-                        "line": 3,
-                        "column": 19,
-                        "byte": 34
+                    "other": {
+                        "type": "string",
+                        "const": "value"
                     }
                 },
-                "schema": {
-                    "type": "string"
+                "type": "object",
+                "required": [
+                    "join",
+                    "other"
+                ]
+            },
+            "keyRanges": {
+                "join": {
+                    "environment": "invalid-join",
+                    "begin": {
+                        "line": 2,
+                        "column": 3,
+                        "byte": 10
+                    },
+                    "end": {
+                        "line": 2,
+                        "column": 7,
+                        "byte": 14
+                    }
                 },
-                "builtin": {
-                    "name": "fn::join",
-                    "nameRange": {
+                "other": {
+                    "environment": "invalid-join",
+                    "begin": {
+                        "line": 4,
+                        "column": 3,
+                        "byte": 37
+                    },
+                    "end": {
+                        "line": 4,
+                        "column": 8,
+                        "byte": 42
+                    }
+                }
+            },
+            "object": {
+                "join": {
+                    "range": {
                         "environment": "invalid-join",
                         "begin": {
                             "line": 3,
@@ -54,95 +94,114 @@
                         },
                         "end": {
                             "line": 3,
-                            "column": 13,
-                            "byte": 28
+                            "column": 19,
+                            "byte": 34
                         }
                     },
-                    "argSchema": {
-                        "prefixItems": [
-                            {
-                                "type": "string"
-                            },
-                            {
-                                "items": {
-                                    "type": "string"
-                                },
-                                "type": "array"
-                            }
-                        ],
-                        "items": false,
-                        "type": "array"
+                    "schema": {
+                        "type": "string"
                     },
-                    "arg": {
-                        "range": {
+                    "builtin": {
+                        "name": "fn::join",
+                        "nameRange": {
                             "environment": "invalid-join",
                             "begin": {
                                 "line": 3,
-                                "column": 15,
-                                "byte": 30
+                                "column": 5,
+                                "byte": 20
                             },
                             "end": {
                                 "line": 3,
-                                "column": 19,
-                                "byte": 34
+                                "column": 13,
+                                "byte": 28
                             }
                         },
-                        "list": [
-                            {
-                                "range": {
-                                    "environment": "invalid-join",
-                                    "begin": {
-                                        "line": 0,
-                                        "column": 0,
-                                        "byte": 0
-                                    },
-                                    "end": {
-                                        "line": 0,
-                                        "column": 0,
-                                        "byte": 0
-                                    }
+                        "argSchema": {
+                            "prefixItems": [
+                                {
+                                    "type": "string"
                                 },
-                                "schema": true
+                                {
+                                    "items": {
+                                        "type": "string"
+                                    },
+                                    "type": "array"
+                                }
+                            ],
+                            "items": false,
+                            "type": "array"
+                        },
+                        "arg": {
+                            "range": {
+                                "environment": "invalid-join",
+                                "begin": {
+                                    "line": 3,
+                                    "column": 15,
+                                    "byte": 30
+                                },
+                                "end": {
+                                    "line": 3,
+                                    "column": 19,
+                                    "byte": 34
+                                }
                             },
-                            {
-                                "range": {
-                                    "environment": "invalid-join",
-                                    "begin": {
-                                        "line": 0,
-                                        "column": 0,
-                                        "byte": 0
+                            "list": [
+                                {
+                                    "range": {
+                                        "environment": "invalid-join",
+                                        "begin": {
+                                            "line": 0,
+                                            "column": 0,
+                                            "byte": 0
+                                        },
+                                        "end": {
+                                            "line": 0,
+                                            "column": 0,
+                                            "byte": 0
+                                        }
                                     },
-                                    "end": {
-                                        "line": 0,
-                                        "column": 0,
-                                        "byte": 0
-                                    }
+                                    "schema": true
                                 },
-                                "schema": true
-                            }
-                        ]
+                                {
+                                    "range": {
+                                        "environment": "invalid-join",
+                                        "begin": {
+                                            "line": 0,
+                                            "column": 0,
+                                            "byte": 0
+                                        },
+                                        "end": {
+                                            "line": 0,
+                                            "column": 0,
+                                            "byte": 0
+                                        }
+                                    },
+                                    "schema": true
+                                }
+                            ]
+                        }
                     }
-                }
-            },
-            "other": {
-                "range": {
-                    "environment": "invalid-join",
-                    "begin": {
-                        "line": 4,
-                        "column": 10,
-                        "byte": 44
+                },
+                "other": {
+                    "range": {
+                        "environment": "invalid-join",
+                        "begin": {
+                            "line": 4,
+                            "column": 10,
+                            "byte": 44
+                        },
+                        "end": {
+                            "line": 4,
+                            "column": 15,
+                            "byte": 49
+                        }
                     },
-                    "end": {
-                        "line": 4,
-                        "column": 15,
-                        "byte": 49
-                    }
-                },
-                "schema": {
-                    "type": "string",
-                    "const": "value"
-                },
-                "literal": "value"
+                    "schema": {
+                        "type": "string",
+                        "const": "value"
+                    },
+                    "literal": "value"
+                }
             }
         },
         "properties": {
@@ -394,26 +453,66 @@
     },
     "eval": {
         "exprs": {
-            "join": {
-                "range": {
-                    "environment": "invalid-join",
-                    "begin": {
-                        "line": 3,
-                        "column": 5,
-                        "byte": 20
+            "range": {
+                "environment": "invalid-join",
+                "begin": {
+                    "line": 2,
+                    "column": 3,
+                    "byte": 10
+                },
+                "end": {
+                    "line": 4,
+                    "column": 15,
+                    "byte": 49
+                }
+            },
+            "schema": {
+                "properties": {
+                    "join": {
+                        "type": "string"
                     },
-                    "end": {
-                        "line": 3,
-                        "column": 19,
-                        "byte": 34
+                    "other": {
+                        "type": "string",
+                        "const": "value"
                     }
                 },
-                "schema": {
-                    "type": "string"
+                "type": "object",
+                "required": [
+                    "join",
+                    "other"
+                ]
+            },
+            "keyRanges": {
+                "join": {
+                    "environment": "invalid-join",
+                    "begin": {
+                        "line": 2,
+                        "column": 3,
+                        "byte": 10
+                    },
+                    "end": {
+                        "line": 2,
+                        "column": 7,
+                        "byte": 14
+                    }
                 },
-                "builtin": {
-                    "name": "fn::join",
-                    "nameRange": {
+                "other": {
+                    "environment": "invalid-join",
+                    "begin": {
+                        "line": 4,
+                        "column": 3,
+                        "byte": 37
+                    },
+                    "end": {
+                        "line": 4,
+                        "column": 8,
+                        "byte": 42
+                    }
+                }
+            },
+            "object": {
+                "join": {
+                    "range": {
                         "environment": "invalid-join",
                         "begin": {
                             "line": 3,
@@ -422,95 +521,114 @@
                         },
                         "end": {
                             "line": 3,
-                            "column": 13,
-                            "byte": 28
+                            "column": 19,
+                            "byte": 34
                         }
                     },
-                    "argSchema": {
-                        "prefixItems": [
-                            {
-                                "type": "string"
-                            },
-                            {
-                                "items": {
-                                    "type": "string"
-                                },
-                                "type": "array"
-                            }
-                        ],
-                        "items": false,
-                        "type": "array"
+                    "schema": {
+                        "type": "string"
                     },
-                    "arg": {
-                        "range": {
+                    "builtin": {
+                        "name": "fn::join",
+                        "nameRange": {
                             "environment": "invalid-join",
                             "begin": {
                                 "line": 3,
-                                "column": 15,
-                                "byte": 30
+                                "column": 5,
+                                "byte": 20
                             },
                             "end": {
                                 "line": 3,
-                                "column": 19,
-                                "byte": 34
+                                "column": 13,
+                                "byte": 28
                             }
                         },
-                        "list": [
-                            {
-                                "range": {
-                                    "environment": "invalid-join",
-                                    "begin": {
-                                        "line": 0,
-                                        "column": 0,
-                                        "byte": 0
-                                    },
-                                    "end": {
-                                        "line": 0,
-                                        "column": 0,
-                                        "byte": 0
-                                    }
+                        "argSchema": {
+                            "prefixItems": [
+                                {
+                                    "type": "string"
                                 },
-                                "schema": true
+                                {
+                                    "items": {
+                                        "type": "string"
+                                    },
+                                    "type": "array"
+                                }
+                            ],
+                            "items": false,
+                            "type": "array"
+                        },
+                        "arg": {
+                            "range": {
+                                "environment": "invalid-join",
+                                "begin": {
+                                    "line": 3,
+                                    "column": 15,
+                                    "byte": 30
+                                },
+                                "end": {
+                                    "line": 3,
+                                    "column": 19,
+                                    "byte": 34
+                                }
                             },
-                            {
-                                "range": {
-                                    "environment": "invalid-join",
-                                    "begin": {
-                                        "line": 0,
-                                        "column": 0,
-                                        "byte": 0
+                            "list": [
+                                {
+                                    "range": {
+                                        "environment": "invalid-join",
+                                        "begin": {
+                                            "line": 0,
+                                            "column": 0,
+                                            "byte": 0
+                                        },
+                                        "end": {
+                                            "line": 0,
+                                            "column": 0,
+                                            "byte": 0
+                                        }
                                     },
-                                    "end": {
-                                        "line": 0,
-                                        "column": 0,
-                                        "byte": 0
-                                    }
+                                    "schema": true
                                 },
-                                "schema": true
-                            }
-                        ]
+                                {
+                                    "range": {
+                                        "environment": "invalid-join",
+                                        "begin": {
+                                            "line": 0,
+                                            "column": 0,
+                                            "byte": 0
+                                        },
+                                        "end": {
+                                            "line": 0,
+                                            "column": 0,
+                                            "byte": 0
+                                        }
+                                    },
+                                    "schema": true
+                                }
+                            ]
+                        }
                     }
-                }
-            },
-            "other": {
-                "range": {
-                    "environment": "invalid-join",
-                    "begin": {
-                        "line": 4,
-                        "column": 10,
-                        "byte": 44
+                },
+                "other": {
+                    "range": {
+                        "environment": "invalid-join",
+                        "begin": {
+                            "line": 4,
+                            "column": 10,
+                            "byte": 44
+                        },
+                        "end": {
+                            "line": 4,
+                            "column": 15,
+                            "byte": 49
+                        }
                     },
-                    "end": {
-                        "line": 4,
-                        "column": 15,
-                        "byte": 49
-                    }
-                },
-                "schema": {
-                    "type": "string",
-                    "const": "value"
-                },
-                "literal": "value"
+                    "schema": {
+                        "type": "string",
+                        "const": "value"
+                    },
+                    "literal": "value"
+                }
             }
         },
         "properties": {

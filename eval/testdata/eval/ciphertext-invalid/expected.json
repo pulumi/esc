@@ -26,26 +26,48 @@
     ],
     "check": {
         "exprs": {
-            "password": {
-                "range": {
-                    "environment": "ciphertext-invalid",
-                    "begin": {
-                        "line": 3,
-                        "column": 5,
-                        "byte": 24
-                    },
-                    "end": {
-                        "line": 4,
-                        "column": 27,
-                        "byte": 62
+            "range": {
+                "environment": "ciphertext-invalid",
+                "begin": {
+                    "line": 2,
+                    "column": 3,
+                    "byte": 10
+                },
+                "end": {
+                    "line": 4,
+                    "column": 27,
+                    "byte": 62
+                }
+            },
+            "schema": {
+                "properties": {
+                    "password": {
+                        "type": "string"
                     }
                 },
-                "schema": {
-                    "type": "string"
-                },
-                "builtin": {
-                    "name": "fn::secret",
-                    "nameRange": {
+                "type": "object",
+                "required": [
+                    "password"
+                ]
+            },
+            "keyRanges": {
+                "password": {
+                    "environment": "ciphertext-invalid",
+                    "begin": {
+                        "line": 2,
+                        "column": 3,
+                        "byte": 10
+                    },
+                    "end": {
+                        "line": 2,
+                        "column": 11,
+                        "byte": 18
+                    }
+                }
+            },
+            "object": {
+                "password": {
+                    "range": {
                         "environment": "ciphertext-invalid",
                         "begin": {
                             "line": 3,
@@ -53,46 +75,65 @@
                             "byte": 24
                         },
                         "end": {
-                            "line": 3,
-                            "column": 15,
-                            "byte": 34
+                            "line": 4,
+                            "column": 27,
+                            "byte": 62
                         }
                     },
-                    "argSchema": true,
-                    "arg": {
-                        "range": {
+                    "schema": {
+                        "type": "string"
+                    },
+                    "builtin": {
+                        "name": "fn::secret",
+                        "nameRange": {
                             "environment": "ciphertext-invalid",
                             "begin": {
-                                "line": 4,
-                                "column": 7,
-                                "byte": 42
+                                "line": 3,
+                                "column": 5,
+                                "byte": 24
                             },
                             "end": {
-                                "line": 4,
-                                "column": 27,
-                                "byte": 62
+                                "line": 3,
+                                "column": 15,
+                                "byte": 34
                             }
                         },
-                        "object": {
-                            "ciphertext": {
-                                "range": {
-                                    "environment": "ciphertext-invalid",
-                                    "begin": {
-                                        "line": 4,
-                                        "column": 19,
-                                        "byte": 54
+                        "argSchema": true,
+                        "arg": {
+                            "range": {
+                                "environment": "ciphertext-invalid",
+                                "begin": {
+                                    "line": 4,
+                                    "column": 7,
+                                    "byte": 42
+                                },
+                                "end": {
+                                    "line": 4,
+                                    "column": 27,
+                                    "byte": 62
+                                }
+                            },
+                            "object": {
+                                "ciphertext": {
+                                    "range": {
+                                        "environment": "ciphertext-invalid",
+                                        "begin": {
+                                            "line": 4,
+                                            "column": 19,
+                                            "byte": 54
+                                        },
+                                        "end": {
+                                            "line": 4,
+                                            "column": 27,
+                                            "byte": 62
+                                        }
                                     },
-                                    "end": {
-                                        "line": 4,
-                                        "column": 27,
-                                        "byte": 62
-                                    }
-                                },
-                                "schema": {
-                                    "type": "string",
-                                    "const": "hunter23"
-                                },
-                                "literal": "hunter23"
+                                    "schema": {
+                                        "type": "string",
+                                        "const": "hunter23"
+                                    },
+                                    "literal": "hunter23"
+                                }
                             }
                         }
                     }
@@ -350,26 +391,48 @@
     ],
     "eval": {
         "exprs": {
-            "password": {
-                "range": {
-                    "environment": "ciphertext-invalid",
-                    "begin": {
-                        "line": 3,
-                        "column": 5,
-                        "byte": 24
-                    },
-                    "end": {
-                        "line": 4,
-                        "column": 27,
-                        "byte": 62
+            "range": {
+                "environment": "ciphertext-invalid",
+                "begin": {
+                    "line": 2,
+                    "column": 3,
+                    "byte": 10
+                },
+                "end": {
+                    "line": 4,
+                    "column": 27,
+                    "byte": 62
+                }
+            },
+            "schema": {
+                "properties": {
+                    "password": {
+                        "type": "string"
                     }
                 },
-                "schema": {
-                    "type": "string"
-                },
-                "builtin": {
-                    "name": "fn::secret",
-                    "nameRange": {
+                "type": "object",
+                "required": [
+                    "password"
+                ]
+            },
+            "keyRanges": {
+                "password": {
+                    "environment": "ciphertext-invalid",
+                    "begin": {
+                        "line": 2,
+                        "column": 3,
+                        "byte": 10
+                    },
+                    "end": {
+                        "line": 2,
+                        "column": 11,
+                        "byte": 18
+                    }
+                }
+            },
+            "object": {
+                "password": {
+                    "range": {
                         "environment": "ciphertext-invalid",
                         "begin": {
                             "line": 3,
@@ -377,46 +440,65 @@
                             "byte": 24
                         },
                         "end": {
-                            "line": 3,
-                            "column": 15,
-                            "byte": 34
+                            "line": 4,
+                            "column": 27,
+                            "byte": 62
                         }
                     },
-                    "argSchema": true,
-                    "arg": {
-                        "range": {
+                    "schema": {
+                        "type": "string"
+                    },
+                    "builtin": {
+                        "name": "fn::secret",
+                        "nameRange": {
                             "environment": "ciphertext-invalid",
                             "begin": {
-                                "line": 4,
-                                "column": 7,
-                                "byte": 42
+                                "line": 3,
+                                "column": 5,
+                                "byte": 24
                             },
                             "end": {
-                                "line": 4,
-                                "column": 27,
-                                "byte": 62
+                                "line": 3,
+                                "column": 15,
+                                "byte": 34
                             }
                         },
-                        "object": {
-                            "ciphertext": {
-                                "range": {
-                                    "environment": "ciphertext-invalid",
-                                    "begin": {
-                                        "line": 4,
-                                        "column": 19,
-                                        "byte": 54
+                        "argSchema": true,
+                        "arg": {
+                            "range": {
+                                "environment": "ciphertext-invalid",
+                                "begin": {
+                                    "line": 4,
+                                    "column": 7,
+                                    "byte": 42
+                                },
+                                "end": {
+                                    "line": 4,
+                                    "column": 27,
+                                    "byte": 62
+                                }
+                            },
+                            "object": {
+                                "ciphertext": {
+                                    "range": {
+                                        "environment": "ciphertext-invalid",
+                                        "begin": {
+                                            "line": 4,
+                                            "column": 19,
+                                            "byte": 54
+                                        },
+                                        "end": {
+                                            "line": 4,
+                                            "column": 27,
+                                            "byte": 62
+                                        }
                                     },
-                                    "end": {
-                                        "line": 4,
-                                        "column": 27,
-                                        "byte": 62
-                                    }
-                                },
-                                "schema": {
-                                    "type": "string",
-                                    "const": "hunter23"
-                                },
-                                "literal": "hunter23"
+                                    "schema": {
+                                        "type": "string",
+                                        "const": "hunter23"
+                                    },
+                                    "literal": "hunter23"
+                                }
                             }
                         }
                     }
