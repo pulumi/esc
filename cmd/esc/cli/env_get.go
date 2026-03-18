@@ -329,7 +329,7 @@ func (get *envGetCommand) getEnvironmentMember(
 	definitionYAML := ""
 	if valuesNode, ok := (encoding.YAMLSyntax{Node: &docNode}.Get(resource.PropertyPath{"values"})); ok {
 		if node, _ := (encoding.YAMLSyntax{Node: valuesNode}.Get(path)); node != nil {
-			expr, ok := getEnvExpr(esc.Expr{Object: env.Exprs}, path)
+			expr, ok := getEnvExpr(*env.Exprs, path)
 			if !ok {
 				return nil, fmt.Errorf("internal error: no expr for path %v", path)
 			}
