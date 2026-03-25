@@ -3342,7 +3342,7 @@
                 }
             },
             "interp": {
-                "value": "hello, \"a\"=\"\",\"b\"=\"true\",\"baz\"=\"qux\",\"c\"=\"42\",\"d\"=\"\\\"hello\\\"\"",
+                "value": "hello, \"a\"=\"\",\"b\"=\"true\",\"baz\"=\"qux\",\"c\"=\"42\",\"d\"=\"hello\"",
                 "trace": {
                     "def": {
                         "environment": "omnibus",
@@ -3815,7 +3815,7 @@
                 }
             },
             "toString": {
-                "value": "\"a\"=\"\",\"b\"=\"true\",\"baz\"=\"qux\",\"c\"=\"42\",\"d\"=\"\\\"hello\\\"\"",
+                "value": "\"a\"=\"\",\"b\"=\"true\",\"baz\"=\"qux\",\"c\"=\"42\",\"d\"=\"hello\"",
                 "trace": {
                     "def": {
                         "environment": "omnibus",
@@ -4220,7 +4220,7 @@
             ],
             "foo": "bar"
         },
-        "interp": "hello, \"a\"=\"\",\"b\"=\"true\",\"baz\"=\"qux\",\"c\"=\"42\",\"d\"=\"\\\"hello\\\"\"",
+        "interp": "hello, \"a\"=\"\",\"b\"=\"true\",\"baz\"=\"qux\",\"c\"=\"42\",\"d\"=\"hello\"",
         "join": "hello,world",
         "open": {
             "a": null,
@@ -4249,7 +4249,7 @@
         ],
         "toBase64": "aGVsbG8sd29ybGQ=",
         "toJSON": "{\"a\":null,\"b\":true,\"baz\":\"qux\",\"c\":42,\"d\":[\"hello\"],\"foo\":\"bar\"}",
-        "toString": "\"a\"=\"\",\"b\"=\"true\",\"baz\"=\"qux\",\"c\"=\"42\",\"d\"=\"\\\"hello\\\"\""
+        "toString": "\"a\"=\"\",\"b\"=\"true\",\"baz\"=\"qux\",\"c\"=\"42\",\"d\"=\"hello\""
     },
     "evalJSONRevealed": {
         "access": "qux",
@@ -4264,7 +4264,7 @@
             ],
             "foo": "bar"
         },
-        "interp": "hello, \"a\"=\"\",\"b\"=\"true\",\"baz\"=\"qux\",\"c\"=\"42\",\"d\"=\"\\\"hello\\\"\"",
+        "interp": "hello, \"a\"=\"\",\"b\"=\"true\",\"baz\"=\"qux\",\"c\"=\"42\",\"d\"=\"hello\"",
         "join": "hello,world",
         "open": {
             "a": null,
@@ -4293,6 +4293,6 @@
         ],
         "toBase64": "aGVsbG8sd29ybGQ=",
         "toJSON": "{\"a\":null,\"b\":true,\"baz\":\"qux\",\"c\":42,\"d\":[\"hello\"],\"foo\":\"bar\"}",
-        "toString": "\"a\"=\"\",\"b\"=\"true\",\"baz\"=\"qux\",\"c\"=\"42\",\"d\"=\"\\\"hello\\\"\""
+        "toString": "\"a\"=\"\",\"b\"=\"true\",\"baz\"=\"qux\",\"c\"=\"42\",\"d\"=\"hello\""
     }
 }

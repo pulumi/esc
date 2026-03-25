@@ -279,6 +279,20 @@ func (v *value) merge(base *value) {
 	v.schema = mergedSchema(v.base.schema, v.schema)
 }
 
+// isComplex returns true if the value's representation is a complex type (array or map)
+// that already includes its own quoting when converted to a string.
+func (v *value) isComplex() bool {
+	if v.unknown {
+		return false
+	}
+	switch v.repr.(type) {
+	case []*value, map[string]*value:
+		return true
+	default:
+		return false
+	}
+}
+
 // toString returns the string representation of this value, whether the string is known, and whether the string is
 // secret.
 func (v *value) toString() (str string, unknown bool, secret bool) {
@@ -302,7 +316,12 @@ func (v *value) toString() (str string, unknown bool, secret bool) {
 		vals := make([]string, len(repr))
 		for i, v := range repr {
 			vs, vunknown, vsecret := v.toString()
-			vals[i], unknown, secret = strconv.Quote(vs), unknown || vunknown, secret || vsecret
+			unknown, secret = unknown || vunknown, secret || vsecret
+			if v.isComplex() {
+				vals[i] = vs
+			} else {
+				vals[i] = strconv.Quote(vs)
+			}
 		}
 		s = strings.Join(vals, ",")
 	case map[string]*value:
@@ -312,7 +331,12 @@ func (v *value) toString() (str string, unknown bool, secret bool) {
 		pairs := make([]string, len(repr))
 		for i, k := range keys {
 			vs, vunknown, vsecret := repr[k].toString()
-			pairs[i], unknown, secret = fmt.Sprintf("%q=%q", k, vs), unknown || vunknown, secret || vsecret
+			unknown, secret = unknown || vunknown, secret || vsecret
+			if repr[k].isComplex() {
+				pairs[i] = fmt.Sprintf("%q=%s", k, vs)
+			} else {
+				pairs[i] = fmt.Sprintf("%q=%q", k, vs)
+			}
 		}
 		s = strings.Join(pairs, ",")
 	}
