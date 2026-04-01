@@ -676,12 +676,13 @@ func (c *testPulumiClient) UpdateEnvironmentWithRevision(
 		return nil, 0, errors.New("etag mismatch")
 	}
 
-	_, diags, err := c.checkEnvironment(ctx, orgName, envName, yaml, nil)
+	envId := projectName + "/" + envName
+	_, diags, err := c.checkEnvironment(ctx, orgName, envId, yaml, nil)
 	if err == nil && !client.DiagnosticsHaveErrors(diags) {
 		h := fnv.New32()
 		h.Write(yaml)
 
-		yaml, err = eval.EncryptSecrets(ctx, envName, yaml, rot128{})
+		yaml, err = eval.EncryptSecrets(ctx, envId, yaml, rot128{})
 		if err != nil {
 			return nil, 0, err
 		}
@@ -720,7 +721,8 @@ func (c *testPulumiClient) CreateEnvironmentDraft(
 		return "", nil, errors.New("etag mismatch")
 	}
 
-	_, diags, err := c.checkEnvironment(ctx, orgName, envName, yaml, nil)
+	envId := projectName + "/" + envName
+	_, diags, err := c.checkEnvironment(ctx, orgName, envId, yaml, nil)
 	if err != nil || len(diags) != 0 {
 		return "", diags, nil
 	}

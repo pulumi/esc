@@ -30,7 +30,7 @@ values:
 > esc env edit default/test -f=-
 Warning: duplicate key "values"
 
-  on test line 3:
+  on default/test line 3:
    3: values:
 
 > esc env get default/test

@@ -81,7 +81,7 @@ func newEnvEditCmd(env *envCommand) *cobra.Command {
 				}
 
 				if len(diags) != 0 {
-					err = edit.env.writeYAMLEnvironmentDiagnostics(edit.env.esc.stderr, ref.envName, yaml, diags)
+					err = edit.env.writeYAMLEnvironmentDiagnostics(edit.env.esc.stderr, ref.projectName+"/"+ref.envName, yaml, diags)
 					contract.IgnoreError(err)
 				}
 				if client.DiagnosticsHaveErrors(diags) {
@@ -136,7 +136,7 @@ func newEnvEditCmd(env *envCommand) *cobra.Command {
 				}
 
 				if len(diags) != 0 {
-					err = edit.env.writeYAMLEnvironmentDiagnostics(edit.env.esc.stderr, ref.envName, newYAML, diags)
+					err = edit.env.writeYAMLEnvironmentDiagnostics(edit.env.esc.stderr, ref.projectName+"/"+ref.envName, newYAML, diags)
 					contract.IgnoreError(err)
 				}
 				if !client.DiagnosticsHaveErrors(diags) {
