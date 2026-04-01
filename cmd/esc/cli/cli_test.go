@@ -25,6 +25,7 @@ import (
 	"time"
 
 	"github.com/gofrs/uuid"
+	"github.com/hashicorp/hcl/v2"
 	"github.com/pgavlin/fx/v2"
 	"github.com/pgavlin/fx/v2/maps"
 	"github.com/pulumi/esc"
@@ -388,10 +389,16 @@ func mapDiags(diags syntax.Diagnostics) []client.EnvironmentDiagnostic {
 			}
 		}
 
+		severity := client.DiagError
+		if d.Severity == hcl.DiagWarning {
+			severity = client.DiagWarning
+		}
+
 		out[i] = client.EnvironmentDiagnostic{
-			Range:   rng,
-			Summary: d.Summary,
-			Detail:  d.Detail,
+			Range:    rng,
+			Summary:  d.Summary,
+			Detail:   d.Detail,
+			Severity: severity,
 		}
 	}
 	return out
@@ -670,7 +677,7 @@ func (c *testPulumiClient) UpdateEnvironmentWithRevision(
 	}
 
 	_, diags, err := c.checkEnvironment(ctx, orgName, envName, yaml, nil)
-	if err == nil && len(diags) == 0 {
+	if err == nil && !client.DiagnosticsHaveErrors(diags) {
 		h := fnv.New32()
 		h.Write(yaml)
 
