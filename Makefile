@@ -8,15 +8,15 @@ GO := go
 .phony: .EXPORT_ALL_VARIABLES
 .EXPORT_ALL_VARIABLES:
 
-default: ensure build
+default: ensure build ## Build the project (default)
 
-install::
+install:: ## Install all commands
 	${GO} install ./cmd/...
 
-clean::
+clean:: ## Remove build artifacts
 	rm -f ./bin/*
 
-ensure::
+ensure:: ## Download Go module dependencies
 	${GO} mod download
 
 .phony: lint
@@ -27,20 +27,28 @@ lint-copyright:
 	pulumictl copyright
 
 .phony: format
-format:
+format: ## Format all Go source files
 	find . -iname "*.go" -print0 | xargs -r0 gofmt -s -w
 
-build:: ensure
+.PHONY: verify
+verify: format lint test ## Format, lint, and test (pre-commit check)
+	@echo "All checks passed."
+
+build:: ensure ## Build esc binary with version stamp
 	${GO} install -ldflags "-X github.com/pulumi/esc/cmd/esc/cli/version.Version=${VERSION}" ./cmd/esc
 
 build_debug:: ensure
 	${GO} install -gcflags="all=-N -l" -ldflags "-X github.com/pulumi/esc/cmd/esc/cli/version.Version=${VERSION}" ./cmd/esc
 
-test:: build
+test:: build ## Run tests (short mode, parallel)
 	${GO} test --timeout 30m -short -count 1 -parallel ${CONCURRENCY} ./...
 
-test_cover:: build
+test_cover:: build ## Run tests with coverage and race detection
 	${GO} test --timeout 30m -count 1 -coverpkg=github.com/pulumi/esc/... -race -coverprofile=coverage.out -parallel ${CONCURRENCY} ./...
+
+.PHONY: help
+help: ## Show available targets
+	@grep -E '^[a-zA-Z_-]+:.*?##' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "  %-25s %s\n", $$1, $$2}'
 
 .PHONY: generate_go_client_sdk
 generate_go_client_sdk:
