@@ -192,6 +192,13 @@ func (x *expr) export(environment string) esc.Expr {
 			ArgSchema: schema.Always().Schema(),
 			Arg:       repr.string.export(environment),
 		}
+	case *fromYAMLExpr:
+		ex.Builtin = &esc.BuiltinExpr{
+			Name:      repr.node.Name().Value,
+			NameRange: convertRange(repr.node.Name().Syntax().Syntax().Range(), environment),
+			ArgSchema: schema.Always().Schema(),
+			Arg:       repr.string.export(environment),
+		}
 	case *concatExpr:
 		ex.Builtin = &esc.BuiltinExpr{
 			Name:      repr.node.Name().Value,
@@ -307,6 +314,13 @@ func (x *expr) export(environment string) esc.Expr {
 			Arg:       repr.value.export(environment),
 		}
 	case *toJSONExpr:
+		ex.Builtin = &esc.BuiltinExpr{
+			Name:      repr.node.Name().Value,
+			NameRange: convertRange(repr.node.Name().Syntax().Syntax().Range(), environment),
+			ArgSchema: schema.Always().Schema(),
+			Arg:       repr.value.export(environment),
+		}
+	case *toYAMLExpr:
 		ex.Builtin = &esc.BuiltinExpr{
 			Name:      repr.node.Name().Value,
 			NameRange: convertRange(repr.node.Name().Syntax().Syntax().Range(), environment),
@@ -484,6 +498,17 @@ func (x *toJSONExpr) syntax() ast.Expr {
 	return x.node
 }
 
+// toYAMLExpr represents a call to the fn::toYAML builtin.
+type toYAMLExpr struct {
+	node *ast.ToYAMLExpr
+
+	value *expr
+}
+
+func (x *toYAMLExpr) syntax() ast.Expr {
+	return x.node
+}
+
 // fromJSONExpr represents a call from the fn::fromJSON builtin.
 type fromJSONExpr struct {
 	node *ast.FromJSONExpr
@@ -492,6 +517,17 @@ type fromJSONExpr struct {
 }
 
 func (x *fromJSONExpr) syntax() ast.Expr {
+	return x.node
+}
+
+// fromYAMLExpr represents a call to the fn::fromYAML builtin.
+type fromYAMLExpr struct {
+	node *ast.FromYAMLExpr
+
+	string *expr
+}
+
+func (x *fromYAMLExpr) syntax() ast.Expr {
 	return x.node
 }
 
