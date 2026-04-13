@@ -37,7 +37,8 @@ type EnvironmentDiagnostic struct {
 }
 
 func (d EnvironmentDiagnostic) IsError() bool {
-	return d.Severity != DiagWarning
+	// Empty severity means error for backward compatibility.
+	return d.Severity == DiagError || d.Severity == ""
 }
 
 func DiagnosticsHaveErrors(diags []EnvironmentDiagnostic) bool {
