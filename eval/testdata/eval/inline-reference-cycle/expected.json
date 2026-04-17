@@ -25,6 +25,205 @@
         }
     ],
     "check": {
+        "exprs": {
+            "range": {
+                "environment": "inline-reference-cycle",
+                "begin": {
+                    "line": 0,
+                    "column": 0,
+                    "byte": 0
+                },
+                "end": {
+                    "line": 0,
+                    "column": 0,
+                    "byte": 0
+                }
+            },
+            "schema": {
+                "properties": {
+                    "cycle": true
+                },
+                "type": "object",
+                "required": [
+                    "cycle"
+                ]
+            },
+            "base": {
+                "range": {
+                    "environment": "bad/bad",
+                    "begin": {
+                        "line": 2,
+                        "column": 3,
+                        "byte": 0
+                    },
+                    "end": {
+                        "line": 2,
+                        "column": 39,
+                        "byte": 0
+                    }
+                },
+                "schema": {
+                    "properties": {
+                        "cycle": true
+                    },
+                    "type": "object",
+                    "required": [
+                        "cycle"
+                    ]
+                },
+                "keyRanges": {
+                    "cycle": {
+                        "environment": "bad/bad",
+                        "begin": {
+                            "line": 2,
+                            "column": 3,
+                            "byte": 0
+                        },
+                        "end": {
+                            "line": 2,
+                            "column": 8,
+                            "byte": 0
+                        }
+                    }
+                },
+                "object": {
+                    "cycle": {
+                        "range": {
+                            "environment": "bad/bad",
+                            "begin": {
+                                "line": 2,
+                                "column": 10,
+                                "byte": 0
+                            },
+                            "end": {
+                                "line": 2,
+                                "column": 39,
+                                "byte": 0
+                            }
+                        },
+                        "schema": true,
+                        "symbol": [
+                            {
+                                "key": "environments",
+                                "range": {
+                                    "environment": "bad/bad",
+                                    "begin": {
+                                        "line": 2,
+                                        "column": 12,
+                                        "byte": 2
+                                    },
+                                    "end": {
+                                        "line": 2,
+                                        "column": 24,
+                                        "byte": 14
+                                    }
+                                },
+                                "value": {
+                                    "environment": "bad/bad",
+                                    "begin": {
+                                        "line": 2,
+                                        "column": 10,
+                                        "byte": 0
+                                    },
+                                    "end": {
+                                        "line": 2,
+                                        "column": 39,
+                                        "byte": 0
+                                    }
+                                }
+                            },
+                            {
+                                "key": "bad",
+                                "range": {
+                                    "environment": "bad/bad",
+                                    "begin": {
+                                        "line": 2,
+                                        "column": 24,
+                                        "byte": 14
+                                    },
+                                    "end": {
+                                        "line": 2,
+                                        "column": 28,
+                                        "byte": 18
+                                    }
+                                },
+                                "value": {
+                                    "environment": "bad/bad",
+                                    "begin": {
+                                        "line": 2,
+                                        "column": 10,
+                                        "byte": 0
+                                    },
+                                    "end": {
+                                        "line": 2,
+                                        "column": 39,
+                                        "byte": 0
+                                    }
+                                }
+                            },
+                            {
+                                "key": "bad",
+                                "range": {
+                                    "environment": "bad/bad",
+                                    "begin": {
+                                        "line": 2,
+                                        "column": 28,
+                                        "byte": 18
+                                    },
+                                    "end": {
+                                        "line": 2,
+                                        "column": 32,
+                                        "byte": 22
+                                    }
+                                },
+                                "value": {
+                                    "environment": "inline-reference-cycle",
+                                    "begin": {
+                                        "line": 0,
+                                        "column": 0,
+                                        "byte": 0
+                                    },
+                                    "end": {
+                                        "line": 0,
+                                        "column": 0,
+                                        "byte": 0
+                                    }
+                                }
+                            },
+                            {
+                                "key": "cycle",
+                                "range": {
+                                    "environment": "bad/bad",
+                                    "begin": {
+                                        "line": 2,
+                                        "column": 32,
+                                        "byte": 22
+                                    },
+                                    "end": {
+                                        "line": 2,
+                                        "column": 38,
+                                        "byte": 28
+                                    }
+                                },
+                                "value": {
+                                    "environment": "bad/bad",
+                                    "begin": {
+                                        "line": 2,
+                                        "column": 10,
+                                        "byte": 0
+                                    },
+                                    "end": {
+                                        "line": 2,
+                                        "column": 39,
+                                        "byte": 0
+                                    }
+                                }
+                            }
+                        ]
+                    }
+                }
+            }
+        },
         "properties": {
             "cycle": {
                 "unknown": true,
@@ -272,6 +471,205 @@
         }
     ],
     "eval": {
+        "exprs": {
+            "range": {
+                "environment": "inline-reference-cycle",
+                "begin": {
+                    "line": 0,
+                    "column": 0,
+                    "byte": 0
+                },
+                "end": {
+                    "line": 0,
+                    "column": 0,
+                    "byte": 0
+                }
+            },
+            "schema": {
+                "properties": {
+                    "cycle": true
+                },
+                "type": "object",
+                "required": [
+                    "cycle"
+                ]
+            },
+            "base": {
+                "range": {
+                    "environment": "bad/bad",
+                    "begin": {
+                        "line": 2,
+                        "column": 3,
+                        "byte": 0
+                    },
+                    "end": {
+                        "line": 2,
+                        "column": 39,
+                        "byte": 0
+                    }
+                },
+                "schema": {
+                    "properties": {
+                        "cycle": true
+                    },
+                    "type": "object",
+                    "required": [
+                        "cycle"
+                    ]
+                },
+                "keyRanges": {
+                    "cycle": {
+                        "environment": "bad/bad",
+                        "begin": {
+                            "line": 2,
+                            "column": 3,
+                            "byte": 0
+                        },
+                        "end": {
+                            "line": 2,
+                            "column": 8,
+                            "byte": 0
+                        }
+                    }
+                },
+                "object": {
+                    "cycle": {
+                        "range": {
+                            "environment": "bad/bad",
+                            "begin": {
+                                "line": 2,
+                                "column": 10,
+                                "byte": 0
+                            },
+                            "end": {
+                                "line": 2,
+                                "column": 39,
+                                "byte": 0
+                            }
+                        },
+                        "schema": true,
+                        "symbol": [
+                            {
+                                "key": "environments",
+                                "range": {
+                                    "environment": "bad/bad",
+                                    "begin": {
+                                        "line": 2,
+                                        "column": 12,
+                                        "byte": 2
+                                    },
+                                    "end": {
+                                        "line": 2,
+                                        "column": 24,
+                                        "byte": 14
+                                    }
+                                },
+                                "value": {
+                                    "environment": "bad/bad",
+                                    "begin": {
+                                        "line": 2,
+                                        "column": 10,
+                                        "byte": 0
+                                    },
+                                    "end": {
+                                        "line": 2,
+                                        "column": 39,
+                                        "byte": 0
+                                    }
+                                }
+                            },
+                            {
+                                "key": "bad",
+                                "range": {
+                                    "environment": "bad/bad",
+                                    "begin": {
+                                        "line": 2,
+                                        "column": 24,
+                                        "byte": 14
+                                    },
+                                    "end": {
+                                        "line": 2,
+                                        "column": 28,
+                                        "byte": 18
+                                    }
+                                },
+                                "value": {
+                                    "environment": "bad/bad",
+                                    "begin": {
+                                        "line": 2,
+                                        "column": 10,
+                                        "byte": 0
+                                    },
+                                    "end": {
+                                        "line": 2,
+                                        "column": 39,
+                                        "byte": 0
+                                    }
+                                }
+                            },
+                            {
+                                "key": "bad",
+                                "range": {
+                                    "environment": "bad/bad",
+                                    "begin": {
+                                        "line": 2,
+                                        "column": 28,
+                                        "byte": 18
+                                    },
+                                    "end": {
+                                        "line": 2,
+                                        "column": 32,
+                                        "byte": 22
+                                    }
+                                },
+                                "value": {
+                                    "environment": "inline-reference-cycle",
+                                    "begin": {
+                                        "line": 0,
+                                        "column": 0,
+                                        "byte": 0
+                                    },
+                                    "end": {
+                                        "line": 0,
+                                        "column": 0,
+                                        "byte": 0
+                                    }
+                                }
+                            },
+                            {
+                                "key": "cycle",
+                                "range": {
+                                    "environment": "bad/bad",
+                                    "begin": {
+                                        "line": 2,
+                                        "column": 32,
+                                        "byte": 22
+                                    },
+                                    "end": {
+                                        "line": 2,
+                                        "column": 38,
+                                        "byte": 28
+                                    }
+                                },
+                                "value": {
+                                    "environment": "bad/bad",
+                                    "begin": {
+                                        "line": 2,
+                                        "column": 10,
+                                        "byte": 0
+                                    },
+                                    "end": {
+                                        "line": 2,
+                                        "column": 39,
+                                        "byte": 0
+                                    }
+                                }
+                            }
+                        ]
+                    }
+                }
+            }
+        },
         "properties": {
             "cycle": {
                 "unknown": true,

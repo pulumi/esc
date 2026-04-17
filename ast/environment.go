@@ -196,7 +196,7 @@ type EnvironmentDecl struct {
 
 	Description *StringExpr
 	Imports     ImportListDecl
-	Values      PropertyMapDecl
+	Values      *ObjectExpr
 }
 
 func (d *EnvironmentDecl) Syntax() syntax.Node {
@@ -222,7 +222,7 @@ func (d *EnvironmentDecl) NewDiagnosticWriter(w io.Writer, width uint, color boo
 	return newDiagnosticWriter(w, fileMap, width, color)
 }
 
-func EnvironmentSyntax(node *syntax.ObjectNode, description *StringExpr, imports ImportListDecl, values PropertyMapDecl) *EnvironmentDecl {
+func EnvironmentSyntax(node *syntax.ObjectNode, description *StringExpr, imports ImportListDecl, values *ObjectExpr) *EnvironmentDecl {
 	return &EnvironmentDecl{
 		syntax:      node,
 		Description: description,
@@ -231,7 +231,7 @@ func EnvironmentSyntax(node *syntax.ObjectNode, description *StringExpr, imports
 	}
 }
 
-func Environment(description *StringExpr, imports ImportListDecl, values PropertyMapDecl) *EnvironmentDecl {
+func Environment(description *StringExpr, imports ImportListDecl, values *ObjectExpr) *EnvironmentDecl {
 	return EnvironmentSyntax(nil, description, imports, values)
 }
 
@@ -295,7 +295,11 @@ func parseField(name string, dest reflect.Value, node syntax.Node) syntax.Diagno
 
 		xv := reflect.ValueOf(x)
 		if !xv.Type().AssignableTo(dest.Type()) {
-			diags.Extend(exprFieldTypeMismatchError(name, dest.Interface(), x))
+			if b, ok := x.(BuiltinExpr); ok {
+				diags.Extend(ExprError(x, fmt.Sprintf("builtin function call %q not allowed at the top level", b.Name().Value)))
+			} else {
+				diags.Extend(exprFieldTypeMismatchError(name, dest.Interface(), x))
+			}
 			v = reflect.New(dest.Type().Elem())
 		} else {
 			v = xv

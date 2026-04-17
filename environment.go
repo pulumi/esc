@@ -164,8 +164,8 @@ type EvaluatedExecutionContext struct {
 
 // An Environment contains the result of evaluating an environment definition.
 type Environment struct {
-	// Exprs contains the AST for each expression in the environment definition.
-	Exprs map[string]Expr `json:"exprs,omitempty"`
+	// Exprs contains the AST for the root object expression.
+	Exprs *Expr `json:"exprs,omitempty"`
 
 	// Properties contains the detailed values produced by the environment.
 	Properties map[string]Value `json:"properties,omitempty"`

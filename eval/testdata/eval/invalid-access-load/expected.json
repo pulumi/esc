@@ -488,788 +488,843 @@
     ],
     "check": {
         "exprs": {
-            "propertyAccessTest": {
-                "range": {
+            "range": {
+                "environment": "invalid-access-load",
+                "begin": {
+                    "line": 2,
+                    "column": 3,
+                    "byte": 10
+                },
+                "end": {
+                    "line": 13,
+                    "column": 14,
+                    "byte": 214
+                }
+            },
+            "schema": {
+                "properties": {
+                    "propertyAccessTest": {
+                        "prefixItems": [
+                            true,
+                            true,
+                            true,
+                            true,
+                            true,
+                            true,
+                            true,
+                            true,
+                            true,
+                            true,
+                            true
+                        ],
+                        "items": false,
+                        "type": "array"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "propertyAccessTest"
+                ]
+            },
+            "keyRanges": {
+                "propertyAccessTest": {
                     "environment": "invalid-access-load",
                     "begin": {
-                        "line": 3,
-                        "column": 5,
-                        "byte": 34
+                        "line": 2,
+                        "column": 3,
+                        "byte": 10
                     },
                     "end": {
-                        "line": 13,
-                        "column": 14,
-                        "byte": 214
+                        "line": 2,
+                        "column": 21,
+                        "byte": 28
                     }
-                },
-                "schema": {
-                    "prefixItems": [
-                        true,
-                        true,
-                        true,
-                        true,
-                        true,
-                        true,
-                        true,
-                        true,
-                        true,
-                        true,
-                        true
-                    ],
-                    "items": false,
-                    "type": "array"
-                },
-                "list": [
-                    {
-                        "range": {
-                            "environment": "invalid-access-load",
-                            "begin": {
-                                "line": 3,
-                                "column": 7,
-                                "byte": 36
-                            },
-                            "end": {
-                                "line": 3,
-                                "column": 9,
-                                "byte": 38
-                            }
+                }
+            },
+            "object": {
+                "propertyAccessTest": {
+                    "range": {
+                        "environment": "invalid-access-load",
+                        "begin": {
+                            "line": 3,
+                            "column": 5,
+                            "byte": 34
                         },
-                        "schema": true,
-                        "symbol": [
-                            {
-                                "key": "",
-                                "range": {
-                                    "environment": "invalid-access-load",
-                                    "begin": {
-                                        "line": 3,
-                                        "column": 9,
-                                        "byte": 38
-                                    },
-                                    "end": {
-                                        "line": 3,
-                                        "column": 9,
-                                        "byte": 38
-                                    }
-                                },
-                                "value": {
-                                    "environment": "invalid-access-load",
-                                    "begin": {
-                                        "line": 3,
-                                        "column": 7,
-                                        "byte": 36
-                                    },
-                                    "end": {
-                                        "line": 3,
-                                        "column": 9,
-                                        "byte": 38
-                                    }
-                                }
-                            }
-                        ]
+                        "end": {
+                            "line": 13,
+                            "column": 14,
+                            "byte": 214
+                        }
                     },
-                    {
-                        "range": {
-                            "environment": "invalid-access-load",
-                            "begin": {
-                                "line": 4,
-                                "column": 7,
-                                "byte": 45
-                            },
-                            "end": {
-                                "line": 4,
-                                "column": 20,
-                                "byte": 58
-                            }
-                        },
-                        "schema": true,
-                        "symbol": [
-                            {
-                                "key": "open",
-                                "range": {
-                                    "environment": "invalid-access-load",
-                                    "begin": {
-                                        "line": 4,
-                                        "column": 9,
-                                        "byte": 47
-                                    },
-                                    "end": {
-                                        "line": 4,
-                                        "column": 13,
-                                        "byte": 51
-                                    }
-                                },
-                                "value": {
-                                    "environment": "invalid-access-load",
-                                    "begin": {
-                                        "line": 4,
-                                        "column": 7,
-                                        "byte": 45
-                                    },
-                                    "end": {
-                                        "line": 4,
-                                        "column": 20,
-                                        "byte": 58
-                                    }
-                                }
-                            },
-                            {
-                                "key": "foo",
-                                "range": {
-                                    "environment": "invalid-access-load",
-                                    "begin": {
-                                        "line": 4,
-                                        "column": 13,
-                                        "byte": 51
-                                    },
-                                    "end": {
-                                        "line": 4,
-                                        "column": 19,
-                                        "byte": 57
-                                    }
-                                },
-                                "value": {
-                                    "environment": "invalid-access-load",
-                                    "begin": {
-                                        "line": 4,
-                                        "column": 7,
-                                        "byte": 45
-                                    },
-                                    "end": {
-                                        "line": 4,
-                                        "column": 20,
-                                        "byte": 58
-                                    }
-                                }
-                            }
-                        ]
+                    "schema": {
+                        "prefixItems": [
+                            true,
+                            true,
+                            true,
+                            true,
+                            true,
+                            true,
+                            true,
+                            true,
+                            true,
+                            true,
+                            true
+                        ],
+                        "items": false,
+                        "type": "array"
                     },
-                    {
-                        "range": {
-                            "environment": "invalid-access-load",
-                            "begin": {
-                                "line": 5,
-                                "column": 7,
-                                "byte": 65
+                    "list": [
+                        {
+                            "range": {
+                                "environment": "invalid-access-load",
+                                "begin": {
+                                    "line": 3,
+                                    "column": 7,
+                                    "byte": 36
+                                },
+                                "end": {
+                                    "line": 3,
+                                    "column": 9,
+                                    "byte": 38
+                                }
                             },
-                            "end": {
-                                "line": 5,
-                                "column": 20,
-                                "byte": 78
-                            }
+                            "schema": true,
+                            "symbol": [
+                                {
+                                    "key": "",
+                                    "range": {
+                                        "environment": "invalid-access-load",
+                                        "begin": {
+                                            "line": 3,
+                                            "column": 9,
+                                            "byte": 38
+                                        },
+                                        "end": {
+                                            "line": 3,
+                                            "column": 9,
+                                            "byte": 38
+                                        }
+                                    },
+                                    "value": {
+                                        "environment": "invalid-access-load",
+                                        "begin": {
+                                            "line": 3,
+                                            "column": 7,
+                                            "byte": 36
+                                        },
+                                        "end": {
+                                            "line": 3,
+                                            "column": 9,
+                                            "byte": 38
+                                        }
+                                    }
+                                }
+                            ]
                         },
-                        "schema": true,
-                        "symbol": [
-                            {
-                                "key": "open",
-                                "range": {
-                                    "environment": "invalid-access-load",
-                                    "begin": {
-                                        "line": 5,
-                                        "column": 9,
-                                        "byte": 67
-                                    },
-                                    "end": {
-                                        "line": 5,
-                                        "column": 13,
-                                        "byte": 71
-                                    }
+                        {
+                            "range": {
+                                "environment": "invalid-access-load",
+                                "begin": {
+                                    "line": 4,
+                                    "column": 7,
+                                    "byte": 45
                                 },
-                                "value": {
-                                    "environment": "invalid-access-load",
-                                    "begin": {
-                                        "line": 5,
-                                        "column": 7,
-                                        "byte": 65
-                                    },
-                                    "end": {
-                                        "line": 5,
-                                        "column": 20,
-                                        "byte": 78
-                                    }
+                                "end": {
+                                    "line": 4,
+                                    "column": 20,
+                                    "byte": 58
                                 }
                             },
-                            {
-                                "key": "foo]}",
-                                "range": {
-                                    "environment": "invalid-access-load",
-                                    "begin": {
-                                        "line": 5,
-                                        "column": 13,
-                                        "byte": 71
+                            "schema": true,
+                            "symbol": [
+                                {
+                                    "key": "open",
+                                    "range": {
+                                        "environment": "invalid-access-load",
+                                        "begin": {
+                                            "line": 4,
+                                            "column": 9,
+                                            "byte": 47
+                                        },
+                                        "end": {
+                                            "line": 4,
+                                            "column": 13,
+                                            "byte": 51
+                                        }
                                     },
-                                    "end": {
-                                        "line": 5,
-                                        "column": 20,
-                                        "byte": 78
+                                    "value": {
+                                        "environment": "invalid-access-load",
+                                        "begin": {
+                                            "line": 4,
+                                            "column": 7,
+                                            "byte": 45
+                                        },
+                                        "end": {
+                                            "line": 4,
+                                            "column": 20,
+                                            "byte": 58
+                                        }
                                     }
                                 },
-                                "value": {
-                                    "environment": "invalid-access-load",
-                                    "begin": {
-                                        "line": 5,
-                                        "column": 7,
-                                        "byte": 65
+                                {
+                                    "key": "foo",
+                                    "range": {
+                                        "environment": "invalid-access-load",
+                                        "begin": {
+                                            "line": 4,
+                                            "column": 13,
+                                            "byte": 51
+                                        },
+                                        "end": {
+                                            "line": 4,
+                                            "column": 19,
+                                            "byte": 57
+                                        }
                                     },
-                                    "end": {
-                                        "line": 5,
-                                        "column": 20,
-                                        "byte": 78
+                                    "value": {
+                                        "environment": "invalid-access-load",
+                                        "begin": {
+                                            "line": 4,
+                                            "column": 7,
+                                            "byte": 45
+                                        },
+                                        "end": {
+                                            "line": 4,
+                                            "column": 20,
+                                            "byte": 58
+                                        }
                                     }
                                 }
-                            }
-                        ]
-                    },
-                    {
-                        "range": {
-                            "environment": "invalid-access-load",
-                            "begin": {
-                                "line": 6,
-                                "column": 7,
-                                "byte": 85
-                            },
-                            "end": {
-                                "line": 6,
-                                "column": 20,
-                                "byte": 98
-                            }
+                            ]
                         },
-                        "schema": true,
-                        "symbol": [
-                            {
-                                "key": "open",
-                                "range": {
-                                    "environment": "invalid-access-load",
-                                    "begin": {
-                                        "line": 6,
-                                        "column": 9,
-                                        "byte": 87
-                                    },
-                                    "end": {
-                                        "line": 6,
-                                        "column": 13,
-                                        "byte": 91
-                                    }
+                        {
+                            "range": {
+                                "environment": "invalid-access-load",
+                                "begin": {
+                                    "line": 5,
+                                    "column": 7,
+                                    "byte": 65
                                 },
-                                "value": {
-                                    "environment": "invalid-access-load",
-                                    "begin": {
-                                        "line": 6,
-                                        "column": 7,
-                                        "byte": 85
-                                    },
-                                    "end": {
-                                        "line": 6,
-                                        "column": 20,
-                                        "byte": 98
-                                    }
+                                "end": {
+                                    "line": 5,
+                                    "column": 20,
+                                    "byte": 78
                                 }
                             },
-                            {
-                                "key": "foo",
-                                "range": {
-                                    "environment": "invalid-access-load",
-                                    "begin": {
-                                        "line": 6,
-                                        "column": 13,
-                                        "byte": 91
+                            "schema": true,
+                            "symbol": [
+                                {
+                                    "key": "open",
+                                    "range": {
+                                        "environment": "invalid-access-load",
+                                        "begin": {
+                                            "line": 5,
+                                            "column": 9,
+                                            "byte": 67
+                                        },
+                                        "end": {
+                                            "line": 5,
+                                            "column": 13,
+                                            "byte": 71
+                                        }
                                     },
-                                    "end": {
-                                        "line": 6,
-                                        "column": 20,
-                                        "byte": 98
+                                    "value": {
+                                        "environment": "invalid-access-load",
+                                        "begin": {
+                                            "line": 5,
+                                            "column": 7,
+                                            "byte": 65
+                                        },
+                                        "end": {
+                                            "line": 5,
+                                            "column": 20,
+                                            "byte": 78
+                                        }
                                     }
                                 },
-                                "value": {
-                                    "environment": "invalid-access-load",
-                                    "begin": {
-                                        "line": 6,
-                                        "column": 7,
-                                        "byte": 85
+                                {
+                                    "key": "foo]}",
+                                    "range": {
+                                        "environment": "invalid-access-load",
+                                        "begin": {
+                                            "line": 5,
+                                            "column": 13,
+                                            "byte": 71
+                                        },
+                                        "end": {
+                                            "line": 5,
+                                            "column": 20,
+                                            "byte": 78
+                                        }
                                     },
-                                    "end": {
-                                        "line": 6,
-                                        "column": 20,
-                                        "byte": 98
+                                    "value": {
+                                        "environment": "invalid-access-load",
+                                        "begin": {
+                                            "line": 5,
+                                            "column": 7,
+                                            "byte": 65
+                                        },
+                                        "end": {
+                                            "line": 5,
+                                            "column": 20,
+                                            "byte": 78
+                                        }
                                     }
                                 }
-                            }
-                        ]
-                    },
-                    {
-                        "range": {
-                            "environment": "invalid-access-load",
-                            "begin": {
-                                "line": 7,
-                                "column": 7,
-                                "byte": 105
-                            },
-                            "end": {
-                                "line": 7,
-                                "column": 17,
-                                "byte": 115
-                            }
+                            ]
                         },
-                        "schema": true,
-                        "symbol": [
-                            {
-                                "key": "array",
-                                "range": {
-                                    "environment": "invalid-access-load",
-                                    "begin": {
-                                        "line": 7,
-                                        "column": 9,
-                                        "byte": 107
-                                    },
-                                    "end": {
-                                        "line": 7,
-                                        "column": 14,
-                                        "byte": 112
-                                    }
+                        {
+                            "range": {
+                                "environment": "invalid-access-load",
+                                "begin": {
+                                    "line": 6,
+                                    "column": 7,
+                                    "byte": 85
                                 },
-                                "value": {
-                                    "environment": "invalid-access-load",
-                                    "begin": {
-                                        "line": 7,
-                                        "column": 7,
-                                        "byte": 105
-                                    },
-                                    "end": {
-                                        "line": 7,
-                                        "column": 17,
-                                        "byte": 115
-                                    }
+                                "end": {
+                                    "line": 6,
+                                    "column": 20,
+                                    "byte": 98
                                 }
                             },
-                            {
-                                "index": 1,
-                                "range": {
-                                    "environment": "invalid-access-load",
-                                    "begin": {
-                                        "line": 7,
-                                        "column": 14,
-                                        "byte": 112
+                            "schema": true,
+                            "symbol": [
+                                {
+                                    "key": "open",
+                                    "range": {
+                                        "environment": "invalid-access-load",
+                                        "begin": {
+                                            "line": 6,
+                                            "column": 9,
+                                            "byte": 87
+                                        },
+                                        "end": {
+                                            "line": 6,
+                                            "column": 13,
+                                            "byte": 91
+                                        }
                                     },
-                                    "end": {
-                                        "line": 7,
-                                        "column": 16,
-                                        "byte": 114
+                                    "value": {
+                                        "environment": "invalid-access-load",
+                                        "begin": {
+                                            "line": 6,
+                                            "column": 7,
+                                            "byte": 85
+                                        },
+                                        "end": {
+                                            "line": 6,
+                                            "column": 20,
+                                            "byte": 98
+                                        }
                                     }
                                 },
-                                "value": {
-                                    "environment": "invalid-access-load",
-                                    "begin": {
-                                        "line": 7,
-                                        "column": 7,
-                                        "byte": 105
+                                {
+                                    "key": "foo",
+                                    "range": {
+                                        "environment": "invalid-access-load",
+                                        "begin": {
+                                            "line": 6,
+                                            "column": 13,
+                                            "byte": 91
+                                        },
+                                        "end": {
+                                            "line": 6,
+                                            "column": 20,
+                                            "byte": 98
+                                        }
                                     },
-                                    "end": {
-                                        "line": 7,
-                                        "column": 17,
-                                        "byte": 115
+                                    "value": {
+                                        "environment": "invalid-access-load",
+                                        "begin": {
+                                            "line": 6,
+                                            "column": 7,
+                                            "byte": 85
+                                        },
+                                        "end": {
+                                            "line": 6,
+                                            "column": 20,
+                                            "byte": 98
+                                        }
                                     }
                                 }
-                            }
-                        ]
-                    },
-                    {
-                        "range": {
-                            "environment": "invalid-access-load",
-                            "begin": {
-                                "line": 8,
-                                "column": 7,
-                                "byte": 122
-                            },
-                            "end": {
-                                "line": 8,
-                                "column": 27,
-                                "byte": 142
-                            }
+                            ]
                         },
-                        "schema": true,
-                        "symbol": [
-                            {
-                                "key": "array",
-                                "range": {
-                                    "environment": "invalid-access-load",
-                                    "begin": {
-                                        "line": 8,
-                                        "column": 9,
-                                        "byte": 124
-                                    },
-                                    "end": {
-                                        "line": 8,
-                                        "column": 14,
-                                        "byte": 129
-                                    }
+                        {
+                            "range": {
+                                "environment": "invalid-access-load",
+                                "begin": {
+                                    "line": 7,
+                                    "column": 7,
+                                    "byte": 105
                                 },
-                                "value": {
-                                    "environment": "invalid-access-load",
-                                    "begin": {
-                                        "line": 8,
-                                        "column": 7,
-                                        "byte": 122
-                                    },
-                                    "end": {
-                                        "line": 8,
-                                        "column": 27,
-                                        "byte": 142
-                                    }
+                                "end": {
+                                    "line": 7,
+                                    "column": 17,
+                                    "byte": 115
                                 }
                             },
-                            {
-                                "key": "notAnIndex",
-                                "range": {
-                                    "environment": "invalid-access-load",
-                                    "begin": {
-                                        "line": 8,
-                                        "column": 14,
-                                        "byte": 129
+                            "schema": true,
+                            "symbol": [
+                                {
+                                    "key": "array",
+                                    "range": {
+                                        "environment": "invalid-access-load",
+                                        "begin": {
+                                            "line": 7,
+                                            "column": 9,
+                                            "byte": 107
+                                        },
+                                        "end": {
+                                            "line": 7,
+                                            "column": 14,
+                                            "byte": 112
+                                        }
                                     },
-                                    "end": {
-                                        "line": 8,
-                                        "column": 26,
-                                        "byte": 141
+                                    "value": {
+                                        "environment": "invalid-access-load",
+                                        "begin": {
+                                            "line": 7,
+                                            "column": 7,
+                                            "byte": 105
+                                        },
+                                        "end": {
+                                            "line": 7,
+                                            "column": 17,
+                                            "byte": 115
+                                        }
                                     }
                                 },
-                                "value": {
-                                    "environment": "invalid-access-load",
-                                    "begin": {
-                                        "line": 8,
-                                        "column": 7,
-                                        "byte": 122
+                                {
+                                    "index": 1,
+                                    "range": {
+                                        "environment": "invalid-access-load",
+                                        "begin": {
+                                            "line": 7,
+                                            "column": 14,
+                                            "byte": 112
+                                        },
+                                        "end": {
+                                            "line": 7,
+                                            "column": 16,
+                                            "byte": 114
+                                        }
                                     },
-                                    "end": {
-                                        "line": 8,
-                                        "column": 27,
-                                        "byte": 142
+                                    "value": {
+                                        "environment": "invalid-access-load",
+                                        "begin": {
+                                            "line": 7,
+                                            "column": 7,
+                                            "byte": 105
+                                        },
+                                        "end": {
+                                            "line": 7,
+                                            "column": 17,
+                                            "byte": 115
+                                        }
                                     }
                                 }
-                            }
-                        ]
-                    },
-                    {
-                        "range": {
-                            "environment": "invalid-access-load",
-                            "begin": {
-                                "line": 9,
-                                "column": 7,
-                                "byte": 149
-                            },
-                            "end": {
-                                "line": 9,
-                                "column": 10,
-                                "byte": 152
-                            }
+                            ]
                         },
-                        "schema": true,
-                        "symbol": [
-                            {
-                                "key": "",
-                                "range": {
-                                    "environment": "invalid-access-load",
-                                    "begin": {
-                                        "line": 9,
-                                        "column": 9,
-                                        "byte": 151
+                        {
+                            "range": {
+                                "environment": "invalid-access-load",
+                                "begin": {
+                                    "line": 8,
+                                    "column": 7,
+                                    "byte": 122
+                                },
+                                "end": {
+                                    "line": 8,
+                                    "column": 27,
+                                    "byte": 142
+                                }
+                            },
+                            "schema": true,
+                            "symbol": [
+                                {
+                                    "key": "array",
+                                    "range": {
+                                        "environment": "invalid-access-load",
+                                        "begin": {
+                                            "line": 8,
+                                            "column": 9,
+                                            "byte": 124
+                                        },
+                                        "end": {
+                                            "line": 8,
+                                            "column": 14,
+                                            "byte": 129
+                                        }
                                     },
-                                    "end": {
-                                        "line": 9,
-                                        "column": 10,
-                                        "byte": 152
+                                    "value": {
+                                        "environment": "invalid-access-load",
+                                        "begin": {
+                                            "line": 8,
+                                            "column": 7,
+                                            "byte": 122
+                                        },
+                                        "end": {
+                                            "line": 8,
+                                            "column": 27,
+                                            "byte": 142
+                                        }
                                     }
                                 },
-                                "value": {
-                                    "environment": "invalid-access-load",
-                                    "begin": {
-                                        "line": 9,
-                                        "column": 7,
-                                        "byte": 149
+                                {
+                                    "key": "notAnIndex",
+                                    "range": {
+                                        "environment": "invalid-access-load",
+                                        "begin": {
+                                            "line": 8,
+                                            "column": 14,
+                                            "byte": 129
+                                        },
+                                        "end": {
+                                            "line": 8,
+                                            "column": 26,
+                                            "byte": 141
+                                        }
                                     },
-                                    "end": {
-                                        "line": 9,
-                                        "column": 10,
-                                        "byte": 152
+                                    "value": {
+                                        "environment": "invalid-access-load",
+                                        "begin": {
+                                            "line": 8,
+                                            "column": 7,
+                                            "byte": 122
+                                        },
+                                        "end": {
+                                            "line": 8,
+                                            "column": 27,
+                                            "byte": 142
+                                        }
                                     }
                                 }
-                            }
-                        ]
-                    },
-                    {
-                        "range": {
-                            "environment": "invalid-access-load",
-                            "begin": {
-                                "line": 10,
-                                "column": 7,
-                                "byte": 159
-                            },
-                            "end": {
-                                "line": 10,
-                                "column": 13,
-                                "byte": 165
-                            }
+                            ]
                         },
-                        "schema": true,
-                        "symbol": [
-                            {
-                                "index": 2,
-                                "range": {
-                                    "environment": "invalid-access-load",
-                                    "begin": {
-                                        "line": 10,
-                                        "column": 9,
-                                        "byte": 161
-                                    },
-                                    "end": {
-                                        "line": 10,
-                                        "column": 12,
-                                        "byte": 164
-                                    }
+                        {
+                            "range": {
+                                "environment": "invalid-access-load",
+                                "begin": {
+                                    "line": 9,
+                                    "column": 7,
+                                    "byte": 149
                                 },
-                                "value": {
-                                    "environment": "invalid-access-load",
-                                    "begin": {
-                                        "line": 10,
-                                        "column": 7,
-                                        "byte": 159
+                                "end": {
+                                    "line": 9,
+                                    "column": 10,
+                                    "byte": 152
+                                }
+                            },
+                            "schema": true,
+                            "symbol": [
+                                {
+                                    "key": "",
+                                    "range": {
+                                        "environment": "invalid-access-load",
+                                        "begin": {
+                                            "line": 9,
+                                            "column": 9,
+                                            "byte": 151
+                                        },
+                                        "end": {
+                                            "line": 9,
+                                            "column": 10,
+                                            "byte": 152
+                                        }
                                     },
-                                    "end": {
-                                        "line": 10,
-                                        "column": 13,
-                                        "byte": 165
+                                    "value": {
+                                        "environment": "invalid-access-load",
+                                        "begin": {
+                                            "line": 9,
+                                            "column": 7,
+                                            "byte": 149
+                                        },
+                                        "end": {
+                                            "line": 9,
+                                            "column": 10,
+                                            "byte": 152
+                                        }
                                     }
                                 }
-                            }
-                        ]
-                    },
-                    {
-                        "range": {
-                            "environment": "invalid-access-load",
-                            "begin": {
-                                "line": 11,
-                                "column": 7,
-                                "byte": 172
-                            },
-                            "end": {
-                                "line": 11,
-                                "column": 19,
-                                "byte": 184
-                            }
+                            ]
                         },
-                        "schema": true,
-                        "symbol": [
-                            {
-                                "key": "2",
-                                "range": {
-                                    "environment": "invalid-access-load",
-                                    "begin": {
-                                        "line": 11,
-                                        "column": 9,
-                                        "byte": 174
-                                    },
-                                    "end": {
-                                        "line": 11,
-                                        "column": 10,
-                                        "byte": 175
-                                    }
+                        {
+                            "range": {
+                                "environment": "invalid-access-load",
+                                "begin": {
+                                    "line": 10,
+                                    "column": 7,
+                                    "byte": 159
                                 },
-                                "value": {
-                                    "environment": "invalid-access-load",
-                                    "begin": {
-                                        "line": 11,
-                                        "column": 7,
-                                        "byte": 172
-                                    },
-                                    "end": {
-                                        "line": 11,
-                                        "column": 19,
-                                        "byte": 184
-                                    }
+                                "end": {
+                                    "line": 10,
+                                    "column": 13,
+                                    "byte": 165
                                 }
                             },
-                            {
-                                "key": "",
-                                "range": {
-                                    "environment": "invalid-access-load",
-                                    "begin": {
-                                        "line": 11,
-                                        "column": 10,
-                                        "byte": 175
+                            "schema": true,
+                            "symbol": [
+                                {
+                                    "index": 2,
+                                    "range": {
+                                        "environment": "invalid-access-load",
+                                        "begin": {
+                                            "line": 10,
+                                            "column": 9,
+                                            "byte": 161
+                                        },
+                                        "end": {
+                                            "line": 10,
+                                            "column": 12,
+                                            "byte": 164
+                                        }
                                     },
-                                    "end": {
-                                        "line": 11,
-                                        "column": 11,
-                                        "byte": 176
-                                    }
-                                },
-                                "value": {
-                                    "environment": "invalid-access-load",
-                                    "begin": {
-                                        "line": 11,
-                                        "column": 7,
-                                        "byte": 172
-                                    },
-                                    "end": {
-                                        "line": 11,
-                                        "column": 19,
-                                        "byte": 184
-                                    }
-                                }
-                            },
-                            {
-                                "key": "bad",
-                                "range": {
-                                    "environment": "invalid-access-load",
-                                    "begin": {
-                                        "line": 11,
-                                        "column": 11,
-                                        "byte": 176
-                                    },
-                                    "end": {
-                                        "line": 11,
-                                        "column": 18,
-                                        "byte": 183
-                                    }
-                                },
-                                "value": {
-                                    "environment": "invalid-access-load",
-                                    "begin": {
-                                        "line": 11,
-                                        "column": 7,
-                                        "byte": 172
-                                    },
-                                    "end": {
-                                        "line": 11,
-                                        "column": 19,
-                                        "byte": 184
+                                    "value": {
+                                        "environment": "invalid-access-load",
+                                        "begin": {
+                                            "line": 10,
+                                            "column": 7,
+                                            "byte": 159
+                                        },
+                                        "end": {
+                                            "line": 10,
+                                            "column": 13,
+                                            "byte": 165
+                                        }
                                     }
                                 }
-                            }
-                        ]
-                    },
-                    {
-                        "range": {
-                            "environment": "invalid-access-load",
-                            "begin": {
-                                "line": 12,
-                                "column": 7,
-                                "byte": 191
-                            },
-                            "end": {
-                                "line": 12,
-                                "column": 16,
-                                "byte": 200
-                            }
+                            ]
                         },
-                        "schema": true,
-                        "symbol": [
-                            {
-                                "key": "34",
-                                "range": {
-                                    "environment": "invalid-access-load",
-                                    "begin": {
-                                        "line": 12,
-                                        "column": 9,
-                                        "byte": 193
-                                    },
-                                    "end": {
-                                        "line": 12,
-                                        "column": 11,
-                                        "byte": 195
-                                    }
+                        {
+                            "range": {
+                                "environment": "invalid-access-load",
+                                "begin": {
+                                    "line": 11,
+                                    "column": 7,
+                                    "byte": 172
                                 },
-                                "value": {
-                                    "environment": "invalid-access-load",
-                                    "begin": {
-                                        "line": 12,
-                                        "column": 7,
-                                        "byte": 191
-                                    },
-                                    "end": {
-                                        "line": 12,
-                                        "column": 16,
-                                        "byte": 200
-                                    }
+                                "end": {
+                                    "line": 11,
+                                    "column": 19,
+                                    "byte": 184
                                 }
                             },
-                            {
-                                "key": "bad",
-                                "range": {
-                                    "environment": "invalid-access-load",
-                                    "begin": {
-                                        "line": 12,
-                                        "column": 11,
-                                        "byte": 195
+                            "schema": true,
+                            "symbol": [
+                                {
+                                    "key": "2",
+                                    "range": {
+                                        "environment": "invalid-access-load",
+                                        "begin": {
+                                            "line": 11,
+                                            "column": 9,
+                                            "byte": 174
+                                        },
+                                        "end": {
+                                            "line": 11,
+                                            "column": 10,
+                                            "byte": 175
+                                        }
                                     },
-                                    "end": {
-                                        "line": 12,
-                                        "column": 15,
-                                        "byte": 199
+                                    "value": {
+                                        "environment": "invalid-access-load",
+                                        "begin": {
+                                            "line": 11,
+                                            "column": 7,
+                                            "byte": 172
+                                        },
+                                        "end": {
+                                            "line": 11,
+                                            "column": 19,
+                                            "byte": 184
+                                        }
                                     }
                                 },
-                                "value": {
-                                    "environment": "invalid-access-load",
-                                    "begin": {
-                                        "line": 12,
-                                        "column": 7,
-                                        "byte": 191
+                                {
+                                    "key": "",
+                                    "range": {
+                                        "environment": "invalid-access-load",
+                                        "begin": {
+                                            "line": 11,
+                                            "column": 10,
+                                            "byte": 175
+                                        },
+                                        "end": {
+                                            "line": 11,
+                                            "column": 11,
+                                            "byte": 176
+                                        }
                                     },
-                                    "end": {
-                                        "line": 12,
-                                        "column": 16,
-                                        "byte": 200
+                                    "value": {
+                                        "environment": "invalid-access-load",
+                                        "begin": {
+                                            "line": 11,
+                                            "column": 7,
+                                            "byte": 172
+                                        },
+                                        "end": {
+                                            "line": 11,
+                                            "column": 19,
+                                            "byte": 184
+                                        }
+                                    }
+                                },
+                                {
+                                    "key": "bad",
+                                    "range": {
+                                        "environment": "invalid-access-load",
+                                        "begin": {
+                                            "line": 11,
+                                            "column": 11,
+                                            "byte": 176
+                                        },
+                                        "end": {
+                                            "line": 11,
+                                            "column": 18,
+                                            "byte": 183
+                                        }
+                                    },
+                                    "value": {
+                                        "environment": "invalid-access-load",
+                                        "begin": {
+                                            "line": 11,
+                                            "column": 7,
+                                            "byte": 172
+                                        },
+                                        "end": {
+                                            "line": 11,
+                                            "column": 19,
+                                            "byte": 184
+                                        }
                                     }
                                 }
-                            }
-                        ]
-                    },
-                    {
-                        "range": {
-                            "environment": "invalid-access-load",
-                            "begin": {
-                                "line": 13,
-                                "column": 7,
-                                "byte": 207
-                            },
-                            "end": {
-                                "line": 13,
-                                "column": 14,
-                                "byte": 214
-                            }
+                            ]
                         },
-                        "schema": true,
-                        "symbol": [
-                            {
-                                "key": "bad",
-                                "range": {
-                                    "environment": "invalid-access-load",
-                                    "begin": {
-                                        "line": 13,
-                                        "column": 9,
-                                        "byte": 209
+                        {
+                            "range": {
+                                "environment": "invalid-access-load",
+                                "begin": {
+                                    "line": 12,
+                                    "column": 7,
+                                    "byte": 191
+                                },
+                                "end": {
+                                    "line": 12,
+                                    "column": 16,
+                                    "byte": 200
+                                }
+                            },
+                            "schema": true,
+                            "symbol": [
+                                {
+                                    "key": "34",
+                                    "range": {
+                                        "environment": "invalid-access-load",
+                                        "begin": {
+                                            "line": 12,
+                                            "column": 9,
+                                            "byte": 193
+                                        },
+                                        "end": {
+                                            "line": 12,
+                                            "column": 11,
+                                            "byte": 195
+                                        }
                                     },
-                                    "end": {
-                                        "line": 13,
-                                        "column": 13,
-                                        "byte": 213
+                                    "value": {
+                                        "environment": "invalid-access-load",
+                                        "begin": {
+                                            "line": 12,
+                                            "column": 7,
+                                            "byte": 191
+                                        },
+                                        "end": {
+                                            "line": 12,
+                                            "column": 16,
+                                            "byte": 200
+                                        }
                                     }
                                 },
-                                "value": {
-                                    "environment": "invalid-access-load",
-                                    "begin": {
-                                        "line": 13,
-                                        "column": 7,
-                                        "byte": 207
+                                {
+                                    "key": "bad",
+                                    "range": {
+                                        "environment": "invalid-access-load",
+                                        "begin": {
+                                            "line": 12,
+                                            "column": 11,
+                                            "byte": 195
+                                        },
+                                        "end": {
+                                            "line": 12,
+                                            "column": 15,
+                                            "byte": 199
+                                        }
                                     },
-                                    "end": {
-                                        "line": 13,
-                                        "column": 14,
-                                        "byte": 214
+                                    "value": {
+                                        "environment": "invalid-access-load",
+                                        "begin": {
+                                            "line": 12,
+                                            "column": 7,
+                                            "byte": 191
+                                        },
+                                        "end": {
+                                            "line": 12,
+                                            "column": 16,
+                                            "byte": 200
+                                        }
                                     }
                                 }
-                            }
-                        ]
-                    }
-                ]
+                            ]
+                        },
+                        {
+                            "range": {
+                                "environment": "invalid-access-load",
+                                "begin": {
+                                    "line": 13,
+                                    "column": 7,
+                                    "byte": 207
+                                },
+                                "end": {
+                                    "line": 13,
+                                    "column": 14,
+                                    "byte": 214
+                                }
+                            },
+                            "schema": true,
+                            "symbol": [
+                                {
+                                    "key": "bad",
+                                    "range": {
+                                        "environment": "invalid-access-load",
+                                        "begin": {
+                                            "line": 13,
+                                            "column": 9,
+                                            "byte": 209
+                                        },
+                                        "end": {
+                                            "line": 13,
+                                            "column": 13,
+                                            "byte": 213
+                                        }
+                                    },
+                                    "value": {
+                                        "environment": "invalid-access-load",
+                                        "begin": {
+                                            "line": 13,
+                                            "column": 7,
+                                            "byte": 207
+                                        },
+                                        "end": {
+                                            "line": 13,
+                                            "column": 14,
+                                            "byte": 214
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                }
             }
         },
         "properties": {
@@ -1977,788 +2032,843 @@
     ],
     "eval": {
         "exprs": {
-            "propertyAccessTest": {
-                "range": {
+            "range": {
+                "environment": "invalid-access-load",
+                "begin": {
+                    "line": 2,
+                    "column": 3,
+                    "byte": 10
+                },
+                "end": {
+                    "line": 13,
+                    "column": 14,
+                    "byte": 214
+                }
+            },
+            "schema": {
+                "properties": {
+                    "propertyAccessTest": {
+                        "prefixItems": [
+                            true,
+                            true,
+                            true,
+                            true,
+                            true,
+                            true,
+                            true,
+                            true,
+                            true,
+                            true,
+                            true
+                        ],
+                        "items": false,
+                        "type": "array"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "propertyAccessTest"
+                ]
+            },
+            "keyRanges": {
+                "propertyAccessTest": {
                     "environment": "invalid-access-load",
                     "begin": {
-                        "line": 3,
-                        "column": 5,
-                        "byte": 34
+                        "line": 2,
+                        "column": 3,
+                        "byte": 10
                     },
                     "end": {
-                        "line": 13,
-                        "column": 14,
-                        "byte": 214
+                        "line": 2,
+                        "column": 21,
+                        "byte": 28
                     }
-                },
-                "schema": {
-                    "prefixItems": [
-                        true,
-                        true,
-                        true,
-                        true,
-                        true,
-                        true,
-                        true,
-                        true,
-                        true,
-                        true,
-                        true
-                    ],
-                    "items": false,
-                    "type": "array"
-                },
-                "list": [
-                    {
-                        "range": {
-                            "environment": "invalid-access-load",
-                            "begin": {
-                                "line": 3,
-                                "column": 7,
-                                "byte": 36
-                            },
-                            "end": {
-                                "line": 3,
-                                "column": 9,
-                                "byte": 38
-                            }
+                }
+            },
+            "object": {
+                "propertyAccessTest": {
+                    "range": {
+                        "environment": "invalid-access-load",
+                        "begin": {
+                            "line": 3,
+                            "column": 5,
+                            "byte": 34
                         },
-                        "schema": true,
-                        "symbol": [
-                            {
-                                "key": "",
-                                "range": {
-                                    "environment": "invalid-access-load",
-                                    "begin": {
-                                        "line": 3,
-                                        "column": 9,
-                                        "byte": 38
-                                    },
-                                    "end": {
-                                        "line": 3,
-                                        "column": 9,
-                                        "byte": 38
-                                    }
-                                },
-                                "value": {
-                                    "environment": "invalid-access-load",
-                                    "begin": {
-                                        "line": 3,
-                                        "column": 7,
-                                        "byte": 36
-                                    },
-                                    "end": {
-                                        "line": 3,
-                                        "column": 9,
-                                        "byte": 38
-                                    }
-                                }
-                            }
-                        ]
+                        "end": {
+                            "line": 13,
+                            "column": 14,
+                            "byte": 214
+                        }
                     },
-                    {
-                        "range": {
-                            "environment": "invalid-access-load",
-                            "begin": {
-                                "line": 4,
-                                "column": 7,
-                                "byte": 45
-                            },
-                            "end": {
-                                "line": 4,
-                                "column": 20,
-                                "byte": 58
-                            }
-                        },
-                        "schema": true,
-                        "symbol": [
-                            {
-                                "key": "open",
-                                "range": {
-                                    "environment": "invalid-access-load",
-                                    "begin": {
-                                        "line": 4,
-                                        "column": 9,
-                                        "byte": 47
-                                    },
-                                    "end": {
-                                        "line": 4,
-                                        "column": 13,
-                                        "byte": 51
-                                    }
-                                },
-                                "value": {
-                                    "environment": "invalid-access-load",
-                                    "begin": {
-                                        "line": 4,
-                                        "column": 7,
-                                        "byte": 45
-                                    },
-                                    "end": {
-                                        "line": 4,
-                                        "column": 20,
-                                        "byte": 58
-                                    }
-                                }
-                            },
-                            {
-                                "key": "foo",
-                                "range": {
-                                    "environment": "invalid-access-load",
-                                    "begin": {
-                                        "line": 4,
-                                        "column": 13,
-                                        "byte": 51
-                                    },
-                                    "end": {
-                                        "line": 4,
-                                        "column": 19,
-                                        "byte": 57
-                                    }
-                                },
-                                "value": {
-                                    "environment": "invalid-access-load",
-                                    "begin": {
-                                        "line": 4,
-                                        "column": 7,
-                                        "byte": 45
-                                    },
-                                    "end": {
-                                        "line": 4,
-                                        "column": 20,
-                                        "byte": 58
-                                    }
-                                }
-                            }
-                        ]
+                    "schema": {
+                        "prefixItems": [
+                            true,
+                            true,
+                            true,
+                            true,
+                            true,
+                            true,
+                            true,
+                            true,
+                            true,
+                            true,
+                            true
+                        ],
+                        "items": false,
+                        "type": "array"
                     },
-                    {
-                        "range": {
-                            "environment": "invalid-access-load",
-                            "begin": {
-                                "line": 5,
-                                "column": 7,
-                                "byte": 65
+                    "list": [
+                        {
+                            "range": {
+                                "environment": "invalid-access-load",
+                                "begin": {
+                                    "line": 3,
+                                    "column": 7,
+                                    "byte": 36
+                                },
+                                "end": {
+                                    "line": 3,
+                                    "column": 9,
+                                    "byte": 38
+                                }
                             },
-                            "end": {
-                                "line": 5,
-                                "column": 20,
-                                "byte": 78
-                            }
+                            "schema": true,
+                            "symbol": [
+                                {
+                                    "key": "",
+                                    "range": {
+                                        "environment": "invalid-access-load",
+                                        "begin": {
+                                            "line": 3,
+                                            "column": 9,
+                                            "byte": 38
+                                        },
+                                        "end": {
+                                            "line": 3,
+                                            "column": 9,
+                                            "byte": 38
+                                        }
+                                    },
+                                    "value": {
+                                        "environment": "invalid-access-load",
+                                        "begin": {
+                                            "line": 3,
+                                            "column": 7,
+                                            "byte": 36
+                                        },
+                                        "end": {
+                                            "line": 3,
+                                            "column": 9,
+                                            "byte": 38
+                                        }
+                                    }
+                                }
+                            ]
                         },
-                        "schema": true,
-                        "symbol": [
-                            {
-                                "key": "open",
-                                "range": {
-                                    "environment": "invalid-access-load",
-                                    "begin": {
-                                        "line": 5,
-                                        "column": 9,
-                                        "byte": 67
-                                    },
-                                    "end": {
-                                        "line": 5,
-                                        "column": 13,
-                                        "byte": 71
-                                    }
+                        {
+                            "range": {
+                                "environment": "invalid-access-load",
+                                "begin": {
+                                    "line": 4,
+                                    "column": 7,
+                                    "byte": 45
                                 },
-                                "value": {
-                                    "environment": "invalid-access-load",
-                                    "begin": {
-                                        "line": 5,
-                                        "column": 7,
-                                        "byte": 65
-                                    },
-                                    "end": {
-                                        "line": 5,
-                                        "column": 20,
-                                        "byte": 78
-                                    }
+                                "end": {
+                                    "line": 4,
+                                    "column": 20,
+                                    "byte": 58
                                 }
                             },
-                            {
-                                "key": "foo]}",
-                                "range": {
-                                    "environment": "invalid-access-load",
-                                    "begin": {
-                                        "line": 5,
-                                        "column": 13,
-                                        "byte": 71
+                            "schema": true,
+                            "symbol": [
+                                {
+                                    "key": "open",
+                                    "range": {
+                                        "environment": "invalid-access-load",
+                                        "begin": {
+                                            "line": 4,
+                                            "column": 9,
+                                            "byte": 47
+                                        },
+                                        "end": {
+                                            "line": 4,
+                                            "column": 13,
+                                            "byte": 51
+                                        }
                                     },
-                                    "end": {
-                                        "line": 5,
-                                        "column": 20,
-                                        "byte": 78
+                                    "value": {
+                                        "environment": "invalid-access-load",
+                                        "begin": {
+                                            "line": 4,
+                                            "column": 7,
+                                            "byte": 45
+                                        },
+                                        "end": {
+                                            "line": 4,
+                                            "column": 20,
+                                            "byte": 58
+                                        }
                                     }
                                 },
-                                "value": {
-                                    "environment": "invalid-access-load",
-                                    "begin": {
-                                        "line": 5,
-                                        "column": 7,
-                                        "byte": 65
+                                {
+                                    "key": "foo",
+                                    "range": {
+                                        "environment": "invalid-access-load",
+                                        "begin": {
+                                            "line": 4,
+                                            "column": 13,
+                                            "byte": 51
+                                        },
+                                        "end": {
+                                            "line": 4,
+                                            "column": 19,
+                                            "byte": 57
+                                        }
                                     },
-                                    "end": {
-                                        "line": 5,
-                                        "column": 20,
-                                        "byte": 78
+                                    "value": {
+                                        "environment": "invalid-access-load",
+                                        "begin": {
+                                            "line": 4,
+                                            "column": 7,
+                                            "byte": 45
+                                        },
+                                        "end": {
+                                            "line": 4,
+                                            "column": 20,
+                                            "byte": 58
+                                        }
                                     }
                                 }
-                            }
-                        ]
-                    },
-                    {
-                        "range": {
-                            "environment": "invalid-access-load",
-                            "begin": {
-                                "line": 6,
-                                "column": 7,
-                                "byte": 85
-                            },
-                            "end": {
-                                "line": 6,
-                                "column": 20,
-                                "byte": 98
-                            }
+                            ]
                         },
-                        "schema": true,
-                        "symbol": [
-                            {
-                                "key": "open",
-                                "range": {
-                                    "environment": "invalid-access-load",
-                                    "begin": {
-                                        "line": 6,
-                                        "column": 9,
-                                        "byte": 87
-                                    },
-                                    "end": {
-                                        "line": 6,
-                                        "column": 13,
-                                        "byte": 91
-                                    }
+                        {
+                            "range": {
+                                "environment": "invalid-access-load",
+                                "begin": {
+                                    "line": 5,
+                                    "column": 7,
+                                    "byte": 65
                                 },
-                                "value": {
-                                    "environment": "invalid-access-load",
-                                    "begin": {
-                                        "line": 6,
-                                        "column": 7,
-                                        "byte": 85
-                                    },
-                                    "end": {
-                                        "line": 6,
-                                        "column": 20,
-                                        "byte": 98
-                                    }
+                                "end": {
+                                    "line": 5,
+                                    "column": 20,
+                                    "byte": 78
                                 }
                             },
-                            {
-                                "key": "foo",
-                                "range": {
-                                    "environment": "invalid-access-load",
-                                    "begin": {
-                                        "line": 6,
-                                        "column": 13,
-                                        "byte": 91
+                            "schema": true,
+                            "symbol": [
+                                {
+                                    "key": "open",
+                                    "range": {
+                                        "environment": "invalid-access-load",
+                                        "begin": {
+                                            "line": 5,
+                                            "column": 9,
+                                            "byte": 67
+                                        },
+                                        "end": {
+                                            "line": 5,
+                                            "column": 13,
+                                            "byte": 71
+                                        }
                                     },
-                                    "end": {
-                                        "line": 6,
-                                        "column": 20,
-                                        "byte": 98
+                                    "value": {
+                                        "environment": "invalid-access-load",
+                                        "begin": {
+                                            "line": 5,
+                                            "column": 7,
+                                            "byte": 65
+                                        },
+                                        "end": {
+                                            "line": 5,
+                                            "column": 20,
+                                            "byte": 78
+                                        }
                                     }
                                 },
-                                "value": {
-                                    "environment": "invalid-access-load",
-                                    "begin": {
-                                        "line": 6,
-                                        "column": 7,
-                                        "byte": 85
+                                {
+                                    "key": "foo]}",
+                                    "range": {
+                                        "environment": "invalid-access-load",
+                                        "begin": {
+                                            "line": 5,
+                                            "column": 13,
+                                            "byte": 71
+                                        },
+                                        "end": {
+                                            "line": 5,
+                                            "column": 20,
+                                            "byte": 78
+                                        }
                                     },
-                                    "end": {
-                                        "line": 6,
-                                        "column": 20,
-                                        "byte": 98
+                                    "value": {
+                                        "environment": "invalid-access-load",
+                                        "begin": {
+                                            "line": 5,
+                                            "column": 7,
+                                            "byte": 65
+                                        },
+                                        "end": {
+                                            "line": 5,
+                                            "column": 20,
+                                            "byte": 78
+                                        }
                                     }
                                 }
-                            }
-                        ]
-                    },
-                    {
-                        "range": {
-                            "environment": "invalid-access-load",
-                            "begin": {
-                                "line": 7,
-                                "column": 7,
-                                "byte": 105
-                            },
-                            "end": {
-                                "line": 7,
-                                "column": 17,
-                                "byte": 115
-                            }
+                            ]
                         },
-                        "schema": true,
-                        "symbol": [
-                            {
-                                "key": "array",
-                                "range": {
-                                    "environment": "invalid-access-load",
-                                    "begin": {
-                                        "line": 7,
-                                        "column": 9,
-                                        "byte": 107
-                                    },
-                                    "end": {
-                                        "line": 7,
-                                        "column": 14,
-                                        "byte": 112
-                                    }
+                        {
+                            "range": {
+                                "environment": "invalid-access-load",
+                                "begin": {
+                                    "line": 6,
+                                    "column": 7,
+                                    "byte": 85
                                 },
-                                "value": {
-                                    "environment": "invalid-access-load",
-                                    "begin": {
-                                        "line": 7,
-                                        "column": 7,
-                                        "byte": 105
-                                    },
-                                    "end": {
-                                        "line": 7,
-                                        "column": 17,
-                                        "byte": 115
-                                    }
+                                "end": {
+                                    "line": 6,
+                                    "column": 20,
+                                    "byte": 98
                                 }
                             },
-                            {
-                                "index": 1,
-                                "range": {
-                                    "environment": "invalid-access-load",
-                                    "begin": {
-                                        "line": 7,
-                                        "column": 14,
-                                        "byte": 112
+                            "schema": true,
+                            "symbol": [
+                                {
+                                    "key": "open",
+                                    "range": {
+                                        "environment": "invalid-access-load",
+                                        "begin": {
+                                            "line": 6,
+                                            "column": 9,
+                                            "byte": 87
+                                        },
+                                        "end": {
+                                            "line": 6,
+                                            "column": 13,
+                                            "byte": 91
+                                        }
                                     },
-                                    "end": {
-                                        "line": 7,
-                                        "column": 16,
-                                        "byte": 114
+                                    "value": {
+                                        "environment": "invalid-access-load",
+                                        "begin": {
+                                            "line": 6,
+                                            "column": 7,
+                                            "byte": 85
+                                        },
+                                        "end": {
+                                            "line": 6,
+                                            "column": 20,
+                                            "byte": 98
+                                        }
                                     }
                                 },
-                                "value": {
-                                    "environment": "invalid-access-load",
-                                    "begin": {
-                                        "line": 7,
-                                        "column": 7,
-                                        "byte": 105
+                                {
+                                    "key": "foo",
+                                    "range": {
+                                        "environment": "invalid-access-load",
+                                        "begin": {
+                                            "line": 6,
+                                            "column": 13,
+                                            "byte": 91
+                                        },
+                                        "end": {
+                                            "line": 6,
+                                            "column": 20,
+                                            "byte": 98
+                                        }
                                     },
-                                    "end": {
-                                        "line": 7,
-                                        "column": 17,
-                                        "byte": 115
+                                    "value": {
+                                        "environment": "invalid-access-load",
+                                        "begin": {
+                                            "line": 6,
+                                            "column": 7,
+                                            "byte": 85
+                                        },
+                                        "end": {
+                                            "line": 6,
+                                            "column": 20,
+                                            "byte": 98
+                                        }
                                     }
                                 }
-                            }
-                        ]
-                    },
-                    {
-                        "range": {
-                            "environment": "invalid-access-load",
-                            "begin": {
-                                "line": 8,
-                                "column": 7,
-                                "byte": 122
-                            },
-                            "end": {
-                                "line": 8,
-                                "column": 27,
-                                "byte": 142
-                            }
+                            ]
                         },
-                        "schema": true,
-                        "symbol": [
-                            {
-                                "key": "array",
-                                "range": {
-                                    "environment": "invalid-access-load",
-                                    "begin": {
-                                        "line": 8,
-                                        "column": 9,
-                                        "byte": 124
-                                    },
-                                    "end": {
-                                        "line": 8,
-                                        "column": 14,
-                                        "byte": 129
-                                    }
+                        {
+                            "range": {
+                                "environment": "invalid-access-load",
+                                "begin": {
+                                    "line": 7,
+                                    "column": 7,
+                                    "byte": 105
                                 },
-                                "value": {
-                                    "environment": "invalid-access-load",
-                                    "begin": {
-                                        "line": 8,
-                                        "column": 7,
-                                        "byte": 122
-                                    },
-                                    "end": {
-                                        "line": 8,
-                                        "column": 27,
-                                        "byte": 142
-                                    }
+                                "end": {
+                                    "line": 7,
+                                    "column": 17,
+                                    "byte": 115
                                 }
                             },
-                            {
-                                "key": "notAnIndex",
-                                "range": {
-                                    "environment": "invalid-access-load",
-                                    "begin": {
-                                        "line": 8,
-                                        "column": 14,
-                                        "byte": 129
+                            "schema": true,
+                            "symbol": [
+                                {
+                                    "key": "array",
+                                    "range": {
+                                        "environment": "invalid-access-load",
+                                        "begin": {
+                                            "line": 7,
+                                            "column": 9,
+                                            "byte": 107
+                                        },
+                                        "end": {
+                                            "line": 7,
+                                            "column": 14,
+                                            "byte": 112
+                                        }
                                     },
-                                    "end": {
-                                        "line": 8,
-                                        "column": 26,
-                                        "byte": 141
+                                    "value": {
+                                        "environment": "invalid-access-load",
+                                        "begin": {
+                                            "line": 7,
+                                            "column": 7,
+                                            "byte": 105
+                                        },
+                                        "end": {
+                                            "line": 7,
+                                            "column": 17,
+                                            "byte": 115
+                                        }
                                     }
                                 },
-                                "value": {
-                                    "environment": "invalid-access-load",
-                                    "begin": {
-                                        "line": 8,
-                                        "column": 7,
-                                        "byte": 122
+                                {
+                                    "index": 1,
+                                    "range": {
+                                        "environment": "invalid-access-load",
+                                        "begin": {
+                                            "line": 7,
+                                            "column": 14,
+                                            "byte": 112
+                                        },
+                                        "end": {
+                                            "line": 7,
+                                            "column": 16,
+                                            "byte": 114
+                                        }
                                     },
-                                    "end": {
-                                        "line": 8,
-                                        "column": 27,
-                                        "byte": 142
+                                    "value": {
+                                        "environment": "invalid-access-load",
+                                        "begin": {
+                                            "line": 7,
+                                            "column": 7,
+                                            "byte": 105
+                                        },
+                                        "end": {
+                                            "line": 7,
+                                            "column": 17,
+                                            "byte": 115
+                                        }
                                     }
                                 }
-                            }
-                        ]
-                    },
-                    {
-                        "range": {
-                            "environment": "invalid-access-load",
-                            "begin": {
-                                "line": 9,
-                                "column": 7,
-                                "byte": 149
-                            },
-                            "end": {
-                                "line": 9,
-                                "column": 10,
-                                "byte": 152
-                            }
+                            ]
                         },
-                        "schema": true,
-                        "symbol": [
-                            {
-                                "key": "",
-                                "range": {
-                                    "environment": "invalid-access-load",
-                                    "begin": {
-                                        "line": 9,
-                                        "column": 9,
-                                        "byte": 151
+                        {
+                            "range": {
+                                "environment": "invalid-access-load",
+                                "begin": {
+                                    "line": 8,
+                                    "column": 7,
+                                    "byte": 122
+                                },
+                                "end": {
+                                    "line": 8,
+                                    "column": 27,
+                                    "byte": 142
+                                }
+                            },
+                            "schema": true,
+                            "symbol": [
+                                {
+                                    "key": "array",
+                                    "range": {
+                                        "environment": "invalid-access-load",
+                                        "begin": {
+                                            "line": 8,
+                                            "column": 9,
+                                            "byte": 124
+                                        },
+                                        "end": {
+                                            "line": 8,
+                                            "column": 14,
+                                            "byte": 129
+                                        }
                                     },
-                                    "end": {
-                                        "line": 9,
-                                        "column": 10,
-                                        "byte": 152
+                                    "value": {
+                                        "environment": "invalid-access-load",
+                                        "begin": {
+                                            "line": 8,
+                                            "column": 7,
+                                            "byte": 122
+                                        },
+                                        "end": {
+                                            "line": 8,
+                                            "column": 27,
+                                            "byte": 142
+                                        }
                                     }
                                 },
-                                "value": {
-                                    "environment": "invalid-access-load",
-                                    "begin": {
-                                        "line": 9,
-                                        "column": 7,
-                                        "byte": 149
+                                {
+                                    "key": "notAnIndex",
+                                    "range": {
+                                        "environment": "invalid-access-load",
+                                        "begin": {
+                                            "line": 8,
+                                            "column": 14,
+                                            "byte": 129
+                                        },
+                                        "end": {
+                                            "line": 8,
+                                            "column": 26,
+                                            "byte": 141
+                                        }
                                     },
-                                    "end": {
-                                        "line": 9,
-                                        "column": 10,
-                                        "byte": 152
+                                    "value": {
+                                        "environment": "invalid-access-load",
+                                        "begin": {
+                                            "line": 8,
+                                            "column": 7,
+                                            "byte": 122
+                                        },
+                                        "end": {
+                                            "line": 8,
+                                            "column": 27,
+                                            "byte": 142
+                                        }
                                     }
                                 }
-                            }
-                        ]
-                    },
-                    {
-                        "range": {
-                            "environment": "invalid-access-load",
-                            "begin": {
-                                "line": 10,
-                                "column": 7,
-                                "byte": 159
-                            },
-                            "end": {
-                                "line": 10,
-                                "column": 13,
-                                "byte": 165
-                            }
+                            ]
                         },
-                        "schema": true,
-                        "symbol": [
-                            {
-                                "index": 2,
-                                "range": {
-                                    "environment": "invalid-access-load",
-                                    "begin": {
-                                        "line": 10,
-                                        "column": 9,
-                                        "byte": 161
-                                    },
-                                    "end": {
-                                        "line": 10,
-                                        "column": 12,
-                                        "byte": 164
-                                    }
+                        {
+                            "range": {
+                                "environment": "invalid-access-load",
+                                "begin": {
+                                    "line": 9,
+                                    "column": 7,
+                                    "byte": 149
                                 },
-                                "value": {
-                                    "environment": "invalid-access-load",
-                                    "begin": {
-                                        "line": 10,
-                                        "column": 7,
-                                        "byte": 159
+                                "end": {
+                                    "line": 9,
+                                    "column": 10,
+                                    "byte": 152
+                                }
+                            },
+                            "schema": true,
+                            "symbol": [
+                                {
+                                    "key": "",
+                                    "range": {
+                                        "environment": "invalid-access-load",
+                                        "begin": {
+                                            "line": 9,
+                                            "column": 9,
+                                            "byte": 151
+                                        },
+                                        "end": {
+                                            "line": 9,
+                                            "column": 10,
+                                            "byte": 152
+                                        }
                                     },
-                                    "end": {
-                                        "line": 10,
-                                        "column": 13,
-                                        "byte": 165
+                                    "value": {
+                                        "environment": "invalid-access-load",
+                                        "begin": {
+                                            "line": 9,
+                                            "column": 7,
+                                            "byte": 149
+                                        },
+                                        "end": {
+                                            "line": 9,
+                                            "column": 10,
+                                            "byte": 152
+                                        }
                                     }
                                 }
-                            }
-                        ]
-                    },
-                    {
-                        "range": {
-                            "environment": "invalid-access-load",
-                            "begin": {
-                                "line": 11,
-                                "column": 7,
-                                "byte": 172
-                            },
-                            "end": {
-                                "line": 11,
-                                "column": 19,
-                                "byte": 184
-                            }
+                            ]
                         },
-                        "schema": true,
-                        "symbol": [
-                            {
-                                "key": "2",
-                                "range": {
-                                    "environment": "invalid-access-load",
-                                    "begin": {
-                                        "line": 11,
-                                        "column": 9,
-                                        "byte": 174
-                                    },
-                                    "end": {
-                                        "line": 11,
-                                        "column": 10,
-                                        "byte": 175
-                                    }
+                        {
+                            "range": {
+                                "environment": "invalid-access-load",
+                                "begin": {
+                                    "line": 10,
+                                    "column": 7,
+                                    "byte": 159
                                 },
-                                "value": {
-                                    "environment": "invalid-access-load",
-                                    "begin": {
-                                        "line": 11,
-                                        "column": 7,
-                                        "byte": 172
-                                    },
-                                    "end": {
-                                        "line": 11,
-                                        "column": 19,
-                                        "byte": 184
-                                    }
+                                "end": {
+                                    "line": 10,
+                                    "column": 13,
+                                    "byte": 165
                                 }
                             },
-                            {
-                                "key": "",
-                                "range": {
-                                    "environment": "invalid-access-load",
-                                    "begin": {
-                                        "line": 11,
-                                        "column": 10,
-                                        "byte": 175
+                            "schema": true,
+                            "symbol": [
+                                {
+                                    "index": 2,
+                                    "range": {
+                                        "environment": "invalid-access-load",
+                                        "begin": {
+                                            "line": 10,
+                                            "column": 9,
+                                            "byte": 161
+                                        },
+                                        "end": {
+                                            "line": 10,
+                                            "column": 12,
+                                            "byte": 164
+                                        }
                                     },
-                                    "end": {
-                                        "line": 11,
-                                        "column": 11,
-                                        "byte": 176
-                                    }
-                                },
-                                "value": {
-                                    "environment": "invalid-access-load",
-                                    "begin": {
-                                        "line": 11,
-                                        "column": 7,
-                                        "byte": 172
-                                    },
-                                    "end": {
-                                        "line": 11,
-                                        "column": 19,
-                                        "byte": 184
-                                    }
-                                }
-                            },
-                            {
-                                "key": "bad",
-                                "range": {
-                                    "environment": "invalid-access-load",
-                                    "begin": {
-                                        "line": 11,
-                                        "column": 11,
-                                        "byte": 176
-                                    },
-                                    "end": {
-                                        "line": 11,
-                                        "column": 18,
-                                        "byte": 183
-                                    }
-                                },
-                                "value": {
-                                    "environment": "invalid-access-load",
-                                    "begin": {
-                                        "line": 11,
-                                        "column": 7,
-                                        "byte": 172
-                                    },
-                                    "end": {
-                                        "line": 11,
-                                        "column": 19,
-                                        "byte": 184
+                                    "value": {
+                                        "environment": "invalid-access-load",
+                                        "begin": {
+                                            "line": 10,
+                                            "column": 7,
+                                            "byte": 159
+                                        },
+                                        "end": {
+                                            "line": 10,
+                                            "column": 13,
+                                            "byte": 165
+                                        }
                                     }
                                 }
-                            }
-                        ]
-                    },
-                    {
-                        "range": {
-                            "environment": "invalid-access-load",
-                            "begin": {
-                                "line": 12,
-                                "column": 7,
-                                "byte": 191
-                            },
-                            "end": {
-                                "line": 12,
-                                "column": 16,
-                                "byte": 200
-                            }
+                            ]
                         },
-                        "schema": true,
-                        "symbol": [
-                            {
-                                "key": "34",
-                                "range": {
-                                    "environment": "invalid-access-load",
-                                    "begin": {
-                                        "line": 12,
-                                        "column": 9,
-                                        "byte": 193
-                                    },
-                                    "end": {
-                                        "line": 12,
-                                        "column": 11,
-                                        "byte": 195
-                                    }
+                        {
+                            "range": {
+                                "environment": "invalid-access-load",
+                                "begin": {
+                                    "line": 11,
+                                    "column": 7,
+                                    "byte": 172
                                 },
-                                "value": {
-                                    "environment": "invalid-access-load",
-                                    "begin": {
-                                        "line": 12,
-                                        "column": 7,
-                                        "byte": 191
-                                    },
-                                    "end": {
-                                        "line": 12,
-                                        "column": 16,
-                                        "byte": 200
-                                    }
+                                "end": {
+                                    "line": 11,
+                                    "column": 19,
+                                    "byte": 184
                                 }
                             },
-                            {
-                                "key": "bad",
-                                "range": {
-                                    "environment": "invalid-access-load",
-                                    "begin": {
-                                        "line": 12,
-                                        "column": 11,
-                                        "byte": 195
+                            "schema": true,
+                            "symbol": [
+                                {
+                                    "key": "2",
+                                    "range": {
+                                        "environment": "invalid-access-load",
+                                        "begin": {
+                                            "line": 11,
+                                            "column": 9,
+                                            "byte": 174
+                                        },
+                                        "end": {
+                                            "line": 11,
+                                            "column": 10,
+                                            "byte": 175
+                                        }
                                     },
-                                    "end": {
-                                        "line": 12,
-                                        "column": 15,
-                                        "byte": 199
+                                    "value": {
+                                        "environment": "invalid-access-load",
+                                        "begin": {
+                                            "line": 11,
+                                            "column": 7,
+                                            "byte": 172
+                                        },
+                                        "end": {
+                                            "line": 11,
+                                            "column": 19,
+                                            "byte": 184
+                                        }
                                     }
                                 },
-                                "value": {
-                                    "environment": "invalid-access-load",
-                                    "begin": {
-                                        "line": 12,
-                                        "column": 7,
-                                        "byte": 191
+                                {
+                                    "key": "",
+                                    "range": {
+                                        "environment": "invalid-access-load",
+                                        "begin": {
+                                            "line": 11,
+                                            "column": 10,
+                                            "byte": 175
+                                        },
+                                        "end": {
+                                            "line": 11,
+                                            "column": 11,
+                                            "byte": 176
+                                        }
                                     },
-                                    "end": {
-                                        "line": 12,
-                                        "column": 16,
-                                        "byte": 200
+                                    "value": {
+                                        "environment": "invalid-access-load",
+                                        "begin": {
+                                            "line": 11,
+                                            "column": 7,
+                                            "byte": 172
+                                        },
+                                        "end": {
+                                            "line": 11,
+                                            "column": 19,
+                                            "byte": 184
+                                        }
+                                    }
+                                },
+                                {
+                                    "key": "bad",
+                                    "range": {
+                                        "environment": "invalid-access-load",
+                                        "begin": {
+                                            "line": 11,
+                                            "column": 11,
+                                            "byte": 176
+                                        },
+                                        "end": {
+                                            "line": 11,
+                                            "column": 18,
+                                            "byte": 183
+                                        }
+                                    },
+                                    "value": {
+                                        "environment": "invalid-access-load",
+                                        "begin": {
+                                            "line": 11,
+                                            "column": 7,
+                                            "byte": 172
+                                        },
+                                        "end": {
+                                            "line": 11,
+                                            "column": 19,
+                                            "byte": 184
+                                        }
                                     }
                                 }
-                            }
-                        ]
-                    },
-                    {
-                        "range": {
-                            "environment": "invalid-access-load",
-                            "begin": {
-                                "line": 13,
-                                "column": 7,
-                                "byte": 207
-                            },
-                            "end": {
-                                "line": 13,
-                                "column": 14,
-                                "byte": 214
-                            }
+                            ]
                         },
-                        "schema": true,
-                        "symbol": [
-                            {
-                                "key": "bad",
-                                "range": {
-                                    "environment": "invalid-access-load",
-                                    "begin": {
-                                        "line": 13,
-                                        "column": 9,
-                                        "byte": 209
+                        {
+                            "range": {
+                                "environment": "invalid-access-load",
+                                "begin": {
+                                    "line": 12,
+                                    "column": 7,
+                                    "byte": 191
+                                },
+                                "end": {
+                                    "line": 12,
+                                    "column": 16,
+                                    "byte": 200
+                                }
+                            },
+                            "schema": true,
+                            "symbol": [
+                                {
+                                    "key": "34",
+                                    "range": {
+                                        "environment": "invalid-access-load",
+                                        "begin": {
+                                            "line": 12,
+                                            "column": 9,
+                                            "byte": 193
+                                        },
+                                        "end": {
+                                            "line": 12,
+                                            "column": 11,
+                                            "byte": 195
+                                        }
                                     },
-                                    "end": {
-                                        "line": 13,
-                                        "column": 13,
-                                        "byte": 213
+                                    "value": {
+                                        "environment": "invalid-access-load",
+                                        "begin": {
+                                            "line": 12,
+                                            "column": 7,
+                                            "byte": 191
+                                        },
+                                        "end": {
+                                            "line": 12,
+                                            "column": 16,
+                                            "byte": 200
+                                        }
                                     }
                                 },
-                                "value": {
-                                    "environment": "invalid-access-load",
-                                    "begin": {
-                                        "line": 13,
-                                        "column": 7,
-                                        "byte": 207
+                                {
+                                    "key": "bad",
+                                    "range": {
+                                        "environment": "invalid-access-load",
+                                        "begin": {
+                                            "line": 12,
+                                            "column": 11,
+                                            "byte": 195
+                                        },
+                                        "end": {
+                                            "line": 12,
+                                            "column": 15,
+                                            "byte": 199
+                                        }
                                     },
-                                    "end": {
-                                        "line": 13,
-                                        "column": 14,
-                                        "byte": 214
+                                    "value": {
+                                        "environment": "invalid-access-load",
+                                        "begin": {
+                                            "line": 12,
+                                            "column": 7,
+                                            "byte": 191
+                                        },
+                                        "end": {
+                                            "line": 12,
+                                            "column": 16,
+                                            "byte": 200
+                                        }
                                     }
                                 }
-                            }
-                        ]
-                    }
-                ]
+                            ]
+                        },
+                        {
+                            "range": {
+                                "environment": "invalid-access-load",
+                                "begin": {
+                                    "line": 13,
+                                    "column": 7,
+                                    "byte": 207
+                                },
+                                "end": {
+                                    "line": 13,
+                                    "column": 14,
+                                    "byte": 214
+                                }
+                            },
+                            "schema": true,
+                            "symbol": [
+                                {
+                                    "key": "bad",
+                                    "range": {
+                                        "environment": "invalid-access-load",
+                                        "begin": {
+                                            "line": 13,
+                                            "column": 9,
+                                            "byte": 209
+                                        },
+                                        "end": {
+                                            "line": 13,
+                                            "column": 13,
+                                            "byte": 213
+                                        }
+                                    },
+                                    "value": {
+                                        "environment": "invalid-access-load",
+                                        "begin": {
+                                            "line": 13,
+                                            "column": 7,
+                                            "byte": 207
+                                        },
+                                        "end": {
+                                            "line": 13,
+                                            "column": 14,
+                                            "byte": 214
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                }
             }
         },
         "properties": {

@@ -1,181 +1,290 @@
 {
     "check": {
         "exprs": {
-            "some_bool": {
-                "range": {
-                    "environment": "literals",
-                    "begin": {
-                        "line": 3,
-                        "column": 14,
-                        "byte": 39
-                    },
-                    "end": {
-                        "line": 3,
-                        "column": 18,
-                        "byte": 43
-                    }
+            "range": {
+                "environment": "literals",
+                "begin": {
+                    "line": 2,
+                    "column": 3,
+                    "byte": 10
                 },
-                "schema": {
-                    "type": "boolean",
-                    "const": true
-                },
-                "literal": true
-            },
-            "some_list": {
-                "range": {
-                    "environment": "literals",
-                    "begin": {
-                        "line": 7,
-                        "column": 5,
-                        "byte": 100
-                    },
-                    "end": {
-                        "line": 8,
-                        "column": 12,
-                        "byte": 119
-                    }
-                },
-                "schema": {
-                    "prefixItems": [
-                        {
-                            "type": "string",
-                            "const": "hello"
-                        },
-                        {
-                            "type": "string",
-                            "const": "world"
-                        }
-                    ],
-                    "items": false,
-                    "type": "array"
-                },
-                "list": [
-                    {
-                        "range": {
-                            "environment": "literals",
-                            "begin": {
-                                "line": 7,
-                                "column": 7,
-                                "byte": 102
-                            },
-                            "end": {
-                                "line": 7,
-                                "column": 12,
-                                "byte": 107
-                            }
-                        },
-                        "schema": {
-                            "type": "string",
-                            "const": "hello"
-                        },
-                        "literal": "hello"
-                    },
-                    {
-                        "range": {
-                            "environment": "literals",
-                            "begin": {
-                                "line": 8,
-                                "column": 7,
-                                "byte": 114
-                            },
-                            "end": {
-                                "line": 8,
-                                "column": 12,
-                                "byte": 119
-                            }
-                        },
-                        "schema": {
-                            "type": "string",
-                            "const": "world"
-                        },
-                        "literal": "world"
-                    }
-                ]
-            },
-            "some_null": {
-                "range": {
-                    "environment": "literals",
-                    "begin": {
-                        "line": 2,
-                        "column": 14,
-                        "byte": 21
-                    },
-                    "end": {
-                        "line": 2,
-                        "column": 18,
-                        "byte": 25
-                    }
-                },
-                "schema": {
-                    "type": "null"
+                "end": {
+                    "line": 11,
+                    "column": 21,
+                    "byte": 172
                 }
             },
-            "some_number": {
-                "range": {
-                    "environment": "literals",
-                    "begin": {
-                        "line": 4,
-                        "column": 16,
-                        "byte": 59
+            "schema": {
+                "properties": {
+                    "some_bool": {
+                        "type": "boolean",
+                        "const": true
                     },
-                    "end": {
-                        "line": 4,
-                        "column": 18,
-                        "byte": 61
-                    }
-                },
-                "schema": {
-                    "type": "number",
-                    "const": 42
-                },
-                "literal": 42
-            },
-            "some_object": {
-                "range": {
-                    "environment": "literals",
-                    "begin": {
-                        "line": 10,
-                        "column": 5,
-                        "byte": 139
+                    "some_list": {
+                        "prefixItems": [
+                            {
+                                "type": "string",
+                                "const": "hello"
+                            },
+                            {
+                                "type": "string",
+                                "const": "world"
+                            }
+                        ],
+                        "items": false,
+                        "type": "array"
                     },
-                    "end": {
-                        "line": 11,
-                        "column": 21,
-                        "byte": 172
-                    }
-                },
-                "schema": {
-                    "properties": {
-                        "goodbye": {
-                            "type": "string",
-                            "const": "for now"
+                    "some_null": {
+                        "type": "null"
+                    },
+                    "some_number": {
+                        "type": "number",
+                        "const": 42
+                    },
+                    "some_object": {
+                        "properties": {
+                            "goodbye": {
+                                "type": "string",
+                                "const": "for now"
+                            },
+                            "hello": {
+                                "type": "string",
+                                "const": "world"
+                            }
                         },
-                        "hello": {
-                            "type": "string",
-                            "const": "world"
-                        }
+                        "type": "object",
+                        "required": [
+                            "goodbye",
+                            "hello"
+                        ]
                     },
-                    "type": "object",
-                    "required": [
-                        "goodbye",
-                        "hello"
-                    ]
+                    "some_string": {
+                        "type": "string",
+                        "const": "hello"
+                    }
                 },
-                "keyRanges": {
-                    "goodbye": {
+                "type": "object",
+                "required": [
+                    "some_bool",
+                    "some_list",
+                    "some_null",
+                    "some_number",
+                    "some_object",
+                    "some_string"
+                ]
+            },
+            "keyRanges": {
+                "some_bool": {
+                    "environment": "literals",
+                    "begin": {
+                        "line": 3,
+                        "column": 3,
+                        "byte": 28
+                    },
+                    "end": {
+                        "line": 3,
+                        "column": 12,
+                        "byte": 37
+                    }
+                },
+                "some_list": {
+                    "environment": "literals",
+                    "begin": {
+                        "line": 6,
+                        "column": 3,
+                        "byte": 85
+                    },
+                    "end": {
+                        "line": 6,
+                        "column": 12,
+                        "byte": 94
+                    }
+                },
+                "some_null": {
+                    "environment": "literals",
+                    "begin": {
+                        "line": 2,
+                        "column": 3,
+                        "byte": 10
+                    },
+                    "end": {
+                        "line": 2,
+                        "column": 12,
+                        "byte": 19
+                    }
+                },
+                "some_number": {
+                    "environment": "literals",
+                    "begin": {
+                        "line": 4,
+                        "column": 3,
+                        "byte": 46
+                    },
+                    "end": {
+                        "line": 4,
+                        "column": 14,
+                        "byte": 57
+                    }
+                },
+                "some_object": {
+                    "environment": "literals",
+                    "begin": {
+                        "line": 9,
+                        "column": 3,
+                        "byte": 122
+                    },
+                    "end": {
+                        "line": 9,
+                        "column": 14,
+                        "byte": 133
+                    }
+                },
+                "some_string": {
+                    "environment": "literals",
+                    "begin": {
+                        "line": 5,
+                        "column": 3,
+                        "byte": 64
+                    },
+                    "end": {
+                        "line": 5,
+                        "column": 14,
+                        "byte": 75
+                    }
+                }
+            },
+            "object": {
+                "some_bool": {
+                    "range": {
                         "environment": "literals",
                         "begin": {
-                            "line": 11,
-                            "column": 5,
-                            "byte": 156
+                            "line": 3,
+                            "column": 14,
+                            "byte": 39
                         },
                         "end": {
-                            "line": 11,
-                            "column": 12,
-                            "byte": 163
+                            "line": 3,
+                            "column": 18,
+                            "byte": 43
                         }
                     },
-                    "hello": {
+                    "schema": {
+                        "type": "boolean",
+                        "const": true
+                    },
+                    "literal": true
+                },
+                "some_list": {
+                    "range": {
+                        "environment": "literals",
+                        "begin": {
+                            "line": 7,
+                            "column": 5,
+                            "byte": 100
+                        },
+                        "end": {
+                            "line": 8,
+                            "column": 12,
+                            "byte": 119
+                        }
+                    },
+                    "schema": {
+                        "prefixItems": [
+                            {
+                                "type": "string",
+                                "const": "hello"
+                            },
+                            {
+                                "type": "string",
+                                "const": "world"
+                            }
+                        ],
+                        "items": false,
+                        "type": "array"
+                    },
+                    "list": [
+                        {
+                            "range": {
+                                "environment": "literals",
+                                "begin": {
+                                    "line": 7,
+                                    "column": 7,
+                                    "byte": 102
+                                },
+                                "end": {
+                                    "line": 7,
+                                    "column": 12,
+                                    "byte": 107
+                                }
+                            },
+                            "schema": {
+                                "type": "string",
+                                "const": "hello"
+                            },
+                            "literal": "hello"
+                        },
+                        {
+                            "range": {
+                                "environment": "literals",
+                                "begin": {
+                                    "line": 8,
+                                    "column": 7,
+                                    "byte": 114
+                                },
+                                "end": {
+                                    "line": 8,
+                                    "column": 12,
+                                    "byte": 119
+                                }
+                            },
+                            "schema": {
+                                "type": "string",
+                                "const": "world"
+                            },
+                            "literal": "world"
+                        }
+                    ]
+                },
+                "some_null": {
+                    "range": {
+                        "environment": "literals",
+                        "begin": {
+                            "line": 2,
+                            "column": 14,
+                            "byte": 21
+                        },
+                        "end": {
+                            "line": 2,
+                            "column": 18,
+                            "byte": 25
+                        }
+                    },
+                    "schema": {
+                        "type": "null"
+                    }
+                },
+                "some_number": {
+                    "range": {
+                        "environment": "literals",
+                        "begin": {
+                            "line": 4,
+                            "column": 16,
+                            "byte": 59
+                        },
+                        "end": {
+                            "line": 4,
+                            "column": 18,
+                            "byte": 61
+                        }
+                    },
+                    "schema": {
+                        "type": "number",
+                        "const": 42
+                    },
+                    "literal": 42
+                },
+                "some_object": {
+                    "range": {
                         "environment": "literals",
                         "begin": {
                             "line": 10,
@@ -183,74 +292,119 @@
                             "byte": 139
                         },
                         "end": {
-                            "line": 10,
-                            "column": 10,
-                            "byte": 144
+                            "line": 11,
+                            "column": 21,
+                            "byte": 172
+                        }
+                    },
+                    "schema": {
+                        "properties": {
+                            "goodbye": {
+                                "type": "string",
+                                "const": "for now"
+                            },
+                            "hello": {
+                                "type": "string",
+                                "const": "world"
+                            }
+                        },
+                        "type": "object",
+                        "required": [
+                            "goodbye",
+                            "hello"
+                        ]
+                    },
+                    "keyRanges": {
+                        "goodbye": {
+                            "environment": "literals",
+                            "begin": {
+                                "line": 11,
+                                "column": 5,
+                                "byte": 156
+                            },
+                            "end": {
+                                "line": 11,
+                                "column": 12,
+                                "byte": 163
+                            }
+                        },
+                        "hello": {
+                            "environment": "literals",
+                            "begin": {
+                                "line": 10,
+                                "column": 5,
+                                "byte": 139
+                            },
+                            "end": {
+                                "line": 10,
+                                "column": 10,
+                                "byte": 144
+                            }
+                        }
+                    },
+                    "object": {
+                        "goodbye": {
+                            "range": {
+                                "environment": "literals",
+                                "begin": {
+                                    "line": 11,
+                                    "column": 14,
+                                    "byte": 165
+                                },
+                                "end": {
+                                    "line": 11,
+                                    "column": 21,
+                                    "byte": 172
+                                }
+                            },
+                            "schema": {
+                                "type": "string",
+                                "const": "for now"
+                            },
+                            "literal": "for now"
+                        },
+                        "hello": {
+                            "range": {
+                                "environment": "literals",
+                                "begin": {
+                                    "line": 10,
+                                    "column": 12,
+                                    "byte": 146
+                                },
+                                "end": {
+                                    "line": 10,
+                                    "column": 17,
+                                    "byte": 151
+                                }
+                            },
+                            "schema": {
+                                "type": "string",
+                                "const": "world"
+                            },
+                            "literal": "world"
                         }
                     }
                 },
-                "object": {
-                    "goodbye": {
-                        "range": {
-                            "environment": "literals",
-                            "begin": {
-                                "line": 11,
-                                "column": 14,
-                                "byte": 165
-                            },
-                            "end": {
-                                "line": 11,
-                                "column": 21,
-                                "byte": 172
-                            }
+                "some_string": {
+                    "range": {
+                        "environment": "literals",
+                        "begin": {
+                            "line": 5,
+                            "column": 16,
+                            "byte": 77
                         },
-                        "schema": {
-                            "type": "string",
-                            "const": "for now"
-                        },
-                        "literal": "for now"
+                        "end": {
+                            "line": 5,
+                            "column": 21,
+                            "byte": 82
+                        }
                     },
-                    "hello": {
-                        "range": {
-                            "environment": "literals",
-                            "begin": {
-                                "line": 10,
-                                "column": 12,
-                                "byte": 146
-                            },
-                            "end": {
-                                "line": 10,
-                                "column": 17,
-                                "byte": 151
-                            }
-                        },
-                        "schema": {
-                            "type": "string",
-                            "const": "world"
-                        },
-                        "literal": "world"
-                    }
+                    "schema": {
+                        "type": "string",
+                        "const": "hello"
+                    },
+                    "literal": "hello"
                 }
-            },
-            "some_string": {
-                "range": {
-                    "environment": "literals",
-                    "begin": {
-                        "line": 5,
-                        "column": 16,
-                        "byte": 77
-                    },
-                    "end": {
-                        "line": 5,
-                        "column": 21,
-                        "byte": 82
-                    }
-                },
-                "schema": {
-                    "type": "string",
-                    "const": "hello"
-                },
-                "literal": "hello"
             }
         },
         "properties": {
@@ -700,181 +854,290 @@
     },
     "eval": {
         "exprs": {
-            "some_bool": {
-                "range": {
-                    "environment": "literals",
-                    "begin": {
-                        "line": 3,
-                        "column": 14,
-                        "byte": 39
-                    },
-                    "end": {
-                        "line": 3,
-                        "column": 18,
-                        "byte": 43
-                    }
+            "range": {
+                "environment": "literals",
+                "begin": {
+                    "line": 2,
+                    "column": 3,
+                    "byte": 10
                 },
-                "schema": {
-                    "type": "boolean",
-                    "const": true
-                },
-                "literal": true
-            },
-            "some_list": {
-                "range": {
-                    "environment": "literals",
-                    "begin": {
-                        "line": 7,
-                        "column": 5,
-                        "byte": 100
-                    },
-                    "end": {
-                        "line": 8,
-                        "column": 12,
-                        "byte": 119
-                    }
-                },
-                "schema": {
-                    "prefixItems": [
-                        {
-                            "type": "string",
-                            "const": "hello"
-                        },
-                        {
-                            "type": "string",
-                            "const": "world"
-                        }
-                    ],
-                    "items": false,
-                    "type": "array"
-                },
-                "list": [
-                    {
-                        "range": {
-                            "environment": "literals",
-                            "begin": {
-                                "line": 7,
-                                "column": 7,
-                                "byte": 102
-                            },
-                            "end": {
-                                "line": 7,
-                                "column": 12,
-                                "byte": 107
-                            }
-                        },
-                        "schema": {
-                            "type": "string",
-                            "const": "hello"
-                        },
-                        "literal": "hello"
-                    },
-                    {
-                        "range": {
-                            "environment": "literals",
-                            "begin": {
-                                "line": 8,
-                                "column": 7,
-                                "byte": 114
-                            },
-                            "end": {
-                                "line": 8,
-                                "column": 12,
-                                "byte": 119
-                            }
-                        },
-                        "schema": {
-                            "type": "string",
-                            "const": "world"
-                        },
-                        "literal": "world"
-                    }
-                ]
-            },
-            "some_null": {
-                "range": {
-                    "environment": "literals",
-                    "begin": {
-                        "line": 2,
-                        "column": 14,
-                        "byte": 21
-                    },
-                    "end": {
-                        "line": 2,
-                        "column": 18,
-                        "byte": 25
-                    }
-                },
-                "schema": {
-                    "type": "null"
+                "end": {
+                    "line": 11,
+                    "column": 21,
+                    "byte": 172
                 }
             },
-            "some_number": {
-                "range": {
-                    "environment": "literals",
-                    "begin": {
-                        "line": 4,
-                        "column": 16,
-                        "byte": 59
+            "schema": {
+                "properties": {
+                    "some_bool": {
+                        "type": "boolean",
+                        "const": true
                     },
-                    "end": {
-                        "line": 4,
-                        "column": 18,
-                        "byte": 61
-                    }
-                },
-                "schema": {
-                    "type": "number",
-                    "const": 42
-                },
-                "literal": 42
-            },
-            "some_object": {
-                "range": {
-                    "environment": "literals",
-                    "begin": {
-                        "line": 10,
-                        "column": 5,
-                        "byte": 139
+                    "some_list": {
+                        "prefixItems": [
+                            {
+                                "type": "string",
+                                "const": "hello"
+                            },
+                            {
+                                "type": "string",
+                                "const": "world"
+                            }
+                        ],
+                        "items": false,
+                        "type": "array"
                     },
-                    "end": {
-                        "line": 11,
-                        "column": 21,
-                        "byte": 172
-                    }
-                },
-                "schema": {
-                    "properties": {
-                        "goodbye": {
-                            "type": "string",
-                            "const": "for now"
+                    "some_null": {
+                        "type": "null"
+                    },
+                    "some_number": {
+                        "type": "number",
+                        "const": 42
+                    },
+                    "some_object": {
+                        "properties": {
+                            "goodbye": {
+                                "type": "string",
+                                "const": "for now"
+                            },
+                            "hello": {
+                                "type": "string",
+                                "const": "world"
+                            }
                         },
-                        "hello": {
-                            "type": "string",
-                            "const": "world"
-                        }
+                        "type": "object",
+                        "required": [
+                            "goodbye",
+                            "hello"
+                        ]
                     },
-                    "type": "object",
-                    "required": [
-                        "goodbye",
-                        "hello"
-                    ]
+                    "some_string": {
+                        "type": "string",
+                        "const": "hello"
+                    }
                 },
-                "keyRanges": {
-                    "goodbye": {
+                "type": "object",
+                "required": [
+                    "some_bool",
+                    "some_list",
+                    "some_null",
+                    "some_number",
+                    "some_object",
+                    "some_string"
+                ]
+            },
+            "keyRanges": {
+                "some_bool": {
+                    "environment": "literals",
+                    "begin": {
+                        "line": 3,
+                        "column": 3,
+                        "byte": 28
+                    },
+                    "end": {
+                        "line": 3,
+                        "column": 12,
+                        "byte": 37
+                    }
+                },
+                "some_list": {
+                    "environment": "literals",
+                    "begin": {
+                        "line": 6,
+                        "column": 3,
+                        "byte": 85
+                    },
+                    "end": {
+                        "line": 6,
+                        "column": 12,
+                        "byte": 94
+                    }
+                },
+                "some_null": {
+                    "environment": "literals",
+                    "begin": {
+                        "line": 2,
+                        "column": 3,
+                        "byte": 10
+                    },
+                    "end": {
+                        "line": 2,
+                        "column": 12,
+                        "byte": 19
+                    }
+                },
+                "some_number": {
+                    "environment": "literals",
+                    "begin": {
+                        "line": 4,
+                        "column": 3,
+                        "byte": 46
+                    },
+                    "end": {
+                        "line": 4,
+                        "column": 14,
+                        "byte": 57
+                    }
+                },
+                "some_object": {
+                    "environment": "literals",
+                    "begin": {
+                        "line": 9,
+                        "column": 3,
+                        "byte": 122
+                    },
+                    "end": {
+                        "line": 9,
+                        "column": 14,
+                        "byte": 133
+                    }
+                },
+                "some_string": {
+                    "environment": "literals",
+                    "begin": {
+                        "line": 5,
+                        "column": 3,
+                        "byte": 64
+                    },
+                    "end": {
+                        "line": 5,
+                        "column": 14,
+                        "byte": 75
+                    }
+                }
+            },
+            "object": {
+                "some_bool": {
+                    "range": {
                         "environment": "literals",
                         "begin": {
-                            "line": 11,
-                            "column": 5,
-                            "byte": 156
+                            "line": 3,
+                            "column": 14,
+                            "byte": 39
                         },
                         "end": {
-                            "line": 11,
-                            "column": 12,
-                            "byte": 163
+                            "line": 3,
+                            "column": 18,
+                            "byte": 43
                         }
                     },
-                    "hello": {
+                    "schema": {
+                        "type": "boolean",
+                        "const": true
+                    },
+                    "literal": true
+                },
+                "some_list": {
+                    "range": {
+                        "environment": "literals",
+                        "begin": {
+                            "line": 7,
+                            "column": 5,
+                            "byte": 100
+                        },
+                        "end": {
+                            "line": 8,
+                            "column": 12,
+                            "byte": 119
+                        }
+                    },
+                    "schema": {
+                        "prefixItems": [
+                            {
+                                "type": "string",
+                                "const": "hello"
+                            },
+                            {
+                                "type": "string",
+                                "const": "world"
+                            }
+                        ],
+                        "items": false,
+                        "type": "array"
+                    },
+                    "list": [
+                        {
+                            "range": {
+                                "environment": "literals",
+                                "begin": {
+                                    "line": 7,
+                                    "column": 7,
+                                    "byte": 102
+                                },
+                                "end": {
+                                    "line": 7,
+                                    "column": 12,
+                                    "byte": 107
+                                }
+                            },
+                            "schema": {
+                                "type": "string",
+                                "const": "hello"
+                            },
+                            "literal": "hello"
+                        },
+                        {
+                            "range": {
+                                "environment": "literals",
+                                "begin": {
+                                    "line": 8,
+                                    "column": 7,
+                                    "byte": 114
+                                },
+                                "end": {
+                                    "line": 8,
+                                    "column": 12,
+                                    "byte": 119
+                                }
+                            },
+                            "schema": {
+                                "type": "string",
+                                "const": "world"
+                            },
+                            "literal": "world"
+                        }
+                    ]
+                },
+                "some_null": {
+                    "range": {
+                        "environment": "literals",
+                        "begin": {
+                            "line": 2,
+                            "column": 14,
+                            "byte": 21
+                        },
+                        "end": {
+                            "line": 2,
+                            "column": 18,
+                            "byte": 25
+                        }
+                    },
+                    "schema": {
+                        "type": "null"
+                    }
+                },
+                "some_number": {
+                    "range": {
+                        "environment": "literals",
+                        "begin": {
+                            "line": 4,
+                            "column": 16,
+                            "byte": 59
+                        },
+                        "end": {
+                            "line": 4,
+                            "column": 18,
+                            "byte": 61
+                        }
+                    },
+                    "schema": {
+                        "type": "number",
+                        "const": 42
+                    },
+                    "literal": 42
+                },
+                "some_object": {
+                    "range": {
                         "environment": "literals",
                         "begin": {
                             "line": 10,
@@ -882,74 +1145,119 @@
                             "byte": 139
                         },
                         "end": {
-                            "line": 10,
-                            "column": 10,
-                            "byte": 144
+                            "line": 11,
+                            "column": 21,
+                            "byte": 172
+                        }
+                    },
+                    "schema": {
+                        "properties": {
+                            "goodbye": {
+                                "type": "string",
+                                "const": "for now"
+                            },
+                            "hello": {
+                                "type": "string",
+                                "const": "world"
+                            }
+                        },
+                        "type": "object",
+                        "required": [
+                            "goodbye",
+                            "hello"
+                        ]
+                    },
+                    "keyRanges": {
+                        "goodbye": {
+                            "environment": "literals",
+                            "begin": {
+                                "line": 11,
+                                "column": 5,
+                                "byte": 156
+                            },
+                            "end": {
+                                "line": 11,
+                                "column": 12,
+                                "byte": 163
+                            }
+                        },
+                        "hello": {
+                            "environment": "literals",
+                            "begin": {
+                                "line": 10,
+                                "column": 5,
+                                "byte": 139
+                            },
+                            "end": {
+                                "line": 10,
+                                "column": 10,
+                                "byte": 144
+                            }
+                        }
+                    },
+                    "object": {
+                        "goodbye": {
+                            "range": {
+                                "environment": "literals",
+                                "begin": {
+                                    "line": 11,
+                                    "column": 14,
+                                    "byte": 165
+                                },
+                                "end": {
+                                    "line": 11,
+                                    "column": 21,
+                                    "byte": 172
+                                }
+                            },
+                            "schema": {
+                                "type": "string",
+                                "const": "for now"
+                            },
+                            "literal": "for now"
+                        },
+                        "hello": {
+                            "range": {
+                                "environment": "literals",
+                                "begin": {
+                                    "line": 10,
+                                    "column": 12,
+                                    "byte": 146
+                                },
+                                "end": {
+                                    "line": 10,
+                                    "column": 17,
+                                    "byte": 151
+                                }
+                            },
+                            "schema": {
+                                "type": "string",
+                                "const": "world"
+                            },
+                            "literal": "world"
                         }
                     }
                 },
-                "object": {
-                    "goodbye": {
-                        "range": {
-                            "environment": "literals",
-                            "begin": {
-                                "line": 11,
-                                "column": 14,
-                                "byte": 165
-                            },
-                            "end": {
-                                "line": 11,
-                                "column": 21,
-                                "byte": 172
-                            }
+                "some_string": {
+                    "range": {
+                        "environment": "literals",
+                        "begin": {
+                            "line": 5,
+                            "column": 16,
+                            "byte": 77
                         },
-                        "schema": {
-                            "type": "string",
-                            "const": "for now"
-                        },
-                        "literal": "for now"
+                        "end": {
+                            "line": 5,
+                            "column": 21,
+                            "byte": 82
+                        }
                     },
-                    "hello": {
-                        "range": {
-                            "environment": "literals",
-                            "begin": {
-                                "line": 10,
-                                "column": 12,
-                                "byte": 146
-                            },
-                            "end": {
-                                "line": 10,
-                                "column": 17,
-                                "byte": 151
-                            }
-                        },
-                        "schema": {
-                            "type": "string",
-                            "const": "world"
-                        },
-                        "literal": "world"
-                    }
+                    "schema": {
+                        "type": "string",
+                        "const": "hello"
+                    },
+                    "literal": "hello"
                 }
-            },
-            "some_string": {
-                "range": {
-                    "environment": "literals",
-                    "begin": {
-                        "line": 5,
-                        "column": 16,
-                        "byte": 77
-                    },
-                    "end": {
-                        "line": 5,
-                        "column": 21,
-                        "byte": 82
-                    }
-                },
-                "schema": {
-                    "type": "string",
-                    "const": "hello"
-                },
-                "literal": "hello"
             }
         },
         "properties": {

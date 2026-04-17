@@ -48,6 +48,52 @@
         }
     ],
     "check": {
+        "exprs": {
+            "range": {
+                "environment": "reserved-keys",
+                "begin": {
+                    "line": 2,
+                    "column": 3,
+                    "byte": 10
+                },
+                "end": {
+                    "line": 3,
+                    "column": 15,
+                    "byte": 37
+                }
+            },
+            "schema": {
+                "type": "object"
+            },
+            "keyRanges": {
+                "context": {
+                    "environment": "reserved-keys",
+                    "begin": {
+                        "line": 3,
+                        "column": 3,
+                        "byte": 25
+                    },
+                    "end": {
+                        "line": 3,
+                        "column": 10,
+                        "byte": 32
+                    }
+                },
+                "imports": {
+                    "environment": "reserved-keys",
+                    "begin": {
+                        "line": 2,
+                        "column": 3,
+                        "byte": 10
+                    },
+                    "end": {
+                        "line": 2,
+                        "column": 10,
+                        "byte": 17
+                    }
+                }
+            }
+        },
         "schema": {
             "type": "object"
         },
@@ -290,6 +336,52 @@
         }
     ],
     "eval": {
+        "exprs": {
+            "range": {
+                "environment": "reserved-keys",
+                "begin": {
+                    "line": 2,
+                    "column": 3,
+                    "byte": 10
+                },
+                "end": {
+                    "line": 3,
+                    "column": 15,
+                    "byte": 37
+                }
+            },
+            "schema": {
+                "type": "object"
+            },
+            "keyRanges": {
+                "context": {
+                    "environment": "reserved-keys",
+                    "begin": {
+                        "line": 3,
+                        "column": 3,
+                        "byte": 25
+                    },
+                    "end": {
+                        "line": 3,
+                        "column": 10,
+                        "byte": 32
+                    }
+                },
+                "imports": {
+                    "environment": "reserved-keys",
+                    "begin": {
+                        "line": 2,
+                        "column": 3,
+                        "byte": 10
+                    },
+                    "end": {
+                        "line": 2,
+                        "column": 10,
+                        "byte": 17
+                    }
+                }
+            }
+        },
         "schema": {
             "type": "object"
         },

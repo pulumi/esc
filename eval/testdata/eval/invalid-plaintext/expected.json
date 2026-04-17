@@ -26,39 +26,80 @@
     ],
     "check": {
         "exprs": {
-            "bar": {
-                "range": {
-                    "environment": "invalid-plaintext",
-                    "begin": {
-                        "line": 5,
-                        "column": 5,
-                        "byte": 57
+            "range": {
+                "environment": "invalid-plaintext",
+                "begin": {
+                    "line": 2,
+                    "column": 3,
+                    "byte": 10
+                },
+                "end": {
+                    "line": 6,
+                    "column": 17,
+                    "byte": 82
+                }
+            },
+            "schema": {
+                "properties": {
+                    "bar": {
+                        "properties": {
+                            "a": {
+                                "type": "string",
+                                "const": "valid"
+                            },
+                            "object": {
+                                "type": "string",
+                                "const": "here"
+                            }
+                        },
+                        "type": "object",
+                        "required": [
+                            "a",
+                            "object"
+                        ]
                     },
-                    "end": {
-                        "line": 6,
-                        "column": 17,
-                        "byte": 82
+                    "foo": {
+                        "type": "string",
+                        "const": ""
                     }
                 },
-                "schema": {
-                    "properties": {
-                        "a": {
-                            "type": "string",
-                            "const": "valid"
-                        },
-                        "object": {
-                            "type": "string",
-                            "const": "here"
-                        }
+                "type": "object",
+                "required": [
+                    "bar",
+                    "foo"
+                ]
+            },
+            "keyRanges": {
+                "bar": {
+                    "environment": "invalid-plaintext",
+                    "begin": {
+                        "line": 4,
+                        "column": 3,
+                        "byte": 48
                     },
-                    "type": "object",
-                    "required": [
-                        "a",
-                        "object"
-                    ]
+                    "end": {
+                        "line": 4,
+                        "column": 6,
+                        "byte": 51
+                    }
                 },
-                "keyRanges": {
-                    "a": {
+                "foo": {
+                    "environment": "invalid-plaintext",
+                    "begin": {
+                        "line": 2,
+                        "column": 3,
+                        "byte": 10
+                    },
+                    "end": {
+                        "line": 2,
+                        "column": 6,
+                        "byte": 13
+                    }
+                }
+            },
+            "object": {
+                "bar": {
+                    "range": {
                         "environment": "invalid-plaintext",
                         "begin": {
                             "line": 5,
@@ -66,89 +107,101 @@
                             "byte": 57
                         },
                         "end": {
-                            "line": 5,
-                            "column": 6,
-                            "byte": 58
+                            "line": 6,
+                            "column": 17,
+                            "byte": 82
                         }
                     },
-                    "object": {
-                        "environment": "invalid-plaintext",
-                        "begin": {
-                            "line": 6,
-                            "column": 5,
-                            "byte": 70
+                    "schema": {
+                        "properties": {
+                            "a": {
+                                "type": "string",
+                                "const": "valid"
+                            },
+                            "object": {
+                                "type": "string",
+                                "const": "here"
+                            }
                         },
-                        "end": {
-                            "line": 6,
-                            "column": 11,
-                            "byte": 76
-                        }
-                    }
-                },
-                "object": {
-                    "a": {
-                        "range": {
+                        "type": "object",
+                        "required": [
+                            "a",
+                            "object"
+                        ]
+                    },
+                    "keyRanges": {
+                        "a": {
                             "environment": "invalid-plaintext",
                             "begin": {
                                 "line": 5,
-                                "column": 8,
-                                "byte": 60
+                                "column": 5,
+                                "byte": 57
                             },
                             "end": {
                                 "line": 5,
-                                "column": 13,
-                                "byte": 65
+                                "column": 6,
+                                "byte": 58
                             }
                         },
-                        "schema": {
-                            "type": "string",
-                            "const": "valid"
-                        },
-                        "literal": "valid"
-                    },
-                    "object": {
-                        "range": {
+                        "object": {
                             "environment": "invalid-plaintext",
                             "begin": {
                                 "line": 6,
-                                "column": 13,
-                                "byte": 78
+                                "column": 5,
+                                "byte": 70
                             },
                             "end": {
                                 "line": 6,
-                                "column": 17,
-                                "byte": 82
+                                "column": 11,
+                                "byte": 76
                             }
-                        },
-                        "schema": {
-                            "type": "string",
-                            "const": "here"
-                        },
-                        "literal": "here"
-                    }
-                }
-            },
-            "foo": {
-                "range": {
-                    "environment": "invalid-plaintext",
-                    "begin": {
-                        "line": 3,
-                        "column": 5,
-                        "byte": 19
+                        }
                     },
-                    "end": {
-                        "line": 3,
-                        "column": 29,
-                        "byte": 43
+                    "object": {
+                        "a": {
+                            "range": {
+                                "environment": "invalid-plaintext",
+                                "begin": {
+                                    "line": 5,
+                                    "column": 8,
+                                    "byte": 60
+                                },
+                                "end": {
+                                    "line": 5,
+                                    "column": 13,
+                                    "byte": 65
+                                }
+                            },
+                            "schema": {
+                                "type": "string",
+                                "const": "valid"
+                            },
+                            "literal": "valid"
+                        },
+                        "object": {
+                            "range": {
+                                "environment": "invalid-plaintext",
+                                "begin": {
+                                    "line": 6,
+                                    "column": 13,
+                                    "byte": 78
+                                },
+                                "end": {
+                                    "line": 6,
+                                    "column": 17,
+                                    "byte": 82
+                                }
+                            },
+                            "schema": {
+                                "type": "string",
+                                "const": "here"
+                            },
+                            "literal": "here"
+                        }
                     }
                 },
-                "schema": {
-                    "type": "string",
-                    "const": ""
-                },
-                "builtin": {
-                    "name": "fn::secret",
-                    "nameRange": {
+                "foo": {
+                    "range": {
                         "environment": "invalid-plaintext",
                         "begin": {
                             "line": 3,
@@ -157,30 +210,50 @@
                         },
                         "end": {
                             "line": 3,
-                            "column": 15,
-                            "byte": 29
+                            "column": 29,
+                            "byte": 43
                         }
                     },
-                    "argSchema": true,
-                    "arg": {
-                        "range": {
+                    "schema": {
+                        "type": "string",
+                        "const": ""
+                    },
+                    "builtin": {
+                        "name": "fn::secret",
+                        "nameRange": {
                             "environment": "invalid-plaintext",
                             "begin": {
-                                "line": 0,
-                                "column": 0,
-                                "byte": 0
+                                "line": 3,
+                                "column": 5,
+                                "byte": 19
                             },
                             "end": {
-                                "line": 0,
-                                "column": 0,
-                                "byte": 0
+                                "line": 3,
+                                "column": 15,
+                                "byte": 29
                             }
                         },
-                        "schema": {
-                            "type": "string",
-                            "const": ""
-                        },
-                        "literal": ""
+                        "argSchema": true,
+                        "arg": {
+                            "range": {
+                                "environment": "invalid-plaintext",
+                                "begin": {
+                                    "line": 0,
+                                    "column": 0,
+                                    "byte": 0
+                                },
+                                "end": {
+                                    "line": 0,
+                                    "column": 0,
+                                    "byte": 0
+                                }
+                            },
+                            "schema": {
+                                "type": "string",
+                                "const": ""
+                            },
+                            "literal": ""
+                        }
                     }
                 }
             }
@@ -489,39 +562,80 @@
     },
     "eval": {
         "exprs": {
-            "bar": {
-                "range": {
-                    "environment": "invalid-plaintext",
-                    "begin": {
-                        "line": 5,
-                        "column": 5,
-                        "byte": 57
+            "range": {
+                "environment": "invalid-plaintext",
+                "begin": {
+                    "line": 2,
+                    "column": 3,
+                    "byte": 10
+                },
+                "end": {
+                    "line": 6,
+                    "column": 17,
+                    "byte": 82
+                }
+            },
+            "schema": {
+                "properties": {
+                    "bar": {
+                        "properties": {
+                            "a": {
+                                "type": "string",
+                                "const": "valid"
+                            },
+                            "object": {
+                                "type": "string",
+                                "const": "here"
+                            }
+                        },
+                        "type": "object",
+                        "required": [
+                            "a",
+                            "object"
+                        ]
                     },
-                    "end": {
-                        "line": 6,
-                        "column": 17,
-                        "byte": 82
+                    "foo": {
+                        "type": "string",
+                        "const": ""
                     }
                 },
-                "schema": {
-                    "properties": {
-                        "a": {
-                            "type": "string",
-                            "const": "valid"
-                        },
-                        "object": {
-                            "type": "string",
-                            "const": "here"
-                        }
+                "type": "object",
+                "required": [
+                    "bar",
+                    "foo"
+                ]
+            },
+            "keyRanges": {
+                "bar": {
+                    "environment": "invalid-plaintext",
+                    "begin": {
+                        "line": 4,
+                        "column": 3,
+                        "byte": 48
                     },
-                    "type": "object",
-                    "required": [
-                        "a",
-                        "object"
-                    ]
+                    "end": {
+                        "line": 4,
+                        "column": 6,
+                        "byte": 51
+                    }
                 },
-                "keyRanges": {
-                    "a": {
+                "foo": {
+                    "environment": "invalid-plaintext",
+                    "begin": {
+                        "line": 2,
+                        "column": 3,
+                        "byte": 10
+                    },
+                    "end": {
+                        "line": 2,
+                        "column": 6,
+                        "byte": 13
+                    }
+                }
+            },
+            "object": {
+                "bar": {
+                    "range": {
                         "environment": "invalid-plaintext",
                         "begin": {
                             "line": 5,
@@ -529,89 +643,101 @@
                             "byte": 57
                         },
                         "end": {
-                            "line": 5,
-                            "column": 6,
-                            "byte": 58
+                            "line": 6,
+                            "column": 17,
+                            "byte": 82
                         }
                     },
-                    "object": {
-                        "environment": "invalid-plaintext",
-                        "begin": {
-                            "line": 6,
-                            "column": 5,
-                            "byte": 70
+                    "schema": {
+                        "properties": {
+                            "a": {
+                                "type": "string",
+                                "const": "valid"
+                            },
+                            "object": {
+                                "type": "string",
+                                "const": "here"
+                            }
                         },
-                        "end": {
-                            "line": 6,
-                            "column": 11,
-                            "byte": 76
-                        }
-                    }
-                },
-                "object": {
-                    "a": {
-                        "range": {
+                        "type": "object",
+                        "required": [
+                            "a",
+                            "object"
+                        ]
+                    },
+                    "keyRanges": {
+                        "a": {
                             "environment": "invalid-plaintext",
                             "begin": {
                                 "line": 5,
-                                "column": 8,
-                                "byte": 60
+                                "column": 5,
+                                "byte": 57
                             },
                             "end": {
                                 "line": 5,
-                                "column": 13,
-                                "byte": 65
+                                "column": 6,
+                                "byte": 58
                             }
                         },
-                        "schema": {
-                            "type": "string",
-                            "const": "valid"
-                        },
-                        "literal": "valid"
-                    },
-                    "object": {
-                        "range": {
+                        "object": {
                             "environment": "invalid-plaintext",
                             "begin": {
                                 "line": 6,
-                                "column": 13,
-                                "byte": 78
+                                "column": 5,
+                                "byte": 70
                             },
                             "end": {
                                 "line": 6,
-                                "column": 17,
-                                "byte": 82
+                                "column": 11,
+                                "byte": 76
                             }
-                        },
-                        "schema": {
-                            "type": "string",
-                            "const": "here"
-                        },
-                        "literal": "here"
-                    }
-                }
-            },
-            "foo": {
-                "range": {
-                    "environment": "invalid-plaintext",
-                    "begin": {
-                        "line": 3,
-                        "column": 5,
-                        "byte": 19
+                        }
                     },
-                    "end": {
-                        "line": 3,
-                        "column": 29,
-                        "byte": 43
+                    "object": {
+                        "a": {
+                            "range": {
+                                "environment": "invalid-plaintext",
+                                "begin": {
+                                    "line": 5,
+                                    "column": 8,
+                                    "byte": 60
+                                },
+                                "end": {
+                                    "line": 5,
+                                    "column": 13,
+                                    "byte": 65
+                                }
+                            },
+                            "schema": {
+                                "type": "string",
+                                "const": "valid"
+                            },
+                            "literal": "valid"
+                        },
+                        "object": {
+                            "range": {
+                                "environment": "invalid-plaintext",
+                                "begin": {
+                                    "line": 6,
+                                    "column": 13,
+                                    "byte": 78
+                                },
+                                "end": {
+                                    "line": 6,
+                                    "column": 17,
+                                    "byte": 82
+                                }
+                            },
+                            "schema": {
+                                "type": "string",
+                                "const": "here"
+                            },
+                            "literal": "here"
+                        }
                     }
                 },
-                "schema": {
-                    "type": "string",
-                    "const": ""
-                },
-                "builtin": {
-                    "name": "fn::secret",
-                    "nameRange": {
+                "foo": {
+                    "range": {
                         "environment": "invalid-plaintext",
                         "begin": {
                             "line": 3,
@@ -620,30 +746,50 @@
                         },
                         "end": {
                             "line": 3,
-                            "column": 15,
-                            "byte": 29
+                            "column": 29,
+                            "byte": 43
                         }
                     },
-                    "argSchema": true,
-                    "arg": {
-                        "range": {
+                    "schema": {
+                        "type": "string",
+                        "const": ""
+                    },
+                    "builtin": {
+                        "name": "fn::secret",
+                        "nameRange": {
                             "environment": "invalid-plaintext",
                             "begin": {
-                                "line": 0,
-                                "column": 0,
-                                "byte": 0
+                                "line": 3,
+                                "column": 5,
+                                "byte": 19
                             },
                             "end": {
-                                "line": 0,
-                                "column": 0,
-                                "byte": 0
+                                "line": 3,
+                                "column": 15,
+                                "byte": 29
                             }
                         },
-                        "schema": {
-                            "type": "string",
-                            "const": ""
-                        },
-                        "literal": ""
+                        "argSchema": true,
+                        "arg": {
+                            "range": {
+                                "environment": "invalid-plaintext",
+                                "begin": {
+                                    "line": 0,
+                                    "column": 0,
+                                    "byte": 0
+                                },
+                                "end": {
+                                    "line": 0,
+                                    "column": 0,
+                                    "byte": 0
+                                }
+                            },
+                            "schema": {
+                                "type": "string",
+                                "const": ""
+                            },
+                            "literal": ""
+                        }
                     }
                 }
             }

@@ -1,5 +1,235 @@
 {
     "check": {
+        "exprs": {
+            "range": {
+                "environment": "import-merge",
+                "begin": {
+                    "line": 0,
+                    "column": 0,
+                    "byte": 0
+                },
+                "end": {
+                    "line": 0,
+                    "column": 0,
+                    "byte": 0
+                }
+            },
+            "schema": {
+                "properties": {
+                    "alpha": {
+                        "type": "string",
+                        "const": "beta"
+                    },
+                    "some_object": {
+                        "properties": {
+                            "baz": {
+                                "type": "string",
+                                "const": "qux"
+                            },
+                            "foo": {
+                                "type": "string",
+                                "const": "bar"
+                            }
+                        },
+                        "type": "object",
+                        "required": [
+                            "baz",
+                            "foo"
+                        ]
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "alpha",
+                    "some_object"
+                ]
+            },
+            "base": {
+                "range": {
+                    "environment": "c",
+                    "begin": {
+                        "line": 4,
+                        "column": 3,
+                        "byte": 25
+                    },
+                    "end": {
+                        "line": 5,
+                        "column": 13,
+                        "byte": 50
+                    }
+                },
+                "schema": {
+                    "properties": {
+                        "alpha": {
+                            "type": "string",
+                            "const": "beta"
+                        },
+                        "some_object": {
+                            "properties": {
+                                "baz": {
+                                    "type": "string",
+                                    "const": "qux"
+                                }
+                            },
+                            "type": "object",
+                            "required": [
+                                "baz"
+                            ]
+                        }
+                    },
+                    "type": "object",
+                    "required": [
+                        "alpha",
+                        "some_object"
+                    ]
+                },
+                "base": {
+                    "range": {
+                        "environment": "b",
+                        "begin": {
+                            "line": 2,
+                            "column": 3,
+                            "byte": 10
+                        },
+                        "end": {
+                            "line": 2,
+                            "column": 14,
+                            "byte": 21
+                        }
+                    },
+                    "schema": {
+                        "properties": {
+                            "alpha": {
+                                "type": "string",
+                                "const": "beta"
+                            }
+                        },
+                        "type": "object",
+                        "required": [
+                            "alpha"
+                        ]
+                    },
+                    "keyRanges": {
+                        "alpha": {
+                            "environment": "b",
+                            "begin": {
+                                "line": 2,
+                                "column": 3,
+                                "byte": 10
+                            },
+                            "end": {
+                                "line": 2,
+                                "column": 8,
+                                "byte": 15
+                            }
+                        }
+                    },
+                    "object": {
+                        "alpha": {
+                            "range": {
+                                "environment": "b",
+                                "begin": {
+                                    "line": 2,
+                                    "column": 10,
+                                    "byte": 17
+                                },
+                                "end": {
+                                    "line": 2,
+                                    "column": 14,
+                                    "byte": 21
+                                }
+                            },
+                            "schema": {
+                                "type": "string",
+                                "const": "beta"
+                            },
+                            "literal": "beta"
+                        }
+                    }
+                },
+                "keyRanges": {
+                    "some_object": {
+                        "environment": "c",
+                        "begin": {
+                            "line": 4,
+                            "column": 3,
+                            "byte": 25
+                        },
+                        "end": {
+                            "line": 4,
+                            "column": 14,
+                            "byte": 36
+                        }
+                    }
+                },
+                "object": {
+                    "some_object": {
+                        "range": {
+                            "environment": "c",
+                            "begin": {
+                                "line": 5,
+                                "column": 5,
+                                "byte": 42
+                            },
+                            "end": {
+                                "line": 5,
+                                "column": 13,
+                                "byte": 50
+                            }
+                        },
+                        "schema": {
+                            "properties": {
+                                "baz": {
+                                    "type": "string",
+                                    "const": "qux"
+                                }
+                            },
+                            "type": "object",
+                            "required": [
+                                "baz"
+                            ]
+                        },
+                        "keyRanges": {
+                            "baz": {
+                                "environment": "c",
+                                "begin": {
+                                    "line": 5,
+                                    "column": 5,
+                                    "byte": 42
+                                },
+                                "end": {
+                                    "line": 5,
+                                    "column": 8,
+                                    "byte": 45
+                                }
+                            }
+                        },
+                        "object": {
+                            "baz": {
+                                "range": {
+                                    "environment": "c",
+                                    "begin": {
+                                        "line": 5,
+                                        "column": 10,
+                                        "byte": 47
+                                    },
+                                    "end": {
+                                        "line": 5,
+                                        "column": 13,
+                                        "byte": 50
+                                    }
+                                },
+                                "schema": {
+                                    "type": "string",
+                                    "const": "qux"
+                                },
+                                "literal": "qux"
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "properties": {
             "alpha": {
                 "value": "beta",
@@ -339,6 +569,236 @@
         }
     },
     "eval": {
+        "exprs": {
+            "range": {
+                "environment": "import-merge",
+                "begin": {
+                    "line": 0,
+                    "column": 0,
+                    "byte": 0
+                },
+                "end": {
+                    "line": 0,
+                    "column": 0,
+                    "byte": 0
+                }
+            },
+            "schema": {
+                "properties": {
+                    "alpha": {
+                        "type": "string",
+                        "const": "beta"
+                    },
+                    "some_object": {
+                        "properties": {
+                            "baz": {
+                                "type": "string",
+                                "const": "qux"
+                            },
+                            "foo": {
+                                "type": "string",
+                                "const": "bar"
+                            }
+                        },
+                        "type": "object",
+                        "required": [
+                            "baz",
+                            "foo"
+                        ]
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "alpha",
+                    "some_object"
+                ]
+            },
+            "base": {
+                "range": {
+                    "environment": "c",
+                    "begin": {
+                        "line": 4,
+                        "column": 3,
+                        "byte": 25
+                    },
+                    "end": {
+                        "line": 5,
+                        "column": 13,
+                        "byte": 50
+                    }
+                },
+                "schema": {
+                    "properties": {
+                        "alpha": {
+                            "type": "string",
+                            "const": "beta"
+                        },
+                        "some_object": {
+                            "properties": {
+                                "baz": {
+                                    "type": "string",
+                                    "const": "qux"
+                                }
+                            },
+                            "type": "object",
+                            "required": [
+                                "baz"
+                            ]
+                        }
+                    },
+                    "type": "object",
+                    "required": [
+                        "alpha",
+                        "some_object"
+                    ]
+                },
+                "base": {
+                    "range": {
+                        "environment": "b",
+                        "begin": {
+                            "line": 2,
+                            "column": 3,
+                            "byte": 10
+                        },
+                        "end": {
+                            "line": 2,
+                            "column": 14,
+                            "byte": 21
+                        }
+                    },
+                    "schema": {
+                        "properties": {
+                            "alpha": {
+                                "type": "string",
+                                "const": "beta"
+                            }
+                        },
+                        "type": "object",
+                        "required": [
+                            "alpha"
+                        ]
+                    },
+                    "keyRanges": {
+                        "alpha": {
+                            "environment": "b",
+                            "begin": {
+                                "line": 2,
+                                "column": 3,
+                                "byte": 10
+                            },
+                            "end": {
+                                "line": 2,
+                                "column": 8,
+                                "byte": 15
+                            }
+                        }
+                    },
+                    "object": {
+                        "alpha": {
+                            "range": {
+                                "environment": "b",
+                                "begin": {
+                                    "line": 2,
+                                    "column": 10,
+                                    "byte": 17
+                                },
+                                "end": {
+                                    "line": 2,
+                                    "column": 14,
+                                    "byte": 21
+                                }
+                            },
+                            "schema": {
+                                "type": "string",
+                                "const": "beta"
+                            },
+                            "literal": "beta"
+                        }
+                    }
+                },
+                "keyRanges": {
+                    "some_object": {
+                        "environment": "c",
+                        "begin": {
+                            "line": 4,
+                            "column": 3,
+                            "byte": 25
+                        },
+                        "end": {
+                            "line": 4,
+                            "column": 14,
+                            "byte": 36
+                        }
+                    }
+                },
+                "object": {
+                    "some_object": {
+                        "range": {
+                            "environment": "c",
+                            "begin": {
+                                "line": 5,
+                                "column": 5,
+                                "byte": 42
+                            },
+                            "end": {
+                                "line": 5,
+                                "column": 13,
+                                "byte": 50
+                            }
+                        },
+                        "schema": {
+                            "properties": {
+                                "baz": {
+                                    "type": "string",
+                                    "const": "qux"
+                                }
+                            },
+                            "type": "object",
+                            "required": [
+                                "baz"
+                            ]
+                        },
+                        "keyRanges": {
+                            "baz": {
+                                "environment": "c",
+                                "begin": {
+                                    "line": 5,
+                                    "column": 5,
+                                    "byte": 42
+                                },
+                                "end": {
+                                    "line": 5,
+                                    "column": 8,
+                                    "byte": 45
+                                }
+                            }
+                        },
+                        "object": {
+                            "baz": {
+                                "range": {
+                                    "environment": "c",
+                                    "begin": {
+                                        "line": 5,
+                                        "column": 10,
+                                        "byte": 47
+                                    },
+                                    "end": {
+                                        "line": 5,
+                                        "column": 13,
+                                        "byte": 50
+                                    }
+                                },
+                                "schema": {
+                                    "type": "string",
+                                    "const": "qux"
+                                },
+                                "literal": "qux"
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "properties": {
             "alpha": {
                 "value": "beta",

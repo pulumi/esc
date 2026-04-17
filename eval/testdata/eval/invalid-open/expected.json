@@ -72,24 +72,76 @@
     ],
     "check": {
         "exprs": {
-            "invalid-provider": {
-                "range": {
+            "range": {
+                "environment": "invalid-open",
+                "begin": {
+                    "line": 2,
+                    "column": 3,
+                    "byte": 10
+                },
+                "end": {
+                    "line": 11,
+                    "column": 21,
+                    "byte": 195
+                }
+            },
+            "schema": {
+                "properties": {
+                    "invalid-provider": true,
+                    "missing-inputs": true,
+                    "missing-provider": true
+                },
+                "type": "object",
+                "required": [
+                    "invalid-provider",
+                    "missing-inputs",
+                    "missing-provider"
+                ]
+            },
+            "keyRanges": {
+                "invalid-provider": {
                     "environment": "invalid-open",
                     "begin": {
-                        "line": 9,
-                        "column": 5,
-                        "byte": 140
+                        "line": 8,
+                        "column": 3,
+                        "byte": 118
                     },
                     "end": {
-                        "line": 11,
-                        "column": 21,
-                        "byte": 195
+                        "line": 8,
+                        "column": 19,
+                        "byte": 134
                     }
                 },
-                "schema": true,
-                "builtin": {
-                    "name": "fn::open",
-                    "nameRange": {
+                "missing-inputs": {
+                    "environment": "invalid-open",
+                    "begin": {
+                        "line": 5,
+                        "column": 3,
+                        "byte": 65
+                    },
+                    "end": {
+                        "line": 5,
+                        "column": 17,
+                        "byte": 79
+                    }
+                },
+                "missing-provider": {
+                    "environment": "invalid-open",
+                    "begin": {
+                        "line": 2,
+                        "column": 3,
+                        "byte": 10
+                    },
+                    "end": {
+                        "line": 2,
+                        "column": 19,
+                        "byte": 26
+                    }
+                }
+            },
+            "object": {
+                "invalid-provider": {
+                    "range": {
                         "environment": "invalid-open",
                         "begin": {
                             "line": 9,
@@ -97,96 +149,96 @@
                             "byte": 140
                         },
                         "end": {
-                            "line": 9,
-                            "column": 13,
-                            "byte": 148
+                            "line": 11,
+                            "column": 21,
+                            "byte": 195
                         }
                     },
-                    "argSchema": {
-                        "properties": {
-                            "inputs": true,
-                            "provider": {
-                                "type": "string"
-                            }
-                        },
-                        "type": "object",
-                        "required": [
-                            "inputs",
-                            "provider"
-                        ]
-                    },
-                    "arg": {
-                        "range": {
+                    "schema": true,
+                    "builtin": {
+                        "name": "fn::open",
+                        "nameRange": {
+                            "environment": "invalid-open",
                             "begin": {
-                                "line": 0,
-                                "column": 0,
-                                "byte": 0
+                                "line": 9,
+                                "column": 5,
+                                "byte": 140
                             },
                             "end": {
-                                "line": 0,
-                                "column": 0,
-                                "byte": 0
+                                "line": 9,
+                                "column": 13,
+                                "byte": 148
                             }
                         },
-                        "object": {
-                            "inputs": {
-                                "range": {
-                                    "environment": "invalid-open",
-                                    "begin": {
-                                        "line": 11,
-                                        "column": 15,
-                                        "byte": 189
-                                    },
-                                    "end": {
-                                        "line": 11,
-                                        "column": 21,
-                                        "byte": 195
-                                    }
-                                },
-                                "schema": {
-                                    "type": "string",
-                                    "const": "inputs"
-                                },
-                                "literal": "inputs"
+                        "argSchema": {
+                            "properties": {
+                                "inputs": true,
+                                "provider": {
+                                    "type": "string"
+                                }
                             },
-                            "provider": {
-                                "range": {
-                                    "environment": "invalid-open",
-                                    "begin": {
-                                        "line": 0,
-                                        "column": 0,
-                                        "byte": 0
-                                    },
-                                    "end": {
-                                        "line": 0,
-                                        "column": 0,
-                                        "byte": 0
-                                    }
+                            "type": "object",
+                            "required": [
+                                "inputs",
+                                "provider"
+                            ]
+                        },
+                        "arg": {
+                            "range": {
+                                "begin": {
+                                    "line": 0,
+                                    "column": 0,
+                                    "byte": 0
                                 },
-                                "schema": true
+                                "end": {
+                                    "line": 0,
+                                    "column": 0,
+                                    "byte": 0
+                                }
+                            },
+                            "object": {
+                                "inputs": {
+                                    "range": {
+                                        "environment": "invalid-open",
+                                        "begin": {
+                                            "line": 11,
+                                            "column": 15,
+                                            "byte": 189
+                                        },
+                                        "end": {
+                                            "line": 11,
+                                            "column": 21,
+                                            "byte": 195
+                                        }
+                                    },
+                                    "schema": {
+                                        "type": "string",
+                                        "const": "inputs"
+                                    },
+                                    "literal": "inputs"
+                                },
+                                "provider": {
+                                    "range": {
+                                        "environment": "invalid-open",
+                                        "begin": {
+                                            "line": 0,
+                                            "column": 0,
+                                            "byte": 0
+                                        },
+                                        "end": {
+                                            "line": 0,
+                                            "column": 0,
+                                            "byte": 0
+                                        }
+                                    },
+                                    "schema": true
+                                }
                             }
                         }
                     }
-                }
-            },
-            "missing-inputs": {
-                "range": {
-                    "environment": "invalid-open",
-                    "begin": {
-                        "line": 6,
-                        "column": 5,
-                        "byte": 85
-                    },
-                    "end": {
-                        "line": 7,
-                        "column": 21,
-                        "byte": 115
-                    }
                 },
-                "schema": true,
-                "builtin": {
-                    "name": "fn::open",
-                    "nameRange": {
+                "missing-inputs": {
+                    "range": {
                         "environment": "invalid-open",
                         "begin": {
                             "line": 6,
@@ -194,96 +246,96 @@
                             "byte": 85
                         },
                         "end": {
-                            "line": 6,
-                            "column": 13,
-                            "byte": 93
+                            "line": 7,
+                            "column": 21,
+                            "byte": 115
                         }
                     },
-                    "argSchema": {
-                        "properties": {
-                            "inputs": true,
-                            "provider": {
-                                "type": "string"
-                            }
-                        },
-                        "type": "object",
-                        "required": [
-                            "inputs",
-                            "provider"
-                        ]
-                    },
-                    "arg": {
-                        "range": {
+                    "schema": true,
+                    "builtin": {
+                        "name": "fn::open",
+                        "nameRange": {
+                            "environment": "invalid-open",
                             "begin": {
-                                "line": 0,
-                                "column": 0,
-                                "byte": 0
+                                "line": 6,
+                                "column": 5,
+                                "byte": 85
                             },
                             "end": {
-                                "line": 0,
-                                "column": 0,
-                                "byte": 0
+                                "line": 6,
+                                "column": 13,
+                                "byte": 93
                             }
                         },
-                        "object": {
-                            "inputs": {
-                                "range": {
-                                    "environment": "invalid-open",
-                                    "begin": {
-                                        "line": 0,
-                                        "column": 0,
-                                        "byte": 0
-                                    },
-                                    "end": {
-                                        "line": 0,
-                                        "column": 0,
-                                        "byte": 0
-                                    }
-                                },
-                                "schema": true
+                        "argSchema": {
+                            "properties": {
+                                "inputs": true,
+                                "provider": {
+                                    "type": "string"
+                                }
                             },
-                            "provider": {
-                                "range": {
-                                    "environment": "invalid-open",
-                                    "begin": {
-                                        "line": 7,
-                                        "column": 17,
-                                        "byte": 111
+                            "type": "object",
+                            "required": [
+                                "inputs",
+                                "provider"
+                            ]
+                        },
+                        "arg": {
+                            "range": {
+                                "begin": {
+                                    "line": 0,
+                                    "column": 0,
+                                    "byte": 0
+                                },
+                                "end": {
+                                    "line": 0,
+                                    "column": 0,
+                                    "byte": 0
+                                }
+                            },
+                            "object": {
+                                "inputs": {
+                                    "range": {
+                                        "environment": "invalid-open",
+                                        "begin": {
+                                            "line": 0,
+                                            "column": 0,
+                                            "byte": 0
+                                        },
+                                        "end": {
+                                            "line": 0,
+                                            "column": 0,
+                                            "byte": 0
+                                        }
                                     },
-                                    "end": {
-                                        "line": 7,
-                                        "column": 21,
-                                        "byte": 115
-                                    }
+                                    "schema": true
                                 },
-                                "schema": {
-                                    "type": "string",
-                                    "const": "test"
-                                },
-                                "literal": "test"
+                                "provider": {
+                                    "range": {
+                                        "environment": "invalid-open",
+                                        "begin": {
+                                            "line": 7,
+                                            "column": 17,
+                                            "byte": 111
+                                        },
+                                        "end": {
+                                            "line": 7,
+                                            "column": 21,
+                                            "byte": 115
+                                        }
+                                    },
+                                    "schema": {
+                                        "type": "string",
+                                        "const": "test"
+                                    },
+                                    "literal": "test"
+                                }
                             }
                         }
                     }
-                }
-            },
-            "missing-provider": {
-                "range": {
-                    "environment": "invalid-open",
-                    "begin": {
-                        "line": 3,
-                        "column": 5,
-                        "byte": 32
-                    },
-                    "end": {
-                        "line": 4,
-                        "column": 21,
-                        "byte": 62
-                    }
                 },
-                "schema": true,
-                "builtin": {
-                    "name": "fn::open",
-                    "nameRange": {
+                "missing-provider": {
+                    "range": {
                         "environment": "invalid-open",
                         "begin": {
                             "line": 3,
@@ -291,73 +343,90 @@
                             "byte": 32
                         },
                         "end": {
-                            "line": 3,
-                            "column": 13,
-                            "byte": 40
+                            "line": 4,
+                            "column": 21,
+                            "byte": 62
                         }
                     },
-                    "argSchema": {
-                        "properties": {
-                            "inputs": true,
-                            "provider": {
-                                "type": "string"
-                            }
-                        },
-                        "type": "object",
-                        "required": [
-                            "inputs",
-                            "provider"
-                        ]
-                    },
-                    "arg": {
-                        "range": {
+                    "schema": true,
+                    "builtin": {
+                        "name": "fn::open",
+                        "nameRange": {
+                            "environment": "invalid-open",
                             "begin": {
-                                "line": 0,
-                                "column": 0,
-                                "byte": 0
+                                "line": 3,
+                                "column": 5,
+                                "byte": 32
                             },
                             "end": {
-                                "line": 0,
-                                "column": 0,
-                                "byte": 0
+                                "line": 3,
+                                "column": 13,
+                                "byte": 40
                             }
                         },
-                        "object": {
-                            "inputs": {
-                                "range": {
-                                    "environment": "invalid-open",
-                                    "begin": {
-                                        "line": 4,
-                                        "column": 15,
-                                        "byte": 56
-                                    },
-                                    "end": {
-                                        "line": 4,
-                                        "column": 21,
-                                        "byte": 62
-                                    }
-                                },
-                                "schema": {
-                                    "type": "string",
-                                    "const": "inputs"
-                                },
-                                "literal": "inputs"
+                        "argSchema": {
+                            "properties": {
+                                "inputs": true,
+                                "provider": {
+                                    "type": "string"
+                                }
                             },
-                            "provider": {
-                                "range": {
-                                    "environment": "invalid-open",
-                                    "begin": {
-                                        "line": 0,
-                                        "column": 0,
-                                        "byte": 0
-                                    },
-                                    "end": {
-                                        "line": 0,
-                                        "column": 0,
-                                        "byte": 0
-                                    }
+                            "type": "object",
+                            "required": [
+                                "inputs",
+                                "provider"
+                            ]
+                        },
+                        "arg": {
+                            "range": {
+                                "begin": {
+                                    "line": 0,
+                                    "column": 0,
+                                    "byte": 0
                                 },
-                                "schema": true
+                                "end": {
+                                    "line": 0,
+                                    "column": 0,
+                                    "byte": 0
+                                }
+                            },
+                            "object": {
+                                "inputs": {
+                                    "range": {
+                                        "environment": "invalid-open",
+                                        "begin": {
+                                            "line": 4,
+                                            "column": 15,
+                                            "byte": 56
+                                        },
+                                        "end": {
+                                            "line": 4,
+                                            "column": 21,
+                                            "byte": 62
+                                        }
+                                    },
+                                    "schema": {
+                                        "type": "string",
+                                        "const": "inputs"
+                                    },
+                                    "literal": "inputs"
+                                },
+                                "provider": {
+                                    "range": {
+                                        "environment": "invalid-open",
+                                        "begin": {
+                                            "line": 0,
+                                            "column": 0,
+                                            "byte": 0
+                                        },
+                                        "end": {
+                                            "line": 0,
+                                            "column": 0,
+                                            "byte": 0
+                                        }
+                                    },
+                                    "schema": true
+                                }
                             }
                         }
                     }
@@ -629,24 +698,76 @@
     },
     "eval": {
         "exprs": {
-            "invalid-provider": {
-                "range": {
+            "range": {
+                "environment": "invalid-open",
+                "begin": {
+                    "line": 2,
+                    "column": 3,
+                    "byte": 10
+                },
+                "end": {
+                    "line": 11,
+                    "column": 21,
+                    "byte": 195
+                }
+            },
+            "schema": {
+                "properties": {
+                    "invalid-provider": true,
+                    "missing-inputs": true,
+                    "missing-provider": true
+                },
+                "type": "object",
+                "required": [
+                    "invalid-provider",
+                    "missing-inputs",
+                    "missing-provider"
+                ]
+            },
+            "keyRanges": {
+                "invalid-provider": {
                     "environment": "invalid-open",
                     "begin": {
-                        "line": 9,
-                        "column": 5,
-                        "byte": 140
+                        "line": 8,
+                        "column": 3,
+                        "byte": 118
                     },
                     "end": {
-                        "line": 11,
-                        "column": 21,
-                        "byte": 195
+                        "line": 8,
+                        "column": 19,
+                        "byte": 134
                     }
                 },
-                "schema": true,
-                "builtin": {
-                    "name": "fn::open",
-                    "nameRange": {
+                "missing-inputs": {
+                    "environment": "invalid-open",
+                    "begin": {
+                        "line": 5,
+                        "column": 3,
+                        "byte": 65
+                    },
+                    "end": {
+                        "line": 5,
+                        "column": 17,
+                        "byte": 79
+                    }
+                },
+                "missing-provider": {
+                    "environment": "invalid-open",
+                    "begin": {
+                        "line": 2,
+                        "column": 3,
+                        "byte": 10
+                    },
+                    "end": {
+                        "line": 2,
+                        "column": 19,
+                        "byte": 26
+                    }
+                }
+            },
+            "object": {
+                "invalid-provider": {
+                    "range": {
                         "environment": "invalid-open",
                         "begin": {
                             "line": 9,
@@ -654,96 +775,96 @@
                             "byte": 140
                         },
                         "end": {
-                            "line": 9,
-                            "column": 13,
-                            "byte": 148
+                            "line": 11,
+                            "column": 21,
+                            "byte": 195
                         }
                     },
-                    "argSchema": {
-                        "properties": {
-                            "inputs": true,
-                            "provider": {
-                                "type": "string"
-                            }
-                        },
-                        "type": "object",
-                        "required": [
-                            "inputs",
-                            "provider"
-                        ]
-                    },
-                    "arg": {
-                        "range": {
+                    "schema": true,
+                    "builtin": {
+                        "name": "fn::open",
+                        "nameRange": {
+                            "environment": "invalid-open",
                             "begin": {
-                                "line": 0,
-                                "column": 0,
-                                "byte": 0
+                                "line": 9,
+                                "column": 5,
+                                "byte": 140
                             },
                             "end": {
-                                "line": 0,
-                                "column": 0,
-                                "byte": 0
+                                "line": 9,
+                                "column": 13,
+                                "byte": 148
                             }
                         },
-                        "object": {
-                            "inputs": {
-                                "range": {
-                                    "environment": "invalid-open",
-                                    "begin": {
-                                        "line": 11,
-                                        "column": 15,
-                                        "byte": 189
-                                    },
-                                    "end": {
-                                        "line": 11,
-                                        "column": 21,
-                                        "byte": 195
-                                    }
-                                },
-                                "schema": {
-                                    "type": "string",
-                                    "const": "inputs"
-                                },
-                                "literal": "inputs"
+                        "argSchema": {
+                            "properties": {
+                                "inputs": true,
+                                "provider": {
+                                    "type": "string"
+                                }
                             },
-                            "provider": {
-                                "range": {
-                                    "environment": "invalid-open",
-                                    "begin": {
-                                        "line": 0,
-                                        "column": 0,
-                                        "byte": 0
-                                    },
-                                    "end": {
-                                        "line": 0,
-                                        "column": 0,
-                                        "byte": 0
-                                    }
+                            "type": "object",
+                            "required": [
+                                "inputs",
+                                "provider"
+                            ]
+                        },
+                        "arg": {
+                            "range": {
+                                "begin": {
+                                    "line": 0,
+                                    "column": 0,
+                                    "byte": 0
                                 },
-                                "schema": true
+                                "end": {
+                                    "line": 0,
+                                    "column": 0,
+                                    "byte": 0
+                                }
+                            },
+                            "object": {
+                                "inputs": {
+                                    "range": {
+                                        "environment": "invalid-open",
+                                        "begin": {
+                                            "line": 11,
+                                            "column": 15,
+                                            "byte": 189
+                                        },
+                                        "end": {
+                                            "line": 11,
+                                            "column": 21,
+                                            "byte": 195
+                                        }
+                                    },
+                                    "schema": {
+                                        "type": "string",
+                                        "const": "inputs"
+                                    },
+                                    "literal": "inputs"
+                                },
+                                "provider": {
+                                    "range": {
+                                        "environment": "invalid-open",
+                                        "begin": {
+                                            "line": 0,
+                                            "column": 0,
+                                            "byte": 0
+                                        },
+                                        "end": {
+                                            "line": 0,
+                                            "column": 0,
+                                            "byte": 0
+                                        }
+                                    },
+                                    "schema": true
+                                }
                             }
                         }
                     }
-                }
-            },
-            "missing-inputs": {
-                "range": {
-                    "environment": "invalid-open",
-                    "begin": {
-                        "line": 6,
-                        "column": 5,
-                        "byte": 85
-                    },
-                    "end": {
-                        "line": 7,
-                        "column": 21,
-                        "byte": 115
-                    }
                 },
-                "schema": true,
-                "builtin": {
-                    "name": "fn::open",
-                    "nameRange": {
+                "missing-inputs": {
+                    "range": {
                         "environment": "invalid-open",
                         "begin": {
                             "line": 6,
@@ -751,96 +872,96 @@
                             "byte": 85
                         },
                         "end": {
-                            "line": 6,
-                            "column": 13,
-                            "byte": 93
+                            "line": 7,
+                            "column": 21,
+                            "byte": 115
                         }
                     },
-                    "argSchema": {
-                        "properties": {
-                            "inputs": true,
-                            "provider": {
-                                "type": "string"
-                            }
-                        },
-                        "type": "object",
-                        "required": [
-                            "inputs",
-                            "provider"
-                        ]
-                    },
-                    "arg": {
-                        "range": {
+                    "schema": true,
+                    "builtin": {
+                        "name": "fn::open",
+                        "nameRange": {
+                            "environment": "invalid-open",
                             "begin": {
-                                "line": 0,
-                                "column": 0,
-                                "byte": 0
+                                "line": 6,
+                                "column": 5,
+                                "byte": 85
                             },
                             "end": {
-                                "line": 0,
-                                "column": 0,
-                                "byte": 0
+                                "line": 6,
+                                "column": 13,
+                                "byte": 93
                             }
                         },
-                        "object": {
-                            "inputs": {
-                                "range": {
-                                    "environment": "invalid-open",
-                                    "begin": {
-                                        "line": 0,
-                                        "column": 0,
-                                        "byte": 0
-                                    },
-                                    "end": {
-                                        "line": 0,
-                                        "column": 0,
-                                        "byte": 0
-                                    }
-                                },
-                                "schema": true
+                        "argSchema": {
+                            "properties": {
+                                "inputs": true,
+                                "provider": {
+                                    "type": "string"
+                                }
                             },
-                            "provider": {
-                                "range": {
-                                    "environment": "invalid-open",
-                                    "begin": {
-                                        "line": 7,
-                                        "column": 17,
-                                        "byte": 111
+                            "type": "object",
+                            "required": [
+                                "inputs",
+                                "provider"
+                            ]
+                        },
+                        "arg": {
+                            "range": {
+                                "begin": {
+                                    "line": 0,
+                                    "column": 0,
+                                    "byte": 0
+                                },
+                                "end": {
+                                    "line": 0,
+                                    "column": 0,
+                                    "byte": 0
+                                }
+                            },
+                            "object": {
+                                "inputs": {
+                                    "range": {
+                                        "environment": "invalid-open",
+                                        "begin": {
+                                            "line": 0,
+                                            "column": 0,
+                                            "byte": 0
+                                        },
+                                        "end": {
+                                            "line": 0,
+                                            "column": 0,
+                                            "byte": 0
+                                        }
                                     },
-                                    "end": {
-                                        "line": 7,
-                                        "column": 21,
-                                        "byte": 115
-                                    }
+                                    "schema": true
                                 },
-                                "schema": {
-                                    "type": "string",
-                                    "const": "test"
-                                },
-                                "literal": "test"
+                                "provider": {
+                                    "range": {
+                                        "environment": "invalid-open",
+                                        "begin": {
+                                            "line": 7,
+                                            "column": 17,
+                                            "byte": 111
+                                        },
+                                        "end": {
+                                            "line": 7,
+                                            "column": 21,
+                                            "byte": 115
+                                        }
+                                    },
+                                    "schema": {
+                                        "type": "string",
+                                        "const": "test"
+                                    },
+                                    "literal": "test"
+                                }
                             }
                         }
                     }
-                }
-            },
-            "missing-provider": {
-                "range": {
-                    "environment": "invalid-open",
-                    "begin": {
-                        "line": 3,
-                        "column": 5,
-                        "byte": 32
-                    },
-                    "end": {
-                        "line": 4,
-                        "column": 21,
-                        "byte": 62
-                    }
                 },
-                "schema": true,
-                "builtin": {
-                    "name": "fn::open",
-                    "nameRange": {
+                "missing-provider": {
+                    "range": {
                         "environment": "invalid-open",
                         "begin": {
                             "line": 3,
@@ -848,73 +969,90 @@
                             "byte": 32
                         },
                         "end": {
-                            "line": 3,
-                            "column": 13,
-                            "byte": 40
+                            "line": 4,
+                            "column": 21,
+                            "byte": 62
                         }
                     },
-                    "argSchema": {
-                        "properties": {
-                            "inputs": true,
-                            "provider": {
-                                "type": "string"
-                            }
-                        },
-                        "type": "object",
-                        "required": [
-                            "inputs",
-                            "provider"
-                        ]
-                    },
-                    "arg": {
-                        "range": {
+                    "schema": true,
+                    "builtin": {
+                        "name": "fn::open",
+                        "nameRange": {
+                            "environment": "invalid-open",
                             "begin": {
-                                "line": 0,
-                                "column": 0,
-                                "byte": 0
+                                "line": 3,
+                                "column": 5,
+                                "byte": 32
                             },
                             "end": {
-                                "line": 0,
-                                "column": 0,
-                                "byte": 0
+                                "line": 3,
+                                "column": 13,
+                                "byte": 40
                             }
                         },
-                        "object": {
-                            "inputs": {
-                                "range": {
-                                    "environment": "invalid-open",
-                                    "begin": {
-                                        "line": 4,
-                                        "column": 15,
-                                        "byte": 56
-                                    },
-                                    "end": {
-                                        "line": 4,
-                                        "column": 21,
-                                        "byte": 62
-                                    }
-                                },
-                                "schema": {
-                                    "type": "string",
-                                    "const": "inputs"
-                                },
-                                "literal": "inputs"
+                        "argSchema": {
+                            "properties": {
+                                "inputs": true,
+                                "provider": {
+                                    "type": "string"
+                                }
                             },
-                            "provider": {
-                                "range": {
-                                    "environment": "invalid-open",
-                                    "begin": {
-                                        "line": 0,
-                                        "column": 0,
-                                        "byte": 0
-                                    },
-                                    "end": {
-                                        "line": 0,
-                                        "column": 0,
-                                        "byte": 0
-                                    }
+                            "type": "object",
+                            "required": [
+                                "inputs",
+                                "provider"
+                            ]
+                        },
+                        "arg": {
+                            "range": {
+                                "begin": {
+                                    "line": 0,
+                                    "column": 0,
+                                    "byte": 0
                                 },
-                                "schema": true
+                                "end": {
+                                    "line": 0,
+                                    "column": 0,
+                                    "byte": 0
+                                }
+                            },
+                            "object": {
+                                "inputs": {
+                                    "range": {
+                                        "environment": "invalid-open",
+                                        "begin": {
+                                            "line": 4,
+                                            "column": 15,
+                                            "byte": 56
+                                        },
+                                        "end": {
+                                            "line": 4,
+                                            "column": 21,
+                                            "byte": 62
+                                        }
+                                    },
+                                    "schema": {
+                                        "type": "string",
+                                        "const": "inputs"
+                                    },
+                                    "literal": "inputs"
+                                },
+                                "provider": {
+                                    "range": {
+                                        "environment": "invalid-open",
+                                        "begin": {
+                                            "line": 0,
+                                            "column": 0,
+                                            "byte": 0
+                                        },
+                                        "end": {
+                                            "line": 0,
+                                            "column": 0,
+                                            "byte": 0
+                                        }
+                                    },
+                                    "schema": true
+                                }
                             }
                         }
                     }

@@ -26,42 +26,101 @@
     ],
     "check": {
         "exprs": {
-            "a": {
-                "range": {
-                    "environment": "invalid-object-key",
-                    "begin": {
-                        "line": 2,
-                        "column": 6,
-                        "byte": 13
-                    },
-                    "end": {
-                        "line": 2,
-                        "column": 11,
-                        "byte": 18
-                    }
+            "range": {
+                "environment": "invalid-object-key",
+                "begin": {
+                    "line": 2,
+                    "column": 3,
+                    "byte": 10
                 },
-                "schema": {
-                    "type": "string",
-                    "const": "value"
-                },
-                "literal": "value"
+                "end": {
+                    "line": 3,
+                    "column": 21,
+                    "byte": 39
+                }
             },
-            "b": {
-                "range": {
+            "schema": {
+                "properties": {
+                    "a": {
+                        "type": "string",
+                        "const": "value"
+                    },
+                    "b": {
+                        "type": "object"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "a",
+                    "b"
+                ]
+            },
+            "keyRanges": {
+                "a": {
+                    "environment": "invalid-object-key",
+                    "begin": {
+                        "line": 2,
+                        "column": 3,
+                        "byte": 10
+                    },
+                    "end": {
+                        "line": 2,
+                        "column": 4,
+                        "byte": 11
+                    }
+                },
+                "b": {
                     "environment": "invalid-object-key",
                     "begin": {
                         "line": 3,
-                        "column": 6,
-                        "byte": 24
+                        "column": 3,
+                        "byte": 21
                     },
                     "end": {
                         "line": 3,
-                        "column": 21,
-                        "byte": 39
+                        "column": 4,
+                        "byte": 22
                     }
+                }
+            },
+            "object": {
+                "a": {
+                    "range": {
+                        "environment": "invalid-object-key",
+                        "begin": {
+                            "line": 2,
+                            "column": 6,
+                            "byte": 13
+                        },
+                        "end": {
+                            "line": 2,
+                            "column": 11,
+                            "byte": 18
+                        }
+                    },
+                    "schema": {
+                        "type": "string",
+                        "const": "value"
+                    },
+                    "literal": "value"
                 },
-                "schema": {
-                    "type": "object"
+                "b": {
+                    "range": {
+                        "environment": "invalid-object-key",
+                        "begin": {
+                            "line": 3,
+                            "column": 6,
+                            "byte": 24
+                        },
+                        "end": {
+                            "line": 3,
+                            "column": 21,
+                            "byte": 39
+                        }
+                    },
+                    "schema": {
+                        "type": "object"
+                    }
                 }
             }
         },
@@ -314,42 +373,101 @@
     },
     "eval": {
         "exprs": {
-            "a": {
-                "range": {
-                    "environment": "invalid-object-key",
-                    "begin": {
-                        "line": 2,
-                        "column": 6,
-                        "byte": 13
-                    },
-                    "end": {
-                        "line": 2,
-                        "column": 11,
-                        "byte": 18
-                    }
+            "range": {
+                "environment": "invalid-object-key",
+                "begin": {
+                    "line": 2,
+                    "column": 3,
+                    "byte": 10
                 },
-                "schema": {
-                    "type": "string",
-                    "const": "value"
-                },
-                "literal": "value"
+                "end": {
+                    "line": 3,
+                    "column": 21,
+                    "byte": 39
+                }
             },
-            "b": {
-                "range": {
+            "schema": {
+                "properties": {
+                    "a": {
+                        "type": "string",
+                        "const": "value"
+                    },
+                    "b": {
+                        "type": "object"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "a",
+                    "b"
+                ]
+            },
+            "keyRanges": {
+                "a": {
+                    "environment": "invalid-object-key",
+                    "begin": {
+                        "line": 2,
+                        "column": 3,
+                        "byte": 10
+                    },
+                    "end": {
+                        "line": 2,
+                        "column": 4,
+                        "byte": 11
+                    }
+                },
+                "b": {
                     "environment": "invalid-object-key",
                     "begin": {
                         "line": 3,
-                        "column": 6,
-                        "byte": 24
+                        "column": 3,
+                        "byte": 21
                     },
                     "end": {
                         "line": 3,
-                        "column": 21,
-                        "byte": 39
+                        "column": 4,
+                        "byte": 22
                     }
+                }
+            },
+            "object": {
+                "a": {
+                    "range": {
+                        "environment": "invalid-object-key",
+                        "begin": {
+                            "line": 2,
+                            "column": 6,
+                            "byte": 13
+                        },
+                        "end": {
+                            "line": 2,
+                            "column": 11,
+                            "byte": 18
+                        }
+                    },
+                    "schema": {
+                        "type": "string",
+                        "const": "value"
+                    },
+                    "literal": "value"
                 },
-                "schema": {
-                    "type": "object"
+                "b": {
+                    "range": {
+                        "environment": "invalid-object-key",
+                        "begin": {
+                            "line": 3,
+                            "column": 6,
+                            "byte": 24
+                        },
+                        "end": {
+                            "line": 3,
+                            "column": 21,
+                            "byte": 39
+                        }
+                    },
+                    "schema": {
+                        "type": "object"
+                    }
                 }
             }
         },

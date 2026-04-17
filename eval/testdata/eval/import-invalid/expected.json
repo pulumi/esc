@@ -13,18 +13,36 @@
                 },
                 "End": {
                     "Line": 2,
-                    "Column": 13,
-                    "Byte": 20
+                    "Column": 38,
+                    "Byte": 45
                 }
             },
             "Context": null,
             "Expression": null,
             "EvalContext": null,
             "Extra": null,
-            "Path": "values[\"fn::secret\"]"
+            "Path": "values"
         }
     ],
     "check": {
+        "exprs": {
+            "range": {
+                "environment": "import-invalid",
+                "begin": {
+                    "line": 0,
+                    "column": 0,
+                    "byte": 0
+                },
+                "end": {
+                    "line": 0,
+                    "column": 0,
+                    "byte": 0
+                }
+            },
+            "schema": {
+                "type": "object"
+            }
+        },
         "schema": {
             "type": "object"
         },
@@ -232,18 +250,36 @@
                 },
                 "End": {
                     "Line": 2,
-                    "Column": 13,
-                    "Byte": 20
+                    "Column": 38,
+                    "Byte": 45
                 }
             },
             "Context": null,
             "Expression": null,
             "EvalContext": null,
             "Extra": null,
-            "Path": "values[\"fn::secret\"]"
+            "Path": "values"
         }
     ],
     "eval": {
+        "exprs": {
+            "range": {
+                "environment": "import-invalid",
+                "begin": {
+                    "line": 0,
+                    "column": 0,
+                    "byte": 0
+                },
+                "end": {
+                    "line": 0,
+                    "column": 0,
+                    "byte": 0
+                }
+            },
+            "schema": {
+                "type": "object"
+            }
+        },
         "schema": {
             "type": "object"
         },

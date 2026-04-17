@@ -1,24 +1,73 @@
 {
     "check": {
         "exprs": {
-            "open": {
-                "range": {
-                    "environment": "builtin-nested-secret",
-                    "begin": {
-                        "line": 3,
-                        "column": 5,
-                        "byte": 20
-                    },
-                    "end": {
-                        "line": 6,
-                        "column": 22,
-                        "byte": 109
+            "range": {
+                "environment": "builtin-nested-secret",
+                "begin": {
+                    "line": 2,
+                    "column": 3,
+                    "byte": 10
+                },
+                "end": {
+                    "line": 10,
+                    "column": 38,
+                    "byte": 213
+                }
+            },
+            "schema": {
+                "properties": {
+                    "open": true,
+                    "references": {
+                        "properties": {
+                            "inner": true,
+                            "nested": true,
+                            "outer": true
+                        },
+                        "type": "object",
+                        "required": [
+                            "inner",
+                            "nested",
+                            "outer"
+                        ]
                     }
                 },
-                "schema": true,
-                "builtin": {
-                    "name": "fn::open::secret-wrapper",
-                    "nameRange": {
+                "type": "object",
+                "required": [
+                    "open",
+                    "references"
+                ]
+            },
+            "keyRanges": {
+                "open": {
+                    "environment": "builtin-nested-secret",
+                    "begin": {
+                        "line": 2,
+                        "column": 3,
+                        "byte": 10
+                    },
+                    "end": {
+                        "line": 2,
+                        "column": 7,
+                        "byte": 14
+                    }
+                },
+                "references": {
+                    "environment": "builtin-nested-secret",
+                    "begin": {
+                        "line": 7,
+                        "column": 3,
+                        "byte": 112
+                    },
+                    "end": {
+                        "line": 7,
+                        "column": 13,
+                        "byte": 122
+                    }
+                }
+            },
+            "object": {
+                "open": {
+                    "range": {
                         "environment": "builtin-nested-secret",
                         "begin": {
                             "line": 3,
@@ -26,53 +75,30 @@
                             "byte": 20
                         },
                         "end": {
-                            "line": 3,
-                            "column": 29,
-                            "byte": 44
+                            "line": 6,
+                            "column": 22,
+                            "byte": 109
                         }
                     },
-                    "argSchema": true,
-                    "arg": {
-                        "range": {
+                    "schema": true,
+                    "builtin": {
+                        "name": "fn::open::secret-wrapper",
+                        "nameRange": {
                             "environment": "builtin-nested-secret",
                             "begin": {
-                                "line": 4,
-                                "column": 7,
-                                "byte": 52
+                                "line": 3,
+                                "column": 5,
+                                "byte": 20
                             },
                             "end": {
-                                "line": 6,
-                                "column": 22,
-                                "byte": 109
+                                "line": 3,
+                                "column": 29,
+                                "byte": 44
                             }
                         },
-                        "schema": {
-                            "properties": {
-                                "secretObject": {
-                                    "properties": {
-                                        "key1": {
-                                            "type": "string",
-                                            "const": "secret1"
-                                        },
-                                        "key2": {
-                                            "type": "string",
-                                            "const": "secret2"
-                                        }
-                                    },
-                                    "type": "object",
-                                    "required": [
-                                        "key1",
-                                        "key2"
-                                    ]
-                                }
-                            },
-                            "type": "object",
-                            "required": [
-                                "secretObject"
-                            ]
-                        },
-                        "keyRanges": {
-                            "secretObject": {
+                        "argSchema": true,
+                        "arg": {
+                            "range": {
                                 "environment": "builtin-nested-secret",
                                 "begin": {
                                     "line": 4,
@@ -80,46 +106,54 @@
                                     "byte": 52
                                 },
                                 "end": {
-                                    "line": 4,
-                                    "column": 19,
-                                    "byte": 64
+                                    "line": 6,
+                                    "column": 22,
+                                    "byte": 109
                                 }
-                            }
-                        },
-                        "object": {
-                            "secretObject": {
-                                "range": {
-                                    "environment": "builtin-nested-secret",
-                                    "begin": {
-                                        "line": 5,
-                                        "column": 9,
-                                        "byte": 74
-                                    },
-                                    "end": {
-                                        "line": 6,
-                                        "column": 22,
-                                        "byte": 109
+                            },
+                            "schema": {
+                                "properties": {
+                                    "secretObject": {
+                                        "properties": {
+                                            "key1": {
+                                                "type": "string",
+                                                "const": "secret1"
+                                            },
+                                            "key2": {
+                                                "type": "string",
+                                                "const": "secret2"
+                                            }
+                                        },
+                                        "type": "object",
+                                        "required": [
+                                            "key1",
+                                            "key2"
+                                        ]
                                     }
                                 },
-                                "schema": {
-                                    "properties": {
-                                        "key1": {
-                                            "type": "string",
-                                            "const": "secret1"
-                                        },
-                                        "key2": {
-                                            "type": "string",
-                                            "const": "secret2"
-                                        }
+                                "type": "object",
+                                "required": [
+                                    "secretObject"
+                                ]
+                            },
+                            "keyRanges": {
+                                "secretObject": {
+                                    "environment": "builtin-nested-secret",
+                                    "begin": {
+                                        "line": 4,
+                                        "column": 7,
+                                        "byte": 52
                                     },
-                                    "type": "object",
-                                    "required": [
-                                        "key1",
-                                        "key2"
-                                    ]
-                                },
-                                "keyRanges": {
-                                    "key1": {
+                                    "end": {
+                                        "line": 4,
+                                        "column": 19,
+                                        "byte": 64
+                                    }
+                                }
+                            },
+                            "object": {
+                                "secretObject": {
+                                    "range": {
                                         "environment": "builtin-nested-secret",
                                         "begin": {
                                             "line": 5,
@@ -127,127 +161,105 @@
                                             "byte": 74
                                         },
                                         "end": {
-                                            "line": 5,
-                                            "column": 13,
-                                            "byte": 78
+                                            "line": 6,
+                                            "column": 22,
+                                            "byte": 109
                                         }
                                     },
-                                    "key2": {
-                                        "environment": "builtin-nested-secret",
-                                        "begin": {
-                                            "line": 6,
-                                            "column": 9,
-                                            "byte": 96
+                                    "schema": {
+                                        "properties": {
+                                            "key1": {
+                                                "type": "string",
+                                                "const": "secret1"
+                                            },
+                                            "key2": {
+                                                "type": "string",
+                                                "const": "secret2"
+                                            }
                                         },
-                                        "end": {
-                                            "line": 6,
-                                            "column": 13,
-                                            "byte": 100
-                                        }
-                                    }
-                                },
-                                "object": {
-                                    "key1": {
-                                        "range": {
+                                        "type": "object",
+                                        "required": [
+                                            "key1",
+                                            "key2"
+                                        ]
+                                    },
+                                    "keyRanges": {
+                                        "key1": {
                                             "environment": "builtin-nested-secret",
                                             "begin": {
                                                 "line": 5,
-                                                "column": 15,
-                                                "byte": 80
+                                                "column": 9,
+                                                "byte": 74
                                             },
                                             "end": {
                                                 "line": 5,
-                                                "column": 22,
-                                                "byte": 87
+                                                "column": 13,
+                                                "byte": 78
                                             }
                                         },
-                                        "schema": {
-                                            "type": "string",
-                                            "const": "secret1"
-                                        },
-                                        "literal": "secret1"
-                                    },
-                                    "key2": {
-                                        "range": {
+                                        "key2": {
                                             "environment": "builtin-nested-secret",
                                             "begin": {
                                                 "line": 6,
-                                                "column": 15,
-                                                "byte": 102
+                                                "column": 9,
+                                                "byte": 96
                                             },
                                             "end": {
                                                 "line": 6,
-                                                "column": 22,
-                                                "byte": 109
+                                                "column": 13,
+                                                "byte": 100
                                             }
+                                        }
+                                    },
+                                    "object": {
+                                        "key1": {
+                                            "range": {
+                                                "environment": "builtin-nested-secret",
+                                                "begin": {
+                                                    "line": 5,
+                                                    "column": 15,
+                                                    "byte": 80
+                                                },
+                                                "end": {
+                                                    "line": 5,
+                                                    "column": 22,
+                                                    "byte": 87
+                                                }
+                                            },
+                                            "schema": {
+                                                "type": "string",
+                                                "const": "secret1"
+                                            },
+                                            "literal": "secret1"
                                         },
-                                        "schema": {
-                                            "type": "string",
-                                            "const": "secret2"
-                                        },
-                                        "literal": "secret2"
+                                        "key2": {
+                                            "range": {
+                                                "environment": "builtin-nested-secret",
+                                                "begin": {
+                                                    "line": 6,
+                                                    "column": 15,
+                                                    "byte": 102
+                                                },
+                                                "end": {
+                                                    "line": 6,
+                                                    "column": 22,
+                                                    "byte": 109
+                                                }
+                                            },
+                                            "schema": {
+                                                "type": "string",
+                                                "const": "secret2"
+                                            },
+                                            "literal": "secret2"
+                                        }
                                     }
                                 }
                             }
                         }
                     }
-                }
-            },
-            "references": {
-                "range": {
-                    "environment": "builtin-nested-secret",
-                    "begin": {
-                        "line": 8,
-                        "column": 5,
-                        "byte": 128
-                    },
-                    "end": {
-                        "line": 10,
-                        "column": 38,
-                        "byte": 213
-                    }
                 },
-                "schema": {
-                    "properties": {
-                        "inner": true,
-                        "nested": true,
-                        "outer": true
-                    },
-                    "type": "object",
-                    "required": [
-                        "inner",
-                        "nested",
-                        "outer"
-                    ]
-                },
-                "keyRanges": {
-                    "inner": {
-                        "environment": "builtin-nested-secret",
-                        "begin": {
-                            "line": 9,
-                            "column": 5,
-                            "byte": 147
-                        },
-                        "end": {
-                            "line": 9,
-                            "column": 10,
-                            "byte": 152
-                        }
-                    },
-                    "nested": {
-                        "environment": "builtin-nested-secret",
-                        "begin": {
-                            "line": 10,
-                            "column": 5,
-                            "byte": 180
-                        },
-                        "end": {
-                            "line": 10,
-                            "column": 11,
-                            "byte": 186
-                        }
-                    },
-                    "outer": {
+                "references": {
+                    "range": {
                         "environment": "builtin-nested-secret",
                         "begin": {
                             "line": 8,
@@ -255,240 +267,294 @@
                             "byte": 128
                         },
                         "end": {
-                            "line": 8,
-                            "column": 10,
-                            "byte": 133
+                            "line": 10,
+                            "column": 38,
+                            "byte": 213
                         }
-                    }
-                },
-                "object": {
-                    "inner": {
-                        "range": {
+                    },
+                    "schema": {
+                        "properties": {
+                            "inner": true,
+                            "nested": true,
+                            "outer": true
+                        },
+                        "type": "object",
+                        "required": [
+                            "inner",
+                            "nested",
+                            "outer"
+                        ]
+                    },
+                    "keyRanges": {
+                        "inner": {
                             "environment": "builtin-nested-secret",
                             "begin": {
                                 "line": 9,
-                                "column": 12,
-                                "byte": 154
+                                "column": 5,
+                                "byte": 147
                             },
                             "end": {
                                 "line": 9,
-                                "column": 32,
-                                "byte": 174
+                                "column": 10,
+                                "byte": 152
                             }
                         },
-                        "schema": true,
-                        "symbol": [
-                            {
-                                "key": "open",
-                                "range": {
-                                    "environment": "builtin-nested-secret",
-                                    "begin": {
-                                        "line": 9,
-                                        "column": 14,
-                                        "byte": 156
-                                    },
-                                    "end": {
-                                        "line": 9,
-                                        "column": 18,
-                                        "byte": 160
-                                    }
-                                },
-                                "value": {
-                                    "environment": "builtin-nested-secret",
-                                    "begin": {
-                                        "line": 3,
-                                        "column": 5,
-                                        "byte": 20
-                                    },
-                                    "end": {
-                                        "line": 6,
-                                        "column": 22,
-                                        "byte": 109
-                                    }
-                                }
-                            },
-                            {
-                                "key": "secretObject",
-                                "range": {
-                                    "environment": "builtin-nested-secret",
-                                    "begin": {
-                                        "line": 9,
-                                        "column": 18,
-                                        "byte": 160
-                                    },
-                                    "end": {
-                                        "line": 9,
-                                        "column": 31,
-                                        "byte": 173
-                                    }
-                                },
-                                "value": {
-                                    "environment": "builtin-nested-secret",
-                                    "begin": {
-                                        "line": 9,
-                                        "column": 12,
-                                        "byte": 154
-                                    },
-                                    "end": {
-                                        "line": 9,
-                                        "column": 32,
-                                        "byte": 174
-                                    }
-                                }
-                            }
-                        ]
-                    },
-                    "nested": {
-                        "range": {
+                        "nested": {
                             "environment": "builtin-nested-secret",
                             "begin": {
                                 "line": 10,
-                                "column": 13,
-                                "byte": 188
+                                "column": 5,
+                                "byte": 180
                             },
                             "end": {
                                 "line": 10,
-                                "column": 38,
-                                "byte": 213
+                                "column": 11,
+                                "byte": 186
                             }
                         },
-                        "schema": true,
-                        "symbol": [
-                            {
-                                "key": "open",
-                                "range": {
-                                    "environment": "builtin-nested-secret",
-                                    "begin": {
-                                        "line": 10,
-                                        "column": 15,
-                                        "byte": 190
-                                    },
-                                    "end": {
-                                        "line": 10,
-                                        "column": 19,
-                                        "byte": 194
-                                    }
-                                },
-                                "value": {
-                                    "environment": "builtin-nested-secret",
-                                    "begin": {
-                                        "line": 3,
-                                        "column": 5,
-                                        "byte": 20
-                                    },
-                                    "end": {
-                                        "line": 6,
-                                        "column": 22,
-                                        "byte": 109
-                                    }
-                                }
-                            },
-                            {
-                                "key": "secretObject",
-                                "range": {
-                                    "environment": "builtin-nested-secret",
-                                    "begin": {
-                                        "line": 10,
-                                        "column": 19,
-                                        "byte": 194
-                                    },
-                                    "end": {
-                                        "line": 10,
-                                        "column": 32,
-                                        "byte": 207
-                                    }
-                                },
-                                "value": {
-                                    "environment": "builtin-nested-secret",
-                                    "begin": {
-                                        "line": 10,
-                                        "column": 13,
-                                        "byte": 188
-                                    },
-                                    "end": {
-                                        "line": 10,
-                                        "column": 38,
-                                        "byte": 213
-                                    }
-                                }
-                            },
-                            {
-                                "key": "key1",
-                                "range": {
-                                    "environment": "builtin-nested-secret",
-                                    "begin": {
-                                        "line": 10,
-                                        "column": 32,
-                                        "byte": 207
-                                    },
-                                    "end": {
-                                        "line": 10,
-                                        "column": 37,
-                                        "byte": 212
-                                    }
-                                },
-                                "value": {
-                                    "environment": "builtin-nested-secret",
-                                    "begin": {
-                                        "line": 10,
-                                        "column": 13,
-                                        "byte": 188
-                                    },
-                                    "end": {
-                                        "line": 10,
-                                        "column": 38,
-                                        "byte": 213
-                                    }
-                                }
-                            }
-                        ]
-                    },
-                    "outer": {
-                        "range": {
+                        "outer": {
                             "environment": "builtin-nested-secret",
                             "begin": {
                                 "line": 8,
-                                "column": 12,
-                                "byte": 135
+                                "column": 5,
+                                "byte": 128
                             },
                             "end": {
                                 "line": 8,
-                                "column": 19,
-                                "byte": 142
+                                "column": 10,
+                                "byte": 133
                             }
-                        },
-                        "schema": true,
-                        "symbol": [
-                            {
-                                "key": "open",
-                                "range": {
-                                    "environment": "builtin-nested-secret",
-                                    "begin": {
-                                        "line": 8,
-                                        "column": 14,
-                                        "byte": 137
+                        }
+                    },
+                    "object": {
+                        "inner": {
+                            "range": {
+                                "environment": "builtin-nested-secret",
+                                "begin": {
+                                    "line": 9,
+                                    "column": 12,
+                                    "byte": 154
+                                },
+                                "end": {
+                                    "line": 9,
+                                    "column": 32,
+                                    "byte": 174
+                                }
+                            },
+                            "schema": true,
+                            "symbol": [
+                                {
+                                    "key": "open",
+                                    "range": {
+                                        "environment": "builtin-nested-secret",
+                                        "begin": {
+                                            "line": 9,
+                                            "column": 14,
+                                            "byte": 156
+                                        },
+                                        "end": {
+                                            "line": 9,
+                                            "column": 18,
+                                            "byte": 160
+                                        }
                                     },
-                                    "end": {
-                                        "line": 8,
-                                        "column": 18,
-                                        "byte": 141
+                                    "value": {
+                                        "environment": "builtin-nested-secret",
+                                        "begin": {
+                                            "line": 3,
+                                            "column": 5,
+                                            "byte": 20
+                                        },
+                                        "end": {
+                                            "line": 6,
+                                            "column": 22,
+                                            "byte": 109
+                                        }
                                     }
                                 },
-                                "value": {
-                                    "environment": "builtin-nested-secret",
-                                    "begin": {
-                                        "line": 3,
-                                        "column": 5,
-                                        "byte": 20
+                                {
+                                    "key": "secretObject",
+                                    "range": {
+                                        "environment": "builtin-nested-secret",
+                                        "begin": {
+                                            "line": 9,
+                                            "column": 18,
+                                            "byte": 160
+                                        },
+                                        "end": {
+                                            "line": 9,
+                                            "column": 31,
+                                            "byte": 173
+                                        }
                                     },
-                                    "end": {
-                                        "line": 6,
-                                        "column": 22,
-                                        "byte": 109
+                                    "value": {
+                                        "environment": "builtin-nested-secret",
+                                        "begin": {
+                                            "line": 9,
+                                            "column": 12,
+                                            "byte": 154
+                                        },
+                                        "end": {
+                                            "line": 9,
+                                            "column": 32,
+                                            "byte": 174
+                                        }
                                     }
                                 }
-                            }
-                        ]
+                            ]
+                        },
+                        "nested": {
+                            "range": {
+                                "environment": "builtin-nested-secret",
+                                "begin": {
+                                    "line": 10,
+                                    "column": 13,
+                                    "byte": 188
+                                },
+                                "end": {
+                                    "line": 10,
+                                    "column": 38,
+                                    "byte": 213
+                                }
+                            },
+                            "schema": true,
+                            "symbol": [
+                                {
+                                    "key": "open",
+                                    "range": {
+                                        "environment": "builtin-nested-secret",
+                                        "begin": {
+                                            "line": 10,
+                                            "column": 15,
+                                            "byte": 190
+                                        },
+                                        "end": {
+                                            "line": 10,
+                                            "column": 19,
+                                            "byte": 194
+                                        }
+                                    },
+                                    "value": {
+                                        "environment": "builtin-nested-secret",
+                                        "begin": {
+                                            "line": 3,
+                                            "column": 5,
+                                            "byte": 20
+                                        },
+                                        "end": {
+                                            "line": 6,
+                                            "column": 22,
+                                            "byte": 109
+                                        }
+                                    }
+                                },
+                                {
+                                    "key": "secretObject",
+                                    "range": {
+                                        "environment": "builtin-nested-secret",
+                                        "begin": {
+                                            "line": 10,
+                                            "column": 19,
+                                            "byte": 194
+                                        },
+                                        "end": {
+                                            "line": 10,
+                                            "column": 32,
+                                            "byte": 207
+                                        }
+                                    },
+                                    "value": {
+                                        "environment": "builtin-nested-secret",
+                                        "begin": {
+                                            "line": 10,
+                                            "column": 13,
+                                            "byte": 188
+                                        },
+                                        "end": {
+                                            "line": 10,
+                                            "column": 38,
+                                            "byte": 213
+                                        }
+                                    }
+                                },
+                                {
+                                    "key": "key1",
+                                    "range": {
+                                        "environment": "builtin-nested-secret",
+                                        "begin": {
+                                            "line": 10,
+                                            "column": 32,
+                                            "byte": 207
+                                        },
+                                        "end": {
+                                            "line": 10,
+                                            "column": 37,
+                                            "byte": 212
+                                        }
+                                    },
+                                    "value": {
+                                        "environment": "builtin-nested-secret",
+                                        "begin": {
+                                            "line": 10,
+                                            "column": 13,
+                                            "byte": 188
+                                        },
+                                        "end": {
+                                            "line": 10,
+                                            "column": 38,
+                                            "byte": 213
+                                        }
+                                    }
+                                }
+                            ]
+                        },
+                        "outer": {
+                            "range": {
+                                "environment": "builtin-nested-secret",
+                                "begin": {
+                                    "line": 8,
+                                    "column": 12,
+                                    "byte": 135
+                                },
+                                "end": {
+                                    "line": 8,
+                                    "column": 19,
+                                    "byte": 142
+                                }
+                            },
+                            "schema": true,
+                            "symbol": [
+                                {
+                                    "key": "open",
+                                    "range": {
+                                        "environment": "builtin-nested-secret",
+                                        "begin": {
+                                            "line": 8,
+                                            "column": 14,
+                                            "byte": 137
+                                        },
+                                        "end": {
+                                            "line": 8,
+                                            "column": 18,
+                                            "byte": 141
+                                        }
+                                    },
+                                    "value": {
+                                        "environment": "builtin-nested-secret",
+                                        "begin": {
+                                            "line": 3,
+                                            "column": 5,
+                                            "byte": 20
+                                        },
+                                        "end": {
+                                            "line": 6,
+                                            "column": 22,
+                                            "byte": 109
+                                        }
+                                    }
+                                }
+                            ]
+                        }
                     }
                 }
             }
@@ -808,48 +874,140 @@
     },
     "eval": {
         "exprs": {
-            "open": {
-                "range": {
-                    "environment": "builtin-nested-secret",
-                    "begin": {
-                        "line": 3,
-                        "column": 5,
-                        "byte": 20
+            "range": {
+                "environment": "builtin-nested-secret",
+                "begin": {
+                    "line": 2,
+                    "column": 3,
+                    "byte": 10
+                },
+                "end": {
+                    "line": 10,
+                    "column": 38,
+                    "byte": 213
+                }
+            },
+            "schema": {
+                "properties": {
+                    "open": {
+                        "properties": {
+                            "secretObject": {
+                                "properties": {
+                                    "key1": {
+                                        "type": "string",
+                                        "const": "secret1"
+                                    },
+                                    "key2": {
+                                        "type": "string",
+                                        "const": "secret2"
+                                    }
+                                },
+                                "type": "object",
+                                "required": [
+                                    "key1",
+                                    "key2"
+                                ]
+                            }
+                        },
+                        "type": "object",
+                        "required": [
+                            "secretObject"
+                        ]
                     },
-                    "end": {
-                        "line": 6,
-                        "column": 22,
-                        "byte": 109
+                    "references": {
+                        "properties": {
+                            "inner": {
+                                "properties": {
+                                    "key1": {
+                                        "type": "string",
+                                        "const": "secret1"
+                                    },
+                                    "key2": {
+                                        "type": "string",
+                                        "const": "secret2"
+                                    }
+                                },
+                                "type": "object",
+                                "required": [
+                                    "key1",
+                                    "key2"
+                                ]
+                            },
+                            "nested": {
+                                "type": "string",
+                                "const": "secret1"
+                            },
+                            "outer": {
+                                "properties": {
+                                    "secretObject": {
+                                        "properties": {
+                                            "key1": {
+                                                "type": "string",
+                                                "const": "secret1"
+                                            },
+                                            "key2": {
+                                                "type": "string",
+                                                "const": "secret2"
+                                            }
+                                        },
+                                        "type": "object",
+                                        "required": [
+                                            "key1",
+                                            "key2"
+                                        ]
+                                    }
+                                },
+                                "type": "object",
+                                "required": [
+                                    "secretObject"
+                                ]
+                            }
+                        },
+                        "type": "object",
+                        "required": [
+                            "inner",
+                            "nested",
+                            "outer"
+                        ]
                     }
                 },
-                "schema": {
-                    "properties": {
-                        "secretObject": {
-                            "properties": {
-                                "key1": {
-                                    "type": "string",
-                                    "const": "secret1"
-                                },
-                                "key2": {
-                                    "type": "string",
-                                    "const": "secret2"
-                                }
-                            },
-                            "type": "object",
-                            "required": [
-                                "key1",
-                                "key2"
-                            ]
-                        }
+                "type": "object",
+                "required": [
+                    "open",
+                    "references"
+                ]
+            },
+            "keyRanges": {
+                "open": {
+                    "environment": "builtin-nested-secret",
+                    "begin": {
+                        "line": 2,
+                        "column": 3,
+                        "byte": 10
                     },
-                    "type": "object",
-                    "required": [
-                        "secretObject"
-                    ]
+                    "end": {
+                        "line": 2,
+                        "column": 7,
+                        "byte": 14
+                    }
                 },
-                "builtin": {
-                    "name": "fn::open::secret-wrapper",
-                    "nameRange": {
+                "references": {
+                    "environment": "builtin-nested-secret",
+                    "begin": {
+                        "line": 7,
+                        "column": 3,
+                        "byte": 112
+                    },
+                    "end": {
+                        "line": 7,
+                        "column": 13,
+                        "byte": 122
+                    }
+                }
+            },
+            "object": {
+                "open": {
+                    "range": {
                         "environment": "builtin-nested-secret",
                         "begin": {
                             "line": 3,
@@ -857,53 +1015,54 @@
                             "byte": 20
                         },
                         "end": {
-                            "line": 3,
-                            "column": 29,
-                            "byte": 44
+                            "line": 6,
+                            "column": 22,
+                            "byte": 109
                         }
                     },
-                    "argSchema": true,
-                    "arg": {
-                        "range": {
-                            "environment": "builtin-nested-secret",
-                            "begin": {
-                                "line": 4,
-                                "column": 7,
-                                "byte": 52
-                            },
-                            "end": {
-                                "line": 6,
-                                "column": 22,
-                                "byte": 109
+                    "schema": {
+                        "properties": {
+                            "secretObject": {
+                                "properties": {
+                                    "key1": {
+                                        "type": "string",
+                                        "const": "secret1"
+                                    },
+                                    "key2": {
+                                        "type": "string",
+                                        "const": "secret2"
+                                    }
+                                },
+                                "type": "object",
+                                "required": [
+                                    "key1",
+                                    "key2"
+                                ]
                             }
                         },
-                        "schema": {
-                            "properties": {
-                                "secretObject": {
-                                    "properties": {
-                                        "key1": {
-                                            "type": "string",
-                                            "const": "secret1"
-                                        },
-                                        "key2": {
-                                            "type": "string",
-                                            "const": "secret2"
-                                        }
-                                    },
-                                    "type": "object",
-                                    "required": [
-                                        "key1",
-                                        "key2"
-                                    ]
-                                }
+                        "type": "object",
+                        "required": [
+                            "secretObject"
+                        ]
+                    },
+                    "builtin": {
+                        "name": "fn::open::secret-wrapper",
+                        "nameRange": {
+                            "environment": "builtin-nested-secret",
+                            "begin": {
+                                "line": 3,
+                                "column": 5,
+                                "byte": 20
                             },
-                            "type": "object",
-                            "required": [
-                                "secretObject"
-                            ]
+                            "end": {
+                                "line": 3,
+                                "column": 29,
+                                "byte": 44
+                            }
                         },
-                        "keyRanges": {
-                            "secretObject": {
+                        "argSchema": true,
+                        "arg": {
+                            "range": {
                                 "environment": "builtin-nested-secret",
                                 "begin": {
                                     "line": 4,
@@ -911,46 +1070,54 @@
                                     "byte": 52
                                 },
                                 "end": {
-                                    "line": 4,
-                                    "column": 19,
-                                    "byte": 64
+                                    "line": 6,
+                                    "column": 22,
+                                    "byte": 109
                                 }
-                            }
-                        },
-                        "object": {
-                            "secretObject": {
-                                "range": {
-                                    "environment": "builtin-nested-secret",
-                                    "begin": {
-                                        "line": 5,
-                                        "column": 9,
-                                        "byte": 74
-                                    },
-                                    "end": {
-                                        "line": 6,
-                                        "column": 22,
-                                        "byte": 109
+                            },
+                            "schema": {
+                                "properties": {
+                                    "secretObject": {
+                                        "properties": {
+                                            "key1": {
+                                                "type": "string",
+                                                "const": "secret1"
+                                            },
+                                            "key2": {
+                                                "type": "string",
+                                                "const": "secret2"
+                                            }
+                                        },
+                                        "type": "object",
+                                        "required": [
+                                            "key1",
+                                            "key2"
+                                        ]
                                     }
                                 },
-                                "schema": {
-                                    "properties": {
-                                        "key1": {
-                                            "type": "string",
-                                            "const": "secret1"
-                                        },
-                                        "key2": {
-                                            "type": "string",
-                                            "const": "secret2"
-                                        }
+                                "type": "object",
+                                "required": [
+                                    "secretObject"
+                                ]
+                            },
+                            "keyRanges": {
+                                "secretObject": {
+                                    "environment": "builtin-nested-secret",
+                                    "begin": {
+                                        "line": 4,
+                                        "column": 7,
+                                        "byte": 52
                                     },
-                                    "type": "object",
-                                    "required": [
-                                        "key1",
-                                        "key2"
-                                    ]
-                                },
-                                "keyRanges": {
-                                    "key1": {
+                                    "end": {
+                                        "line": 4,
+                                        "column": 19,
+                                        "byte": 64
+                                    }
+                                }
+                            },
+                            "object": {
+                                "secretObject": {
+                                    "range": {
                                         "environment": "builtin-nested-secret",
                                         "begin": {
                                             "line": 5,
@@ -958,170 +1125,105 @@
                                             "byte": 74
                                         },
                                         "end": {
-                                            "line": 5,
-                                            "column": 13,
-                                            "byte": 78
+                                            "line": 6,
+                                            "column": 22,
+                                            "byte": 109
                                         }
                                     },
-                                    "key2": {
-                                        "environment": "builtin-nested-secret",
-                                        "begin": {
-                                            "line": 6,
-                                            "column": 9,
-                                            "byte": 96
+                                    "schema": {
+                                        "properties": {
+                                            "key1": {
+                                                "type": "string",
+                                                "const": "secret1"
+                                            },
+                                            "key2": {
+                                                "type": "string",
+                                                "const": "secret2"
+                                            }
                                         },
-                                        "end": {
-                                            "line": 6,
-                                            "column": 13,
-                                            "byte": 100
-                                        }
-                                    }
-                                },
-                                "object": {
-                                    "key1": {
-                                        "range": {
+                                        "type": "object",
+                                        "required": [
+                                            "key1",
+                                            "key2"
+                                        ]
+                                    },
+                                    "keyRanges": {
+                                        "key1": {
                                             "environment": "builtin-nested-secret",
                                             "begin": {
                                                 "line": 5,
-                                                "column": 15,
-                                                "byte": 80
+                                                "column": 9,
+                                                "byte": 74
                                             },
                                             "end": {
                                                 "line": 5,
-                                                "column": 22,
-                                                "byte": 87
+                                                "column": 13,
+                                                "byte": 78
                                             }
                                         },
-                                        "schema": {
-                                            "type": "string",
-                                            "const": "secret1"
-                                        },
-                                        "literal": "secret1"
-                                    },
-                                    "key2": {
-                                        "range": {
+                                        "key2": {
                                             "environment": "builtin-nested-secret",
                                             "begin": {
                                                 "line": 6,
-                                                "column": 15,
-                                                "byte": 102
+                                                "column": 9,
+                                                "byte": 96
                                             },
                                             "end": {
                                                 "line": 6,
-                                                "column": 22,
-                                                "byte": 109
+                                                "column": 13,
+                                                "byte": 100
                                             }
+                                        }
+                                    },
+                                    "object": {
+                                        "key1": {
+                                            "range": {
+                                                "environment": "builtin-nested-secret",
+                                                "begin": {
+                                                    "line": 5,
+                                                    "column": 15,
+                                                    "byte": 80
+                                                },
+                                                "end": {
+                                                    "line": 5,
+                                                    "column": 22,
+                                                    "byte": 87
+                                                }
+                                            },
+                                            "schema": {
+                                                "type": "string",
+                                                "const": "secret1"
+                                            },
+                                            "literal": "secret1"
                                         },
-                                        "schema": {
-                                            "type": "string",
-                                            "const": "secret2"
-                                        },
-                                        "literal": "secret2"
+                                        "key2": {
+                                            "range": {
+                                                "environment": "builtin-nested-secret",
+                                                "begin": {
+                                                    "line": 6,
+                                                    "column": 15,
+                                                    "byte": 102
+                                                },
+                                                "end": {
+                                                    "line": 6,
+                                                    "column": 22,
+                                                    "byte": 109
+                                                }
+                                            },
+                                            "schema": {
+                                                "type": "string",
+                                                "const": "secret2"
+                                            },
+                                            "literal": "secret2"
+                                        }
                                     }
                                 }
                             }
                         }
                     }
-                }
-            },
-            "references": {
-                "range": {
-                    "environment": "builtin-nested-secret",
-                    "begin": {
-                        "line": 8,
-                        "column": 5,
-                        "byte": 128
-                    },
-                    "end": {
-                        "line": 10,
-                        "column": 38,
-                        "byte": 213
-                    }
                 },
-                "schema": {
-                    "properties": {
-                        "inner": {
-                            "properties": {
-                                "key1": {
-                                    "type": "string",
-                                    "const": "secret1"
-                                },
-                                "key2": {
-                                    "type": "string",
-                                    "const": "secret2"
-                                }
-                            },
-                            "type": "object",
-                            "required": [
-                                "key1",
-                                "key2"
-                            ]
-                        },
-                        "nested": {
-                            "type": "string",
-                            "const": "secret1"
-                        },
-                        "outer": {
-                            "properties": {
-                                "secretObject": {
-                                    "properties": {
-                                        "key1": {
-                                            "type": "string",
-                                            "const": "secret1"
-                                        },
-                                        "key2": {
-                                            "type": "string",
-                                            "const": "secret2"
-                                        }
-                                    },
-                                    "type": "object",
-                                    "required": [
-                                        "key1",
-                                        "key2"
-                                    ]
-                                }
-                            },
-                            "type": "object",
-                            "required": [
-                                "secretObject"
-                            ]
-                        }
-                    },
-                    "type": "object",
-                    "required": [
-                        "inner",
-                        "nested",
-                        "outer"
-                    ]
-                },
-                "keyRanges": {
-                    "inner": {
-                        "environment": "builtin-nested-secret",
-                        "begin": {
-                            "line": 9,
-                            "column": 5,
-                            "byte": 147
-                        },
-                        "end": {
-                            "line": 9,
-                            "column": 10,
-                            "byte": 152
-                        }
-                    },
-                    "nested": {
-                        "environment": "builtin-nested-secret",
-                        "begin": {
-                            "line": 10,
-                            "column": 5,
-                            "byte": 180
-                        },
-                        "end": {
-                            "line": 10,
-                            "column": 11,
-                            "byte": 186
-                        }
-                    },
-                    "outer": {
+                "references": {
+                    "range": {
                         "environment": "builtin-nested-secret",
                         "begin": {
                             "line": 8,
@@ -1129,283 +1231,380 @@
                             "byte": 128
                         },
                         "end": {
-                            "line": 8,
-                            "column": 10,
-                            "byte": 133
+                            "line": 10,
+                            "column": 38,
+                            "byte": 213
                         }
-                    }
-                },
-                "object": {
-                    "inner": {
-                        "range": {
-                            "environment": "builtin-nested-secret",
-                            "begin": {
-                                "line": 9,
-                                "column": 12,
-                                "byte": 154
-                            },
-                            "end": {
-                                "line": 9,
-                                "column": 32,
-                                "byte": 174
-                            }
-                        },
-                        "schema": {
-                            "properties": {
-                                "key1": {
-                                    "type": "string",
-                                    "const": "secret1"
-                                },
-                                "key2": {
-                                    "type": "string",
-                                    "const": "secret2"
-                                }
-                            },
-                            "type": "object",
-                            "required": [
-                                "key1",
-                                "key2"
-                            ]
-                        },
-                        "symbol": [
-                            {
-                                "key": "open",
-                                "range": {
-                                    "environment": "builtin-nested-secret",
-                                    "begin": {
-                                        "line": 9,
-                                        "column": 14,
-                                        "byte": 156
-                                    },
-                                    "end": {
-                                        "line": 9,
-                                        "column": 18,
-                                        "byte": 160
-                                    }
-                                },
-                                "value": {
-                                    "environment": "builtin-nested-secret",
-                                    "begin": {
-                                        "line": 3,
-                                        "column": 5,
-                                        "byte": 20
-                                    },
-                                    "end": {
-                                        "line": 6,
-                                        "column": 22,
-                                        "byte": 109
-                                    }
-                                }
-                            },
-                            {
-                                "key": "secretObject",
-                                "range": {
-                                    "environment": "builtin-nested-secret",
-                                    "begin": {
-                                        "line": 9,
-                                        "column": 18,
-                                        "byte": 160
-                                    },
-                                    "end": {
-                                        "line": 9,
-                                        "column": 31,
-                                        "byte": 173
-                                    }
-                                },
-                                "value": {
-                                    "environment": "builtin-nested-secret",
-                                    "begin": {
-                                        "line": 3,
-                                        "column": 5,
-                                        "byte": 20
-                                    },
-                                    "end": {
-                                        "line": 6,
-                                        "column": 22,
-                                        "byte": 109
-                                    }
-                                }
-                            }
-                        ]
                     },
-                    "nested": {
-                        "range": {
-                            "environment": "builtin-nested-secret",
-                            "begin": {
-                                "line": 10,
-                                "column": 13,
-                                "byte": 188
-                            },
-                            "end": {
-                                "line": 10,
-                                "column": 38,
-                                "byte": 213
-                            }
-                        },
-                        "schema": {
-                            "type": "string",
-                            "const": "secret1"
-                        },
-                        "symbol": [
-                            {
-                                "key": "open",
-                                "range": {
-                                    "environment": "builtin-nested-secret",
-                                    "begin": {
-                                        "line": 10,
-                                        "column": 15,
-                                        "byte": 190
+                    "schema": {
+                        "properties": {
+                            "inner": {
+                                "properties": {
+                                    "key1": {
+                                        "type": "string",
+                                        "const": "secret1"
                                     },
-                                    "end": {
-                                        "line": 10,
-                                        "column": 19,
-                                        "byte": 194
+                                    "key2": {
+                                        "type": "string",
+                                        "const": "secret2"
                                     }
                                 },
-                                "value": {
-                                    "environment": "builtin-nested-secret",
-                                    "begin": {
-                                        "line": 3,
-                                        "column": 5,
-                                        "byte": 20
-                                    },
-                                    "end": {
-                                        "line": 6,
-                                        "column": 22,
-                                        "byte": 109
-                                    }
-                                }
+                                "type": "object",
+                                "required": [
+                                    "key1",
+                                    "key2"
+                                ]
                             },
-                            {
-                                "key": "secretObject",
-                                "range": {
-                                    "environment": "builtin-nested-secret",
-                                    "begin": {
-                                        "line": 10,
-                                        "column": 19,
-                                        "byte": 194
-                                    },
-                                    "end": {
-                                        "line": 10,
-                                        "column": 32,
-                                        "byte": 207
-                                    }
-                                },
-                                "value": {
-                                    "environment": "builtin-nested-secret",
-                                    "begin": {
-                                        "line": 3,
-                                        "column": 5,
-                                        "byte": 20
-                                    },
-                                    "end": {
-                                        "line": 6,
-                                        "column": 22,
-                                        "byte": 109
-                                    }
-                                }
+                            "nested": {
+                                "type": "string",
+                                "const": "secret1"
                             },
-                            {
-                                "key": "key1",
-                                "range": {
-                                    "environment": "builtin-nested-secret",
-                                    "begin": {
-                                        "line": 10,
-                                        "column": 32,
-                                        "byte": 207
-                                    },
-                                    "end": {
-                                        "line": 10,
-                                        "column": 37,
-                                        "byte": 212
-                                    }
-                                },
-                                "value": {
-                                    "environment": "builtin-nested-secret",
-                                    "begin": {
-                                        "line": 3,
-                                        "column": 5,
-                                        "byte": 20
-                                    },
-                                    "end": {
-                                        "line": 6,
-                                        "column": 22,
-                                        "byte": 109
-                                    }
-                                }
-                            }
-                        ]
-                    },
-                    "outer": {
-                        "range": {
-                            "environment": "builtin-nested-secret",
-                            "begin": {
-                                "line": 8,
-                                "column": 12,
-                                "byte": 135
-                            },
-                            "end": {
-                                "line": 8,
-                                "column": 19,
-                                "byte": 142
-                            }
-                        },
-                        "schema": {
-                            "properties": {
-                                "secretObject": {
-                                    "properties": {
-                                        "key1": {
-                                            "type": "string",
-                                            "const": "secret1"
+                            "outer": {
+                                "properties": {
+                                    "secretObject": {
+                                        "properties": {
+                                            "key1": {
+                                                "type": "string",
+                                                "const": "secret1"
+                                            },
+                                            "key2": {
+                                                "type": "string",
+                                                "const": "secret2"
+                                            }
                                         },
-                                        "key2": {
-                                            "type": "string",
-                                            "const": "secret2"
+                                        "type": "object",
+                                        "required": [
+                                            "key1",
+                                            "key2"
+                                        ]
+                                    }
+                                },
+                                "type": "object",
+                                "required": [
+                                    "secretObject"
+                                ]
+                            }
+                        },
+                        "type": "object",
+                        "required": [
+                            "inner",
+                            "nested",
+                            "outer"
+                        ]
+                    },
+                    "keyRanges": {
+                        "inner": {
+                            "environment": "builtin-nested-secret",
+                            "begin": {
+                                "line": 9,
+                                "column": 5,
+                                "byte": 147
+                            },
+                            "end": {
+                                "line": 9,
+                                "column": 10,
+                                "byte": 152
+                            }
+                        },
+                        "nested": {
+                            "environment": "builtin-nested-secret",
+                            "begin": {
+                                "line": 10,
+                                "column": 5,
+                                "byte": 180
+                            },
+                            "end": {
+                                "line": 10,
+                                "column": 11,
+                                "byte": 186
+                            }
+                        },
+                        "outer": {
+                            "environment": "builtin-nested-secret",
+                            "begin": {
+                                "line": 8,
+                                "column": 5,
+                                "byte": 128
+                            },
+                            "end": {
+                                "line": 8,
+                                "column": 10,
+                                "byte": 133
+                            }
+                        }
+                    },
+                    "object": {
+                        "inner": {
+                            "range": {
+                                "environment": "builtin-nested-secret",
+                                "begin": {
+                                    "line": 9,
+                                    "column": 12,
+                                    "byte": 154
+                                },
+                                "end": {
+                                    "line": 9,
+                                    "column": 32,
+                                    "byte": 174
+                                }
+                            },
+                            "schema": {
+                                "properties": {
+                                    "key1": {
+                                        "type": "string",
+                                        "const": "secret1"
+                                    },
+                                    "key2": {
+                                        "type": "string",
+                                        "const": "secret2"
+                                    }
+                                },
+                                "type": "object",
+                                "required": [
+                                    "key1",
+                                    "key2"
+                                ]
+                            },
+                            "symbol": [
+                                {
+                                    "key": "open",
+                                    "range": {
+                                        "environment": "builtin-nested-secret",
+                                        "begin": {
+                                            "line": 9,
+                                            "column": 14,
+                                            "byte": 156
+                                        },
+                                        "end": {
+                                            "line": 9,
+                                            "column": 18,
+                                            "byte": 160
                                         }
                                     },
-                                    "type": "object",
-                                    "required": [
-                                        "key1",
-                                        "key2"
-                                    ]
-                                }
-                            },
-                            "type": "object",
-                            "required": [
-                                "secretObject"
-                            ]
-                        },
-                        "symbol": [
-                            {
-                                "key": "open",
-                                "range": {
-                                    "environment": "builtin-nested-secret",
-                                    "begin": {
-                                        "line": 8,
-                                        "column": 14,
-                                        "byte": 137
-                                    },
-                                    "end": {
-                                        "line": 8,
-                                        "column": 18,
-                                        "byte": 141
+                                    "value": {
+                                        "environment": "builtin-nested-secret",
+                                        "begin": {
+                                            "line": 3,
+                                            "column": 5,
+                                            "byte": 20
+                                        },
+                                        "end": {
+                                            "line": 6,
+                                            "column": 22,
+                                            "byte": 109
+                                        }
                                     }
                                 },
-                                "value": {
-                                    "environment": "builtin-nested-secret",
-                                    "begin": {
-                                        "line": 3,
-                                        "column": 5,
-                                        "byte": 20
+                                {
+                                    "key": "secretObject",
+                                    "range": {
+                                        "environment": "builtin-nested-secret",
+                                        "begin": {
+                                            "line": 9,
+                                            "column": 18,
+                                            "byte": 160
+                                        },
+                                        "end": {
+                                            "line": 9,
+                                            "column": 31,
+                                            "byte": 173
+                                        }
                                     },
-                                    "end": {
-                                        "line": 6,
-                                        "column": 22,
-                                        "byte": 109
+                                    "value": {
+                                        "environment": "builtin-nested-secret",
+                                        "begin": {
+                                            "line": 3,
+                                            "column": 5,
+                                            "byte": 20
+                                        },
+                                        "end": {
+                                            "line": 6,
+                                            "column": 22,
+                                            "byte": 109
+                                        }
                                     }
                                 }
-                            }
-                        ]
+                            ]
+                        },
+                        "nested": {
+                            "range": {
+                                "environment": "builtin-nested-secret",
+                                "begin": {
+                                    "line": 10,
+                                    "column": 13,
+                                    "byte": 188
+                                },
+                                "end": {
+                                    "line": 10,
+                                    "column": 38,
+                                    "byte": 213
+                                }
+                            },
+                            "schema": {
+                                "type": "string",
+                                "const": "secret1"
+                            },
+                            "symbol": [
+                                {
+                                    "key": "open",
+                                    "range": {
+                                        "environment": "builtin-nested-secret",
+                                        "begin": {
+                                            "line": 10,
+                                            "column": 15,
+                                            "byte": 190
+                                        },
+                                        "end": {
+                                            "line": 10,
+                                            "column": 19,
+                                            "byte": 194
+                                        }
+                                    },
+                                    "value": {
+                                        "environment": "builtin-nested-secret",
+                                        "begin": {
+                                            "line": 3,
+                                            "column": 5,
+                                            "byte": 20
+                                        },
+                                        "end": {
+                                            "line": 6,
+                                            "column": 22,
+                                            "byte": 109
+                                        }
+                                    }
+                                },
+                                {
+                                    "key": "secretObject",
+                                    "range": {
+                                        "environment": "builtin-nested-secret",
+                                        "begin": {
+                                            "line": 10,
+                                            "column": 19,
+                                            "byte": 194
+                                        },
+                                        "end": {
+                                            "line": 10,
+                                            "column": 32,
+                                            "byte": 207
+                                        }
+                                    },
+                                    "value": {
+                                        "environment": "builtin-nested-secret",
+                                        "begin": {
+                                            "line": 3,
+                                            "column": 5,
+                                            "byte": 20
+                                        },
+                                        "end": {
+                                            "line": 6,
+                                            "column": 22,
+                                            "byte": 109
+                                        }
+                                    }
+                                },
+                                {
+                                    "key": "key1",
+                                    "range": {
+                                        "environment": "builtin-nested-secret",
+                                        "begin": {
+                                            "line": 10,
+                                            "column": 32,
+                                            "byte": 207
+                                        },
+                                        "end": {
+                                            "line": 10,
+                                            "column": 37,
+                                            "byte": 212
+                                        }
+                                    },
+                                    "value": {
+                                        "environment": "builtin-nested-secret",
+                                        "begin": {
+                                            "line": 3,
+                                            "column": 5,
+                                            "byte": 20
+                                        },
+                                        "end": {
+                                            "line": 6,
+                                            "column": 22,
+                                            "byte": 109
+                                        }
+                                    }
+                                }
+                            ]
+                        },
+                        "outer": {
+                            "range": {
+                                "environment": "builtin-nested-secret",
+                                "begin": {
+                                    "line": 8,
+                                    "column": 12,
+                                    "byte": 135
+                                },
+                                "end": {
+                                    "line": 8,
+                                    "column": 19,
+                                    "byte": 142
+                                }
+                            },
+                            "schema": {
+                                "properties": {
+                                    "secretObject": {
+                                        "properties": {
+                                            "key1": {
+                                                "type": "string",
+                                                "const": "secret1"
+                                            },
+                                            "key2": {
+                                                "type": "string",
+                                                "const": "secret2"
+                                            }
+                                        },
+                                        "type": "object",
+                                        "required": [
+                                            "key1",
+                                            "key2"
+                                        ]
+                                    }
+                                },
+                                "type": "object",
+                                "required": [
+                                    "secretObject"
+                                ]
+                            },
+                            "symbol": [
+                                {
+                                    "key": "open",
+                                    "range": {
+                                        "environment": "builtin-nested-secret",
+                                        "begin": {
+                                            "line": 8,
+                                            "column": 14,
+                                            "byte": 137
+                                        },
+                                        "end": {
+                                            "line": 8,
+                                            "column": 18,
+                                            "byte": 141
+                                        }
+                                    },
+                                    "value": {
+                                        "environment": "builtin-nested-secret",
+                                        "begin": {
+                                            "line": 3,
+                                            "column": 5,
+                                            "byte": 20
+                                        },
+                                        "end": {
+                                            "line": 6,
+                                            "column": 22,
+                                            "byte": 109
+                                        }
+                                    }
+                                }
+                            ]
+                        }
                     }
                 }
             }
