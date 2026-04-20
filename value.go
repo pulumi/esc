@@ -151,6 +151,39 @@ func FromJSON(v any) (Value, error) {
 	return fromJSON("", v)
 }
 
+// FromYAML converts a plain YAML value (as returned by yaml.Unmarshal) into a Value.
+// YAML produces int/float64 for numbers rather than json.Number, so this function
+// normalizes them before delegating to fromJSON.
+func FromYAML(v any) (Value, error) {
+	return fromJSON("", normalizeYAMLValue(v))
+}
+
+// normalizeYAMLValue converts YAML-native types to JSON-compatible types.
+func normalizeYAMLValue(v any) any {
+	switch v := v.(type) {
+	case int:
+		return json.Number(strconv.Itoa(v))
+	case int64:
+		return json.Number(strconv.FormatInt(v, 10))
+	case uint64:
+		return json.Number(strconv.FormatUint(v, 10))
+	case float64:
+		return json.Number(strconv.FormatFloat(v, 'f', -1, 64))
+	case []any:
+		for i, elem := range v {
+			v[i] = normalizeYAMLValue(elem)
+		}
+		return v
+	case map[string]any:
+		for k, elem := range v {
+			v[k] = normalizeYAMLValue(elem)
+		}
+		return v
+	default:
+		return v
+	}
+}
+
 func fromJSON(path string, v any) (Value, error) {
 	switch v := v.(type) {
 	case nil:
