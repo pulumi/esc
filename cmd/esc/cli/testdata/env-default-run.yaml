@@ -1,0 +1,20 @@
+run: esc env run -- esc-test-cmd
+process:
+  fs:
+    proj/.esc.yaml: |
+      environment: test-user/default/the-env
+  commands:
+    esc-test-cmd: echo "hello $FOO"
+  cwd: proj
+environments:
+  test-user/default/the-env:
+    values:
+      environmentVariables:
+        FOO: world
+
+---
+> esc env run -- esc-test-cmd
+hello world
+
+---
+> esc env run -- esc-test-cmd

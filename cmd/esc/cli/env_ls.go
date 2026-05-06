@@ -29,8 +29,20 @@ func newEnvLsCmd(env *envCommand) *cobra.Command {
 		RunE: func(cmd *cobra.Command, _ []string) error {
 			ctx := context.Background()
 
+			desc, err := env.inferDefaultEnv(ctx)
+			if err != nil {
+				return fmt.Errorf("configuring default environment: %w", err)
+			}
+			ref, hasDefaultRef := desc.(environmentRef)
+
 			if err := env.esc.getCachedClient(ctx); err != nil {
 				return err
+			}
+
+			// listEnvironments empties Organization for envs in the calling user's namespace, so
+			// normalize the inferred ref the same way before comparing.
+			if hasDefaultRef && ref.orgName == env.esc.account.Username {
+				ref.orgName = ""
 			}
 
 			allEnvs, err := env.listEnvironments(ctx, orgFilter, projectFilter)
@@ -51,10 +63,16 @@ func newEnvLsCmd(env *envCommand) *cobra.Command {
 			})
 
 			for _, e := range allEnvs {
+				isDefault := hasDefaultRef && ref.orgName == e.Organization && ref.projectName == e.Project && ref.envName == e.Name
+				defaultSuffix := ""
+				if isDefault {
+					defaultSuffix = " (default)"
+				}
+
 				if e.Organization == "" {
-					fmt.Fprintf(env.esc.stdout, "%v/%v\n", e.Project, e.Name)
+					fmt.Fprintf(env.esc.stdout, "%v/%v%v\n", e.Project, e.Name, defaultSuffix)
 				} else {
-					fmt.Fprintf(env.esc.stdout, "%v/%v/%v\n", e.Organization, e.Project, e.Name)
+					fmt.Fprintf(env.esc.stdout, "%v/%v/%v%v\n", e.Organization, e.Project, e.Name, defaultSuffix)
 				}
 			}
 

@@ -1282,6 +1282,7 @@ type testExec struct {
 	fs       testFS
 	environ  map[string]string
 	commands map[string]string
+	cwd      string
 
 	parentPath string
 	login      *testLoginManager
@@ -1303,6 +1304,19 @@ func (c *testExec) Run(cmd *exec.Cmd) error {
 		return errors.New("command not found")
 	}
 	return c.runScript(script, cmd)
+}
+
+func (c *testExec) Output(cmd *exec.Cmd) ([]byte, error) {
+	if cmd.Stdout != nil {
+		return nil, errors.New("exec: Stdout already set")
+	}
+	var stdout bytes.Buffer
+	cmd.Stdout = &stdout
+	if cmd.Stderr == nil {
+		cmd.Stderr = io.Discard
+	}
+	err := c.Run(cmd)
+	return stdout.Bytes(), err
 }
 
 func (c *testExec) runScript(script string, cmd *exec.Cmd) error {
@@ -1341,6 +1355,7 @@ func (c *testExec) runScript(script string, cmd *exec.Cmd) error {
 					environ:         environ,
 					exec:            c,
 					pager:           testPager(0),
+					cwd:             c.cwd,
 					newClient: func(_, backendURL, accessToken string, insecure bool) client.Client {
 						return c.client
 					},
@@ -1421,6 +1436,7 @@ type cliTestcaseProcess struct {
 	FS       map[string]string `yaml:"fs,omitempty"`
 	Environ  map[string]string `yaml:"environ,omitempty"`
 	Commands map[string]string `yaml:"commands,omitempty"`
+	Cwd      string            `yaml:"cwd,omitempty"`
 }
 
 type cliTestcaseRetract struct {
@@ -1495,6 +1511,7 @@ func loadTestcase(path string) (*cliTestcaseYAML, *cliTestcase, error) {
 
 		exec.environ = testcase.Process.Environ
 		exec.commands = testcase.Process.Commands
+		exec.cwd = testcase.Process.Cwd
 	}
 
 	environments := map[string]*testEnvironment{}
