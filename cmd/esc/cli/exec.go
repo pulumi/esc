@@ -7,6 +7,7 @@ import "os/exec"
 type cmdExec interface {
 	LookPath(command string) (string, error)
 	Run(cmd *exec.Cmd) error
+	Output(cmd *exec.Cmd) ([]byte, error)
 }
 
 type defaultCmdExec int
@@ -21,4 +22,8 @@ func (defaultCmdExec) LookPath(command string) (string, error) {
 
 func (defaultCmdExec) Run(cmd *exec.Cmd) error {
 	return cmd.Run()
+}
+
+func (defaultCmdExec) Output(cmd *exec.Cmd) ([]byte, error) {
+	return cmd.Output()
 }

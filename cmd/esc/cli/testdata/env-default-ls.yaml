@@ -1,0 +1,17 @@
+run: esc env ls
+process:
+  fs:
+    proj/.esc.yaml: |
+      environment: test-user/default/env-2
+  cwd: proj
+environments:
+  test-user/default/env: true
+  test-user/default/env-2: true
+
+---
+> esc env ls
+default/env
+default/env-2 (default)
+
+---
+> esc env ls

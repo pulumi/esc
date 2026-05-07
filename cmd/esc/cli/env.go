@@ -53,6 +53,25 @@ func newEnvCmd(esc *escCommand) *cobra.Command {
 			"\n" +
 			"This will prompt you to create a new environment to hold secrets and configuration.\n" +
 			"\n" +
+			"Most subcommands accept an explicit environment name. When one is not given, the default\n" +
+			"environment is inferred from a `.esc.yaml` file in the current directory or any parent,\n" +
+			"falling back to the imports of the currently-selected Pulumi IaC stack.\n" +
+			"\n" +
+			"The `.esc.yaml` schema accepts three forms under its `environment` field:\n" +
+			"\n" +
+			"  # A reference to a single environment.\n" +
+			"  environment: my-org/my-project/my-env\n" +
+			"\n" +
+			"  # An anonymous list of imports, opened in the named organization.\n" +
+			"  environment:\n" +
+			"    organization: my-org\n" +
+			"    imports:\n" +
+			"      - my-project/my-env\n" +
+			"\n" +
+			"  # A command to run. Its stdout must be JSON in either of the two forms above.\n" +
+			"  environment:\n" +
+			"    command: my-tool resolve-env\n" +
+			"\n" +
 			"For more information, please visit the project page: https://www.pulumi.com/docs/esc",
 
 		Args: cobra.NoArgs,
@@ -81,6 +100,17 @@ func newEnvCmd(esc *escCommand) *cobra.Command {
 	return cmd
 }
 
+type environmentDesc interface {
+	isEnvironmentDesc()
+}
+
+type importList struct {
+	orgName string
+	imports []string
+}
+
+func (importList) isEnvironmentDesc() {}
+
 type environmentRef struct {
 	orgName     string
 	projectName string
@@ -90,6 +120,8 @@ type environmentRef struct {
 	isUsingLegacyID  bool
 	hasAmbiguousPath bool
 }
+
+func (r environmentRef) isEnvironmentDesc() {}
 
 func (r *environmentRef) Id() string {
 	s := fmt.Sprintf("%s/%s", r.projectName, r.envName)
@@ -244,20 +276,19 @@ func (cmd *envCommand) getNewEnvRef(
 
 // Get an environment reference for an existing environment
 // If the given path is ambiguous, we need to make additional API calls to disambiguate
-func (cmd *envCommand) getExistingEnvRef(
-	ctx context.Context,
-	args []string,
-) (environmentRef, []string, error) {
+func (cmd *envCommand) getExistingEnvRefArg(ctx context.Context, args []string) (*environmentRef, []string, error) {
 	if cmd.envNameFlag == "" {
 		if len(args) == 0 {
-			return environmentRef{}, nil, fmt.Errorf("no environment name specified")
+			return nil, nil, nil
 		}
 		cmd.envNameFlag, args = args[0], args[1:]
 	}
 
 	envRef, err := cmd.getExistingEnvRefWithRelative(ctx, cmd.envNameFlag, nil)
-
-	return envRef, args, err
+	if err != nil {
+		return nil, nil, err
+	}
+	return &envRef, args, err
 }
 
 func (cmd *envCommand) getExistingEnvRefWithRelative(
@@ -266,7 +297,6 @@ func (cmd *envCommand) getExistingEnvRefWithRelative(
 	rel *environmentRef,
 ) (environmentRef, error) {
 	ref, _ := cmd.getEnvRef(refString, rel)
-
 	if !ref.hasAmbiguousPath {
 		return ref, nil
 	}
@@ -305,6 +335,45 @@ func (cmd *envCommand) getExistingEnvRefWithRelative(
 	}
 
 	return ref, nil
+}
+
+// getExistingEnvDesc resolves the environment to operate on, falling back to the inferred default
+// when args is empty and -e was not given. Returns a nil environmentDesc when neither an explicit
+// nor a default environment is available; callers that require one must check for nil.
+func (cmd *envCommand) getExistingEnvDesc(ctx context.Context, args []string) (environmentDesc, []string, error) {
+	ref, rest, err := cmd.getExistingEnvRefArg(ctx, args)
+	if err != nil {
+		return nil, nil, err
+	}
+	if ref != nil {
+		return *ref, rest, nil
+	}
+
+	desc, err := cmd.inferDefaultEnv(ctx)
+	if err != nil {
+		return nil, nil, fmt.Errorf("configuring default environment: %w", err)
+	}
+	return desc, args, nil
+}
+
+// getExistingEnvRef is like getExistingEnvDesc but errors if the resolved environment is an
+// anonymous import list rather than a single environment reference. Use it for commands that
+// must operate on a specific named environment.
+func (cmd *envCommand) getExistingEnvRef(ctx context.Context, args []string) (environmentRef, []string, error) {
+	desc, rest, err := cmd.getExistingEnvDesc(ctx, args)
+	if err != nil {
+		return environmentRef{}, nil, err
+	}
+	switch desc := desc.(type) {
+	case nil:
+		return environmentRef{}, nil, fmt.Errorf("no environment name specified")
+	case environmentRef:
+		return desc, rest, nil
+	case importList:
+		return environmentRef{}, nil, fmt.Errorf("this command does not support inferred environment lists")
+	default:
+		return environmentRef{}, nil, fmt.Errorf("unexpected environment desc of type %T", desc)
+	}
 }
 
 func sortEnvironmentDiagnostics(diags []client.EnvironmentDiagnostic) {

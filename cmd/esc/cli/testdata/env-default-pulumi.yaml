@@ -1,0 +1,22 @@
+run: esc env open
+process:
+  commands:
+    pulumi: |
+      case "$1 $2 $3" in
+        "config env ls") echo '["default/the-env"]' ;;
+        "stack ls -Q") echo '[{"name":"test-user/my-project/dev","current":true}]' ;;
+      esac
+  cwd: proj
+environments:
+  test-user/default/the-env:
+    values:
+      foo: bar
+
+---
+> esc env open
+{
+  "foo": "bar"
+}
+
+---
+> esc env open

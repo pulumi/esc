@@ -29,7 +29,10 @@ func newEnvOpenCmd(envcmd *envCommand) *cobra.Command {
 		Long: "Open the environment with the given name and return the result\n" +
 			"\n" +
 			"This command opens the environment with the given name. The result is written to\n" +
-			"stdout as JSON. If a property path is specified, only retrieves that property.\n",
+			"stdout as JSON. If a property path is specified, only retrieves that property.\n" +
+			"\n" +
+			"If no environment is specified, the default environment is inferred from the working\n" +
+			"directory. See `esc env --help` for details.\n",
 		SilenceUsage: true,
 		RunE: func(cmd *cobra.Command, args []string) error {
 			ctx := context.Background()
@@ -38,9 +41,12 @@ func newEnvOpenCmd(envcmd *envCommand) *cobra.Command {
 				return err
 			}
 
-			ref, args, err := envcmd.getExistingEnvRef(ctx, args)
+			desc, args, err := envcmd.getExistingEnvDesc(ctx, args)
 			if err != nil {
 				return err
+			}
+			if desc == nil {
+				return fmt.Errorf("no environment name specified")
 			}
 
 			var path resource.PropertyPath
@@ -63,7 +69,7 @@ func newEnvOpenCmd(envcmd *envCommand) *cobra.Command {
 				return fmt.Errorf("unknown output format %q", format)
 			}
 
-			env, diags, err := envcmd.openEnvironment(ctx, ref, duration, draft)
+			env, diags, err := envcmd.openEnvironmentDesc(ctx, desc, duration, draft)
 			if err != nil {
 				return err
 			}
@@ -190,4 +196,43 @@ func (env *envCommand) openEnvironment(
 	}
 	open, err := env.esc.client.GetOpenEnvironmentWithProject(ctx, ref.orgName, ref.projectName, ref.envName, envID)
 	return open, nil, err
+}
+
+func (env *envCommand) openImportList(
+	ctx context.Context,
+	list importList,
+	duration time.Duration,
+) (*esc.Environment, []client.EnvironmentDiagnostic, error) {
+	def, err := yaml.Marshal(map[string]any{"imports": list.imports})
+	if err != nil {
+		return nil, nil, err
+	}
+	envID, diags, err := env.esc.client.OpenYAMLEnvironment(ctx, list.orgName, def, duration)
+	if err != nil {
+		return nil, nil, err
+	}
+	if len(diags) != 0 {
+		return nil, diags, err
+	}
+	open, err := env.esc.client.GetAnonymousOpenEnvironment(ctx, list.orgName, envID)
+	return open, nil, err
+}
+
+func (env *envCommand) openEnvironmentDesc(
+	ctx context.Context,
+	desc environmentDesc,
+	duration time.Duration,
+	changeRequestID string,
+) (*esc.Environment, []client.EnvironmentDiagnostic, error) {
+	switch desc := desc.(type) {
+	case environmentRef:
+		return env.openEnvironment(ctx, desc, duration, changeRequestID)
+	case importList:
+		if changeRequestID != "" {
+			return nil, nil, fmt.Errorf("--draft is not supported for an inferred environment list")
+		}
+		return env.openImportList(ctx, desc, duration)
+	default:
+		return nil, nil, fmt.Errorf("unexpected environment desc of type %T", desc)
+	}
 }
