@@ -324,6 +324,28 @@ type Client interface {
 	// DeleteEnvironmentTag deletes a specified tag on an environment.
 	DeleteEnvironmentTag(ctx context.Context, orgName, projectName, envName, tagName string) error
 
+	// ListEnvironmentSchedules lists the scheduled actions for the given environment.
+	ListEnvironmentSchedules(
+		ctx context.Context,
+		orgName, projectName, envName string,
+	) (*ListScheduledActionsResponse, error)
+
+	// CreateEnvironmentSchedule creates a new scheduled action on the given environment.
+	CreateEnvironmentSchedule(
+		ctx context.Context,
+		orgName, projectName, envName string,
+		req CreateEnvironmentScheduleRequest,
+	) (*ScheduledAction, error)
+
+	// PauseEnvironmentSchedule pauses the scheduled action with the given ID.
+	PauseEnvironmentSchedule(ctx context.Context, orgName, projectName, envName, scheduleID string) error
+
+	// ResumeEnvironmentSchedule resumes the scheduled action with the given ID.
+	ResumeEnvironmentSchedule(ctx context.Context, orgName, projectName, envName, scheduleID string) error
+
+	// DeleteEnvironmentSchedule deletes the scheduled action with the given ID.
+	DeleteEnvironmentSchedule(ctx context.Context, orgName, projectName, envName, scheduleID string) error
+
 	// GetEnvironmentRevision returns a description of the given revision.
 	GetEnvironmentRevision(ctx context.Context, orgName, projectName, envName string, revision int) (*EnvironmentRevision, error)
 
@@ -1139,6 +1161,60 @@ func (pc *client) UpdateEnvironmentTag(
 // DeleteEnvironmentTag deletes a specified tag on an environment.
 func (pc *client) DeleteEnvironmentTag(ctx context.Context, orgName, projectName, envName, tagName string) error {
 	path := fmt.Sprintf("/api/esc/environments/%v/%v/%v/tags/%v", orgName, projectName, envName, tagName)
+	return pc.restCall(ctx, http.MethodDelete, path, nil, nil, nil)
+}
+
+// ListEnvironmentSchedules lists the scheduled actions for the given environment.
+func (pc *client) ListEnvironmentSchedules(
+	ctx context.Context,
+	orgName, projectName, envName string,
+) (*ListScheduledActionsResponse, error) {
+	var resp ListScheduledActionsResponse
+	path := fmt.Sprintf("/api/esc/environments/%v/%v/%v/schedules", orgName, projectName, envName)
+	if err := pc.restCall(ctx, http.MethodGet, path, nil, nil, &resp); err != nil {
+		return nil, err
+	}
+	return &resp, nil
+}
+
+// CreateEnvironmentSchedule creates a new scheduled action on the given environment.
+func (pc *client) CreateEnvironmentSchedule(
+	ctx context.Context,
+	orgName, projectName, envName string,
+	req CreateEnvironmentScheduleRequest,
+) (*ScheduledAction, error) {
+	var resp ScheduledAction
+	path := fmt.Sprintf("/api/esc/environments/%v/%v/%v/schedules", orgName, projectName, envName)
+	if err := pc.restCall(ctx, http.MethodPost, path, nil, &req, &resp); err != nil {
+		return nil, err
+	}
+	return &resp, nil
+}
+
+// PauseEnvironmentSchedule pauses the scheduled action with the given ID.
+func (pc *client) PauseEnvironmentSchedule(
+	ctx context.Context,
+	orgName, projectName, envName, scheduleID string,
+) error {
+	path := fmt.Sprintf("/api/esc/environments/%v/%v/%v/schedules/%v/pause", orgName, projectName, envName, scheduleID)
+	return pc.restCall(ctx, http.MethodPost, path, nil, nil, nil)
+}
+
+// ResumeEnvironmentSchedule resumes the scheduled action with the given ID.
+func (pc *client) ResumeEnvironmentSchedule(
+	ctx context.Context,
+	orgName, projectName, envName, scheduleID string,
+) error {
+	path := fmt.Sprintf("/api/esc/environments/%v/%v/%v/schedules/%v/resume", orgName, projectName, envName, scheduleID)
+	return pc.restCall(ctx, http.MethodPost, path, nil, nil, nil)
+}
+
+// DeleteEnvironmentSchedule deletes the scheduled action with the given ID.
+func (pc *client) DeleteEnvironmentSchedule(
+	ctx context.Context,
+	orgName, projectName, envName, scheduleID string,
+) error {
+	path := fmt.Sprintf("/api/esc/environments/%v/%v/%v/schedules/%v", orgName, projectName, envName, scheduleID)
 	return pc.restCall(ctx, http.MethodDelete, path, nil, nil, nil)
 }
 

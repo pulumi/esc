@@ -77,6 +77,7 @@ func newEnvCmd(esc *escCommand) *cobra.Command {
 	cmd.AddCommand(newEnvOpenRequestCmd(env))
 	cmd.AddCommand(newEnvRotateCmd(env))
 	cmd.AddCommand(newEnvRunCmd(env))
+	cmd.AddCommand(newEnvScheduleCmd(env))
 
 	return cmd
 }
