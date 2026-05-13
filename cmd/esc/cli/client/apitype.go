@@ -271,3 +271,58 @@ type EnvironmentSettings struct {
 type PatchEnvironmentSettingsRequest struct {
 	DeletionProtected *bool `json:"deletionProtected,omitempty"`
 }
+
+// EnvironmentWebhook describes a webhook attached to an environment.
+type EnvironmentWebhook struct {
+	Active           bool     `json:"active"`
+	DisplayName      string   `json:"displayName"`
+	Name             string   `json:"name"`
+	OrganizationName string   `json:"organizationName"`
+	PayloadURL       string   `json:"payloadUrl"`
+	EnvName          string   `json:"envName,omitempty"`
+	Filters          []string `json:"filters,omitempty"`
+	Format           string   `json:"format,omitempty"`
+	Groups           []string `json:"groups,omitempty"`
+	ProjectName      string   `json:"projectName,omitempty"`
+	Secret           string   `json:"secret,omitempty"`
+	StackName        string   `json:"stackName,omitempty"`
+	HasSecret        bool     `json:"hasSecret,omitempty"`
+	SecretCiphertext string   `json:"secretCiphertext,omitempty"`
+}
+
+// CreateEnvironmentWebhookRequest is the request body for creating a webhook on an environment.
+type CreateEnvironmentWebhookRequest struct {
+	Active           bool     `json:"active"`
+	DisplayName      string   `json:"displayName"`
+	Name             string   `json:"name"`
+	OrganizationName string   `json:"organizationName"`
+	PayloadURL       string   `json:"payloadUrl"`
+	Filters          []string `json:"filters,omitempty"`
+	Format           string   `json:"format,omitempty"`
+	Secret           string   `json:"secret,omitempty"`
+}
+
+// UpdateEnvironmentWebhookRequest is the PATCH body for updating an environment webhook. Pointer
+// fields preserve "leave unchanged" semantics: a nil value omits the field from the request.
+type UpdateEnvironmentWebhookRequest struct {
+	Active      *bool     `json:"active,omitempty"`
+	DisplayName *string   `json:"displayName,omitempty"`
+	PayloadURL  *string   `json:"payloadUrl,omitempty"`
+	Filters     *[]string `json:"filters,omitempty"`
+	Format      *string   `json:"format,omitempty"`
+	Secret      *string   `json:"secret,omitempty"`
+}
+
+// EnvironmentWebhookDelivery describes a single webhook delivery attempt.
+type EnvironmentWebhookDelivery struct {
+	ID              string `json:"id"`
+	Kind            string `json:"kind"`
+	Timestamp       int64  `json:"timestamp"`
+	Duration        int64  `json:"duration"`
+	Payload         string `json:"payload"`
+	RequestURL      string `json:"requestUrl"`
+	RequestHeaders  string `json:"requestHeaders"`
+	ResponseCode    int64  `json:"responseCode"`
+	ResponseHeaders string `json:"responseHeaders"`
+	ResponseBody    string `json:"responseBody"`
+}
