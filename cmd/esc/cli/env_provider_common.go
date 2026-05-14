@@ -88,6 +88,17 @@ func secretNode(value string) *yaml.Node {
 	}
 }
 
+// stringSequenceNode returns a yaml sequence node containing the given values
+// as string scalars. Used by OIDC provider subcommands for fields like
+// `policyArns` and `subjectAttributes`.
+func stringSequenceNode(values []string) *yaml.Node {
+	items := make([]*yaml.Node, 0, len(values))
+	for _, v := range values {
+		items = append(items, &yaml.Node{Kind: yaml.ScalarNode, Tag: "!!str", Value: v})
+	}
+	return &yaml.Node{Kind: yaml.SequenceNode, Tag: "!!seq", Content: items}
+}
+
 func applyProviderUpdate(
 	ctx context.Context,
 	env *envCommand,

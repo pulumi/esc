@@ -18,12 +18,13 @@ func newEnvProviderAWSLoginCmd(env *envCommand) *cobra.Command {
 		Short: "Add an AWS login provider to an environment",
 		Long: "Add an AWS login provider to an environment\n" +
 			"\n" +
-			"Subcommands select the authentication mode. Only `static` is supported today;\n" +
-			"`oidc` is not supported yet.\n",
+			"Subcommands select the authentication mode: `static` for static credentials,\n" +
+			"`oidc` for federated identity via OpenID Connect.\n",
 		Args: cobra.NoArgs,
 	}
 
 	cmd.AddCommand(newEnvProviderAWSLoginStaticCmd(env))
+	cmd.AddCommand(newEnvProviderAWSLoginOIDCCmd(env))
 
 	return cmd
 }
@@ -116,6 +117,119 @@ func buildAWSLoginStaticNode(accessKeyID, secretAccessKey, sessionToken string) 
 				Content: []*yaml.Node{
 					{Kind: yaml.ScalarNode, Tag: "!!str", Value: "static"},
 					{Kind: yaml.MappingNode, Tag: "!!map", Content: staticContent},
+				},
+			},
+		},
+	}
+}
+
+func newEnvProviderAWSLoginOIDCCmd(env *envCommand) *cobra.Command {
+	var duration string
+	var policyArns []string
+	var subjectAttributes []string
+	var pathStr string
+	var draft string
+	var create bool
+
+	cmd := &cobra.Command{
+		Use:   "oidc [<org>/][<project>/]<environment-name> <role-arn> <session-name>",
+		Args:  cobra.RangeArgs(2, 3),
+		Short: "Add an AWS OIDC login provider to an environment",
+		Long: "Add an AWS OIDC login provider to an environment\n" +
+			"\n" +
+			"Writes an `fn::open::aws-login` block with an `oidc` federation block at the\n" +
+			"configured path under `values`. The OIDC IAM role and trust policy must be\n" +
+			"provisioned separately (e.g. with Pulumi). If a block already exists at the\n" +
+			"path it is replaced.\n",
+		SilenceUsage: true,
+		RunE: func(cmd *cobra.Command, args []string) error {
+			ctx := context.Background()
+
+			if err := env.esc.getCachedClient(ctx); err != nil {
+				return err
+			}
+
+			ref, args, err := env.getExistingEnvRef(ctx, args)
+			if err != nil {
+				return err
+			}
+			if ref.version != "" {
+				return fmt.Errorf("the provider command does not accept versions")
+			}
+			if len(args) != 2 {
+				return fmt.Errorf("expected <role-arn> and <session-name>")
+			}
+			roleArn, sessionName := args[0], args[1]
+
+			path, err := resource.ParsePropertyPath(pathStr)
+			if err != nil {
+				return fmt.Errorf("invalid --path: %w", err)
+			}
+
+			node := buildAWSLoginOIDCNode(roleArn, sessionName, duration, policyArns, subjectAttributes)
+
+			if err := ensureProviderEnv(ctx, env, ref, create); err != nil {
+				return err
+			}
+			return applyProviderUpdate(ctx, env, ref, draft, path, node)
+		},
+	}
+
+	cmd.Flags().StringVar(&duration, "duration", "", "optional session duration, e.g. 1h")
+	cmd.Flags().StringArrayVar(&policyArns, "policy-arn", nil,
+		"AWS managed-policy ARN to attach to the role session (repeatable)")
+	cmd.Flags().StringArrayVar(&subjectAttributes, "subject-attribute", nil,
+		"OIDC subject attribute to include in the session token (repeatable)")
+	cmd.Flags().StringVar(&pathStr, "path", "aws.login", "property path under `values` where the provider block is written")
+	cmd.Flags().BoolVar(&create, "create", false,
+		"create the environment if it does not already exist")
+	cmd.Flags().StringVar(&draft, "draft", "",
+		"set flag without a value (--draft) to create a draft rather than saving changes directly. --draft=<change-request-id> to update an existing change request.")
+	cmd.Flag("draft").NoOptDefVal = "new"
+
+	return cmd
+}
+
+// buildAWSLoginOIDCNode returns a yaml.Node representing
+// `fn::open::aws-login: { oidc: {...} }`. duration, policyArns, and
+// subjectAttributes are omitted when empty.
+func buildAWSLoginOIDCNode(roleArn, sessionName, duration string, policyArns, subjectAttributes []string) *yaml.Node {
+	oidcContent := []*yaml.Node{
+		{Kind: yaml.ScalarNode, Tag: "!!str", Value: "roleArn"},
+		{Kind: yaml.ScalarNode, Tag: "!!str", Value: roleArn},
+		{Kind: yaml.ScalarNode, Tag: "!!str", Value: "sessionName"},
+		{Kind: yaml.ScalarNode, Tag: "!!str", Value: sessionName},
+	}
+	if duration != "" {
+		oidcContent = append(oidcContent,
+			&yaml.Node{Kind: yaml.ScalarNode, Tag: "!!str", Value: "duration"},
+			&yaml.Node{Kind: yaml.ScalarNode, Tag: "!!str", Value: duration},
+		)
+	}
+	if len(policyArns) > 0 {
+		oidcContent = append(oidcContent,
+			&yaml.Node{Kind: yaml.ScalarNode, Tag: "!!str", Value: "policyArns"},
+			stringSequenceNode(policyArns),
+		)
+	}
+	if len(subjectAttributes) > 0 {
+		oidcContent = append(oidcContent,
+			&yaml.Node{Kind: yaml.ScalarNode, Tag: "!!str", Value: "subjectAttributes"},
+			stringSequenceNode(subjectAttributes),
+		)
+	}
+
+	return &yaml.Node{
+		Kind: yaml.MappingNode,
+		Tag:  "!!map",
+		Content: []*yaml.Node{
+			{Kind: yaml.ScalarNode, Tag: "!!str", Value: "fn::open::aws-login"},
+			{
+				Kind: yaml.MappingNode,
+				Tag:  "!!map",
+				Content: []*yaml.Node{
+					{Kind: yaml.ScalarNode, Tag: "!!str", Value: "oidc"},
+					{Kind: yaml.MappingNode, Tag: "!!map", Content: oidcContent},
 				},
 			},
 		},

@@ -35,3 +35,35 @@ func TestBuildGCPLoginStaticNode_WithImpersonation(t *testing.T) {
     tokenLifetime: 1h
 `, string(out))
 }
+
+func TestBuildGCPLoginOIDCNode_Required(t *testing.T) {
+	node := buildGCPLoginOIDCNode(123456789, "pool", "provider", "sa@proj.iam.gserviceaccount.com", "", "", nil)
+	out, err := yaml.Marshal(node)
+	require.NoError(t, err)
+	assert.YAMLEq(t, `fn::open::gcp-login:
+  project: 123456789
+  oidc:
+    workloadPoolId: pool
+    providerId: provider
+    serviceAccount: sa@proj.iam.gserviceaccount.com
+`, string(out))
+}
+
+func TestBuildGCPLoginOIDCNode_WithOptionals(t *testing.T) {
+	node := buildGCPLoginOIDCNode(1, "pool", "provider", "sa@proj.iam.gserviceaccount.com",
+		"us-central1", "1h", []string{"env", "team"})
+	out, err := yaml.Marshal(node)
+	require.NoError(t, err)
+	assert.YAMLEq(t, `fn::open::gcp-login:
+  project: 1
+  oidc:
+    workloadPoolId: pool
+    providerId: provider
+    serviceAccount: sa@proj.iam.gserviceaccount.com
+    region: us-central1
+    tokenLifetime: 1h
+    subjectAttributes:
+      - env
+      - team
+`, string(out))
+}
