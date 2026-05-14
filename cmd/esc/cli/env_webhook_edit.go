@@ -20,6 +20,7 @@ func newEnvWebhookEditCmd(env *envCommand) *cobra.Command {
 		filters       []string
 		active        bool
 		secret        string
+		removeSecret  bool
 		addFilters    []string
 		removeFilters []string
 	)
@@ -34,7 +35,16 @@ func newEnvWebhookEditCmd(env *envCommand) *cobra.Command {
 			"\n" +
 			"--filter replaces the filter list. Use --add-filter and --remove-filter to apply\n" +
 			"incremental changes that merge with the existing filters; mixing --filter with\n" +
-			"either of those is not allowed.\n",
+			"either of those is not allowed. Filter names are validated by the service.\n" +
+			"\n" +
+			"Allowed --format values are: raw, slack, ms_teams, pulumi_deployments. When both\n" +
+			"--format and --url are changed they are validated together; URL requirements:\n" +
+			"  raw, ms_teams:      any http(s) URL\n" +
+			"  slack:              must begin with https://hooks.slack.com/\n" +
+			"  pulumi_deployments: must be of the form <project>/<stack>\n" +
+			"\n" +
+			"--secret replaces the shared secret. Use --remove-secret to clear an existing\n" +
+			"secret; passing --secret \"\" leaves it unchanged.\n",
 		Args:         cobra.ExactArgs(2),
 		SilenceUsage: true,
 		RunE: func(cmd *cobra.Command, args []string) error {
@@ -64,6 +74,28 @@ func newEnvWebhookEditCmd(env *envCommand) *cobra.Command {
 				return errors.New("--filter cannot be combined with --add-filter or --remove-filter")
 			}
 
+			secretChanged := cmd.Flags().Changed("secret")
+			if secretChanged && removeSecret {
+				return errors.New("--secret cannot be combined with --remove-secret")
+			}
+
+			formatChanged := cmd.Flags().Changed("format")
+			urlChanged := cmd.Flags().Changed("url")
+			if formatChanged {
+				if err := validateWebhookFormat(format); err != nil {
+					return err
+				}
+			}
+			if urlChanged {
+				coupleFormat := ""
+				if formatChanged {
+					coupleFormat = format
+				}
+				if err := validateWebhookURL(coupleFormat, url); err != nil {
+					return err
+				}
+			}
+
 			req := client.UpdateEnvironmentWebhookRequest{}
 			if cmd.Flags().Changed("active") {
 				v := active
@@ -73,16 +105,19 @@ func newEnvWebhookEditCmd(env *envCommand) *cobra.Command {
 				v := displayName
 				req.DisplayName = &v
 			}
-			if cmd.Flags().Changed("url") {
+			if urlChanged {
 				v := url
 				req.PayloadURL = &v
 			}
-			if cmd.Flags().Changed("format") {
+			if formatChanged {
 				v := format
 				req.Format = &v
 			}
-			if cmd.Flags().Changed("secret") {
+			if secretChanged {
 				v := secret
+				req.Secret = &v
+			} else if removeSecret {
+				v := removeSecretSentinel
 				req.Secret = &v
 			}
 			if filterChanged {
@@ -116,6 +151,7 @@ func newEnvWebhookEditCmd(env *envCommand) *cobra.Command {
 	cmd.Flags().StringArrayVar(&filters, "filter", nil, "replace the event filters (repeatable)")
 	cmd.Flags().BoolVar(&active, "active", true, "whether the webhook is active")
 	cmd.Flags().StringVar(&secret, "secret", "", "shared secret used to sign deliveries")
+	cmd.Flags().BoolVar(&removeSecret, "remove-secret", false, "clear the existing shared secret")
 	cmd.Flags().StringArrayVar(&addFilters, "add-filter", nil, "add an event filter (repeatable)")
 	cmd.Flags().StringArrayVar(&removeFilters, "remove-filter", nil, "remove an event filter (repeatable)")
 

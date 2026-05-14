@@ -29,7 +29,15 @@ func newEnvWebhookNewCmd(env *envCommand) *cobra.Command {
 			"\n" +
 			"This command attaches a new webhook to the given environment. The webhook will be\n" +
 			"delivered to --url whenever the environment changes. Use --filter to limit the set\n" +
-			"of events that trigger a delivery; the flag can be repeated.\n",
+			"of events that trigger a delivery; the flag can be repeated. Filter names are\n" +
+			"validated by the service.\n" +
+			"\n" +
+			"Allowed --format values are: raw (default), slack, ms_teams, pulumi_deployments.\n" +
+			"\n" +
+			"URL requirements depend on --format:\n" +
+			"  raw, ms_teams:      any http(s) URL\n" +
+			"  slack:              must begin with https://hooks.slack.com/\n" +
+			"  pulumi_deployments: must be of the form <project>/<stack>\n",
 		Args:         cobra.ExactArgs(2),
 		SilenceUsage: true,
 		RunE: func(cmd *cobra.Command, args []string) error {
@@ -48,11 +56,17 @@ func newEnvWebhookNewCmd(env *envCommand) *cobra.Command {
 			}
 
 			webhookName := args[0]
-			if webhookName == "" {
-				return errors.New("webhook name cannot be empty")
+			if err := validateWebhookName(webhookName); err != nil {
+				return err
 			}
 			if url == "" {
 				return errors.New("--url is required")
+			}
+			if err := validateWebhookFormat(format); err != nil {
+				return err
+			}
+			if err := validateWebhookURL(format, url); err != nil {
+				return err
 			}
 
 			if displayName == "" {
