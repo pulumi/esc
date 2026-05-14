@@ -10,7 +10,6 @@ linters:
     - lll
     - paralleltest
     - revive
-    - staticcheck
     - unused
   exclusions:
     generated: lax
