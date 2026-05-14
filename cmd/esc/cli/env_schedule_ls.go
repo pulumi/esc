@@ -72,9 +72,9 @@ func printSchedule(stdout io.Writer, s client.ScheduledAction, utc utcFlag) {
 	fmt.Fprintf(stdout, "Kind: %s\n", s.Kind)
 	schedule := s.ScheduleCron
 	if schedule == "" {
-		schedule = s.ScheduleOnce
+		schedule = formatScheduleTime(s.ScheduleOnce, utc)
 	}
-	if schedule == "" {
+	if schedule == "" || schedule == "never" {
 		schedule = "<unknown>"
 	}
 	fmt.Fprintf(stdout, "Schedule: %s\n", schedule)
@@ -83,15 +83,21 @@ func printSchedule(stdout io.Writer, s client.ScheduledAction, utc utcFlag) {
 	fmt.Fprintf(stdout, "Last executed: %s\n", formatScheduleTime(s.LastExecuted, utc))
 }
 
-// formatScheduleTime parses an ISO 8601 timestamp and re-formats it honouring the --utc flag.
-// Empty or unparseable values pass through as "never" and the raw string, respectively.
+// The backend serializes schedule timestamps without a timezone but always in UTC.
+const scheduleTimeFormat = "2006-01-02 15:04:05.000"
+
+// formatScheduleTime parses a schedule timestamp and re-formats it honouring the --utc flag.
+// Empty values render as "never"; unparseable values pass through as-is so the user still sees
+// the backend's raw response.
 func formatScheduleTime(s string, utc utcFlag) string {
 	if s == "" {
 		return "never"
 	}
-	t, err := time.Parse(time.RFC3339, s)
+	t, err := time.ParseInLocation(scheduleTimeFormat, s, time.UTC)
 	if err != nil {
-		return s
+		if t, err = time.Parse(time.RFC3339, s); err != nil {
+			return s
+		}
 	}
 	return utc.time(t).Format(time.RFC3339)
 }
