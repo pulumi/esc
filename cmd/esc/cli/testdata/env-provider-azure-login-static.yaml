@@ -1,22 +1,11 @@
 run: |
   esc env init default/test
-  esc env provider azure-login static default/test cid tid /subscriptions/sub && esc env get default/test --definition
-  esc env provider azure-login static default/test cid tid /subscriptions/sub --client-secret shhh && esc env get default/test --definition
+  esc env provider azure-login static default/test cid tid /subscriptions/sub shhhhhh && esc env get default/test --definition
 
 ---
 > esc env init default/test
 Environment created: test-user/default/test
-> esc env provider azure-login static default/test cid tid /subscriptions/sub
-Provider updated.
-> esc env get default/test --definition
-values:
-  azure:
-    login:
-      fn::open::azure-login:
-        clientId: cid
-        tenantId: tid
-        subscriptionId: /subscriptions/sub
-> esc env provider azure-login static default/test cid tid /subscriptions/sub --client-secret shhh
+> esc env provider azure-login static default/test cid tid /subscriptions/sub shhhhhh
 Provider updated.
 > esc env get default/test --definition
 values:
@@ -28,11 +17,9 @@ values:
         subscriptionId: /subscriptions/sub
         clientSecret:
           fn::secret:
-            ciphertext: ZXNjeAAAAAHz6Ojo63s1dA==
+            ciphertext: ZXNjeAAAAAHz6Ojo6OjoVtjhwQ==
 
 ---
 > esc env init default/test
-> esc env provider azure-login static default/test cid tid /subscriptions/sub
-> esc env get default/test --definition
-> esc env provider azure-login static default/test cid tid /subscriptions/sub --client-secret shhh
+> esc env provider azure-login static default/test cid tid /subscriptions/sub shhhhhh
 > esc env get default/test --definition

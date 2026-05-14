@@ -30,20 +30,19 @@ func newEnvProviderAzureLoginCmd(env *envCommand) *cobra.Command {
 }
 
 func newEnvProviderAzureLoginStaticCmd(env *envCommand) *cobra.Command {
-	var clientSecret string
 	var pathStr string
 	var draft string
 	var create bool
 
 	cmd := &cobra.Command{
-		Use:   "static [<org>/][<project>/]<environment-name> <client-id> <tenant-id> <subscription-id>",
-		Args:  cobra.RangeArgs(3, 4),
+		Use:   "static [<org>/][<project>/]<environment-name> <client-id> <tenant-id> <subscription-id> <client-secret>",
+		Args:  cobra.RangeArgs(4, 5),
 		Short: "Add an Azure static-credentials login provider to an environment",
 		Long: "Add an Azure static-credentials login provider to an environment\n" +
 			"\n" +
 			"Writes an `fn::open::azure-login` block at the configured path under `values`.\n" +
-			"`--client-secret`, if provided, is wrapped in `fn::secret`. If a block already\n" +
-			"exists at the path it is replaced.\n",
+			"The client secret is wrapped in `fn::secret`. If a block already exists at the\n" +
+			"path it is replaced.\n",
 		SilenceUsage: true,
 		RunE: func(cmd *cobra.Command, args []string) error {
 			ctx := context.Background()
@@ -59,10 +58,10 @@ func newEnvProviderAzureLoginStaticCmd(env *envCommand) *cobra.Command {
 			if ref.version != "" {
 				return fmt.Errorf("the provider command does not accept versions")
 			}
-			if len(args) != 3 {
-				return fmt.Errorf("expected <client-id> <tenant-id> <subscription-id>")
+			if len(args) != 4 {
+				return fmt.Errorf("expected <client-id> <tenant-id> <subscription-id> <client-secret>")
 			}
-			clientID, tenantID, subscriptionID := args[0], args[1], args[2]
+			clientID, tenantID, subscriptionID, clientSecret := args[0], args[1], args[2], args[3]
 
 			path, err := resource.ParsePropertyPath(pathStr)
 			if err != nil {
@@ -78,7 +77,6 @@ func newEnvProviderAzureLoginStaticCmd(env *envCommand) *cobra.Command {
 		},
 	}
 
-	cmd.Flags().StringVar(&clientSecret, "client-secret", "", "optional Azure client secret")
 	cmd.Flags().StringVar(&pathStr, "path", "azure.login", "property path under `values` where the provider block is written")
 	cmd.Flags().BoolVar(&create, "create", false,
 		"create the environment if it does not already exist")
@@ -90,8 +88,8 @@ func newEnvProviderAzureLoginStaticCmd(env *envCommand) *cobra.Command {
 }
 
 // buildAzureLoginStaticNode returns a yaml.Node representing
-// `fn::open::azure-login: { ... }`. clientSecret is wrapped in `fn::secret` and
-// omitted when empty.
+// `fn::open::azure-login: { ... }`. clientSecret is required and wrapped in
+// `fn::secret`.
 func buildAzureLoginStaticNode(clientID, tenantID, subscriptionID, clientSecret string) *yaml.Node {
 	loginContent := []*yaml.Node{
 		{Kind: yaml.ScalarNode, Tag: "!!str", Value: "clientId"},
@@ -100,12 +98,8 @@ func buildAzureLoginStaticNode(clientID, tenantID, subscriptionID, clientSecret 
 		{Kind: yaml.ScalarNode, Tag: "!!str", Value: tenantID},
 		{Kind: yaml.ScalarNode, Tag: "!!str", Value: "subscriptionId"},
 		{Kind: yaml.ScalarNode, Tag: "!!str", Value: subscriptionID},
-	}
-	if clientSecret != "" {
-		loginContent = append(loginContent,
-			&yaml.Node{Kind: yaml.ScalarNode, Tag: "!!str", Value: "clientSecret"},
-			secretNode(clientSecret),
-		)
+		{Kind: yaml.ScalarNode, Tag: "!!str", Value: "clientSecret"},
+		secretNode(clientSecret),
 	}
 
 	return &yaml.Node{
