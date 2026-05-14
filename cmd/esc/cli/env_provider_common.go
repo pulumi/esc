@@ -4,11 +4,13 @@ package cli
 
 import (
 	"context"
+	"errors"
 	"fmt"
 
 	"github.com/pulumi/esc/cmd/esc/cli/client"
 	"github.com/pulumi/esc/syntax/encoding"
 	"github.com/pulumi/pulumi/sdk/v3/go/common/resource"
+	"github.com/pulumi/pulumi/sdk/v3/go/common/util/contract"
 	"gopkg.in/yaml.v3"
 )
 
@@ -137,7 +139,11 @@ func applyProviderUpdate(
 		return err
 	}
 	if len(diags) != 0 {
-		return env.writePropertyEnvironmentDiagnostics(env.esc.stderr, diags)
+		werr := env.writeYAMLEnvironmentDiagnostics(env.esc.stderr, ref.projectName+"/"+ref.envName, newYAML, diags)
+		contract.IgnoreError(werr)
+	}
+	if client.DiagnosticsHaveErrors(diags) {
+		return errors.New("provider update failed")
 	}
 	return nil
 }
