@@ -46,6 +46,9 @@ func newEnvReferrerLsCmd(env *envCommand) *cobra.Command {
 			if ref.version != "" {
 				return fmt.Errorf("the ls command does not accept versions")
 			}
+			if count < 0 || count > 500 {
+				return fmt.Errorf("--count must be in the range [1, 500]")
+			}
 
 			opts := client.ListEnvironmentReferrersOptions{
 				ContinuationToken: continuationToken,
