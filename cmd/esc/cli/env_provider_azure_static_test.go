@@ -10,8 +10,8 @@ import (
 	"gopkg.in/yaml.v3"
 )
 
-func TestBuildAzureLoginNode_Required(t *testing.T) {
-	node := buildAzureLoginNode("client-id", "tenant-id", "/subscriptions/sub", "")
+func TestBuildAzureLoginStaticNode_Required(t *testing.T) {
+	node := buildAzureLoginStaticNode("client-id", "tenant-id", "/subscriptions/sub", "")
 	out, err := yaml.Marshal(node)
 	require.NoError(t, err)
 	assert.YAMLEq(t, `fn::open::azure-login:
@@ -21,8 +21,8 @@ func TestBuildAzureLoginNode_Required(t *testing.T) {
 `, string(out))
 }
 
-func TestBuildAzureLoginNode_WithClientSecret(t *testing.T) {
-	node := buildAzureLoginNode("client-id", "tenant-id", "/subscriptions/sub", "shhh")
+func TestBuildAzureLoginStaticNode_WithClientSecret(t *testing.T) {
+	node := buildAzureLoginStaticNode("client-id", "tenant-id", "/subscriptions/sub", "shhh")
 	out, err := yaml.Marshal(node)
 	require.NoError(t, err)
 	assert.YAMLEq(t, `fn::open::azure-login:

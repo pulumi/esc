@@ -10,8 +10,8 @@ import (
 	"gopkg.in/yaml.v3"
 )
 
-func TestBuildGCPLoginNode_Required(t *testing.T) {
-	node := buildGCPLoginNode(123456789, "ya29.token", "", "")
+func TestBuildGCPLoginStaticNode_Required(t *testing.T) {
+	node := buildGCPLoginStaticNode(123456789, "ya29.token", "", "")
 	out, err := yaml.Marshal(node)
 	require.NoError(t, err)
 	assert.YAMLEq(t, `fn::open::gcp-login:
@@ -22,8 +22,8 @@ func TestBuildGCPLoginNode_Required(t *testing.T) {
 `, string(out))
 }
 
-func TestBuildGCPLoginNode_WithImpersonation(t *testing.T) {
-	node := buildGCPLoginNode(1, "ya29.token", "sa@proj.iam.gserviceaccount.com", "1h")
+func TestBuildGCPLoginStaticNode_WithImpersonation(t *testing.T) {
+	node := buildGCPLoginStaticNode(1, "ya29.token", "sa@proj.iam.gserviceaccount.com", "1h")
 	out, err := yaml.Marshal(node)
 	require.NoError(t, err)
 	assert.YAMLEq(t, `fn::open::gcp-login:

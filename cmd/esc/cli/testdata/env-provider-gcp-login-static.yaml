@@ -1,12 +1,12 @@
 run: |
   esc env init default/test
-  esc env provider gcp-login default/test 123456789 ya29.token && esc env get default/test --definition
-  esc env provider gcp-login default/test 123456789 ya29.token --service-account sa@proj.iam.gserviceaccount.com --token-lifetime 1h && esc env get default/test --definition
+  esc env provider gcp-login static default/test 123456789 ya29.token && esc env get default/test --definition
+  esc env provider gcp-login static default/test 123456789 ya29.token --service-account sa@proj.iam.gserviceaccount.com --token-lifetime 1h && esc env get default/test --definition
 
 ---
 > esc env init default/test
 Environment created: test-user/default/test
-> esc env provider gcp-login default/test 123456789 ya29.token
+> esc env provider gcp-login static default/test 123456789 ya29.token
 Provider updated.
 > esc env get default/test --definition
 values:
@@ -18,7 +18,7 @@ values:
           accessToken:
             fn::secret:
               ciphertext: ZXNjeAAAAAH54bK5rvTv6+Xuek7KOw==
-> esc env provider gcp-login default/test 123456789 ya29.token --service-account sa@proj.iam.gserviceaccount.com --token-lifetime 1h
+> esc env provider gcp-login static default/test 123456789 ya29.token --service-account sa@proj.iam.gserviceaccount.com --token-lifetime 1h
 Provider updated.
 > esc env get default/test --definition
 values:
@@ -35,7 +35,7 @@ values:
 
 ---
 > esc env init default/test
-> esc env provider gcp-login default/test 123456789 ya29.token
+> esc env provider gcp-login static default/test 123456789 ya29.token
 > esc env get default/test --definition
-> esc env provider gcp-login default/test 123456789 ya29.token --service-account sa@proj.iam.gserviceaccount.com --token-lifetime 1h
+> esc env provider gcp-login static default/test 123456789 ya29.token --service-account sa@proj.iam.gserviceaccount.com --token-lifetime 1h
 > esc env get default/test --definition

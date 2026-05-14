@@ -10,8 +10,8 @@ import (
 	"gopkg.in/yaml.v3"
 )
 
-func TestBuildAWSLoginNode_Required(t *testing.T) {
-	node := buildAWSLoginNode("AKIAEXAMPLE", "shhh", "")
+func TestBuildAWSLoginStaticNode_Required(t *testing.T) {
+	node := buildAWSLoginStaticNode("AKIAEXAMPLE", "shhh", "")
 	out, err := yaml.Marshal(node)
 	require.NoError(t, err)
 	assert.YAMLEq(t, `fn::open::aws-login:
@@ -22,8 +22,8 @@ func TestBuildAWSLoginNode_Required(t *testing.T) {
 `, string(out))
 }
 
-func TestBuildAWSLoginNode_WithSessionToken(t *testing.T) {
-	node := buildAWSLoginNode("AKIAEXAMPLE", "shhh", "tok")
+func TestBuildAWSLoginStaticNode_WithSessionToken(t *testing.T) {
+	node := buildAWSLoginStaticNode("AKIAEXAMPLE", "shhh", "tok")
 	out, err := yaml.Marshal(node)
 	require.NoError(t, err)
 	assert.YAMLEq(t, `fn::open::aws-login:
