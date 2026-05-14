@@ -18,6 +18,7 @@ func newEnvProviderCmd(env *envCommand) *cobra.Command {
 	}
 
 	cmd.AddCommand(newEnvProviderAWSLoginCmd(env))
+	cmd.AddCommand(newEnvProviderAzureLoginCmd(env))
 
 	return cmd
 }
