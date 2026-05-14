@@ -35,7 +35,7 @@ func TestBuildAzureLoginStaticNode_WithClientSecret(t *testing.T) {
 }
 
 func TestBuildAzureLoginOIDCNode_Required(t *testing.T) {
-	node := buildAzureLoginOIDCNode("client-id", "tenant-id", "/subscriptions/sub", "", nil)
+	node := buildAzureLoginOIDCNode("client-id", "tenant-id", "/subscriptions/sub", nil)
 	out, err := yaml.Marshal(node)
 	require.NoError(t, err)
 	assert.YAMLEq(t, `fn::open::azure-login:
@@ -43,25 +43,11 @@ func TestBuildAzureLoginOIDCNode_Required(t *testing.T) {
   tenantId: tenant-id
   subscriptionId: /subscriptions/sub
   oidc: true
-`, string(out))
-}
-
-func TestBuildAzureLoginOIDCNode_WithClientSecret(t *testing.T) {
-	node := buildAzureLoginOIDCNode("client-id", "tenant-id", "/subscriptions/sub", "shhh", nil)
-	out, err := yaml.Marshal(node)
-	require.NoError(t, err)
-	assert.YAMLEq(t, `fn::open::azure-login:
-  clientId: client-id
-  tenantId: tenant-id
-  subscriptionId: /subscriptions/sub
-  oidc: true
-  clientSecret:
-    fn::secret: shhh
 `, string(out))
 }
 
 func TestBuildAzureLoginOIDCNode_WithSubjectAttributes(t *testing.T) {
-	node := buildAzureLoginOIDCNode("client-id", "tenant-id", "/subscriptions/sub", "",
+	node := buildAzureLoginOIDCNode("client-id", "tenant-id", "/subscriptions/sub",
 		[]string{"env", "team"})
 	out, err := yaml.Marshal(node)
 	require.NoError(t, err)

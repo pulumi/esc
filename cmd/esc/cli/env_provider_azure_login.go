@@ -119,7 +119,6 @@ func buildAzureLoginStaticNode(clientID, tenantID, subscriptionID, clientSecret 
 }
 
 func newEnvProviderAzureLoginOIDCCmd(env *envCommand) *cobra.Command {
-	var clientSecret string
 	var subjectAttributes []string
 	var pathStr string
 	var draft string
@@ -132,9 +131,9 @@ func newEnvProviderAzureLoginOIDCCmd(env *envCommand) *cobra.Command {
 		Long: "Add an Azure OIDC login provider to an environment\n" +
 			"\n" +
 			"Writes an `fn::open::azure-login` block with `oidc: true` at the configured\n" +
-			"path under `values`. `--client-secret`, if provided, is wrapped in\n" +
-			"`fn::secret`. The Azure federated credential must be provisioned separately\n" +
-			"(e.g. with Pulumi). If a block already exists at the path it is replaced.\n",
+			"path under `values`. The Azure federated credential must be provisioned\n" +
+			"separately (e.g. with Pulumi). If a block already exists at the path it is\n" +
+			"replaced.\n",
 		SilenceUsage: true,
 		RunE: func(cmd *cobra.Command, args []string) error {
 			ctx := context.Background()
@@ -160,7 +159,7 @@ func newEnvProviderAzureLoginOIDCCmd(env *envCommand) *cobra.Command {
 				return fmt.Errorf("invalid --path: %w", err)
 			}
 
-			node := buildAzureLoginOIDCNode(clientID, tenantID, subscriptionID, clientSecret, subjectAttributes)
+			node := buildAzureLoginOIDCNode(clientID, tenantID, subscriptionID, subjectAttributes)
 
 			if err := ensureProviderEnv(ctx, env, ref, create); err != nil {
 				return err
@@ -169,7 +168,6 @@ func newEnvProviderAzureLoginOIDCCmd(env *envCommand) *cobra.Command {
 		},
 	}
 
-	cmd.Flags().StringVar(&clientSecret, "client-secret", "", "optional Azure client secret")
 	cmd.Flags().StringArrayVar(&subjectAttributes, "subject-attribute", nil,
 		"OIDC subject attribute to include in the federated token (repeatable)")
 	cmd.Flags().StringVar(&pathStr, "path", "azure.login", "property path under `values` where the provider block is written")
@@ -183,9 +181,9 @@ func newEnvProviderAzureLoginOIDCCmd(env *envCommand) *cobra.Command {
 }
 
 // buildAzureLoginOIDCNode returns a yaml.Node representing
-// `fn::open::azure-login: { ..., oidc: true }`. clientSecret is wrapped in
-// `fn::secret` and omitted when empty. subjectAttributes is omitted when empty.
-func buildAzureLoginOIDCNode(clientID, tenantID, subscriptionID, clientSecret string, subjectAttributes []string) *yaml.Node {
+// `fn::open::azure-login: { ..., oidc: true }`. subjectAttributes is omitted
+// when empty. clientSecret is not supported in OIDC mode.
+func buildAzureLoginOIDCNode(clientID, tenantID, subscriptionID string, subjectAttributes []string) *yaml.Node {
 	loginContent := []*yaml.Node{
 		{Kind: yaml.ScalarNode, Tag: "!!str", Value: "clientId"},
 		{Kind: yaml.ScalarNode, Tag: "!!str", Value: clientID},
@@ -195,12 +193,6 @@ func buildAzureLoginOIDCNode(clientID, tenantID, subscriptionID, clientSecret st
 		{Kind: yaml.ScalarNode, Tag: "!!str", Value: subscriptionID},
 		{Kind: yaml.ScalarNode, Tag: "!!str", Value: "oidc"},
 		{Kind: yaml.ScalarNode, Tag: "!!bool", Value: "true"},
-	}
-	if clientSecret != "" {
-		loginContent = append(loginContent,
-			&yaml.Node{Kind: yaml.ScalarNode, Tag: "!!str", Value: "clientSecret"},
-			secretNode(clientSecret),
-		)
 	}
 	if len(subjectAttributes) > 0 {
 		loginContent = append(loginContent,
