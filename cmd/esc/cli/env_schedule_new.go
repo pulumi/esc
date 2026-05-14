@@ -6,6 +6,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"time"
 
 	"github.com/spf13/cobra"
 
@@ -16,7 +17,6 @@ func newEnvScheduleNewCmd(env *envCommand) *cobra.Command {
 	var (
 		cron string
 		once string
-		path string
 	)
 
 	cmd := &cobra.Command{
@@ -26,8 +26,10 @@ func newEnvScheduleNewCmd(env *envCommand) *cobra.Command {
 			"\n" +
 			"This command schedules a secret rotation against the environment. Use --cron to\n" +
 			"schedule a recurring rotation or --once to schedule a single rotation at a\n" +
-			"specific time (ISO 8601 / RFC 3339). Use --path to rotate only a subset of the\n" +
-			"environment; omit it to rotate the whole environment.\n",
+			"specific time (ISO 8601 / RFC 3339).\n" +
+			"\n" +
+			"Only one schedule per environment is currently supported; creating a second\n" +
+			"schedule will fail. The minimum cron interval is once per day.\n",
 		Args:         cobra.ExactArgs(1),
 		SilenceUsage: true,
 		RunE: func(cmd *cobra.Command, args []string) error {
@@ -52,12 +54,29 @@ func newEnvScheduleNewCmd(env *envCommand) *cobra.Command {
 				return errors.New("only one of --cron or --once may be set")
 			}
 
+			if once != "" {
+				t, err := time.Parse(time.RFC3339, once)
+				if err != nil {
+					return fmt.Errorf("--once must be an ISO 8601 / RFC 3339 timestamp: %w", err)
+				}
+				if !t.After(time.Now()) {
+					return errors.New("--once must be a timestamp in the future")
+				}
+			}
+
+			existing, err := env.esc.client.ListEnvironmentSchedules(ctx, ref.orgName, ref.projectName, ref.envName)
+			if err != nil {
+				return err
+			}
+			if existing != nil && len(existing.Schedules) > 0 {
+				return fmt.Errorf("environment %s/%s/%s already has a schedule (%s); only one schedule per environment is currently supported",
+					ref.orgName, ref.projectName, ref.envName, existing.Schedules[0].ID)
+			}
+
 			req := client.CreateEnvironmentScheduleRequest{
-				ScheduleCron: cron,
-				ScheduleOnce: once,
-				SecretRotationRequest: &client.CreateEnvironmentSecretRotationScheduleRequest{
-					EnvironmentPath: path,
-				},
+				ScheduleCron:          cron,
+				ScheduleOnce:          once,
+				SecretRotationRequest: &client.CreateEnvironmentSecretRotationScheduleRequest{},
 			}
 
 			s, err := env.esc.client.CreateEnvironmentSchedule(ctx, ref.orgName, ref.projectName, ref.envName, req)
@@ -71,9 +90,8 @@ func newEnvScheduleNewCmd(env *envCommand) *cobra.Command {
 		},
 	}
 
-	cmd.Flags().StringVar(&cron, "cron", "", "a cron expression for a recurring schedule")
-	cmd.Flags().StringVar(&once, "once", "", "an ISO 8601 timestamp for a one-time schedule")
-	cmd.Flags().StringVar(&path, "path", "", "the path within the environment to rotate (default: rotate the whole environment)")
+	cmd.Flags().StringVar(&cron, "cron", "", "a cron expression for a recurring schedule (minimum interval: once daily)")
+	cmd.Flags().StringVar(&once, "once", "", "an ISO 8601 / RFC 3339 timestamp in the future for a one-time schedule")
 
 	return cmd
 }
