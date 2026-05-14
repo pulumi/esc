@@ -3,7 +3,7 @@
 - Surface warnings when editing environments with the CLI
   [#631](https://github.com/pulumi/esc/pull/631)
 
-- Add `esc env referrer ls` to list entities that reference an environment
+- Add `esc env referrer list` (alias `ls`) to list entities that reference an environment
   [#645](https://github.com/pulumi/esc/pull/645)
 
 - Migrate golangci-lint to v2 and enable `staticcheck`; minor reword of

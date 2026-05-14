@@ -21,7 +21,7 @@ func newEnvReferrerCmd(env *envCommand) *cobra.Command {
 		SilenceUsage: true,
 	}
 
-	cmd.AddCommand(newEnvReferrerLsCmd(env))
+	cmd.AddCommand(newEnvReferrerListCmd(env))
 
 	return cmd
 }

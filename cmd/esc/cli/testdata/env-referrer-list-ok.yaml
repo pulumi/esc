@@ -1,6 +1,7 @@
 run: |
+  esc env referrer list default/src
   esc env referrer ls default/src
-  esc env referrer ls default/src --count 100 --all-revisions --latest-stack-version-only
+  esc env referrer list default/src --count 100 --all-revisions --latest-stack-version-only
 environments:
   test-user/default/src:
     revisions:
@@ -25,6 +26,14 @@ environments:
             version: 41
 
 ---
+> esc env referrer list default/src
+revision latest
+environment  shared/dev@7
+insights     insights-acct
+stack        my-iac/prod@42
+
+revision 3
+stack        my-iac/prod@41
 > esc env referrer ls default/src
 revision latest
 environment  shared/dev@7
@@ -33,7 +42,7 @@ stack        my-iac/prod@42
 
 revision 3
 stack        my-iac/prod@41
-> esc env referrer ls default/src --count 100 --all-revisions --latest-stack-version-only
+> esc env referrer list default/src --count 100 --all-revisions --latest-stack-version-only
 revision latest
 environment  shared/dev@7
 insights     insights-acct
@@ -43,5 +52,6 @@ revision 3
 stack        my-iac/prod@41
 
 ---
+> esc env referrer list default/src
 > esc env referrer ls default/src
-> esc env referrer ls default/src --count 100 --all-revisions --latest-stack-version-only
+> esc env referrer list default/src --count 100 --all-revisions --latest-stack-version-only
