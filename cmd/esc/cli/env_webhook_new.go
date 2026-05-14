@@ -17,7 +17,7 @@ func newEnvWebhookNewCmd(env *envCommand) *cobra.Command {
 		url         string
 		displayName string
 		format      string
-		filters     []string
+		events      []string
 		active      bool
 		secret      string
 	)
@@ -28,8 +28,8 @@ func newEnvWebhookNewCmd(env *envCommand) *cobra.Command {
 		Long: "Create a new environment webhook\n" +
 			"\n" +
 			"This command attaches a new webhook to the given environment. The webhook will be\n" +
-			"delivered to --url whenever the environment changes. Use --filter to limit the set\n" +
-			"of events that trigger a delivery; the flag can be repeated. Filter names are\n" +
+			"delivered to --url whenever the environment changes. Use --event to limit the set\n" +
+			"of events that trigger a delivery; the flag can be repeated. Event names are\n" +
 			"validated by the service.\n" +
 			"\n" +
 			"Allowed --format values are: raw (default), slack, ms_teams, pulumi_deployments.\n" +
@@ -81,7 +81,7 @@ func newEnvWebhookNewCmd(env *envCommand) *cobra.Command {
 				ProjectName:      ref.projectName,
 				EnvName:          ref.envName,
 				PayloadURL:       url,
-				Filters:          filters,
+				Filters:          events,
 				Format:           format,
 				Secret:           secret,
 			}
@@ -100,7 +100,7 @@ func newEnvWebhookNewCmd(env *envCommand) *cobra.Command {
 	cmd.Flags().StringVar(&url, "url", "", "the payload URL to deliver events to (required)")
 	cmd.Flags().StringVar(&displayName, "display-name", "", "the display name (defaults to the webhook name)")
 	cmd.Flags().StringVar(&format, "format", "raw", "the payload format")
-	cmd.Flags().StringArrayVar(&filters, "filter", nil, "event filters to apply (repeatable)")
+	cmd.Flags().StringArrayVar(&events, "event", nil, "event types to subscribe to (repeatable)")
 	cmd.Flags().BoolVar(&active, "active", true, "whether the webhook is active")
 	cmd.Flags().StringVar(&secret, "secret", "", "shared secret used to sign deliveries")
 

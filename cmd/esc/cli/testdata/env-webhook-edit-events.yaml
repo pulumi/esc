@@ -1,6 +1,6 @@
 run: |
   esc env webhook get test-user/default/src deploy
-  esc env webhook edit test-user/default/src deploy --add-filter rotated --remove-filter created
+  esc env webhook edit test-user/default/src deploy --add-event rotated --remove-event created
   esc env webhook get test-user/default/src deploy
 environments:
   test-user/default/src:
@@ -23,9 +23,9 @@ Display name: deploy
 URL: https://example.invalid/hook
 Active: true
 Format: raw
-Filters: created, updated
+Events: created, updated
 Has secret: false
-> esc env webhook edit test-user/default/src deploy --add-filter rotated --remove-filter created
+> esc env webhook edit test-user/default/src deploy --add-event rotated --remove-event created
 Updated webhook deploy for test-user/default/src
 > esc env webhook get test-user/default/src deploy
 Name: deploy
@@ -33,10 +33,10 @@ Display name: deploy
 URL: https://example.invalid/hook
 Active: true
 Format: raw
-Filters: updated, rotated
+Events: updated, rotated
 Has secret: false
 
 ---
 > esc env webhook get test-user/default/src deploy
-> esc env webhook edit test-user/default/src deploy --add-filter rotated --remove-filter created
+> esc env webhook edit test-user/default/src deploy --add-event rotated --remove-event created
 > esc env webhook get test-user/default/src deploy

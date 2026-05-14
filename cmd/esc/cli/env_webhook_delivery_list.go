@@ -15,12 +15,16 @@ import (
 	"github.com/pulumi/esc/cmd/esc/cli/client"
 )
 
-func newEnvWebhookDeliveryLsCmd(env *envCommand) *cobra.Command {
-	var utc bool
+func newEnvWebhookDeliveryListCmd(env *envCommand) *cobra.Command {
+	var (
+		utc   bool
+		count int
+	)
 
 	cmd := &cobra.Command{
-		Use:   "ls [<org-name>/][<project-name>/]<environment-name> <webhook-name>",
-		Short: "List environment webhook deliveries.",
+		Use:     "list [<org-name>/][<project-name>/]<environment-name> <webhook-name>",
+		Aliases: []string{"ls"},
+		Short:   "List environment webhook deliveries.",
 		Long: "List environment webhook deliveries\n" +
 			"\n" +
 			"This command lists the deliveries recorded for the named webhook.\n",
@@ -38,7 +42,10 @@ func newEnvWebhookDeliveryLsCmd(env *envCommand) *cobra.Command {
 				return err
 			}
 			if ref.version != "" {
-				return errors.New("the ls command does not accept versions")
+				return errors.New("the list command does not accept versions")
+			}
+			if count < 0 {
+				return errors.New("--count must be non-negative")
 			}
 
 			webhookName := args[0]
@@ -52,12 +59,17 @@ func newEnvWebhookDeliveryLsCmd(env *envCommand) *cobra.Command {
 				return err
 			}
 
+			if count > 0 && len(deliveries) > count {
+				deliveries = deliveries[:count]
+			}
+
 			printWebhookDeliveries(env.esc.stdout, deliveries, utcFlag(utc))
 			return nil
 		},
 	}
 
 	cmd.Flags().BoolVar(&utc, "utc", false, "display times in UTC")
+	cmd.Flags().IntVar(&count, "count", 0, "the maximum number of deliveries to return (all if unset)")
 
 	return cmd
 }

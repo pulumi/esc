@@ -67,10 +67,10 @@ func printWebhook(stdout io.Writer, w client.EnvironmentWebhook) {
 		format = "-"
 	}
 	fmt.Fprintf(stdout, "Format: %s\n", format)
-	filters := "-"
+	events := "-"
 	if len(w.Filters) > 0 {
-		filters = strings.Join(w.Filters, ", ")
+		events = strings.Join(w.Filters, ", ")
 	}
-	fmt.Fprintf(stdout, "Filters: %s\n", filters)
+	fmt.Fprintf(stdout, "Events: %s\n", events)
 	fmt.Fprintf(stdout, "Has secret: %t\n", w.HasSecret)
 }

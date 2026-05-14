@@ -14,15 +14,15 @@ import (
 
 func newEnvWebhookEditCmd(env *envCommand) *cobra.Command {
 	var (
-		url           string
-		displayName   string
-		format        string
-		filters       []string
-		active        bool
-		secret        string
-		removeSecret  bool
-		addFilters    []string
-		removeFilters []string
+		url          string
+		displayName  string
+		format       string
+		events       []string
+		active       bool
+		secret       string
+		removeSecret bool
+		addEvents    []string
+		removeEvents []string
 	)
 
 	cmd := &cobra.Command{
@@ -34,9 +34,9 @@ func newEnvWebhookEditCmd(env *envCommand) *cobra.Command {
 			"current webhook, applies the supplied flag values on top of it, and submits the\n" +
 			"merged state to the service.\n" +
 			"\n" +
-			"--filter replaces the filter list. Use --add-filter and --remove-filter to apply\n" +
-			"incremental changes that merge with the existing filters; mixing --filter with\n" +
-			"either of those is not allowed. Filter names are validated by the service.\n" +
+			"--event replaces the event list. Use --add-event and --remove-event to apply\n" +
+			"incremental changes that merge with the existing events; mixing --event with\n" +
+			"either of those is not allowed. Event names are validated by the service.\n" +
 			"\n" +
 			"Allowed --format values are: raw, slack, ms_teams, pulumi_deployments. URL\n" +
 			"requirements (validated against the format that will be in effect):\n" +
@@ -68,11 +68,11 @@ func newEnvWebhookEditCmd(env *envCommand) *cobra.Command {
 				return errors.New("webhook name cannot be empty")
 			}
 
-			filterChanged := cmd.Flags().Changed("filter")
-			addFilterChanged := cmd.Flags().Changed("add-filter")
-			removeFilterChanged := cmd.Flags().Changed("remove-filter")
-			if filterChanged && (addFilterChanged || removeFilterChanged) {
-				return errors.New("--filter cannot be combined with --add-filter or --remove-filter")
+			eventChanged := cmd.Flags().Changed("event")
+			addEventChanged := cmd.Flags().Changed("add-event")
+			removeEventChanged := cmd.Flags().Changed("remove-event")
+			if eventChanged && (addEventChanged || removeEventChanged) {
+				return errors.New("--event cannot be combined with --add-event or --remove-event")
 			}
 
 			secretChanged := cmd.Flags().Changed("secret")
@@ -123,10 +123,10 @@ func newEnvWebhookEditCmd(env *envCommand) *cobra.Command {
 			} else if removeSecret {
 				req.Secret = removeSecretSentinel
 			}
-			if filterChanged {
-				req.Filters = append([]string(nil), filters...)
-			} else if addFilterChanged || removeFilterChanged {
-				req.Filters = mergeFilters(existing.Filters, addFilters, removeFilters)
+			if eventChanged {
+				req.Filters = append([]string(nil), events...)
+			} else if addEventChanged || removeEventChanged {
+				req.Filters = mergeEvents(existing.Filters, addEvents, removeEvents)
 			}
 
 			// Cross-check the final URL against the format that will be in effect.
@@ -153,18 +153,18 @@ func newEnvWebhookEditCmd(env *envCommand) *cobra.Command {
 	cmd.Flags().StringVar(&url, "url", "", "the payload URL to deliver events to")
 	cmd.Flags().StringVar(&displayName, "display-name", "", "the display name")
 	cmd.Flags().StringVar(&format, "format", "", "the payload format")
-	cmd.Flags().StringArrayVar(&filters, "filter", nil, "replace the event filters (repeatable)")
+	cmd.Flags().StringArrayVar(&events, "event", nil, "replace the subscribed events (repeatable)")
 	cmd.Flags().BoolVar(&active, "active", true, "whether the webhook is active")
 	cmd.Flags().StringVar(&secret, "secret", "", "shared secret used to sign deliveries")
 	cmd.Flags().BoolVar(&removeSecret, "remove-secret", false, "clear the existing shared secret")
-	cmd.Flags().StringArrayVar(&addFilters, "add-filter", nil, "add an event filter (repeatable)")
-	cmd.Flags().StringArrayVar(&removeFilters, "remove-filter", nil, "remove an event filter (repeatable)")
+	cmd.Flags().StringArrayVar(&addEvents, "add-event", nil, "subscribe to an additional event (repeatable)")
+	cmd.Flags().StringArrayVar(&removeEvents, "remove-event", nil, "unsubscribe from an event (repeatable)")
 
 	return cmd
 }
 
-// mergeFilters returns existing minus removes, then appends adds (skipping duplicates).
-func mergeFilters(existing, adds, removes []string) []string {
+// mergeEvents returns existing minus removes, then appends adds (skipping duplicates).
+func mergeEvents(existing, adds, removes []string) []string {
 	removeSet := map[string]struct{}{}
 	for _, r := range removes {
 		removeSet[r] = struct{}{}

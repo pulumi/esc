@@ -20,7 +20,7 @@ func newEnvWebhookCmd(env *envCommand) *cobra.Command {
 		SilenceUsage: true,
 	}
 
-	cmd.AddCommand(newEnvWebhookLsCmd(env))
+	cmd.AddCommand(newEnvWebhookListCmd(env))
 	cmd.AddCommand(newEnvWebhookGetCmd(env))
 	cmd.AddCommand(newEnvWebhookNewCmd(env))
 	cmd.AddCommand(newEnvWebhookEditCmd(env))

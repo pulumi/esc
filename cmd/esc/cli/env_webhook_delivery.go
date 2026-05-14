@@ -18,7 +18,7 @@ func newEnvWebhookDeliveryCmd(env *envCommand) *cobra.Command {
 		SilenceUsage: true,
 	}
 
-	cmd.AddCommand(newEnvWebhookDeliveryLsCmd(env))
+	cmd.AddCommand(newEnvWebhookDeliveryListCmd(env))
 
 	return cmd
 }

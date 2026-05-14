@@ -1,21 +1,26 @@
 run: |
-  esc env webhook new test-user/default/src deploy --url https://example.invalid/hook --filter created --filter updated
+  esc env webhook new test-user/default/src deploy --url https://example.invalid/hook --event created --event updated
+  esc env webhook list test-user/default/src
   esc env webhook ls test-user/default/src
   esc env webhook get test-user/default/src deploy
   esc env webhook edit test-user/default/src deploy --active=false
   esc env webhook get test-user/default/src deploy
   esc env webhook ping test-user/default/src deploy
+  esc env webhook delivery list test-user/default/src deploy --utc
   esc env webhook delivery ls test-user/default/src deploy --utc
   esc env webhook rm test-user/default/src deploy
-  esc env webhook ls test-user/default/src
+  esc env webhook list test-user/default/src
 environments:
   test-user/default/src:
     yaml:
       values: {}
 
 ---
-> esc env webhook new test-user/default/src deploy --url https://example.invalid/hook --filter created --filter updated
+> esc env webhook new test-user/default/src deploy --url https://example.invalid/hook --event created --event updated
 Created webhook deploy for test-user/default/src
+> esc env webhook list test-user/default/src
+NAME    DISPLAY NAME  URL                           ACTIVE  FORMAT
+deploy  deploy        https://example.invalid/hook  true    raw
 > esc env webhook ls test-user/default/src
 NAME    DISPLAY NAME  URL                           ACTIVE  FORMAT
 deploy  deploy        https://example.invalid/hook  true    raw
@@ -25,7 +30,7 @@ Display name: deploy
 URL: https://example.invalid/hook
 Active: true
 Format: raw
-Filters: created, updated
+Events: created, updated
 Has secret: false
 > esc env webhook edit test-user/default/src deploy --active=false
 Updated webhook deploy for test-user/default/src
@@ -35,27 +40,32 @@ Display name: deploy
 URL: https://example.invalid/hook
 Active: false
 Format: raw
-Filters: created, updated
+Events: created, updated
 Has secret: false
 > esc env webhook ping test-user/default/src deploy
 ID: dlv-deploy-1
 Kind: ping
 Response code: 200
 Duration (ms): 42
+> esc env webhook delivery list test-user/default/src deploy --utc
+ID            KIND  TIMESTAMP             RESPONSE  DURATION (ms)
+dlv-deploy-1  ping  2025-05-13T00:00:00Z  200       42
 > esc env webhook delivery ls test-user/default/src deploy --utc
 ID            KIND  TIMESTAMP             RESPONSE  DURATION (ms)
 dlv-deploy-1  ping  2025-05-13T00:00:00Z  200       42
 > esc env webhook rm test-user/default/src deploy
 Removed webhook deploy from test-user/default/src
-> esc env webhook ls test-user/default/src
+> esc env webhook list test-user/default/src
 
 ---
-> esc env webhook new test-user/default/src deploy --url https://example.invalid/hook --filter created --filter updated
+> esc env webhook new test-user/default/src deploy --url https://example.invalid/hook --event created --event updated
+> esc env webhook list test-user/default/src
 > esc env webhook ls test-user/default/src
 > esc env webhook get test-user/default/src deploy
 > esc env webhook edit test-user/default/src deploy --active=false
 > esc env webhook get test-user/default/src deploy
 > esc env webhook ping test-user/default/src deploy
+> esc env webhook delivery list test-user/default/src deploy --utc
 > esc env webhook delivery ls test-user/default/src deploy --utc
 > esc env webhook rm test-user/default/src deploy
-> esc env webhook ls test-user/default/src
+> esc env webhook list test-user/default/src

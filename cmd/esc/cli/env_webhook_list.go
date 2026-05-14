@@ -13,10 +13,13 @@ import (
 	"github.com/pulumi/esc/cmd/esc/cli/client"
 )
 
-func newEnvWebhookLsCmd(env *envCommand) *cobra.Command {
+func newEnvWebhookListCmd(env *envCommand) *cobra.Command {
+	var count int
+
 	cmd := &cobra.Command{
-		Use:   "ls [<org-name>/][<project-name>/]<environment-name>",
-		Short: "List environment webhooks.",
+		Use:     "list [<org-name>/][<project-name>/]<environment-name>",
+		Aliases: []string{"ls"},
+		Short:   "List environment webhooks.",
 		Long: "List environment webhooks\n" +
 			"\n" +
 			"This command lists the webhooks attached to the given environment.\n",
@@ -34,7 +37,10 @@ func newEnvWebhookLsCmd(env *envCommand) *cobra.Command {
 				return err
 			}
 			if ref.version != "" {
-				return fmt.Errorf("the ls command does not accept versions")
+				return fmt.Errorf("the list command does not accept versions")
+			}
+			if count < 0 {
+				return fmt.Errorf("--count must be non-negative")
 			}
 
 			hooks, err := env.esc.client.ListEnvironmentWebhooks(ctx, ref.orgName, ref.projectName, ref.envName)
@@ -42,10 +48,16 @@ func newEnvWebhookLsCmd(env *envCommand) *cobra.Command {
 				return err
 			}
 
+			if count > 0 && len(hooks) > count {
+				hooks = hooks[:count]
+			}
+
 			printWebhooks(env.esc.stdout, hooks)
 			return nil
 		},
 	}
+
+	cmd.Flags().IntVar(&count, "count", 0, "the maximum number of webhooks to return (all if unset)")
 
 	return cmd
 }
