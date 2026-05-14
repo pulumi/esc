@@ -8,7 +8,9 @@
   [#648](https://github.com/pulumi/esc/pull/648)
 
 - Add `esc env provider {aws-login,azure-login,gcp-login} static` commands
-  to add static-credentials login providers to an environment
+  to add static-credentials login providers to an environment. Each
+  supports `--create` to create the target environment if it does not
+  already exist
 
 ### Bug Fixes
 

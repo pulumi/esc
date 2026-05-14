@@ -6,10 +6,32 @@ import (
 	"context"
 	"fmt"
 
+	"github.com/pulumi/esc/cmd/esc/cli/client"
 	"github.com/pulumi/esc/syntax/encoding"
 	"github.com/pulumi/pulumi/sdk/v3/go/common/resource"
 	"gopkg.in/yaml.v3"
 )
+
+// ensureProviderEnv creates the target environment if --create was passed and
+// the environment does not already exist. It is a no-op when create is false
+// or when the environment exists.
+func ensureProviderEnv(ctx context.Context, env *envCommand, ref environmentRef, create bool) error {
+	if !create {
+		return nil
+	}
+	exists, err := env.esc.client.EnvironmentExists(ctx, ref.orgName, ref.projectName, ref.envName)
+	if err != nil {
+		return fmt.Errorf("checking environment existence: %w", err)
+	}
+	if exists {
+		return nil
+	}
+	if err := env.esc.client.CreateEnvironmentWithProject(ctx, ref.orgName, ref.projectName, ref.envName); err != nil {
+		return fmt.Errorf("creating environment: %w", err)
+	}
+	fmt.Fprintf(env.esc.stdout, "Environment created: %v\n", ref.String())
+	return nil
+}
 
 // mergeProviderIntoEnv merges providerNode into the YAML environment definition
 // at values.<path>, replacing any existing node at that path. The result is the
@@ -85,6 +107,11 @@ func applyProviderUpdate(
 	} else {
 		def, tag, _, err = env.esc.client.GetEnvironment(ctx, ref.orgName, ref.projectName, ref.envName, "", false)
 		if err != nil {
+			if client.IsNotFound(err) {
+				return fmt.Errorf(
+					"environment %s does not exist; pass --create to create it, or run `esc env init %s` first",
+					ref.String(), ref.String())
+			}
 			return fmt.Errorf("getting environment definition: %w", err)
 		}
 	}

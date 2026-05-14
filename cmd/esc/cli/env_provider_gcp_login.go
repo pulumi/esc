@@ -19,8 +19,8 @@ func newEnvProviderGCPLoginCmd(env *envCommand) *cobra.Command {
 		Short: "Add a GCP login provider to an environment",
 		Long: "Add a GCP login provider to an environment\n" +
 			"\n" +
-			"Subcommands select the authentication mode. Today only `static` is supported;\n" +
-			"`oidc` is planned in a follow-up.\n",
+			"Subcommands select the authentication mode. Only `static` is supported today;\n" +
+			"`oidc` is not supported yet.\n",
 		Args: cobra.NoArgs,
 	}
 
@@ -34,6 +34,7 @@ func newEnvProviderGCPLoginStaticCmd(env *envCommand) *cobra.Command {
 	var tokenLifetime string
 	var pathStr string
 	var draft string
+	var create bool
 
 	cmd := &cobra.Command{
 		Use:   "static [<org>/][<project>/]<environment-name> <project-number> <access-token>",
@@ -78,6 +79,9 @@ func newEnvProviderGCPLoginStaticCmd(env *envCommand) *cobra.Command {
 
 			node := buildGCPLoginStaticNode(project, accessToken, serviceAccount, tokenLifetime)
 
+			if err := ensureProviderEnv(ctx, env, ref, create); err != nil {
+				return err
+			}
 			return applyProviderUpdate(ctx, env, ref, draft, path, node)
 		},
 	}
@@ -85,6 +89,8 @@ func newEnvProviderGCPLoginStaticCmd(env *envCommand) *cobra.Command {
 	cmd.Flags().StringVar(&serviceAccount, "service-account", "", "optional GCP service account to impersonate")
 	cmd.Flags().StringVar(&tokenLifetime, "token-lifetime", "", "optional lifetime for impersonated credentials, e.g. 1h30m")
 	cmd.Flags().StringVar(&pathStr, "path", "gcp.login", "property path under `values` where the provider block is written")
+	cmd.Flags().BoolVar(&create, "create", false,
+		"create the environment if it does not already exist")
 	cmd.Flags().StringVar(&draft, "draft", "",
 		"set flag without a value (--draft) to create a draft rather than saving changes directly. --draft=<change-request-id> to update an existing change request.")
 	cmd.Flag("draft").NoOptDefVal = "new"

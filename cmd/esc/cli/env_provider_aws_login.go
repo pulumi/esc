@@ -18,8 +18,8 @@ func newEnvProviderAWSLoginCmd(env *envCommand) *cobra.Command {
 		Short: "Add an AWS login provider to an environment",
 		Long: "Add an AWS login provider to an environment\n" +
 			"\n" +
-			"Subcommands select the authentication mode. Today only `static` is supported;\n" +
-			"`oidc` is planned in a follow-up.\n",
+			"Subcommands select the authentication mode. Only `static` is supported today;\n" +
+			"`oidc` is not supported yet.\n",
 		Args: cobra.NoArgs,
 	}
 
@@ -32,6 +32,7 @@ func newEnvProviderAWSLoginStaticCmd(env *envCommand) *cobra.Command {
 	var sessionToken string
 	var pathStr string
 	var draft string
+	var create bool
 
 	cmd := &cobra.Command{
 		Use:   "static [<org>/][<project>/]<environment-name> <access-key-id> <secret-access-key>",
@@ -69,12 +70,17 @@ func newEnvProviderAWSLoginStaticCmd(env *envCommand) *cobra.Command {
 
 			node := buildAWSLoginStaticNode(accessKeyID, secretAccessKey, sessionToken)
 
+			if err := ensureProviderEnv(ctx, env, ref, create); err != nil {
+				return err
+			}
 			return applyProviderUpdate(ctx, env, ref, draft, path, node)
 		},
 	}
 
 	cmd.Flags().StringVar(&sessionToken, "session-token", "", "optional AWS session token")
 	cmd.Flags().StringVar(&pathStr, "path", "aws.login", "property path under `values` where the provider block is written")
+	cmd.Flags().BoolVar(&create, "create", false,
+		"create the environment if it does not already exist")
 	cmd.Flags().StringVar(&draft, "draft", "",
 		"set flag without a value (--draft) to create a draft rather than saving changes directly. --draft=<change-request-id> to update an existing change request.")
 	cmd.Flag("draft").NoOptDefVal = "new"
