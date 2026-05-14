@@ -3,6 +3,7 @@
 package cli
 
 import (
+	"context"
 	"fmt"
 
 	"github.com/pulumi/esc/syntax/encoding"
@@ -63,4 +64,42 @@ func secretNode(value string) *yaml.Node {
 			{Kind: yaml.ScalarNode, Tag: "!!str", Value: value},
 		},
 	}
+}
+
+func applyProviderUpdate(
+	ctx context.Context,
+	env *envCommand,
+	ref environmentRef,
+	draft string,
+	path resource.PropertyPath,
+	providerNode *yaml.Node,
+) error {
+	var def []byte
+	var tag string
+	var err error
+	if draft != "" && draft != "new" {
+		def, tag, err = env.esc.client.GetEnvironmentDraft(ctx, ref.orgName, ref.projectName, ref.envName, draft)
+		if err != nil {
+			return fmt.Errorf("getting environment draft definition: %w", err)
+		}
+	} else {
+		def, tag, _, err = env.esc.client.GetEnvironment(ctx, ref.orgName, ref.projectName, ref.envName, "", false)
+		if err != nil {
+			return fmt.Errorf("getting environment definition: %w", err)
+		}
+	}
+
+	newYAML, err := mergeProviderIntoEnv(def, path, providerNode)
+	if err != nil {
+		return err
+	}
+
+	diags, err := env.esc.updateEnvironment(ctx, ref, draft, newYAML, tag, "Provider updated.")
+	if err != nil {
+		return err
+	}
+	if len(diags) != 0 {
+		return env.writePropertyEnvironmentDiagnostics(env.esc.stderr, diags)
+	}
+	return nil
 }
