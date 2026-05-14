@@ -30,15 +30,16 @@ func newEnvWebhookEditCmd(env *envCommand) *cobra.Command {
 		Short: "Edit an environment webhook.",
 		Long: "Edit an environment webhook\n" +
 			"\n" +
-			"This command updates one or more fields of the named webhook. Only the fields\n" +
-			"specified via flags are sent; everything else is left unchanged.\n" +
+			"This command updates one or more fields of the named webhook. The CLI fetches the\n" +
+			"current webhook, applies the supplied flag values on top of it, and submits the\n" +
+			"merged state to the service.\n" +
 			"\n" +
 			"--filter replaces the filter list. Use --add-filter and --remove-filter to apply\n" +
 			"incremental changes that merge with the existing filters; mixing --filter with\n" +
 			"either of those is not allowed. Filter names are validated by the service.\n" +
 			"\n" +
-			"Allowed --format values are: raw, slack, ms_teams, pulumi_deployments. When both\n" +
-			"--format and --url are changed they are validated together; URL requirements:\n" +
+			"Allowed --format values are: raw, slack, ms_teams, pulumi_deployments. URL\n" +
+			"requirements (validated against the format that will be in effect):\n" +
 			"  raw, ms_teams:      any http(s) URL\n" +
 			"  slack:              must begin with https://hooks.slack.com/\n" +
 			"  pulumi_deployments: must be of the form <project>/<stack>\n" +
@@ -86,51 +87,55 @@ func newEnvWebhookEditCmd(env *envCommand) *cobra.Command {
 					return err
 				}
 			}
-			if urlChanged {
-				coupleFormat := ""
-				if formatChanged {
-					coupleFormat = format
-				}
-				if err := validateWebhookURL(coupleFormat, url); err != nil {
-					return err
-				}
+
+			// The service's PATCH handler is effectively a PUT: omitted fields are
+			// not "leave unchanged" but rather "set to the zero value". The CLI
+			// therefore fetches the current webhook and applies flag overrides on
+			// top of it before submitting the merged state.
+			existing, err := env.esc.client.GetEnvironmentWebhook(
+				ctx, ref.orgName, ref.projectName, ref.envName, webhookName)
+			if err != nil {
+				return err
 			}
 
-			req := client.UpdateEnvironmentWebhookRequest{}
+			req := client.UpdateEnvironmentWebhookRequest{
+				Active:      existing.Active,
+				DisplayName: existing.DisplayName,
+				PayloadURL:  existing.PayloadURL,
+				Filters:     append([]string(nil), existing.Filters...),
+				Groups:      append([]string(nil), existing.Groups...),
+			}
 			if cmd.Flags().Changed("active") {
-				v := active
-				req.Active = &v
+				req.Active = active
 			}
 			if cmd.Flags().Changed("display-name") {
-				v := displayName
-				req.DisplayName = &v
+				req.DisplayName = displayName
 			}
 			if urlChanged {
-				v := url
-				req.PayloadURL = &v
+				req.PayloadURL = url
 			}
 			if formatChanged {
 				v := format
 				req.Format = &v
 			}
 			if secretChanged {
-				v := secret
-				req.Secret = &v
+				req.Secret = secret
 			} else if removeSecret {
-				v := removeSecretSentinel
-				req.Secret = &v
+				req.Secret = removeSecretSentinel
 			}
 			if filterChanged {
-				v := append([]string(nil), filters...)
-				req.Filters = &v
+				req.Filters = append([]string(nil), filters...)
 			} else if addFilterChanged || removeFilterChanged {
-				existing, err := env.esc.client.GetEnvironmentWebhook(
-					ctx, ref.orgName, ref.projectName, ref.envName, webhookName)
-				if err != nil {
-					return err
-				}
-				merged := mergeFilters(existing.Filters, addFilters, removeFilters)
-				req.Filters = &merged
+				req.Filters = mergeFilters(existing.Filters, addFilters, removeFilters)
+			}
+
+			// Cross-check the final URL against the format that will be in effect.
+			effectiveFormat := existing.Format
+			if formatChanged {
+				effectiveFormat = format
+			}
+			if err := validateWebhookURL(effectiveFormat, req.PayloadURL); err != nil {
+				return err
 			}
 
 			w, err := env.esc.client.UpdateEnvironmentWebhook(

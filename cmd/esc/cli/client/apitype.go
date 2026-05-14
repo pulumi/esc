@@ -291,26 +291,33 @@ type EnvironmentWebhook struct {
 }
 
 // CreateEnvironmentWebhookRequest is the request body for creating a webhook on an environment.
+// OrganizationName, ProjectName, and EnvName must match the URL path or the service returns 400.
 type CreateEnvironmentWebhookRequest struct {
 	Active           bool     `json:"active"`
 	DisplayName      string   `json:"displayName"`
 	Name             string   `json:"name"`
 	OrganizationName string   `json:"organizationName"`
+	ProjectName      string   `json:"projectName,omitempty"`
+	EnvName          string   `json:"envName,omitempty"`
 	PayloadURL       string   `json:"payloadUrl"`
 	Filters          []string `json:"filters,omitempty"`
 	Format           string   `json:"format,omitempty"`
 	Secret           string   `json:"secret,omitempty"`
 }
 
-// UpdateEnvironmentWebhookRequest is the PATCH body for updating an environment webhook. Pointer
-// fields preserve "leave unchanged" semantics: a nil value omits the field from the request.
+// UpdateEnvironmentWebhookRequest is the PATCH body for updating an environment webhook. The
+// service's PATCH handler unconditionally replaces DisplayName, PayloadURL, Active, Filters,
+// and Groups from the body, so callers must send the full desired state. Format and Secret are
+// the only fields with "leave unchanged" semantics (nil pointer / empty string respectively),
+// and Secret accepts the sentinel "__remove-secret" to clear a stored secret.
 type UpdateEnvironmentWebhookRequest struct {
-	Active      *bool     `json:"active,omitempty"`
-	DisplayName *string   `json:"displayName,omitempty"`
-	PayloadURL  *string   `json:"payloadUrl,omitempty"`
-	Filters     *[]string `json:"filters,omitempty"`
-	Format      *string   `json:"format,omitempty"`
-	Secret      *string   `json:"secret,omitempty"`
+	Active      bool     `json:"active"`
+	DisplayName string   `json:"displayName"`
+	PayloadURL  string   `json:"payloadUrl"`
+	Filters     []string `json:"filters,omitempty"`
+	Groups      []string `json:"groups,omitempty"`
+	Format      *string  `json:"format,omitempty"`
+	Secret      string   `json:"secret,omitempty"`
 }
 
 // EnvironmentWebhookDelivery describes a single webhook delivery attempt.

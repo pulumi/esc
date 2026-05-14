@@ -78,6 +78,8 @@ func newEnvWebhookNewCmd(env *envCommand) *cobra.Command {
 				DisplayName:      displayName,
 				Name:             webhookName,
 				OrganizationName: ref.orgName,
+				ProjectName:      ref.projectName,
+				EnvName:          ref.envName,
 				PayloadURL:       url,
 				Filters:          filters,
 				Format:           format,

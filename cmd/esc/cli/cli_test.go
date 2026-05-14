@@ -1074,23 +1074,21 @@ func (c *testPulumiClient) UpdateEnvironmentWebhook(
 		return nil, err
 	}
 	w := env.webhooks[i]
-	if req.Active != nil {
-		w.Active = *req.Active
-	}
-	if req.DisplayName != nil {
-		w.DisplayName = *req.DisplayName
-	}
-	if req.PayloadURL != nil {
-		w.PayloadURL = *req.PayloadURL
-	}
-	if req.Filters != nil {
-		w.Filters = append([]string(nil), (*req.Filters)...)
-	}
+	w.Active = req.Active
+	w.DisplayName = req.DisplayName
+	w.PayloadURL = req.PayloadURL
+	w.Filters = append([]string(nil), req.Filters...)
+	w.Groups = append([]string(nil), req.Groups...)
 	if req.Format != nil {
 		w.Format = *req.Format
 	}
-	if req.Secret != nil {
-		w.HasSecret = *req.Secret != ""
+	switch req.Secret {
+	case "":
+		// leave HasSecret unchanged
+	case "__remove-secret":
+		w.HasSecret = false
+	default:
+		w.HasSecret = true
 	}
 	env.webhooks[i] = w
 	return &w, nil
