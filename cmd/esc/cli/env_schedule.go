@@ -20,7 +20,7 @@ func newEnvScheduleCmd(env *envCommand) *cobra.Command {
 		SilenceUsage: true,
 	}
 
-	cmd.AddCommand(newEnvScheduleLsCmd(env))
+	cmd.AddCommand(newEnvScheduleListCmd(env))
 	cmd.AddCommand(newEnvScheduleNewCmd(env))
 	cmd.AddCommand(newEnvSchedulePauseCmd(env))
 	cmd.AddCommand(newEnvScheduleResumeCmd(env))

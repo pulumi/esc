@@ -13,12 +13,16 @@ import (
 	"github.com/pulumi/esc/cmd/esc/cli/client"
 )
 
-func newEnvScheduleLsCmd(env *envCommand) *cobra.Command {
-	var utc bool
+func newEnvScheduleListCmd(env *envCommand) *cobra.Command {
+	var (
+		utc   bool
+		count int
+	)
 
 	cmd := &cobra.Command{
-		Use:   "ls [<org-name>/][<project-name>/]<environment-name>",
-		Short: "List environment scheduled actions.",
+		Use:     "list [<org-name>/][<project-name>/]<environment-name>",
+		Aliases: []string{"ls"},
+		Short:   "List environment scheduled actions.",
 		Long: "List environment scheduled actions\n" +
 			"\n" +
 			"This command lists the scheduled actions configured for the given environment.\n",
@@ -36,12 +40,19 @@ func newEnvScheduleLsCmd(env *envCommand) *cobra.Command {
 				return err
 			}
 			if ref.version != "" {
-				return fmt.Errorf("the ls command does not accept versions")
+				return fmt.Errorf("the list command does not accept versions")
+			}
+			if count < 0 {
+				return fmt.Errorf("--count must be non-negative")
 			}
 
 			resp, err := env.esc.client.ListEnvironmentSchedules(ctx, ref.orgName, ref.projectName, ref.envName)
 			if err != nil {
 				return err
+			}
+
+			if count > 0 && resp != nil && len(resp.Schedules) > count {
+				resp.Schedules = resp.Schedules[:count]
 			}
 
 			printSchedules(env.esc.stdout, resp, utcFlag(utc))
@@ -50,6 +61,7 @@ func newEnvScheduleLsCmd(env *envCommand) *cobra.Command {
 	}
 
 	cmd.Flags().BoolVar(&utc, "utc", false, "display times in UTC")
+	cmd.Flags().IntVar(&count, "count", 0, "the maximum number of schedules to return (all if unset)")
 
 	return cmd
 }
