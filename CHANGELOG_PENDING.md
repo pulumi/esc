@@ -7,6 +7,9 @@
   a handful of CLI error messages as a result
   [#648](https://github.com/pulumi/esc/pull/648)
 
+- Add `esc env provider {aws-login,azure-login,gcp-login}` commands to add
+  static-credentials login providers to an environment
+
 ### Bug Fixes
 
 ### Breaking changes
