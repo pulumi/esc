@@ -12,38 +12,20 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/common/resource"
 )
 
-// buildAWSLoginStaticNode returns a yaml.Node representing
-// `fn::open::aws-login: { static: {...} }`. secretAccessKey and sessionToken
-// are wrapped in `fn::secret`. sessionToken is omitted when empty.
-func buildAWSLoginStaticNode(accessKeyID, secretAccessKey, sessionToken string) *yaml.Node {
-	staticContent := []*yaml.Node{
-		{Kind: yaml.ScalarNode, Tag: "!!str", Value: "accessKeyId"},
-		{Kind: yaml.ScalarNode, Tag: "!!str", Value: accessKeyID},
-		{Kind: yaml.ScalarNode, Tag: "!!str", Value: "secretAccessKey"},
-		secretNode(secretAccessKey),
-	}
-	if sessionToken != "" {
-		staticContent = append(staticContent,
-			&yaml.Node{Kind: yaml.ScalarNode, Tag: "!!str", Value: "sessionToken"},
-			secretNode(sessionToken),
-		)
+func newEnvProviderAWSLoginCmd(env *envCommand) *cobra.Command {
+	cmd := &cobra.Command{
+		Use:   "aws-login",
+		Short: "Add an AWS login provider to an environment",
+		Long: "Add an AWS login provider to an environment\n" +
+			"\n" +
+			"Subcommands select the authentication mode. Today only `static` is supported;\n" +
+			"`oidc` is planned in a follow-up.\n",
+		Args: cobra.NoArgs,
 	}
 
-	return &yaml.Node{
-		Kind: yaml.MappingNode,
-		Tag:  "!!map",
-		Content: []*yaml.Node{
-			{Kind: yaml.ScalarNode, Tag: "!!str", Value: "fn::open::aws-login"},
-			{
-				Kind: yaml.MappingNode,
-				Tag:  "!!map",
-				Content: []*yaml.Node{
-					{Kind: yaml.ScalarNode, Tag: "!!str", Value: "static"},
-					{Kind: yaml.MappingNode, Tag: "!!map", Content: staticContent},
-				},
-			},
-		},
-	}
+	cmd.AddCommand(newEnvProviderAWSLoginStaticCmd(env))
+
+	return cmd
 }
 
 func newEnvProviderAWSLoginStaticCmd(env *envCommand) *cobra.Command {
@@ -98,4 +80,38 @@ func newEnvProviderAWSLoginStaticCmd(env *envCommand) *cobra.Command {
 	cmd.Flag("draft").NoOptDefVal = "new"
 
 	return cmd
+}
+
+// buildAWSLoginStaticNode returns a yaml.Node representing
+// `fn::open::aws-login: { static: {...} }`. secretAccessKey and sessionToken
+// are wrapped in `fn::secret`. sessionToken is omitted when empty.
+func buildAWSLoginStaticNode(accessKeyID, secretAccessKey, sessionToken string) *yaml.Node {
+	staticContent := []*yaml.Node{
+		{Kind: yaml.ScalarNode, Tag: "!!str", Value: "accessKeyId"},
+		{Kind: yaml.ScalarNode, Tag: "!!str", Value: accessKeyID},
+		{Kind: yaml.ScalarNode, Tag: "!!str", Value: "secretAccessKey"},
+		secretNode(secretAccessKey),
+	}
+	if sessionToken != "" {
+		staticContent = append(staticContent,
+			&yaml.Node{Kind: yaml.ScalarNode, Tag: "!!str", Value: "sessionToken"},
+			secretNode(sessionToken),
+		)
+	}
+
+	return &yaml.Node{
+		Kind: yaml.MappingNode,
+		Tag:  "!!map",
+		Content: []*yaml.Node{
+			{Kind: yaml.ScalarNode, Tag: "!!str", Value: "fn::open::aws-login"},
+			{
+				Kind: yaml.MappingNode,
+				Tag:  "!!map",
+				Content: []*yaml.Node{
+					{Kind: yaml.ScalarNode, Tag: "!!str", Value: "static"},
+					{Kind: yaml.MappingNode, Tag: "!!map", Content: staticContent},
+				},
+			},
+		},
+	}
 }

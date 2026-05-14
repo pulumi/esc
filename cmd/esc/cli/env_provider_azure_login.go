@@ -12,33 +12,20 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/common/resource"
 )
 
-// buildAzureLoginStaticNode returns a yaml.Node representing
-// `fn::open::azure-login: { ... }`. clientSecret is wrapped in `fn::secret` and
-// omitted when empty.
-func buildAzureLoginStaticNode(clientID, tenantID, subscriptionID, clientSecret string) *yaml.Node {
-	loginContent := []*yaml.Node{
-		{Kind: yaml.ScalarNode, Tag: "!!str", Value: "clientId"},
-		{Kind: yaml.ScalarNode, Tag: "!!str", Value: clientID},
-		{Kind: yaml.ScalarNode, Tag: "!!str", Value: "tenantId"},
-		{Kind: yaml.ScalarNode, Tag: "!!str", Value: tenantID},
-		{Kind: yaml.ScalarNode, Tag: "!!str", Value: "subscriptionId"},
-		{Kind: yaml.ScalarNode, Tag: "!!str", Value: subscriptionID},
-	}
-	if clientSecret != "" {
-		loginContent = append(loginContent,
-			&yaml.Node{Kind: yaml.ScalarNode, Tag: "!!str", Value: "clientSecret"},
-			secretNode(clientSecret),
-		)
+func newEnvProviderAzureLoginCmd(env *envCommand) *cobra.Command {
+	cmd := &cobra.Command{
+		Use:   "azure-login",
+		Short: "Add an Azure login provider to an environment",
+		Long: "Add an Azure login provider to an environment\n" +
+			"\n" +
+			"Subcommands select the authentication mode. Today only `static` is supported;\n" +
+			"`oidc` is planned in a follow-up.\n",
+		Args: cobra.NoArgs,
 	}
 
-	return &yaml.Node{
-		Kind: yaml.MappingNode,
-		Tag:  "!!map",
-		Content: []*yaml.Node{
-			{Kind: yaml.ScalarNode, Tag: "!!str", Value: "fn::open::azure-login"},
-			{Kind: yaml.MappingNode, Tag: "!!map", Content: loginContent},
-		},
-	}
+	cmd.AddCommand(newEnvProviderAzureLoginStaticCmd(env))
+
+	return cmd
 }
 
 func newEnvProviderAzureLoginStaticCmd(env *envCommand) *cobra.Command {
@@ -93,4 +80,33 @@ func newEnvProviderAzureLoginStaticCmd(env *envCommand) *cobra.Command {
 	cmd.Flag("draft").NoOptDefVal = "new"
 
 	return cmd
+}
+
+// buildAzureLoginStaticNode returns a yaml.Node representing
+// `fn::open::azure-login: { ... }`. clientSecret is wrapped in `fn::secret` and
+// omitted when empty.
+func buildAzureLoginStaticNode(clientID, tenantID, subscriptionID, clientSecret string) *yaml.Node {
+	loginContent := []*yaml.Node{
+		{Kind: yaml.ScalarNode, Tag: "!!str", Value: "clientId"},
+		{Kind: yaml.ScalarNode, Tag: "!!str", Value: clientID},
+		{Kind: yaml.ScalarNode, Tag: "!!str", Value: "tenantId"},
+		{Kind: yaml.ScalarNode, Tag: "!!str", Value: tenantID},
+		{Kind: yaml.ScalarNode, Tag: "!!str", Value: "subscriptionId"},
+		{Kind: yaml.ScalarNode, Tag: "!!str", Value: subscriptionID},
+	}
+	if clientSecret != "" {
+		loginContent = append(loginContent,
+			&yaml.Node{Kind: yaml.ScalarNode, Tag: "!!str", Value: "clientSecret"},
+			secretNode(clientSecret),
+		)
+	}
+
+	return &yaml.Node{
+		Kind: yaml.MappingNode,
+		Tag:  "!!map",
+		Content: []*yaml.Node{
+			{Kind: yaml.ScalarNode, Tag: "!!str", Value: "fn::open::azure-login"},
+			{Kind: yaml.MappingNode, Tag: "!!map", Content: loginContent},
+		},
+	}
 }

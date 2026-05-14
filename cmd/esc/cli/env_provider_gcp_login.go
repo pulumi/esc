@@ -13,44 +13,20 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/common/resource"
 )
 
-// buildGCPLoginStaticNode returns a yaml.Node representing
-// `fn::open::gcp-login: { project, accessToken: { accessToken: {fn::secret}, ... } }`.
-// serviceAccount and tokenLifetime are omitted when empty.
-func buildGCPLoginStaticNode(project int64, accessToken, serviceAccount, tokenLifetime string) *yaml.Node {
-	accessTokenContent := []*yaml.Node{
-		{Kind: yaml.ScalarNode, Tag: "!!str", Value: "accessToken"},
-		secretNode(accessToken),
-	}
-	if serviceAccount != "" {
-		accessTokenContent = append(accessTokenContent,
-			&yaml.Node{Kind: yaml.ScalarNode, Tag: "!!str", Value: "serviceAccount"},
-			&yaml.Node{Kind: yaml.ScalarNode, Tag: "!!str", Value: serviceAccount},
-		)
-	}
-	if tokenLifetime != "" {
-		accessTokenContent = append(accessTokenContent,
-			&yaml.Node{Kind: yaml.ScalarNode, Tag: "!!str", Value: "tokenLifetime"},
-			&yaml.Node{Kind: yaml.ScalarNode, Tag: "!!str", Value: tokenLifetime},
-		)
+func newEnvProviderGCPLoginCmd(env *envCommand) *cobra.Command {
+	cmd := &cobra.Command{
+		Use:   "gcp-login",
+		Short: "Add a GCP login provider to an environment",
+		Long: "Add a GCP login provider to an environment\n" +
+			"\n" +
+			"Subcommands select the authentication mode. Today only `static` is supported;\n" +
+			"`oidc` is planned in a follow-up.\n",
+		Args: cobra.NoArgs,
 	}
 
-	return &yaml.Node{
-		Kind: yaml.MappingNode,
-		Tag:  "!!map",
-		Content: []*yaml.Node{
-			{Kind: yaml.ScalarNode, Tag: "!!str", Value: "fn::open::gcp-login"},
-			{
-				Kind: yaml.MappingNode,
-				Tag:  "!!map",
-				Content: []*yaml.Node{
-					{Kind: yaml.ScalarNode, Tag: "!!str", Value: "project"},
-					{Kind: yaml.ScalarNode, Tag: "!!int", Value: strconv.FormatInt(project, 10)},
-					{Kind: yaml.ScalarNode, Tag: "!!str", Value: "accessToken"},
-					{Kind: yaml.MappingNode, Tag: "!!map", Content: accessTokenContent},
-				},
-			},
-		},
-	}
+	cmd.AddCommand(newEnvProviderGCPLoginStaticCmd(env))
+
+	return cmd
 }
 
 func newEnvProviderGCPLoginStaticCmd(env *envCommand) *cobra.Command {
@@ -114,4 +90,44 @@ func newEnvProviderGCPLoginStaticCmd(env *envCommand) *cobra.Command {
 	cmd.Flag("draft").NoOptDefVal = "new"
 
 	return cmd
+}
+
+// buildGCPLoginStaticNode returns a yaml.Node representing
+// `fn::open::gcp-login: { project, accessToken: { accessToken: {fn::secret}, ... } }`.
+// serviceAccount and tokenLifetime are omitted when empty.
+func buildGCPLoginStaticNode(project int64, accessToken, serviceAccount, tokenLifetime string) *yaml.Node {
+	accessTokenContent := []*yaml.Node{
+		{Kind: yaml.ScalarNode, Tag: "!!str", Value: "accessToken"},
+		secretNode(accessToken),
+	}
+	if serviceAccount != "" {
+		accessTokenContent = append(accessTokenContent,
+			&yaml.Node{Kind: yaml.ScalarNode, Tag: "!!str", Value: "serviceAccount"},
+			&yaml.Node{Kind: yaml.ScalarNode, Tag: "!!str", Value: serviceAccount},
+		)
+	}
+	if tokenLifetime != "" {
+		accessTokenContent = append(accessTokenContent,
+			&yaml.Node{Kind: yaml.ScalarNode, Tag: "!!str", Value: "tokenLifetime"},
+			&yaml.Node{Kind: yaml.ScalarNode, Tag: "!!str", Value: tokenLifetime},
+		)
+	}
+
+	return &yaml.Node{
+		Kind: yaml.MappingNode,
+		Tag:  "!!map",
+		Content: []*yaml.Node{
+			{Kind: yaml.ScalarNode, Tag: "!!str", Value: "fn::open::gcp-login"},
+			{
+				Kind: yaml.MappingNode,
+				Tag:  "!!map",
+				Content: []*yaml.Node{
+					{Kind: yaml.ScalarNode, Tag: "!!str", Value: "project"},
+					{Kind: yaml.ScalarNode, Tag: "!!int", Value: strconv.FormatInt(project, 10)},
+					{Kind: yaml.ScalarNode, Tag: "!!str", Value: "accessToken"},
+					{Kind: yaml.MappingNode, Tag: "!!map", Content: accessTokenContent},
+				},
+			},
+		},
+	}
 }
