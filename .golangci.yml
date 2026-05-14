@@ -1,18 +1,40 @@
-run:
-  timeout: 10m
+version: "2"
 linters:
-  enable-all: false
   enable:
-    - errcheck
-    - gofmt
     - gosec
-    - govet
-    - ineffassign
     - misspell
     - nakedret
     - unconvert
   disable:
-    - lll
     - goconst
+    - lll
     - paralleltest
     - revive
+    - staticcheck
+    - unused
+  exclusions:
+    generated: lax
+    presets:
+      - comments
+      - common-false-positives
+      - legacy
+      - std-error-handling
+    rules:
+      - linters:
+          - gosec
+        path: _test\.go
+    paths:
+      - third_party$
+      - builtin$
+      - examples$
+      - testdata$
+formatters:
+  enable:
+    - gofmt
+  exclusions:
+    generated: lax
+    paths:
+      - third_party$
+      - builtin$
+      - examples$
+      - testdata$
