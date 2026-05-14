@@ -5,7 +5,6 @@ package cli
 import (
 	"context"
 	"fmt"
-	"io"
 	"sort"
 	"strconv"
 
@@ -93,7 +92,7 @@ func printReferrers(env *envCommand, resp *client.ListEnvironmentReferrersRespon
 	if resp == nil {
 		return
 	}
-	var stdout io.Writer = env.esc.stdout
+	stdout := env.esc.stdout
 
 	keys := sortReferrerKeys(resp.Referrers)
 	for i, k := range keys {
