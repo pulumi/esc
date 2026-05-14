@@ -1,11 +1,11 @@
 run: |
   esc env init default/test
-  esc env provider azure-login static default/test cid tid /subscriptions/sub shhhhhh && esc env get default/test --definition
+  esc env provider azure-login static default/test tid /subscriptions/sub cid shhhhhh && esc env get default/test --definition
 
 ---
 > esc env init default/test
 Environment created: test-user/default/test
-> esc env provider azure-login static default/test cid tid /subscriptions/sub shhhhhh
+> esc env provider azure-login static default/test tid /subscriptions/sub cid shhhhhh
 Provider updated.
 > esc env get default/test --definition
 values:
@@ -21,5 +21,5 @@ values:
 
 ---
 > esc env init default/test
-> esc env provider azure-login static default/test cid tid /subscriptions/sub shhhhhh
+> esc env provider azure-login static default/test tid /subscriptions/sub cid shhhhhh
 > esc env get default/test --definition

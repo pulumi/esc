@@ -35,7 +35,7 @@ func newEnvProviderAzureLoginStaticCmd(env *envCommand) *cobra.Command {
 	var create bool
 
 	cmd := &cobra.Command{
-		Use:   "static [<org>/][<project>/]<environment-name> <client-id> <tenant-id> <subscription-id> <client-secret>",
+		Use:   "static [<org>/][<project>/]<environment-name> <tenant-id> <subscription-id> <client-id> <client-secret>",
 		Args:  cobra.RangeArgs(4, 5),
 		Short: "Add an Azure static-credentials login provider to an environment",
 		Long: "Add an Azure static-credentials login provider to an environment\n" +
@@ -59,9 +59,9 @@ func newEnvProviderAzureLoginStaticCmd(env *envCommand) *cobra.Command {
 				return fmt.Errorf("the provider command does not accept versions")
 			}
 			if len(args) != 4 {
-				return fmt.Errorf("expected <client-id> <tenant-id> <subscription-id> <client-secret>")
+				return fmt.Errorf("expected <tenant-id> <subscription-id> <client-id> <client-secret>")
 			}
-			clientID, tenantID, subscriptionID, clientSecret := args[0], args[1], args[2], args[3]
+			tenantID, subscriptionID, clientID, clientSecret := args[0], args[1], args[2], args[3]
 
 			path, err := resource.ParsePropertyPath(pathStr)
 			if err != nil {
@@ -119,7 +119,7 @@ func newEnvProviderAzureLoginOIDCCmd(env *envCommand) *cobra.Command {
 	var create bool
 
 	cmd := &cobra.Command{
-		Use:   "oidc [<org>/][<project>/]<environment-name> <client-id> <tenant-id> <subscription-id>",
+		Use:   "oidc [<org>/][<project>/]<environment-name> <tenant-id> <subscription-id> <client-id>",
 		Args:  cobra.RangeArgs(3, 4),
 		Short: "Add an Azure OIDC login provider to an environment",
 		Long: "Add an Azure OIDC login provider to an environment\n" +
@@ -144,9 +144,9 @@ func newEnvProviderAzureLoginOIDCCmd(env *envCommand) *cobra.Command {
 				return fmt.Errorf("the provider command does not accept versions")
 			}
 			if len(args) != 3 {
-				return fmt.Errorf("expected <client-id> <tenant-id> <subscription-id>")
+				return fmt.Errorf("expected <tenant-id> <subscription-id> <client-id>")
 			}
-			clientID, tenantID, subscriptionID := args[0], args[1], args[2]
+			tenantID, subscriptionID, clientID := args[0], args[1], args[2]
 
 			path, err := resource.ParsePropertyPath(pathStr)
 			if err != nil {
