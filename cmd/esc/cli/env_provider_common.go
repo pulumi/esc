@@ -22,7 +22,7 @@ func ensureProviderEnv(ctx context.Context, env *envCommand, ref environmentRef,
 		return nil
 	}
 	exists, err := env.esc.client.EnvironmentExists(ctx, ref.orgName, ref.projectName, ref.envName)
-	if err != nil {
+	if err != nil && !client.IsNotFound(err) {
 		return fmt.Errorf("checking environment existence: %w", err)
 	}
 	if exists {
