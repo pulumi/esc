@@ -1196,19 +1196,24 @@ func (c *testPulumiClient) CreateEnvironmentWebhook(
 	if !ok {
 		return nil, errors.New("environment not found")
 	}
+	name := req.Name
+	if name == "" {
+		name = fmt.Sprintf("hook-%d", len(env.webhooks)+1)
+	}
 	for _, w := range env.webhooks {
-		if w.Name == req.Name {
+		if w.Name == name {
 			return nil, errors.New("webhook already exists")
 		}
 	}
 	w := client.EnvironmentWebhook{
 		Active:           req.Active,
 		DisplayName:      req.DisplayName,
-		Name:             req.Name,
+		Name:             name,
 		OrganizationName: orgName,
 		PayloadURL:       req.PayloadURL,
 		EnvName:          envName,
 		Filters:          append([]string(nil), req.Filters...),
+		Groups:           append([]string(nil), req.Groups...),
 		Format:           req.Format,
 		ProjectName:      projectName,
 		HasSecret:        req.Secret != "",

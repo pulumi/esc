@@ -24,6 +24,7 @@ URL: https://example.invalid/hook
 Active: true
 Format: raw
 Events: created, updated
+Event groups: -
 Has secret: false
 > esc env webhook edit test-user/default/src deploy --add-event rotated --remove-event created
 Updated webhook deploy for test-user/default/src
@@ -34,6 +35,7 @@ URL: https://example.invalid/hook
 Active: true
 Format: raw
 Events: updated, rotated
+Event groups: -
 Has secret: false
 
 ---

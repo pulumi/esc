@@ -6,9 +6,11 @@ import (
 	"context"
 	"fmt"
 	"io"
-	"text/tabwriter"
+	"strconv"
 
 	"github.com/spf13/cobra"
+
+	"github.com/pulumi/pulumi/sdk/v3/go/common/util/cmdutil"
 
 	"github.com/pulumi/esc/cmd/esc/cli/client"
 )
@@ -57,24 +59,27 @@ func newEnvWebhookListCmd(env *envCommand) *cobra.Command {
 		},
 	}
 
-	cmd.Flags().IntVar(&count, "count", 0, "the maximum number of webhooks to return (all if unset)")
+	cmd.Flags().IntVar(&count, "count", 0, "The maximum number of webhooks to return (all if unset)")
 
 	return cmd
 }
 
-// printWebhooks renders the webhook list as a tab-aligned table.
 func printWebhooks(stdout io.Writer, hooks []client.EnvironmentWebhook) {
 	if len(hooks) == 0 {
 		return
 	}
-	w := tabwriter.NewWriter(stdout, 0, 0, 2, ' ', 0)
-	fmt.Fprintln(w, "NAME\tDISPLAY NAME\tURL\tACTIVE\tFORMAT")
+	rows := make([]cmdutil.TableRow, 0, len(hooks))
 	for _, h := range hooks {
 		format := h.Format
 		if format == "" {
 			format = "-"
 		}
-		fmt.Fprintf(w, "%s\t%s\t%s\t%t\t%s\n", h.Name, h.DisplayName, h.PayloadURL, h.Active, format)
+		rows = append(rows, cmdutil.TableRow{
+			Columns: []string{h.Name, h.DisplayName, h.PayloadURL, strconv.FormatBool(h.Active), format},
+		})
 	}
-	_ = w.Flush()
+	_ = cmdutil.FprintTable(stdout, cmdutil.Table{
+		Headers: []string{"NAME", "DISPLAY NAME", "URL", "ACTIVE", "FORMAT"},
+		Rows:    rows,
+	})
 }

@@ -18,11 +18,14 @@ func newEnvWebhookEditCmd(env *envCommand) *cobra.Command {
 		displayName  string
 		format       string
 		events       []string
+		groups       []string
 		active       bool
 		secret       string
 		removeSecret bool
 		addEvents    []string
 		removeEvents []string
+		addGroups    []string
+		removeGroups []string
 	)
 
 	cmd := &cobra.Command{
@@ -37,6 +40,9 @@ func newEnvWebhookEditCmd(env *envCommand) *cobra.Command {
 			"--event replaces the event list. Use --add-event and --remove-event to apply\n" +
 			"incremental changes that merge with the existing events; mixing --event with\n" +
 			"either of those is not allowed. Event names are validated by the service.\n" +
+			"\n" +
+			"--group, --add-group, and --remove-group behave the same way for event groups.\n" +
+			"Valid groups for environment webhooks are: environments, change_requests.\n" +
 			"\n" +
 			"Allowed --format values are: raw, slack, ms_teams, pulumi_deployments. URL\n" +
 			"requirements (validated against the format that will be in effect):\n" +
@@ -73,6 +79,13 @@ func newEnvWebhookEditCmd(env *envCommand) *cobra.Command {
 			removeEventChanged := cmd.Flags().Changed("remove-event")
 			if eventChanged && (addEventChanged || removeEventChanged) {
 				return errors.New("--event cannot be combined with --add-event or --remove-event")
+			}
+
+			groupChanged := cmd.Flags().Changed("group")
+			addGroupChanged := cmd.Flags().Changed("add-group")
+			removeGroupChanged := cmd.Flags().Changed("remove-group")
+			if groupChanged && (addGroupChanged || removeGroupChanged) {
+				return errors.New("--group cannot be combined with --add-group or --remove-group")
 			}
 
 			secretChanged := cmd.Flags().Changed("secret")
@@ -129,6 +142,12 @@ func newEnvWebhookEditCmd(env *envCommand) *cobra.Command {
 				req.Filters = mergeEvents(existing.Filters, addEvents, removeEvents)
 			}
 
+			if groupChanged {
+				req.Groups = append([]string(nil), groups...)
+			} else if addGroupChanged || removeGroupChanged {
+				req.Groups = mergeEvents(existing.Groups, addGroups, removeGroups)
+			}
+
 			// Cross-check the final URL against the format that will be in effect.
 			effectiveFormat := existing.Format
 			if formatChanged {
@@ -150,15 +169,18 @@ func newEnvWebhookEditCmd(env *envCommand) *cobra.Command {
 		},
 	}
 
-	cmd.Flags().StringVar(&url, "url", "", "the payload URL to deliver events to")
-	cmd.Flags().StringVar(&displayName, "display-name", "", "the display name")
-	cmd.Flags().StringVar(&format, "format", "", "the payload format")
-	cmd.Flags().StringArrayVar(&events, "event", nil, "replace the subscribed events (repeatable)")
-	cmd.Flags().BoolVar(&active, "active", true, "whether the webhook is active")
-	cmd.Flags().StringVar(&secret, "secret", "", "shared secret used to sign deliveries")
-	cmd.Flags().BoolVar(&removeSecret, "remove-secret", false, "clear the existing shared secret")
-	cmd.Flags().StringArrayVar(&addEvents, "add-event", nil, "subscribe to an additional event (repeatable)")
-	cmd.Flags().StringArrayVar(&removeEvents, "remove-event", nil, "unsubscribe from an event (repeatable)")
+	cmd.Flags().StringVar(&url, "url", "", "The payload URL to deliver events to")
+	cmd.Flags().StringVar(&displayName, "display-name", "", "The display name")
+	cmd.Flags().StringVar(&format, "format", "", "The payload format")
+	cmd.Flags().StringArrayVar(&events, "event", nil, "Replace the subscribed events (repeatable)")
+	cmd.Flags().StringArrayVar(&groups, "group", nil, "Replace the subscribed event groups (repeatable)")
+	cmd.Flags().BoolVar(&active, "active", true, "Whether the webhook is active")
+	cmd.Flags().StringVar(&secret, "secret", "", "Shared secret used to sign deliveries")
+	cmd.Flags().BoolVar(&removeSecret, "remove-secret", false, "Clear the existing shared secret")
+	cmd.Flags().StringArrayVar(&addEvents, "add-event", nil, "Subscribe to an additional event (repeatable)")
+	cmd.Flags().StringArrayVar(&removeEvents, "remove-event", nil, "Unsubscribe from an event (repeatable)")
+	cmd.Flags().StringArrayVar(&addGroups, "add-group", nil, "Subscribe to an additional event group (repeatable)")
+	cmd.Flags().StringArrayVar(&removeGroups, "remove-group", nil, "Unsubscribe from an event group (repeatable)")
 
 	return cmd
 }

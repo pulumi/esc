@@ -302,6 +302,7 @@ type CreateEnvironmentWebhookRequest struct {
 	EnvName          string   `json:"envName,omitempty"`
 	PayloadURL       string   `json:"payloadUrl"`
 	Filters          []string `json:"filters,omitempty"`
+	Groups           []string `json:"groups,omitempty"`
 	Format           string   `json:"format,omitempty"`
 	Secret           string   `json:"secret,omitempty"`
 }

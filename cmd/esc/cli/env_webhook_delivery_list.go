@@ -5,12 +5,13 @@ package cli
 import (
 	"context"
 	"errors"
-	"fmt"
 	"io"
-	"text/tabwriter"
+	"strconv"
 	"time"
 
 	"github.com/spf13/cobra"
+
+	"github.com/pulumi/pulumi/sdk/v3/go/common/util/cmdutil"
 
 	"github.com/pulumi/esc/cmd/esc/cli/client"
 )
@@ -68,8 +69,8 @@ func newEnvWebhookDeliveryListCmd(env *envCommand) *cobra.Command {
 		},
 	}
 
-	cmd.Flags().BoolVar(&utc, "utc", false, "display times in UTC")
-	cmd.Flags().IntVar(&count, "count", 0, "the maximum number of deliveries to return (all if unset)")
+	cmd.Flags().BoolVar(&utc, "utc", false, "Display times in UTC")
+	cmd.Flags().IntVar(&count, "count", 0, "The maximum number of deliveries to return (all if unset)")
 
 	return cmd
 }
@@ -78,12 +79,21 @@ func printWebhookDeliveries(stdout io.Writer, ds []client.EnvironmentWebhookDeli
 	if len(ds) == 0 {
 		return
 	}
-	w := tabwriter.NewWriter(stdout, 0, 0, 2, ' ', 0)
-	fmt.Fprintln(w, "ID\tKIND\tTIMESTAMP\tRESPONSE\tDURATION (ms)")
+	rows := make([]cmdutil.TableRow, 0, len(ds))
 	for _, d := range ds {
 		ts := time.Unix(d.Timestamp, 0)
-		fmt.Fprintf(w, "%s\t%s\t%s\t%d\t%d\n",
-			d.ID, d.Kind, utc.time(ts).Format(time.RFC3339), d.ResponseCode, d.Duration)
+		rows = append(rows, cmdutil.TableRow{
+			Columns: []string{
+				d.ID,
+				d.Kind,
+				utc.time(ts).Format(time.RFC3339),
+				strconv.FormatInt(d.ResponseCode, 10),
+				strconv.FormatInt(d.Duration, 10),
+			},
+		})
 	}
-	_ = w.Flush()
+	_ = cmdutil.FprintTable(stdout, cmdutil.Table{
+		Headers: []string{"ID", "KIND", "TIMESTAMP", "RESPONSE", "DURATION (ms)"},
+		Rows:    rows,
+	})
 }

@@ -72,5 +72,10 @@ func printWebhook(stdout io.Writer, w client.EnvironmentWebhook) {
 		events = strings.Join(w.Filters, ", ")
 	}
 	fmt.Fprintf(stdout, "Events: %s\n", events)
+	groups := "-"
+	if len(w.Groups) > 0 {
+		groups = strings.Join(w.Groups, ", ")
+	}
+	fmt.Fprintf(stdout, "Event groups: %s\n", groups)
 	fmt.Fprintf(stdout, "Has secret: %t\n", w.HasSecret)
 }
