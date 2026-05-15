@@ -8,10 +8,10 @@ import (
 	"io"
 	"time"
 
+	"github.com/jedib0t/go-pretty/v6/table"
 	"github.com/spf13/cobra"
 
 	"github.com/pulumi/esc/cmd/esc/cli/client"
-	"github.com/pulumi/esc/cmd/esc/cli/style"
 )
 
 func newEnvVersionTagLsCmd(env *envCommand) *cobra.Command {
@@ -25,8 +25,7 @@ func newEnvVersionTagLsCmd(env *envCommand) *cobra.Command {
 		Long: "List tagged versions\n" +
 			"\n" +
 			"This command lists an environment's tagged versions.\n",
-		SilenceUsage: true,
-		Args:         cobra.ExactArgs(1),
+		Args: cobra.ExactArgs(1),
 		RunE: func(cmd *cobra.Command, args []string) error {
 			ctx := context.Background()
 
@@ -48,7 +47,7 @@ func newEnvVersionTagLsCmd(env *envCommand) *cobra.Command {
 			}
 			_ = args
 
-			tags, err := listAllEnvironmentRevisionTags(ctx, env.esc.client, ref)
+			allTags, err := listAllEnvironmentRevisionTags(ctx, env.esc.client, ref)
 			if err != nil {
 				return err
 			}
@@ -56,8 +55,8 @@ func newEnvVersionTagLsCmd(env *envCommand) *cobra.Command {
 			if format == outputJSON {
 				out := struct {
 					Tags []revisionTagJSON `json:"tags"`
-				}{Tags: make([]revisionTagJSON, 0, len(tags))}
-				for _, t := range tags {
+				}{Tags: make([]revisionTagJSON, 0, len(allTags))}
+				for _, t := range allTags {
 					out.Tags = append(out.Tags, revisionTagJSON{
 						Name:        t.Name,
 						Revision:    t.Revision,
@@ -69,12 +68,21 @@ func newEnvVersionTagLsCmd(env *envCommand) *cobra.Command {
 				return writeJSON(env.esc.stdout, out)
 			}
 
-			st := style.NewStylist(style.Profile(env.esc.stdout))
 			return env.esc.pager.Run(pagerFlag, env.esc.stdout, env.esc.stderr, func(ctx context.Context, stdout io.Writer) error {
-				for _, t := range tags {
-					printRevisionTag(stdout, st, t, utcFlag(utc))
-					fmt.Fprintf(stdout, "\n")
+				if len(allTags) == 0 {
+					return nil
 				}
+				t := newTable(stdout)
+				t.AppendHeader(table.Row{"NAME", "REVISION", "MODIFIED", "EDITOR"})
+				for _, tag := range allTags {
+					t.AppendRow(table.Row{
+						tag.Name,
+						tag.Revision,
+						utcFlag(utc).time(tag.Modified).String(),
+						revisionTagEditor(tag),
+					})
+				}
+				t.Render()
 				return nil
 			})
 		},
@@ -88,7 +96,7 @@ func newEnvVersionTagLsCmd(env *envCommand) *cobra.Command {
 }
 
 // revisionTagJSON is the slim per-tag projection emitted by JSON output.
-// Mirrors the fields shown by printRevisionTag; `created` is omitted because
+// Mirrors the fields shown in the text table; `created` is omitted because
 // text only shows `modified`.
 type revisionTagJSON struct {
 	Name        string    `json:"name"`
@@ -122,4 +130,11 @@ func listAllEnvironmentRevisionTags(
 		after = tags[len(tags)-1].Name
 		all = append(all, tags...)
 	}
+}
+
+func revisionTagEditor(t client.EnvironmentRevisionTag) string {
+	if t.EditorLogin == "" {
+		return "<unknown>"
+	}
+	return fmt.Sprintf("%s <%s>", t.EditorName, t.EditorLogin)
 }

@@ -5,10 +5,10 @@ package cli
 import (
 	"context"
 	"errors"
-	"fmt"
 	"io"
 	"time"
 
+	"github.com/jedib0t/go-pretty/v6/table"
 	"github.com/spf13/cobra"
 
 	"github.com/pulumi/esc/cmd/esc/cli/client"
@@ -27,8 +27,7 @@ func newEnvScheduleHistoryCmd(env *envCommand) *cobra.Command {
 		Long: "[EXPERIMENTAL] Show the execution history of an environment scheduled action\n" +
 			"\n" +
 			"This command lists past executions of a scheduled action.\n",
-		Args:         cobra.ExactArgs(2),
-		SilenceUsage: true,
+		Args: cobra.ExactArgs(2),
 		RunE: func(cmd *cobra.Command, args []string) error {
 			ctx := context.Background()
 
@@ -107,18 +106,20 @@ type scheduleHistoryEventJSON struct {
 }
 
 func printScheduleHistory(stdout io.Writer, resp *client.ListScheduleHistoryResponse, utc utcFlag) {
-	if resp == nil {
+	if resp == nil || len(resp.ScheduleHistoryEvents) == 0 {
 		return
 	}
-	for i, e := range resp.ScheduleHistoryEvents {
-		if i > 0 {
-			fmt.Fprintln(stdout)
-		}
-		fmt.Fprintf(stdout, "ID: %s\n", e.ID)
-		fmt.Fprintf(stdout, "Executed: %s\n", formatHistoryTime(e.Executed, utc))
-		fmt.Fprintf(stdout, "Version: %d\n", e.Version)
-		fmt.Fprintf(stdout, "Result: %s\n", e.Result)
+	t := newTable(stdout)
+	t.AppendHeader(table.Row{"ID", "EXECUTED", "VERSION", "RESULT"})
+	for _, e := range resp.ScheduleHistoryEvents {
+		t.AppendRow(table.Row{
+			e.ID,
+			formatHistoryTime(e.Executed, utc),
+			e.Version,
+			e.Result,
+		})
 	}
+	t.Render()
 }
 
 // formatHistoryTime parses an event timestamp (RFC 3339 on the wire) and re-formats it honouring
