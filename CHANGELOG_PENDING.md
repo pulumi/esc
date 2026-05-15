@@ -1,5 +1,8 @@
 ### Improvements
 
+- Add `esc env schedule` to manage environment scheduled actions
+  [#646](https://github.com/pulumi/esc/pull/646)
+
 - Add `new` as an alias for `esc env init`
   [#644](https://github.com/pulumi/esc/pull/644)
 
