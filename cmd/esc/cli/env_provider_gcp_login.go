@@ -20,7 +20,10 @@ func newEnvProviderGCPLoginCmd(env *envCommand) *cobra.Command {
 		Long: "[EXPERIMENTAL] Add a GCP login provider to an environment\n" +
 			"\n" +
 			"Subcommands select the authentication mode: `static` for static credentials,\n" +
-			"`oidc` for federated identity via OpenID Connect.\n",
+			"`oidc` for federated identity via OpenID Connect.\n" +
+			"\n" +
+			"See https://www.pulumi.com/docs/esc/integrations/dynamic-login-credentials/gcp-login/\n" +
+			"for the full provider reference.\n",
 		Args: cobra.NoArgs,
 	}
 
@@ -45,7 +48,10 @@ func newEnvProviderGCPLoginStaticCmd(env *envCommand) *cobra.Command {
 			"\n" +
 			"Writes an `fn::open::gcp-login` block at the configured path under `values`. The\n" +
 			"access token is wrapped in `fn::secret`. <project-number> must be the numerical\n" +
-			"GCP project ID. If a block already exists at the path it is replaced.\n",
+			"GCP project ID. If a block already exists at the path it is replaced.\n" +
+			"\n" +
+			"See https://www.pulumi.com/docs/esc/integrations/dynamic-login-credentials/gcp-login/\n" +
+			"for the full provider reference.\n",
 		SilenceUsage: true,
 		RunE: func(cmd *cobra.Command, args []string) error {
 			ctx := context.Background()
@@ -102,6 +108,9 @@ func newEnvProviderGCPLoginStaticCmd(env *envCommand) *cobra.Command {
 // buildGCPLoginStaticNode returns a yaml.Node representing
 // `fn::open::gcp-login: { project, accessToken: { accessToken: {fn::secret}, ... } }`.
 // serviceAccount and tokenLifetime are omitted when empty.
+//
+// Provider reference:
+// https://www.pulumi.com/docs/esc/integrations/dynamic-login-credentials/gcp-login/
 func buildGCPLoginStaticNode(project int64, accessToken, serviceAccount, tokenLifetime string) *yaml.Node {
 	accessTokenContent := []*yaml.Node{
 		{Kind: yaml.ScalarNode, Tag: "!!str", Value: "accessToken"},
@@ -160,7 +169,10 @@ func newEnvProviderGCPLoginOIDCCmd(env *envCommand) *cobra.Command {
 			"federation block at the configured path under `values`. <project-number> must\n" +
 			"be the numerical GCP project ID. The workload-identity pool, provider, and\n" +
 			"service account must be provisioned separately (e.g. with Pulumi). If a block\n" +
-			"already exists at the path it is replaced.\n",
+			"already exists at the path it is replaced.\n" +
+			"\n" +
+			"See https://www.pulumi.com/docs/esc/integrations/dynamic-login-credentials/gcp-login/\n" +
+			"for the full provider reference.\n",
 		SilenceUsage: true,
 		RunE: func(cmd *cobra.Command, args []string) error {
 			ctx := context.Background()
@@ -225,6 +237,9 @@ func newEnvProviderGCPLoginOIDCCmd(env *envCommand) *cobra.Command {
 // buildGCPLoginOIDCNode returns a yaml.Node representing
 // `fn::open::gcp-login: { project, oidc: {...} }`. region, tokenLifetime, and
 // subjectAttributes are omitted when empty.
+//
+// Provider reference:
+// https://www.pulumi.com/docs/esc/integrations/dynamic-login-credentials/gcp-login/
 func buildGCPLoginOIDCNode(project int64, workloadPoolID, providerID, serviceAccount, region, tokenLifetime string, subjectAttributes []string) *yaml.Node {
 	oidcContent := []*yaml.Node{
 		{Kind: yaml.ScalarNode, Tag: "!!str", Value: "workloadPoolId"},

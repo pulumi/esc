@@ -19,7 +19,10 @@ func newEnvProviderAWSLoginCmd(env *envCommand) *cobra.Command {
 		Long: "[EXPERIMENTAL] Add an AWS login provider to an environment\n" +
 			"\n" +
 			"Subcommands select the authentication mode: `static` for static credentials,\n" +
-			"`oidc` for federated identity via OpenID Connect.\n",
+			"`oidc` for federated identity via OpenID Connect.\n" +
+			"\n" +
+			"See https://www.pulumi.com/docs/esc/integrations/dynamic-login-credentials/aws-login/\n" +
+			"for the full provider reference.\n",
 		Args: cobra.NoArgs,
 	}
 
@@ -43,7 +46,10 @@ func newEnvProviderAWSLoginStaticCmd(env *envCommand) *cobra.Command {
 			"\n" +
 			"Writes an `fn::open::aws-login` block with static credentials at the configured\n" +
 			"path under `values`. The secret access key and session token, if any, are\n" +
-			"wrapped in `fn::secret`. If a block already exists at the path it is replaced.\n",
+			"wrapped in `fn::secret`. If a block already exists at the path it is replaced.\n" +
+			"\n" +
+			"See https://www.pulumi.com/docs/esc/integrations/dynamic-login-credentials/aws-login/\n" +
+			"for the full provider reference.\n",
 		SilenceUsage: true,
 		RunE: func(cmd *cobra.Command, args []string) error {
 			ctx := context.Background()
@@ -92,6 +98,9 @@ func newEnvProviderAWSLoginStaticCmd(env *envCommand) *cobra.Command {
 // buildAWSLoginStaticNode returns a yaml.Node representing
 // `fn::open::aws-login: { static: {...} }`. secretAccessKey and sessionToken
 // are wrapped in `fn::secret`. sessionToken is omitted when empty.
+//
+// Provider reference:
+// https://www.pulumi.com/docs/esc/integrations/dynamic-login-credentials/aws-login/
 func buildAWSLoginStaticNode(accessKeyID, secretAccessKey, sessionToken string) *yaml.Node {
 	staticContent := []*yaml.Node{
 		{Kind: yaml.ScalarNode, Tag: "!!str", Value: "accessKeyId"},
@@ -140,7 +149,10 @@ func newEnvProviderAWSLoginOIDCCmd(env *envCommand) *cobra.Command {
 			"Writes an `fn::open::aws-login` block with an `oidc` federation block at the\n" +
 			"configured path under `values`. The OIDC IAM role and trust policy must be\n" +
 			"provisioned separately (e.g. with Pulumi). If a block already exists at the\n" +
-			"path it is replaced.\n",
+			"path it is replaced.\n" +
+			"\n" +
+			"See https://www.pulumi.com/docs/esc/integrations/dynamic-login-credentials/aws-login/\n" +
+			"for the full provider reference.\n",
 		SilenceUsage: true,
 		RunE: func(cmd *cobra.Command, args []string) error {
 			ctx := context.Background()
@@ -193,6 +205,9 @@ func newEnvProviderAWSLoginOIDCCmd(env *envCommand) *cobra.Command {
 // buildAWSLoginOIDCNode returns a yaml.Node representing
 // `fn::open::aws-login: { oidc: {...} }`. duration, policyArns, and
 // subjectAttributes are omitted when empty.
+//
+// Provider reference:
+// https://www.pulumi.com/docs/esc/integrations/dynamic-login-credentials/aws-login/
 func buildAWSLoginOIDCNode(roleArn, sessionName, duration string, policyArns, subjectAttributes []string) *yaml.Node {
 	oidcContent := []*yaml.Node{
 		{Kind: yaml.ScalarNode, Tag: "!!str", Value: "roleArn"},
