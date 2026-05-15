@@ -23,7 +23,7 @@ func newEnvScheduleEditCmd(env *envCommand) *cobra.Command {
 		Use:     "edit [<org-name>/][<project-name>/]<environment-name> <schedule-id>",
 		Aliases: []string{"update", "modify"},
 		Short:   "Edit an environment scheduled action.",
-		Long: "Edit an environment scheduled action\n" +
+		Long: "[EXPERIMENTAL] Edit an environment scheduled action\n" +
 			"\n" +
 			"This command updates the timing of an existing scheduled action. Use --cron to\n" +
 			"switch to (or update) a recurring schedule or --once to switch to (or update) a\n" +

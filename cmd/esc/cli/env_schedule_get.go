@@ -15,7 +15,7 @@ func newEnvScheduleGetCmd(env *envCommand) *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "get [<org-name>/][<project-name>/]<environment-name> <schedule-id>",
 		Short: "Show details for an environment scheduled action.",
-		Long: "Show details for an environment scheduled action\n" +
+		Long: "[EXPERIMENTAL] Show details for an environment scheduled action\n" +
 			"\n" +
 			"This command retrieves details for a single scheduled action.\n",
 		Args:         cobra.ExactArgs(2),

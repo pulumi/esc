@@ -20,7 +20,7 @@ func newEnvScheduleRemoveCmd(env *envCommand) *cobra.Command {
 		Use:     "remove [<org-name>/][<project-name>/]<environment-name> <schedule-id>",
 		Aliases: []string{"rm", "delete"},
 		Short:   "Remove an environment scheduled action.",
-		Long: "Remove an environment scheduled action\n" +
+		Long: "[EXPERIMENTAL] Remove an environment scheduled action\n" +
 			"\n" +
 			"This command removes the named scheduled action from the environment.\n" +
 			"You will be prompted to confirm by typing `remove` unless --yes is passed.\n",

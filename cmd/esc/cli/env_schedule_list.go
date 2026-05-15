@@ -23,7 +23,7 @@ func newEnvScheduleListCmd(env *envCommand) *cobra.Command {
 		Use:     "list [<org-name>/][<project-name>/]<environment-name>",
 		Aliases: []string{"ls"},
 		Short:   "List environment scheduled actions.",
-		Long: "List environment scheduled actions\n" +
+		Long: "[EXPERIMENTAL] List environment scheduled actions\n" +
 			"\n" +
 			"This command lists the scheduled actions configured for the given environment.\n",
 		Args:         cobra.ExactArgs(1),

@@ -23,7 +23,7 @@ func newEnvScheduleHistoryCmd(env *envCommand) *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "history [<org-name>/][<project-name>/]<environment-name> <schedule-id>",
 		Short: "Show the execution history of an environment scheduled action.",
-		Long: "Show the execution history of an environment scheduled action\n" +
+		Long: "[EXPERIMENTAL] Show the execution history of an environment scheduled action\n" +
 			"\n" +
 			"This command lists past executions of a scheduled action.\n",
 		Args:         cobra.ExactArgs(2),
