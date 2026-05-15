@@ -1,5 +1,8 @@
 ### Improvements
 
+- Add `esc env webhook` to manage environment webhooks
+  [#647](https://github.com/pulumi/esc/pull/647)
+
 - Add `esc env schedule` to manage environment scheduled actions
   [#646](https://github.com/pulumi/esc/pull/646)
 
