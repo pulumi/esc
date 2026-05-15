@@ -5,11 +5,13 @@ package cli
 import (
 	"context"
 	"errors"
-	"fmt"
 	"io"
+	"strconv"
 	"time"
 
 	"github.com/spf13/cobra"
+
+	"github.com/pulumi/pulumi/sdk/v3/go/common/util/cmdutil"
 
 	"github.com/pulumi/esc/cmd/esc/cli/client"
 )
@@ -72,18 +74,24 @@ func newEnvScheduleHistoryCmd(env *envCommand) *cobra.Command {
 }
 
 func printScheduleHistory(stdout io.Writer, resp *client.ListScheduleHistoryResponse, utc utcFlag) {
-	if resp == nil {
+	if resp == nil || len(resp.ScheduleHistoryEvents) == 0 {
 		return
 	}
-	for i, e := range resp.ScheduleHistoryEvents {
-		if i > 0 {
-			fmt.Fprintln(stdout)
-		}
-		fmt.Fprintf(stdout, "ID: %s\n", e.ID)
-		fmt.Fprintf(stdout, "Executed: %s\n", formatHistoryTime(e.Executed, utc))
-		fmt.Fprintf(stdout, "Version: %d\n", e.Version)
-		fmt.Fprintf(stdout, "Result: %s\n", e.Result)
+	rows := make([]cmdutil.TableRow, 0, len(resp.ScheduleHistoryEvents))
+	for _, e := range resp.ScheduleHistoryEvents {
+		rows = append(rows, cmdutil.TableRow{
+			Columns: []string{
+				e.ID,
+				formatHistoryTime(e.Executed, utc),
+				strconv.Itoa(e.Version),
+				e.Result,
+			},
+		})
 	}
+	_ = cmdutil.FprintTable(stdout, cmdutil.Table{
+		Headers: []string{"ID", "EXECUTED", "VERSION", "RESULT"},
+		Rows:    rows,
+	})
 }
 
 // formatHistoryTime parses an event timestamp (RFC 3339 on the wire) and re-formats it honouring

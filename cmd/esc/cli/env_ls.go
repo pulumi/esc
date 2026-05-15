@@ -9,6 +9,8 @@ import (
 
 	"github.com/spf13/cobra"
 
+	"github.com/pulumi/pulumi/sdk/v3/go/common/util/cmdutil"
+
 	"github.com/pulumi/esc/cmd/esc/cli/client"
 )
 
@@ -50,15 +52,20 @@ func newEnvLsCmd(env *envCommand) *cobra.Command {
 				return ei.Organization < ej.Organization
 			})
 
-			for _, e := range allEnvs {
-				if e.Organization == "" {
-					fmt.Fprintf(env.esc.stdout, "%v/%v\n", e.Project, e.Name)
-				} else {
-					fmt.Fprintf(env.esc.stdout, "%v/%v/%v\n", e.Organization, e.Project, e.Name)
-				}
+			if len(allEnvs) == 0 {
+				return nil
 			}
 
-			return nil
+			rows := make([]cmdutil.TableRow, 0, len(allEnvs))
+			for _, e := range allEnvs {
+				rows = append(rows, cmdutil.TableRow{
+					Columns: []string{e.Organization, e.Project, e.Name},
+				})
+			}
+			return cmdutil.FprintTable(env.esc.stdout, cmdutil.Table{
+				Headers: []string{"ORGANIZATION", "PROJECT", "NAME"},
+				Rows:    rows,
+			})
 		},
 	}
 

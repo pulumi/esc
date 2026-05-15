@@ -11,14 +11,15 @@ environments:
 
 ---
 > esc env ls
-default/env
-default/env-2
-test-org/default/env
-test-org/default/env-2
-test-org/project-a/env
-test-org/project-a/env-2
-test-org/project-b/env
-test-org-2/default/env
+ORGANIZATION  PROJECT    NAME
+              default    env
+              default    env-2
+test-org      default    env
+test-org      default    env-2
+test-org      project-a  env
+test-org      project-a  env-2
+test-org      project-b  env
+test-org-2    default    env
 
 ---
 > esc env ls
