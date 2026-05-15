@@ -19,9 +19,10 @@
   a handful of CLI error messages as a result
   [#648](https://github.com/pulumi/esc/pull/648)
 
-- Render `esc env schedule list`, `esc env schedule history`, and
-  `esc env referrer list` as tables for consistency with the other
-  `esc env ... list` commands and with `pulumi/pulumi`
+- Render `esc env schedule list`, `esc env schedule history`,
+  `esc env referrer list`, and `esc env version tag ls` as tables for
+  consistency with the other `esc env ... list` commands and with
+  `pulumi/pulumi`
   [#655](https://github.com/pulumi/esc/pull/655)
 
 ### Bug Fixes

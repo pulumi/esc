@@ -6,11 +6,13 @@ import (
 	"context"
 	"fmt"
 	"io"
+	"strconv"
 
 	"github.com/spf13/cobra"
 
+	"github.com/pulumi/pulumi/sdk/v3/go/common/util/cmdutil"
+
 	"github.com/pulumi/esc/cmd/esc/cli/client"
-	"github.com/pulumi/esc/cmd/esc/cli/style"
 )
 
 func newEnvVersionTagLsCmd(env *envCommand) *cobra.Command {
@@ -41,10 +43,9 @@ func newEnvVersionTagLsCmd(env *envCommand) *cobra.Command {
 			}
 			_ = args
 
-			st := style.NewStylist(style.Profile(env.esc.stdout))
-
 			after := ""
 			return env.esc.pager.Run(pagerFlag, env.esc.stdout, env.esc.stderr, func(ctx context.Context, stdout io.Writer) error {
+				rows := []cmdutil.TableRow{}
 				count := 500
 				for {
 					options := client.ListEnvironmentRevisionTagsOptions{
@@ -61,11 +62,23 @@ func newEnvVersionTagLsCmd(env *envCommand) *cobra.Command {
 					after = tags[len(tags)-1].Name
 
 					for _, t := range tags {
-						printRevisionTag(stdout, st, t, utcFlag(utc))
-						fmt.Fprintf(stdout, "\n")
+						rows = append(rows, cmdutil.TableRow{
+							Columns: []string{
+								t.Name,
+								strconv.Itoa(t.Revision),
+								utcFlag(utc).time(t.Modified).String(),
+								revisionTagEditor(t),
+							},
+						})
 					}
 				}
-				return nil
+				if len(rows) == 0 {
+					return nil
+				}
+				return cmdutil.FprintTable(stdout, cmdutil.Table{
+					Headers: []string{"NAME", "REVISION", "MODIFIED", "EDITOR"},
+					Rows:    rows,
+				})
 			})
 		},
 	}
@@ -74,4 +87,11 @@ func newEnvVersionTagLsCmd(env *envCommand) *cobra.Command {
 	cmd.Flags().BoolVar(&utc, "utc", false, "display times in UTC")
 
 	return cmd
+}
+
+func revisionTagEditor(t client.EnvironmentRevisionTag) string {
+	if t.EditorLogin == "" {
+		return "<unknown>"
+	}
+	return fmt.Sprintf("%s <%s>", t.EditorName, t.EditorLogin)
 }
