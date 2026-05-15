@@ -17,6 +17,7 @@ import (
 
 func newEnvWebhookListCmd(env *envCommand) *cobra.Command {
 	var count int
+	var output string
 
 	cmd := &cobra.Command{
 		Use:     "list [<org-name>/][<project-name>/]<environment-name>",
@@ -29,6 +30,11 @@ func newEnvWebhookListCmd(env *envCommand) *cobra.Command {
 		SilenceUsage: true,
 		RunE: func(cmd *cobra.Command, args []string) error {
 			ctx := context.Background()
+
+			format, err := parseOutputFormat(output)
+			if err != nil {
+				return err
+			}
 
 			if err := env.esc.getCachedClient(ctx); err != nil {
 				return err
@@ -54,12 +60,19 @@ func newEnvWebhookListCmd(env *envCommand) *cobra.Command {
 				hooks = hooks[:count]
 			}
 
+			if format == outputJSON {
+				return writeJSON(env.esc.stdout, struct {
+					Webhooks []client.EnvironmentWebhook `json:"webhooks"`
+				}{hooks})
+			}
+
 			printWebhooks(env.esc.stdout, hooks)
 			return nil
 		},
 	}
 
 	cmd.Flags().IntVar(&count, "count", 0, "The maximum number of webhooks to return (all if unset)")
+	addOutputFlag(cmd, &output)
 
 	return cmd
 }

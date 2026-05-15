@@ -18,8 +18,9 @@ import (
 
 func newEnvWebhookDeliveryListCmd(env *envCommand) *cobra.Command {
 	var (
-		utc   bool
-		count int
+		utc    bool
+		count  int
+		output string
 	)
 
 	cmd := &cobra.Command{
@@ -33,6 +34,11 @@ func newEnvWebhookDeliveryListCmd(env *envCommand) *cobra.Command {
 		SilenceUsage: true,
 		RunE: func(cmd *cobra.Command, args []string) error {
 			ctx := context.Background()
+
+			format, err := parseOutputFormat(output)
+			if err != nil {
+				return err
+			}
 
 			if err := env.esc.getCachedClient(ctx); err != nil {
 				return err
@@ -64,6 +70,12 @@ func newEnvWebhookDeliveryListCmd(env *envCommand) *cobra.Command {
 				deliveries = deliveries[:count]
 			}
 
+			if format == outputJSON {
+				return writeJSON(env.esc.stdout, struct {
+					Deliveries []client.EnvironmentWebhookDelivery `json:"deliveries"`
+				}{deliveries})
+			}
+
 			printWebhookDeliveries(env.esc.stdout, deliveries, utcFlag(utc))
 			return nil
 		},
@@ -71,6 +83,7 @@ func newEnvWebhookDeliveryListCmd(env *envCommand) *cobra.Command {
 
 	cmd.Flags().BoolVar(&utc, "utc", false, "Display times in UTC")
 	cmd.Flags().IntVar(&count, "count", 0, "The maximum number of deliveries to return (all if unset)")
+	addOutputFlag(cmd, &output)
 
 	return cmd
 }

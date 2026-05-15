@@ -15,6 +15,8 @@ import (
 )
 
 func newEnvWebhookGetCmd(env *envCommand) *cobra.Command {
+	var output string
+
 	cmd := &cobra.Command{
 		Use:   "get [<org-name>/][<project-name>/]<environment-name> <webhook-name>",
 		Short: "Get an environment webhook.",
@@ -25,6 +27,11 @@ func newEnvWebhookGetCmd(env *envCommand) *cobra.Command {
 		SilenceUsage: true,
 		RunE: func(cmd *cobra.Command, args []string) error {
 			ctx := context.Background()
+
+			format, err := parseOutputFormat(output)
+			if err != nil {
+				return err
+			}
 
 			if err := env.esc.getCachedClient(ctx); err != nil {
 				return err
@@ -48,10 +55,16 @@ func newEnvWebhookGetCmd(env *envCommand) *cobra.Command {
 				return err
 			}
 
+			if format == outputJSON {
+				return writeJSON(env.esc.stdout, w)
+			}
+
 			printWebhook(env.esc.stdout, *w)
 			return nil
 		},
 	}
+
+	addOutputFlag(cmd, &output)
 
 	return cmd
 }

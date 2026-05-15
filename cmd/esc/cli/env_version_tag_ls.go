@@ -16,6 +16,7 @@ import (
 func newEnvVersionTagLsCmd(env *envCommand) *cobra.Command {
 	var pagerFlag string
 	var utc bool
+	var output string
 
 	cmd := &cobra.Command{
 		Use:   "ls [<org-name>/][<project-name>/]<environment-name>",
@@ -27,6 +28,11 @@ func newEnvVersionTagLsCmd(env *envCommand) *cobra.Command {
 		Args:         cobra.ExactArgs(1),
 		RunE: func(cmd *cobra.Command, args []string) error {
 			ctx := context.Background()
+
+			format, err := parseOutputFormat(output)
+			if err != nil {
+				return err
+			}
 
 			if err := env.esc.getCachedClient(ctx); err != nil {
 				return err
@@ -40,6 +46,31 @@ func newEnvVersionTagLsCmd(env *envCommand) *cobra.Command {
 				return fmt.Errorf("the ls command does not accept versions")
 			}
 			_ = args
+
+			if format == outputJSON {
+				all := []client.EnvironmentRevisionTag{}
+				after := ""
+				count := 500
+				for {
+					options := client.ListEnvironmentRevisionTagsOptions{
+						After: after,
+						Count: &count,
+					}
+					tags, err := env.esc.client.ListEnvironmentRevisionTags(
+						ctx, ref.orgName, ref.projectName, ref.envName, options)
+					if err != nil {
+						return err
+					}
+					if len(tags) == 0 {
+						break
+					}
+					after = tags[len(tags)-1].Name
+					all = append(all, tags...)
+				}
+				return writeJSON(env.esc.stdout, struct {
+					Tags []client.EnvironmentRevisionTag `json:"tags"`
+				}{all})
+			}
 
 			st := style.NewStylist(style.Profile(env.esc.stdout))
 
@@ -72,6 +103,7 @@ func newEnvVersionTagLsCmd(env *envCommand) *cobra.Command {
 
 	cmd.Flags().StringVar(&pagerFlag, "pager", "", "the command to use to page through the environment's version tags")
 	cmd.Flags().BoolVar(&utc, "utc", false, "display times in UTC")
+	addOutputFlag(cmd, &output)
 
 	return cmd
 }
