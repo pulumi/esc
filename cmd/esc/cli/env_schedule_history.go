@@ -16,8 +16,9 @@ import (
 
 func newEnvScheduleHistoryCmd(env *envCommand) *cobra.Command {
 	var (
-		utc   bool
-		count int
+		utc    bool
+		count  int
+		output string
 	)
 
 	cmd := &cobra.Command{
@@ -30,6 +31,11 @@ func newEnvScheduleHistoryCmd(env *envCommand) *cobra.Command {
 		SilenceUsage: true,
 		RunE: func(cmd *cobra.Command, args []string) error {
 			ctx := context.Background()
+
+			format, err := parseOutputFormat(output)
+			if err != nil {
+				return err
+			}
 
 			if err := env.esc.getCachedClient(ctx); err != nil {
 				return err
@@ -60,6 +66,13 @@ func newEnvScheduleHistoryCmd(env *envCommand) *cobra.Command {
 				resp.ScheduleHistoryEvents = resp.ScheduleHistoryEvents[:count]
 			}
 
+			if format == outputJSON {
+				if resp == nil {
+					resp = &client.ListScheduleHistoryResponse{}
+				}
+				return writeJSON(env.esc.stdout, resp)
+			}
+
 			printScheduleHistory(env.esc.stdout, resp, utcFlag(utc))
 			return nil
 		},
@@ -67,6 +80,7 @@ func newEnvScheduleHistoryCmd(env *envCommand) *cobra.Command {
 
 	cmd.Flags().BoolVar(&utc, "utc", false, "display times in UTC")
 	cmd.Flags().IntVar(&count, "count", 0, "the maximum number of events to return (all if unset)")
+	addOutputFlag(cmd, &output)
 
 	return cmd
 }

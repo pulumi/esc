@@ -16,6 +16,7 @@ import (
 func newEnvVersionHistoryCmd(env *envCommand) *cobra.Command {
 	var pagerFlag string
 	var utc bool
+	var output string
 
 	cmd := &cobra.Command{
 		Use:   "history [<org-name>/][<project-name>/]<environment-name>[@<version>]",
@@ -28,6 +29,11 @@ func newEnvVersionHistoryCmd(env *envCommand) *cobra.Command {
 		Args:         cobra.ExactArgs(1),
 		RunE: func(cmd *cobra.Command, args []string) error {
 			ctx := context.Background()
+
+			format, err := parseOutputFormat(output)
+			if err != nil {
+				return err
+			}
 
 			if err := env.esc.getCachedClient(ctx); err != nil {
 				return err
@@ -46,6 +52,28 @@ func newEnvVersionHistoryCmd(env *envCommand) *cobra.Command {
 					return err
 				}
 				before = rev + 1
+			}
+
+			if format == outputJSON {
+				all := []client.EnvironmentRevision{}
+				count := 500
+				for {
+					options := client.ListEnvironmentRevisionsOptions{
+						Before: &before,
+						Count:  &count,
+					}
+					revisions, err := env.esc.client.ListEnvironmentRevisions(
+						ctx, ref.orgName, ref.projectName, ref.envName, options)
+					if err != nil {
+						return err
+					}
+					if len(revisions) == 0 {
+						break
+					}
+					before = revisions[len(revisions)-1].Number
+					all = append(all, revisions...)
+				}
+				return writeJSON(env.esc.stdout, all)
 			}
 
 			// NOTE: we use the color profile from the user-visible stdout rather than the color profile from the pager's stdout.
@@ -79,6 +107,7 @@ func newEnvVersionHistoryCmd(env *envCommand) *cobra.Command {
 
 	cmd.Flags().StringVar(&pagerFlag, "pager", "", "the command to use to page through the environment's revisions")
 	cmd.Flags().BoolVar(&utc, "utc", false, "display times in UTC")
+	addOutputFlag(cmd, &output)
 
 	return cmd
 }

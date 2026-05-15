@@ -18,6 +18,7 @@ import (
 func newEnvTagLsCmd(env *envCommand) *cobra.Command {
 	var pagerFlag string
 	var utc bool
+	var output string
 
 	cmd := &cobra.Command{
 		Use:   "ls [<org-name>/][<project-name>/]<environment-name>",
@@ -29,6 +30,11 @@ func newEnvTagLsCmd(env *envCommand) *cobra.Command {
 		Args:         cobra.ExactArgs(1),
 		RunE: func(cmd *cobra.Command, args []string) error {
 			ctx := context.Background()
+
+			format, err := parseOutputFormat(output)
+			if err != nil {
+				return err
+			}
 
 			if err := env.esc.getCachedClient(ctx); err != nil {
 				return err
@@ -68,16 +74,20 @@ func newEnvTagLsCmd(env *envCommand) *cobra.Command {
 				}
 				return nil
 			})
+			if err != nil {
+				return err
+			}
 
 			sort.Slice(allTags, func(a, b int) bool {
 				return strings.ToLower(allTags[a].Name) < strings.ToLower(allTags[b].Name)
 			})
 
+			if format == outputJSON {
+				return writeJSON(env.esc.stdout, allTags)
+			}
+
 			for _, t := range allTags {
 				printTag(env.esc.stdout, st, t, utcFlag(utc))
-			}
-			if err != nil {
-				return err
 			}
 			return nil
 		},
@@ -85,6 +95,7 @@ func newEnvTagLsCmd(env *envCommand) *cobra.Command {
 
 	cmd.Flags().StringVar(&pagerFlag, "pager", "", "the command to use to page through the environment's version tags")
 	cmd.Flags().BoolVar(&utc, "utc", false, "display times in UTC")
+	addOutputFlag(cmd, &output)
 
 	return cmd
 }

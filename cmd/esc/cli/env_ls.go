@@ -16,6 +16,7 @@ func newEnvLsCmd(env *envCommand) *cobra.Command {
 	var (
 		orgFilter     string
 		projectFilter string
+		output        string
 	)
 
 	cmd := &cobra.Command{
@@ -28,6 +29,11 @@ func newEnvLsCmd(env *envCommand) *cobra.Command {
 		Args:         cobra.NoArgs,
 		RunE: func(cmd *cobra.Command, _ []string) error {
 			ctx := context.Background()
+
+			format, err := parseOutputFormat(output)
+			if err != nil {
+				return err
+			}
 
 			if err := env.esc.getCachedClient(ctx); err != nil {
 				return err
@@ -50,6 +56,10 @@ func newEnvLsCmd(env *envCommand) *cobra.Command {
 				return ei.Organization < ej.Organization
 			})
 
+			if format == outputJSON {
+				return writeJSON(env.esc.stdout, allEnvs)
+			}
+
 			for _, e := range allEnvs {
 				if e.Organization == "" {
 					fmt.Fprintf(env.esc.stdout, "%v/%v\n", e.Project, e.Name)
@@ -66,6 +76,7 @@ func newEnvLsCmd(env *envCommand) *cobra.Command {
 		&orgFilter, "organization", "o", "", "Filter returned environments to those in a specific organization")
 	cmd.PersistentFlags().StringVarP(
 		&projectFilter, "project", "p", "", "Filter returned environments to those in a specific project")
+	addOutputFlag(cmd, &output)
 
 	return cmd
 }
