@@ -24,6 +24,13 @@
   rather than relying on cobra
   [#654](https://github.com/pulumi/esc/pull/654)
 
+- Add `esc env provider {aws-login,azure-login,gcp-login} {static,oidc}`
+  commands to add login providers to an environment. `static` writes a
+  static-credentials block; `oidc` writes a federated-identity block that
+  references cloud-side OIDC resources you provision separately (e.g.
+  with Pulumi). Each supports `--create` to create the target environment
+  if it does not already exist
+
 ### Bug Fixes
 
 ### Breaking changes
