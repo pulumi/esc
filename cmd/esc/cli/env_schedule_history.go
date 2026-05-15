@@ -6,12 +6,10 @@ import (
 	"context"
 	"errors"
 	"io"
-	"strconv"
 	"time"
 
+	"github.com/jedib0t/go-pretty/v6/table"
 	"github.com/spf13/cobra"
-
-	"github.com/pulumi/pulumi/sdk/v3/go/common/util/cmdutil"
 
 	"github.com/pulumi/esc/cmd/esc/cli/client"
 )
@@ -77,21 +75,17 @@ func printScheduleHistory(stdout io.Writer, resp *client.ListScheduleHistoryResp
 	if resp == nil || len(resp.ScheduleHistoryEvents) == 0 {
 		return
 	}
-	rows := make([]cmdutil.TableRow, 0, len(resp.ScheduleHistoryEvents))
+	t := newTable(stdout)
+	t.AppendHeader(table.Row{"ID", "EXECUTED", "VERSION", "RESULT"})
 	for _, e := range resp.ScheduleHistoryEvents {
-		rows = append(rows, cmdutil.TableRow{
-			Columns: []string{
-				e.ID,
-				formatHistoryTime(e.Executed, utc),
-				strconv.Itoa(e.Version),
-				e.Result,
-			},
+		t.AppendRow(table.Row{
+			e.ID,
+			formatHistoryTime(e.Executed, utc),
+			e.Version,
+			e.Result,
 		})
 	}
-	_ = cmdutil.FprintTable(stdout, cmdutil.Table{
-		Headers: []string{"ID", "EXECUTED", "VERSION", "RESULT"},
-		Rows:    rows,
-	})
+	t.Render()
 }
 
 // formatHistoryTime parses an event timestamp (RFC 3339 on the wire) and re-formats it honouring

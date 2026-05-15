@@ -8,9 +8,8 @@ import (
 	"sort"
 	"strconv"
 
+	"github.com/jedib0t/go-pretty/v6/table"
 	"github.com/spf13/cobra"
-
-	"github.com/pulumi/pulumi/sdk/v3/go/common/util/cmdutil"
 
 	"github.com/pulumi/esc/cmd/esc/cli/client"
 )
@@ -119,20 +118,17 @@ func printReferrers(env *envCommand, resp *client.ListEnvironmentReferrersRespon
 		return
 	}
 
-	keys := sortReferrerKeys(resp.Referrers)
-	rows := make([]cmdutil.TableRow, 0)
-	for _, k := range keys {
+	t := newTable(env.esc.stdout)
+	t.AppendHeader(table.Row{"REVISION", "KIND", "REFERRER"})
+	for _, k := range sortReferrerKeys(resp.Referrers) {
 		group := resp.Referrers[k]
 		sortReferrers(group)
 		for _, r := range group {
 			kind, ref := referrerColumns(r)
-			rows = append(rows, cmdutil.TableRow{Columns: []string{k, kind, ref}})
+			t.AppendRow(table.Row{k, kind, ref})
 		}
 	}
-	_ = cmdutil.FprintTable(env.esc.stdout, cmdutil.Table{
-		Headers: []string{"REVISION", "KIND", "REFERRER"},
-		Rows:    rows,
-	})
+	t.Render()
 }
 
 func sortReferrerKeys(m map[string][]client.EnvironmentReferrer) []string {

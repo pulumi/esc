@@ -6,12 +6,10 @@ import (
 	"context"
 	"fmt"
 	"io"
-	"strconv"
 	"time"
 
+	"github.com/jedib0t/go-pretty/v6/table"
 	"github.com/spf13/cobra"
-
-	"github.com/pulumi/pulumi/sdk/v3/go/common/util/cmdutil"
 
 	"github.com/pulumi/esc/cmd/esc/cli/client"
 )
@@ -74,23 +72,19 @@ func printSchedules(stdout io.Writer, resp *client.ListScheduledActionsResponse,
 	if resp == nil || len(resp.Schedules) == 0 {
 		return
 	}
-	rows := make([]cmdutil.TableRow, 0, len(resp.Schedules))
+	t := newTable(stdout)
+	t.AppendHeader(table.Row{"ID", "KIND", "SCHEDULE", "PAUSED", "NEXT", "LAST"})
 	for _, s := range resp.Schedules {
-		rows = append(rows, cmdutil.TableRow{
-			Columns: []string{
-				s.ID,
-				s.Kind,
-				scheduleExpr(s, utc),
-				strconv.FormatBool(s.Paused),
-				formatScheduleTime(s.NextExecution, utc),
-				formatScheduleTime(s.LastExecuted, utc),
-			},
+		t.AppendRow(table.Row{
+			s.ID,
+			s.Kind,
+			scheduleExpr(s, utc),
+			s.Paused,
+			formatScheduleTime(s.NextExecution, utc),
+			formatScheduleTime(s.LastExecuted, utc),
 		})
 	}
-	_ = cmdutil.FprintTable(stdout, cmdutil.Table{
-		Headers: []string{"ID", "KIND", "SCHEDULE", "PAUSED", "NEXT", "LAST"},
-		Rows:    rows,
-	})
+	t.Render()
 }
 
 // printSchedule renders a single schedule as a key/value block.

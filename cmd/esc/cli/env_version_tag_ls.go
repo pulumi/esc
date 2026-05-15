@@ -6,11 +6,9 @@ import (
 	"context"
 	"fmt"
 	"io"
-	"strconv"
 
+	"github.com/jedib0t/go-pretty/v6/table"
 	"github.com/spf13/cobra"
-
-	"github.com/pulumi/pulumi/sdk/v3/go/common/util/cmdutil"
 
 	"github.com/pulumi/esc/cmd/esc/cli/client"
 )
@@ -45,7 +43,7 @@ func newEnvVersionTagLsCmd(env *envCommand) *cobra.Command {
 
 			after := ""
 			return env.esc.pager.Run(pagerFlag, env.esc.stdout, env.esc.stderr, func(ctx context.Context, stdout io.Writer) error {
-				rows := []cmdutil.TableRow{}
+				allTags := []client.EnvironmentRevisionTag{}
 				count := 500
 				for {
 					options := client.ListEnvironmentRevisionTagsOptions{
@@ -60,25 +58,23 @@ func newEnvVersionTagLsCmd(env *envCommand) *cobra.Command {
 						break
 					}
 					after = tags[len(tags)-1].Name
-
-					for _, t := range tags {
-						rows = append(rows, cmdutil.TableRow{
-							Columns: []string{
-								t.Name,
-								strconv.Itoa(t.Revision),
-								utcFlag(utc).time(t.Modified).String(),
-								revisionTagEditor(t),
-							},
-						})
-					}
+					allTags = append(allTags, tags...)
 				}
-				if len(rows) == 0 {
+				if len(allTags) == 0 {
 					return nil
 				}
-				return cmdutil.FprintTable(stdout, cmdutil.Table{
-					Headers: []string{"NAME", "REVISION", "MODIFIED", "EDITOR"},
-					Rows:    rows,
-				})
+				t := newTable(stdout)
+				t.AppendHeader(table.Row{"NAME", "REVISION", "MODIFIED", "EDITOR"})
+				for _, tag := range allTags {
+					t.AppendRow(table.Row{
+						tag.Name,
+						tag.Revision,
+						utcFlag(utc).time(tag.Modified).String(),
+						revisionTagEditor(tag),
+					})
+				}
+				t.Render()
+				return nil
 			})
 		},
 	}

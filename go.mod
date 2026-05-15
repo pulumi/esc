@@ -15,12 +15,13 @@ require (
 	github.com/google/shlex v0.0.0-20191202100458-e7afc7fbc510
 	github.com/hashicorp/hcl/v2 v2.22.0
 	github.com/hexops/gotextdiff v1.0.3
+	github.com/jedib0t/go-pretty/v6 v6.7.10
 	github.com/muesli/termenv v0.15.2
 	github.com/pgavlin/aho-corasick v0.5.1
 	github.com/pgavlin/fx/v2 v2.0.10
 	github.com/pulumi/pulumi/pkg/v3 v3.209.0
 	github.com/pulumi/pulumi/sdk/v3 v3.209.0
-	github.com/rivo/uniseg v0.4.4
+	github.com/rivo/uniseg v0.4.7
 	github.com/rogpeppe/go-internal v1.13.1
 	github.com/spf13/cobra v1.10.1
 	github.com/spf13/pflag v1.0.9
@@ -142,7 +143,7 @@ require (
 	github.com/mattn/go-colorable v0.1.13 // indirect
 	github.com/mattn/go-isatty v0.0.20 // indirect
 	github.com/mattn/go-localereader v0.0.1 // indirect
-	github.com/mattn/go-runewidth v0.0.15 // indirect
+	github.com/mattn/go-runewidth v0.0.16 // indirect
 	github.com/mgutz/ansi v0.0.0-20170206155736-9520e82c474b // indirect
 	github.com/microcosm-cc/bluemonday v1.0.21 // indirect
 	github.com/mitchellh/copystructure v1.2.0 // indirect
