@@ -10,12 +10,9 @@ func newEnvWebhookCmd(env *envCommand) *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "webhook",
 		Short: "Manage environment webhooks",
-		Long: "Manage environment webhooks\n" +
+		Long: "[EXPERIMENTAL] Manage environment webhooks\n" +
 			"\n" +
-			"A webhook delivers JSON event payloads to a URL whenever the environment changes.\n" +
-			"\n" +
-			"Subcommands exist for listing, getting, creating, editing, removing, pinging\n" +
-			"webhooks, and listing their deliveries.",
+			"A webhook delivers JSON event payloads to a URL whenever the environment changes.",
 		Args:         cobra.NoArgs,
 		SilenceUsage: true,
 	}

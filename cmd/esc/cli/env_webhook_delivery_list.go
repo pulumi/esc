@@ -25,7 +25,7 @@ func newEnvWebhookDeliveryListCmd(env *envCommand) *cobra.Command {
 		Use:     "list [<org-name>/][<project-name>/]<environment-name> <webhook-name>",
 		Aliases: []string{"ls"},
 		Short:   "List environment webhook deliveries.",
-		Long: "List environment webhook deliveries\n" +
+		Long: "[EXPERIMENTAL] List environment webhook deliveries\n" +
 			"\n" +
 			"This command lists the deliveries recorded for the named webhook.\n",
 		Args:         cobra.ExactArgs(2),

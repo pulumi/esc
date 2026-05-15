@@ -14,7 +14,7 @@ func newEnvWebhookPingCmd(env *envCommand) *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "ping [<org-name>/][<project-name>/]<environment-name> <webhook-name>",
 		Short: "Send a test delivery to an environment webhook.",
-		Long: "Send a test delivery to an environment webhook\n" +
+		Long: "[EXPERIMENTAL] Send a test delivery to an environment webhook\n" +
 			"\n" +
 			"This command triggers a synthetic delivery against the named webhook and prints\n" +
 			"the resulting delivery record.\n",

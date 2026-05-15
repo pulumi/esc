@@ -10,10 +10,9 @@ func newEnvWebhookDeliveryCmd(env *envCommand) *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "delivery",
 		Short: "Manage environment webhook deliveries",
-		Long: "Manage environment webhook deliveries\n" +
+		Long: "[EXPERIMENTAL] Manage environment webhook deliveries\n" +
 			"\n" +
-			"A delivery is a single attempt to deliver a webhook payload. Subcommands exist for\n" +
-			"listing the deliveries recorded for a given webhook.",
+			"A delivery is a single attempt to deliver a webhook payload.",
 		Args:         cobra.NoArgs,
 		SilenceUsage: true,
 	}

@@ -20,7 +20,7 @@ func newEnvWebhookListCmd(env *envCommand) *cobra.Command {
 		Use:     "list [<org-name>/][<project-name>/]<environment-name>",
 		Aliases: []string{"ls"},
 		Short:   "List environment webhooks.",
-		Long: "List environment webhooks\n" +
+		Long: "[EXPERIMENTAL] List environment webhooks\n" +
 			"\n" +
 			"This command lists the webhooks attached to the given environment.\n",
 		Args:         cobra.ExactArgs(1),

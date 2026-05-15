@@ -18,7 +18,7 @@ func newEnvWebhookGetCmd(env *envCommand) *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "get [<org-name>/][<project-name>/]<environment-name> <webhook-name>",
 		Short: "Get an environment webhook.",
-		Long: "Get an environment webhook\n" +
+		Long: "[EXPERIMENTAL] Get an environment webhook\n" +
 			"\n" +
 			"This command prints the named webhook attached to the given environment.\n",
 		Args:         cobra.ExactArgs(2),

@@ -15,6 +15,7 @@
 package client
 
 import (
+	"encoding/json"
 	"fmt"
 	"strings"
 	"time"
@@ -332,4 +333,97 @@ type EnvironmentWebhookDelivery struct {
 	ResponseCode    int64  `json:"responseCode"`
 	ResponseHeaders string `json:"responseHeaders"`
 	ResponseBody    string `json:"responseBody"`
+}
+
+// ScheduledAction describes a scheduled action attached to an environment.
+//
+// Time fields (Created, Modified, LastExecuted, NextExecution, ScheduleOnce) are kept as
+// raw ISO 8601 strings on the wire; callers can parse them as needed.
+type ScheduledAction struct {
+	ID            string          `json:"id"`
+	OrgID         string          `json:"orgID"`
+	Kind          string          `json:"kind"`
+	Paused        bool            `json:"paused"`
+	Created       string          `json:"created"`
+	Modified      string          `json:"modified"`
+	LastExecuted  string          `json:"lastExecuted"`
+	NextExecution string          `json:"nextExecution"`
+	Definition    json.RawMessage `json:"definition,omitempty"`
+	ScheduleCron  string          `json:"scheduleCron,omitempty"`
+	ScheduleOnce  string          `json:"scheduleOnce,omitempty"`
+}
+
+// ListScheduledActionsResponse is the response shape for listing an environment's schedules.
+type ListScheduledActionsResponse struct {
+	Schedules []ScheduledAction `json:"schedules"`
+}
+
+// CreateEnvironmentScheduleRequest is the request body for creating a scheduled action on an
+// environment. Exactly one of ScheduleCron or ScheduleOnce should be set.
+type CreateEnvironmentScheduleRequest struct {
+	ScheduleCron          string                                          `json:"scheduleCron,omitempty"`
+	ScheduleOnce          string                                          `json:"scheduleOnce,omitempty"`
+	SecretRotationRequest *CreateEnvironmentSecretRotationScheduleRequest `json:"secretRotationRequest,omitempty"`
+}
+
+// CreateEnvironmentSecretRotationScheduleRequest is the secret-rotation-specific payload for
+// CreateEnvironmentScheduleRequest. An empty EnvironmentPath means rotate the whole environment.
+type CreateEnvironmentSecretRotationScheduleRequest struct {
+	EnvironmentPath string `json:"environmentPath"`
+}
+
+// UpdateEnvironmentScheduleRequest is the PATCH body for an existing scheduled action. Only the
+// fields set on the request are modified.
+type UpdateEnvironmentScheduleRequest struct {
+	ScheduleCron          string                                          `json:"scheduleCron,omitempty"`
+	ScheduleOnce          string                                          `json:"scheduleOnce,omitempty"`
+	SecretRotationRequest *CreateEnvironmentSecretRotationScheduleRequest `json:"secretRotationRequest,omitempty"`
+}
+
+// ScheduleHistoryEvent describes a single execution of a scheduled action.
+type ScheduleHistoryEvent struct {
+	ID                string `json:"id"`
+	ScheduledActionID string `json:"scheduledActionID"`
+	Executed          string `json:"executed"`
+	Version           int    `json:"version"`
+	Result            string `json:"result"`
+}
+
+// ListScheduleHistoryResponse is the response shape for listing a schedule's execution history.
+type ListScheduleHistoryResponse struct {
+	ScheduleHistoryEvents []ScheduleHistoryEvent `json:"scheduleHistoryEvents"`
+}
+
+// EnvironmentImportReferrer represents an `import` reference from another environment.
+type EnvironmentImportReferrer struct {
+	Project  string `json:"project"`
+	Name     string `json:"name"`
+	Revision int64  `json:"revision"`
+}
+
+// EnvironmentStackReferrer represents a reference from an IaC stack.
+type EnvironmentStackReferrer struct {
+	Project string `json:"project"`
+	Stack   string `json:"stack"`
+	Version int64  `json:"version"`
+}
+
+// EnvironmentInsightsAccountReferrer represents a reference from an Insights account.
+type EnvironmentInsightsAccountReferrer struct {
+	AccountName string `json:"accountName"`
+}
+
+// EnvironmentReferrer represents an entity that refers to an environment. Exactly one of the
+// pointer fields will be non-nil, indicating which kind of referrer this is.
+type EnvironmentReferrer struct {
+	Environment     *EnvironmentImportReferrer          `json:"environment,omitempty"`
+	Stack           *EnvironmentStackReferrer           `json:"stack,omitempty"`
+	InsightsAccount *EnvironmentInsightsAccountReferrer `json:"insightsAccount,omitempty"`
+}
+
+// ListEnvironmentReferrersResponse contains a list of entities that reference an environment,
+// keyed by the revision tag of the referenced environment (e.g. "latest" or "3").
+type ListEnvironmentReferrersResponse struct {
+	Referrers         map[string][]EnvironmentReferrer `json:"referrers"`
+	ContinuationToken string                           `json:"continuationToken,omitempty"`
 }

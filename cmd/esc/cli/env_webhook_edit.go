@@ -28,7 +28,7 @@ func newEnvWebhookEditCmd(env *envCommand) *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "edit [<org-name>/][<project-name>/]<environment-name> <webhook-name>",
 		Short: "Edit an environment webhook.",
-		Long: "Edit an environment webhook\n" +
+		Long: "[EXPERIMENTAL] Edit an environment webhook\n" +
 			"\n" +
 			"This command updates one or more fields of the named webhook. The CLI fetches the\n" +
 			"current webhook, applies the supplied flag values on top of it, and submits the\n" +
