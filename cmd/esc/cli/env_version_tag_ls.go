@@ -47,54 +47,22 @@ func newEnvVersionTagLsCmd(env *envCommand) *cobra.Command {
 			}
 			_ = args
 
+			tags, err := listAllEnvironmentRevisionTags(ctx, env.esc.client, ref)
+			if err != nil {
+				return err
+			}
+
 			if format == outputJSON {
-				all := []client.EnvironmentRevisionTag{}
-				after := ""
-				count := 500
-				for {
-					options := client.ListEnvironmentRevisionTagsOptions{
-						After: after,
-						Count: &count,
-					}
-					tags, err := env.esc.client.ListEnvironmentRevisionTags(
-						ctx, ref.orgName, ref.projectName, ref.envName, options)
-					if err != nil {
-						return err
-					}
-					if len(tags) == 0 {
-						break
-					}
-					after = tags[len(tags)-1].Name
-					all = append(all, tags...)
-				}
 				return writeJSON(env.esc.stdout, struct {
 					Tags []client.EnvironmentRevisionTag `json:"tags"`
-				}{all})
+				}{tags})
 			}
 
 			st := style.NewStylist(style.Profile(env.esc.stdout))
-
-			after := ""
 			return env.esc.pager.Run(pagerFlag, env.esc.stdout, env.esc.stderr, func(ctx context.Context, stdout io.Writer) error {
-				count := 500
-				for {
-					options := client.ListEnvironmentRevisionTagsOptions{
-						After: after,
-						Count: &count,
-					}
-					tags, err := env.esc.client.ListEnvironmentRevisionTags(ctx, ref.orgName, ref.projectName, ref.envName, options)
-					if err != nil {
-						return err
-					}
-					if len(tags) == 0 {
-						break
-					}
-					after = tags[len(tags)-1].Name
-
-					for _, t := range tags {
-						printRevisionTag(stdout, st, t, utcFlag(utc))
-						fmt.Fprintf(stdout, "\n")
-					}
+				for _, t := range tags {
+					printRevisionTag(stdout, st, t, utcFlag(utc))
+					fmt.Fprintf(stdout, "\n")
 				}
 				return nil
 			})
@@ -106,4 +74,30 @@ func newEnvVersionTagLsCmd(env *envCommand) *cobra.Command {
 	addOutputFlag(cmd, &output)
 
 	return cmd
+}
+
+// listAllEnvironmentRevisionTags pages through every revision tag on the environment.
+func listAllEnvironmentRevisionTags(
+	ctx context.Context,
+	c client.Client,
+	ref environmentRef,
+) ([]client.EnvironmentRevisionTag, error) {
+	all := []client.EnvironmentRevisionTag{}
+	after := ""
+	count := 500
+	for {
+		options := client.ListEnvironmentRevisionTagsOptions{
+			After: after,
+			Count: &count,
+		}
+		tags, err := c.ListEnvironmentRevisionTags(ctx, ref.orgName, ref.projectName, ref.envName, options)
+		if err != nil {
+			return nil, err
+		}
+		if len(tags) == 0 {
+			return all, nil
+		}
+		after = tags[len(tags)-1].Name
+		all = append(all, tags...)
+	}
 }

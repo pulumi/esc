@@ -54,7 +54,11 @@ func newEnvSettingsGetCmd(env *envCommand, registry *EnvSettingsRegistry) *cobra
 
 			if len(args) == 0 {
 				if format == outputJSON {
-					return writeJSON(env.esc.stdout, settings)
+					all := map[string]any{}
+					for _, setting := range registry.Settings {
+						all[setting.KebabName()] = setting.GetValue(settings)
+					}
+					return writeJSON(env.esc.stdout, all)
 				}
 				for _, setting := range registry.Settings {
 					fmt.Fprintf(env.esc.stdout, "%s %v\n", setting.KebabName(), setting.GetValue(settings))
