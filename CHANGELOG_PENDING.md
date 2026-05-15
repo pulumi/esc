@@ -31,6 +31,12 @@
   with Pulumi). Each supports `--create` to create the target environment
   if it does not already exist
 
+- Render `esc env schedule list`, `esc env schedule history`,
+  `esc env referrer list`, and `esc env version tag ls` as tables for
+  consistency with the other `esc env ... list` commands and with
+  `pulumi/pulumi`
+  [#655](https://github.com/pulumi/esc/pull/655)
+
 ### Bug Fixes
 
 ### Breaking changes
