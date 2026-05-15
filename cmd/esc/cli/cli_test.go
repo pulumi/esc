@@ -1681,6 +1681,7 @@ func (c *testExec) runScript(script string, cmd *exec.Cmd) error {
 					return ctx.Err()
 				case result := <-ch:
 					if result != nil {
+						fmt.Fprintf(hc.Stderr, "Error: %s\n", result)
 						return interp.NewExitStatus(1)
 					}
 				}
