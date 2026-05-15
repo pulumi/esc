@@ -10,11 +10,8 @@ func newEnvProviderCmd(env *envCommand) *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "provider",
 		Short: "Manage login providers within an environment",
-		Long: "Manage login providers within an environment\n" +
-			"\n" +
-			"Subcommands add cloud-provider login blocks (AWS, Azure, GCP) to an environment.\n" +
-			"Only static credentials are supported today; OIDC support will be added later.\n",
-		Args: cobra.NoArgs,
+		Long:  "[EXPERIMENTAL] Manage providers within an environment\n",
+		Args:  cobra.NoArgs,
 	}
 
 	cmd.AddCommand(newEnvProviderAWSLoginCmd(env))

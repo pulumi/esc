@@ -17,7 +17,7 @@ func newEnvProviderGCPLoginCmd(env *envCommand) *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "gcp-login",
 		Short: "Add a GCP login provider to an environment",
-		Long: "Add a GCP login provider to an environment\n" +
+		Long: "[EXPERIMENTAL] Add a GCP login provider to an environment\n" +
 			"\n" +
 			"Subcommands select the authentication mode: `static` for static credentials,\n" +
 			"`oidc` for federated identity via OpenID Connect.\n",
@@ -41,7 +41,7 @@ func newEnvProviderGCPLoginStaticCmd(env *envCommand) *cobra.Command {
 		Use:   "static [<org>/][<project>/]<environment-name> <project-number> <access-token>",
 		Args:  cobra.RangeArgs(2, 3),
 		Short: "Add a GCP static-credentials login provider to an environment",
-		Long: "Add a GCP static-credentials login provider to an environment\n" +
+		Long: "[EXPERIMENTAL] Add a GCP static-credentials login provider to an environment\n" +
 			"\n" +
 			"Writes an `fn::open::gcp-login` block at the configured path under `values`. The\n" +
 			"access token is wrapped in `fn::secret`. <project-number> must be the numerical\n" +
@@ -154,7 +154,7 @@ func newEnvProviderGCPLoginOIDCCmd(env *envCommand) *cobra.Command {
 		Use:   "oidc [<org>/][<project>/]<environment-name> <project-number>",
 		Args:  cobra.RangeArgs(1, 2),
 		Short: "Add a GCP OIDC login provider to an environment",
-		Long: "Add a GCP OIDC login provider to an environment\n" +
+		Long: "[EXPERIMENTAL] Add a GCP OIDC login provider to an environment\n" +
 			"\n" +
 			"Writes an `fn::open::gcp-login` block with an `oidc` workload-identity\n" +
 			"federation block at the configured path under `values`. <project-number> must\n" +

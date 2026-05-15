@@ -16,7 +16,7 @@ func newEnvProviderAzureLoginCmd(env *envCommand) *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "azure-login",
 		Short: "Add an Azure login provider to an environment",
-		Long: "Add an Azure login provider to an environment\n" +
+		Long: "[EXPERIMENTAL] Add an Azure login provider to an environment\n" +
 			"\n" +
 			"Subcommands select the authentication mode: `static` for static credentials,\n" +
 			"`oidc` for federated identity via OpenID Connect.\n",
@@ -38,7 +38,7 @@ func newEnvProviderAzureLoginStaticCmd(env *envCommand) *cobra.Command {
 		Use:   "static [<org>/][<project>/]<environment-name> <tenant-id> <subscription-id> <client-id> <client-secret>",
 		Args:  cobra.RangeArgs(4, 5),
 		Short: "Add an Azure static-credentials login provider to an environment",
-		Long: "Add an Azure static-credentials login provider to an environment\n" +
+		Long: "[EXPERIMENTAL] Add an Azure static-credentials login provider to an environment\n" +
 			"\n" +
 			"Writes an `fn::open::azure-login` block at the configured path under `values`.\n" +
 			"The client secret is wrapped in `fn::secret`. If a block already exists at the\n" +
@@ -122,7 +122,7 @@ func newEnvProviderAzureLoginOIDCCmd(env *envCommand) *cobra.Command {
 		Use:   "oidc [<org>/][<project>/]<environment-name> <tenant-id> <subscription-id> <client-id>",
 		Args:  cobra.RangeArgs(3, 4),
 		Short: "Add an Azure OIDC login provider to an environment",
-		Long: "Add an Azure OIDC login provider to an environment\n" +
+		Long: "[EXPERIMENTAL] Add an Azure OIDC login provider to an environment\n" +
 			"\n" +
 			"Writes an `fn::open::azure-login` block with `oidc: true` at the configured\n" +
 			"path under `values`. The Azure federated credential must be provisioned\n" +

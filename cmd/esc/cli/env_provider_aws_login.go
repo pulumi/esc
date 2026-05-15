@@ -16,7 +16,7 @@ func newEnvProviderAWSLoginCmd(env *envCommand) *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "aws-login",
 		Short: "Add an AWS login provider to an environment",
-		Long: "Add an AWS login provider to an environment\n" +
+		Long: "[EXPERIMENTAL] Add an AWS login provider to an environment\n" +
 			"\n" +
 			"Subcommands select the authentication mode: `static` for static credentials,\n" +
 			"`oidc` for federated identity via OpenID Connect.\n",
@@ -39,7 +39,7 @@ func newEnvProviderAWSLoginStaticCmd(env *envCommand) *cobra.Command {
 		Use:   "static [<org>/][<project>/]<environment-name> <access-key-id> <secret-access-key>",
 		Args:  cobra.RangeArgs(2, 3),
 		Short: "Add an AWS static-credentials login provider to an environment",
-		Long: "Add an AWS static-credentials login provider to an environment\n" +
+		Long: "[EXPERIMENTAL] Add an AWS static-credentials login provider to an environment\n" +
 			"\n" +
 			"Writes an `fn::open::aws-login` block with static credentials at the configured\n" +
 			"path under `values`. The secret access key and session token, if any, are\n" +
@@ -135,7 +135,7 @@ func newEnvProviderAWSLoginOIDCCmd(env *envCommand) *cobra.Command {
 		Use:   "oidc [<org>/][<project>/]<environment-name> <role-arn> <session-name>",
 		Args:  cobra.RangeArgs(2, 3),
 		Short: "Add an AWS OIDC login provider to an environment",
-		Long: "Add an AWS OIDC login provider to an environment\n" +
+		Long: "[EXPERIMENTAL] Add an AWS OIDC login provider to an environment\n" +
 			"\n" +
 			"Writes an `fn::open::aws-login` block with an `oidc` federation block at the\n" +
 			"configured path under `values`. The OIDC IAM role and trust policy must be\n" +
