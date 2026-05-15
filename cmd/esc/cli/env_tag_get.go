@@ -54,7 +54,7 @@ func newEnvTagGetCmd(env *envCommand) *cobra.Command {
 			}
 
 			if format == outputJSON {
-				return writeJSON(env.esc.stdout, tag)
+				return writeJSON(env.esc.stdout, newTagJSON(tag, utcFlag(utc)))
 			}
 
 			st := style.NewStylist(style.Profile(env.esc.stdout))

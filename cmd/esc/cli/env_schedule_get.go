@@ -52,7 +52,7 @@ func newEnvScheduleGetCmd(env *envCommand) *cobra.Command {
 			}
 
 			if format == outputJSON {
-				return writeJSON(env.esc.stdout, s)
+				return writeJSON(env.esc.stdout, newScheduleJSON(*s, utcFlag(utc)))
 			}
 
 			printSchedule(env.esc.stdout, *s, utcFlag(utc))

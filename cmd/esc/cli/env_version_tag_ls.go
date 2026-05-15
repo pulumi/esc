@@ -6,6 +6,7 @@ import (
 	"context"
 	"fmt"
 	"io"
+	"time"
 
 	"github.com/spf13/cobra"
 
@@ -53,9 +54,19 @@ func newEnvVersionTagLsCmd(env *envCommand) *cobra.Command {
 			}
 
 			if format == outputJSON {
-				return writeJSON(env.esc.stdout, struct {
-					Tags []client.EnvironmentRevisionTag `json:"tags"`
-				}{tags})
+				out := struct {
+					Tags []revisionTagJSON `json:"tags"`
+				}{Tags: make([]revisionTagJSON, 0, len(tags))}
+				for _, t := range tags {
+					out.Tags = append(out.Tags, revisionTagJSON{
+						Name:        t.Name,
+						Revision:    t.Revision,
+						Modified:    utcFlag(utc).time(t.Modified),
+						EditorLogin: t.EditorLogin,
+						EditorName:  t.EditorName,
+					})
+				}
+				return writeJSON(env.esc.stdout, out)
 			}
 
 			st := style.NewStylist(style.Profile(env.esc.stdout))
@@ -74,6 +85,17 @@ func newEnvVersionTagLsCmd(env *envCommand) *cobra.Command {
 	addOutputFlag(cmd, &output)
 
 	return cmd
+}
+
+// revisionTagJSON is the slim per-tag projection emitted by JSON output.
+// Mirrors the fields shown by printRevisionTag; `created` is omitted because
+// text only shows `modified`.
+type revisionTagJSON struct {
+	Name        string    `json:"name"`
+	Revision    int       `json:"revision"`
+	Modified    time.Time `json:"modified"`
+	EditorLogin string    `json:"editorLogin,omitempty"`
+	EditorName  string    `json:"editorName,omitempty"`
 }
 
 // listAllEnvironmentRevisionTags pages through every revision tag on the environment.

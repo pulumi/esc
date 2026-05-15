@@ -71,9 +71,19 @@ func newEnvWebhookDeliveryListCmd(env *envCommand) *cobra.Command {
 			}
 
 			if format == outputJSON {
-				return writeJSON(env.esc.stdout, struct {
-					Deliveries []client.EnvironmentWebhookDelivery `json:"deliveries"`
-				}{deliveries})
+				out := struct {
+					Deliveries []webhookDeliveryJSON `json:"deliveries"`
+				}{Deliveries: make([]webhookDeliveryJSON, 0, len(deliveries))}
+				for _, d := range deliveries {
+					out.Deliveries = append(out.Deliveries, webhookDeliveryJSON{
+						ID:           d.ID,
+						Kind:         d.Kind,
+						Timestamp:    utcFlag(utc).time(time.Unix(d.Timestamp, 0)).Format(time.RFC3339),
+						ResponseCode: d.ResponseCode,
+						Duration:     d.Duration,
+					})
+				}
+				return writeJSON(env.esc.stdout, out)
 			}
 
 			printWebhookDeliveries(env.esc.stdout, deliveries, utcFlag(utc))
@@ -86,6 +96,18 @@ func newEnvWebhookDeliveryListCmd(env *envCommand) *cobra.Command {
 	addOutputFlag(cmd, &output)
 
 	return cmd
+}
+
+// webhookDeliveryJSON is the slim per-delivery projection emitted by JSON
+// output. Mirrors the columns shown by printWebhookDeliveries; the bulky
+// payload / request-headers / response-headers / response-body fields are
+// omitted (use `pulumi api` for the full record).
+type webhookDeliveryJSON struct {
+	ID           string `json:"id"`
+	Kind         string `json:"kind"`
+	Timestamp    string `json:"timestamp"`
+	ResponseCode int64  `json:"responseCode"`
+	Duration     int64  `json:"duration"`
 }
 
 func printWebhookDeliveries(stdout io.Writer, ds []client.EnvironmentWebhookDelivery, utc utcFlag) {

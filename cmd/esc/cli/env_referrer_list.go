@@ -98,7 +98,9 @@ func newEnvReferrerListCmd(env *envCommand) *cobra.Command {
 			}
 
 			if format == outputJSON {
-				return writeJSON(env.esc.stdout, merged)
+				return writeJSON(env.esc.stdout, struct {
+					Referrers map[string][]client.EnvironmentReferrer `json:"referrers"`
+				}{merged.Referrers})
 			}
 
 			printReferrers(env, merged)

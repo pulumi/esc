@@ -62,10 +62,16 @@ func newEnvScheduleListCmd(env *envCommand) *cobra.Command {
 			}
 
 			if format == outputJSON {
-				if resp == nil {
-					resp = &client.ListScheduledActionsResponse{}
+				out := struct {
+					Schedules []scheduleJSON `json:"schedules"`
+				}{Schedules: []scheduleJSON{}}
+				if resp != nil {
+					out.Schedules = make([]scheduleJSON, 0, len(resp.Schedules))
+					for _, s := range resp.Schedules {
+						out.Schedules = append(out.Schedules, newScheduleJSON(s, utcFlag(utc)))
+					}
 				}
-				return writeJSON(env.esc.stdout, resp)
+				return writeJSON(env.esc.stdout, out)
 			}
 
 			printSchedules(env.esc.stdout, resp, utcFlag(utc))
@@ -78,6 +84,38 @@ func newEnvScheduleListCmd(env *envCommand) *cobra.Command {
 	addOutputFlag(cmd, &output)
 
 	return cmd
+}
+
+// scheduleJSON is the slim per-schedule projection emitted by JSON output.
+// Mirrors the fields shown by printSchedule; internal timestamps (created,
+// modified) and the org/definition blob are omitted.
+type scheduleJSON struct {
+	ID            string `json:"id"`
+	Kind          string `json:"kind"`
+	Schedule      string `json:"schedule"`
+	Paused        bool   `json:"paused"`
+	NextExecution string `json:"nextExecution"`
+	LastExecuted  string `json:"lastExecuted"`
+}
+
+func newScheduleJSON(s client.ScheduledAction, utc utcFlag) scheduleJSON {
+	var schedule string
+	switch {
+	case s.ScheduleCron != "":
+		schedule = s.ScheduleCron
+	case s.ScheduleOnce != "":
+		schedule = formatScheduleTime(s.ScheduleOnce, utc)
+	default:
+		schedule = "<unknown>"
+	}
+	return scheduleJSON{
+		ID:            s.ID,
+		Kind:          s.Kind,
+		Schedule:      schedule,
+		Paused:        s.Paused,
+		NextExecution: formatScheduleTime(s.NextExecution, utc),
+		LastExecuted:  formatScheduleTime(s.LastExecuted, utc),
+	}
 }
 
 // printSchedules writes each schedule as a key/value block separated by blank lines.

@@ -56,7 +56,7 @@ func newEnvWebhookGetCmd(env *envCommand) *cobra.Command {
 			}
 
 			if format == outputJSON {
-				return writeJSON(env.esc.stdout, w)
+				return writeJSON(env.esc.stdout, webhookJSON(*w))
 			}
 
 			printWebhook(env.esc.stdout, *w)
@@ -91,4 +91,32 @@ func printWebhook(stdout io.Writer, w client.EnvironmentWebhook) {
 	}
 	fmt.Fprintf(stdout, "Event groups: %s\n", groups)
 	fmt.Fprintf(stdout, "Has secret: %t\n", w.HasSecret)
+}
+
+// webhookDetailJSON is the slim webhook projection emitted by `env webhook get`.
+// Mirrors the fields shown by printWebhook; identity fields (organization /
+// project / env / stack) and secret material are omitted on purpose — for the
+// full API response use `pulumi api`.
+type webhookDetailJSON struct {
+	Name        string   `json:"name"`
+	DisplayName string   `json:"displayName"`
+	PayloadURL  string   `json:"payloadUrl"`
+	Active      bool     `json:"active"`
+	Format      string   `json:"format,omitempty"`
+	Events      []string `json:"events,omitempty"`
+	EventGroups []string `json:"eventGroups,omitempty"`
+	HasSecret   bool     `json:"hasSecret"`
+}
+
+func webhookJSON(w client.EnvironmentWebhook) webhookDetailJSON {
+	return webhookDetailJSON{
+		Name:        w.Name,
+		DisplayName: w.DisplayName,
+		PayloadURL:  w.PayloadURL,
+		Active:      w.Active,
+		Format:      w.Format,
+		Events:      w.Filters,
+		EventGroups: w.Groups,
+		HasSecret:   w.HasSecret,
+	}
 }

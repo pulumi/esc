@@ -54,7 +54,9 @@ func newEnvOpenRequestCmd(envcmd *envCommand) *cobra.Command {
 			}
 
 			if format == outputJSON {
-				return writeJSON(envcmd.esc.stdout, resp)
+				return writeJSON(envcmd.esc.stdout, struct {
+					ChangeRequestID string `json:"changeRequestId"`
+				}{resp.ChangeRequests[0].ChangeRequestID})
 			}
 
 			fmt.Fprintf(envcmd.esc.stdout, "Created environment open request with ID: %s\n", resp.ChangeRequests[0].ChangeRequestID)
