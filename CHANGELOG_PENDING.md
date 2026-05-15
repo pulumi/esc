@@ -19,6 +19,18 @@
   a handful of CLI error messages as a result
   [#648](https://github.com/pulumi/esc/pull/648)
 
+- Consolidate `SilenceUsage` / `SilenceErrors` on the `esc` root command,
+  matching the `pulumi/pulumi` pattern; the CLI now prints errors itself
+  rather than relying on cobra
+  [#654](https://github.com/pulumi/esc/pull/654)
+
+- Add `esc env provider {aws-login,azure-login,gcp-login} {static,oidc}`
+  commands to add login providers to an environment. `static` writes a
+  static-credentials block; `oidc` writes a federated-identity block that
+  references cloud-side OIDC resources you provision separately (e.g.
+  with Pulumi). Each supports `--create` to create the target environment
+  if it does not already exist
+
 - Render `esc env schedule list`, `esc env schedule history`,
   `esc env referrer list`, and `esc env version tag ls` as tables for
   consistency with the other `esc env ... list` commands and with
