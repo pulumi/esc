@@ -19,6 +19,11 @@
   a handful of CLI error messages as a result
   [#648](https://github.com/pulumi/esc/pull/648)
 
+- Consolidate `SilenceUsage` / `SilenceErrors` on the `esc` root command,
+  matching the `pulumi/pulumi` pattern; the CLI now prints errors itself
+  rather than relying on cobra
+  [#654](https://github.com/pulumi/esc/pull/654)
+
 ### Bug Fixes
 
 ### Breaking changes
