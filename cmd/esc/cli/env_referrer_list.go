@@ -25,7 +25,7 @@ func newEnvReferrerListCmd(env *envCommand) *cobra.Command {
 		Use:     "list [<org-name>/][<project-name>/]<environment-name>",
 		Aliases: []string{"ls"},
 		Short:   "List entities that reference an environment.",
-		Long: "List entities that reference an environment\n" +
+		Long: "[EXPERIMENTAL] List entities that reference an environment\n" +
 			"\n" +
 			"This command lists referrers (other environments, Pulumi IaC stacks, and Pulumi\n" +
 			"Insights accounts) that reference the given environment. Results are grouped by\n" +

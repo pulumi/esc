@@ -14,9 +14,7 @@ func newEnvReferrerCmd(env *envCommand) *cobra.Command {
 			"\n" +
 			"A referrer is an entity that references an environment, such as another environment\n" +
 			"that imports it, a Pulumi IaC stack that opens it, or a Pulumi Insights account\n" +
-			"that consumes it.\n" +
-			"\n" +
-			"Subcommands exist for listing referrers.",
+			"that consumes it.\n",
 		Args:         cobra.NoArgs,
 		SilenceUsage: true,
 	}
