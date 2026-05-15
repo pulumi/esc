@@ -15,6 +15,7 @@
 package client
 
 import (
+	"encoding/json"
 	"fmt"
 	"strings"
 	"time"
@@ -270,4 +271,160 @@ type EnvironmentSettings struct {
 
 type PatchEnvironmentSettingsRequest struct {
 	DeletionProtected *bool `json:"deletionProtected,omitempty"`
+}
+
+// EnvironmentWebhook describes a webhook attached to an environment.
+type EnvironmentWebhook struct {
+	Active           bool     `json:"active"`
+	DisplayName      string   `json:"displayName"`
+	Name             string   `json:"name"`
+	OrganizationName string   `json:"organizationName"`
+	PayloadURL       string   `json:"payloadUrl"`
+	EnvName          string   `json:"envName,omitempty"`
+	Filters          []string `json:"filters,omitempty"`
+	Format           string   `json:"format,omitempty"`
+	Groups           []string `json:"groups,omitempty"`
+	ProjectName      string   `json:"projectName,omitempty"`
+	Secret           string   `json:"secret,omitempty"`
+	StackName        string   `json:"stackName,omitempty"`
+	HasSecret        bool     `json:"hasSecret,omitempty"`
+	SecretCiphertext string   `json:"secretCiphertext,omitempty"`
+}
+
+// CreateEnvironmentWebhookRequest is the request body for creating a webhook on an environment.
+// OrganizationName, ProjectName, and EnvName must match the URL path or the service returns 400.
+type CreateEnvironmentWebhookRequest struct {
+	Active           bool     `json:"active"`
+	DisplayName      string   `json:"displayName"`
+	Name             string   `json:"name"`
+	OrganizationName string   `json:"organizationName"`
+	ProjectName      string   `json:"projectName,omitempty"`
+	EnvName          string   `json:"envName,omitempty"`
+	PayloadURL       string   `json:"payloadUrl"`
+	Filters          []string `json:"filters,omitempty"`
+	Groups           []string `json:"groups,omitempty"`
+	Format           string   `json:"format,omitempty"`
+	Secret           string   `json:"secret,omitempty"`
+}
+
+// UpdateEnvironmentWebhookRequest is the PATCH body for updating an environment webhook. The
+// service's PATCH handler unconditionally replaces DisplayName, PayloadURL, Active, Filters,
+// and Groups from the body, so callers must send the full desired state. Format and Secret are
+// the only fields with "leave unchanged" semantics (nil pointer / empty string respectively),
+// and Secret accepts the sentinel "__remove-secret" to clear a stored secret.
+type UpdateEnvironmentWebhookRequest struct {
+	Active      bool     `json:"active"`
+	DisplayName string   `json:"displayName"`
+	PayloadURL  string   `json:"payloadUrl"`
+	Filters     []string `json:"filters,omitempty"`
+	Groups      []string `json:"groups,omitempty"`
+	Format      *string  `json:"format,omitempty"`
+	Secret      string   `json:"secret,omitempty"`
+}
+
+// EnvironmentWebhookDelivery describes a single webhook delivery attempt.
+type EnvironmentWebhookDelivery struct {
+	ID              string `json:"id"`
+	Kind            string `json:"kind"`
+	Timestamp       int64  `json:"timestamp"`
+	Duration        int64  `json:"duration"`
+	Payload         string `json:"payload"`
+	RequestURL      string `json:"requestUrl"`
+	RequestHeaders  string `json:"requestHeaders"`
+	ResponseCode    int64  `json:"responseCode"`
+	ResponseHeaders string `json:"responseHeaders"`
+	ResponseBody    string `json:"responseBody"`
+}
+
+// ScheduledAction describes a scheduled action attached to an environment.
+//
+// Time fields (Created, Modified, LastExecuted, NextExecution, ScheduleOnce) are kept as
+// raw ISO 8601 strings on the wire; callers can parse them as needed.
+type ScheduledAction struct {
+	ID            string          `json:"id"`
+	OrgID         string          `json:"orgID"`
+	Kind          string          `json:"kind"`
+	Paused        bool            `json:"paused"`
+	Created       string          `json:"created"`
+	Modified      string          `json:"modified"`
+	LastExecuted  string          `json:"lastExecuted"`
+	NextExecution string          `json:"nextExecution"`
+	Definition    json.RawMessage `json:"definition,omitempty"`
+	ScheduleCron  string          `json:"scheduleCron,omitempty"`
+	ScheduleOnce  string          `json:"scheduleOnce,omitempty"`
+}
+
+// ListScheduledActionsResponse is the response shape for listing an environment's schedules.
+type ListScheduledActionsResponse struct {
+	Schedules []ScheduledAction `json:"schedules"`
+}
+
+// CreateEnvironmentScheduleRequest is the request body for creating a scheduled action on an
+// environment. Exactly one of ScheduleCron or ScheduleOnce should be set.
+type CreateEnvironmentScheduleRequest struct {
+	ScheduleCron          string                                          `json:"scheduleCron,omitempty"`
+	ScheduleOnce          string                                          `json:"scheduleOnce,omitempty"`
+	SecretRotationRequest *CreateEnvironmentSecretRotationScheduleRequest `json:"secretRotationRequest,omitempty"`
+}
+
+// CreateEnvironmentSecretRotationScheduleRequest is the secret-rotation-specific payload for
+// CreateEnvironmentScheduleRequest. An empty EnvironmentPath means rotate the whole environment.
+type CreateEnvironmentSecretRotationScheduleRequest struct {
+	EnvironmentPath string `json:"environmentPath"`
+}
+
+// UpdateEnvironmentScheduleRequest is the PATCH body for an existing scheduled action. Only the
+// fields set on the request are modified.
+type UpdateEnvironmentScheduleRequest struct {
+	ScheduleCron          string                                          `json:"scheduleCron,omitempty"`
+	ScheduleOnce          string                                          `json:"scheduleOnce,omitempty"`
+	SecretRotationRequest *CreateEnvironmentSecretRotationScheduleRequest `json:"secretRotationRequest,omitempty"`
+}
+
+// ScheduleHistoryEvent describes a single execution of a scheduled action.
+type ScheduleHistoryEvent struct {
+	ID                string `json:"id"`
+	ScheduledActionID string `json:"scheduledActionID"`
+	Executed          string `json:"executed"`
+	Version           int    `json:"version"`
+	Result            string `json:"result"`
+}
+
+// ListScheduleHistoryResponse is the response shape for listing a schedule's execution history.
+type ListScheduleHistoryResponse struct {
+	ScheduleHistoryEvents []ScheduleHistoryEvent `json:"scheduleHistoryEvents"`
+}
+
+// EnvironmentImportReferrer represents an `import` reference from another environment.
+type EnvironmentImportReferrer struct {
+	Project  string `json:"project"`
+	Name     string `json:"name"`
+	Revision int64  `json:"revision"`
+}
+
+// EnvironmentStackReferrer represents a reference from an IaC stack.
+type EnvironmentStackReferrer struct {
+	Project string `json:"project"`
+	Stack   string `json:"stack"`
+	Version int64  `json:"version"`
+}
+
+// EnvironmentInsightsAccountReferrer represents a reference from an Insights account.
+type EnvironmentInsightsAccountReferrer struct {
+	AccountName string `json:"accountName"`
+}
+
+// EnvironmentReferrer represents an entity that refers to an environment. Exactly one of the
+// pointer fields will be non-nil, indicating which kind of referrer this is.
+type EnvironmentReferrer struct {
+	Environment     *EnvironmentImportReferrer          `json:"environment,omitempty"`
+	Stack           *EnvironmentStackReferrer           `json:"stack,omitempty"`
+	InsightsAccount *EnvironmentInsightsAccountReferrer `json:"insightsAccount,omitempty"`
+}
+
+// ListEnvironmentReferrersResponse contains a list of entities that reference an environment,
+// keyed by the revision tag of the referenced environment (e.g. "latest" or "3").
+type ListEnvironmentReferrersResponse struct {
+	Referrers         map[string][]EnvironmentReferrer `json:"referrers"`
+	ContinuationToken string                           `json:"continuationToken,omitempty"`
 }

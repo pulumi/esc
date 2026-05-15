@@ -6,6 +6,7 @@ import (
 	"bytes"
 	"context"
 	"encoding/base64"
+	"encoding/json"
 	"errors"
 	"fmt"
 	"hash/fnv"
@@ -285,6 +286,10 @@ type testEnvironment struct {
 	revisionTags      map[string]int
 	tags              map[string]string
 	deletionProtected bool
+	webhooks          []client.EnvironmentWebhook
+	webhookDeliveries map[string][]client.EnvironmentWebhookDelivery
+	schedules         []client.ScheduledAction
+	referrers         map[string][]client.EnvironmentReferrer
 }
 
 func (env *testEnvironment) latest() *testEnvironmentRevision {
@@ -924,6 +929,24 @@ func (c *testPulumiClient) ListEnvironmentTags(
 	return tags, "0", nil
 }
 
+func (c *testPulumiClient) ListEnvironmentReferrers(
+	ctx context.Context,
+	orgName, projectName, envName string,
+	options client.ListEnvironmentReferrersOptions,
+) (*client.ListEnvironmentReferrersResponse, error) {
+	env, ok := c.environments[fmt.Sprintf("%s/%s/%s", orgName, projectName, envName)]
+	if !ok {
+		return nil, errors.New("environment not found")
+	}
+	resp := &client.ListEnvironmentReferrersResponse{
+		Referrers: map[string][]client.EnvironmentReferrer{},
+	}
+	for k, v := range env.referrers {
+		resp.Referrers[k] = v
+	}
+	return resp, nil
+}
+
 func (c *testPulumiClient) CreateEnvironmentTag(
 	ctx context.Context,
 	orgName, projectName, envName, key, value string,
@@ -995,6 +1018,290 @@ func (c *testPulumiClient) DeleteEnvironmentTag(ctx context.Context, orgName, pr
 	}
 	delete(env.tags, tagName)
 	return nil
+}
+
+func (c *testPulumiClient) ListEnvironmentSchedules(
+	ctx context.Context,
+	orgName, projectName, envName string,
+) (*client.ListScheduledActionsResponse, error) {
+	env, ok := c.environments[fmt.Sprintf("%s/%s/%s", orgName, projectName, envName)]
+	if !ok {
+		return nil, errors.New("environment not found")
+	}
+	resp := &client.ListScheduledActionsResponse{
+		Schedules: append([]client.ScheduledAction(nil), env.schedules...),
+	}
+	return resp, nil
+}
+
+func (c *testPulumiClient) CreateEnvironmentSchedule(
+	ctx context.Context,
+	orgName, projectName, envName string,
+	req client.CreateEnvironmentScheduleRequest,
+) (*client.ScheduledAction, error) {
+	env, ok := c.environments[fmt.Sprintf("%s/%s/%s", orgName, projectName, envName)]
+	if !ok {
+		return nil, errors.New("environment not found")
+	}
+	id := fmt.Sprintf("sched-%d", len(env.schedules)+1)
+	var def json.RawMessage
+	if req.SecretRotationRequest != nil {
+		def, _ = json.Marshal(map[string]any{
+			"environmentPath": req.SecretRotationRequest.EnvironmentPath,
+		})
+	}
+	s := client.ScheduledAction{
+		ID:            id,
+		OrgID:         orgName,
+		Kind:          "environment_rotation",
+		Paused:        false,
+		Created:       "2026-05-13T12:00:00Z",
+		Modified:      "2026-05-13T12:00:00Z",
+		LastExecuted:  "",
+		NextExecution: "2026-05-14T00:00:00Z",
+		Definition:    def,
+		ScheduleCron:  req.ScheduleCron,
+		ScheduleOnce:  req.ScheduleOnce,
+	}
+	env.schedules = append(env.schedules, s)
+	return &s, nil
+}
+
+func (c *testPulumiClient) findSchedule(orgName, projectName, envName, scheduleID string) (*testEnvironment, int, error) {
+	env, ok := c.environments[fmt.Sprintf("%s/%s/%s", orgName, projectName, envName)]
+	if !ok {
+		return nil, 0, errors.New("environment not found")
+	}
+	for i, s := range env.schedules {
+		if s.ID == scheduleID {
+			return env, i, nil
+		}
+	}
+	return nil, 0, errors.New("schedule not found")
+}
+
+func (c *testPulumiClient) GetEnvironmentSchedule(
+	ctx context.Context,
+	orgName, projectName, envName, scheduleID string,
+) (*client.ScheduledAction, error) {
+	env, i, err := c.findSchedule(orgName, projectName, envName, scheduleID)
+	if err != nil {
+		return nil, err
+	}
+	s := env.schedules[i]
+	return &s, nil
+}
+
+func (c *testPulumiClient) UpdateEnvironmentSchedule(
+	ctx context.Context,
+	orgName, projectName, envName, scheduleID string,
+	req client.UpdateEnvironmentScheduleRequest,
+) (*client.ScheduledAction, error) {
+	env, i, err := c.findSchedule(orgName, projectName, envName, scheduleID)
+	if err != nil {
+		return nil, err
+	}
+	if req.ScheduleCron != "" {
+		env.schedules[i].ScheduleCron = req.ScheduleCron
+		env.schedules[i].ScheduleOnce = ""
+	}
+	if req.ScheduleOnce != "" {
+		env.schedules[i].ScheduleOnce = req.ScheduleOnce
+		env.schedules[i].ScheduleCron = ""
+	}
+	if req.SecretRotationRequest != nil {
+		def, _ := json.Marshal(map[string]any{
+			"environmentPath": req.SecretRotationRequest.EnvironmentPath,
+		})
+		env.schedules[i].Definition = def
+	}
+	env.schedules[i].Modified = "2026-05-13T13:00:00Z"
+	s := env.schedules[i]
+	return &s, nil
+}
+
+func (c *testPulumiClient) ListEnvironmentScheduleHistory(
+	ctx context.Context,
+	orgName, projectName, envName, scheduleID string,
+) (*client.ListScheduleHistoryResponse, error) {
+	if _, _, err := c.findSchedule(orgName, projectName, envName, scheduleID); err != nil {
+		return nil, err
+	}
+	return &client.ListScheduleHistoryResponse{
+		ScheduleHistoryEvents: []client.ScheduleHistoryEvent{
+			{
+				ID:                "evt-1",
+				ScheduledActionID: scheduleID,
+				Executed:          "2026-05-13T12:30:00Z",
+				Version:           1,
+				Result:            "succeeded",
+			},
+		},
+	}, nil
+}
+
+func (c *testPulumiClient) DeleteEnvironmentSchedule(
+	ctx context.Context,
+	orgName, projectName, envName, scheduleID string,
+) error {
+	env, i, err := c.findSchedule(orgName, projectName, envName, scheduleID)
+	if err != nil {
+		return err
+	}
+	env.schedules = append(env.schedules[:i], env.schedules[i+1:]...)
+	return nil
+}
+
+func (c *testPulumiClient) findWebhook(orgName, projectName, envName, webhookName string) (*testEnvironment, int, error) {
+	env, ok := c.environments[fmt.Sprintf("%s/%s/%s", orgName, projectName, envName)]
+	if !ok {
+		return nil, 0, errors.New("environment not found")
+	}
+	for i, w := range env.webhooks {
+		if w.Name == webhookName {
+			return env, i, nil
+		}
+	}
+	return nil, 0, errors.New("webhook not found")
+}
+
+func (c *testPulumiClient) ListEnvironmentWebhooks(
+	ctx context.Context,
+	orgName, projectName, envName string,
+) ([]client.EnvironmentWebhook, error) {
+	env, ok := c.environments[fmt.Sprintf("%s/%s/%s", orgName, projectName, envName)]
+	if !ok {
+		return nil, errors.New("environment not found")
+	}
+	return append([]client.EnvironmentWebhook(nil), env.webhooks...), nil
+}
+
+func (c *testPulumiClient) GetEnvironmentWebhook(
+	ctx context.Context,
+	orgName, projectName, envName, webhookName string,
+) (*client.EnvironmentWebhook, error) {
+	env, i, err := c.findWebhook(orgName, projectName, envName, webhookName)
+	if err != nil {
+		return nil, err
+	}
+	w := env.webhooks[i]
+	return &w, nil
+}
+
+func (c *testPulumiClient) CreateEnvironmentWebhook(
+	ctx context.Context,
+	orgName, projectName, envName string,
+	req client.CreateEnvironmentWebhookRequest,
+) (*client.EnvironmentWebhook, error) {
+	env, ok := c.environments[fmt.Sprintf("%s/%s/%s", orgName, projectName, envName)]
+	if !ok {
+		return nil, errors.New("environment not found")
+	}
+	name := req.Name
+	if name == "" {
+		name = fmt.Sprintf("hook-%d", len(env.webhooks)+1)
+	}
+	for _, w := range env.webhooks {
+		if w.Name == name {
+			return nil, errors.New("webhook already exists")
+		}
+	}
+	w := client.EnvironmentWebhook{
+		Active:           req.Active,
+		DisplayName:      req.DisplayName,
+		Name:             name,
+		OrganizationName: orgName,
+		PayloadURL:       req.PayloadURL,
+		EnvName:          envName,
+		Filters:          append([]string(nil), req.Filters...),
+		Groups:           append([]string(nil), req.Groups...),
+		Format:           req.Format,
+		ProjectName:      projectName,
+		HasSecret:        req.Secret != "",
+	}
+	env.webhooks = append(env.webhooks, w)
+	return &w, nil
+}
+
+func (c *testPulumiClient) UpdateEnvironmentWebhook(
+	ctx context.Context,
+	orgName, projectName, envName, webhookName string,
+	req client.UpdateEnvironmentWebhookRequest,
+) (*client.EnvironmentWebhook, error) {
+	env, i, err := c.findWebhook(orgName, projectName, envName, webhookName)
+	if err != nil {
+		return nil, err
+	}
+	w := env.webhooks[i]
+	w.Active = req.Active
+	w.DisplayName = req.DisplayName
+	w.PayloadURL = req.PayloadURL
+	w.Filters = append([]string(nil), req.Filters...)
+	w.Groups = append([]string(nil), req.Groups...)
+	if req.Format != nil {
+		w.Format = *req.Format
+	}
+	switch req.Secret {
+	case "":
+		// leave HasSecret unchanged
+	case "__remove-secret":
+		w.HasSecret = false
+	default:
+		w.HasSecret = true
+	}
+	env.webhooks[i] = w
+	return &w, nil
+}
+
+func (c *testPulumiClient) DeleteEnvironmentWebhook(
+	ctx context.Context,
+	orgName, projectName, envName, webhookName string,
+) error {
+	env, i, err := c.findWebhook(orgName, projectName, envName, webhookName)
+	if err != nil {
+		return err
+	}
+	env.webhooks = append(env.webhooks[:i], env.webhooks[i+1:]...)
+	return nil
+}
+
+func (c *testPulumiClient) PingEnvironmentWebhook(
+	ctx context.Context,
+	orgName, projectName, envName, webhookName string,
+) (*client.EnvironmentWebhookDelivery, error) {
+	env, _, err := c.findWebhook(orgName, projectName, envName, webhookName)
+	if err != nil {
+		return nil, err
+	}
+	if env.webhookDeliveries == nil {
+		env.webhookDeliveries = map[string][]client.EnvironmentWebhookDelivery{}
+	}
+	id := fmt.Sprintf("dlv-%s-%d", webhookName, len(env.webhookDeliveries[webhookName])+1)
+	d := client.EnvironmentWebhookDelivery{
+		ID:              id,
+		Kind:            "ping",
+		Timestamp:       1747094400,
+		Duration:        42,
+		Payload:         "{}",
+		RequestURL:      "https://example.invalid/hook",
+		RequestHeaders:  "Content-Type: application/json",
+		ResponseCode:    200,
+		ResponseHeaders: "Content-Type: text/plain",
+		ResponseBody:    "ok",
+	}
+	env.webhookDeliveries[webhookName] = append(env.webhookDeliveries[webhookName], d)
+	return &d, nil
+}
+
+func (c *testPulumiClient) ListEnvironmentWebhookDeliveries(
+	ctx context.Context,
+	orgName, projectName, envName, webhookName string,
+) ([]client.EnvironmentWebhookDelivery, error) {
+	env, _, err := c.findWebhook(orgName, projectName, envName, webhookName)
+	if err != nil {
+		return nil, err
+	}
+	return append([]client.EnvironmentWebhookDelivery(nil), env.webhookDeliveries[webhookName]...), nil
 }
 
 func (c *testPulumiClient) GetEnvironmentRevision(
@@ -1443,6 +1750,125 @@ type cliTestcaseEnvironmentTags struct {
 	Tags map[string]string `yaml:"tags,omitempty"`
 }
 
+type cliTestcaseWebhook struct {
+	Name        string   `yaml:"name,omitempty"`
+	DisplayName string   `yaml:"display-name,omitempty"`
+	PayloadURL  string   `yaml:"payload-url,omitempty"`
+	Active      bool     `yaml:"active,omitempty"`
+	Format      string   `yaml:"format,omitempty"`
+	Filters     []string `yaml:"filters,omitempty"`
+	HasSecret   bool     `yaml:"has-secret,omitempty"`
+}
+
+type cliTestcaseEnvironmentWebhooks struct {
+	Webhooks []cliTestcaseWebhook `yaml:"webhooks,omitempty"`
+}
+
+func (w cliTestcaseWebhook) toClient(orgName, projectName, envName string) client.EnvironmentWebhook {
+	return client.EnvironmentWebhook{
+		Active:           w.Active,
+		DisplayName:      w.DisplayName,
+		Name:             w.Name,
+		OrganizationName: orgName,
+		PayloadURL:       w.PayloadURL,
+		EnvName:          envName,
+		Filters:          append([]string(nil), w.Filters...),
+		Format:           w.Format,
+		ProjectName:      projectName,
+		HasSecret:        w.HasSecret,
+	}
+}
+
+type cliTestcaseSchedule struct {
+	ID            string `yaml:"id,omitempty"`
+	Kind          string `yaml:"kind,omitempty"`
+	Paused        bool   `yaml:"paused,omitempty"`
+	Created       string `yaml:"created,omitempty"`
+	Modified      string `yaml:"modified,omitempty"`
+	LastExecuted  string `yaml:"last-executed,omitempty"`
+	NextExecution string `yaml:"next-execution,omitempty"`
+	ScheduleCron  string `yaml:"schedule-cron,omitempty"`
+	ScheduleOnce  string `yaml:"schedule-once,omitempty"`
+	Path          string `yaml:"path,omitempty"`
+}
+
+type cliTestcaseEnvironmentSchedules struct {
+	Schedules []cliTestcaseSchedule `yaml:"schedules,omitempty"`
+}
+
+func (s cliTestcaseSchedule) toClient() client.ScheduledAction {
+	var def json.RawMessage
+	if s.Path != "" {
+		def, _ = json.Marshal(map[string]any{"environmentPath": s.Path})
+	}
+	kind := s.Kind
+	if kind == "" {
+		kind = "environment_rotation"
+	}
+	return client.ScheduledAction{
+		ID:            s.ID,
+		Kind:          kind,
+		Paused:        s.Paused,
+		Created:       s.Created,
+		Modified:      s.Modified,
+		LastExecuted:  s.LastExecuted,
+		NextExecution: s.NextExecution,
+		Definition:    def,
+		ScheduleCron:  s.ScheduleCron,
+		ScheduleOnce:  s.ScheduleOnce,
+	}
+}
+
+type cliTestcaseReferrer struct {
+	Environment     *cliTestcaseEnvironmentImportReferrer `yaml:"environment,omitempty"`
+	Stack           *cliTestcaseStackReferrer             `yaml:"stack,omitempty"`
+	InsightsAccount *cliTestcaseInsightsAccountReferrer   `yaml:"insights-account,omitempty"`
+}
+
+type cliTestcaseEnvironmentImportReferrer struct {
+	Project  string `yaml:"project"`
+	Name     string `yaml:"name"`
+	Revision int64  `yaml:"revision"`
+}
+
+type cliTestcaseStackReferrer struct {
+	Project string `yaml:"project"`
+	Stack   string `yaml:"stack"`
+	Version int64  `yaml:"version"`
+}
+
+type cliTestcaseInsightsAccountReferrer struct {
+	AccountName string `yaml:"account-name"`
+}
+
+type cliTestcaseEnvironmentReferrers struct {
+	Referrers map[string][]cliTestcaseReferrer `yaml:"referrers,omitempty"`
+}
+
+func (r cliTestcaseReferrer) toClient() client.EnvironmentReferrer {
+	out := client.EnvironmentReferrer{}
+	if r.Environment != nil {
+		out.Environment = &client.EnvironmentImportReferrer{
+			Project:  r.Environment.Project,
+			Name:     r.Environment.Name,
+			Revision: r.Environment.Revision,
+		}
+	}
+	if r.Stack != nil {
+		out.Stack = &client.EnvironmentStackReferrer{
+			Project: r.Stack.Project,
+			Stack:   r.Stack.Stack,
+			Version: r.Stack.Version,
+		}
+	}
+	if r.InsightsAccount != nil {
+		out.InsightsAccount = &client.EnvironmentInsightsAccountReferrer{
+			AccountName: r.InsightsAccount.AccountName,
+		}
+	}
+	return out
+}
+
 type cliTestcaseYAML struct {
 	Parent string `yaml:"parent,omitempty"`
 
@@ -1511,6 +1937,41 @@ func loadTestcase(path string) (*cliTestcaseYAML, *cliTestcase, error) {
 			envTags = tags.Tags
 		}
 
+		var webhooks cliTestcaseEnvironmentWebhooks
+		var envWebhooks []client.EnvironmentWebhook
+		if err := env.Decode(&webhooks); webhooks.Webhooks != nil && err == nil {
+			parts := strings.SplitN(k, "/", 3)
+			var orgName, projectName, envName string
+			if len(parts) == 3 {
+				orgName, projectName, envName = parts[0], parts[1], parts[2]
+			}
+			envWebhooks = make([]client.EnvironmentWebhook, len(webhooks.Webhooks))
+			for i, w := range webhooks.Webhooks {
+				envWebhooks[i] = w.toClient(orgName, projectName, envName)
+			}
+		}
+
+		var schedules cliTestcaseEnvironmentSchedules
+		var envSchedules []client.ScheduledAction
+		if err := env.Decode(&schedules); schedules.Schedules != nil && err == nil {
+			envSchedules = make([]client.ScheduledAction, len(schedules.Schedules))
+			for i, s := range schedules.Schedules {
+				envSchedules[i] = s.toClient()
+			}
+		}
+
+		var referrers cliTestcaseEnvironmentReferrers
+		envReferrers := map[string][]client.EnvironmentReferrer{}
+		if err := env.Decode(&referrers); referrers.Referrers != nil && err == nil {
+			for k, rs := range referrers.Referrers {
+				out := make([]client.EnvironmentReferrer, len(rs))
+				for i, r := range rs {
+					out[i] = r.toClient()
+				}
+				envReferrers[k] = out
+			}
+		}
+
 		envRevisions := []*testEnvironmentRevision{{number: 1}}
 		revisionTags := map[string]int{}
 		for _, rev := range revisions.Revisions {
@@ -1554,6 +2015,9 @@ func loadTestcase(path string) (*cliTestcaseYAML, *cliTestcase, error) {
 			revisions:    envRevisions,
 			revisionTags: revisionTags,
 			tags:         envTags,
+			webhooks:     envWebhooks,
+			schedules:    envSchedules,
+			referrers:    envReferrers,
 		}
 	}
 
