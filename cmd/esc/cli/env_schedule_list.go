@@ -73,13 +73,12 @@ func printSchedules(stdout io.Writer, resp *client.ListScheduledActionsResponse,
 		return
 	}
 	t := newTable(stdout)
-	t.AppendHeader(table.Row{"ID", "KIND", "SCHEDULE", "PAUSED", "NEXT", "LAST"})
+	t.AppendHeader(table.Row{"ID", "KIND", "SCHEDULE", "NEXT", "LAST"})
 	for _, s := range resp.Schedules {
 		t.AppendRow(table.Row{
 			s.ID,
 			s.Kind,
 			scheduleExpr(s, utc),
-			s.Paused,
 			formatScheduleTime(s.NextExecution, utc),
 			formatScheduleTime(s.LastExecuted, utc),
 		})
@@ -92,7 +91,6 @@ func printSchedule(stdout io.Writer, s client.ScheduledAction, utc utcFlag) {
 	fmt.Fprintf(stdout, "ID: %s\n", s.ID)
 	fmt.Fprintf(stdout, "Kind: %s\n", s.Kind)
 	fmt.Fprintf(stdout, "Schedule: %s\n", scheduleExpr(s, utc))
-	fmt.Fprintf(stdout, "Paused: %t\n", s.Paused)
 	fmt.Fprintf(stdout, "Next execution: %s\n", formatScheduleTime(s.NextExecution, utc))
 	fmt.Fprintf(stdout, "Last executed: %s\n", formatScheduleTime(s.LastExecuted, utc))
 }
