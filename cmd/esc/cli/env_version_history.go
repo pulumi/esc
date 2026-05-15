@@ -73,7 +73,9 @@ func newEnvVersionHistoryCmd(env *envCommand) *cobra.Command {
 					before = revisions[len(revisions)-1].Number
 					all = append(all, revisions...)
 				}
-				return writeJSON(env.esc.stdout, all)
+				return writeJSON(env.esc.stdout, struct {
+					Revisions []client.EnvironmentRevision `json:"revisions"`
+				}{all})
 			}
 
 			// NOTE: we use the color profile from the user-visible stdout rather than the color profile from the pager's stdout.

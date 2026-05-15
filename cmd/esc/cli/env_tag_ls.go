@@ -83,7 +83,9 @@ func newEnvTagLsCmd(env *envCommand) *cobra.Command {
 			})
 
 			if format == outputJSON {
-				return writeJSON(env.esc.stdout, allTags)
+				return writeJSON(env.esc.stdout, struct {
+					Tags []*client.EnvironmentTag `json:"tags"`
+				}{allTags})
 			}
 
 			for _, t := range allTags {

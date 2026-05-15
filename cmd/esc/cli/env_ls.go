@@ -57,15 +57,17 @@ func newEnvLsCmd(env *envCommand) *cobra.Command {
 			})
 
 			if format == outputJSON {
-				return writeJSON(env.esc.stdout, allEnvs)
+				ids := make([]string, 0, len(allEnvs))
+				for _, e := range allEnvs {
+					ids = append(ids, envIdentifier(e))
+				}
+				return writeJSON(env.esc.stdout, struct {
+					Environments []string `json:"environments"`
+				}{ids})
 			}
 
 			for _, e := range allEnvs {
-				if e.Organization == "" {
-					fmt.Fprintf(env.esc.stdout, "%v/%v\n", e.Project, e.Name)
-				} else {
-					fmt.Fprintf(env.esc.stdout, "%v/%v/%v\n", e.Organization, e.Project, e.Name)
-				}
+				fmt.Fprintln(env.esc.stdout, envIdentifier(e))
 			}
 
 			return nil
@@ -79,6 +81,15 @@ func newEnvLsCmd(env *envCommand) *cobra.Command {
 	addOutputFlag(cmd, &output)
 
 	return cmd
+}
+
+// envIdentifier formats an environment as "org/project/name", omitting the org segment
+// when it has been blanked out (i.e. it matches the caller's own username).
+func envIdentifier(e client.OrgEnvironment) string {
+	if e.Organization == "" {
+		return fmt.Sprintf("%s/%s", e.Project, e.Name)
+	}
+	return fmt.Sprintf("%s/%s/%s", e.Organization, e.Project, e.Name)
 }
 
 func (env *envCommand) listEnvironments(ctx context.Context, orgFilter, projectFilter string) ([]client.OrgEnvironment, error) {
