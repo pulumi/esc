@@ -5,18 +5,19 @@ package cli
 import (
 	"context"
 	"errors"
-	"fmt"
 
 	"github.com/spf13/cobra"
 )
 
-func newEnvScheduleRmCmd(env *envCommand) *cobra.Command {
+func newEnvScheduleGetCmd(env *envCommand) *cobra.Command {
+	var utc bool
+
 	cmd := &cobra.Command{
-		Use:   "rm [<org-name>/][<project-name>/]<environment-name> <schedule-id>",
-		Short: "Remove an environment scheduled action.",
-		Long: "Remove an environment scheduled action\n" +
+		Use:   "get [<org-name>/][<project-name>/]<environment-name> <schedule-id>",
+		Short: "Show details for an environment scheduled action.",
+		Long: "Show details for an environment scheduled action\n" +
 			"\n" +
-			"This command removes the named scheduled action from the environment.\n",
+			"This command retrieves details for a single scheduled action.\n",
 		Args:         cobra.ExactArgs(2),
 		SilenceUsage: true,
 		RunE: func(cmd *cobra.Command, args []string) error {
@@ -31,7 +32,7 @@ func newEnvScheduleRmCmd(env *envCommand) *cobra.Command {
 				return err
 			}
 			if ref.version != "" {
-				return errors.New("the rm command does not accept versions")
+				return errors.New("the get command does not accept versions")
 			}
 
 			scheduleID := args[0]
@@ -39,15 +40,17 @@ func newEnvScheduleRmCmd(env *envCommand) *cobra.Command {
 				return errors.New("schedule ID cannot be empty")
 			}
 
-			if err := env.esc.client.DeleteEnvironmentSchedule(ctx, ref.orgName, ref.projectName, ref.envName, scheduleID); err != nil {
+			s, err := env.esc.client.GetEnvironmentSchedule(ctx, ref.orgName, ref.projectName, ref.envName, scheduleID)
+			if err != nil {
 				return err
 			}
 
-			fmt.Fprintf(env.esc.stdout, "Removed schedule %s from %s/%s/%s\n",
-				scheduleID, ref.orgName, ref.projectName, ref.envName)
+			printSchedule(env.esc.stdout, *s, utcFlag(utc))
 			return nil
 		},
 	}
+
+	cmd.Flags().BoolVar(&utc, "utc", false, "display times in UTC")
 
 	return cmd
 }

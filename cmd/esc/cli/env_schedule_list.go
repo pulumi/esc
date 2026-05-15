@@ -80,15 +80,18 @@ func printSchedules(stdout io.Writer, resp *client.ListScheduledActionsResponse,
 }
 
 func printSchedule(stdout io.Writer, s client.ScheduledAction, utc utcFlag) {
-	fmt.Fprintf(stdout, "ID: %s\n", s.ID)
-	fmt.Fprintf(stdout, "Kind: %s\n", s.Kind)
-	schedule := s.ScheduleCron
-	if schedule == "" {
+	var schedule string
+	switch {
+	case s.ScheduleCron != "":
+		schedule = s.ScheduleCron
+	case s.ScheduleOnce != "":
 		schedule = formatScheduleTime(s.ScheduleOnce, utc)
-	}
-	if schedule == "" || schedule == "never" {
+	default:
 		schedule = "<unknown>"
 	}
+
+	fmt.Fprintf(stdout, "ID: %s\n", s.ID)
+	fmt.Fprintf(stdout, "Kind: %s\n", s.Kind)
 	fmt.Fprintf(stdout, "Schedule: %s\n", schedule)
 	fmt.Fprintf(stdout, "Paused: %t\n", s.Paused)
 	fmt.Fprintf(stdout, "Next execution: %s\n", formatScheduleTime(s.NextExecution, utc))

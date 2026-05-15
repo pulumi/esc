@@ -6,6 +6,7 @@ import (
 	"bytes"
 	"context"
 	"encoding/base64"
+	"encoding/json"
 	"errors"
 	"fmt"
 	"hash/fnv"
@@ -1040,9 +1041,11 @@ func (c *testPulumiClient) CreateEnvironmentSchedule(
 		return nil, errors.New("environment not found")
 	}
 	id := fmt.Sprintf("sched-%d", len(env.schedules)+1)
-	def := map[string]any{}
+	var def json.RawMessage
 	if req.SecretRotationRequest != nil {
-		def["environmentPath"] = req.SecretRotationRequest.EnvironmentPath
+		def, _ = json.Marshal(map[string]any{
+			"environmentPath": req.SecretRotationRequest.EnvironmentPath,
+		})
 	}
 	s := client.ScheduledAction{
 		ID:            id,
@@ -1074,28 +1077,64 @@ func (c *testPulumiClient) findSchedule(orgName, projectName, envName, scheduleI
 	return nil, 0, errors.New("schedule not found")
 }
 
-func (c *testPulumiClient) PauseEnvironmentSchedule(
+func (c *testPulumiClient) GetEnvironmentSchedule(
 	ctx context.Context,
 	orgName, projectName, envName, scheduleID string,
-) error {
+) (*client.ScheduledAction, error) {
 	env, i, err := c.findSchedule(orgName, projectName, envName, scheduleID)
 	if err != nil {
-		return err
+		return nil, err
 	}
-	env.schedules[i].Paused = true
-	return nil
+	s := env.schedules[i]
+	return &s, nil
 }
 
-func (c *testPulumiClient) ResumeEnvironmentSchedule(
+func (c *testPulumiClient) UpdateEnvironmentSchedule(
 	ctx context.Context,
 	orgName, projectName, envName, scheduleID string,
-) error {
+	req client.UpdateEnvironmentScheduleRequest,
+) (*client.ScheduledAction, error) {
 	env, i, err := c.findSchedule(orgName, projectName, envName, scheduleID)
 	if err != nil {
-		return err
+		return nil, err
 	}
-	env.schedules[i].Paused = false
-	return nil
+	if req.ScheduleCron != "" {
+		env.schedules[i].ScheduleCron = req.ScheduleCron
+		env.schedules[i].ScheduleOnce = ""
+	}
+	if req.ScheduleOnce != "" {
+		env.schedules[i].ScheduleOnce = req.ScheduleOnce
+		env.schedules[i].ScheduleCron = ""
+	}
+	if req.SecretRotationRequest != nil {
+		def, _ := json.Marshal(map[string]any{
+			"environmentPath": req.SecretRotationRequest.EnvironmentPath,
+		})
+		env.schedules[i].Definition = def
+	}
+	env.schedules[i].Modified = "2026-05-13T13:00:00Z"
+	s := env.schedules[i]
+	return &s, nil
+}
+
+func (c *testPulumiClient) ListEnvironmentScheduleHistory(
+	ctx context.Context,
+	orgName, projectName, envName, scheduleID string,
+) (*client.ListScheduleHistoryResponse, error) {
+	if _, _, err := c.findSchedule(orgName, projectName, envName, scheduleID); err != nil {
+		return nil, err
+	}
+	return &client.ListScheduleHistoryResponse{
+		ScheduleHistoryEvents: []client.ScheduleHistoryEvent{
+			{
+				ID:                "evt-1",
+				ScheduledActionID: scheduleID,
+				Executed:          "2026-05-13T12:30:00Z",
+				Version:           1,
+				Result:            "succeeded",
+			},
+		},
+	}, nil
 }
 
 func (c *testPulumiClient) DeleteEnvironmentSchedule(
@@ -1574,9 +1613,9 @@ type cliTestcaseEnvironmentSchedules struct {
 }
 
 func (s cliTestcaseSchedule) toClient() client.ScheduledAction {
-	def := map[string]any{}
+	var def json.RawMessage
 	if s.Path != "" {
-		def["environmentPath"] = s.Path
+		def, _ = json.Marshal(map[string]any{"environmentPath": s.Path})
 	}
 	kind := s.Kind
 	if kind == "" {

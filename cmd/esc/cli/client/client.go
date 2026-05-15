@@ -345,14 +345,27 @@ type Client interface {
 		req CreateEnvironmentScheduleRequest,
 	) (*ScheduledAction, error)
 
-	// PauseEnvironmentSchedule pauses the scheduled action with the given ID.
-	PauseEnvironmentSchedule(ctx context.Context, orgName, projectName, envName, scheduleID string) error
+	// GetEnvironmentSchedule returns the scheduled action with the given ID.
+	GetEnvironmentSchedule(
+		ctx context.Context,
+		orgName, projectName, envName, scheduleID string,
+	) (*ScheduledAction, error)
 
-	// ResumeEnvironmentSchedule resumes the scheduled action with the given ID.
-	ResumeEnvironmentSchedule(ctx context.Context, orgName, projectName, envName, scheduleID string) error
+	// UpdateEnvironmentSchedule edits the scheduled action with the given ID.
+	UpdateEnvironmentSchedule(
+		ctx context.Context,
+		orgName, projectName, envName, scheduleID string,
+		req UpdateEnvironmentScheduleRequest,
+	) (*ScheduledAction, error)
 
 	// DeleteEnvironmentSchedule deletes the scheduled action with the given ID.
 	DeleteEnvironmentSchedule(ctx context.Context, orgName, projectName, envName, scheduleID string) error
+
+	// ListEnvironmentScheduleHistory lists past executions of the scheduled action with the given ID.
+	ListEnvironmentScheduleHistory(
+		ctx context.Context,
+		orgName, projectName, envName, scheduleID string,
+	) (*ListScheduleHistoryResponse, error)
 
 	// GetEnvironmentRevision returns a description of the given revision.
 	GetEnvironmentRevision(ctx context.Context, orgName, projectName, envName string, revision int) (*EnvironmentRevision, error)
@@ -1221,22 +1234,31 @@ func (pc *client) CreateEnvironmentSchedule(
 	return &resp, nil
 }
 
-// PauseEnvironmentSchedule pauses the scheduled action with the given ID.
-func (pc *client) PauseEnvironmentSchedule(
+// GetEnvironmentSchedule returns the scheduled action with the given ID.
+func (pc *client) GetEnvironmentSchedule(
 	ctx context.Context,
 	orgName, projectName, envName, scheduleID string,
-) error {
-	path := fmt.Sprintf("/api/esc/environments/%v/%v/%v/schedules/%v/pause", orgName, projectName, envName, scheduleID)
-	return pc.restCall(ctx, http.MethodPost, path, nil, nil, nil)
+) (*ScheduledAction, error) {
+	var resp ScheduledAction
+	path := fmt.Sprintf("/api/esc/environments/%v/%v/%v/schedules/%v", orgName, projectName, envName, scheduleID)
+	if err := pc.restCall(ctx, http.MethodGet, path, nil, nil, &resp); err != nil {
+		return nil, err
+	}
+	return &resp, nil
 }
 
-// ResumeEnvironmentSchedule resumes the scheduled action with the given ID.
-func (pc *client) ResumeEnvironmentSchedule(
+// UpdateEnvironmentSchedule edits the scheduled action with the given ID.
+func (pc *client) UpdateEnvironmentSchedule(
 	ctx context.Context,
 	orgName, projectName, envName, scheduleID string,
-) error {
-	path := fmt.Sprintf("/api/esc/environments/%v/%v/%v/schedules/%v/resume", orgName, projectName, envName, scheduleID)
-	return pc.restCall(ctx, http.MethodPost, path, nil, nil, nil)
+	req UpdateEnvironmentScheduleRequest,
+) (*ScheduledAction, error) {
+	var resp ScheduledAction
+	path := fmt.Sprintf("/api/esc/environments/%v/%v/%v/schedules/%v", orgName, projectName, envName, scheduleID)
+	if err := pc.restCall(ctx, http.MethodPatch, path, nil, &req, &resp); err != nil {
+		return nil, err
+	}
+	return &resp, nil
 }
 
 // DeleteEnvironmentSchedule deletes the scheduled action with the given ID.
@@ -1246,6 +1268,19 @@ func (pc *client) DeleteEnvironmentSchedule(
 ) error {
 	path := fmt.Sprintf("/api/esc/environments/%v/%v/%v/schedules/%v", orgName, projectName, envName, scheduleID)
 	return pc.restCall(ctx, http.MethodDelete, path, nil, nil, nil)
+}
+
+// ListEnvironmentScheduleHistory lists past executions of the scheduled action with the given ID.
+func (pc *client) ListEnvironmentScheduleHistory(
+	ctx context.Context,
+	orgName, projectName, envName, scheduleID string,
+) (*ListScheduleHistoryResponse, error) {
+	var resp ListScheduleHistoryResponse
+	path := fmt.Sprintf("/api/esc/environments/%v/%v/%v/schedules/%v/history", orgName, projectName, envName, scheduleID)
+	if err := pc.restCall(ctx, http.MethodGet, path, nil, nil, &resp); err != nil {
+		return nil, err
+	}
+	return &resp, nil
 }
 
 // GetEnvironmentRevision returns a description of the given revision.
