@@ -45,6 +45,29 @@
             "EvalContext": null,
             "Extra": null,
             "Path": "values.context"
+        },
+        {
+            "Severity": 1,
+            "Summary": "\"environments\" is a reserved key",
+            "Detail": "",
+            "Subject": {
+                "Filename": "reserved-keys",
+                "Start": {
+                    "Line": 4,
+                    "Column": 3,
+                    "Byte": 40
+                },
+                "End": {
+                    "Line": 4,
+                    "Column": 15,
+                    "Byte": 52
+                }
+            },
+            "Context": null,
+            "Expression": null,
+            "EvalContext": null,
+            "Extra": null,
+            "Path": "values.environments"
         }
     ],
     "check": {
@@ -287,6 +310,29 @@
             "EvalContext": null,
             "Extra": null,
             "Path": "values.context"
+        },
+        {
+            "Severity": 1,
+            "Summary": "\"environments\" is a reserved key",
+            "Detail": "",
+            "Subject": {
+                "Filename": "reserved-keys",
+                "Start": {
+                    "Line": 4,
+                    "Column": 3,
+                    "Byte": 40
+                },
+                "End": {
+                    "Line": 4,
+                    "Column": 15,
+                    "Byte": 52
+                }
+            },
+            "Context": null,
+            "Expression": null,
+            "EvalContext": null,
+            "Extra": null,
+            "Path": "values.environments"
         }
     ],
     "eval": {

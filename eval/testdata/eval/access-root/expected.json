@@ -1,0 +1,2875 @@
+{
+    "checkDiags": [
+        {
+            "Severity": 1,
+            "Summary": "cyclic reference to values",
+            "Detail": "",
+            "Subject": {
+                "Filename": "access-root",
+                "Start": {
+                    "Line": 11,
+                    "Column": 11,
+                    "Byte": 163
+                },
+                "End": {
+                    "Line": 11,
+                    "Column": 21,
+                    "Byte": 173
+                }
+            },
+            "Context": null,
+            "Expression": null,
+            "EvalContext": null,
+            "Extra": null,
+            "Path": "values.values"
+        }
+    ],
+    "check": {
+        "exprs": {
+            "ctx": {
+                "range": {
+                    "environment": "access-root",
+                    "begin": {
+                        "line": 8,
+                        "column": 8,
+                        "byte": 73
+                    },
+                    "end": {
+                        "line": 8,
+                        "column": 19,
+                        "byte": 84
+                    }
+                },
+                "schema": {
+                    "properties": {
+                        "currentEnvironment": {
+                            "properties": {
+                                "name": {
+                                    "type": "string",
+                                    "const": "access-root"
+                                }
+                            },
+                            "type": "object",
+                            "required": [
+                                "name"
+                            ]
+                        },
+                        "pulumi": {
+                            "properties": {
+                                "user": {
+                                    "properties": {
+                                        "id": {
+                                            "type": "string",
+                                            "const": "USER_123"
+                                        }
+                                    },
+                                    "type": "object",
+                                    "required": [
+                                        "id"
+                                    ]
+                                }
+                            },
+                            "type": "object",
+                            "required": [
+                                "user"
+                            ]
+                        },
+                        "rootEnvironment": {
+                            "properties": {
+                                "name": {
+                                    "type": "string",
+                                    "const": "access-root"
+                                }
+                            },
+                            "type": "object",
+                            "required": [
+                                "name"
+                            ]
+                        }
+                    },
+                    "type": "object",
+                    "required": [
+                        "currentEnvironment",
+                        "pulumi",
+                        "rootEnvironment"
+                    ]
+                },
+                "symbol": [
+                    {
+                        "key": "",
+                        "range": {
+                            "environment": "access-root",
+                            "begin": {
+                                "line": 8,
+                                "column": 10,
+                                "byte": 75
+                            },
+                            "end": {
+                                "line": 8,
+                                "column": 10,
+                                "byte": 75
+                            }
+                        },
+                        "value": {
+                            "begin": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            },
+                            "end": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            }
+                        }
+                    },
+                    {
+                        "key": "context",
+                        "range": {
+                            "environment": "access-root",
+                            "begin": {
+                                "line": 8,
+                                "column": 10,
+                                "byte": 75
+                            },
+                            "end": {
+                                "line": 8,
+                                "column": 18,
+                                "byte": 83
+                            }
+                        },
+                        "value": {
+                            "environment": "access-root",
+                            "begin": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            },
+                            "end": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            }
+                        }
+                    }
+                ]
+            },
+            "env": {
+                "range": {
+                    "environment": "access-root",
+                    "begin": {
+                        "line": 9,
+                        "column": 8,
+                        "byte": 92
+                    },
+                    "end": {
+                        "line": 9,
+                        "column": 24,
+                        "byte": 108
+                    }
+                },
+                "schema": true,
+                "symbol": [
+                    {
+                        "key": "",
+                        "range": {
+                            "environment": "access-root",
+                            "begin": {
+                                "line": 9,
+                                "column": 10,
+                                "byte": 94
+                            },
+                            "end": {
+                                "line": 9,
+                                "column": 10,
+                                "byte": 94
+                            }
+                        },
+                        "value": {
+                            "begin": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            },
+                            "end": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            }
+                        }
+                    },
+                    {
+                        "key": "environments",
+                        "range": {
+                            "environment": "access-root",
+                            "begin": {
+                                "line": 9,
+                                "column": 10,
+                                "byte": 94
+                            },
+                            "end": {
+                                "line": 9,
+                                "column": 23,
+                                "byte": 107
+                            }
+                        },
+                        "value": {
+                            "environment": "access-root",
+                            "begin": {
+                                "line": 9,
+                                "column": 8,
+                                "byte": 92
+                            },
+                            "end": {
+                                "line": 9,
+                                "column": 24,
+                                "byte": 108
+                            }
+                        }
+                    }
+                ]
+            },
+            "env2": {
+                "range": {
+                    "environment": "access-root",
+                    "begin": {
+                        "line": 10,
+                        "column": 9,
+                        "byte": 117
+                    },
+                    "end": {
+                        "line": 10,
+                        "column": 44,
+                        "byte": 152
+                    }
+                },
+                "schema": {
+                    "type": "number",
+                    "const": 42
+                },
+                "symbol": [
+                    {
+                        "key": "",
+                        "range": {
+                            "environment": "access-root",
+                            "begin": {
+                                "line": 10,
+                                "column": 11,
+                                "byte": 119
+                            },
+                            "end": {
+                                "line": 10,
+                                "column": 11,
+                                "byte": 119
+                            }
+                        },
+                        "value": {
+                            "begin": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            },
+                            "end": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            }
+                        }
+                    },
+                    {
+                        "key": "environments",
+                        "range": {
+                            "environment": "access-root",
+                            "begin": {
+                                "line": 10,
+                                "column": 11,
+                                "byte": 119
+                            },
+                            "end": {
+                                "line": 10,
+                                "column": 24,
+                                "byte": 132
+                            }
+                        },
+                        "value": {
+                            "environment": "access-root",
+                            "begin": {
+                                "line": 10,
+                                "column": 9,
+                                "byte": 117
+                            },
+                            "end": {
+                                "line": 10,
+                                "column": 44,
+                                "byte": 152
+                            }
+                        }
+                    },
+                    {
+                        "key": "foo",
+                        "range": {
+                            "environment": "access-root",
+                            "begin": {
+                                "line": 10,
+                                "column": 24,
+                                "byte": 132
+                            },
+                            "end": {
+                                "line": 10,
+                                "column": 28,
+                                "byte": 136
+                            }
+                        },
+                        "value": {
+                            "environment": "access-root",
+                            "begin": {
+                                "line": 10,
+                                "column": 9,
+                                "byte": 117
+                            },
+                            "end": {
+                                "line": 10,
+                                "column": 44,
+                                "byte": 152
+                            }
+                        }
+                    },
+                    {
+                        "key": "bar",
+                        "range": {
+                            "environment": "access-root",
+                            "begin": {
+                                "line": 10,
+                                "column": 28,
+                                "byte": 136
+                            },
+                            "end": {
+                                "line": 10,
+                                "column": 32,
+                                "byte": 140
+                            }
+                        },
+                        "value": {
+                            "environment": "access-root",
+                            "begin": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            },
+                            "end": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            }
+                        }
+                    },
+                    {
+                        "key": "some_value",
+                        "range": {
+                            "environment": "access-root",
+                            "begin": {
+                                "line": 10,
+                                "column": 32,
+                                "byte": 140
+                            },
+                            "end": {
+                                "line": 10,
+                                "column": 43,
+                                "byte": 151
+                            }
+                        },
+                        "value": {
+                            "environment": "foo/bar",
+                            "begin": {
+                                "line": 2,
+                                "column": 15,
+                                "byte": 22
+                            },
+                            "end": {
+                                "line": 2,
+                                "column": 17,
+                                "byte": 24
+                            }
+                        }
+                    }
+                ]
+            },
+            "foo": {
+                "range": {
+                    "environment": "access-root",
+                    "begin": {
+                        "line": 5,
+                        "column": 8,
+                        "byte": 37
+                    },
+                    "end": {
+                        "line": 5,
+                        "column": 14,
+                        "byte": 43
+                    }
+                },
+                "schema": {
+                    "type": "string",
+                    "const": "hello!"
+                },
+                "literal": "hello!"
+            },
+            "imp": {
+                "range": {
+                    "environment": "access-root",
+                    "begin": {
+                        "line": 7,
+                        "column": 8,
+                        "byte": 54
+                    },
+                    "end": {
+                        "line": 7,
+                        "column": 19,
+                        "byte": 65
+                    }
+                },
+                "schema": {
+                    "properties": {
+                        "foo/bar": {
+                            "properties": {
+                                "some_value": {
+                                    "type": "number",
+                                    "const": 42
+                                }
+                            },
+                            "type": "object",
+                            "required": [
+                                "some_value"
+                            ]
+                        }
+                    },
+                    "type": "object",
+                    "required": [
+                        "foo/bar"
+                    ]
+                },
+                "symbol": [
+                    {
+                        "key": "",
+                        "range": {
+                            "environment": "access-root",
+                            "begin": {
+                                "line": 7,
+                                "column": 10,
+                                "byte": 56
+                            },
+                            "end": {
+                                "line": 7,
+                                "column": 10,
+                                "byte": 56
+                            }
+                        },
+                        "value": {
+                            "begin": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            },
+                            "end": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            }
+                        }
+                    },
+                    {
+                        "key": "imports",
+                        "range": {
+                            "environment": "access-root",
+                            "begin": {
+                                "line": 7,
+                                "column": 10,
+                                "byte": 56
+                            },
+                            "end": {
+                                "line": 7,
+                                "column": 18,
+                                "byte": 64
+                            }
+                        },
+                        "value": {
+                            "environment": "access-root",
+                            "begin": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            },
+                            "end": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            }
+                        }
+                    }
+                ]
+            },
+            "invalid": {
+                "range": {
+                    "environment": "access-root",
+                    "begin": {
+                        "line": 13,
+                        "column": 12,
+                        "byte": 211
+                    },
+                    "end": {
+                        "line": 13,
+                        "column": 23,
+                        "byte": 222
+                    }
+                },
+                "schema": true,
+                "symbol": [
+                    {
+                        "key": "",
+                        "range": {
+                            "environment": "access-root",
+                            "begin": {
+                                "line": 13,
+                                "column": 14,
+                                "byte": 213
+                            },
+                            "end": {
+                                "line": 13,
+                                "column": 14,
+                                "byte": 213
+                            }
+                        },
+                        "value": {
+                            "begin": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            },
+                            "end": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            }
+                        }
+                    },
+                    {
+                        "key": "invalid",
+                        "range": {
+                            "environment": "access-root",
+                            "begin": {
+                                "line": 13,
+                                "column": 14,
+                                "byte": 213
+                            },
+                            "end": {
+                                "line": 13,
+                                "column": 22,
+                                "byte": 221
+                            }
+                        },
+                        "value": {
+                            "environment": "access-root",
+                            "begin": {
+                                "line": 13,
+                                "column": 12,
+                                "byte": 211
+                            },
+                            "end": {
+                                "line": 13,
+                                "column": 23,
+                                "byte": 222
+                            }
+                        }
+                    }
+                ]
+            },
+            "values": {
+                "range": {
+                    "environment": "access-root",
+                    "begin": {
+                        "line": 11,
+                        "column": 11,
+                        "byte": 163
+                    },
+                    "end": {
+                        "line": 11,
+                        "column": 21,
+                        "byte": 173
+                    }
+                },
+                "schema": true,
+                "symbol": [
+                    {
+                        "key": "",
+                        "range": {
+                            "environment": "access-root",
+                            "begin": {
+                                "line": 11,
+                                "column": 13,
+                                "byte": 165
+                            },
+                            "end": {
+                                "line": 11,
+                                "column": 13,
+                                "byte": 165
+                            }
+                        },
+                        "value": {
+                            "begin": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            },
+                            "end": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            }
+                        }
+                    },
+                    {
+                        "key": "values",
+                        "range": {
+                            "environment": "access-root",
+                            "begin": {
+                                "line": 11,
+                                "column": 13,
+                                "byte": 165
+                            },
+                            "end": {
+                                "line": 11,
+                                "column": 20,
+                                "byte": 172
+                            }
+                        },
+                        "value": {
+                            "begin": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            },
+                            "end": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            }
+                        }
+                    }
+                ]
+            },
+            "values2": {
+                "range": {
+                    "environment": "access-root",
+                    "begin": {
+                        "line": 12,
+                        "column": 12,
+                        "byte": 185
+                    },
+                    "end": {
+                        "line": 12,
+                        "column": 26,
+                        "byte": 199
+                    }
+                },
+                "schema": {
+                    "type": "string",
+                    "const": "hello!"
+                },
+                "symbol": [
+                    {
+                        "key": "",
+                        "range": {
+                            "environment": "access-root",
+                            "begin": {
+                                "line": 12,
+                                "column": 14,
+                                "byte": 187
+                            },
+                            "end": {
+                                "line": 12,
+                                "column": 14,
+                                "byte": 187
+                            }
+                        },
+                        "value": {
+                            "begin": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            },
+                            "end": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            }
+                        }
+                    },
+                    {
+                        "key": "values",
+                        "range": {
+                            "environment": "access-root",
+                            "begin": {
+                                "line": 12,
+                                "column": 14,
+                                "byte": 187
+                            },
+                            "end": {
+                                "line": 12,
+                                "column": 21,
+                                "byte": 194
+                            }
+                        },
+                        "value": {
+                            "begin": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            },
+                            "end": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            }
+                        }
+                    },
+                    {
+                        "key": "foo",
+                        "range": {
+                            "environment": "access-root",
+                            "begin": {
+                                "line": 12,
+                                "column": 21,
+                                "byte": 194
+                            },
+                            "end": {
+                                "line": 12,
+                                "column": 25,
+                                "byte": 198
+                            }
+                        },
+                        "value": {
+                            "environment": "access-root",
+                            "begin": {
+                                "line": 5,
+                                "column": 8,
+                                "byte": 37
+                            },
+                            "end": {
+                                "line": 5,
+                                "column": 14,
+                                "byte": 43
+                            }
+                        }
+                    }
+                ]
+            }
+        },
+        "properties": {
+            "ctx": {
+                "value": {
+                    "currentEnvironment": {
+                        "value": {
+                            "name": {
+                                "value": "access-root",
+                                "trace": {
+                                    "def": {
+                                        "environment": "access-root",
+                                        "begin": {
+                                            "line": 0,
+                                            "column": 0,
+                                            "byte": 0
+                                        },
+                                        "end": {
+                                            "line": 0,
+                                            "column": 0,
+                                            "byte": 0
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "trace": {
+                            "def": {
+                                "environment": "access-root",
+                                "begin": {
+                                    "line": 0,
+                                    "column": 0,
+                                    "byte": 0
+                                },
+                                "end": {
+                                    "line": 0,
+                                    "column": 0,
+                                    "byte": 0
+                                }
+                            }
+                        }
+                    },
+                    "pulumi": {
+                        "value": {
+                            "user": {
+                                "value": {
+                                    "id": {
+                                        "value": "USER_123",
+                                        "trace": {
+                                            "def": {
+                                                "environment": "access-root",
+                                                "begin": {
+                                                    "line": 0,
+                                                    "column": 0,
+                                                    "byte": 0
+                                                },
+                                                "end": {
+                                                    "line": 0,
+                                                    "column": 0,
+                                                    "byte": 0
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                "trace": {
+                                    "def": {
+                                        "environment": "access-root",
+                                        "begin": {
+                                            "line": 0,
+                                            "column": 0,
+                                            "byte": 0
+                                        },
+                                        "end": {
+                                            "line": 0,
+                                            "column": 0,
+                                            "byte": 0
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "trace": {
+                            "def": {
+                                "environment": "access-root",
+                                "begin": {
+                                    "line": 0,
+                                    "column": 0,
+                                    "byte": 0
+                                },
+                                "end": {
+                                    "line": 0,
+                                    "column": 0,
+                                    "byte": 0
+                                }
+                            }
+                        }
+                    },
+                    "rootEnvironment": {
+                        "value": {
+                            "name": {
+                                "value": "access-root",
+                                "trace": {
+                                    "def": {
+                                        "environment": "access-root",
+                                        "begin": {
+                                            "line": 0,
+                                            "column": 0,
+                                            "byte": 0
+                                        },
+                                        "end": {
+                                            "line": 0,
+                                            "column": 0,
+                                            "byte": 0
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "trace": {
+                            "def": {
+                                "environment": "access-root",
+                                "begin": {
+                                    "line": 0,
+                                    "column": 0,
+                                    "byte": 0
+                                },
+                                "end": {
+                                    "line": 0,
+                                    "column": 0,
+                                    "byte": 0
+                                }
+                            }
+                        }
+                    }
+                },
+                "trace": {
+                    "def": {
+                        "environment": "access-root",
+                        "begin": {
+                            "line": 8,
+                            "column": 8,
+                            "byte": 73
+                        },
+                        "end": {
+                            "line": 8,
+                            "column": 19,
+                            "byte": 84
+                        }
+                    }
+                }
+            },
+            "env": {
+                "unknown": true,
+                "trace": {
+                    "def": {
+                        "environment": "access-root",
+                        "begin": {
+                            "line": 9,
+                            "column": 8,
+                            "byte": 92
+                        },
+                        "end": {
+                            "line": 9,
+                            "column": 24,
+                            "byte": 108
+                        }
+                    }
+                }
+            },
+            "env2": {
+                "value": 42,
+                "trace": {
+                    "def": {
+                        "environment": "access-root",
+                        "begin": {
+                            "line": 10,
+                            "column": 9,
+                            "byte": 117
+                        },
+                        "end": {
+                            "line": 10,
+                            "column": 44,
+                            "byte": 152
+                        }
+                    }
+                }
+            },
+            "foo": {
+                "value": "hello!",
+                "trace": {
+                    "def": {
+                        "environment": "access-root",
+                        "begin": {
+                            "line": 5,
+                            "column": 8,
+                            "byte": 37
+                        },
+                        "end": {
+                            "line": 5,
+                            "column": 14,
+                            "byte": 43
+                        }
+                    }
+                }
+            },
+            "imp": {
+                "value": {
+                    "foo/bar": {
+                        "value": {
+                            "some_value": {
+                                "value": 42,
+                                "trace": {
+                                    "def": {
+                                        "environment": "foo/bar",
+                                        "begin": {
+                                            "line": 2,
+                                            "column": 15,
+                                            "byte": 22
+                                        },
+                                        "end": {
+                                            "line": 2,
+                                            "column": 17,
+                                            "byte": 24
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "trace": {
+                            "def": {
+                                "environment": "access-root",
+                                "begin": {
+                                    "line": 0,
+                                    "column": 0,
+                                    "byte": 0
+                                },
+                                "end": {
+                                    "line": 0,
+                                    "column": 0,
+                                    "byte": 0
+                                }
+                            }
+                        }
+                    }
+                },
+                "trace": {
+                    "def": {
+                        "environment": "access-root",
+                        "begin": {
+                            "line": 7,
+                            "column": 8,
+                            "byte": 54
+                        },
+                        "end": {
+                            "line": 7,
+                            "column": 19,
+                            "byte": 65
+                        }
+                    }
+                }
+            },
+            "invalid": {
+                "unknown": true,
+                "trace": {
+                    "def": {
+                        "environment": "access-root",
+                        "begin": {
+                            "line": 13,
+                            "column": 12,
+                            "byte": 211
+                        },
+                        "end": {
+                            "line": 13,
+                            "column": 23,
+                            "byte": 222
+                        }
+                    }
+                }
+            },
+            "some_value": {
+                "value": 42,
+                "trace": {
+                    "def": {
+                        "environment": "foo/bar",
+                        "begin": {
+                            "line": 2,
+                            "column": 15,
+                            "byte": 22
+                        },
+                        "end": {
+                            "line": 2,
+                            "column": 17,
+                            "byte": 24
+                        }
+                    }
+                }
+            },
+            "values": {
+                "unknown": true,
+                "trace": {
+                    "def": {
+                        "environment": "access-root",
+                        "begin": {
+                            "line": 11,
+                            "column": 11,
+                            "byte": 163
+                        },
+                        "end": {
+                            "line": 11,
+                            "column": 21,
+                            "byte": 173
+                        }
+                    }
+                }
+            },
+            "values2": {
+                "value": "hello!",
+                "trace": {
+                    "def": {
+                        "environment": "access-root",
+                        "begin": {
+                            "line": 12,
+                            "column": 12,
+                            "byte": 185
+                        },
+                        "end": {
+                            "line": 12,
+                            "column": 26,
+                            "byte": 199
+                        }
+                    }
+                }
+            }
+        },
+        "schema": {
+            "properties": {
+                "ctx": {
+                    "properties": {
+                        "currentEnvironment": {
+                            "properties": {
+                                "name": {
+                                    "type": "string",
+                                    "const": "access-root"
+                                }
+                            },
+                            "type": "object",
+                            "required": [
+                                "name"
+                            ]
+                        },
+                        "pulumi": {
+                            "properties": {
+                                "user": {
+                                    "properties": {
+                                        "id": {
+                                            "type": "string",
+                                            "const": "USER_123"
+                                        }
+                                    },
+                                    "type": "object",
+                                    "required": [
+                                        "id"
+                                    ]
+                                }
+                            },
+                            "type": "object",
+                            "required": [
+                                "user"
+                            ]
+                        },
+                        "rootEnvironment": {
+                            "properties": {
+                                "name": {
+                                    "type": "string",
+                                    "const": "access-root"
+                                }
+                            },
+                            "type": "object",
+                            "required": [
+                                "name"
+                            ]
+                        }
+                    },
+                    "type": "object",
+                    "required": [
+                        "currentEnvironment",
+                        "pulumi",
+                        "rootEnvironment"
+                    ]
+                },
+                "env": true,
+                "env2": {
+                    "type": "number",
+                    "const": 42
+                },
+                "foo": {
+                    "type": "string",
+                    "const": "hello!"
+                },
+                "imp": {
+                    "properties": {
+                        "foo/bar": {
+                            "properties": {
+                                "some_value": {
+                                    "type": "number",
+                                    "const": 42
+                                }
+                            },
+                            "type": "object",
+                            "required": [
+                                "some_value"
+                            ]
+                        }
+                    },
+                    "type": "object",
+                    "required": [
+                        "foo/bar"
+                    ]
+                },
+                "invalid": true,
+                "some_value": {
+                    "type": "number",
+                    "const": 42
+                },
+                "values": true,
+                "values2": {
+                    "type": "string",
+                    "const": "hello!"
+                }
+            },
+            "type": "object",
+            "required": [
+                "ctx",
+                "env",
+                "env2",
+                "foo",
+                "imp",
+                "invalid",
+                "some_value",
+                "values",
+                "values2"
+            ]
+        },
+        "executionContext": {
+            "properties": {
+                "currentEnvironment": {
+                    "value": {
+                        "name": {
+                            "value": "access-root",
+                            "trace": {
+                                "def": {
+                                    "environment": "access-root",
+                                    "begin": {
+                                        "line": 0,
+                                        "column": 0,
+                                        "byte": 0
+                                    },
+                                    "end": {
+                                        "line": 0,
+                                        "column": 0,
+                                        "byte": 0
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "trace": {
+                        "def": {
+                            "environment": "access-root",
+                            "begin": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            },
+                            "end": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            }
+                        }
+                    }
+                },
+                "pulumi": {
+                    "value": {
+                        "user": {
+                            "value": {
+                                "id": {
+                                    "value": "USER_123",
+                                    "trace": {
+                                        "def": {
+                                            "environment": "access-root",
+                                            "begin": {
+                                                "line": 0,
+                                                "column": 0,
+                                                "byte": 0
+                                            },
+                                            "end": {
+                                                "line": 0,
+                                                "column": 0,
+                                                "byte": 0
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            "trace": {
+                                "def": {
+                                    "environment": "access-root",
+                                    "begin": {
+                                        "line": 0,
+                                        "column": 0,
+                                        "byte": 0
+                                    },
+                                    "end": {
+                                        "line": 0,
+                                        "column": 0,
+                                        "byte": 0
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "trace": {
+                        "def": {
+                            "environment": "access-root",
+                            "begin": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            },
+                            "end": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            }
+                        }
+                    }
+                },
+                "rootEnvironment": {
+                    "value": {
+                        "name": {
+                            "value": "access-root",
+                            "trace": {
+                                "def": {
+                                    "environment": "access-root",
+                                    "begin": {
+                                        "line": 0,
+                                        "column": 0,
+                                        "byte": 0
+                                    },
+                                    "end": {
+                                        "line": 0,
+                                        "column": 0,
+                                        "byte": 0
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "trace": {
+                        "def": {
+                            "environment": "access-root",
+                            "begin": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            },
+                            "end": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            }
+                        }
+                    }
+                }
+            },
+            "schema": {
+                "properties": {
+                    "currentEnvironment": {
+                        "properties": {
+                            "name": {
+                                "type": "string",
+                                "const": "access-root"
+                            }
+                        },
+                        "type": "object",
+                        "required": [
+                            "name"
+                        ]
+                    },
+                    "pulumi": {
+                        "properties": {
+                            "user": {
+                                "properties": {
+                                    "id": {
+                                        "type": "string",
+                                        "const": "USER_123"
+                                    }
+                                },
+                                "type": "object",
+                                "required": [
+                                    "id"
+                                ]
+                            }
+                        },
+                        "type": "object",
+                        "required": [
+                            "user"
+                        ]
+                    },
+                    "rootEnvironment": {
+                        "properties": {
+                            "name": {
+                                "type": "string",
+                                "const": "access-root"
+                            }
+                        },
+                        "type": "object",
+                        "required": [
+                            "name"
+                        ]
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "currentEnvironment",
+                    "pulumi",
+                    "rootEnvironment"
+                ]
+            }
+        }
+    },
+    "checkJson": {
+        "ctx": {
+            "currentEnvironment": {
+                "name": "access-root"
+            },
+            "pulumi": {
+                "user": {
+                    "id": "USER_123"
+                }
+            },
+            "rootEnvironment": {
+                "name": "access-root"
+            }
+        },
+        "env": "[unknown]",
+        "env2": 42,
+        "foo": "hello!",
+        "imp": {
+            "foo/bar": {
+                "some_value": 42
+            }
+        },
+        "invalid": "[unknown]",
+        "some_value": 42,
+        "values": "[unknown]",
+        "values2": "hello!"
+    },
+    "evalDiags": [
+        {
+            "Severity": 1,
+            "Summary": "cyclic reference to values",
+            "Detail": "",
+            "Subject": {
+                "Filename": "access-root",
+                "Start": {
+                    "Line": 11,
+                    "Column": 11,
+                    "Byte": 163
+                },
+                "End": {
+                    "Line": 11,
+                    "Column": 21,
+                    "Byte": 173
+                }
+            },
+            "Context": null,
+            "Expression": null,
+            "EvalContext": null,
+            "Extra": null,
+            "Path": "values.values"
+        }
+    ],
+    "eval": {
+        "exprs": {
+            "ctx": {
+                "range": {
+                    "environment": "access-root",
+                    "begin": {
+                        "line": 8,
+                        "column": 8,
+                        "byte": 73
+                    },
+                    "end": {
+                        "line": 8,
+                        "column": 19,
+                        "byte": 84
+                    }
+                },
+                "schema": {
+                    "properties": {
+                        "currentEnvironment": {
+                            "properties": {
+                                "name": {
+                                    "type": "string",
+                                    "const": "access-root"
+                                }
+                            },
+                            "type": "object",
+                            "required": [
+                                "name"
+                            ]
+                        },
+                        "pulumi": {
+                            "properties": {
+                                "user": {
+                                    "properties": {
+                                        "id": {
+                                            "type": "string",
+                                            "const": "USER_123"
+                                        }
+                                    },
+                                    "type": "object",
+                                    "required": [
+                                        "id"
+                                    ]
+                                }
+                            },
+                            "type": "object",
+                            "required": [
+                                "user"
+                            ]
+                        },
+                        "rootEnvironment": {
+                            "properties": {
+                                "name": {
+                                    "type": "string",
+                                    "const": "access-root"
+                                }
+                            },
+                            "type": "object",
+                            "required": [
+                                "name"
+                            ]
+                        }
+                    },
+                    "type": "object",
+                    "required": [
+                        "currentEnvironment",
+                        "pulumi",
+                        "rootEnvironment"
+                    ]
+                },
+                "symbol": [
+                    {
+                        "key": "",
+                        "range": {
+                            "environment": "access-root",
+                            "begin": {
+                                "line": 8,
+                                "column": 10,
+                                "byte": 75
+                            },
+                            "end": {
+                                "line": 8,
+                                "column": 10,
+                                "byte": 75
+                            }
+                        },
+                        "value": {
+                            "begin": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            },
+                            "end": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            }
+                        }
+                    },
+                    {
+                        "key": "context",
+                        "range": {
+                            "environment": "access-root",
+                            "begin": {
+                                "line": 8,
+                                "column": 10,
+                                "byte": 75
+                            },
+                            "end": {
+                                "line": 8,
+                                "column": 18,
+                                "byte": 83
+                            }
+                        },
+                        "value": {
+                            "environment": "access-root",
+                            "begin": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            },
+                            "end": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            }
+                        }
+                    }
+                ]
+            },
+            "env": {
+                "range": {
+                    "environment": "access-root",
+                    "begin": {
+                        "line": 9,
+                        "column": 8,
+                        "byte": 92
+                    },
+                    "end": {
+                        "line": 9,
+                        "column": 24,
+                        "byte": 108
+                    }
+                },
+                "schema": true,
+                "symbol": [
+                    {
+                        "key": "",
+                        "range": {
+                            "environment": "access-root",
+                            "begin": {
+                                "line": 9,
+                                "column": 10,
+                                "byte": 94
+                            },
+                            "end": {
+                                "line": 9,
+                                "column": 10,
+                                "byte": 94
+                            }
+                        },
+                        "value": {
+                            "begin": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            },
+                            "end": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            }
+                        }
+                    },
+                    {
+                        "key": "environments",
+                        "range": {
+                            "environment": "access-root",
+                            "begin": {
+                                "line": 9,
+                                "column": 10,
+                                "byte": 94
+                            },
+                            "end": {
+                                "line": 9,
+                                "column": 23,
+                                "byte": 107
+                            }
+                        },
+                        "value": {
+                            "environment": "access-root",
+                            "begin": {
+                                "line": 9,
+                                "column": 8,
+                                "byte": 92
+                            },
+                            "end": {
+                                "line": 9,
+                                "column": 24,
+                                "byte": 108
+                            }
+                        }
+                    }
+                ]
+            },
+            "env2": {
+                "range": {
+                    "environment": "access-root",
+                    "begin": {
+                        "line": 10,
+                        "column": 9,
+                        "byte": 117
+                    },
+                    "end": {
+                        "line": 10,
+                        "column": 44,
+                        "byte": 152
+                    }
+                },
+                "schema": {
+                    "type": "number",
+                    "const": 42
+                },
+                "symbol": [
+                    {
+                        "key": "",
+                        "range": {
+                            "environment": "access-root",
+                            "begin": {
+                                "line": 10,
+                                "column": 11,
+                                "byte": 119
+                            },
+                            "end": {
+                                "line": 10,
+                                "column": 11,
+                                "byte": 119
+                            }
+                        },
+                        "value": {
+                            "begin": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            },
+                            "end": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            }
+                        }
+                    },
+                    {
+                        "key": "environments",
+                        "range": {
+                            "environment": "access-root",
+                            "begin": {
+                                "line": 10,
+                                "column": 11,
+                                "byte": 119
+                            },
+                            "end": {
+                                "line": 10,
+                                "column": 24,
+                                "byte": 132
+                            }
+                        },
+                        "value": {
+                            "environment": "access-root",
+                            "begin": {
+                                "line": 10,
+                                "column": 9,
+                                "byte": 117
+                            },
+                            "end": {
+                                "line": 10,
+                                "column": 44,
+                                "byte": 152
+                            }
+                        }
+                    },
+                    {
+                        "key": "foo",
+                        "range": {
+                            "environment": "access-root",
+                            "begin": {
+                                "line": 10,
+                                "column": 24,
+                                "byte": 132
+                            },
+                            "end": {
+                                "line": 10,
+                                "column": 28,
+                                "byte": 136
+                            }
+                        },
+                        "value": {
+                            "environment": "access-root",
+                            "begin": {
+                                "line": 10,
+                                "column": 9,
+                                "byte": 117
+                            },
+                            "end": {
+                                "line": 10,
+                                "column": 44,
+                                "byte": 152
+                            }
+                        }
+                    },
+                    {
+                        "key": "bar",
+                        "range": {
+                            "environment": "access-root",
+                            "begin": {
+                                "line": 10,
+                                "column": 28,
+                                "byte": 136
+                            },
+                            "end": {
+                                "line": 10,
+                                "column": 32,
+                                "byte": 140
+                            }
+                        },
+                        "value": {
+                            "environment": "access-root",
+                            "begin": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            },
+                            "end": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            }
+                        }
+                    },
+                    {
+                        "key": "some_value",
+                        "range": {
+                            "environment": "access-root",
+                            "begin": {
+                                "line": 10,
+                                "column": 32,
+                                "byte": 140
+                            },
+                            "end": {
+                                "line": 10,
+                                "column": 43,
+                                "byte": 151
+                            }
+                        },
+                        "value": {
+                            "environment": "foo/bar",
+                            "begin": {
+                                "line": 2,
+                                "column": 15,
+                                "byte": 22
+                            },
+                            "end": {
+                                "line": 2,
+                                "column": 17,
+                                "byte": 24
+                            }
+                        }
+                    }
+                ]
+            },
+            "foo": {
+                "range": {
+                    "environment": "access-root",
+                    "begin": {
+                        "line": 5,
+                        "column": 8,
+                        "byte": 37
+                    },
+                    "end": {
+                        "line": 5,
+                        "column": 14,
+                        "byte": 43
+                    }
+                },
+                "schema": {
+                    "type": "string",
+                    "const": "hello!"
+                },
+                "literal": "hello!"
+            },
+            "imp": {
+                "range": {
+                    "environment": "access-root",
+                    "begin": {
+                        "line": 7,
+                        "column": 8,
+                        "byte": 54
+                    },
+                    "end": {
+                        "line": 7,
+                        "column": 19,
+                        "byte": 65
+                    }
+                },
+                "schema": {
+                    "properties": {
+                        "foo/bar": {
+                            "properties": {
+                                "some_value": {
+                                    "type": "number",
+                                    "const": 42
+                                }
+                            },
+                            "type": "object",
+                            "required": [
+                                "some_value"
+                            ]
+                        }
+                    },
+                    "type": "object",
+                    "required": [
+                        "foo/bar"
+                    ]
+                },
+                "symbol": [
+                    {
+                        "key": "",
+                        "range": {
+                            "environment": "access-root",
+                            "begin": {
+                                "line": 7,
+                                "column": 10,
+                                "byte": 56
+                            },
+                            "end": {
+                                "line": 7,
+                                "column": 10,
+                                "byte": 56
+                            }
+                        },
+                        "value": {
+                            "begin": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            },
+                            "end": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            }
+                        }
+                    },
+                    {
+                        "key": "imports",
+                        "range": {
+                            "environment": "access-root",
+                            "begin": {
+                                "line": 7,
+                                "column": 10,
+                                "byte": 56
+                            },
+                            "end": {
+                                "line": 7,
+                                "column": 18,
+                                "byte": 64
+                            }
+                        },
+                        "value": {
+                            "environment": "access-root",
+                            "begin": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            },
+                            "end": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            }
+                        }
+                    }
+                ]
+            },
+            "invalid": {
+                "range": {
+                    "environment": "access-root",
+                    "begin": {
+                        "line": 13,
+                        "column": 12,
+                        "byte": 211
+                    },
+                    "end": {
+                        "line": 13,
+                        "column": 23,
+                        "byte": 222
+                    }
+                },
+                "schema": true,
+                "symbol": [
+                    {
+                        "key": "",
+                        "range": {
+                            "environment": "access-root",
+                            "begin": {
+                                "line": 13,
+                                "column": 14,
+                                "byte": 213
+                            },
+                            "end": {
+                                "line": 13,
+                                "column": 14,
+                                "byte": 213
+                            }
+                        },
+                        "value": {
+                            "begin": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            },
+                            "end": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            }
+                        }
+                    },
+                    {
+                        "key": "invalid",
+                        "range": {
+                            "environment": "access-root",
+                            "begin": {
+                                "line": 13,
+                                "column": 14,
+                                "byte": 213
+                            },
+                            "end": {
+                                "line": 13,
+                                "column": 22,
+                                "byte": 221
+                            }
+                        },
+                        "value": {
+                            "environment": "access-root",
+                            "begin": {
+                                "line": 13,
+                                "column": 12,
+                                "byte": 211
+                            },
+                            "end": {
+                                "line": 13,
+                                "column": 23,
+                                "byte": 222
+                            }
+                        }
+                    }
+                ]
+            },
+            "values": {
+                "range": {
+                    "environment": "access-root",
+                    "begin": {
+                        "line": 11,
+                        "column": 11,
+                        "byte": 163
+                    },
+                    "end": {
+                        "line": 11,
+                        "column": 21,
+                        "byte": 173
+                    }
+                },
+                "schema": true,
+                "symbol": [
+                    {
+                        "key": "",
+                        "range": {
+                            "environment": "access-root",
+                            "begin": {
+                                "line": 11,
+                                "column": 13,
+                                "byte": 165
+                            },
+                            "end": {
+                                "line": 11,
+                                "column": 13,
+                                "byte": 165
+                            }
+                        },
+                        "value": {
+                            "begin": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            },
+                            "end": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            }
+                        }
+                    },
+                    {
+                        "key": "values",
+                        "range": {
+                            "environment": "access-root",
+                            "begin": {
+                                "line": 11,
+                                "column": 13,
+                                "byte": 165
+                            },
+                            "end": {
+                                "line": 11,
+                                "column": 20,
+                                "byte": 172
+                            }
+                        },
+                        "value": {
+                            "begin": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            },
+                            "end": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            }
+                        }
+                    }
+                ]
+            },
+            "values2": {
+                "range": {
+                    "environment": "access-root",
+                    "begin": {
+                        "line": 12,
+                        "column": 12,
+                        "byte": 185
+                    },
+                    "end": {
+                        "line": 12,
+                        "column": 26,
+                        "byte": 199
+                    }
+                },
+                "schema": {
+                    "type": "string",
+                    "const": "hello!"
+                },
+                "symbol": [
+                    {
+                        "key": "",
+                        "range": {
+                            "environment": "access-root",
+                            "begin": {
+                                "line": 12,
+                                "column": 14,
+                                "byte": 187
+                            },
+                            "end": {
+                                "line": 12,
+                                "column": 14,
+                                "byte": 187
+                            }
+                        },
+                        "value": {
+                            "begin": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            },
+                            "end": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            }
+                        }
+                    },
+                    {
+                        "key": "values",
+                        "range": {
+                            "environment": "access-root",
+                            "begin": {
+                                "line": 12,
+                                "column": 14,
+                                "byte": 187
+                            },
+                            "end": {
+                                "line": 12,
+                                "column": 21,
+                                "byte": 194
+                            }
+                        },
+                        "value": {
+                            "begin": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            },
+                            "end": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            }
+                        }
+                    },
+                    {
+                        "key": "foo",
+                        "range": {
+                            "environment": "access-root",
+                            "begin": {
+                                "line": 12,
+                                "column": 21,
+                                "byte": 194
+                            },
+                            "end": {
+                                "line": 12,
+                                "column": 25,
+                                "byte": 198
+                            }
+                        },
+                        "value": {
+                            "environment": "access-root",
+                            "begin": {
+                                "line": 5,
+                                "column": 8,
+                                "byte": 37
+                            },
+                            "end": {
+                                "line": 5,
+                                "column": 14,
+                                "byte": 43
+                            }
+                        }
+                    }
+                ]
+            }
+        },
+        "properties": {
+            "ctx": {
+                "value": {
+                    "currentEnvironment": {
+                        "value": {
+                            "name": {
+                                "value": "access-root",
+                                "trace": {
+                                    "def": {
+                                        "environment": "access-root",
+                                        "begin": {
+                                            "line": 0,
+                                            "column": 0,
+                                            "byte": 0
+                                        },
+                                        "end": {
+                                            "line": 0,
+                                            "column": 0,
+                                            "byte": 0
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "trace": {
+                            "def": {
+                                "environment": "access-root",
+                                "begin": {
+                                    "line": 0,
+                                    "column": 0,
+                                    "byte": 0
+                                },
+                                "end": {
+                                    "line": 0,
+                                    "column": 0,
+                                    "byte": 0
+                                }
+                            }
+                        }
+                    },
+                    "pulumi": {
+                        "value": {
+                            "user": {
+                                "value": {
+                                    "id": {
+                                        "value": "USER_123",
+                                        "trace": {
+                                            "def": {
+                                                "environment": "access-root",
+                                                "begin": {
+                                                    "line": 0,
+                                                    "column": 0,
+                                                    "byte": 0
+                                                },
+                                                "end": {
+                                                    "line": 0,
+                                                    "column": 0,
+                                                    "byte": 0
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                "trace": {
+                                    "def": {
+                                        "environment": "access-root",
+                                        "begin": {
+                                            "line": 0,
+                                            "column": 0,
+                                            "byte": 0
+                                        },
+                                        "end": {
+                                            "line": 0,
+                                            "column": 0,
+                                            "byte": 0
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "trace": {
+                            "def": {
+                                "environment": "access-root",
+                                "begin": {
+                                    "line": 0,
+                                    "column": 0,
+                                    "byte": 0
+                                },
+                                "end": {
+                                    "line": 0,
+                                    "column": 0,
+                                    "byte": 0
+                                }
+                            }
+                        }
+                    },
+                    "rootEnvironment": {
+                        "value": {
+                            "name": {
+                                "value": "access-root",
+                                "trace": {
+                                    "def": {
+                                        "environment": "access-root",
+                                        "begin": {
+                                            "line": 0,
+                                            "column": 0,
+                                            "byte": 0
+                                        },
+                                        "end": {
+                                            "line": 0,
+                                            "column": 0,
+                                            "byte": 0
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "trace": {
+                            "def": {
+                                "environment": "access-root",
+                                "begin": {
+                                    "line": 0,
+                                    "column": 0,
+                                    "byte": 0
+                                },
+                                "end": {
+                                    "line": 0,
+                                    "column": 0,
+                                    "byte": 0
+                                }
+                            }
+                        }
+                    }
+                },
+                "trace": {
+                    "def": {
+                        "environment": "access-root",
+                        "begin": {
+                            "line": 8,
+                            "column": 8,
+                            "byte": 73
+                        },
+                        "end": {
+                            "line": 8,
+                            "column": 19,
+                            "byte": 84
+                        }
+                    }
+                }
+            },
+            "env": {
+                "unknown": true,
+                "trace": {
+                    "def": {
+                        "environment": "access-root",
+                        "begin": {
+                            "line": 9,
+                            "column": 8,
+                            "byte": 92
+                        },
+                        "end": {
+                            "line": 9,
+                            "column": 24,
+                            "byte": 108
+                        }
+                    }
+                }
+            },
+            "env2": {
+                "value": 42,
+                "trace": {
+                    "def": {
+                        "environment": "access-root",
+                        "begin": {
+                            "line": 10,
+                            "column": 9,
+                            "byte": 117
+                        },
+                        "end": {
+                            "line": 10,
+                            "column": 44,
+                            "byte": 152
+                        }
+                    }
+                }
+            },
+            "foo": {
+                "value": "hello!",
+                "trace": {
+                    "def": {
+                        "environment": "access-root",
+                        "begin": {
+                            "line": 5,
+                            "column": 8,
+                            "byte": 37
+                        },
+                        "end": {
+                            "line": 5,
+                            "column": 14,
+                            "byte": 43
+                        }
+                    }
+                }
+            },
+            "imp": {
+                "value": {
+                    "foo/bar": {
+                        "value": {
+                            "some_value": {
+                                "value": 42,
+                                "trace": {
+                                    "def": {
+                                        "environment": "foo/bar",
+                                        "begin": {
+                                            "line": 2,
+                                            "column": 15,
+                                            "byte": 22
+                                        },
+                                        "end": {
+                                            "line": 2,
+                                            "column": 17,
+                                            "byte": 24
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "trace": {
+                            "def": {
+                                "environment": "access-root",
+                                "begin": {
+                                    "line": 0,
+                                    "column": 0,
+                                    "byte": 0
+                                },
+                                "end": {
+                                    "line": 0,
+                                    "column": 0,
+                                    "byte": 0
+                                }
+                            }
+                        }
+                    }
+                },
+                "trace": {
+                    "def": {
+                        "environment": "access-root",
+                        "begin": {
+                            "line": 7,
+                            "column": 8,
+                            "byte": 54
+                        },
+                        "end": {
+                            "line": 7,
+                            "column": 19,
+                            "byte": 65
+                        }
+                    }
+                }
+            },
+            "invalid": {
+                "unknown": true,
+                "trace": {
+                    "def": {
+                        "environment": "access-root",
+                        "begin": {
+                            "line": 13,
+                            "column": 12,
+                            "byte": 211
+                        },
+                        "end": {
+                            "line": 13,
+                            "column": 23,
+                            "byte": 222
+                        }
+                    }
+                }
+            },
+            "some_value": {
+                "value": 42,
+                "trace": {
+                    "def": {
+                        "environment": "foo/bar",
+                        "begin": {
+                            "line": 2,
+                            "column": 15,
+                            "byte": 22
+                        },
+                        "end": {
+                            "line": 2,
+                            "column": 17,
+                            "byte": 24
+                        }
+                    }
+                }
+            },
+            "values": {
+                "unknown": true,
+                "trace": {
+                    "def": {
+                        "environment": "access-root",
+                        "begin": {
+                            "line": 11,
+                            "column": 11,
+                            "byte": 163
+                        },
+                        "end": {
+                            "line": 11,
+                            "column": 21,
+                            "byte": 173
+                        }
+                    }
+                }
+            },
+            "values2": {
+                "value": "hello!",
+                "trace": {
+                    "def": {
+                        "environment": "access-root",
+                        "begin": {
+                            "line": 12,
+                            "column": 12,
+                            "byte": 185
+                        },
+                        "end": {
+                            "line": 12,
+                            "column": 26,
+                            "byte": 199
+                        }
+                    }
+                }
+            }
+        },
+        "schema": {
+            "properties": {
+                "ctx": {
+                    "properties": {
+                        "currentEnvironment": {
+                            "properties": {
+                                "name": {
+                                    "type": "string",
+                                    "const": "access-root"
+                                }
+                            },
+                            "type": "object",
+                            "required": [
+                                "name"
+                            ]
+                        },
+                        "pulumi": {
+                            "properties": {
+                                "user": {
+                                    "properties": {
+                                        "id": {
+                                            "type": "string",
+                                            "const": "USER_123"
+                                        }
+                                    },
+                                    "type": "object",
+                                    "required": [
+                                        "id"
+                                    ]
+                                }
+                            },
+                            "type": "object",
+                            "required": [
+                                "user"
+                            ]
+                        },
+                        "rootEnvironment": {
+                            "properties": {
+                                "name": {
+                                    "type": "string",
+                                    "const": "access-root"
+                                }
+                            },
+                            "type": "object",
+                            "required": [
+                                "name"
+                            ]
+                        }
+                    },
+                    "type": "object",
+                    "required": [
+                        "currentEnvironment",
+                        "pulumi",
+                        "rootEnvironment"
+                    ]
+                },
+                "env": true,
+                "env2": {
+                    "type": "number",
+                    "const": 42
+                },
+                "foo": {
+                    "type": "string",
+                    "const": "hello!"
+                },
+                "imp": {
+                    "properties": {
+                        "foo/bar": {
+                            "properties": {
+                                "some_value": {
+                                    "type": "number",
+                                    "const": 42
+                                }
+                            },
+                            "type": "object",
+                            "required": [
+                                "some_value"
+                            ]
+                        }
+                    },
+                    "type": "object",
+                    "required": [
+                        "foo/bar"
+                    ]
+                },
+                "invalid": true,
+                "some_value": {
+                    "type": "number",
+                    "const": 42
+                },
+                "values": true,
+                "values2": {
+                    "type": "string",
+                    "const": "hello!"
+                }
+            },
+            "type": "object",
+            "required": [
+                "ctx",
+                "env",
+                "env2",
+                "foo",
+                "imp",
+                "invalid",
+                "some_value",
+                "values",
+                "values2"
+            ]
+        },
+        "executionContext": {
+            "properties": {
+                "currentEnvironment": {
+                    "value": {
+                        "name": {
+                            "value": "access-root",
+                            "trace": {
+                                "def": {
+                                    "environment": "access-root",
+                                    "begin": {
+                                        "line": 0,
+                                        "column": 0,
+                                        "byte": 0
+                                    },
+                                    "end": {
+                                        "line": 0,
+                                        "column": 0,
+                                        "byte": 0
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "trace": {
+                        "def": {
+                            "environment": "access-root",
+                            "begin": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            },
+                            "end": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            }
+                        }
+                    }
+                },
+                "pulumi": {
+                    "value": {
+                        "user": {
+                            "value": {
+                                "id": {
+                                    "value": "USER_123",
+                                    "trace": {
+                                        "def": {
+                                            "environment": "access-root",
+                                            "begin": {
+                                                "line": 0,
+                                                "column": 0,
+                                                "byte": 0
+                                            },
+                                            "end": {
+                                                "line": 0,
+                                                "column": 0,
+                                                "byte": 0
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            "trace": {
+                                "def": {
+                                    "environment": "access-root",
+                                    "begin": {
+                                        "line": 0,
+                                        "column": 0,
+                                        "byte": 0
+                                    },
+                                    "end": {
+                                        "line": 0,
+                                        "column": 0,
+                                        "byte": 0
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "trace": {
+                        "def": {
+                            "environment": "access-root",
+                            "begin": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            },
+                            "end": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            }
+                        }
+                    }
+                },
+                "rootEnvironment": {
+                    "value": {
+                        "name": {
+                            "value": "access-root",
+                            "trace": {
+                                "def": {
+                                    "environment": "access-root",
+                                    "begin": {
+                                        "line": 0,
+                                        "column": 0,
+                                        "byte": 0
+                                    },
+                                    "end": {
+                                        "line": 0,
+                                        "column": 0,
+                                        "byte": 0
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "trace": {
+                        "def": {
+                            "environment": "access-root",
+                            "begin": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            },
+                            "end": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            }
+                        }
+                    }
+                }
+            },
+            "schema": {
+                "properties": {
+                    "currentEnvironment": {
+                        "properties": {
+                            "name": {
+                                "type": "string",
+                                "const": "access-root"
+                            }
+                        },
+                        "type": "object",
+                        "required": [
+                            "name"
+                        ]
+                    },
+                    "pulumi": {
+                        "properties": {
+                            "user": {
+                                "properties": {
+                                    "id": {
+                                        "type": "string",
+                                        "const": "USER_123"
+                                    }
+                                },
+                                "type": "object",
+                                "required": [
+                                    "id"
+                                ]
+                            }
+                        },
+                        "type": "object",
+                        "required": [
+                            "user"
+                        ]
+                    },
+                    "rootEnvironment": {
+                        "properties": {
+                            "name": {
+                                "type": "string",
+                                "const": "access-root"
+                            }
+                        },
+                        "type": "object",
+                        "required": [
+                            "name"
+                        ]
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "currentEnvironment",
+                    "pulumi",
+                    "rootEnvironment"
+                ]
+            }
+        }
+    },
+    "evalJsonRedacted": {
+        "ctx": {
+            "currentEnvironment": {
+                "name": "access-root"
+            },
+            "pulumi": {
+                "user": {
+                    "id": "USER_123"
+                }
+            },
+            "rootEnvironment": {
+                "name": "access-root"
+            }
+        },
+        "env": "[unknown]",
+        "env2": 42,
+        "foo": "hello!",
+        "imp": {
+            "foo/bar": {
+                "some_value": 42
+            }
+        },
+        "invalid": "[unknown]",
+        "some_value": 42,
+        "values": "[unknown]",
+        "values2": "hello!"
+    },
+    "evalJSONRevealed": {
+        "ctx": {
+            "currentEnvironment": {
+                "name": "access-root"
+            },
+            "pulumi": {
+                "user": {
+                    "id": "USER_123"
+                }
+            },
+            "rootEnvironment": {
+                "name": "access-root"
+            }
+        },
+        "env": "[unknown]",
+        "env2": 42,
+        "foo": "hello!",
+        "imp": {
+            "foo/bar": {
+                "some_value": 42
+            }
+        },
+        "invalid": "[unknown]",
+        "some_value": 42,
+        "values": "[unknown]",
+        "values2": "hello!"
+    }
+}
