@@ -65,6 +65,45 @@ func TestValueToString(t *testing.T) {
 			secret:   true,
 			expected: `"baz"="42","foo"="bar"`,
 		},
+		// Unknown value with complex repr should still be quoted
+		{
+			value: &value{repr: []*value{
+				{unknown: true, repr: map[string]*value{"foo": {repr: "bar"}}},
+				{repr: "hello"},
+			}},
+			unknown:  true,
+			expected: `"[unknown]","hello"`,
+		},
+		// Nested structures: map with array value
+		{
+			value: &value{repr: map[string]*value{
+				"hello": {repr: "world"},
+				"from":  {repr: []*value{{repr: "pulumi"}, {repr: "esc"}}},
+			}},
+			expected: `"from"="pulumi","esc","hello"="world"`,
+		},
+		// Nested structures: array with map value
+		{
+			value: &value{repr: []*value{
+				{repr: map[string]*value{"foo": {repr: "bar"}}},
+				{repr: "hello"},
+			}},
+			expected: `"foo"="bar","hello"`,
+		},
+		// Nested structures: map with nested map value
+		{
+			value: &value{repr: map[string]*value{
+				"outer": {repr: map[string]*value{"inner": {repr: "val"}}},
+			}},
+			expected: `"outer"="inner"="val"`,
+		},
+		// Nested structures: array with nested array value
+		{
+			value: &value{repr: []*value{
+				{repr: []*value{{repr: "a"}, {repr: "b"}}},
+			}},
+			expected: `"a","b"`,
+		},
 	}
 	for _, c := range cases {
 		t.Run(c.expected, func(t *testing.T) {

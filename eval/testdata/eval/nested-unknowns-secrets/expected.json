@@ -2982,7 +2982,7 @@
                 }
             },
             "stringOutputSecret": {
-                "value": "\"account\"=\"\\\"id\\\"=\\\"accountIdSecret\\\",\\\"name\\\"=\\\"account-name\\\"\",\"apiKey\"=\"apiKeySecret\",\"apiToken\"=\"apiTokenSecret\",\"username\"=\"bot@pulumi.com\",\"zoneId\"=\"zone-id-123\"",
+                "value": "\"account\"=\"id\"=\"accountIdSecret\",\"name\"=\"account-name\",\"apiKey\"=\"apiKeySecret\",\"apiToken\"=\"apiTokenSecret\",\"username\"=\"bot@pulumi.com\",\"zoneId\"=\"zone-id-123\"",
                 "secret": true,
                 "trace": {
                     "def": {
@@ -6532,7 +6532,7 @@
                 }
             },
             "stringOutputSecret": {
-                "value": "\"account\"=\"\\\"id\\\"=\\\"accountIdSecret\\\",\\\"name\\\"=\\\"account-name\\\"\",\"apiKey\"=\"apiKeySecret\",\"apiToken\"=\"apiTokenSecret\",\"username\"=\"bot@pulumi.com\",\"zoneId\"=\"zone-id-123\"",
+                "value": "\"account\"=\"id\"=\"accountIdSecret\",\"name\"=\"account-name\",\"apiKey\"=\"apiKeySecret\",\"apiToken\"=\"apiTokenSecret\",\"username\"=\"bot@pulumi.com\",\"zoneId\"=\"zone-id-123\"",
                 "secret": true,
                 "trace": {
                     "def": {
@@ -6551,7 +6551,7 @@
                 }
             },
             "stringOutputUnknown": {
-                "value": "\"oneStep\"=\"\\\"twoStep\\\"=\\\"\\\\\\\"threeStep\\\\\\\"=\\\\\\\"\\\\\\\\\\\\\\\"fourStep\\\\\\\\\\\\\\\"=\\\\\\\\\\\\\\\"\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"foo\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"=\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"bar\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"\\\\\\\\\\\\\\\"\\\\\\\"\\\"\"",
+                "value": "\"oneStep\"=\"twoStep\"=\"threeStep\"=\"fourStep\"=\"foo\"=\"bar\"",
                 "trace": {
                     "def": {
                         "environment": "nested-unknowns-secrets",
@@ -7001,7 +7001,7 @@
         },
         "stringOutputCombo": "[secret]",
         "stringOutputSecret": "[secret]",
-        "stringOutputUnknown": "\"oneStep\"=\"\\\"twoStep\\\"=\\\"\\\\\\\"threeStep\\\\\\\"=\\\\\\\"\\\\\\\\\\\\\\\"fourStep\\\\\\\\\\\\\\\"=\\\\\\\\\\\\\\\"\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"foo\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"=\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"bar\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"\\\\\\\\\\\\\\\"\\\\\\\"\\\"\"",
+        "stringOutputUnknown": "\"oneStep\"=\"twoStep\"=\"threeStep\"=\"fourStep\"=\"foo\"=\"bar\"",
         "top-level-secret": "[secret]"
     },
     "evalJSONRevealed": {
@@ -7043,8 +7043,8 @@
             "refTopLevelSecret": "top-secret"
         },
         "stringOutputCombo": "\"cloudflareApi\"=\"apiKeySecret\",\"provider\"=\"bar\"",
-        "stringOutputSecret": "\"account\"=\"\\\"id\\\"=\\\"accountIdSecret\\\",\\\"name\\\"=\\\"account-name\\\"\",\"apiKey\"=\"apiKeySecret\",\"apiToken\"=\"apiTokenSecret\",\"username\"=\"bot@pulumi.com\",\"zoneId\"=\"zone-id-123\"",
-        "stringOutputUnknown": "\"oneStep\"=\"\\\"twoStep\\\"=\\\"\\\\\\\"threeStep\\\\\\\"=\\\\\\\"\\\\\\\\\\\\\\\"fourStep\\\\\\\\\\\\\\\"=\\\\\\\\\\\\\\\"\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"foo\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"=\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"bar\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"\\\\\\\\\\\\\\\"\\\\\\\"\\\"\"",
+        "stringOutputSecret": "\"account\"=\"id\"=\"accountIdSecret\",\"name\"=\"account-name\",\"apiKey\"=\"apiKeySecret\",\"apiToken\"=\"apiTokenSecret\",\"username\"=\"bot@pulumi.com\",\"zoneId\"=\"zone-id-123\"",
+        "stringOutputUnknown": "\"oneStep\"=\"twoStep\"=\"threeStep\"=\"fourStep\"=\"foo\"=\"bar\"",
         "top-level-secret": "top-secret"
     }
 }
