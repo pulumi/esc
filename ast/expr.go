@@ -488,6 +488,25 @@ func ToJSON(value Expr) *ToJSONExpr {
 	return ToJSONSyntax(nil, name, value)
 }
 
+// ToYAML returns the underlying structure as a YAML string.
+type ToYAMLExpr struct {
+	builtinNode
+
+	Value Expr
+}
+
+func ToYAMLSyntax(node *syntax.ObjectNode, name *StringExpr, args Expr) *ToYAMLExpr {
+	return &ToYAMLExpr{
+		builtinNode: builtin(node, name, args),
+		Value:       args,
+	}
+}
+
+func ToYAML(value Expr) *ToYAMLExpr {
+	name := String("fn::toYAML")
+	return ToYAMLSyntax(nil, name, value)
+}
+
 // FromJSON deserializes a JSON string into a value.
 type FromJSONExpr struct {
 	builtinNode
@@ -505,6 +524,25 @@ func FromJSONSyntax(node *syntax.ObjectNode, name *StringExpr, args Expr) *FromJ
 func FromJSON(value Expr) *FromJSONExpr {
 	name := String("fn::fromJSON")
 	return FromJSONSyntax(nil, name, value)
+}
+
+// FromYAML deserializes a YAML string into a value.
+type FromYAMLExpr struct {
+	builtinNode
+
+	String Expr
+}
+
+func FromYAMLSyntax(node *syntax.ObjectNode, name *StringExpr, args Expr) *FromYAMLExpr {
+	return &FromYAMLExpr{
+		builtinNode: builtin(node, name, args),
+		String:      args,
+	}
+}
+
+func FromYAML(value Expr) *FromYAMLExpr {
+	name := String("fn::fromYAML")
+	return FromYAMLSyntax(nil, name, value)
 }
 
 // ToString returns the underlying structure as a string.
@@ -742,6 +780,8 @@ func tryParseFunction(node *syntax.ObjectNode) (Expr, syntax.Diagnostics, bool) 
 		parse = parseValidate
 	case "fn::fromJSON":
 		parse = parseFromJSON
+	case "fn::fromYAML":
+		parse = parseFromYAML
 	case "fn::fromBase64":
 		parse = parseFromBase64
 	case "fn::join":
@@ -758,6 +798,8 @@ func tryParseFunction(node *syntax.ObjectNode) (Expr, syntax.Diagnostics, bool) 
 		parse = parseToBase64
 	case "fn::toJSON":
 		parse = parseToJSON
+	case "fn::toYAML":
+		parse = parseToYAML
 	case "fn::toString":
 		parse = parseToString
 	default:
@@ -961,8 +1003,16 @@ func parseToJSON(node *syntax.ObjectNode, name *StringExpr, args Expr) (Expr, sy
 	return ToJSONSyntax(node, name, args), nil
 }
 
+func parseToYAML(node *syntax.ObjectNode, name *StringExpr, args Expr) (Expr, syntax.Diagnostics) {
+	return ToYAMLSyntax(node, name, args), nil
+}
+
 func parseFromJSON(node *syntax.ObjectNode, name *StringExpr, args Expr) (Expr, syntax.Diagnostics) {
 	return FromJSONSyntax(node, name, args), nil
+}
+
+func parseFromYAML(node *syntax.ObjectNode, name *StringExpr, args Expr) (Expr, syntax.Diagnostics) {
+	return FromYAMLSyntax(node, name, args), nil
 }
 
 func parseToString(node *syntax.ObjectNode, name *StringExpr, args Expr) (Expr, syntax.Diagnostics) {

@@ -1,0 +1,1964 @@
+{
+    "check": {
+        "exprs": {
+            "item_from_secret_array": {
+                "range": {
+                    "environment": "secret-objects-yaml",
+                    "begin": {
+                        "line": 10,
+                        "column": 27,
+                        "byte": 301
+                    },
+                    "end": {
+                        "line": 10,
+                        "column": 58,
+                        "byte": 332
+                    }
+                },
+                "schema": {
+                    "type": "string",
+                    "const": "haha"
+                },
+                "symbol": [
+                    {
+                        "key": "unmarshalled_secret_array",
+                        "range": {
+                            "environment": "secret-objects-yaml",
+                            "begin": {
+                                "line": 10,
+                                "column": 29,
+                                "byte": 303
+                            },
+                            "end": {
+                                "line": 10,
+                                "column": 54,
+                                "byte": 328
+                            }
+                        },
+                        "value": {
+                            "environment": "secret-objects-yaml",
+                            "begin": {
+                                "line": 9,
+                                "column": 5,
+                                "byte": 245
+                            },
+                            "end": {
+                                "line": 9,
+                                "column": 34,
+                                "byte": 274
+                            }
+                        }
+                    },
+                    {
+                        "index": 0,
+                        "range": {
+                            "environment": "secret-objects-yaml",
+                            "begin": {
+                                "line": 10,
+                                "column": 54,
+                                "byte": 328
+                            },
+                            "end": {
+                                "line": 10,
+                                "column": 57,
+                                "byte": 331
+                            }
+                        },
+                        "value": {
+                            "environment": "secret-objects-yaml",
+                            "begin": {
+                                "line": 9,
+                                "column": 5,
+                                "byte": 245
+                            },
+                            "end": {
+                                "line": 9,
+                                "column": 34,
+                                "byte": 274
+                            }
+                        }
+                    }
+                ]
+            },
+            "item_from_secret_object": {
+                "range": {
+                    "environment": "secret-objects-yaml",
+                    "begin": {
+                        "line": 11,
+                        "column": 28,
+                        "byte": 360
+                    },
+                    "end": {
+                        "line": 11,
+                        "column": 62,
+                        "byte": 394
+                    }
+                },
+                "schema": {
+                    "type": "string",
+                    "const": "business"
+                },
+                "symbol": [
+                    {
+                        "key": "unmarshalled_secret_object",
+                        "range": {
+                            "environment": "secret-objects-yaml",
+                            "begin": {
+                                "line": 11,
+                                "column": 30,
+                                "byte": 362
+                            },
+                            "end": {
+                                "line": 11,
+                                "column": 56,
+                                "byte": 388
+                            }
+                        },
+                        "value": {
+                            "environment": "secret-objects-yaml",
+                            "begin": {
+                                "line": 5,
+                                "column": 5,
+                                "byte": 108
+                            },
+                            "end": {
+                                "line": 5,
+                                "column": 35,
+                                "byte": 138
+                            }
+                        }
+                    },
+                    {
+                        "key": "haha",
+                        "range": {
+                            "environment": "secret-objects-yaml",
+                            "begin": {
+                                "line": 11,
+                                "column": 56,
+                                "byte": 388
+                            },
+                            "end": {
+                                "line": 11,
+                                "column": 61,
+                                "byte": 393
+                            }
+                        },
+                        "value": {
+                            "environment": "secret-objects-yaml",
+                            "begin": {
+                                "line": 5,
+                                "column": 5,
+                                "byte": 108
+                            },
+                            "end": {
+                                "line": 5,
+                                "column": 35,
+                                "byte": 138
+                            }
+                        }
+                    }
+                ]
+            },
+            "secret_array": {
+                "range": {
+                    "environment": "secret-objects-yaml",
+                    "begin": {
+                        "line": 7,
+                        "column": 5,
+                        "byte": 159
+                    },
+                    "end": {
+                        "line": 7,
+                        "column": 51,
+                        "byte": 205
+                    }
+                },
+                "schema": {
+                    "type": "string",
+                    "const": "- haha\n- business\n- also\n- secret\n"
+                },
+                "builtin": {
+                    "name": "fn::secret",
+                    "nameRange": {
+                        "environment": "secret-objects-yaml",
+                        "begin": {
+                            "line": 7,
+                            "column": 5,
+                            "byte": 159
+                        },
+                        "end": {
+                            "line": 7,
+                            "column": 15,
+                            "byte": 169
+                        }
+                    },
+                    "argSchema": true,
+                    "arg": {
+                        "range": {
+                            "environment": "secret-objects-yaml",
+                            "begin": {
+                                "line": 7,
+                                "column": 17,
+                                "byte": 171
+                            },
+                            "end": {
+                                "line": 7,
+                                "column": 51,
+                                "byte": 205
+                            }
+                        },
+                        "schema": {
+                            "type": "string",
+                            "const": "- haha\n- business\n- also\n- secret\n"
+                        },
+                        "literal": "- haha\n- business\n- also\n- secret\n"
+                    }
+                }
+            },
+            "secret_object": {
+                "range": {
+                    "environment": "secret-objects-yaml",
+                    "begin": {
+                        "line": 3,
+                        "column": 5,
+                        "byte": 29
+                    },
+                    "end": {
+                        "line": 3,
+                        "column": 45,
+                        "byte": 69
+                    }
+                },
+                "schema": {
+                    "type": "string",
+                    "const": "haha: business\nalso: secret\n"
+                },
+                "builtin": {
+                    "name": "fn::secret",
+                    "nameRange": {
+                        "environment": "secret-objects-yaml",
+                        "begin": {
+                            "line": 3,
+                            "column": 5,
+                            "byte": 29
+                        },
+                        "end": {
+                            "line": 3,
+                            "column": 15,
+                            "byte": 39
+                        }
+                    },
+                    "argSchema": true,
+                    "arg": {
+                        "range": {
+                            "environment": "secret-objects-yaml",
+                            "begin": {
+                                "line": 3,
+                                "column": 17,
+                                "byte": 41
+                            },
+                            "end": {
+                                "line": 3,
+                                "column": 45,
+                                "byte": 69
+                            }
+                        },
+                        "schema": {
+                            "type": "string",
+                            "const": "haha: business\nalso: secret\n"
+                        },
+                        "literal": "haha: business\nalso: secret\n"
+                    }
+                }
+            },
+            "unmarshalled_secret_array": {
+                "range": {
+                    "environment": "secret-objects-yaml",
+                    "begin": {
+                        "line": 9,
+                        "column": 5,
+                        "byte": 245
+                    },
+                    "end": {
+                        "line": 9,
+                        "column": 34,
+                        "byte": 274
+                    }
+                },
+                "schema": {
+                    "prefixItems": [
+                        {
+                            "type": "string",
+                            "const": "haha"
+                        },
+                        {
+                            "type": "string",
+                            "const": "business"
+                        },
+                        {
+                            "type": "string",
+                            "const": "also"
+                        },
+                        {
+                            "type": "string",
+                            "const": "secret"
+                        }
+                    ],
+                    "items": false,
+                    "type": "array"
+                },
+                "builtin": {
+                    "name": "fn::fromYAML",
+                    "nameRange": {
+                        "environment": "secret-objects-yaml",
+                        "begin": {
+                            "line": 9,
+                            "column": 5,
+                            "byte": 245
+                        },
+                        "end": {
+                            "line": 9,
+                            "column": 17,
+                            "byte": 257
+                        }
+                    },
+                    "argSchema": true,
+                    "arg": {
+                        "range": {
+                            "environment": "secret-objects-yaml",
+                            "begin": {
+                                "line": 9,
+                                "column": 19,
+                                "byte": 259
+                            },
+                            "end": {
+                                "line": 9,
+                                "column": 34,
+                                "byte": 274
+                            }
+                        },
+                        "schema": {
+                            "type": "string",
+                            "const": "- haha\n- business\n- also\n- secret\n"
+                        },
+                        "symbol": [
+                            {
+                                "key": "secret_array",
+                                "range": {
+                                    "environment": "secret-objects-yaml",
+                                    "begin": {
+                                        "line": 9,
+                                        "column": 21,
+                                        "byte": 261
+                                    },
+                                    "end": {
+                                        "line": 9,
+                                        "column": 33,
+                                        "byte": 273
+                                    }
+                                },
+                                "value": {
+                                    "environment": "secret-objects-yaml",
+                                    "begin": {
+                                        "line": 7,
+                                        "column": 5,
+                                        "byte": 159
+                                    },
+                                    "end": {
+                                        "line": 7,
+                                        "column": 51,
+                                        "byte": 205
+                                    }
+                                }
+                            }
+                        ]
+                    }
+                }
+            },
+            "unmarshalled_secret_object": {
+                "range": {
+                    "environment": "secret-objects-yaml",
+                    "begin": {
+                        "line": 5,
+                        "column": 5,
+                        "byte": 108
+                    },
+                    "end": {
+                        "line": 5,
+                        "column": 35,
+                        "byte": 138
+                    }
+                },
+                "schema": {
+                    "properties": {
+                        "also": {
+                            "type": "string",
+                            "const": "secret"
+                        },
+                        "haha": {
+                            "type": "string",
+                            "const": "business"
+                        }
+                    },
+                    "type": "object",
+                    "required": [
+                        "also",
+                        "haha"
+                    ]
+                },
+                "builtin": {
+                    "name": "fn::fromYAML",
+                    "nameRange": {
+                        "environment": "secret-objects-yaml",
+                        "begin": {
+                            "line": 5,
+                            "column": 5,
+                            "byte": 108
+                        },
+                        "end": {
+                            "line": 5,
+                            "column": 17,
+                            "byte": 120
+                        }
+                    },
+                    "argSchema": true,
+                    "arg": {
+                        "range": {
+                            "environment": "secret-objects-yaml",
+                            "begin": {
+                                "line": 5,
+                                "column": 19,
+                                "byte": 122
+                            },
+                            "end": {
+                                "line": 5,
+                                "column": 35,
+                                "byte": 138
+                            }
+                        },
+                        "schema": {
+                            "type": "string",
+                            "const": "haha: business\nalso: secret\n"
+                        },
+                        "symbol": [
+                            {
+                                "key": "secret_object",
+                                "range": {
+                                    "environment": "secret-objects-yaml",
+                                    "begin": {
+                                        "line": 5,
+                                        "column": 21,
+                                        "byte": 124
+                                    },
+                                    "end": {
+                                        "line": 5,
+                                        "column": 34,
+                                        "byte": 137
+                                    }
+                                },
+                                "value": {
+                                    "environment": "secret-objects-yaml",
+                                    "begin": {
+                                        "line": 3,
+                                        "column": 5,
+                                        "byte": 29
+                                    },
+                                    "end": {
+                                        "line": 3,
+                                        "column": 45,
+                                        "byte": 69
+                                    }
+                                }
+                            }
+                        ]
+                    }
+                }
+            }
+        },
+        "properties": {
+            "item_from_secret_array": {
+                "value": "haha",
+                "secret": true,
+                "trace": {
+                    "def": {
+                        "environment": "secret-objects-yaml",
+                        "begin": {
+                            "line": 10,
+                            "column": 27,
+                            "byte": 301
+                        },
+                        "end": {
+                            "line": 10,
+                            "column": 58,
+                            "byte": 332
+                        }
+                    }
+                }
+            },
+            "item_from_secret_object": {
+                "value": "business",
+                "secret": true,
+                "trace": {
+                    "def": {
+                        "environment": "secret-objects-yaml",
+                        "begin": {
+                            "line": 11,
+                            "column": 28,
+                            "byte": 360
+                        },
+                        "end": {
+                            "line": 11,
+                            "column": 62,
+                            "byte": 394
+                        }
+                    }
+                }
+            },
+            "secret_array": {
+                "value": "- haha\n- business\n- also\n- secret\n",
+                "secret": true,
+                "trace": {
+                    "def": {
+                        "environment": "secret-objects-yaml",
+                        "begin": {
+                            "line": 7,
+                            "column": 17,
+                            "byte": 171
+                        },
+                        "end": {
+                            "line": 7,
+                            "column": 51,
+                            "byte": 205
+                        }
+                    }
+                }
+            },
+            "secret_object": {
+                "value": "haha: business\nalso: secret\n",
+                "secret": true,
+                "trace": {
+                    "def": {
+                        "environment": "secret-objects-yaml",
+                        "begin": {
+                            "line": 3,
+                            "column": 17,
+                            "byte": 41
+                        },
+                        "end": {
+                            "line": 3,
+                            "column": 45,
+                            "byte": 69
+                        }
+                    }
+                }
+            },
+            "unmarshalled_secret_array": {
+                "value": [
+                    {
+                        "value": "haha",
+                        "secret": true,
+                        "trace": {
+                            "def": {
+                                "environment": "secret-objects-yaml",
+                                "begin": {
+                                    "line": 9,
+                                    "column": 5,
+                                    "byte": 245
+                                },
+                                "end": {
+                                    "line": 9,
+                                    "column": 34,
+                                    "byte": 274
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "value": "business",
+                        "secret": true,
+                        "trace": {
+                            "def": {
+                                "environment": "secret-objects-yaml",
+                                "begin": {
+                                    "line": 9,
+                                    "column": 5,
+                                    "byte": 245
+                                },
+                                "end": {
+                                    "line": 9,
+                                    "column": 34,
+                                    "byte": 274
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "value": "also",
+                        "secret": true,
+                        "trace": {
+                            "def": {
+                                "environment": "secret-objects-yaml",
+                                "begin": {
+                                    "line": 9,
+                                    "column": 5,
+                                    "byte": 245
+                                },
+                                "end": {
+                                    "line": 9,
+                                    "column": 34,
+                                    "byte": 274
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "value": "secret",
+                        "secret": true,
+                        "trace": {
+                            "def": {
+                                "environment": "secret-objects-yaml",
+                                "begin": {
+                                    "line": 9,
+                                    "column": 5,
+                                    "byte": 245
+                                },
+                                "end": {
+                                    "line": 9,
+                                    "column": 34,
+                                    "byte": 274
+                                }
+                            }
+                        }
+                    }
+                ],
+                "secret": true,
+                "trace": {
+                    "def": {
+                        "environment": "secret-objects-yaml",
+                        "begin": {
+                            "line": 9,
+                            "column": 5,
+                            "byte": 245
+                        },
+                        "end": {
+                            "line": 9,
+                            "column": 34,
+                            "byte": 274
+                        }
+                    }
+                }
+            },
+            "unmarshalled_secret_object": {
+                "value": {
+                    "also": {
+                        "value": "secret",
+                        "secret": true,
+                        "trace": {
+                            "def": {
+                                "environment": "secret-objects-yaml",
+                                "begin": {
+                                    "line": 5,
+                                    "column": 5,
+                                    "byte": 108
+                                },
+                                "end": {
+                                    "line": 5,
+                                    "column": 35,
+                                    "byte": 138
+                                }
+                            }
+                        }
+                    },
+                    "haha": {
+                        "value": "business",
+                        "secret": true,
+                        "trace": {
+                            "def": {
+                                "environment": "secret-objects-yaml",
+                                "begin": {
+                                    "line": 5,
+                                    "column": 5,
+                                    "byte": 108
+                                },
+                                "end": {
+                                    "line": 5,
+                                    "column": 35,
+                                    "byte": 138
+                                }
+                            }
+                        }
+                    }
+                },
+                "secret": true,
+                "trace": {
+                    "def": {
+                        "environment": "secret-objects-yaml",
+                        "begin": {
+                            "line": 5,
+                            "column": 5,
+                            "byte": 108
+                        },
+                        "end": {
+                            "line": 5,
+                            "column": 35,
+                            "byte": 138
+                        }
+                    }
+                }
+            }
+        },
+        "schema": {
+            "properties": {
+                "item_from_secret_array": {
+                    "type": "string",
+                    "const": "haha"
+                },
+                "item_from_secret_object": {
+                    "type": "string",
+                    "const": "business"
+                },
+                "secret_array": {
+                    "type": "string",
+                    "const": "- haha\n- business\n- also\n- secret\n"
+                },
+                "secret_object": {
+                    "type": "string",
+                    "const": "haha: business\nalso: secret\n"
+                },
+                "unmarshalled_secret_array": {
+                    "prefixItems": [
+                        {
+                            "type": "string",
+                            "const": "haha"
+                        },
+                        {
+                            "type": "string",
+                            "const": "business"
+                        },
+                        {
+                            "type": "string",
+                            "const": "also"
+                        },
+                        {
+                            "type": "string",
+                            "const": "secret"
+                        }
+                    ],
+                    "items": false,
+                    "type": "array"
+                },
+                "unmarshalled_secret_object": {
+                    "properties": {
+                        "also": {
+                            "type": "string",
+                            "const": "secret"
+                        },
+                        "haha": {
+                            "type": "string",
+                            "const": "business"
+                        }
+                    },
+                    "type": "object",
+                    "required": [
+                        "also",
+                        "haha"
+                    ]
+                }
+            },
+            "type": "object",
+            "required": [
+                "item_from_secret_array",
+                "item_from_secret_object",
+                "secret_array",
+                "secret_object",
+                "unmarshalled_secret_array",
+                "unmarshalled_secret_object"
+            ]
+        },
+        "executionContext": {
+            "properties": {
+                "currentEnvironment": {
+                    "value": {
+                        "name": {
+                            "value": "secret-objects-yaml",
+                            "trace": {
+                                "def": {
+                                    "environment": "secret-objects-yaml",
+                                    "begin": {
+                                        "line": 0,
+                                        "column": 0,
+                                        "byte": 0
+                                    },
+                                    "end": {
+                                        "line": 0,
+                                        "column": 0,
+                                        "byte": 0
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "trace": {
+                        "def": {
+                            "environment": "secret-objects-yaml",
+                            "begin": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            },
+                            "end": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            }
+                        }
+                    }
+                },
+                "pulumi": {
+                    "value": {
+                        "user": {
+                            "value": {
+                                "id": {
+                                    "value": "USER_123",
+                                    "trace": {
+                                        "def": {
+                                            "environment": "secret-objects-yaml",
+                                            "begin": {
+                                                "line": 0,
+                                                "column": 0,
+                                                "byte": 0
+                                            },
+                                            "end": {
+                                                "line": 0,
+                                                "column": 0,
+                                                "byte": 0
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            "trace": {
+                                "def": {
+                                    "environment": "secret-objects-yaml",
+                                    "begin": {
+                                        "line": 0,
+                                        "column": 0,
+                                        "byte": 0
+                                    },
+                                    "end": {
+                                        "line": 0,
+                                        "column": 0,
+                                        "byte": 0
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "trace": {
+                        "def": {
+                            "environment": "secret-objects-yaml",
+                            "begin": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            },
+                            "end": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            }
+                        }
+                    }
+                },
+                "rootEnvironment": {
+                    "value": {
+                        "name": {
+                            "value": "secret-objects-yaml",
+                            "trace": {
+                                "def": {
+                                    "environment": "secret-objects-yaml",
+                                    "begin": {
+                                        "line": 0,
+                                        "column": 0,
+                                        "byte": 0
+                                    },
+                                    "end": {
+                                        "line": 0,
+                                        "column": 0,
+                                        "byte": 0
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "trace": {
+                        "def": {
+                            "environment": "secret-objects-yaml",
+                            "begin": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            },
+                            "end": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            }
+                        }
+                    }
+                }
+            },
+            "schema": {
+                "properties": {
+                    "currentEnvironment": {
+                        "properties": {
+                            "name": {
+                                "type": "string",
+                                "const": "secret-objects-yaml"
+                            }
+                        },
+                        "type": "object",
+                        "required": [
+                            "name"
+                        ]
+                    },
+                    "pulumi": {
+                        "properties": {
+                            "user": {
+                                "properties": {
+                                    "id": {
+                                        "type": "string",
+                                        "const": "USER_123"
+                                    }
+                                },
+                                "type": "object",
+                                "required": [
+                                    "id"
+                                ]
+                            }
+                        },
+                        "type": "object",
+                        "required": [
+                            "user"
+                        ]
+                    },
+                    "rootEnvironment": {
+                        "properties": {
+                            "name": {
+                                "type": "string",
+                                "const": "secret-objects-yaml"
+                            }
+                        },
+                        "type": "object",
+                        "required": [
+                            "name"
+                        ]
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "currentEnvironment",
+                    "pulumi",
+                    "rootEnvironment"
+                ]
+            }
+        }
+    },
+    "checkJson": {
+        "item_from_secret_array": "[secret]",
+        "item_from_secret_object": "[secret]",
+        "secret_array": "[secret]",
+        "secret_object": "[secret]",
+        "unmarshalled_secret_array": "[secret]",
+        "unmarshalled_secret_object": "[secret]"
+    },
+    "eval": {
+        "exprs": {
+            "item_from_secret_array": {
+                "range": {
+                    "environment": "secret-objects-yaml",
+                    "begin": {
+                        "line": 10,
+                        "column": 27,
+                        "byte": 301
+                    },
+                    "end": {
+                        "line": 10,
+                        "column": 58,
+                        "byte": 332
+                    }
+                },
+                "schema": {
+                    "type": "string",
+                    "const": "haha"
+                },
+                "symbol": [
+                    {
+                        "key": "unmarshalled_secret_array",
+                        "range": {
+                            "environment": "secret-objects-yaml",
+                            "begin": {
+                                "line": 10,
+                                "column": 29,
+                                "byte": 303
+                            },
+                            "end": {
+                                "line": 10,
+                                "column": 54,
+                                "byte": 328
+                            }
+                        },
+                        "value": {
+                            "environment": "secret-objects-yaml",
+                            "begin": {
+                                "line": 9,
+                                "column": 5,
+                                "byte": 245
+                            },
+                            "end": {
+                                "line": 9,
+                                "column": 34,
+                                "byte": 274
+                            }
+                        }
+                    },
+                    {
+                        "index": 0,
+                        "range": {
+                            "environment": "secret-objects-yaml",
+                            "begin": {
+                                "line": 10,
+                                "column": 54,
+                                "byte": 328
+                            },
+                            "end": {
+                                "line": 10,
+                                "column": 57,
+                                "byte": 331
+                            }
+                        },
+                        "value": {
+                            "environment": "secret-objects-yaml",
+                            "begin": {
+                                "line": 9,
+                                "column": 5,
+                                "byte": 245
+                            },
+                            "end": {
+                                "line": 9,
+                                "column": 34,
+                                "byte": 274
+                            }
+                        }
+                    }
+                ]
+            },
+            "item_from_secret_object": {
+                "range": {
+                    "environment": "secret-objects-yaml",
+                    "begin": {
+                        "line": 11,
+                        "column": 28,
+                        "byte": 360
+                    },
+                    "end": {
+                        "line": 11,
+                        "column": 62,
+                        "byte": 394
+                    }
+                },
+                "schema": {
+                    "type": "string",
+                    "const": "business"
+                },
+                "symbol": [
+                    {
+                        "key": "unmarshalled_secret_object",
+                        "range": {
+                            "environment": "secret-objects-yaml",
+                            "begin": {
+                                "line": 11,
+                                "column": 30,
+                                "byte": 362
+                            },
+                            "end": {
+                                "line": 11,
+                                "column": 56,
+                                "byte": 388
+                            }
+                        },
+                        "value": {
+                            "environment": "secret-objects-yaml",
+                            "begin": {
+                                "line": 5,
+                                "column": 5,
+                                "byte": 108
+                            },
+                            "end": {
+                                "line": 5,
+                                "column": 35,
+                                "byte": 138
+                            }
+                        }
+                    },
+                    {
+                        "key": "haha",
+                        "range": {
+                            "environment": "secret-objects-yaml",
+                            "begin": {
+                                "line": 11,
+                                "column": 56,
+                                "byte": 388
+                            },
+                            "end": {
+                                "line": 11,
+                                "column": 61,
+                                "byte": 393
+                            }
+                        },
+                        "value": {
+                            "environment": "secret-objects-yaml",
+                            "begin": {
+                                "line": 5,
+                                "column": 5,
+                                "byte": 108
+                            },
+                            "end": {
+                                "line": 5,
+                                "column": 35,
+                                "byte": 138
+                            }
+                        }
+                    }
+                ]
+            },
+            "secret_array": {
+                "range": {
+                    "environment": "secret-objects-yaml",
+                    "begin": {
+                        "line": 7,
+                        "column": 5,
+                        "byte": 159
+                    },
+                    "end": {
+                        "line": 7,
+                        "column": 51,
+                        "byte": 205
+                    }
+                },
+                "schema": {
+                    "type": "string",
+                    "const": "- haha\n- business\n- also\n- secret\n"
+                },
+                "builtin": {
+                    "name": "fn::secret",
+                    "nameRange": {
+                        "environment": "secret-objects-yaml",
+                        "begin": {
+                            "line": 7,
+                            "column": 5,
+                            "byte": 159
+                        },
+                        "end": {
+                            "line": 7,
+                            "column": 15,
+                            "byte": 169
+                        }
+                    },
+                    "argSchema": true,
+                    "arg": {
+                        "range": {
+                            "environment": "secret-objects-yaml",
+                            "begin": {
+                                "line": 7,
+                                "column": 17,
+                                "byte": 171
+                            },
+                            "end": {
+                                "line": 7,
+                                "column": 51,
+                                "byte": 205
+                            }
+                        },
+                        "schema": {
+                            "type": "string",
+                            "const": "- haha\n- business\n- also\n- secret\n"
+                        },
+                        "literal": "- haha\n- business\n- also\n- secret\n"
+                    }
+                }
+            },
+            "secret_object": {
+                "range": {
+                    "environment": "secret-objects-yaml",
+                    "begin": {
+                        "line": 3,
+                        "column": 5,
+                        "byte": 29
+                    },
+                    "end": {
+                        "line": 3,
+                        "column": 45,
+                        "byte": 69
+                    }
+                },
+                "schema": {
+                    "type": "string",
+                    "const": "haha: business\nalso: secret\n"
+                },
+                "builtin": {
+                    "name": "fn::secret",
+                    "nameRange": {
+                        "environment": "secret-objects-yaml",
+                        "begin": {
+                            "line": 3,
+                            "column": 5,
+                            "byte": 29
+                        },
+                        "end": {
+                            "line": 3,
+                            "column": 15,
+                            "byte": 39
+                        }
+                    },
+                    "argSchema": true,
+                    "arg": {
+                        "range": {
+                            "environment": "secret-objects-yaml",
+                            "begin": {
+                                "line": 3,
+                                "column": 17,
+                                "byte": 41
+                            },
+                            "end": {
+                                "line": 3,
+                                "column": 45,
+                                "byte": 69
+                            }
+                        },
+                        "schema": {
+                            "type": "string",
+                            "const": "haha: business\nalso: secret\n"
+                        },
+                        "literal": "haha: business\nalso: secret\n"
+                    }
+                }
+            },
+            "unmarshalled_secret_array": {
+                "range": {
+                    "environment": "secret-objects-yaml",
+                    "begin": {
+                        "line": 9,
+                        "column": 5,
+                        "byte": 245
+                    },
+                    "end": {
+                        "line": 9,
+                        "column": 34,
+                        "byte": 274
+                    }
+                },
+                "schema": {
+                    "prefixItems": [
+                        {
+                            "type": "string",
+                            "const": "haha"
+                        },
+                        {
+                            "type": "string",
+                            "const": "business"
+                        },
+                        {
+                            "type": "string",
+                            "const": "also"
+                        },
+                        {
+                            "type": "string",
+                            "const": "secret"
+                        }
+                    ],
+                    "items": false,
+                    "type": "array"
+                },
+                "builtin": {
+                    "name": "fn::fromYAML",
+                    "nameRange": {
+                        "environment": "secret-objects-yaml",
+                        "begin": {
+                            "line": 9,
+                            "column": 5,
+                            "byte": 245
+                        },
+                        "end": {
+                            "line": 9,
+                            "column": 17,
+                            "byte": 257
+                        }
+                    },
+                    "argSchema": true,
+                    "arg": {
+                        "range": {
+                            "environment": "secret-objects-yaml",
+                            "begin": {
+                                "line": 9,
+                                "column": 19,
+                                "byte": 259
+                            },
+                            "end": {
+                                "line": 9,
+                                "column": 34,
+                                "byte": 274
+                            }
+                        },
+                        "schema": {
+                            "type": "string",
+                            "const": "- haha\n- business\n- also\n- secret\n"
+                        },
+                        "symbol": [
+                            {
+                                "key": "secret_array",
+                                "range": {
+                                    "environment": "secret-objects-yaml",
+                                    "begin": {
+                                        "line": 9,
+                                        "column": 21,
+                                        "byte": 261
+                                    },
+                                    "end": {
+                                        "line": 9,
+                                        "column": 33,
+                                        "byte": 273
+                                    }
+                                },
+                                "value": {
+                                    "environment": "secret-objects-yaml",
+                                    "begin": {
+                                        "line": 7,
+                                        "column": 5,
+                                        "byte": 159
+                                    },
+                                    "end": {
+                                        "line": 7,
+                                        "column": 51,
+                                        "byte": 205
+                                    }
+                                }
+                            }
+                        ]
+                    }
+                }
+            },
+            "unmarshalled_secret_object": {
+                "range": {
+                    "environment": "secret-objects-yaml",
+                    "begin": {
+                        "line": 5,
+                        "column": 5,
+                        "byte": 108
+                    },
+                    "end": {
+                        "line": 5,
+                        "column": 35,
+                        "byte": 138
+                    }
+                },
+                "schema": {
+                    "properties": {
+                        "also": {
+                            "type": "string",
+                            "const": "secret"
+                        },
+                        "haha": {
+                            "type": "string",
+                            "const": "business"
+                        }
+                    },
+                    "type": "object",
+                    "required": [
+                        "also",
+                        "haha"
+                    ]
+                },
+                "builtin": {
+                    "name": "fn::fromYAML",
+                    "nameRange": {
+                        "environment": "secret-objects-yaml",
+                        "begin": {
+                            "line": 5,
+                            "column": 5,
+                            "byte": 108
+                        },
+                        "end": {
+                            "line": 5,
+                            "column": 17,
+                            "byte": 120
+                        }
+                    },
+                    "argSchema": true,
+                    "arg": {
+                        "range": {
+                            "environment": "secret-objects-yaml",
+                            "begin": {
+                                "line": 5,
+                                "column": 19,
+                                "byte": 122
+                            },
+                            "end": {
+                                "line": 5,
+                                "column": 35,
+                                "byte": 138
+                            }
+                        },
+                        "schema": {
+                            "type": "string",
+                            "const": "haha: business\nalso: secret\n"
+                        },
+                        "symbol": [
+                            {
+                                "key": "secret_object",
+                                "range": {
+                                    "environment": "secret-objects-yaml",
+                                    "begin": {
+                                        "line": 5,
+                                        "column": 21,
+                                        "byte": 124
+                                    },
+                                    "end": {
+                                        "line": 5,
+                                        "column": 34,
+                                        "byte": 137
+                                    }
+                                },
+                                "value": {
+                                    "environment": "secret-objects-yaml",
+                                    "begin": {
+                                        "line": 3,
+                                        "column": 5,
+                                        "byte": 29
+                                    },
+                                    "end": {
+                                        "line": 3,
+                                        "column": 45,
+                                        "byte": 69
+                                    }
+                                }
+                            }
+                        ]
+                    }
+                }
+            }
+        },
+        "properties": {
+            "item_from_secret_array": {
+                "value": "haha",
+                "secret": true,
+                "trace": {
+                    "def": {
+                        "environment": "secret-objects-yaml",
+                        "begin": {
+                            "line": 10,
+                            "column": 27,
+                            "byte": 301
+                        },
+                        "end": {
+                            "line": 10,
+                            "column": 58,
+                            "byte": 332
+                        }
+                    }
+                }
+            },
+            "item_from_secret_object": {
+                "value": "business",
+                "secret": true,
+                "trace": {
+                    "def": {
+                        "environment": "secret-objects-yaml",
+                        "begin": {
+                            "line": 11,
+                            "column": 28,
+                            "byte": 360
+                        },
+                        "end": {
+                            "line": 11,
+                            "column": 62,
+                            "byte": 394
+                        }
+                    }
+                }
+            },
+            "secret_array": {
+                "value": "- haha\n- business\n- also\n- secret\n",
+                "secret": true,
+                "trace": {
+                    "def": {
+                        "environment": "secret-objects-yaml",
+                        "begin": {
+                            "line": 7,
+                            "column": 17,
+                            "byte": 171
+                        },
+                        "end": {
+                            "line": 7,
+                            "column": 51,
+                            "byte": 205
+                        }
+                    }
+                }
+            },
+            "secret_object": {
+                "value": "haha: business\nalso: secret\n",
+                "secret": true,
+                "trace": {
+                    "def": {
+                        "environment": "secret-objects-yaml",
+                        "begin": {
+                            "line": 3,
+                            "column": 17,
+                            "byte": 41
+                        },
+                        "end": {
+                            "line": 3,
+                            "column": 45,
+                            "byte": 69
+                        }
+                    }
+                }
+            },
+            "unmarshalled_secret_array": {
+                "value": [
+                    {
+                        "value": "haha",
+                        "secret": true,
+                        "trace": {
+                            "def": {
+                                "environment": "secret-objects-yaml",
+                                "begin": {
+                                    "line": 9,
+                                    "column": 5,
+                                    "byte": 245
+                                },
+                                "end": {
+                                    "line": 9,
+                                    "column": 34,
+                                    "byte": 274
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "value": "business",
+                        "secret": true,
+                        "trace": {
+                            "def": {
+                                "environment": "secret-objects-yaml",
+                                "begin": {
+                                    "line": 9,
+                                    "column": 5,
+                                    "byte": 245
+                                },
+                                "end": {
+                                    "line": 9,
+                                    "column": 34,
+                                    "byte": 274
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "value": "also",
+                        "secret": true,
+                        "trace": {
+                            "def": {
+                                "environment": "secret-objects-yaml",
+                                "begin": {
+                                    "line": 9,
+                                    "column": 5,
+                                    "byte": 245
+                                },
+                                "end": {
+                                    "line": 9,
+                                    "column": 34,
+                                    "byte": 274
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "value": "secret",
+                        "secret": true,
+                        "trace": {
+                            "def": {
+                                "environment": "secret-objects-yaml",
+                                "begin": {
+                                    "line": 9,
+                                    "column": 5,
+                                    "byte": 245
+                                },
+                                "end": {
+                                    "line": 9,
+                                    "column": 34,
+                                    "byte": 274
+                                }
+                            }
+                        }
+                    }
+                ],
+                "secret": true,
+                "trace": {
+                    "def": {
+                        "environment": "secret-objects-yaml",
+                        "begin": {
+                            "line": 9,
+                            "column": 5,
+                            "byte": 245
+                        },
+                        "end": {
+                            "line": 9,
+                            "column": 34,
+                            "byte": 274
+                        }
+                    }
+                }
+            },
+            "unmarshalled_secret_object": {
+                "value": {
+                    "also": {
+                        "value": "secret",
+                        "secret": true,
+                        "trace": {
+                            "def": {
+                                "environment": "secret-objects-yaml",
+                                "begin": {
+                                    "line": 5,
+                                    "column": 5,
+                                    "byte": 108
+                                },
+                                "end": {
+                                    "line": 5,
+                                    "column": 35,
+                                    "byte": 138
+                                }
+                            }
+                        }
+                    },
+                    "haha": {
+                        "value": "business",
+                        "secret": true,
+                        "trace": {
+                            "def": {
+                                "environment": "secret-objects-yaml",
+                                "begin": {
+                                    "line": 5,
+                                    "column": 5,
+                                    "byte": 108
+                                },
+                                "end": {
+                                    "line": 5,
+                                    "column": 35,
+                                    "byte": 138
+                                }
+                            }
+                        }
+                    }
+                },
+                "secret": true,
+                "trace": {
+                    "def": {
+                        "environment": "secret-objects-yaml",
+                        "begin": {
+                            "line": 5,
+                            "column": 5,
+                            "byte": 108
+                        },
+                        "end": {
+                            "line": 5,
+                            "column": 35,
+                            "byte": 138
+                        }
+                    }
+                }
+            }
+        },
+        "schema": {
+            "properties": {
+                "item_from_secret_array": {
+                    "type": "string",
+                    "const": "haha"
+                },
+                "item_from_secret_object": {
+                    "type": "string",
+                    "const": "business"
+                },
+                "secret_array": {
+                    "type": "string",
+                    "const": "- haha\n- business\n- also\n- secret\n"
+                },
+                "secret_object": {
+                    "type": "string",
+                    "const": "haha: business\nalso: secret\n"
+                },
+                "unmarshalled_secret_array": {
+                    "prefixItems": [
+                        {
+                            "type": "string",
+                            "const": "haha"
+                        },
+                        {
+                            "type": "string",
+                            "const": "business"
+                        },
+                        {
+                            "type": "string",
+                            "const": "also"
+                        },
+                        {
+                            "type": "string",
+                            "const": "secret"
+                        }
+                    ],
+                    "items": false,
+                    "type": "array"
+                },
+                "unmarshalled_secret_object": {
+                    "properties": {
+                        "also": {
+                            "type": "string",
+                            "const": "secret"
+                        },
+                        "haha": {
+                            "type": "string",
+                            "const": "business"
+                        }
+                    },
+                    "type": "object",
+                    "required": [
+                        "also",
+                        "haha"
+                    ]
+                }
+            },
+            "type": "object",
+            "required": [
+                "item_from_secret_array",
+                "item_from_secret_object",
+                "secret_array",
+                "secret_object",
+                "unmarshalled_secret_array",
+                "unmarshalled_secret_object"
+            ]
+        },
+        "executionContext": {
+            "properties": {
+                "currentEnvironment": {
+                    "value": {
+                        "name": {
+                            "value": "secret-objects-yaml",
+                            "trace": {
+                                "def": {
+                                    "environment": "secret-objects-yaml",
+                                    "begin": {
+                                        "line": 0,
+                                        "column": 0,
+                                        "byte": 0
+                                    },
+                                    "end": {
+                                        "line": 0,
+                                        "column": 0,
+                                        "byte": 0
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "trace": {
+                        "def": {
+                            "environment": "secret-objects-yaml",
+                            "begin": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            },
+                            "end": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            }
+                        }
+                    }
+                },
+                "pulumi": {
+                    "value": {
+                        "user": {
+                            "value": {
+                                "id": {
+                                    "value": "USER_123",
+                                    "trace": {
+                                        "def": {
+                                            "environment": "secret-objects-yaml",
+                                            "begin": {
+                                                "line": 0,
+                                                "column": 0,
+                                                "byte": 0
+                                            },
+                                            "end": {
+                                                "line": 0,
+                                                "column": 0,
+                                                "byte": 0
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            "trace": {
+                                "def": {
+                                    "environment": "secret-objects-yaml",
+                                    "begin": {
+                                        "line": 0,
+                                        "column": 0,
+                                        "byte": 0
+                                    },
+                                    "end": {
+                                        "line": 0,
+                                        "column": 0,
+                                        "byte": 0
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "trace": {
+                        "def": {
+                            "environment": "secret-objects-yaml",
+                            "begin": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            },
+                            "end": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            }
+                        }
+                    }
+                },
+                "rootEnvironment": {
+                    "value": {
+                        "name": {
+                            "value": "secret-objects-yaml",
+                            "trace": {
+                                "def": {
+                                    "environment": "secret-objects-yaml",
+                                    "begin": {
+                                        "line": 0,
+                                        "column": 0,
+                                        "byte": 0
+                                    },
+                                    "end": {
+                                        "line": 0,
+                                        "column": 0,
+                                        "byte": 0
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "trace": {
+                        "def": {
+                            "environment": "secret-objects-yaml",
+                            "begin": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            },
+                            "end": {
+                                "line": 0,
+                                "column": 0,
+                                "byte": 0
+                            }
+                        }
+                    }
+                }
+            },
+            "schema": {
+                "properties": {
+                    "currentEnvironment": {
+                        "properties": {
+                            "name": {
+                                "type": "string",
+                                "const": "secret-objects-yaml"
+                            }
+                        },
+                        "type": "object",
+                        "required": [
+                            "name"
+                        ]
+                    },
+                    "pulumi": {
+                        "properties": {
+                            "user": {
+                                "properties": {
+                                    "id": {
+                                        "type": "string",
+                                        "const": "USER_123"
+                                    }
+                                },
+                                "type": "object",
+                                "required": [
+                                    "id"
+                                ]
+                            }
+                        },
+                        "type": "object",
+                        "required": [
+                            "user"
+                        ]
+                    },
+                    "rootEnvironment": {
+                        "properties": {
+                            "name": {
+                                "type": "string",
+                                "const": "secret-objects-yaml"
+                            }
+                        },
+                        "type": "object",
+                        "required": [
+                            "name"
+                        ]
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "currentEnvironment",
+                    "pulumi",
+                    "rootEnvironment"
+                ]
+            }
+        }
+    },
+    "evalJsonRedacted": {
+        "item_from_secret_array": "[secret]",
+        "item_from_secret_object": "[secret]",
+        "secret_array": "[secret]",
+        "secret_object": "[secret]",
+        "unmarshalled_secret_array": "[secret]",
+        "unmarshalled_secret_object": "[secret]"
+    },
+    "evalJSONRevealed": {
+        "item_from_secret_array": "haha",
+        "item_from_secret_object": "business",
+        "secret_array": "- haha\n- business\n- also\n- secret\n",
+        "secret_object": "haha: business\nalso: secret\n",
+        "unmarshalled_secret_array": [
+            "haha",
+            "business",
+            "also",
+            "secret"
+        ],
+        "unmarshalled_secret_object": {
+            "also": "secret",
+            "haha": "business"
+        }
+    }
+}
