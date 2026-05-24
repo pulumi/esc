@@ -3,7 +3,7 @@ project_name: esc
 changelog:
   skip: true
 release:
-  disable: true
+  disable: false
 snapshot:
   name_template: '{{ .Tag }}-SNAPSHOT'
 checksum:
