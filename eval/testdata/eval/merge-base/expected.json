@@ -1,101 +1,199 @@
 {
     "check": {
         "exprs": {
-            "other_object": {
-                "range": {
-                    "environment": "merge-base",
-                    "begin": {
-                        "line": 40,
-                        "column": 17,
-                        "byte": 1003
-                    },
-                    "end": {
-                        "line": 40,
-                        "column": 31,
-                        "byte": 1017
-                    }
+            "range": {
+                "environment": "merge-base",
+                "begin": {
+                    "line": 35,
+                    "column": 3,
+                    "byte": 918
                 },
-                "schema": {
-                    "properties": {
-                        "alpha": {
-                            "type": "string",
-                            "const": "beta"
-                        },
-                        "baz": {
-                            "type": "string",
-                            "const": "zab"
-                        },
-                        "foo": {
-                            "type": "string",
-                            "const": "baz"
-                        },
-                        "nested": {
-                            "properties": {
-                                "epsilon": {
-                                    "type": "string",
-                                    "const": "delta"
-                                },
-                                "zed": {
-                                    "type": "string",
-                                    "const": "dez"
-                                }
-                            },
-                            "type": "object",
-                            "required": [
-                                "epsilon",
-                                "zed"
-                            ]
-                        }
-                    },
-                    "type": "object",
-                    "required": [
-                        "alpha",
-                        "baz",
-                        "foo",
-                        "nested"
-                    ]
-                },
-                "base": {
-                    "range": {
-                        "environment": "a",
-                        "begin": {
-                            "line": 6,
-                            "column": 5,
-                            "byte": 69
-                        },
-                        "end": {
-                            "line": 8,
-                            "column": 21,
-                            "byte": 110
-                        }
-                    },
-                    "schema": {
+                "end": {
+                    "line": 40,
+                    "column": 31,
+                    "byte": 1017
+                }
+            },
+            "schema": {
+                "properties": {
+                    "other_object": {
                         "properties": {
+                            "alpha": {
+                                "type": "string",
+                                "const": "beta"
+                            },
                             "baz": {
                                 "type": "string",
-                                "const": "qux"
+                                "const": "zab"
+                            },
+                            "foo": {
+                                "type": "string",
+                                "const": "baz"
                             },
                             "nested": {
                                 "properties": {
                                     "epsilon": {
                                         "type": "string",
                                         "const": "delta"
+                                    },
+                                    "zed": {
+                                        "type": "string",
+                                        "const": "dez"
                                     }
                                 },
                                 "type": "object",
                                 "required": [
-                                    "epsilon"
+                                    "epsilon",
+                                    "zed"
                                 ]
                             }
                         },
                         "type": "object",
                         "required": [
+                            "alpha",
                             "baz",
+                            "foo",
                             "nested"
                         ]
                     },
-                    "keyRanges": {
-                        "baz": {
+                    "some_object": {
+                        "properties": {
+                            "alpha": {
+                                "type": "string",
+                                "const": "beta"
+                            },
+                            "baz": {
+                                "type": "string",
+                                "const": "zab"
+                            },
+                            "foo": {
+                                "type": "string",
+                                "const": "baz"
+                            },
+                            "nested": {
+                                "properties": {
+                                    "zed": {
+                                        "type": "string",
+                                        "const": "dez"
+                                    }
+                                },
+                                "type": "object",
+                                "required": [
+                                    "zed"
+                                ]
+                            }
+                        },
+                        "type": "object",
+                        "required": [
+                            "alpha",
+                            "baz",
+                            "foo",
+                            "nested"
+                        ]
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "other_object",
+                    "some_object"
+                ]
+            },
+            "base": {
+                "range": {
+                    "environment": "a",
+                    "begin": {
+                        "line": 2,
+                        "column": 3,
+                        "byte": 10
+                    },
+                    "end": {
+                        "line": 8,
+                        "column": 21,
+                        "byte": 110
+                    }
+                },
+                "schema": {
+                    "properties": {
+                        "other_object": {
+                            "properties": {
+                                "baz": {
+                                    "type": "string",
+                                    "const": "qux"
+                                },
+                                "nested": {
+                                    "properties": {
+                                        "epsilon": {
+                                            "type": "string",
+                                            "const": "delta"
+                                        }
+                                    },
+                                    "type": "object",
+                                    "required": [
+                                        "epsilon"
+                                    ]
+                                }
+                            },
+                            "type": "object",
+                            "required": [
+                                "baz",
+                                "nested"
+                            ]
+                        },
+                        "some_object": {
+                            "properties": {
+                                "baz": {
+                                    "type": "string",
+                                    "const": "zab"
+                                },
+                                "foo": {
+                                    "type": "string",
+                                    "const": "bar"
+                                }
+                            },
+                            "type": "object",
+                            "required": [
+                                "baz",
+                                "foo"
+                            ]
+                        }
+                    },
+                    "type": "object",
+                    "required": [
+                        "other_object",
+                        "some_object"
+                    ]
+                },
+                "keyRanges": {
+                    "other_object": {
+                        "environment": "a",
+                        "begin": {
+                            "line": 5,
+                            "column": 3,
+                            "byte": 51
+                        },
+                        "end": {
+                            "line": 5,
+                            "column": 15,
+                            "byte": 63
+                        }
+                    },
+                    "some_object": {
+                        "environment": "a",
+                        "begin": {
+                            "line": 2,
+                            "column": 3,
+                            "byte": 10
+                        },
+                        "end": {
+                            "line": 2,
+                            "column": 14,
+                            "byte": 21
+                        }
+                    }
+                },
+                "object": {
+                    "other_object": {
+                        "range": {
                             "environment": "a",
                             "begin": {
                                 "line": 6,
@@ -103,74 +201,87 @@
                                 "byte": 69
                             },
                             "end": {
-                                "line": 6,
-                                "column": 8,
-                                "byte": 72
+                                "line": 8,
+                                "column": 21,
+                                "byte": 110
                             }
                         },
-                        "nested": {
-                            "environment": "a",
-                            "begin": {
-                                "line": 7,
-                                "column": 5,
-                                "byte": 82
+                        "schema": {
+                            "properties": {
+                                "baz": {
+                                    "type": "string",
+                                    "const": "qux"
+                                },
+                                "nested": {
+                                    "properties": {
+                                        "epsilon": {
+                                            "type": "string",
+                                            "const": "delta"
+                                        }
+                                    },
+                                    "type": "object",
+                                    "required": [
+                                        "epsilon"
+                                    ]
+                                }
                             },
-                            "end": {
-                                "line": 7,
-                                "column": 11,
-                                "byte": 88
-                            }
-                        }
-                    },
-                    "object": {
-                        "baz": {
-                            "range": {
+                            "type": "object",
+                            "required": [
+                                "baz",
+                                "nested"
+                            ]
+                        },
+                        "keyRanges": {
+                            "baz": {
                                 "environment": "a",
                                 "begin": {
                                     "line": 6,
-                                    "column": 10,
-                                    "byte": 74
+                                    "column": 5,
+                                    "byte": 69
                                 },
                                 "end": {
                                     "line": 6,
-                                    "column": 13,
-                                    "byte": 77
+                                    "column": 8,
+                                    "byte": 72
                                 }
                             },
-                            "schema": {
-                                "type": "string",
-                                "const": "qux"
-                            },
-                            "literal": "qux"
-                        },
-                        "nested": {
-                            "range": {
+                            "nested": {
                                 "environment": "a",
                                 "begin": {
-                                    "line": 8,
-                                    "column": 7,
-                                    "byte": 96
+                                    "line": 7,
+                                    "column": 5,
+                                    "byte": 82
                                 },
                                 "end": {
-                                    "line": 8,
-                                    "column": 21,
-                                    "byte": 110
+                                    "line": 7,
+                                    "column": 11,
+                                    "byte": 88
                                 }
-                            },
-                            "schema": {
-                                "properties": {
-                                    "epsilon": {
-                                        "type": "string",
-                                        "const": "delta"
+                            }
+                        },
+                        "object": {
+                            "baz": {
+                                "range": {
+                                    "environment": "a",
+                                    "begin": {
+                                        "line": 6,
+                                        "column": 10,
+                                        "byte": 74
+                                    },
+                                    "end": {
+                                        "line": 6,
+                                        "column": 13,
+                                        "byte": 77
                                     }
                                 },
-                                "type": "object",
-                                "required": [
-                                    "epsilon"
-                                ]
+                                "schema": {
+                                    "type": "string",
+                                    "const": "qux"
+                                },
+                                "literal": "qux"
                             },
-                            "keyRanges": {
-                                "epsilon": {
+                            "nested": {
+                                "range": {
                                     "environment": "a",
                                     "begin": {
                                         "line": 8,
@@ -179,163 +290,64 @@
                                     },
                                     "end": {
                                         "line": 8,
-                                        "column": 14,
-                                        "byte": 103
+                                        "column": 21,
+                                        "byte": 110
                                     }
-                                }
-                            },
-                            "object": {
-                                "epsilon": {
-                                    "range": {
+                                },
+                                "schema": {
+                                    "properties": {
+                                        "epsilon": {
+                                            "type": "string",
+                                            "const": "delta"
+                                        }
+                                    },
+                                    "type": "object",
+                                    "required": [
+                                        "epsilon"
+                                    ]
+                                },
+                                "keyRanges": {
+                                    "epsilon": {
                                         "environment": "a",
                                         "begin": {
                                             "line": 8,
-                                            "column": 16,
-                                            "byte": 105
+                                            "column": 7,
+                                            "byte": 96
                                         },
                                         "end": {
                                             "line": 8,
-                                            "column": 21,
-                                            "byte": 110
+                                            "column": 14,
+                                            "byte": 103
                                         }
-                                    },
-                                    "schema": {
-                                        "type": "string",
-                                        "const": "delta"
-                                    },
-                                    "literal": "delta"
+                                    }
+                                },
+                                "object": {
+                                    "epsilon": {
+                                        "range": {
+                                            "environment": "a",
+                                            "begin": {
+                                                "line": 8,
+                                                "column": 16,
+                                                "byte": 105
+                                            },
+                                            "end": {
+                                                "line": 8,
+                                                "column": 21,
+                                                "byte": 110
+                                            }
+                                        },
+                                        "schema": {
+                                            "type": "string",
+                                            "const": "delta"
+                                        },
+                                        "literal": "delta"
+                                    }
                                 }
                             }
                         }
-                    }
-                },
-                "symbol": [
-                    {
-                        "key": "some_object",
+                    },
+                    "some_object": {
                         "range": {
-                            "environment": "merge-base",
-                            "begin": {
-                                "line": 40,
-                                "column": 19,
-                                "byte": 1005
-                            },
-                            "end": {
-                                "line": 40,
-                                "column": 30,
-                                "byte": 1016
-                            }
-                        },
-                        "value": {
-                            "environment": "merge-base",
-                            "begin": {
-                                "line": 36,
-                                "column": 5,
-                                "byte": 935
-                            },
-                            "end": {
-                                "line": 39,
-                                "column": 15,
-                                "byte": 986
-                            }
-                        }
-                    }
-                ]
-            },
-            "some_object": {
-                "range": {
-                    "environment": "merge-base",
-                    "begin": {
-                        "line": 36,
-                        "column": 5,
-                        "byte": 935
-                    },
-                    "end": {
-                        "line": 39,
-                        "column": 15,
-                        "byte": 986
-                    }
-                },
-                "schema": {
-                    "properties": {
-                        "alpha": {
-                            "type": "string",
-                            "const": "beta"
-                        },
-                        "baz": {
-                            "type": "string",
-                            "const": "zab"
-                        },
-                        "foo": {
-                            "type": "string",
-                            "const": "baz"
-                        },
-                        "nested": {
-                            "properties": {
-                                "zed": {
-                                    "type": "string",
-                                    "const": "dez"
-                                }
-                            },
-                            "type": "object",
-                            "required": [
-                                "zed"
-                            ]
-                        }
-                    },
-                    "type": "object",
-                    "required": [
-                        "alpha",
-                        "baz",
-                        "foo",
-                        "nested"
-                    ]
-                },
-                "base": {
-                    "range": {
-                        "environment": "a",
-                        "begin": {
-                            "line": 3,
-                            "column": 5,
-                            "byte": 27
-                        },
-                        "end": {
-                            "line": 4,
-                            "column": 13,
-                            "byte": 48
-                        }
-                    },
-                    "schema": {
-                        "properties": {
-                            "baz": {
-                                "type": "string",
-                                "const": "zab"
-                            },
-                            "foo": {
-                                "type": "string",
-                                "const": "bar"
-                            }
-                        },
-                        "type": "object",
-                        "required": [
-                            "baz",
-                            "foo"
-                        ]
-                    },
-                    "keyRanges": {
-                        "baz": {
-                            "environment": "a",
-                            "begin": {
-                                "line": 4,
-                                "column": 5,
-                                "byte": 40
-                            },
-                            "end": {
-                                "line": 4,
-                                "column": 8,
-                                "byte": 43
-                            }
-                        },
-                        "foo": {
                             "environment": "a",
                             "begin": {
                                 "line": 3,
@@ -343,70 +355,372 @@
                                 "byte": 27
                             },
                             "end": {
-                                "line": 3,
-                                "column": 8,
-                                "byte": 30
+                                "line": 4,
+                                "column": 13,
+                                "byte": 48
                             }
-                        }
-                    },
-                    "object": {
-                        "baz": {
-                            "range": {
+                        },
+                        "schema": {
+                            "properties": {
+                                "baz": {
+                                    "type": "string",
+                                    "const": "zab"
+                                },
+                                "foo": {
+                                    "type": "string",
+                                    "const": "bar"
+                                }
+                            },
+                            "type": "object",
+                            "required": [
+                                "baz",
+                                "foo"
+                            ]
+                        },
+                        "keyRanges": {
+                            "baz": {
                                 "environment": "a",
                                 "begin": {
                                     "line": 4,
-                                    "column": 10,
-                                    "byte": 45
+                                    "column": 5,
+                                    "byte": 40
                                 },
                                 "end": {
                                     "line": 4,
-                                    "column": 13,
-                                    "byte": 48
+                                    "column": 8,
+                                    "byte": 43
                                 }
                             },
-                            "schema": {
+                            "foo": {
+                                "environment": "a",
+                                "begin": {
+                                    "line": 3,
+                                    "column": 5,
+                                    "byte": 27
+                                },
+                                "end": {
+                                    "line": 3,
+                                    "column": 8,
+                                    "byte": 30
+                                }
+                            }
+                        },
+                        "object": {
+                            "baz": {
+                                "range": {
+                                    "environment": "a",
+                                    "begin": {
+                                        "line": 4,
+                                        "column": 10,
+                                        "byte": 45
+                                    },
+                                    "end": {
+                                        "line": 4,
+                                        "column": 13,
+                                        "byte": 48
+                                    }
+                                },
+                                "schema": {
+                                    "type": "string",
+                                    "const": "zab"
+                                },
+                                "literal": "zab"
+                            },
+                            "foo": {
+                                "range": {
+                                    "environment": "a",
+                                    "begin": {
+                                        "line": 3,
+                                        "column": 10,
+                                        "byte": 32
+                                    },
+                                    "end": {
+                                        "line": 3,
+                                        "column": 13,
+                                        "byte": 35
+                                    }
+                                },
+                                "schema": {
+                                    "type": "string",
+                                    "const": "bar"
+                                },
+                                "literal": "bar"
+                            }
+                        }
+                    }
+                }
+            },
+            "keyRanges": {
+                "other_object": {
+                    "environment": "merge-base",
+                    "begin": {
+                        "line": 40,
+                        "column": 3,
+                        "byte": 989
+                    },
+                    "end": {
+                        "line": 40,
+                        "column": 15,
+                        "byte": 1001
+                    }
+                },
+                "some_object": {
+                    "environment": "merge-base",
+                    "begin": {
+                        "line": 35,
+                        "column": 3,
+                        "byte": 918
+                    },
+                    "end": {
+                        "line": 35,
+                        "column": 14,
+                        "byte": 929
+                    }
+                }
+            },
+            "object": {
+                "other_object": {
+                    "range": {
+                        "environment": "merge-base",
+                        "begin": {
+                            "line": 40,
+                            "column": 17,
+                            "byte": 1003
+                        },
+                        "end": {
+                            "line": 40,
+                            "column": 31,
+                            "byte": 1017
+                        }
+                    },
+                    "schema": {
+                        "properties": {
+                            "alpha": {
+                                "type": "string",
+                                "const": "beta"
+                            },
+                            "baz": {
                                 "type": "string",
                                 "const": "zab"
                             },
-                            "literal": "zab"
-                        },
-                        "foo": {
-                            "range": {
-                                "environment": "a",
-                                "begin": {
-                                    "line": 3,
-                                    "column": 10,
-                                    "byte": 32
+                            "foo": {
+                                "type": "string",
+                                "const": "baz"
+                            },
+                            "nested": {
+                                "properties": {
+                                    "epsilon": {
+                                        "type": "string",
+                                        "const": "delta"
+                                    },
+                                    "zed": {
+                                        "type": "string",
+                                        "const": "dez"
+                                    }
                                 },
-                                "end": {
-                                    "line": 3,
-                                    "column": 13,
-                                    "byte": 35
+                                "type": "object",
+                                "required": [
+                                    "epsilon",
+                                    "zed"
+                                ]
+                            }
+                        },
+                        "type": "object",
+                        "required": [
+                            "alpha",
+                            "baz",
+                            "foo",
+                            "nested"
+                        ]
+                    },
+                    "base": {
+                        "range": {
+                            "environment": "a",
+                            "begin": {
+                                "line": 6,
+                                "column": 5,
+                                "byte": 69
+                            },
+                            "end": {
+                                "line": 8,
+                                "column": 21,
+                                "byte": 110
+                            }
+                        },
+                        "schema": {
+                            "properties": {
+                                "baz": {
+                                    "type": "string",
+                                    "const": "qux"
+                                },
+                                "nested": {
+                                    "properties": {
+                                        "epsilon": {
+                                            "type": "string",
+                                            "const": "delta"
+                                        }
+                                    },
+                                    "type": "object",
+                                    "required": [
+                                        "epsilon"
+                                    ]
                                 }
                             },
-                            "schema": {
-                                "type": "string",
-                                "const": "bar"
-                            },
-                            "literal": "bar"
-                        }
-                    }
-                },
-                "keyRanges": {
-                    "alpha": {
-                        "environment": "merge-base",
-                        "begin": {
-                            "line": 37,
-                            "column": 5,
-                            "byte": 948
+                            "type": "object",
+                            "required": [
+                                "baz",
+                                "nested"
+                            ]
                         },
-                        "end": {
-                            "line": 37,
-                            "column": 10,
-                            "byte": 953
+                        "keyRanges": {
+                            "baz": {
+                                "environment": "a",
+                                "begin": {
+                                    "line": 6,
+                                    "column": 5,
+                                    "byte": 69
+                                },
+                                "end": {
+                                    "line": 6,
+                                    "column": 8,
+                                    "byte": 72
+                                }
+                            },
+                            "nested": {
+                                "environment": "a",
+                                "begin": {
+                                    "line": 7,
+                                    "column": 5,
+                                    "byte": 82
+                                },
+                                "end": {
+                                    "line": 7,
+                                    "column": 11,
+                                    "byte": 88
+                                }
+                            }
+                        },
+                        "object": {
+                            "baz": {
+                                "range": {
+                                    "environment": "a",
+                                    "begin": {
+                                        "line": 6,
+                                        "column": 10,
+                                        "byte": 74
+                                    },
+                                    "end": {
+                                        "line": 6,
+                                        "column": 13,
+                                        "byte": 77
+                                    }
+                                },
+                                "schema": {
+                                    "type": "string",
+                                    "const": "qux"
+                                },
+                                "literal": "qux"
+                            },
+                            "nested": {
+                                "range": {
+                                    "environment": "a",
+                                    "begin": {
+                                        "line": 8,
+                                        "column": 7,
+                                        "byte": 96
+                                    },
+                                    "end": {
+                                        "line": 8,
+                                        "column": 21,
+                                        "byte": 110
+                                    }
+                                },
+                                "schema": {
+                                    "properties": {
+                                        "epsilon": {
+                                            "type": "string",
+                                            "const": "delta"
+                                        }
+                                    },
+                                    "type": "object",
+                                    "required": [
+                                        "epsilon"
+                                    ]
+                                },
+                                "keyRanges": {
+                                    "epsilon": {
+                                        "environment": "a",
+                                        "begin": {
+                                            "line": 8,
+                                            "column": 7,
+                                            "byte": 96
+                                        },
+                                        "end": {
+                                            "line": 8,
+                                            "column": 14,
+                                            "byte": 103
+                                        }
+                                    }
+                                },
+                                "object": {
+                                    "epsilon": {
+                                        "range": {
+                                            "environment": "a",
+                                            "begin": {
+                                                "line": 8,
+                                                "column": 16,
+                                                "byte": 105
+                                            },
+                                            "end": {
+                                                "line": 8,
+                                                "column": 21,
+                                                "byte": 110
+                                            }
+                                        },
+                                        "schema": {
+                                            "type": "string",
+                                            "const": "delta"
+                                        },
+                                        "literal": "delta"
+                                    }
+                                }
+                            }
                         }
                     },
-                    "foo": {
+                    "symbol": [
+                        {
+                            "key": "some_object",
+                            "range": {
+                                "environment": "merge-base",
+                                "begin": {
+                                    "line": 40,
+                                    "column": 19,
+                                    "byte": 1005
+                                },
+                                "end": {
+                                    "line": 40,
+                                    "column": 30,
+                                    "byte": 1016
+                                }
+                            },
+                            "value": {
+                                "environment": "merge-base",
+                                "begin": {
+                                    "line": 36,
+                                    "column": 5,
+                                    "byte": 935
+                                },
+                                "end": {
+                                    "line": 39,
+                                    "column": 15,
+                                    "byte": 986
+                                }
+                            }
+                        }
+                    ]
+                },
+                "some_object": {
+                    "range": {
                         "environment": "merge-base",
                         "begin": {
                             "line": 36,
@@ -414,114 +728,252 @@
                             "byte": 935
                         },
                         "end": {
-                            "line": 36,
-                            "column": 8,
-                            "byte": 938
+                            "line": 39,
+                            "column": 15,
+                            "byte": 986
                         }
                     },
-                    "nested": {
-                        "environment": "merge-base",
-                        "begin": {
-                            "line": 38,
-                            "column": 5,
-                            "byte": 964
-                        },
-                        "end": {
-                            "line": 38,
-                            "column": 11,
-                            "byte": 970
-                        }
-                    }
-                },
-                "object": {
-                    "alpha": {
-                        "range": {
-                            "environment": "merge-base",
-                            "begin": {
-                                "line": 37,
-                                "column": 12,
-                                "byte": 955
-                            },
-                            "end": {
-                                "line": 37,
-                                "column": 16,
-                                "byte": 959
-                            }
-                        },
-                        "schema": {
-                            "type": "string",
-                            "const": "beta"
-                        },
-                        "literal": "beta"
-                    },
-                    "foo": {
-                        "range": {
-                            "environment": "merge-base",
-                            "begin": {
-                                "line": 36,
-                                "column": 10,
-                                "byte": 940
-                            },
-                            "end": {
-                                "line": 36,
-                                "column": 13,
-                                "byte": 943
-                            }
-                        },
-                        "schema": {
-                            "type": "string",
-                            "const": "baz"
-                        },
-                        "base": {
-                            "range": {
-                                "environment": "a",
-                                "begin": {
-                                    "line": 3,
-                                    "column": 10,
-                                    "byte": 32
-                                },
-                                "end": {
-                                    "line": 3,
-                                    "column": 13,
-                                    "byte": 35
-                                }
-                            },
-                            "schema": {
+                    "schema": {
+                        "properties": {
+                            "alpha": {
                                 "type": "string",
-                                "const": "bar"
+                                "const": "beta"
                             },
-                            "literal": "bar"
+                            "baz": {
+                                "type": "string",
+                                "const": "zab"
+                            },
+                            "foo": {
+                                "type": "string",
+                                "const": "baz"
+                            },
+                            "nested": {
+                                "properties": {
+                                    "zed": {
+                                        "type": "string",
+                                        "const": "dez"
+                                    }
+                                },
+                                "type": "object",
+                                "required": [
+                                    "zed"
+                                ]
+                            }
                         },
-                        "literal": "baz"
+                        "type": "object",
+                        "required": [
+                            "alpha",
+                            "baz",
+                            "foo",
+                            "nested"
+                        ]
                     },
-                    "nested": {
+                    "base": {
                         "range": {
-                            "environment": "merge-base",
+                            "environment": "a",
                             "begin": {
-                                "line": 39,
-                                "column": 7,
-                                "byte": 978
+                                "line": 3,
+                                "column": 5,
+                                "byte": 27
                             },
                             "end": {
-                                "line": 39,
-                                "column": 15,
-                                "byte": 986
+                                "line": 4,
+                                "column": 13,
+                                "byte": 48
                             }
                         },
                         "schema": {
                             "properties": {
-                                "zed": {
+                                "baz": {
                                     "type": "string",
-                                    "const": "dez"
+                                    "const": "zab"
+                                },
+                                "foo": {
+                                    "type": "string",
+                                    "const": "bar"
                                 }
                             },
                             "type": "object",
                             "required": [
-                                "zed"
+                                "baz",
+                                "foo"
                             ]
                         },
                         "keyRanges": {
-                            "zed": {
+                            "baz": {
+                                "environment": "a",
+                                "begin": {
+                                    "line": 4,
+                                    "column": 5,
+                                    "byte": 40
+                                },
+                                "end": {
+                                    "line": 4,
+                                    "column": 8,
+                                    "byte": 43
+                                }
+                            },
+                            "foo": {
+                                "environment": "a",
+                                "begin": {
+                                    "line": 3,
+                                    "column": 5,
+                                    "byte": 27
+                                },
+                                "end": {
+                                    "line": 3,
+                                    "column": 8,
+                                    "byte": 30
+                                }
+                            }
+                        },
+                        "object": {
+                            "baz": {
+                                "range": {
+                                    "environment": "a",
+                                    "begin": {
+                                        "line": 4,
+                                        "column": 10,
+                                        "byte": 45
+                                    },
+                                    "end": {
+                                        "line": 4,
+                                        "column": 13,
+                                        "byte": 48
+                                    }
+                                },
+                                "schema": {
+                                    "type": "string",
+                                    "const": "zab"
+                                },
+                                "literal": "zab"
+                            },
+                            "foo": {
+                                "range": {
+                                    "environment": "a",
+                                    "begin": {
+                                        "line": 3,
+                                        "column": 10,
+                                        "byte": 32
+                                    },
+                                    "end": {
+                                        "line": 3,
+                                        "column": 13,
+                                        "byte": 35
+                                    }
+                                },
+                                "schema": {
+                                    "type": "string",
+                                    "const": "bar"
+                                },
+                                "literal": "bar"
+                            }
+                        }
+                    },
+                    "keyRanges": {
+                        "alpha": {
+                            "environment": "merge-base",
+                            "begin": {
+                                "line": 37,
+                                "column": 5,
+                                "byte": 948
+                            },
+                            "end": {
+                                "line": 37,
+                                "column": 10,
+                                "byte": 953
+                            }
+                        },
+                        "foo": {
+                            "environment": "merge-base",
+                            "begin": {
+                                "line": 36,
+                                "column": 5,
+                                "byte": 935
+                            },
+                            "end": {
+                                "line": 36,
+                                "column": 8,
+                                "byte": 938
+                            }
+                        },
+                        "nested": {
+                            "environment": "merge-base",
+                            "begin": {
+                                "line": 38,
+                                "column": 5,
+                                "byte": 964
+                            },
+                            "end": {
+                                "line": 38,
+                                "column": 11,
+                                "byte": 970
+                            }
+                        }
+                    },
+                    "object": {
+                        "alpha": {
+                            "range": {
+                                "environment": "merge-base",
+                                "begin": {
+                                    "line": 37,
+                                    "column": 12,
+                                    "byte": 955
+                                },
+                                "end": {
+                                    "line": 37,
+                                    "column": 16,
+                                    "byte": 959
+                                }
+                            },
+                            "schema": {
+                                "type": "string",
+                                "const": "beta"
+                            },
+                            "literal": "beta"
+                        },
+                        "foo": {
+                            "range": {
+                                "environment": "merge-base",
+                                "begin": {
+                                    "line": 36,
+                                    "column": 10,
+                                    "byte": 940
+                                },
+                                "end": {
+                                    "line": 36,
+                                    "column": 13,
+                                    "byte": 943
+                                }
+                            },
+                            "schema": {
+                                "type": "string",
+                                "const": "baz"
+                            },
+                            "base": {
+                                "range": {
+                                    "environment": "a",
+                                    "begin": {
+                                        "line": 3,
+                                        "column": 10,
+                                        "byte": 32
+                                    },
+                                    "end": {
+                                        "line": 3,
+                                        "column": 13,
+                                        "byte": 35
+                                    }
+                                },
+                                "schema": {
+                                    "type": "string",
+                                    "const": "bar"
+                                },
+                                "literal": "bar"
+                            },
+                            "literal": "baz"
+                        },
+                        "nested": {
+                            "range": {
                                 "environment": "merge-base",
                                 "begin": {
                                     "line": 39,
@@ -530,31 +982,58 @@
                                 },
                                 "end": {
                                     "line": 39,
-                                    "column": 10,
-                                    "byte": 981
+                                    "column": 15,
+                                    "byte": 986
                                 }
-                            }
-                        },
-                        "object": {
-                            "zed": {
-                                "range": {
+                            },
+                            "schema": {
+                                "properties": {
+                                    "zed": {
+                                        "type": "string",
+                                        "const": "dez"
+                                    }
+                                },
+                                "type": "object",
+                                "required": [
+                                    "zed"
+                                ]
+                            },
+                            "keyRanges": {
+                                "zed": {
                                     "environment": "merge-base",
                                     "begin": {
                                         "line": 39,
-                                        "column": 12,
-                                        "byte": 983
+                                        "column": 7,
+                                        "byte": 978
                                     },
                                     "end": {
                                         "line": 39,
-                                        "column": 15,
-                                        "byte": 986
+                                        "column": 10,
+                                        "byte": 981
                                     }
-                                },
-                                "schema": {
-                                    "type": "string",
-                                    "const": "dez"
-                                },
-                                "literal": "dez"
+                                }
+                            },
+                            "object": {
+                                "zed": {
+                                    "range": {
+                                        "environment": "merge-base",
+                                        "begin": {
+                                            "line": 39,
+                                            "column": 12,
+                                            "byte": 983
+                                        },
+                                        "end": {
+                                            "line": 39,
+                                            "column": 15,
+                                            "byte": 986
+                                        }
+                                    },
+                                    "schema": {
+                                        "type": "string",
+                                        "const": "dez"
+                                    },
+                                    "literal": "dez"
+                                }
                             }
                         }
                     }
@@ -1425,101 +1904,199 @@
     },
     "eval": {
         "exprs": {
-            "other_object": {
-                "range": {
-                    "environment": "merge-base",
-                    "begin": {
-                        "line": 40,
-                        "column": 17,
-                        "byte": 1003
-                    },
-                    "end": {
-                        "line": 40,
-                        "column": 31,
-                        "byte": 1017
-                    }
+            "range": {
+                "environment": "merge-base",
+                "begin": {
+                    "line": 35,
+                    "column": 3,
+                    "byte": 918
                 },
-                "schema": {
-                    "properties": {
-                        "alpha": {
-                            "type": "string",
-                            "const": "beta"
-                        },
-                        "baz": {
-                            "type": "string",
-                            "const": "zab"
-                        },
-                        "foo": {
-                            "type": "string",
-                            "const": "baz"
-                        },
-                        "nested": {
-                            "properties": {
-                                "epsilon": {
-                                    "type": "string",
-                                    "const": "delta"
-                                },
-                                "zed": {
-                                    "type": "string",
-                                    "const": "dez"
-                                }
-                            },
-                            "type": "object",
-                            "required": [
-                                "epsilon",
-                                "zed"
-                            ]
-                        }
-                    },
-                    "type": "object",
-                    "required": [
-                        "alpha",
-                        "baz",
-                        "foo",
-                        "nested"
-                    ]
-                },
-                "base": {
-                    "range": {
-                        "environment": "a",
-                        "begin": {
-                            "line": 6,
-                            "column": 5,
-                            "byte": 69
-                        },
-                        "end": {
-                            "line": 8,
-                            "column": 21,
-                            "byte": 110
-                        }
-                    },
-                    "schema": {
+                "end": {
+                    "line": 40,
+                    "column": 31,
+                    "byte": 1017
+                }
+            },
+            "schema": {
+                "properties": {
+                    "other_object": {
                         "properties": {
+                            "alpha": {
+                                "type": "string",
+                                "const": "beta"
+                            },
                             "baz": {
                                 "type": "string",
-                                "const": "qux"
+                                "const": "zab"
+                            },
+                            "foo": {
+                                "type": "string",
+                                "const": "baz"
                             },
                             "nested": {
                                 "properties": {
                                     "epsilon": {
                                         "type": "string",
                                         "const": "delta"
+                                    },
+                                    "zed": {
+                                        "type": "string",
+                                        "const": "dez"
                                     }
                                 },
                                 "type": "object",
                                 "required": [
-                                    "epsilon"
+                                    "epsilon",
+                                    "zed"
                                 ]
                             }
                         },
                         "type": "object",
                         "required": [
+                            "alpha",
                             "baz",
+                            "foo",
                             "nested"
                         ]
                     },
-                    "keyRanges": {
-                        "baz": {
+                    "some_object": {
+                        "properties": {
+                            "alpha": {
+                                "type": "string",
+                                "const": "beta"
+                            },
+                            "baz": {
+                                "type": "string",
+                                "const": "zab"
+                            },
+                            "foo": {
+                                "type": "string",
+                                "const": "baz"
+                            },
+                            "nested": {
+                                "properties": {
+                                    "zed": {
+                                        "type": "string",
+                                        "const": "dez"
+                                    }
+                                },
+                                "type": "object",
+                                "required": [
+                                    "zed"
+                                ]
+                            }
+                        },
+                        "type": "object",
+                        "required": [
+                            "alpha",
+                            "baz",
+                            "foo",
+                            "nested"
+                        ]
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "other_object",
+                    "some_object"
+                ]
+            },
+            "base": {
+                "range": {
+                    "environment": "a",
+                    "begin": {
+                        "line": 2,
+                        "column": 3,
+                        "byte": 10
+                    },
+                    "end": {
+                        "line": 8,
+                        "column": 21,
+                        "byte": 110
+                    }
+                },
+                "schema": {
+                    "properties": {
+                        "other_object": {
+                            "properties": {
+                                "baz": {
+                                    "type": "string",
+                                    "const": "qux"
+                                },
+                                "nested": {
+                                    "properties": {
+                                        "epsilon": {
+                                            "type": "string",
+                                            "const": "delta"
+                                        }
+                                    },
+                                    "type": "object",
+                                    "required": [
+                                        "epsilon"
+                                    ]
+                                }
+                            },
+                            "type": "object",
+                            "required": [
+                                "baz",
+                                "nested"
+                            ]
+                        },
+                        "some_object": {
+                            "properties": {
+                                "baz": {
+                                    "type": "string",
+                                    "const": "zab"
+                                },
+                                "foo": {
+                                    "type": "string",
+                                    "const": "bar"
+                                }
+                            },
+                            "type": "object",
+                            "required": [
+                                "baz",
+                                "foo"
+                            ]
+                        }
+                    },
+                    "type": "object",
+                    "required": [
+                        "other_object",
+                        "some_object"
+                    ]
+                },
+                "keyRanges": {
+                    "other_object": {
+                        "environment": "a",
+                        "begin": {
+                            "line": 5,
+                            "column": 3,
+                            "byte": 51
+                        },
+                        "end": {
+                            "line": 5,
+                            "column": 15,
+                            "byte": 63
+                        }
+                    },
+                    "some_object": {
+                        "environment": "a",
+                        "begin": {
+                            "line": 2,
+                            "column": 3,
+                            "byte": 10
+                        },
+                        "end": {
+                            "line": 2,
+                            "column": 14,
+                            "byte": 21
+                        }
+                    }
+                },
+                "object": {
+                    "other_object": {
+                        "range": {
                             "environment": "a",
                             "begin": {
                                 "line": 6,
@@ -1527,74 +2104,87 @@
                                 "byte": 69
                             },
                             "end": {
-                                "line": 6,
-                                "column": 8,
-                                "byte": 72
+                                "line": 8,
+                                "column": 21,
+                                "byte": 110
                             }
                         },
-                        "nested": {
-                            "environment": "a",
-                            "begin": {
-                                "line": 7,
-                                "column": 5,
-                                "byte": 82
+                        "schema": {
+                            "properties": {
+                                "baz": {
+                                    "type": "string",
+                                    "const": "qux"
+                                },
+                                "nested": {
+                                    "properties": {
+                                        "epsilon": {
+                                            "type": "string",
+                                            "const": "delta"
+                                        }
+                                    },
+                                    "type": "object",
+                                    "required": [
+                                        "epsilon"
+                                    ]
+                                }
                             },
-                            "end": {
-                                "line": 7,
-                                "column": 11,
-                                "byte": 88
-                            }
-                        }
-                    },
-                    "object": {
-                        "baz": {
-                            "range": {
+                            "type": "object",
+                            "required": [
+                                "baz",
+                                "nested"
+                            ]
+                        },
+                        "keyRanges": {
+                            "baz": {
                                 "environment": "a",
                                 "begin": {
                                     "line": 6,
-                                    "column": 10,
-                                    "byte": 74
+                                    "column": 5,
+                                    "byte": 69
                                 },
                                 "end": {
                                     "line": 6,
-                                    "column": 13,
-                                    "byte": 77
+                                    "column": 8,
+                                    "byte": 72
                                 }
                             },
-                            "schema": {
-                                "type": "string",
-                                "const": "qux"
-                            },
-                            "literal": "qux"
-                        },
-                        "nested": {
-                            "range": {
+                            "nested": {
                                 "environment": "a",
                                 "begin": {
-                                    "line": 8,
-                                    "column": 7,
-                                    "byte": 96
+                                    "line": 7,
+                                    "column": 5,
+                                    "byte": 82
                                 },
                                 "end": {
-                                    "line": 8,
-                                    "column": 21,
-                                    "byte": 110
+                                    "line": 7,
+                                    "column": 11,
+                                    "byte": 88
                                 }
-                            },
-                            "schema": {
-                                "properties": {
-                                    "epsilon": {
-                                        "type": "string",
-                                        "const": "delta"
+                            }
+                        },
+                        "object": {
+                            "baz": {
+                                "range": {
+                                    "environment": "a",
+                                    "begin": {
+                                        "line": 6,
+                                        "column": 10,
+                                        "byte": 74
+                                    },
+                                    "end": {
+                                        "line": 6,
+                                        "column": 13,
+                                        "byte": 77
                                     }
                                 },
-                                "type": "object",
-                                "required": [
-                                    "epsilon"
-                                ]
+                                "schema": {
+                                    "type": "string",
+                                    "const": "qux"
+                                },
+                                "literal": "qux"
                             },
-                            "keyRanges": {
-                                "epsilon": {
+                            "nested": {
+                                "range": {
                                     "environment": "a",
                                     "begin": {
                                         "line": 8,
@@ -1603,163 +2193,64 @@
                                     },
                                     "end": {
                                         "line": 8,
-                                        "column": 14,
-                                        "byte": 103
+                                        "column": 21,
+                                        "byte": 110
                                     }
-                                }
-                            },
-                            "object": {
-                                "epsilon": {
-                                    "range": {
+                                },
+                                "schema": {
+                                    "properties": {
+                                        "epsilon": {
+                                            "type": "string",
+                                            "const": "delta"
+                                        }
+                                    },
+                                    "type": "object",
+                                    "required": [
+                                        "epsilon"
+                                    ]
+                                },
+                                "keyRanges": {
+                                    "epsilon": {
                                         "environment": "a",
                                         "begin": {
                                             "line": 8,
-                                            "column": 16,
-                                            "byte": 105
+                                            "column": 7,
+                                            "byte": 96
                                         },
                                         "end": {
                                             "line": 8,
-                                            "column": 21,
-                                            "byte": 110
+                                            "column": 14,
+                                            "byte": 103
                                         }
-                                    },
-                                    "schema": {
-                                        "type": "string",
-                                        "const": "delta"
-                                    },
-                                    "literal": "delta"
+                                    }
+                                },
+                                "object": {
+                                    "epsilon": {
+                                        "range": {
+                                            "environment": "a",
+                                            "begin": {
+                                                "line": 8,
+                                                "column": 16,
+                                                "byte": 105
+                                            },
+                                            "end": {
+                                                "line": 8,
+                                                "column": 21,
+                                                "byte": 110
+                                            }
+                                        },
+                                        "schema": {
+                                            "type": "string",
+                                            "const": "delta"
+                                        },
+                                        "literal": "delta"
+                                    }
                                 }
                             }
                         }
-                    }
-                },
-                "symbol": [
-                    {
-                        "key": "some_object",
+                    },
+                    "some_object": {
                         "range": {
-                            "environment": "merge-base",
-                            "begin": {
-                                "line": 40,
-                                "column": 19,
-                                "byte": 1005
-                            },
-                            "end": {
-                                "line": 40,
-                                "column": 30,
-                                "byte": 1016
-                            }
-                        },
-                        "value": {
-                            "environment": "merge-base",
-                            "begin": {
-                                "line": 36,
-                                "column": 5,
-                                "byte": 935
-                            },
-                            "end": {
-                                "line": 39,
-                                "column": 15,
-                                "byte": 986
-                            }
-                        }
-                    }
-                ]
-            },
-            "some_object": {
-                "range": {
-                    "environment": "merge-base",
-                    "begin": {
-                        "line": 36,
-                        "column": 5,
-                        "byte": 935
-                    },
-                    "end": {
-                        "line": 39,
-                        "column": 15,
-                        "byte": 986
-                    }
-                },
-                "schema": {
-                    "properties": {
-                        "alpha": {
-                            "type": "string",
-                            "const": "beta"
-                        },
-                        "baz": {
-                            "type": "string",
-                            "const": "zab"
-                        },
-                        "foo": {
-                            "type": "string",
-                            "const": "baz"
-                        },
-                        "nested": {
-                            "properties": {
-                                "zed": {
-                                    "type": "string",
-                                    "const": "dez"
-                                }
-                            },
-                            "type": "object",
-                            "required": [
-                                "zed"
-                            ]
-                        }
-                    },
-                    "type": "object",
-                    "required": [
-                        "alpha",
-                        "baz",
-                        "foo",
-                        "nested"
-                    ]
-                },
-                "base": {
-                    "range": {
-                        "environment": "a",
-                        "begin": {
-                            "line": 3,
-                            "column": 5,
-                            "byte": 27
-                        },
-                        "end": {
-                            "line": 4,
-                            "column": 13,
-                            "byte": 48
-                        }
-                    },
-                    "schema": {
-                        "properties": {
-                            "baz": {
-                                "type": "string",
-                                "const": "zab"
-                            },
-                            "foo": {
-                                "type": "string",
-                                "const": "bar"
-                            }
-                        },
-                        "type": "object",
-                        "required": [
-                            "baz",
-                            "foo"
-                        ]
-                    },
-                    "keyRanges": {
-                        "baz": {
-                            "environment": "a",
-                            "begin": {
-                                "line": 4,
-                                "column": 5,
-                                "byte": 40
-                            },
-                            "end": {
-                                "line": 4,
-                                "column": 8,
-                                "byte": 43
-                            }
-                        },
-                        "foo": {
                             "environment": "a",
                             "begin": {
                                 "line": 3,
@@ -1767,70 +2258,372 @@
                                 "byte": 27
                             },
                             "end": {
-                                "line": 3,
-                                "column": 8,
-                                "byte": 30
+                                "line": 4,
+                                "column": 13,
+                                "byte": 48
                             }
-                        }
-                    },
-                    "object": {
-                        "baz": {
-                            "range": {
+                        },
+                        "schema": {
+                            "properties": {
+                                "baz": {
+                                    "type": "string",
+                                    "const": "zab"
+                                },
+                                "foo": {
+                                    "type": "string",
+                                    "const": "bar"
+                                }
+                            },
+                            "type": "object",
+                            "required": [
+                                "baz",
+                                "foo"
+                            ]
+                        },
+                        "keyRanges": {
+                            "baz": {
                                 "environment": "a",
                                 "begin": {
                                     "line": 4,
-                                    "column": 10,
-                                    "byte": 45
+                                    "column": 5,
+                                    "byte": 40
                                 },
                                 "end": {
                                     "line": 4,
-                                    "column": 13,
-                                    "byte": 48
+                                    "column": 8,
+                                    "byte": 43
                                 }
                             },
-                            "schema": {
+                            "foo": {
+                                "environment": "a",
+                                "begin": {
+                                    "line": 3,
+                                    "column": 5,
+                                    "byte": 27
+                                },
+                                "end": {
+                                    "line": 3,
+                                    "column": 8,
+                                    "byte": 30
+                                }
+                            }
+                        },
+                        "object": {
+                            "baz": {
+                                "range": {
+                                    "environment": "a",
+                                    "begin": {
+                                        "line": 4,
+                                        "column": 10,
+                                        "byte": 45
+                                    },
+                                    "end": {
+                                        "line": 4,
+                                        "column": 13,
+                                        "byte": 48
+                                    }
+                                },
+                                "schema": {
+                                    "type": "string",
+                                    "const": "zab"
+                                },
+                                "literal": "zab"
+                            },
+                            "foo": {
+                                "range": {
+                                    "environment": "a",
+                                    "begin": {
+                                        "line": 3,
+                                        "column": 10,
+                                        "byte": 32
+                                    },
+                                    "end": {
+                                        "line": 3,
+                                        "column": 13,
+                                        "byte": 35
+                                    }
+                                },
+                                "schema": {
+                                    "type": "string",
+                                    "const": "bar"
+                                },
+                                "literal": "bar"
+                            }
+                        }
+                    }
+                }
+            },
+            "keyRanges": {
+                "other_object": {
+                    "environment": "merge-base",
+                    "begin": {
+                        "line": 40,
+                        "column": 3,
+                        "byte": 989
+                    },
+                    "end": {
+                        "line": 40,
+                        "column": 15,
+                        "byte": 1001
+                    }
+                },
+                "some_object": {
+                    "environment": "merge-base",
+                    "begin": {
+                        "line": 35,
+                        "column": 3,
+                        "byte": 918
+                    },
+                    "end": {
+                        "line": 35,
+                        "column": 14,
+                        "byte": 929
+                    }
+                }
+            },
+            "object": {
+                "other_object": {
+                    "range": {
+                        "environment": "merge-base",
+                        "begin": {
+                            "line": 40,
+                            "column": 17,
+                            "byte": 1003
+                        },
+                        "end": {
+                            "line": 40,
+                            "column": 31,
+                            "byte": 1017
+                        }
+                    },
+                    "schema": {
+                        "properties": {
+                            "alpha": {
+                                "type": "string",
+                                "const": "beta"
+                            },
+                            "baz": {
                                 "type": "string",
                                 "const": "zab"
                             },
-                            "literal": "zab"
-                        },
-                        "foo": {
-                            "range": {
-                                "environment": "a",
-                                "begin": {
-                                    "line": 3,
-                                    "column": 10,
-                                    "byte": 32
+                            "foo": {
+                                "type": "string",
+                                "const": "baz"
+                            },
+                            "nested": {
+                                "properties": {
+                                    "epsilon": {
+                                        "type": "string",
+                                        "const": "delta"
+                                    },
+                                    "zed": {
+                                        "type": "string",
+                                        "const": "dez"
+                                    }
                                 },
-                                "end": {
-                                    "line": 3,
-                                    "column": 13,
-                                    "byte": 35
+                                "type": "object",
+                                "required": [
+                                    "epsilon",
+                                    "zed"
+                                ]
+                            }
+                        },
+                        "type": "object",
+                        "required": [
+                            "alpha",
+                            "baz",
+                            "foo",
+                            "nested"
+                        ]
+                    },
+                    "base": {
+                        "range": {
+                            "environment": "a",
+                            "begin": {
+                                "line": 6,
+                                "column": 5,
+                                "byte": 69
+                            },
+                            "end": {
+                                "line": 8,
+                                "column": 21,
+                                "byte": 110
+                            }
+                        },
+                        "schema": {
+                            "properties": {
+                                "baz": {
+                                    "type": "string",
+                                    "const": "qux"
+                                },
+                                "nested": {
+                                    "properties": {
+                                        "epsilon": {
+                                            "type": "string",
+                                            "const": "delta"
+                                        }
+                                    },
+                                    "type": "object",
+                                    "required": [
+                                        "epsilon"
+                                    ]
                                 }
                             },
-                            "schema": {
-                                "type": "string",
-                                "const": "bar"
-                            },
-                            "literal": "bar"
-                        }
-                    }
-                },
-                "keyRanges": {
-                    "alpha": {
-                        "environment": "merge-base",
-                        "begin": {
-                            "line": 37,
-                            "column": 5,
-                            "byte": 948
+                            "type": "object",
+                            "required": [
+                                "baz",
+                                "nested"
+                            ]
                         },
-                        "end": {
-                            "line": 37,
-                            "column": 10,
-                            "byte": 953
+                        "keyRanges": {
+                            "baz": {
+                                "environment": "a",
+                                "begin": {
+                                    "line": 6,
+                                    "column": 5,
+                                    "byte": 69
+                                },
+                                "end": {
+                                    "line": 6,
+                                    "column": 8,
+                                    "byte": 72
+                                }
+                            },
+                            "nested": {
+                                "environment": "a",
+                                "begin": {
+                                    "line": 7,
+                                    "column": 5,
+                                    "byte": 82
+                                },
+                                "end": {
+                                    "line": 7,
+                                    "column": 11,
+                                    "byte": 88
+                                }
+                            }
+                        },
+                        "object": {
+                            "baz": {
+                                "range": {
+                                    "environment": "a",
+                                    "begin": {
+                                        "line": 6,
+                                        "column": 10,
+                                        "byte": 74
+                                    },
+                                    "end": {
+                                        "line": 6,
+                                        "column": 13,
+                                        "byte": 77
+                                    }
+                                },
+                                "schema": {
+                                    "type": "string",
+                                    "const": "qux"
+                                },
+                                "literal": "qux"
+                            },
+                            "nested": {
+                                "range": {
+                                    "environment": "a",
+                                    "begin": {
+                                        "line": 8,
+                                        "column": 7,
+                                        "byte": 96
+                                    },
+                                    "end": {
+                                        "line": 8,
+                                        "column": 21,
+                                        "byte": 110
+                                    }
+                                },
+                                "schema": {
+                                    "properties": {
+                                        "epsilon": {
+                                            "type": "string",
+                                            "const": "delta"
+                                        }
+                                    },
+                                    "type": "object",
+                                    "required": [
+                                        "epsilon"
+                                    ]
+                                },
+                                "keyRanges": {
+                                    "epsilon": {
+                                        "environment": "a",
+                                        "begin": {
+                                            "line": 8,
+                                            "column": 7,
+                                            "byte": 96
+                                        },
+                                        "end": {
+                                            "line": 8,
+                                            "column": 14,
+                                            "byte": 103
+                                        }
+                                    }
+                                },
+                                "object": {
+                                    "epsilon": {
+                                        "range": {
+                                            "environment": "a",
+                                            "begin": {
+                                                "line": 8,
+                                                "column": 16,
+                                                "byte": 105
+                                            },
+                                            "end": {
+                                                "line": 8,
+                                                "column": 21,
+                                                "byte": 110
+                                            }
+                                        },
+                                        "schema": {
+                                            "type": "string",
+                                            "const": "delta"
+                                        },
+                                        "literal": "delta"
+                                    }
+                                }
+                            }
                         }
                     },
-                    "foo": {
+                    "symbol": [
+                        {
+                            "key": "some_object",
+                            "range": {
+                                "environment": "merge-base",
+                                "begin": {
+                                    "line": 40,
+                                    "column": 19,
+                                    "byte": 1005
+                                },
+                                "end": {
+                                    "line": 40,
+                                    "column": 30,
+                                    "byte": 1016
+                                }
+                            },
+                            "value": {
+                                "environment": "merge-base",
+                                "begin": {
+                                    "line": 36,
+                                    "column": 5,
+                                    "byte": 935
+                                },
+                                "end": {
+                                    "line": 39,
+                                    "column": 15,
+                                    "byte": 986
+                                }
+                            }
+                        }
+                    ]
+                },
+                "some_object": {
+                    "range": {
                         "environment": "merge-base",
                         "begin": {
                             "line": 36,
@@ -1838,114 +2631,252 @@
                             "byte": 935
                         },
                         "end": {
-                            "line": 36,
-                            "column": 8,
-                            "byte": 938
+                            "line": 39,
+                            "column": 15,
+                            "byte": 986
                         }
                     },
-                    "nested": {
-                        "environment": "merge-base",
-                        "begin": {
-                            "line": 38,
-                            "column": 5,
-                            "byte": 964
-                        },
-                        "end": {
-                            "line": 38,
-                            "column": 11,
-                            "byte": 970
-                        }
-                    }
-                },
-                "object": {
-                    "alpha": {
-                        "range": {
-                            "environment": "merge-base",
-                            "begin": {
-                                "line": 37,
-                                "column": 12,
-                                "byte": 955
-                            },
-                            "end": {
-                                "line": 37,
-                                "column": 16,
-                                "byte": 959
-                            }
-                        },
-                        "schema": {
-                            "type": "string",
-                            "const": "beta"
-                        },
-                        "literal": "beta"
-                    },
-                    "foo": {
-                        "range": {
-                            "environment": "merge-base",
-                            "begin": {
-                                "line": 36,
-                                "column": 10,
-                                "byte": 940
-                            },
-                            "end": {
-                                "line": 36,
-                                "column": 13,
-                                "byte": 943
-                            }
-                        },
-                        "schema": {
-                            "type": "string",
-                            "const": "baz"
-                        },
-                        "base": {
-                            "range": {
-                                "environment": "a",
-                                "begin": {
-                                    "line": 3,
-                                    "column": 10,
-                                    "byte": 32
-                                },
-                                "end": {
-                                    "line": 3,
-                                    "column": 13,
-                                    "byte": 35
-                                }
-                            },
-                            "schema": {
+                    "schema": {
+                        "properties": {
+                            "alpha": {
                                 "type": "string",
-                                "const": "bar"
+                                "const": "beta"
                             },
-                            "literal": "bar"
+                            "baz": {
+                                "type": "string",
+                                "const": "zab"
+                            },
+                            "foo": {
+                                "type": "string",
+                                "const": "baz"
+                            },
+                            "nested": {
+                                "properties": {
+                                    "zed": {
+                                        "type": "string",
+                                        "const": "dez"
+                                    }
+                                },
+                                "type": "object",
+                                "required": [
+                                    "zed"
+                                ]
+                            }
                         },
-                        "literal": "baz"
+                        "type": "object",
+                        "required": [
+                            "alpha",
+                            "baz",
+                            "foo",
+                            "nested"
+                        ]
                     },
-                    "nested": {
+                    "base": {
                         "range": {
-                            "environment": "merge-base",
+                            "environment": "a",
                             "begin": {
-                                "line": 39,
-                                "column": 7,
-                                "byte": 978
+                                "line": 3,
+                                "column": 5,
+                                "byte": 27
                             },
                             "end": {
-                                "line": 39,
-                                "column": 15,
-                                "byte": 986
+                                "line": 4,
+                                "column": 13,
+                                "byte": 48
                             }
                         },
                         "schema": {
                             "properties": {
-                                "zed": {
+                                "baz": {
                                     "type": "string",
-                                    "const": "dez"
+                                    "const": "zab"
+                                },
+                                "foo": {
+                                    "type": "string",
+                                    "const": "bar"
                                 }
                             },
                             "type": "object",
                             "required": [
-                                "zed"
+                                "baz",
+                                "foo"
                             ]
                         },
                         "keyRanges": {
-                            "zed": {
+                            "baz": {
+                                "environment": "a",
+                                "begin": {
+                                    "line": 4,
+                                    "column": 5,
+                                    "byte": 40
+                                },
+                                "end": {
+                                    "line": 4,
+                                    "column": 8,
+                                    "byte": 43
+                                }
+                            },
+                            "foo": {
+                                "environment": "a",
+                                "begin": {
+                                    "line": 3,
+                                    "column": 5,
+                                    "byte": 27
+                                },
+                                "end": {
+                                    "line": 3,
+                                    "column": 8,
+                                    "byte": 30
+                                }
+                            }
+                        },
+                        "object": {
+                            "baz": {
+                                "range": {
+                                    "environment": "a",
+                                    "begin": {
+                                        "line": 4,
+                                        "column": 10,
+                                        "byte": 45
+                                    },
+                                    "end": {
+                                        "line": 4,
+                                        "column": 13,
+                                        "byte": 48
+                                    }
+                                },
+                                "schema": {
+                                    "type": "string",
+                                    "const": "zab"
+                                },
+                                "literal": "zab"
+                            },
+                            "foo": {
+                                "range": {
+                                    "environment": "a",
+                                    "begin": {
+                                        "line": 3,
+                                        "column": 10,
+                                        "byte": 32
+                                    },
+                                    "end": {
+                                        "line": 3,
+                                        "column": 13,
+                                        "byte": 35
+                                    }
+                                },
+                                "schema": {
+                                    "type": "string",
+                                    "const": "bar"
+                                },
+                                "literal": "bar"
+                            }
+                        }
+                    },
+                    "keyRanges": {
+                        "alpha": {
+                            "environment": "merge-base",
+                            "begin": {
+                                "line": 37,
+                                "column": 5,
+                                "byte": 948
+                            },
+                            "end": {
+                                "line": 37,
+                                "column": 10,
+                                "byte": 953
+                            }
+                        },
+                        "foo": {
+                            "environment": "merge-base",
+                            "begin": {
+                                "line": 36,
+                                "column": 5,
+                                "byte": 935
+                            },
+                            "end": {
+                                "line": 36,
+                                "column": 8,
+                                "byte": 938
+                            }
+                        },
+                        "nested": {
+                            "environment": "merge-base",
+                            "begin": {
+                                "line": 38,
+                                "column": 5,
+                                "byte": 964
+                            },
+                            "end": {
+                                "line": 38,
+                                "column": 11,
+                                "byte": 970
+                            }
+                        }
+                    },
+                    "object": {
+                        "alpha": {
+                            "range": {
+                                "environment": "merge-base",
+                                "begin": {
+                                    "line": 37,
+                                    "column": 12,
+                                    "byte": 955
+                                },
+                                "end": {
+                                    "line": 37,
+                                    "column": 16,
+                                    "byte": 959
+                                }
+                            },
+                            "schema": {
+                                "type": "string",
+                                "const": "beta"
+                            },
+                            "literal": "beta"
+                        },
+                        "foo": {
+                            "range": {
+                                "environment": "merge-base",
+                                "begin": {
+                                    "line": 36,
+                                    "column": 10,
+                                    "byte": 940
+                                },
+                                "end": {
+                                    "line": 36,
+                                    "column": 13,
+                                    "byte": 943
+                                }
+                            },
+                            "schema": {
+                                "type": "string",
+                                "const": "baz"
+                            },
+                            "base": {
+                                "range": {
+                                    "environment": "a",
+                                    "begin": {
+                                        "line": 3,
+                                        "column": 10,
+                                        "byte": 32
+                                    },
+                                    "end": {
+                                        "line": 3,
+                                        "column": 13,
+                                        "byte": 35
+                                    }
+                                },
+                                "schema": {
+                                    "type": "string",
+                                    "const": "bar"
+                                },
+                                "literal": "bar"
+                            },
+                            "literal": "baz"
+                        },
+                        "nested": {
+                            "range": {
                                 "environment": "merge-base",
                                 "begin": {
                                     "line": 39,
@@ -1954,31 +2885,58 @@
                                 },
                                 "end": {
                                     "line": 39,
-                                    "column": 10,
-                                    "byte": 981
+                                    "column": 15,
+                                    "byte": 986
                                 }
-                            }
-                        },
-                        "object": {
-                            "zed": {
-                                "range": {
+                            },
+                            "schema": {
+                                "properties": {
+                                    "zed": {
+                                        "type": "string",
+                                        "const": "dez"
+                                    }
+                                },
+                                "type": "object",
+                                "required": [
+                                    "zed"
+                                ]
+                            },
+                            "keyRanges": {
+                                "zed": {
                                     "environment": "merge-base",
                                     "begin": {
                                         "line": 39,
-                                        "column": 12,
-                                        "byte": 983
+                                        "column": 7,
+                                        "byte": 978
                                     },
                                     "end": {
                                         "line": 39,
-                                        "column": 15,
-                                        "byte": 986
+                                        "column": 10,
+                                        "byte": 981
                                     }
-                                },
-                                "schema": {
-                                    "type": "string",
-                                    "const": "dez"
-                                },
-                                "literal": "dez"
+                                }
+                            },
+                            "object": {
+                                "zed": {
+                                    "range": {
+                                        "environment": "merge-base",
+                                        "begin": {
+                                            "line": 39,
+                                            "column": 12,
+                                            "byte": 983
+                                        },
+                                        "end": {
+                                            "line": 39,
+                                            "column": 15,
+                                            "byte": 986
+                                        }
+                                    },
+                                    "schema": {
+                                        "type": "string",
+                                        "const": "dez"
+                                    },
+                                    "literal": "dez"
+                                }
                             }
                         }
                     }

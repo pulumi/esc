@@ -266,6 +266,13 @@ type ObjectExpr struct {
 	Entries []ObjectProperty
 }
 
+func (o *ObjectExpr) GetEntries() []ObjectProperty {
+	if o == nil {
+		return nil
+	}
+	return o.Entries
+}
+
 // An ObjectProperty represents an object property. Key must be a string.
 type ObjectProperty struct {
 	syntax syntax.ObjectPropertyDef

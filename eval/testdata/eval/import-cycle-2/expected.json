@@ -25,6 +25,60 @@
         }
     ],
     "check": {
+        "exprs": {
+            "range": {
+                "environment": "import-cycle-2",
+                "begin": {
+                    "line": 0,
+                    "column": 0,
+                    "byte": 0
+                },
+                "end": {
+                    "line": 0,
+                    "column": 0,
+                    "byte": 0
+                }
+            },
+            "schema": {
+                "type": "object"
+            },
+            "base": {
+                "range": {
+                    "environment": "import-cycle-2",
+                    "begin": {
+                        "line": 0,
+                        "column": 0,
+                        "byte": 0
+                    },
+                    "end": {
+                        "line": 0,
+                        "column": 0,
+                        "byte": 0
+                    }
+                },
+                "schema": {
+                    "type": "object"
+                },
+                "base": {
+                    "range": {
+                        "environment": "import-cycle-2",
+                        "begin": {
+                            "line": 0,
+                            "column": 0,
+                            "byte": 0
+                        },
+                        "end": {
+                            "line": 0,
+                            "column": 0,
+                            "byte": 0
+                        }
+                    },
+                    "schema": {
+                        "type": "object"
+                    }
+                }
+            }
+        },
         "schema": {
             "type": "object"
         },
@@ -244,6 +298,60 @@
         }
     ],
     "eval": {
+        "exprs": {
+            "range": {
+                "environment": "import-cycle-2",
+                "begin": {
+                    "line": 0,
+                    "column": 0,
+                    "byte": 0
+                },
+                "end": {
+                    "line": 0,
+                    "column": 0,
+                    "byte": 0
+                }
+            },
+            "schema": {
+                "type": "object"
+            },
+            "base": {
+                "range": {
+                    "environment": "import-cycle-2",
+                    "begin": {
+                        "line": 0,
+                        "column": 0,
+                        "byte": 0
+                    },
+                    "end": {
+                        "line": 0,
+                        "column": 0,
+                        "byte": 0
+                    }
+                },
+                "schema": {
+                    "type": "object"
+                },
+                "base": {
+                    "range": {
+                        "environment": "import-cycle-2",
+                        "begin": {
+                            "line": 0,
+                            "column": 0,
+                            "byte": 0
+                        },
+                        "end": {
+                            "line": 0,
+                            "column": 0,
+                            "byte": 0
+                        }
+                    },
+                    "schema": {
+                        "type": "object"
+                    }
+                }
+            }
+        },
         "schema": {
             "type": "object"
         },

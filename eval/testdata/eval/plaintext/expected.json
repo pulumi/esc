@@ -1,27 +1,49 @@
 {
     "check": {
         "exprs": {
-            "password": {
-                "range": {
-                    "environment": "plaintext",
-                    "begin": {
-                        "line": 3,
-                        "column": 5,
-                        "byte": 24
-                    },
-                    "end": {
-                        "line": 3,
-                        "column": 24,
-                        "byte": 43
+            "range": {
+                "environment": "plaintext",
+                "begin": {
+                    "line": 2,
+                    "column": 3,
+                    "byte": 10
+                },
+                "end": {
+                    "line": 3,
+                    "column": 24,
+                    "byte": 43
+                }
+            },
+            "schema": {
+                "properties": {
+                    "password": {
+                        "type": "string",
+                        "const": "hunter2"
                     }
                 },
-                "schema": {
-                    "type": "string",
-                    "const": "hunter2"
-                },
-                "builtin": {
-                    "name": "fn::secret",
-                    "nameRange": {
+                "type": "object",
+                "required": [
+                    "password"
+                ]
+            },
+            "keyRanges": {
+                "password": {
+                    "environment": "plaintext",
+                    "begin": {
+                        "line": 2,
+                        "column": 3,
+                        "byte": 10
+                    },
+                    "end": {
+                        "line": 2,
+                        "column": 11,
+                        "byte": 18
+                    }
+                }
+            },
+            "object": {
+                "password": {
+                    "range": {
                         "environment": "plaintext",
                         "begin": {
                             "line": 3,
@@ -30,30 +52,50 @@
                         },
                         "end": {
                             "line": 3,
-                            "column": 15,
-                            "byte": 34
+                            "column": 24,
+                            "byte": 43
                         }
                     },
-                    "argSchema": true,
-                    "arg": {
-                        "range": {
+                    "schema": {
+                        "type": "string",
+                        "const": "hunter2"
+                    },
+                    "builtin": {
+                        "name": "fn::secret",
+                        "nameRange": {
                             "environment": "plaintext",
                             "begin": {
                                 "line": 3,
-                                "column": 17,
-                                "byte": 36
+                                "column": 5,
+                                "byte": 24
                             },
                             "end": {
                                 "line": 3,
-                                "column": 24,
-                                "byte": 43
+                                "column": 15,
+                                "byte": 34
                             }
                         },
-                        "schema": {
-                            "type": "string",
-                            "const": "hunter2"
-                        },
-                        "literal": "hunter2"
+                        "argSchema": true,
+                        "arg": {
+                            "range": {
+                                "environment": "plaintext",
+                                "begin": {
+                                    "line": 3,
+                                    "column": 17,
+                                    "byte": 36
+                                },
+                                "end": {
+                                    "line": 3,
+                                    "column": 24,
+                                    "byte": 43
+                                }
+                            },
+                            "schema": {
+                                "type": "string",
+                                "const": "hunter2"
+                            },
+                            "literal": "hunter2"
+                        }
                     }
                 }
             }
@@ -285,27 +327,49 @@
     },
     "eval": {
         "exprs": {
-            "password": {
-                "range": {
-                    "environment": "plaintext",
-                    "begin": {
-                        "line": 3,
-                        "column": 5,
-                        "byte": 24
-                    },
-                    "end": {
-                        "line": 3,
-                        "column": 24,
-                        "byte": 43
+            "range": {
+                "environment": "plaintext",
+                "begin": {
+                    "line": 2,
+                    "column": 3,
+                    "byte": 10
+                },
+                "end": {
+                    "line": 3,
+                    "column": 24,
+                    "byte": 43
+                }
+            },
+            "schema": {
+                "properties": {
+                    "password": {
+                        "type": "string",
+                        "const": "hunter2"
                     }
                 },
-                "schema": {
-                    "type": "string",
-                    "const": "hunter2"
-                },
-                "builtin": {
-                    "name": "fn::secret",
-                    "nameRange": {
+                "type": "object",
+                "required": [
+                    "password"
+                ]
+            },
+            "keyRanges": {
+                "password": {
+                    "environment": "plaintext",
+                    "begin": {
+                        "line": 2,
+                        "column": 3,
+                        "byte": 10
+                    },
+                    "end": {
+                        "line": 2,
+                        "column": 11,
+                        "byte": 18
+                    }
+                }
+            },
+            "object": {
+                "password": {
+                    "range": {
                         "environment": "plaintext",
                         "begin": {
                             "line": 3,
@@ -314,30 +378,50 @@
                         },
                         "end": {
                             "line": 3,
-                            "column": 15,
-                            "byte": 34
+                            "column": 24,
+                            "byte": 43
                         }
                     },
-                    "argSchema": true,
-                    "arg": {
-                        "range": {
+                    "schema": {
+                        "type": "string",
+                        "const": "hunter2"
+                    },
+                    "builtin": {
+                        "name": "fn::secret",
+                        "nameRange": {
                             "environment": "plaintext",
                             "begin": {
                                 "line": 3,
-                                "column": 17,
-                                "byte": 36
+                                "column": 5,
+                                "byte": 24
                             },
                             "end": {
                                 "line": 3,
-                                "column": 24,
-                                "byte": 43
+                                "column": 15,
+                                "byte": 34
                             }
                         },
-                        "schema": {
-                            "type": "string",
-                            "const": "hunter2"
-                        },
-                        "literal": "hunter2"
+                        "argSchema": true,
+                        "arg": {
+                            "range": {
+                                "environment": "plaintext",
+                                "begin": {
+                                    "line": 3,
+                                    "column": 17,
+                                    "byte": 36
+                                },
+                                "end": {
+                                    "line": 3,
+                                    "column": 24,
+                                    "byte": 43
+                                }
+                            },
+                            "schema": {
+                                "type": "string",
+                                "const": "hunter2"
+                            },
+                            "literal": "hunter2"
+                        }
                     }
                 }
             }

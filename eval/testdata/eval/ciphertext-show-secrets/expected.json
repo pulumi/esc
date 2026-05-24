@@ -1,26 +1,167 @@
 {
     "check": {
         "exprs": {
-            "password": {
+            "range": {
+                "environment": "ciphertext-show-secrets",
+                "begin": {
+                    "line": 4,
+                    "column": 3,
+                    "byte": 33
+                },
+                "end": {
+                    "line": 6,
+                    "column": 47,
+                    "byte": 105
+                }
+            },
+            "schema": {
+                "properties": {
+                    "basePassword": {
+                        "type": "string"
+                    },
+                    "password": {
+                        "type": "string"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "basePassword",
+                    "password"
+                ]
+            },
+            "base": {
                 "range": {
-                    "environment": "ciphertext-show-secrets",
+                    "environment": "test-base",
                     "begin": {
-                        "line": 5,
-                        "column": 5,
-                        "byte": 47
+                        "line": 2,
+                        "column": 3,
+                        "byte": 10
                     },
                     "end": {
-                        "line": 6,
+                        "line": 4,
                         "column": 47,
-                        "byte": 105
+                        "byte": 86
                     }
                 },
                 "schema": {
-                    "type": "string"
+                    "properties": {
+                        "basePassword": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object",
+                    "required": [
+                        "basePassword"
+                    ]
                 },
-                "builtin": {
-                    "name": "fn::secret",
-                    "nameRange": {
+                "keyRanges": {
+                    "basePassword": {
+                        "environment": "test-base",
+                        "begin": {
+                            "line": 2,
+                            "column": 3,
+                            "byte": 10
+                        },
+                        "end": {
+                            "line": 2,
+                            "column": 15,
+                            "byte": 22
+                        }
+                    }
+                },
+                "object": {
+                    "basePassword": {
+                        "range": {
+                            "environment": "test-base",
+                            "begin": {
+                                "line": 3,
+                                "column": 5,
+                                "byte": 28
+                            },
+                            "end": {
+                                "line": 4,
+                                "column": 47,
+                                "byte": 86
+                            }
+                        },
+                        "schema": {
+                            "type": "string"
+                        },
+                        "builtin": {
+                            "name": "fn::secret",
+                            "nameRange": {
+                                "environment": "test-base",
+                                "begin": {
+                                    "line": 3,
+                                    "column": 5,
+                                    "byte": 28
+                                },
+                                "end": {
+                                    "line": 3,
+                                    "column": 15,
+                                    "byte": 38
+                                }
+                            },
+                            "argSchema": true,
+                            "arg": {
+                                "range": {
+                                    "environment": "test-base",
+                                    "begin": {
+                                        "line": 4,
+                                        "column": 7,
+                                        "byte": 46
+                                    },
+                                    "end": {
+                                        "line": 4,
+                                        "column": 47,
+                                        "byte": 86
+                                    }
+                                },
+                                "object": {
+                                    "ciphertext": {
+                                        "range": {
+                                            "environment": "test-base",
+                                            "begin": {
+                                                "line": 4,
+                                                "column": 19,
+                                                "byte": 58
+                                            },
+                                            "end": {
+                                                "line": 4,
+                                                "column": 47,
+                                                "byte": 86
+                                            }
+                                        },
+                                        "schema": {
+                                            "type": "string",
+                                            "const": "ZXNjeAAAAAHo9e705fKyKo30VQ=="
+                                        },
+                                        "literal": "ZXNjeAAAAAHo9e705fKyKo30VQ=="
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "keyRanges": {
+                "password": {
+                    "environment": "ciphertext-show-secrets",
+                    "begin": {
+                        "line": 4,
+                        "column": 3,
+                        "byte": 33
+                    },
+                    "end": {
+                        "line": 4,
+                        "column": 11,
+                        "byte": 41
+                    }
+                }
+            },
+            "object": {
+                "password": {
+                    "range": {
                         "environment": "ciphertext-show-secrets",
                         "begin": {
                             "line": 5,
@@ -28,46 +169,65 @@
                             "byte": 47
                         },
                         "end": {
-                            "line": 5,
-                            "column": 15,
-                            "byte": 57
+                            "line": 6,
+                            "column": 47,
+                            "byte": 105
                         }
                     },
-                    "argSchema": true,
-                    "arg": {
-                        "range": {
+                    "schema": {
+                        "type": "string"
+                    },
+                    "builtin": {
+                        "name": "fn::secret",
+                        "nameRange": {
                             "environment": "ciphertext-show-secrets",
                             "begin": {
-                                "line": 6,
-                                "column": 7,
-                                "byte": 65
+                                "line": 5,
+                                "column": 5,
+                                "byte": 47
                             },
                             "end": {
-                                "line": 6,
-                                "column": 47,
-                                "byte": 105
+                                "line": 5,
+                                "column": 15,
+                                "byte": 57
                             }
                         },
-                        "object": {
-                            "ciphertext": {
-                                "range": {
-                                    "environment": "ciphertext-show-secrets",
-                                    "begin": {
-                                        "line": 6,
-                                        "column": 19,
-                                        "byte": 77
+                        "argSchema": true,
+                        "arg": {
+                            "range": {
+                                "environment": "ciphertext-show-secrets",
+                                "begin": {
+                                    "line": 6,
+                                    "column": 7,
+                                    "byte": 65
+                                },
+                                "end": {
+                                    "line": 6,
+                                    "column": 47,
+                                    "byte": 105
+                                }
+                            },
+                            "object": {
+                                "ciphertext": {
+                                    "range": {
+                                        "environment": "ciphertext-show-secrets",
+                                        "begin": {
+                                            "line": 6,
+                                            "column": 19,
+                                            "byte": 77
+                                        },
+                                        "end": {
+                                            "line": 6,
+                                            "column": 47,
+                                            "byte": 105
+                                        }
                                     },
-                                    "end": {
-                                        "line": 6,
-                                        "column": 47,
-                                        "byte": 105
-                                    }
-                                },
-                                "schema": {
-                                    "type": "string",
-                                    "const": "ZXNjeAAAAAHo9e705fKyKo30VQ=="
-                                },
-                                "literal": "ZXNjeAAAAAHo9e705fKyKo30VQ=="
+                                    "schema": {
+                                        "type": "string",
+                                        "const": "ZXNjeAAAAAHo9e705fKyKo30VQ=="
+                                    },
+                                    "literal": "ZXNjeAAAAAHo9e705fKyKo30VQ=="
+                                }
                             }
                         }
                     }
@@ -324,26 +484,167 @@
     },
     "eval": {
         "exprs": {
-            "password": {
+            "range": {
+                "environment": "ciphertext-show-secrets",
+                "begin": {
+                    "line": 4,
+                    "column": 3,
+                    "byte": 33
+                },
+                "end": {
+                    "line": 6,
+                    "column": 47,
+                    "byte": 105
+                }
+            },
+            "schema": {
+                "properties": {
+                    "basePassword": {
+                        "type": "string"
+                    },
+                    "password": {
+                        "type": "string"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "basePassword",
+                    "password"
+                ]
+            },
+            "base": {
                 "range": {
-                    "environment": "ciphertext-show-secrets",
+                    "environment": "test-base",
                     "begin": {
-                        "line": 5,
-                        "column": 5,
-                        "byte": 47
+                        "line": 2,
+                        "column": 3,
+                        "byte": 10
                     },
                     "end": {
-                        "line": 6,
+                        "line": 4,
                         "column": 47,
-                        "byte": 105
+                        "byte": 86
                     }
                 },
                 "schema": {
-                    "type": "string"
+                    "properties": {
+                        "basePassword": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object",
+                    "required": [
+                        "basePassword"
+                    ]
                 },
-                "builtin": {
-                    "name": "fn::secret",
-                    "nameRange": {
+                "keyRanges": {
+                    "basePassword": {
+                        "environment": "test-base",
+                        "begin": {
+                            "line": 2,
+                            "column": 3,
+                            "byte": 10
+                        },
+                        "end": {
+                            "line": 2,
+                            "column": 15,
+                            "byte": 22
+                        }
+                    }
+                },
+                "object": {
+                    "basePassword": {
+                        "range": {
+                            "environment": "test-base",
+                            "begin": {
+                                "line": 3,
+                                "column": 5,
+                                "byte": 28
+                            },
+                            "end": {
+                                "line": 4,
+                                "column": 47,
+                                "byte": 86
+                            }
+                        },
+                        "schema": {
+                            "type": "string"
+                        },
+                        "builtin": {
+                            "name": "fn::secret",
+                            "nameRange": {
+                                "environment": "test-base",
+                                "begin": {
+                                    "line": 3,
+                                    "column": 5,
+                                    "byte": 28
+                                },
+                                "end": {
+                                    "line": 3,
+                                    "column": 15,
+                                    "byte": 38
+                                }
+                            },
+                            "argSchema": true,
+                            "arg": {
+                                "range": {
+                                    "environment": "test-base",
+                                    "begin": {
+                                        "line": 4,
+                                        "column": 7,
+                                        "byte": 46
+                                    },
+                                    "end": {
+                                        "line": 4,
+                                        "column": 47,
+                                        "byte": 86
+                                    }
+                                },
+                                "object": {
+                                    "ciphertext": {
+                                        "range": {
+                                            "environment": "test-base",
+                                            "begin": {
+                                                "line": 4,
+                                                "column": 19,
+                                                "byte": 58
+                                            },
+                                            "end": {
+                                                "line": 4,
+                                                "column": 47,
+                                                "byte": 86
+                                            }
+                                        },
+                                        "schema": {
+                                            "type": "string",
+                                            "const": "ZXNjeAAAAAHo9e705fKyKo30VQ=="
+                                        },
+                                        "literal": "ZXNjeAAAAAHo9e705fKyKo30VQ=="
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "keyRanges": {
+                "password": {
+                    "environment": "ciphertext-show-secrets",
+                    "begin": {
+                        "line": 4,
+                        "column": 3,
+                        "byte": 33
+                    },
+                    "end": {
+                        "line": 4,
+                        "column": 11,
+                        "byte": 41
+                    }
+                }
+            },
+            "object": {
+                "password": {
+                    "range": {
                         "environment": "ciphertext-show-secrets",
                         "begin": {
                             "line": 5,
@@ -351,46 +652,65 @@
                             "byte": 47
                         },
                         "end": {
-                            "line": 5,
-                            "column": 15,
-                            "byte": 57
+                            "line": 6,
+                            "column": 47,
+                            "byte": 105
                         }
                     },
-                    "argSchema": true,
-                    "arg": {
-                        "range": {
+                    "schema": {
+                        "type": "string"
+                    },
+                    "builtin": {
+                        "name": "fn::secret",
+                        "nameRange": {
                             "environment": "ciphertext-show-secrets",
                             "begin": {
-                                "line": 6,
-                                "column": 7,
-                                "byte": 65
+                                "line": 5,
+                                "column": 5,
+                                "byte": 47
                             },
                             "end": {
-                                "line": 6,
-                                "column": 47,
-                                "byte": 105
+                                "line": 5,
+                                "column": 15,
+                                "byte": 57
                             }
                         },
-                        "object": {
-                            "ciphertext": {
-                                "range": {
-                                    "environment": "ciphertext-show-secrets",
-                                    "begin": {
-                                        "line": 6,
-                                        "column": 19,
-                                        "byte": 77
+                        "argSchema": true,
+                        "arg": {
+                            "range": {
+                                "environment": "ciphertext-show-secrets",
+                                "begin": {
+                                    "line": 6,
+                                    "column": 7,
+                                    "byte": 65
+                                },
+                                "end": {
+                                    "line": 6,
+                                    "column": 47,
+                                    "byte": 105
+                                }
+                            },
+                            "object": {
+                                "ciphertext": {
+                                    "range": {
+                                        "environment": "ciphertext-show-secrets",
+                                        "begin": {
+                                            "line": 6,
+                                            "column": 19,
+                                            "byte": 77
+                                        },
+                                        "end": {
+                                            "line": 6,
+                                            "column": 47,
+                                            "byte": 105
+                                        }
                                     },
-                                    "end": {
-                                        "line": 6,
-                                        "column": 47,
-                                        "byte": 105
-                                    }
-                                },
-                                "schema": {
-                                    "type": "string",
-                                    "const": "ZXNjeAAAAAHo9e705fKyKo30VQ=="
-                                },
-                                "literal": "ZXNjeAAAAAHo9e705fKyKo30VQ=="
+                                    "schema": {
+                                        "type": "string",
+                                        "const": "ZXNjeAAAAAHo9e705fKyKo30VQ=="
+                                    },
+                                    "literal": "ZXNjeAAAAAHo9e705fKyKo30VQ=="
+                                }
                             }
                         }
                     }

@@ -26,370 +26,457 @@
     ],
     "check": {
         "exprs": {
-            "invalid1": {
-                "range": {
+            "range": {
+                "environment": "inline-reference",
+                "begin": {
+                    "line": 2,
+                    "column": 3,
+                    "byte": 10
+                },
+                "end": {
+                    "line": 6,
+                    "column": 40,
+                    "byte": 156
+                }
+            },
+            "schema": {
+                "properties": {
+                    "invalid1": true,
+                    "invalid2": true,
+                    "invalid3": true,
+                    "reference": {
+                        "type": "number",
+                        "const": 42
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "invalid1",
+                    "invalid2",
+                    "invalid3",
+                    "reference"
+                ]
+            },
+            "keyRanges": {
+                "invalid1": {
                     "environment": "inline-reference",
                     "begin": {
                         "line": 4,
-                        "column": 13,
-                        "byte": 69
+                        "column": 3,
+                        "byte": 59
                     },
                     "end": {
                         "line": 4,
-                        "column": 28,
-                        "byte": 84
+                        "column": 11,
+                        "byte": 67
                     }
                 },
-                "schema": true,
-                "symbol": [
-                    {
-                        "key": "environments",
-                        "range": {
-                            "environment": "inline-reference",
-                            "begin": {
-                                "line": 4,
-                                "column": 15,
-                                "byte": 71
-                            },
-                            "end": {
-                                "line": 4,
-                                "column": 27,
-                                "byte": 83
-                            }
-                        },
-                        "value": {
-                            "environment": "inline-reference",
-                            "begin": {
-                                "line": 4,
-                                "column": 13,
-                                "byte": 69
-                            },
-                            "end": {
-                                "line": 4,
-                                "column": 28,
-                                "byte": 84
-                            }
-                        }
-                    }
-                ]
-            },
-            "invalid2": {
-                "range": {
+                "invalid2": {
                     "environment": "inline-reference",
                     "begin": {
                         "line": 5,
-                        "column": 13,
-                        "byte": 97
+                        "column": 3,
+                        "byte": 87
                     },
                     "end": {
                         "line": 5,
-                        "column": 32,
-                        "byte": 116
+                        "column": 11,
+                        "byte": 95
                     }
                 },
-                "schema": true,
-                "symbol": [
-                    {
-                        "key": "environments",
-                        "range": {
-                            "environment": "inline-reference",
-                            "begin": {
-                                "line": 5,
-                                "column": 15,
-                                "byte": 99
-                            },
-                            "end": {
-                                "line": 5,
-                                "column": 27,
-                                "byte": 111
-                            }
-                        },
-                        "value": {
-                            "environment": "inline-reference",
-                            "begin": {
-                                "line": 5,
-                                "column": 13,
-                                "byte": 97
-                            },
-                            "end": {
-                                "line": 5,
-                                "column": 32,
-                                "byte": 116
-                            }
-                        }
-                    },
-                    {
-                        "key": "foo",
-                        "range": {
-                            "environment": "inline-reference",
-                            "begin": {
-                                "line": 5,
-                                "column": 27,
-                                "byte": 111
-                            },
-                            "end": {
-                                "line": 5,
-                                "column": 31,
-                                "byte": 115
-                            }
-                        },
-                        "value": {
-                            "environment": "inline-reference",
-                            "begin": {
-                                "line": 5,
-                                "column": 13,
-                                "byte": 97
-                            },
-                            "end": {
-                                "line": 5,
-                                "column": 32,
-                                "byte": 116
-                            }
-                        }
-                    }
-                ]
-            },
-            "invalid3": {
-                "range": {
+                "invalid3": {
                     "environment": "inline-reference",
                     "begin": {
                         "line": 6,
-                        "column": 13,
-                        "byte": 129
+                        "column": 3,
+                        "byte": 119
                     },
                     "end": {
                         "line": 6,
-                        "column": 40,
-                        "byte": 156
+                        "column": 11,
+                        "byte": 127
                     }
                 },
-                "schema": true,
-                "symbol": [
-                    {
-                        "key": "environments",
-                        "range": {
-                            "environment": "inline-reference",
-                            "begin": {
-                                "line": 6,
-                                "column": 15,
-                                "byte": 131
-                            },
-                            "end": {
-                                "line": 6,
-                                "column": 27,
-                                "byte": 143
-                            }
-                        },
-                        "value": {
-                            "environment": "inline-reference",
-                            "begin": {
-                                "line": 6,
-                                "column": 13,
-                                "byte": 129
-                            },
-                            "end": {
-                                "line": 6,
-                                "column": 40,
-                                "byte": 156
-                            }
-                        }
-                    },
-                    {
-                        "key": "foo",
-                        "range": {
-                            "environment": "inline-reference",
-                            "begin": {
-                                "line": 6,
-                                "column": 27,
-                                "byte": 143
-                            },
-                            "end": {
-                                "line": 6,
-                                "column": 31,
-                                "byte": 147
-                            }
-                        },
-                        "value": {
-                            "environment": "inline-reference",
-                            "begin": {
-                                "line": 6,
-                                "column": 13,
-                                "byte": 129
-                            },
-                            "end": {
-                                "line": 6,
-                                "column": 40,
-                                "byte": 156
-                            }
-                        }
-                    },
-                    {
-                        "key": "unknown",
-                        "range": {
-                            "environment": "inline-reference",
-                            "begin": {
-                                "line": 6,
-                                "column": 31,
-                                "byte": 147
-                            },
-                            "end": {
-                                "line": 6,
-                                "column": 39,
-                                "byte": 155
-                            }
-                        },
-                        "value": {
-                            "environment": "inline-reference",
-                            "begin": {
-                                "line": 0,
-                                "column": 0,
-                                "byte": 0
-                            },
-                            "end": {
-                                "line": 0,
-                                "column": 0,
-                                "byte": 0
-                            }
-                        }
-                    }
-                ]
-            },
-            "reference": {
-                "range": {
+                "reference": {
                     "environment": "inline-reference",
                     "begin": {
                         "line": 2,
-                        "column": 14,
-                        "byte": 21
+                        "column": 3,
+                        "byte": 10
                     },
                     "end": {
                         "line": 2,
-                        "column": 48,
-                        "byte": 55
+                        "column": 12,
+                        "byte": 19
                     }
+                }
+            },
+            "object": {
+                "invalid1": {
+                    "range": {
+                        "environment": "inline-reference",
+                        "begin": {
+                            "line": 4,
+                            "column": 13,
+                            "byte": 69
+                        },
+                        "end": {
+                            "line": 4,
+                            "column": 28,
+                            "byte": 84
+                        }
+                    },
+                    "schema": true,
+                    "symbol": [
+                        {
+                            "key": "environments",
+                            "range": {
+                                "environment": "inline-reference",
+                                "begin": {
+                                    "line": 4,
+                                    "column": 15,
+                                    "byte": 71
+                                },
+                                "end": {
+                                    "line": 4,
+                                    "column": 27,
+                                    "byte": 83
+                                }
+                            },
+                            "value": {
+                                "environment": "inline-reference",
+                                "begin": {
+                                    "line": 4,
+                                    "column": 13,
+                                    "byte": 69
+                                },
+                                "end": {
+                                    "line": 4,
+                                    "column": 28,
+                                    "byte": 84
+                                }
+                            }
+                        }
+                    ]
                 },
-                "schema": {
-                    "type": "number",
-                    "const": 42
+                "invalid2": {
+                    "range": {
+                        "environment": "inline-reference",
+                        "begin": {
+                            "line": 5,
+                            "column": 13,
+                            "byte": 97
+                        },
+                        "end": {
+                            "line": 5,
+                            "column": 32,
+                            "byte": 116
+                        }
+                    },
+                    "schema": true,
+                    "symbol": [
+                        {
+                            "key": "environments",
+                            "range": {
+                                "environment": "inline-reference",
+                                "begin": {
+                                    "line": 5,
+                                    "column": 15,
+                                    "byte": 99
+                                },
+                                "end": {
+                                    "line": 5,
+                                    "column": 27,
+                                    "byte": 111
+                                }
+                            },
+                            "value": {
+                                "environment": "inline-reference",
+                                "begin": {
+                                    "line": 5,
+                                    "column": 13,
+                                    "byte": 97
+                                },
+                                "end": {
+                                    "line": 5,
+                                    "column": 32,
+                                    "byte": 116
+                                }
+                            }
+                        },
+                        {
+                            "key": "foo",
+                            "range": {
+                                "environment": "inline-reference",
+                                "begin": {
+                                    "line": 5,
+                                    "column": 27,
+                                    "byte": 111
+                                },
+                                "end": {
+                                    "line": 5,
+                                    "column": 31,
+                                    "byte": 115
+                                }
+                            },
+                            "value": {
+                                "environment": "inline-reference",
+                                "begin": {
+                                    "line": 5,
+                                    "column": 13,
+                                    "byte": 97
+                                },
+                                "end": {
+                                    "line": 5,
+                                    "column": 32,
+                                    "byte": 116
+                                }
+                            }
+                        }
+                    ]
                 },
-                "symbol": [
-                    {
-                        "key": "environments",
-                        "range": {
-                            "environment": "inline-reference",
-                            "begin": {
-                                "line": 2,
-                                "column": 16,
-                                "byte": 23
-                            },
-                            "end": {
-                                "line": 2,
-                                "column": 28,
-                                "byte": 35
-                            }
+                "invalid3": {
+                    "range": {
+                        "environment": "inline-reference",
+                        "begin": {
+                            "line": 6,
+                            "column": 13,
+                            "byte": 129
                         },
-                        "value": {
-                            "environment": "inline-reference",
-                            "begin": {
-                                "line": 2,
-                                "column": 14,
-                                "byte": 21
-                            },
-                            "end": {
-                                "line": 2,
-                                "column": 48,
-                                "byte": 55
-                            }
+                        "end": {
+                            "line": 6,
+                            "column": 40,
+                            "byte": 156
                         }
                     },
-                    {
-                        "key": "foo",
-                        "range": {
-                            "environment": "inline-reference",
-                            "begin": {
-                                "line": 2,
-                                "column": 28,
-                                "byte": 35
+                    "schema": true,
+                    "symbol": [
+                        {
+                            "key": "environments",
+                            "range": {
+                                "environment": "inline-reference",
+                                "begin": {
+                                    "line": 6,
+                                    "column": 15,
+                                    "byte": 131
+                                },
+                                "end": {
+                                    "line": 6,
+                                    "column": 27,
+                                    "byte": 143
+                                }
                             },
-                            "end": {
-                                "line": 2,
-                                "column": 32,
-                                "byte": 39
+                            "value": {
+                                "environment": "inline-reference",
+                                "begin": {
+                                    "line": 6,
+                                    "column": 13,
+                                    "byte": 129
+                                },
+                                "end": {
+                                    "line": 6,
+                                    "column": 40,
+                                    "byte": 156
+                                }
                             }
                         },
-                        "value": {
-                            "environment": "inline-reference",
-                            "begin": {
-                                "line": 2,
-                                "column": 14,
-                                "byte": 21
+                        {
+                            "key": "foo",
+                            "range": {
+                                "environment": "inline-reference",
+                                "begin": {
+                                    "line": 6,
+                                    "column": 27,
+                                    "byte": 143
+                                },
+                                "end": {
+                                    "line": 6,
+                                    "column": 31,
+                                    "byte": 147
+                                }
                             },
-                            "end": {
-                                "line": 2,
-                                "column": 48,
-                                "byte": 55
+                            "value": {
+                                "environment": "inline-reference",
+                                "begin": {
+                                    "line": 6,
+                                    "column": 13,
+                                    "byte": 129
+                                },
+                                "end": {
+                                    "line": 6,
+                                    "column": 40,
+                                    "byte": 156
+                                }
                             }
+                        },
+                        {
+                            "key": "unknown",
+                            "range": {
+                                "environment": "inline-reference",
+                                "begin": {
+                                    "line": 6,
+                                    "column": 31,
+                                    "byte": 147
+                                },
+                                "end": {
+                                    "line": 6,
+                                    "column": 39,
+                                    "byte": 155
+                                }
+                            },
+                            "value": {
+                                "environment": "inline-reference",
+                                "begin": {
+                                    "line": 0,
+                                    "column": 0,
+                                    "byte": 0
+                                },
+                                "end": {
+                                    "line": 0,
+                                    "column": 0,
+                                    "byte": 0
+                                }
+                            }
+                        }
+                    ]
+                },
+                "reference": {
+                    "range": {
+                        "environment": "inline-reference",
+                        "begin": {
+                            "line": 2,
+                            "column": 14,
+                            "byte": 21
+                        },
+                        "end": {
+                            "line": 2,
+                            "column": 48,
+                            "byte": 55
                         }
                     },
-                    {
-                        "key": "bar",
-                        "range": {
-                            "environment": "inline-reference",
-                            "begin": {
-                                "line": 2,
-                                "column": 32,
-                                "byte": 39
-                            },
-                            "end": {
-                                "line": 2,
-                                "column": 36,
-                                "byte": 43
-                            }
-                        },
-                        "value": {
-                            "environment": "inline-reference",
-                            "begin": {
-                                "line": 0,
-                                "column": 0,
-                                "byte": 0
-                            },
-                            "end": {
-                                "line": 0,
-                                "column": 0,
-                                "byte": 0
-                            }
-                        }
+                    "schema": {
+                        "type": "number",
+                        "const": 42
                     },
-                    {
-                        "key": "some_value",
-                        "range": {
-                            "environment": "inline-reference",
-                            "begin": {
-                                "line": 2,
-                                "column": 36,
-                                "byte": 43
+                    "symbol": [
+                        {
+                            "key": "environments",
+                            "range": {
+                                "environment": "inline-reference",
+                                "begin": {
+                                    "line": 2,
+                                    "column": 16,
+                                    "byte": 23
+                                },
+                                "end": {
+                                    "line": 2,
+                                    "column": 28,
+                                    "byte": 35
+                                }
                             },
-                            "end": {
-                                "line": 2,
-                                "column": 47,
-                                "byte": 54
+                            "value": {
+                                "environment": "inline-reference",
+                                "begin": {
+                                    "line": 2,
+                                    "column": 14,
+                                    "byte": 21
+                                },
+                                "end": {
+                                    "line": 2,
+                                    "column": 48,
+                                    "byte": 55
+                                }
                             }
                         },
-                        "value": {
-                            "environment": "foo/bar",
-                            "begin": {
-                                "line": 2,
-                                "column": 15,
-                                "byte": 22
+                        {
+                            "key": "foo",
+                            "range": {
+                                "environment": "inline-reference",
+                                "begin": {
+                                    "line": 2,
+                                    "column": 28,
+                                    "byte": 35
+                                },
+                                "end": {
+                                    "line": 2,
+                                    "column": 32,
+                                    "byte": 39
+                                }
                             },
-                            "end": {
-                                "line": 2,
-                                "column": 17,
-                                "byte": 24
+                            "value": {
+                                "environment": "inline-reference",
+                                "begin": {
+                                    "line": 2,
+                                    "column": 14,
+                                    "byte": 21
+                                },
+                                "end": {
+                                    "line": 2,
+                                    "column": 48,
+                                    "byte": 55
+                                }
+                            }
+                        },
+                        {
+                            "key": "bar",
+                            "range": {
+                                "environment": "inline-reference",
+                                "begin": {
+                                    "line": 2,
+                                    "column": 32,
+                                    "byte": 39
+                                },
+                                "end": {
+                                    "line": 2,
+                                    "column": 36,
+                                    "byte": 43
+                                }
+                            },
+                            "value": {
+                                "environment": "foo/bar",
+                                "begin": {
+                                    "line": 2,
+                                    "column": 3,
+                                    "byte": 10
+                                },
+                                "end": {
+                                    "line": 3,
+                                    "column": 56,
+                                    "byte": 80
+                                }
+                            }
+                        },
+                        {
+                            "key": "some_value",
+                            "range": {
+                                "environment": "inline-reference",
+                                "begin": {
+                                    "line": 2,
+                                    "column": 36,
+                                    "byte": 43
+                                },
+                                "end": {
+                                    "line": 2,
+                                    "column": 47,
+                                    "byte": 54
+                                }
+                            },
+                            "value": {
+                                "environment": "foo/bar",
+                                "begin": {
+                                    "line": 2,
+                                    "column": 15,
+                                    "byte": 22
+                                },
+                                "end": {
+                                    "line": 2,
+                                    "column": 17,
+                                    "byte": 24
+                                }
                             }
                         }
-                    }
-                ]
+                    ]
+                }
             }
         },
         "properties": {
@@ -706,370 +793,457 @@
     ],
     "eval": {
         "exprs": {
-            "invalid1": {
-                "range": {
+            "range": {
+                "environment": "inline-reference",
+                "begin": {
+                    "line": 2,
+                    "column": 3,
+                    "byte": 10
+                },
+                "end": {
+                    "line": 6,
+                    "column": 40,
+                    "byte": 156
+                }
+            },
+            "schema": {
+                "properties": {
+                    "invalid1": true,
+                    "invalid2": true,
+                    "invalid3": true,
+                    "reference": {
+                        "type": "number",
+                        "const": 42
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "invalid1",
+                    "invalid2",
+                    "invalid3",
+                    "reference"
+                ]
+            },
+            "keyRanges": {
+                "invalid1": {
                     "environment": "inline-reference",
                     "begin": {
                         "line": 4,
-                        "column": 13,
-                        "byte": 69
+                        "column": 3,
+                        "byte": 59
                     },
                     "end": {
                         "line": 4,
-                        "column": 28,
-                        "byte": 84
+                        "column": 11,
+                        "byte": 67
                     }
                 },
-                "schema": true,
-                "symbol": [
-                    {
-                        "key": "environments",
-                        "range": {
-                            "environment": "inline-reference",
-                            "begin": {
-                                "line": 4,
-                                "column": 15,
-                                "byte": 71
-                            },
-                            "end": {
-                                "line": 4,
-                                "column": 27,
-                                "byte": 83
-                            }
-                        },
-                        "value": {
-                            "environment": "inline-reference",
-                            "begin": {
-                                "line": 4,
-                                "column": 13,
-                                "byte": 69
-                            },
-                            "end": {
-                                "line": 4,
-                                "column": 28,
-                                "byte": 84
-                            }
-                        }
-                    }
-                ]
-            },
-            "invalid2": {
-                "range": {
+                "invalid2": {
                     "environment": "inline-reference",
                     "begin": {
                         "line": 5,
-                        "column": 13,
-                        "byte": 97
+                        "column": 3,
+                        "byte": 87
                     },
                     "end": {
                         "line": 5,
-                        "column": 32,
-                        "byte": 116
+                        "column": 11,
+                        "byte": 95
                     }
                 },
-                "schema": true,
-                "symbol": [
-                    {
-                        "key": "environments",
-                        "range": {
-                            "environment": "inline-reference",
-                            "begin": {
-                                "line": 5,
-                                "column": 15,
-                                "byte": 99
-                            },
-                            "end": {
-                                "line": 5,
-                                "column": 27,
-                                "byte": 111
-                            }
-                        },
-                        "value": {
-                            "environment": "inline-reference",
-                            "begin": {
-                                "line": 5,
-                                "column": 13,
-                                "byte": 97
-                            },
-                            "end": {
-                                "line": 5,
-                                "column": 32,
-                                "byte": 116
-                            }
-                        }
-                    },
-                    {
-                        "key": "foo",
-                        "range": {
-                            "environment": "inline-reference",
-                            "begin": {
-                                "line": 5,
-                                "column": 27,
-                                "byte": 111
-                            },
-                            "end": {
-                                "line": 5,
-                                "column": 31,
-                                "byte": 115
-                            }
-                        },
-                        "value": {
-                            "environment": "inline-reference",
-                            "begin": {
-                                "line": 5,
-                                "column": 13,
-                                "byte": 97
-                            },
-                            "end": {
-                                "line": 5,
-                                "column": 32,
-                                "byte": 116
-                            }
-                        }
-                    }
-                ]
-            },
-            "invalid3": {
-                "range": {
+                "invalid3": {
                     "environment": "inline-reference",
                     "begin": {
                         "line": 6,
-                        "column": 13,
-                        "byte": 129
+                        "column": 3,
+                        "byte": 119
                     },
                     "end": {
                         "line": 6,
-                        "column": 40,
-                        "byte": 156
+                        "column": 11,
+                        "byte": 127
                     }
                 },
-                "schema": true,
-                "symbol": [
-                    {
-                        "key": "environments",
-                        "range": {
-                            "environment": "inline-reference",
-                            "begin": {
-                                "line": 6,
-                                "column": 15,
-                                "byte": 131
-                            },
-                            "end": {
-                                "line": 6,
-                                "column": 27,
-                                "byte": 143
-                            }
-                        },
-                        "value": {
-                            "environment": "inline-reference",
-                            "begin": {
-                                "line": 6,
-                                "column": 13,
-                                "byte": 129
-                            },
-                            "end": {
-                                "line": 6,
-                                "column": 40,
-                                "byte": 156
-                            }
-                        }
-                    },
-                    {
-                        "key": "foo",
-                        "range": {
-                            "environment": "inline-reference",
-                            "begin": {
-                                "line": 6,
-                                "column": 27,
-                                "byte": 143
-                            },
-                            "end": {
-                                "line": 6,
-                                "column": 31,
-                                "byte": 147
-                            }
-                        },
-                        "value": {
-                            "environment": "inline-reference",
-                            "begin": {
-                                "line": 6,
-                                "column": 13,
-                                "byte": 129
-                            },
-                            "end": {
-                                "line": 6,
-                                "column": 40,
-                                "byte": 156
-                            }
-                        }
-                    },
-                    {
-                        "key": "unknown",
-                        "range": {
-                            "environment": "inline-reference",
-                            "begin": {
-                                "line": 6,
-                                "column": 31,
-                                "byte": 147
-                            },
-                            "end": {
-                                "line": 6,
-                                "column": 39,
-                                "byte": 155
-                            }
-                        },
-                        "value": {
-                            "environment": "inline-reference",
-                            "begin": {
-                                "line": 0,
-                                "column": 0,
-                                "byte": 0
-                            },
-                            "end": {
-                                "line": 0,
-                                "column": 0,
-                                "byte": 0
-                            }
-                        }
-                    }
-                ]
-            },
-            "reference": {
-                "range": {
+                "reference": {
                     "environment": "inline-reference",
                     "begin": {
                         "line": 2,
-                        "column": 14,
-                        "byte": 21
+                        "column": 3,
+                        "byte": 10
                     },
                     "end": {
                         "line": 2,
-                        "column": 48,
-                        "byte": 55
+                        "column": 12,
+                        "byte": 19
                     }
+                }
+            },
+            "object": {
+                "invalid1": {
+                    "range": {
+                        "environment": "inline-reference",
+                        "begin": {
+                            "line": 4,
+                            "column": 13,
+                            "byte": 69
+                        },
+                        "end": {
+                            "line": 4,
+                            "column": 28,
+                            "byte": 84
+                        }
+                    },
+                    "schema": true,
+                    "symbol": [
+                        {
+                            "key": "environments",
+                            "range": {
+                                "environment": "inline-reference",
+                                "begin": {
+                                    "line": 4,
+                                    "column": 15,
+                                    "byte": 71
+                                },
+                                "end": {
+                                    "line": 4,
+                                    "column": 27,
+                                    "byte": 83
+                                }
+                            },
+                            "value": {
+                                "environment": "inline-reference",
+                                "begin": {
+                                    "line": 4,
+                                    "column": 13,
+                                    "byte": 69
+                                },
+                                "end": {
+                                    "line": 4,
+                                    "column": 28,
+                                    "byte": 84
+                                }
+                            }
+                        }
+                    ]
                 },
-                "schema": {
-                    "type": "number",
-                    "const": 42
+                "invalid2": {
+                    "range": {
+                        "environment": "inline-reference",
+                        "begin": {
+                            "line": 5,
+                            "column": 13,
+                            "byte": 97
+                        },
+                        "end": {
+                            "line": 5,
+                            "column": 32,
+                            "byte": 116
+                        }
+                    },
+                    "schema": true,
+                    "symbol": [
+                        {
+                            "key": "environments",
+                            "range": {
+                                "environment": "inline-reference",
+                                "begin": {
+                                    "line": 5,
+                                    "column": 15,
+                                    "byte": 99
+                                },
+                                "end": {
+                                    "line": 5,
+                                    "column": 27,
+                                    "byte": 111
+                                }
+                            },
+                            "value": {
+                                "environment": "inline-reference",
+                                "begin": {
+                                    "line": 5,
+                                    "column": 13,
+                                    "byte": 97
+                                },
+                                "end": {
+                                    "line": 5,
+                                    "column": 32,
+                                    "byte": 116
+                                }
+                            }
+                        },
+                        {
+                            "key": "foo",
+                            "range": {
+                                "environment": "inline-reference",
+                                "begin": {
+                                    "line": 5,
+                                    "column": 27,
+                                    "byte": 111
+                                },
+                                "end": {
+                                    "line": 5,
+                                    "column": 31,
+                                    "byte": 115
+                                }
+                            },
+                            "value": {
+                                "environment": "inline-reference",
+                                "begin": {
+                                    "line": 5,
+                                    "column": 13,
+                                    "byte": 97
+                                },
+                                "end": {
+                                    "line": 5,
+                                    "column": 32,
+                                    "byte": 116
+                                }
+                            }
+                        }
+                    ]
                 },
-                "symbol": [
-                    {
-                        "key": "environments",
-                        "range": {
-                            "environment": "inline-reference",
-                            "begin": {
-                                "line": 2,
-                                "column": 16,
-                                "byte": 23
-                            },
-                            "end": {
-                                "line": 2,
-                                "column": 28,
-                                "byte": 35
-                            }
+                "invalid3": {
+                    "range": {
+                        "environment": "inline-reference",
+                        "begin": {
+                            "line": 6,
+                            "column": 13,
+                            "byte": 129
                         },
-                        "value": {
-                            "environment": "inline-reference",
-                            "begin": {
-                                "line": 2,
-                                "column": 14,
-                                "byte": 21
-                            },
-                            "end": {
-                                "line": 2,
-                                "column": 48,
-                                "byte": 55
-                            }
+                        "end": {
+                            "line": 6,
+                            "column": 40,
+                            "byte": 156
                         }
                     },
-                    {
-                        "key": "foo",
-                        "range": {
-                            "environment": "inline-reference",
-                            "begin": {
-                                "line": 2,
-                                "column": 28,
-                                "byte": 35
+                    "schema": true,
+                    "symbol": [
+                        {
+                            "key": "environments",
+                            "range": {
+                                "environment": "inline-reference",
+                                "begin": {
+                                    "line": 6,
+                                    "column": 15,
+                                    "byte": 131
+                                },
+                                "end": {
+                                    "line": 6,
+                                    "column": 27,
+                                    "byte": 143
+                                }
                             },
-                            "end": {
-                                "line": 2,
-                                "column": 32,
-                                "byte": 39
+                            "value": {
+                                "environment": "inline-reference",
+                                "begin": {
+                                    "line": 6,
+                                    "column": 13,
+                                    "byte": 129
+                                },
+                                "end": {
+                                    "line": 6,
+                                    "column": 40,
+                                    "byte": 156
+                                }
                             }
                         },
-                        "value": {
-                            "environment": "inline-reference",
-                            "begin": {
-                                "line": 2,
-                                "column": 14,
-                                "byte": 21
+                        {
+                            "key": "foo",
+                            "range": {
+                                "environment": "inline-reference",
+                                "begin": {
+                                    "line": 6,
+                                    "column": 27,
+                                    "byte": 143
+                                },
+                                "end": {
+                                    "line": 6,
+                                    "column": 31,
+                                    "byte": 147
+                                }
                             },
-                            "end": {
-                                "line": 2,
-                                "column": 48,
-                                "byte": 55
+                            "value": {
+                                "environment": "inline-reference",
+                                "begin": {
+                                    "line": 6,
+                                    "column": 13,
+                                    "byte": 129
+                                },
+                                "end": {
+                                    "line": 6,
+                                    "column": 40,
+                                    "byte": 156
+                                }
                             }
+                        },
+                        {
+                            "key": "unknown",
+                            "range": {
+                                "environment": "inline-reference",
+                                "begin": {
+                                    "line": 6,
+                                    "column": 31,
+                                    "byte": 147
+                                },
+                                "end": {
+                                    "line": 6,
+                                    "column": 39,
+                                    "byte": 155
+                                }
+                            },
+                            "value": {
+                                "environment": "inline-reference",
+                                "begin": {
+                                    "line": 0,
+                                    "column": 0,
+                                    "byte": 0
+                                },
+                                "end": {
+                                    "line": 0,
+                                    "column": 0,
+                                    "byte": 0
+                                }
+                            }
+                        }
+                    ]
+                },
+                "reference": {
+                    "range": {
+                        "environment": "inline-reference",
+                        "begin": {
+                            "line": 2,
+                            "column": 14,
+                            "byte": 21
+                        },
+                        "end": {
+                            "line": 2,
+                            "column": 48,
+                            "byte": 55
                         }
                     },
-                    {
-                        "key": "bar",
-                        "range": {
-                            "environment": "inline-reference",
-                            "begin": {
-                                "line": 2,
-                                "column": 32,
-                                "byte": 39
-                            },
-                            "end": {
-                                "line": 2,
-                                "column": 36,
-                                "byte": 43
-                            }
-                        },
-                        "value": {
-                            "environment": "inline-reference",
-                            "begin": {
-                                "line": 0,
-                                "column": 0,
-                                "byte": 0
-                            },
-                            "end": {
-                                "line": 0,
-                                "column": 0,
-                                "byte": 0
-                            }
-                        }
+                    "schema": {
+                        "type": "number",
+                        "const": 42
                     },
-                    {
-                        "key": "some_value",
-                        "range": {
-                            "environment": "inline-reference",
-                            "begin": {
-                                "line": 2,
-                                "column": 36,
-                                "byte": 43
+                    "symbol": [
+                        {
+                            "key": "environments",
+                            "range": {
+                                "environment": "inline-reference",
+                                "begin": {
+                                    "line": 2,
+                                    "column": 16,
+                                    "byte": 23
+                                },
+                                "end": {
+                                    "line": 2,
+                                    "column": 28,
+                                    "byte": 35
+                                }
                             },
-                            "end": {
-                                "line": 2,
-                                "column": 47,
-                                "byte": 54
+                            "value": {
+                                "environment": "inline-reference",
+                                "begin": {
+                                    "line": 2,
+                                    "column": 14,
+                                    "byte": 21
+                                },
+                                "end": {
+                                    "line": 2,
+                                    "column": 48,
+                                    "byte": 55
+                                }
                             }
                         },
-                        "value": {
-                            "environment": "foo/bar",
-                            "begin": {
-                                "line": 2,
-                                "column": 15,
-                                "byte": 22
+                        {
+                            "key": "foo",
+                            "range": {
+                                "environment": "inline-reference",
+                                "begin": {
+                                    "line": 2,
+                                    "column": 28,
+                                    "byte": 35
+                                },
+                                "end": {
+                                    "line": 2,
+                                    "column": 32,
+                                    "byte": 39
+                                }
                             },
-                            "end": {
-                                "line": 2,
-                                "column": 17,
-                                "byte": 24
+                            "value": {
+                                "environment": "inline-reference",
+                                "begin": {
+                                    "line": 2,
+                                    "column": 14,
+                                    "byte": 21
+                                },
+                                "end": {
+                                    "line": 2,
+                                    "column": 48,
+                                    "byte": 55
+                                }
+                            }
+                        },
+                        {
+                            "key": "bar",
+                            "range": {
+                                "environment": "inline-reference",
+                                "begin": {
+                                    "line": 2,
+                                    "column": 32,
+                                    "byte": 39
+                                },
+                                "end": {
+                                    "line": 2,
+                                    "column": 36,
+                                    "byte": 43
+                                }
+                            },
+                            "value": {
+                                "environment": "foo/bar",
+                                "begin": {
+                                    "line": 2,
+                                    "column": 3,
+                                    "byte": 10
+                                },
+                                "end": {
+                                    "line": 3,
+                                    "column": 56,
+                                    "byte": 80
+                                }
+                            }
+                        },
+                        {
+                            "key": "some_value",
+                            "range": {
+                                "environment": "inline-reference",
+                                "begin": {
+                                    "line": 2,
+                                    "column": 36,
+                                    "byte": 43
+                                },
+                                "end": {
+                                    "line": 2,
+                                    "column": 47,
+                                    "byte": 54
+                                }
+                            },
+                            "value": {
+                                "environment": "foo/bar",
+                                "begin": {
+                                    "line": 2,
+                                    "column": 15,
+                                    "byte": 22
+                                },
+                                "end": {
+                                    "line": 2,
+                                    "column": 17,
+                                    "byte": 24
+                                }
                             }
                         }
-                    }
-                ]
+                    ]
+                }
             }
         },
         "properties": {

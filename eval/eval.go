@@ -165,8 +165,9 @@ func evalEnvironment(
 	envProperties, exportDiags := v.export(name)
 	diags.Extend(exportDiags...)
 
+	rootExpr := ec.root.export(name)
 	return &esc.Environment{
-		Exprs:            ec.root.export(name).Object,
+		Exprs:            &rootExpr,
 		Properties:       envProperties.Value.(map[string]esc.Value),
 		Schema:           s,
 		ExecutionContext: executionContext,
@@ -446,11 +447,15 @@ func (e *evalContext) evaluate() (*value, syntax.Diagnostics) {
 
 	// Build the root value. We do this manually b/c the AST uses a declaration rather than an expression for the
 	// root.
-	properties := make(map[string]*expr, len(e.env.Values.GetEntries()))
+	valuesNode := e.env.Values
+	if valuesNode == nil {
+		valuesNode = ast.Object()
+	}
+	properties := make(map[string]*expr, len(valuesNode.GetEntries()))
 	e.root = &expr{
 		path: "<" + e.name + ">",
 		repr: &objectExpr{
-			node:       ast.Object(),
+			node:       valuesNode,
 			properties: properties,
 		},
 		base: e.base,

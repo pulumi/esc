@@ -1,54 +1,121 @@
 {
     "check": {
         "exprs": {
-            "foo": {
+            "range": {
+                "environment": "merge-replace",
+                "begin": {
+                    "line": 4,
+                    "column": 3,
+                    "byte": 25
+                },
+                "end": {
+                    "line": 5,
+                    "column": 13,
+                    "byte": 42
+                }
+            },
+            "schema": {
+                "properties": {
+                    "foo": {
+                        "properties": {
+                            "bar": {
+                                "type": "string",
+                                "const": "baz"
+                            }
+                        },
+                        "type": "object",
+                        "required": [
+                            "bar"
+                        ]
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "foo"
+                ]
+            },
+            "base": {
                 "range": {
-                    "environment": "merge-replace",
+                    "environment": "a",
                     "begin": {
-                        "line": 5,
-                        "column": 5,
-                        "byte": 34
+                        "line": 2,
+                        "column": 3,
+                        "byte": 10
                     },
                     "end": {
-                        "line": 5,
-                        "column": 13,
-                        "byte": 42
+                        "line": 2,
+                        "column": 11,
+                        "byte": 18
                     }
                 },
                 "schema": {
                     "properties": {
-                        "bar": {
+                        "foo": {
                             "type": "string",
-                            "const": "baz"
+                            "const": "bar"
                         }
                     },
                     "type": "object",
                     "required": [
-                        "bar"
+                        "foo"
                     ]
                 },
-                "base": {
-                    "range": {
+                "keyRanges": {
+                    "foo": {
                         "environment": "a",
                         "begin": {
                             "line": 2,
-                            "column": 8,
-                            "byte": 15
+                            "column": 3,
+                            "byte": 10
                         },
                         "end": {
                             "line": 2,
-                            "column": 11,
-                            "byte": 18
+                            "column": 6,
+                            "byte": 13
                         }
-                    },
-                    "schema": {
-                        "type": "string",
-                        "const": "bar"
-                    },
-                    "literal": "bar"
+                    }
                 },
-                "keyRanges": {
-                    "bar": {
+                "object": {
+                    "foo": {
+                        "range": {
+                            "environment": "a",
+                            "begin": {
+                                "line": 2,
+                                "column": 8,
+                                "byte": 15
+                            },
+                            "end": {
+                                "line": 2,
+                                "column": 11,
+                                "byte": 18
+                            }
+                        },
+                        "schema": {
+                            "type": "string",
+                            "const": "bar"
+                        },
+                        "literal": "bar"
+                    }
+                }
+            },
+            "keyRanges": {
+                "foo": {
+                    "environment": "merge-replace",
+                    "begin": {
+                        "line": 4,
+                        "column": 3,
+                        "byte": 25
+                    },
+                    "end": {
+                        "line": 4,
+                        "column": 6,
+                        "byte": 28
+                    }
+                }
+            },
+            "object": {
+                "foo": {
+                    "range": {
                         "environment": "merge-replace",
                         "begin": {
                             "line": 5,
@@ -57,31 +124,78 @@
                         },
                         "end": {
                             "line": 5,
-                            "column": 8,
-                            "byte": 37
+                            "column": 13,
+                            "byte": 42
                         }
-                    }
-                },
-                "object": {
-                    "bar": {
+                    },
+                    "schema": {
+                        "properties": {
+                            "bar": {
+                                "type": "string",
+                                "const": "baz"
+                            }
+                        },
+                        "type": "object",
+                        "required": [
+                            "bar"
+                        ]
+                    },
+                    "base": {
                         "range": {
-                            "environment": "merge-replace",
+                            "environment": "a",
                             "begin": {
-                                "line": 5,
-                                "column": 10,
-                                "byte": 39
+                                "line": 2,
+                                "column": 8,
+                                "byte": 15
                             },
                             "end": {
-                                "line": 5,
-                                "column": 13,
-                                "byte": 42
+                                "line": 2,
+                                "column": 11,
+                                "byte": 18
                             }
                         },
                         "schema": {
                             "type": "string",
-                            "const": "baz"
+                            "const": "bar"
                         },
-                        "literal": "baz"
+                        "literal": "bar"
+                    },
+                    "keyRanges": {
+                        "bar": {
+                            "environment": "merge-replace",
+                            "begin": {
+                                "line": 5,
+                                "column": 5,
+                                "byte": 34
+                            },
+                            "end": {
+                                "line": 5,
+                                "column": 8,
+                                "byte": 37
+                            }
+                        }
+                    },
+                    "object": {
+                        "bar": {
+                            "range": {
+                                "environment": "merge-replace",
+                                "begin": {
+                                    "line": 5,
+                                    "column": 10,
+                                    "byte": 39
+                                },
+                                "end": {
+                                    "line": 5,
+                                    "column": 13,
+                                    "byte": 42
+                                }
+                            },
+                            "schema": {
+                                "type": "string",
+                                "const": "baz"
+                            },
+                            "literal": "baz"
+                        }
                     }
                 }
             }
@@ -359,54 +473,121 @@
     },
     "eval": {
         "exprs": {
-            "foo": {
+            "range": {
+                "environment": "merge-replace",
+                "begin": {
+                    "line": 4,
+                    "column": 3,
+                    "byte": 25
+                },
+                "end": {
+                    "line": 5,
+                    "column": 13,
+                    "byte": 42
+                }
+            },
+            "schema": {
+                "properties": {
+                    "foo": {
+                        "properties": {
+                            "bar": {
+                                "type": "string",
+                                "const": "baz"
+                            }
+                        },
+                        "type": "object",
+                        "required": [
+                            "bar"
+                        ]
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "foo"
+                ]
+            },
+            "base": {
                 "range": {
-                    "environment": "merge-replace",
+                    "environment": "a",
                     "begin": {
-                        "line": 5,
-                        "column": 5,
-                        "byte": 34
+                        "line": 2,
+                        "column": 3,
+                        "byte": 10
                     },
                     "end": {
-                        "line": 5,
-                        "column": 13,
-                        "byte": 42
+                        "line": 2,
+                        "column": 11,
+                        "byte": 18
                     }
                 },
                 "schema": {
                     "properties": {
-                        "bar": {
+                        "foo": {
                             "type": "string",
-                            "const": "baz"
+                            "const": "bar"
                         }
                     },
                     "type": "object",
                     "required": [
-                        "bar"
+                        "foo"
                     ]
                 },
-                "base": {
-                    "range": {
+                "keyRanges": {
+                    "foo": {
                         "environment": "a",
                         "begin": {
                             "line": 2,
-                            "column": 8,
-                            "byte": 15
+                            "column": 3,
+                            "byte": 10
                         },
                         "end": {
                             "line": 2,
-                            "column": 11,
-                            "byte": 18
+                            "column": 6,
+                            "byte": 13
                         }
-                    },
-                    "schema": {
-                        "type": "string",
-                        "const": "bar"
-                    },
-                    "literal": "bar"
+                    }
                 },
-                "keyRanges": {
-                    "bar": {
+                "object": {
+                    "foo": {
+                        "range": {
+                            "environment": "a",
+                            "begin": {
+                                "line": 2,
+                                "column": 8,
+                                "byte": 15
+                            },
+                            "end": {
+                                "line": 2,
+                                "column": 11,
+                                "byte": 18
+                            }
+                        },
+                        "schema": {
+                            "type": "string",
+                            "const": "bar"
+                        },
+                        "literal": "bar"
+                    }
+                }
+            },
+            "keyRanges": {
+                "foo": {
+                    "environment": "merge-replace",
+                    "begin": {
+                        "line": 4,
+                        "column": 3,
+                        "byte": 25
+                    },
+                    "end": {
+                        "line": 4,
+                        "column": 6,
+                        "byte": 28
+                    }
+                }
+            },
+            "object": {
+                "foo": {
+                    "range": {
                         "environment": "merge-replace",
                         "begin": {
                             "line": 5,
@@ -415,31 +596,78 @@
                         },
                         "end": {
                             "line": 5,
-                            "column": 8,
-                            "byte": 37
+                            "column": 13,
+                            "byte": 42
                         }
-                    }
-                },
-                "object": {
-                    "bar": {
+                    },
+                    "schema": {
+                        "properties": {
+                            "bar": {
+                                "type": "string",
+                                "const": "baz"
+                            }
+                        },
+                        "type": "object",
+                        "required": [
+                            "bar"
+                        ]
+                    },
+                    "base": {
                         "range": {
-                            "environment": "merge-replace",
+                            "environment": "a",
                             "begin": {
-                                "line": 5,
-                                "column": 10,
-                                "byte": 39
+                                "line": 2,
+                                "column": 8,
+                                "byte": 15
                             },
                             "end": {
-                                "line": 5,
-                                "column": 13,
-                                "byte": 42
+                                "line": 2,
+                                "column": 11,
+                                "byte": 18
                             }
                         },
                         "schema": {
                             "type": "string",
-                            "const": "baz"
+                            "const": "bar"
                         },
-                        "literal": "baz"
+                        "literal": "bar"
+                    },
+                    "keyRanges": {
+                        "bar": {
+                            "environment": "merge-replace",
+                            "begin": {
+                                "line": 5,
+                                "column": 5,
+                                "byte": 34
+                            },
+                            "end": {
+                                "line": 5,
+                                "column": 8,
+                                "byte": 37
+                            }
+                        }
+                    },
+                    "object": {
+                        "bar": {
+                            "range": {
+                                "environment": "merge-replace",
+                                "begin": {
+                                    "line": 5,
+                                    "column": 10,
+                                    "byte": 39
+                                },
+                                "end": {
+                                    "line": 5,
+                                    "column": 13,
+                                    "byte": 42
+                                }
+                            },
+                            "schema": {
+                                "type": "string",
+                                "const": "baz"
+                            },
+                            "literal": "baz"
+                        }
                     }
                 }
             }

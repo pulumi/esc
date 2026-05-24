@@ -1,34 +1,121 @@
 {
     "check": {
         "exprs": {
-            "danmark": {
-                "range": {
-                    "environment": "unicode",
-                    "begin": {
-                        "line": 8,
-                        "column": 5,
-                        "byte": 89
+            "range": {
+                "environment": "unicode",
+                "begin": {
+                    "line": 2,
+                    "column": 3,
+                    "byte": 10
+                },
+                "end": {
+                    "line": 8,
+                    "column": 26,
+                    "byte": 110
+                }
+            },
+            "schema": {
+                "properties": {
+                    "danmark": {
+                        "properties": {
+                            "hovedstad": {
+                                "type": "string",
+                                "const": "københavn"
+                            }
+                        },
+                        "type": "object",
+                        "required": [
+                            "hovedstad"
+                        ]
                     },
-                    "end": {
-                        "line": 8,
-                        "column": 26,
-                        "byte": 110
+                    "hello": {
+                        "type": "string",
+                        "const": "世界"
+                    },
+                    "linear-b": {
+                        "prefixItems": [
+                            {
+                                "type": "string",
+                                "const": "𐀀"
+                            },
+                            {
+                                "type": "string",
+                                "const": "𐀁"
+                            }
+                        ],
+                        "items": false,
+                        "type": "array"
+                    },
+                    "世界": {
+                        "type": "string",
+                        "const": "hello"
                     }
                 },
-                "schema": {
-                    "properties": {
-                        "hovedstad": {
-                            "type": "string",
-                            "const": "københavn"
-                        }
+                "type": "object",
+                "required": [
+                    "danmark",
+                    "hello",
+                    "linear-b",
+                    "世界"
+                ]
+            },
+            "keyRanges": {
+                "danmark": {
+                    "environment": "unicode",
+                    "begin": {
+                        "line": 7,
+                        "column": 3,
+                        "byte": 76
                     },
-                    "type": "object",
-                    "required": [
-                        "hovedstad"
-                    ]
+                    "end": {
+                        "line": 7,
+                        "column": 10,
+                        "byte": 83
+                    }
                 },
-                "keyRanges": {
-                    "hovedstad": {
+                "hello": {
+                    "environment": "unicode",
+                    "begin": {
+                        "line": 2,
+                        "column": 3,
+                        "byte": 10
+                    },
+                    "end": {
+                        "line": 2,
+                        "column": 8,
+                        "byte": 15
+                    }
+                },
+                "linear-b": {
+                    "environment": "unicode",
+                    "begin": {
+                        "line": 4,
+                        "column": 3,
+                        "byte": 42
+                    },
+                    "end": {
+                        "line": 4,
+                        "column": 11,
+                        "byte": 50
+                    }
+                },
+                "世界": {
+                    "environment": "unicode",
+                    "begin": {
+                        "line": 3,
+                        "column": 3,
+                        "byte": 26
+                    },
+                    "end": {
+                        "line": 3,
+                        "column": 9,
+                        "byte": 34
+                    }
+                }
+            },
+            "object": {
+                "danmark": {
+                    "range": {
                         "environment": "unicode",
                         "begin": {
                             "line": 8,
@@ -37,144 +124,171 @@
                         },
                         "end": {
                             "line": 8,
-                            "column": 14,
-                            "byte": 98
+                            "column": 26,
+                            "byte": 110
                         }
-                    }
-                },
-                "object": {
-                    "hovedstad": {
-                        "range": {
+                    },
+                    "schema": {
+                        "properties": {
+                            "hovedstad": {
+                                "type": "string",
+                                "const": "københavn"
+                            }
+                        },
+                        "type": "object",
+                        "required": [
+                            "hovedstad"
+                        ]
+                    },
+                    "keyRanges": {
+                        "hovedstad": {
                             "environment": "unicode",
                             "begin": {
                                 "line": 8,
-                                "column": 16,
-                                "byte": 100
+                                "column": 5,
+                                "byte": 89
                             },
                             "end": {
                                 "line": 8,
-                                "column": 26,
-                                "byte": 110
+                                "column": 14,
+                                "byte": 98
                             }
-                        },
-                        "schema": {
-                            "type": "string",
-                            "const": "københavn"
-                        },
-                        "literal": "københavn"
+                        }
+                    },
+                    "object": {
+                        "hovedstad": {
+                            "range": {
+                                "environment": "unicode",
+                                "begin": {
+                                    "line": 8,
+                                    "column": 16,
+                                    "byte": 100
+                                },
+                                "end": {
+                                    "line": 8,
+                                    "column": 26,
+                                    "byte": 110
+                                }
+                            },
+                            "schema": {
+                                "type": "string",
+                                "const": "københavn"
+                            },
+                            "literal": "københavn"
+                        }
                     }
+                },
+                "hello": {
+                    "range": {
+                        "environment": "unicode",
+                        "begin": {
+                            "line": 2,
+                            "column": 10,
+                            "byte": 17
+                        },
+                        "end": {
+                            "line": 2,
+                            "column": 16,
+                            "byte": 23
+                        }
+                    },
+                    "schema": {
+                        "type": "string",
+                        "const": "世界"
+                    },
+                    "literal": "世界"
+                },
+                "linear-b": {
+                    "range": {
+                        "environment": "unicode",
+                        "begin": {
+                            "line": 5,
+                            "column": 5,
+                            "byte": 56
+                        },
+                        "end": {
+                            "line": 6,
+                            "column": 11,
+                            "byte": 73
+                        }
+                    },
+                    "schema": {
+                        "prefixItems": [
+                            {
+                                "type": "string",
+                                "const": "𐀀"
+                            },
+                            {
+                                "type": "string",
+                                "const": "𐀁"
+                            }
+                        ],
+                        "items": false,
+                        "type": "array"
+                    },
+                    "list": [
+                        {
+                            "range": {
+                                "environment": "unicode",
+                                "begin": {
+                                    "line": 5,
+                                    "column": 7,
+                                    "byte": 58
+                                },
+                                "end": {
+                                    "line": 5,
+                                    "column": 11,
+                                    "byte": 62
+                                }
+                            },
+                            "schema": {
+                                "type": "string",
+                                "const": "𐀀"
+                            },
+                            "literal": "𐀀"
+                        },
+                        {
+                            "range": {
+                                "environment": "unicode",
+                                "begin": {
+                                    "line": 6,
+                                    "column": 7,
+                                    "byte": 69
+                                },
+                                "end": {
+                                    "line": 6,
+                                    "column": 11,
+                                    "byte": 73
+                                }
+                            },
+                            "schema": {
+                                "type": "string",
+                                "const": "𐀁"
+                            },
+                            "literal": "𐀁"
+                        }
+                    ]
+                },
+                "世界": {
+                    "range": {
+                        "environment": "unicode",
+                        "begin": {
+                            "line": 3,
+                            "column": 7,
+                            "byte": 32
+                        },
+                        "end": {
+                            "line": 3,
+                            "column": 12,
+                            "byte": 37
+                        }
+                    },
+                    "schema": {
+                        "type": "string",
+                        "const": "hello"
+                    },
+                    "literal": "hello"
                 }
-            },
-            "hello": {
-                "range": {
-                    "environment": "unicode",
-                    "begin": {
-                        "line": 2,
-                        "column": 10,
-                        "byte": 17
-                    },
-                    "end": {
-                        "line": 2,
-                        "column": 16,
-                        "byte": 23
-                    }
-                },
-                "schema": {
-                    "type": "string",
-                    "const": "世界"
-                },
-                "literal": "世界"
-            },
-            "linear-b": {
-                "range": {
-                    "environment": "unicode",
-                    "begin": {
-                        "line": 5,
-                        "column": 5,
-                        "byte": 56
-                    },
-                    "end": {
-                        "line": 6,
-                        "column": 11,
-                        "byte": 73
-                    }
-                },
-                "schema": {
-                    "prefixItems": [
-                        {
-                            "type": "string",
-                            "const": "𐀀"
-                        },
-                        {
-                            "type": "string",
-                            "const": "𐀁"
-                        }
-                    ],
-                    "items": false,
-                    "type": "array"
-                },
-                "list": [
-                    {
-                        "range": {
-                            "environment": "unicode",
-                            "begin": {
-                                "line": 5,
-                                "column": 7,
-                                "byte": 58
-                            },
-                            "end": {
-                                "line": 5,
-                                "column": 11,
-                                "byte": 62
-                            }
-                        },
-                        "schema": {
-                            "type": "string",
-                            "const": "𐀀"
-                        },
-                        "literal": "𐀀"
-                    },
-                    {
-                        "range": {
-                            "environment": "unicode",
-                            "begin": {
-                                "line": 6,
-                                "column": 7,
-                                "byte": 69
-                            },
-                            "end": {
-                                "line": 6,
-                                "column": 11,
-                                "byte": 73
-                            }
-                        },
-                        "schema": {
-                            "type": "string",
-                            "const": "𐀁"
-                        },
-                        "literal": "𐀁"
-                    }
-                ]
-            },
-            "世界": {
-                "range": {
-                    "environment": "unicode",
-                    "begin": {
-                        "line": 3,
-                        "column": 7,
-                        "byte": 32
-                    },
-                    "end": {
-                        "line": 3,
-                        "column": 12,
-                        "byte": 37
-                    }
-                },
-                "schema": {
-                    "type": "string",
-                    "const": "hello"
-                },
-                "literal": "hello"
             }
         },
         "properties": {
@@ -554,34 +668,121 @@
     },
     "eval": {
         "exprs": {
-            "danmark": {
-                "range": {
-                    "environment": "unicode",
-                    "begin": {
-                        "line": 8,
-                        "column": 5,
-                        "byte": 89
+            "range": {
+                "environment": "unicode",
+                "begin": {
+                    "line": 2,
+                    "column": 3,
+                    "byte": 10
+                },
+                "end": {
+                    "line": 8,
+                    "column": 26,
+                    "byte": 110
+                }
+            },
+            "schema": {
+                "properties": {
+                    "danmark": {
+                        "properties": {
+                            "hovedstad": {
+                                "type": "string",
+                                "const": "københavn"
+                            }
+                        },
+                        "type": "object",
+                        "required": [
+                            "hovedstad"
+                        ]
                     },
-                    "end": {
-                        "line": 8,
-                        "column": 26,
-                        "byte": 110
+                    "hello": {
+                        "type": "string",
+                        "const": "世界"
+                    },
+                    "linear-b": {
+                        "prefixItems": [
+                            {
+                                "type": "string",
+                                "const": "𐀀"
+                            },
+                            {
+                                "type": "string",
+                                "const": "𐀁"
+                            }
+                        ],
+                        "items": false,
+                        "type": "array"
+                    },
+                    "世界": {
+                        "type": "string",
+                        "const": "hello"
                     }
                 },
-                "schema": {
-                    "properties": {
-                        "hovedstad": {
-                            "type": "string",
-                            "const": "københavn"
-                        }
+                "type": "object",
+                "required": [
+                    "danmark",
+                    "hello",
+                    "linear-b",
+                    "世界"
+                ]
+            },
+            "keyRanges": {
+                "danmark": {
+                    "environment": "unicode",
+                    "begin": {
+                        "line": 7,
+                        "column": 3,
+                        "byte": 76
                     },
-                    "type": "object",
-                    "required": [
-                        "hovedstad"
-                    ]
+                    "end": {
+                        "line": 7,
+                        "column": 10,
+                        "byte": 83
+                    }
                 },
-                "keyRanges": {
-                    "hovedstad": {
+                "hello": {
+                    "environment": "unicode",
+                    "begin": {
+                        "line": 2,
+                        "column": 3,
+                        "byte": 10
+                    },
+                    "end": {
+                        "line": 2,
+                        "column": 8,
+                        "byte": 15
+                    }
+                },
+                "linear-b": {
+                    "environment": "unicode",
+                    "begin": {
+                        "line": 4,
+                        "column": 3,
+                        "byte": 42
+                    },
+                    "end": {
+                        "line": 4,
+                        "column": 11,
+                        "byte": 50
+                    }
+                },
+                "世界": {
+                    "environment": "unicode",
+                    "begin": {
+                        "line": 3,
+                        "column": 3,
+                        "byte": 26
+                    },
+                    "end": {
+                        "line": 3,
+                        "column": 9,
+                        "byte": 34
+                    }
+                }
+            },
+            "object": {
+                "danmark": {
+                    "range": {
                         "environment": "unicode",
                         "begin": {
                             "line": 8,
@@ -590,144 +791,171 @@
                         },
                         "end": {
                             "line": 8,
-                            "column": 14,
-                            "byte": 98
+                            "column": 26,
+                            "byte": 110
                         }
-                    }
-                },
-                "object": {
-                    "hovedstad": {
-                        "range": {
+                    },
+                    "schema": {
+                        "properties": {
+                            "hovedstad": {
+                                "type": "string",
+                                "const": "københavn"
+                            }
+                        },
+                        "type": "object",
+                        "required": [
+                            "hovedstad"
+                        ]
+                    },
+                    "keyRanges": {
+                        "hovedstad": {
                             "environment": "unicode",
                             "begin": {
                                 "line": 8,
-                                "column": 16,
-                                "byte": 100
+                                "column": 5,
+                                "byte": 89
                             },
                             "end": {
                                 "line": 8,
-                                "column": 26,
-                                "byte": 110
+                                "column": 14,
+                                "byte": 98
                             }
-                        },
-                        "schema": {
-                            "type": "string",
-                            "const": "københavn"
-                        },
-                        "literal": "københavn"
+                        }
+                    },
+                    "object": {
+                        "hovedstad": {
+                            "range": {
+                                "environment": "unicode",
+                                "begin": {
+                                    "line": 8,
+                                    "column": 16,
+                                    "byte": 100
+                                },
+                                "end": {
+                                    "line": 8,
+                                    "column": 26,
+                                    "byte": 110
+                                }
+                            },
+                            "schema": {
+                                "type": "string",
+                                "const": "københavn"
+                            },
+                            "literal": "københavn"
+                        }
                     }
+                },
+                "hello": {
+                    "range": {
+                        "environment": "unicode",
+                        "begin": {
+                            "line": 2,
+                            "column": 10,
+                            "byte": 17
+                        },
+                        "end": {
+                            "line": 2,
+                            "column": 16,
+                            "byte": 23
+                        }
+                    },
+                    "schema": {
+                        "type": "string",
+                        "const": "世界"
+                    },
+                    "literal": "世界"
+                },
+                "linear-b": {
+                    "range": {
+                        "environment": "unicode",
+                        "begin": {
+                            "line": 5,
+                            "column": 5,
+                            "byte": 56
+                        },
+                        "end": {
+                            "line": 6,
+                            "column": 11,
+                            "byte": 73
+                        }
+                    },
+                    "schema": {
+                        "prefixItems": [
+                            {
+                                "type": "string",
+                                "const": "𐀀"
+                            },
+                            {
+                                "type": "string",
+                                "const": "𐀁"
+                            }
+                        ],
+                        "items": false,
+                        "type": "array"
+                    },
+                    "list": [
+                        {
+                            "range": {
+                                "environment": "unicode",
+                                "begin": {
+                                    "line": 5,
+                                    "column": 7,
+                                    "byte": 58
+                                },
+                                "end": {
+                                    "line": 5,
+                                    "column": 11,
+                                    "byte": 62
+                                }
+                            },
+                            "schema": {
+                                "type": "string",
+                                "const": "𐀀"
+                            },
+                            "literal": "𐀀"
+                        },
+                        {
+                            "range": {
+                                "environment": "unicode",
+                                "begin": {
+                                    "line": 6,
+                                    "column": 7,
+                                    "byte": 69
+                                },
+                                "end": {
+                                    "line": 6,
+                                    "column": 11,
+                                    "byte": 73
+                                }
+                            },
+                            "schema": {
+                                "type": "string",
+                                "const": "𐀁"
+                            },
+                            "literal": "𐀁"
+                        }
+                    ]
+                },
+                "世界": {
+                    "range": {
+                        "environment": "unicode",
+                        "begin": {
+                            "line": 3,
+                            "column": 7,
+                            "byte": 32
+                        },
+                        "end": {
+                            "line": 3,
+                            "column": 12,
+                            "byte": 37
+                        }
+                    },
+                    "schema": {
+                        "type": "string",
+                        "const": "hello"
+                    },
+                    "literal": "hello"
                 }
-            },
-            "hello": {
-                "range": {
-                    "environment": "unicode",
-                    "begin": {
-                        "line": 2,
-                        "column": 10,
-                        "byte": 17
-                    },
-                    "end": {
-                        "line": 2,
-                        "column": 16,
-                        "byte": 23
-                    }
-                },
-                "schema": {
-                    "type": "string",
-                    "const": "世界"
-                },
-                "literal": "世界"
-            },
-            "linear-b": {
-                "range": {
-                    "environment": "unicode",
-                    "begin": {
-                        "line": 5,
-                        "column": 5,
-                        "byte": 56
-                    },
-                    "end": {
-                        "line": 6,
-                        "column": 11,
-                        "byte": 73
-                    }
-                },
-                "schema": {
-                    "prefixItems": [
-                        {
-                            "type": "string",
-                            "const": "𐀀"
-                        },
-                        {
-                            "type": "string",
-                            "const": "𐀁"
-                        }
-                    ],
-                    "items": false,
-                    "type": "array"
-                },
-                "list": [
-                    {
-                        "range": {
-                            "environment": "unicode",
-                            "begin": {
-                                "line": 5,
-                                "column": 7,
-                                "byte": 58
-                            },
-                            "end": {
-                                "line": 5,
-                                "column": 11,
-                                "byte": 62
-                            }
-                        },
-                        "schema": {
-                            "type": "string",
-                            "const": "𐀀"
-                        },
-                        "literal": "𐀀"
-                    },
-                    {
-                        "range": {
-                            "environment": "unicode",
-                            "begin": {
-                                "line": 6,
-                                "column": 7,
-                                "byte": 69
-                            },
-                            "end": {
-                                "line": 6,
-                                "column": 11,
-                                "byte": 73
-                            }
-                        },
-                        "schema": {
-                            "type": "string",
-                            "const": "𐀁"
-                        },
-                        "literal": "𐀁"
-                    }
-                ]
-            },
-            "世界": {
-                "range": {
-                    "environment": "unicode",
-                    "begin": {
-                        "line": 3,
-                        "column": 7,
-                        "byte": 32
-                    },
-                    "end": {
-                        "line": 3,
-                        "column": 12,
-                        "byte": 37
-                    }
-                },
-                "schema": {
-                    "type": "string",
-                    "const": "hello"
-                },
-                "literal": "hello"
             }
         },
         "properties": {

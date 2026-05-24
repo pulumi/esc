@@ -72,49 +72,628 @@
     ],
     "check": {
         "exprs": {
-            "final_nested": {
+            "range": {
+                "environment": "builtin-final",
+                "begin": {
+                    "line": 4,
+                    "column": 3,
+                    "byte": 25
+                },
+                "end": {
+                    "line": 10,
+                    "column": 29,
+                    "byte": 170
+                }
+            },
+            "schema": {
+                "properties": {
+                    "final_nested": {
+                        "properties": {
+                            "key": {
+                                "type": "string",
+                                "const": "nested_frozen"
+                            },
+                            "other_key": {
+                                "type": "string",
+                                "const": "new_value"
+                            }
+                        },
+                        "type": "object",
+                        "required": [
+                            "key",
+                            "other_key"
+                        ]
+                    },
+                    "final_object": {
+                        "properties": {
+                            "retries": {
+                                "type": "number",
+                                "const": 3
+                            },
+                            "timeout": {
+                                "type": "number",
+                                "const": 30
+                            }
+                        },
+                        "type": "object",
+                        "required": [
+                            "retries",
+                            "timeout"
+                        ]
+                    },
+                    "final_scalar": {
+                        "type": "string",
+                        "const": "frozen_value"
+                    },
+                    "not_final": {
+                        "type": "string",
+                        "const": "new_plain_value"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "final_nested",
+                    "final_object",
+                    "final_scalar",
+                    "not_final"
+                ]
+            },
+            "base": {
                 "range": {
-                    "environment": "builtin-final",
+                    "environment": "a",
                     "begin": {
-                        "line": 8,
-                        "column": 5,
-                        "byte": 101
+                        "line": 2,
+                        "column": 3,
+                        "byte": 10
                     },
                     "end": {
-                        "line": 9,
+                        "line": 12,
                         "column": 25,
-                        "byte": 141
+                        "byte": 226
                     }
                 },
                 "schema": {
                     "properties": {
-                        "key": {
-                            "type": "string",
-                            "const": "nested_frozen"
+                        "final_nested": {
+                            "properties": {
+                                "key": {
+                                    "type": "string",
+                                    "const": "nested_frozen"
+                                },
+                                "other_key": {
+                                    "type": "string",
+                                    "const": "can_override"
+                                }
+                            },
+                            "type": "object",
+                            "required": [
+                                "key",
+                                "other_key"
+                            ]
                         },
-                        "other_key": {
+                        "final_object": {
+                            "properties": {
+                                "retries": {
+                                    "type": "number",
+                                    "const": 3
+                                },
+                                "timeout": {
+                                    "type": "number",
+                                    "const": 30
+                                }
+                            },
+                            "type": "object",
+                            "required": [
+                                "retries",
+                                "timeout"
+                            ]
+                        },
+                        "final_scalar": {
                             "type": "string",
-                            "const": "new_value"
+                            "const": "frozen_value"
+                        },
+                        "not_final": {
+                            "type": "string",
+                            "const": "plain_value"
                         }
                     },
                     "type": "object",
                     "required": [
-                        "key",
-                        "other_key"
+                        "final_nested",
+                        "final_object",
+                        "final_scalar",
+                        "not_final"
                     ]
                 },
-                "base": {
-                    "range": {
+                "keyRanges": {
+                    "final_nested": {
                         "environment": "a",
                         "begin": {
-                            "line": 9,
-                            "column": 5,
-                            "byte": 138
+                            "line": 8,
+                            "column": 3,
+                            "byte": 120
                         },
                         "end": {
-                            "line": 11,
-                            "column": 28,
-                            "byte": 201
+                            "line": 8,
+                            "column": 15,
+                            "byte": 132
+                        }
+                    },
+                    "final_object": {
+                        "environment": "a",
+                        "begin": {
+                            "line": 4,
+                            "column": 3,
+                            "byte": 54
+                        },
+                        "end": {
+                            "line": 4,
+                            "column": 15,
+                            "byte": 66
+                        }
+                    },
+                    "final_scalar": {
+                        "environment": "a",
+                        "begin": {
+                            "line": 2,
+                            "column": 3,
+                            "byte": 10
+                        },
+                        "end": {
+                            "line": 2,
+                            "column": 15,
+                            "byte": 22
+                        }
+                    },
+                    "not_final": {
+                        "environment": "a",
+                        "begin": {
+                            "line": 12,
+                            "column": 3,
+                            "byte": 204
+                        },
+                        "end": {
+                            "line": 12,
+                            "column": 12,
+                            "byte": 213
+                        }
+                    }
+                },
+                "object": {
+                    "final_nested": {
+                        "range": {
+                            "environment": "a",
+                            "begin": {
+                                "line": 9,
+                                "column": 5,
+                                "byte": 138
+                            },
+                            "end": {
+                                "line": 11,
+                                "column": 28,
+                                "byte": 201
+                            }
+                        },
+                        "schema": {
+                            "properties": {
+                                "key": {
+                                    "type": "string",
+                                    "const": "nested_frozen"
+                                },
+                                "other_key": {
+                                    "type": "string",
+                                    "const": "can_override"
+                                }
+                            },
+                            "type": "object",
+                            "required": [
+                                "key",
+                                "other_key"
+                            ]
+                        },
+                        "keyRanges": {
+                            "key": {
+                                "environment": "a",
+                                "begin": {
+                                    "line": 9,
+                                    "column": 5,
+                                    "byte": 138
+                                },
+                                "end": {
+                                    "line": 9,
+                                    "column": 8,
+                                    "byte": 141
+                                }
+                            },
+                            "other_key": {
+                                "environment": "a",
+                                "begin": {
+                                    "line": 11,
+                                    "column": 5,
+                                    "byte": 178
+                                },
+                                "end": {
+                                    "line": 11,
+                                    "column": 14,
+                                    "byte": 187
+                                }
+                            }
+                        },
+                        "object": {
+                            "key": {
+                                "range": {
+                                    "environment": "a",
+                                    "begin": {
+                                        "line": 10,
+                                        "column": 7,
+                                        "byte": 149
+                                    },
+                                    "end": {
+                                        "line": 10,
+                                        "column": 31,
+                                        "byte": 173
+                                    }
+                                },
+                                "schema": {
+                                    "type": "string",
+                                    "const": "nested_frozen"
+                                },
+                                "builtin": {
+                                    "name": "fn::final",
+                                    "nameRange": {
+                                        "environment": "a",
+                                        "begin": {
+                                            "line": 10,
+                                            "column": 7,
+                                            "byte": 149
+                                        },
+                                        "end": {
+                                            "line": 10,
+                                            "column": 16,
+                                            "byte": 158
+                                        }
+                                    },
+                                    "argSchema": true,
+                                    "arg": {
+                                        "range": {
+                                            "environment": "a",
+                                            "begin": {
+                                                "line": 10,
+                                                "column": 18,
+                                                "byte": 160
+                                            },
+                                            "end": {
+                                                "line": 10,
+                                                "column": 31,
+                                                "byte": 173
+                                            }
+                                        },
+                                        "schema": {
+                                            "type": "string",
+                                            "const": "nested_frozen"
+                                        },
+                                        "literal": "nested_frozen"
+                                    }
+                                }
+                            },
+                            "other_key": {
+                                "range": {
+                                    "environment": "a",
+                                    "begin": {
+                                        "line": 11,
+                                        "column": 16,
+                                        "byte": 189
+                                    },
+                                    "end": {
+                                        "line": 11,
+                                        "column": 28,
+                                        "byte": 201
+                                    }
+                                },
+                                "schema": {
+                                    "type": "string",
+                                    "const": "can_override"
+                                },
+                                "literal": "can_override"
+                            }
+                        }
+                    },
+                    "final_object": {
+                        "range": {
+                            "environment": "a",
+                            "begin": {
+                                "line": 5,
+                                "column": 5,
+                                "byte": 72
+                            },
+                            "end": {
+                                "line": 7,
+                                "column": 18,
+                                "byte": 117
+                            }
+                        },
+                        "schema": {
+                            "properties": {
+                                "retries": {
+                                    "type": "number",
+                                    "const": 3
+                                },
+                                "timeout": {
+                                    "type": "number",
+                                    "const": 30
+                                }
+                            },
+                            "type": "object",
+                            "required": [
+                                "retries",
+                                "timeout"
+                            ]
+                        },
+                        "builtin": {
+                            "name": "fn::final",
+                            "nameRange": {
+                                "environment": "a",
+                                "begin": {
+                                    "line": 5,
+                                    "column": 5,
+                                    "byte": 72
+                                },
+                                "end": {
+                                    "line": 5,
+                                    "column": 14,
+                                    "byte": 81
+                                }
+                            },
+                            "argSchema": true,
+                            "arg": {
+                                "range": {
+                                    "environment": "a",
+                                    "begin": {
+                                        "line": 6,
+                                        "column": 7,
+                                        "byte": 89
+                                    },
+                                    "end": {
+                                        "line": 7,
+                                        "column": 18,
+                                        "byte": 117
+                                    }
+                                },
+                                "schema": {
+                                    "properties": {
+                                        "retries": {
+                                            "type": "number",
+                                            "const": 3
+                                        },
+                                        "timeout": {
+                                            "type": "number",
+                                            "const": 30
+                                        }
+                                    },
+                                    "type": "object",
+                                    "required": [
+                                        "retries",
+                                        "timeout"
+                                    ]
+                                },
+                                "keyRanges": {
+                                    "retries": {
+                                        "environment": "a",
+                                        "begin": {
+                                            "line": 6,
+                                            "column": 7,
+                                            "byte": 89
+                                        },
+                                        "end": {
+                                            "line": 6,
+                                            "column": 14,
+                                            "byte": 96
+                                        }
+                                    },
+                                    "timeout": {
+                                        "environment": "a",
+                                        "begin": {
+                                            "line": 7,
+                                            "column": 7,
+                                            "byte": 106
+                                        },
+                                        "end": {
+                                            "line": 7,
+                                            "column": 14,
+                                            "byte": 113
+                                        }
+                                    }
+                                },
+                                "object": {
+                                    "retries": {
+                                        "range": {
+                                            "environment": "a",
+                                            "begin": {
+                                                "line": 6,
+                                                "column": 16,
+                                                "byte": 98
+                                            },
+                                            "end": {
+                                                "line": 6,
+                                                "column": 17,
+                                                "byte": 99
+                                            }
+                                        },
+                                        "schema": {
+                                            "type": "number",
+                                            "const": 3
+                                        },
+                                        "literal": 3
+                                    },
+                                    "timeout": {
+                                        "range": {
+                                            "environment": "a",
+                                            "begin": {
+                                                "line": 7,
+                                                "column": 16,
+                                                "byte": 115
+                                            },
+                                            "end": {
+                                                "line": 7,
+                                                "column": 18,
+                                                "byte": 117
+                                            }
+                                        },
+                                        "schema": {
+                                            "type": "number",
+                                            "const": 30
+                                        },
+                                        "literal": 30
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "final_scalar": {
+                        "range": {
+                            "environment": "a",
+                            "begin": {
+                                "line": 3,
+                                "column": 5,
+                                "byte": 28
+                            },
+                            "end": {
+                                "line": 3,
+                                "column": 28,
+                                "byte": 51
+                            }
+                        },
+                        "schema": {
+                            "type": "string",
+                            "const": "frozen_value"
+                        },
+                        "builtin": {
+                            "name": "fn::final",
+                            "nameRange": {
+                                "environment": "a",
+                                "begin": {
+                                    "line": 3,
+                                    "column": 5,
+                                    "byte": 28
+                                },
+                                "end": {
+                                    "line": 3,
+                                    "column": 14,
+                                    "byte": 37
+                                }
+                            },
+                            "argSchema": true,
+                            "arg": {
+                                "range": {
+                                    "environment": "a",
+                                    "begin": {
+                                        "line": 3,
+                                        "column": 16,
+                                        "byte": 39
+                                    },
+                                    "end": {
+                                        "line": 3,
+                                        "column": 28,
+                                        "byte": 51
+                                    }
+                                },
+                                "schema": {
+                                    "type": "string",
+                                    "const": "frozen_value"
+                                },
+                                "literal": "frozen_value"
+                            }
+                        }
+                    },
+                    "not_final": {
+                        "range": {
+                            "environment": "a",
+                            "begin": {
+                                "line": 12,
+                                "column": 14,
+                                "byte": 215
+                            },
+                            "end": {
+                                "line": 12,
+                                "column": 25,
+                                "byte": 226
+                            }
+                        },
+                        "schema": {
+                            "type": "string",
+                            "const": "plain_value"
+                        },
+                        "literal": "plain_value"
+                    }
+                }
+            },
+            "keyRanges": {
+                "final_nested": {
+                    "environment": "builtin-final",
+                    "begin": {
+                        "line": 7,
+                        "column": 3,
+                        "byte": 83
+                    },
+                    "end": {
+                        "line": 7,
+                        "column": 15,
+                        "byte": 95
+                    }
+                },
+                "final_object": {
+                    "environment": "builtin-final",
+                    "begin": {
+                        "line": 5,
+                        "column": 3,
+                        "byte": 52
+                    },
+                    "end": {
+                        "line": 5,
+                        "column": 15,
+                        "byte": 64
+                    }
+                },
+                "final_scalar": {
+                    "environment": "builtin-final",
+                    "begin": {
+                        "line": 4,
+                        "column": 3,
+                        "byte": 25
+                    },
+                    "end": {
+                        "line": 4,
+                        "column": 15,
+                        "byte": 37
+                    }
+                },
+                "not_final": {
+                    "environment": "builtin-final",
+                    "begin": {
+                        "line": 10,
+                        "column": 3,
+                        "byte": 144
+                    },
+                    "end": {
+                        "line": 10,
+                        "column": 12,
+                        "byte": 153
+                    }
+                }
+            },
+            "object": {
+                "final_nested": {
+                    "range": {
+                        "environment": "builtin-final",
+                        "begin": {
+                            "line": 8,
+                            "column": 5,
+                            "byte": 101
+                        },
+                        "end": {
+                            "line": 9,
+                            "column": 25,
+                            "byte": 141
                         }
                     },
                     "schema": {
@@ -125,7 +704,7 @@
                             },
                             "other_key": {
                                 "type": "string",
-                                "const": "can_override"
+                                "const": "new_value"
                             }
                         },
                         "type": "object",
@@ -134,8 +713,8 @@
                             "other_key"
                         ]
                     },
-                    "keyRanges": {
-                        "key": {
+                    "base": {
+                        "range": {
                             "environment": "a",
                             "begin": {
                                 "line": 9,
@@ -143,47 +722,184 @@
                                 "byte": 138
                             },
                             "end": {
-                                "line": 9,
+                                "line": 11,
+                                "column": 28,
+                                "byte": 201
+                            }
+                        },
+                        "schema": {
+                            "properties": {
+                                "key": {
+                                    "type": "string",
+                                    "const": "nested_frozen"
+                                },
+                                "other_key": {
+                                    "type": "string",
+                                    "const": "can_override"
+                                }
+                            },
+                            "type": "object",
+                            "required": [
+                                "key",
+                                "other_key"
+                            ]
+                        },
+                        "keyRanges": {
+                            "key": {
+                                "environment": "a",
+                                "begin": {
+                                    "line": 9,
+                                    "column": 5,
+                                    "byte": 138
+                                },
+                                "end": {
+                                    "line": 9,
+                                    "column": 8,
+                                    "byte": 141
+                                }
+                            },
+                            "other_key": {
+                                "environment": "a",
+                                "begin": {
+                                    "line": 11,
+                                    "column": 5,
+                                    "byte": 178
+                                },
+                                "end": {
+                                    "line": 11,
+                                    "column": 14,
+                                    "byte": 187
+                                }
+                            }
+                        },
+                        "object": {
+                            "key": {
+                                "range": {
+                                    "environment": "a",
+                                    "begin": {
+                                        "line": 10,
+                                        "column": 7,
+                                        "byte": 149
+                                    },
+                                    "end": {
+                                        "line": 10,
+                                        "column": 31,
+                                        "byte": 173
+                                    }
+                                },
+                                "schema": {
+                                    "type": "string",
+                                    "const": "nested_frozen"
+                                },
+                                "builtin": {
+                                    "name": "fn::final",
+                                    "nameRange": {
+                                        "environment": "a",
+                                        "begin": {
+                                            "line": 10,
+                                            "column": 7,
+                                            "byte": 149
+                                        },
+                                        "end": {
+                                            "line": 10,
+                                            "column": 16,
+                                            "byte": 158
+                                        }
+                                    },
+                                    "argSchema": true,
+                                    "arg": {
+                                        "range": {
+                                            "environment": "a",
+                                            "begin": {
+                                                "line": 10,
+                                                "column": 18,
+                                                "byte": 160
+                                            },
+                                            "end": {
+                                                "line": 10,
+                                                "column": 31,
+                                                "byte": 173
+                                            }
+                                        },
+                                        "schema": {
+                                            "type": "string",
+                                            "const": "nested_frozen"
+                                        },
+                                        "literal": "nested_frozen"
+                                    }
+                                }
+                            },
+                            "other_key": {
+                                "range": {
+                                    "environment": "a",
+                                    "begin": {
+                                        "line": 11,
+                                        "column": 16,
+                                        "byte": 189
+                                    },
+                                    "end": {
+                                        "line": 11,
+                                        "column": 28,
+                                        "byte": 201
+                                    }
+                                },
+                                "schema": {
+                                    "type": "string",
+                                    "const": "can_override"
+                                },
+                                "literal": "can_override"
+                            }
+                        }
+                    },
+                    "keyRanges": {
+                        "key": {
+                            "environment": "builtin-final",
+                            "begin": {
+                                "line": 8,
+                                "column": 5,
+                                "byte": 101
+                            },
+                            "end": {
+                                "line": 8,
                                 "column": 8,
-                                "byte": 141
+                                "byte": 104
                             }
                         },
                         "other_key": {
-                            "environment": "a",
+                            "environment": "builtin-final",
                             "begin": {
-                                "line": 11,
+                                "line": 9,
                                 "column": 5,
-                                "byte": 178
+                                "byte": 121
                             },
                             "end": {
-                                "line": 11,
+                                "line": 9,
                                 "column": 14,
-                                "byte": 187
+                                "byte": 130
                             }
                         }
                     },
                     "object": {
                         "key": {
                             "range": {
-                                "environment": "a",
+                                "environment": "builtin-final",
                                 "begin": {
-                                    "line": 10,
-                                    "column": 7,
-                                    "byte": 149
+                                    "line": 8,
+                                    "column": 10,
+                                    "byte": 106
                                 },
                                 "end": {
-                                    "line": 10,
-                                    "column": 31,
-                                    "byte": 173
+                                    "line": 8,
+                                    "column": 20,
+                                    "byte": 116
                                 }
                             },
                             "schema": {
                                 "type": "string",
                                 "const": "nested_frozen"
                             },
-                            "builtin": {
-                                "name": "fn::final",
-                                "nameRange": {
+                            "base": {
+                                "range": {
                                     "environment": "a",
                                     "begin": {
                                         "line": 10,
@@ -192,245 +908,108 @@
                                     },
                                     "end": {
                                         "line": 10,
-                                        "column": 16,
-                                        "byte": 158
+                                        "column": 31,
+                                        "byte": 173
                                     }
                                 },
-                                "argSchema": true,
-                                "arg": {
-                                    "range": {
+                                "schema": {
+                                    "type": "string",
+                                    "const": "nested_frozen"
+                                },
+                                "builtin": {
+                                    "name": "fn::final",
+                                    "nameRange": {
                                         "environment": "a",
                                         "begin": {
                                             "line": 10,
-                                            "column": 18,
-                                            "byte": 160
+                                            "column": 7,
+                                            "byte": 149
                                         },
                                         "end": {
                                             "line": 10,
-                                            "column": 31,
-                                            "byte": 173
+                                            "column": 16,
+                                            "byte": 158
                                         }
                                     },
-                                    "schema": {
-                                        "type": "string",
-                                        "const": "nested_frozen"
-                                    },
-                                    "literal": "nested_frozen"
+                                    "argSchema": true,
+                                    "arg": {
+                                        "range": {
+                                            "environment": "a",
+                                            "begin": {
+                                                "line": 10,
+                                                "column": 18,
+                                                "byte": 160
+                                            },
+                                            "end": {
+                                                "line": 10,
+                                                "column": 31,
+                                                "byte": 173
+                                            }
+                                        },
+                                        "schema": {
+                                            "type": "string",
+                                            "const": "nested_frozen"
+                                        },
+                                        "literal": "nested_frozen"
+                                    }
                                 }
-                            }
+                            },
+                            "literal": "overridden"
                         },
                         "other_key": {
                             "range": {
-                                "environment": "a",
+                                "environment": "builtin-final",
                                 "begin": {
-                                    "line": 11,
+                                    "line": 9,
                                     "column": 16,
-                                    "byte": 189
+                                    "byte": 132
                                 },
                                 "end": {
-                                    "line": 11,
-                                    "column": 28,
-                                    "byte": 201
+                                    "line": 9,
+                                    "column": 25,
+                                    "byte": 141
                                 }
                             },
                             "schema": {
                                 "type": "string",
-                                "const": "can_override"
+                                "const": "new_value"
                             },
-                            "literal": "can_override"
-                        }
-                    }
-                },
-                "keyRanges": {
-                    "key": {
-                        "environment": "builtin-final",
-                        "begin": {
-                            "line": 8,
-                            "column": 5,
-                            "byte": 101
-                        },
-                        "end": {
-                            "line": 8,
-                            "column": 8,
-                            "byte": 104
-                        }
-                    },
-                    "other_key": {
-                        "environment": "builtin-final",
-                        "begin": {
-                            "line": 9,
-                            "column": 5,
-                            "byte": 121
-                        },
-                        "end": {
-                            "line": 9,
-                            "column": 14,
-                            "byte": 130
-                        }
-                    }
-                },
-                "object": {
-                    "key": {
-                        "range": {
-                            "environment": "builtin-final",
-                            "begin": {
-                                "line": 8,
-                                "column": 10,
-                                "byte": 106
-                            },
-                            "end": {
-                                "line": 8,
-                                "column": 20,
-                                "byte": 116
-                            }
-                        },
-                        "schema": {
-                            "type": "string",
-                            "const": "nested_frozen"
-                        },
-                        "base": {
-                            "range": {
-                                "environment": "a",
-                                "begin": {
-                                    "line": 10,
-                                    "column": 7,
-                                    "byte": 149
-                                },
-                                "end": {
-                                    "line": 10,
-                                    "column": 31,
-                                    "byte": 173
-                                }
-                            },
-                            "schema": {
-                                "type": "string",
-                                "const": "nested_frozen"
-                            },
-                            "builtin": {
-                                "name": "fn::final",
-                                "nameRange": {
+                            "base": {
+                                "range": {
                                     "environment": "a",
                                     "begin": {
-                                        "line": 10,
-                                        "column": 7,
-                                        "byte": 149
+                                        "line": 11,
+                                        "column": 16,
+                                        "byte": 189
                                     },
                                     "end": {
-                                        "line": 10,
-                                        "column": 16,
-                                        "byte": 158
+                                        "line": 11,
+                                        "column": 28,
+                                        "byte": 201
                                     }
                                 },
-                                "argSchema": true,
-                                "arg": {
-                                    "range": {
-                                        "environment": "a",
-                                        "begin": {
-                                            "line": 10,
-                                            "column": 18,
-                                            "byte": 160
-                                        },
-                                        "end": {
-                                            "line": 10,
-                                            "column": 31,
-                                            "byte": 173
-                                        }
-                                    },
-                                    "schema": {
-                                        "type": "string",
-                                        "const": "nested_frozen"
-                                    },
-                                    "literal": "nested_frozen"
-                                }
-                            }
-                        },
-                        "literal": "overridden"
-                    },
-                    "other_key": {
-                        "range": {
-                            "environment": "builtin-final",
-                            "begin": {
-                                "line": 9,
-                                "column": 16,
-                                "byte": 132
-                            },
-                            "end": {
-                                "line": 9,
-                                "column": 25,
-                                "byte": 141
-                            }
-                        },
-                        "schema": {
-                            "type": "string",
-                            "const": "new_value"
-                        },
-                        "base": {
-                            "range": {
-                                "environment": "a",
-                                "begin": {
-                                    "line": 11,
-                                    "column": 16,
-                                    "byte": 189
+                                "schema": {
+                                    "type": "string",
+                                    "const": "can_override"
                                 },
-                                "end": {
-                                    "line": 11,
-                                    "column": 28,
-                                    "byte": 201
-                                }
+                                "literal": "can_override"
                             },
-                            "schema": {
-                                "type": "string",
-                                "const": "can_override"
-                            },
-                            "literal": "can_override"
-                        },
-                        "literal": "new_value"
-                    }
-                }
-            },
-            "final_object": {
-                "range": {
-                    "environment": "builtin-final",
-                    "begin": {
-                        "line": 6,
-                        "column": 5,
-                        "byte": 70
-                    },
-                    "end": {
-                        "line": 6,
-                        "column": 15,
-                        "byte": 80
-                    }
-                },
-                "schema": {
-                    "properties": {
-                        "retries": {
-                            "type": "number",
-                            "const": 3
-                        },
-                        "timeout": {
-                            "type": "number",
-                            "const": 30
+                            "literal": "new_value"
                         }
-                    },
-                    "type": "object",
-                    "required": [
-                        "retries",
-                        "timeout"
-                    ]
+                    }
                 },
-                "base": {
+                "final_object": {
                     "range": {
-                        "environment": "a",
+                        "environment": "builtin-final",
                         "begin": {
-                            "line": 5,
+                            "line": 6,
                             "column": 5,
-                            "byte": 72
+                            "byte": 70
                         },
                         "end": {
-                            "line": 7,
-                            "column": 18,
-                            "byte": 117
+                            "line": 6,
+                            "column": 15,
+                            "byte": 80
                         }
                     },
                     "schema": {
@@ -450,9 +1029,8 @@
                             "timeout"
                         ]
                     },
-                    "builtin": {
-                        "name": "fn::final",
-                        "nameRange": {
+                    "base": {
+                        "range": {
                             "environment": "a",
                             "begin": {
                                 "line": 5,
@@ -460,45 +1038,46 @@
                                 "byte": 72
                             },
                             "end": {
-                                "line": 5,
-                                "column": 14,
-                                "byte": 81
+                                "line": 7,
+                                "column": 18,
+                                "byte": 117
                             }
                         },
-                        "argSchema": true,
-                        "arg": {
-                            "range": {
-                                "environment": "a",
-                                "begin": {
-                                    "line": 6,
-                                    "column": 7,
-                                    "byte": 89
+                        "schema": {
+                            "properties": {
+                                "retries": {
+                                    "type": "number",
+                                    "const": 3
                                 },
-                                "end": {
-                                    "line": 7,
-                                    "column": 18,
-                                    "byte": 117
+                                "timeout": {
+                                    "type": "number",
+                                    "const": 30
                                 }
                             },
-                            "schema": {
-                                "properties": {
-                                    "retries": {
-                                        "type": "number",
-                                        "const": 3
-                                    },
-                                    "timeout": {
-                                        "type": "number",
-                                        "const": 30
-                                    }
+                            "type": "object",
+                            "required": [
+                                "retries",
+                                "timeout"
+                            ]
+                        },
+                        "builtin": {
+                            "name": "fn::final",
+                            "nameRange": {
+                                "environment": "a",
+                                "begin": {
+                                    "line": 5,
+                                    "column": 5,
+                                    "byte": 72
                                 },
-                                "type": "object",
-                                "required": [
-                                    "retries",
-                                    "timeout"
-                                ]
+                                "end": {
+                                    "line": 5,
+                                    "column": 14,
+                                    "byte": 81
+                                }
                             },
-                            "keyRanges": {
-                                "retries": {
+                            "argSchema": true,
+                            "arg": {
+                                "range": {
                                     "environment": "a",
                                     "begin": {
                                         "line": 6,
@@ -506,167 +1085,179 @@
                                         "byte": 89
                                     },
                                     "end": {
-                                        "line": 6,
-                                        "column": 14,
-                                        "byte": 96
+                                        "line": 7,
+                                        "column": 18,
+                                        "byte": 117
                                     }
                                 },
-                                "timeout": {
-                                    "environment": "a",
-                                    "begin": {
-                                        "line": 7,
-                                        "column": 7,
-                                        "byte": 106
+                                "schema": {
+                                    "properties": {
+                                        "retries": {
+                                            "type": "number",
+                                            "const": 3
+                                        },
+                                        "timeout": {
+                                            "type": "number",
+                                            "const": 30
+                                        }
                                     },
-                                    "end": {
-                                        "line": 7,
-                                        "column": 14,
-                                        "byte": 113
-                                    }
-                                }
-                            },
-                            "object": {
-                                "retries": {
-                                    "range": {
+                                    "type": "object",
+                                    "required": [
+                                        "retries",
+                                        "timeout"
+                                    ]
+                                },
+                                "keyRanges": {
+                                    "retries": {
                                         "environment": "a",
                                         "begin": {
                                             "line": 6,
-                                            "column": 16,
-                                            "byte": 98
+                                            "column": 7,
+                                            "byte": 89
                                         },
                                         "end": {
                                             "line": 6,
-                                            "column": 17,
-                                            "byte": 99
+                                            "column": 14,
+                                            "byte": 96
                                         }
                                     },
-                                    "schema": {
-                                        "type": "number",
-                                        "const": 3
-                                    },
-                                    "literal": 3
-                                },
-                                "timeout": {
-                                    "range": {
+                                    "timeout": {
                                         "environment": "a",
                                         "begin": {
                                             "line": 7,
-                                            "column": 16,
-                                            "byte": 115
+                                            "column": 7,
+                                            "byte": 106
                                         },
                                         "end": {
                                             "line": 7,
-                                            "column": 18,
-                                            "byte": 117
+                                            "column": 14,
+                                            "byte": 113
                                         }
+                                    }
+                                },
+                                "object": {
+                                    "retries": {
+                                        "range": {
+                                            "environment": "a",
+                                            "begin": {
+                                                "line": 6,
+                                                "column": 16,
+                                                "byte": 98
+                                            },
+                                            "end": {
+                                                "line": 6,
+                                                "column": 17,
+                                                "byte": 99
+                                            }
+                                        },
+                                        "schema": {
+                                            "type": "number",
+                                            "const": 3
+                                        },
+                                        "literal": 3
                                     },
-                                    "schema": {
-                                        "type": "number",
-                                        "const": 30
-                                    },
-                                    "literal": 30
+                                    "timeout": {
+                                        "range": {
+                                            "environment": "a",
+                                            "begin": {
+                                                "line": 7,
+                                                "column": 16,
+                                                "byte": 115
+                                            },
+                                            "end": {
+                                                "line": 7,
+                                                "column": 18,
+                                                "byte": 117
+                                            }
+                                        },
+                                        "schema": {
+                                            "type": "number",
+                                            "const": 30
+                                        },
+                                        "literal": 30
+                                    }
                                 }
                             }
                         }
-                    }
-                },
-                "keyRanges": {
-                    "retries": {
-                        "environment": "builtin-final",
-                        "begin": {
-                            "line": 6,
-                            "column": 5,
-                            "byte": 70
-                        },
-                        "end": {
-                            "line": 6,
-                            "column": 12,
-                            "byte": 77
-                        }
-                    }
-                },
-                "object": {
-                    "retries": {
-                        "range": {
+                    },
+                    "keyRanges": {
+                        "retries": {
                             "environment": "builtin-final",
                             "begin": {
                                 "line": 6,
-                                "column": 14,
-                                "byte": 79
+                                "column": 5,
+                                "byte": 70
                             },
                             "end": {
                                 "line": 6,
-                                "column": 15,
-                                "byte": 80
+                                "column": 12,
+                                "byte": 77
                             }
-                        },
-                        "schema": {
-                            "type": "number",
-                            "const": 5
-                        },
-                        "base": {
+                        }
+                    },
+                    "object": {
+                        "retries": {
                             "range": {
-                                "environment": "a",
+                                "environment": "builtin-final",
                                 "begin": {
                                     "line": 6,
-                                    "column": 16,
-                                    "byte": 98
+                                    "column": 14,
+                                    "byte": 79
                                 },
                                 "end": {
                                     "line": 6,
-                                    "column": 17,
-                                    "byte": 99
+                                    "column": 15,
+                                    "byte": 80
                                 }
                             },
                             "schema": {
                                 "type": "number",
-                                "const": 3
+                                "const": 5
                             },
-                            "literal": 3
-                        },
-                        "literal": 5
-                    }
-                }
-            },
-            "final_scalar": {
-                "range": {
-                    "environment": "builtin-final",
-                    "begin": {
-                        "line": 4,
-                        "column": 17,
-                        "byte": 39
-                    },
-                    "end": {
-                        "line": 4,
-                        "column": 27,
-                        "byte": 49
+                            "base": {
+                                "range": {
+                                    "environment": "a",
+                                    "begin": {
+                                        "line": 6,
+                                        "column": 16,
+                                        "byte": 98
+                                    },
+                                    "end": {
+                                        "line": 6,
+                                        "column": 17,
+                                        "byte": 99
+                                    }
+                                },
+                                "schema": {
+                                    "type": "number",
+                                    "const": 3
+                                },
+                                "literal": 3
+                            },
+                            "literal": 5
+                        }
                     }
                 },
-                "schema": {
-                    "type": "string",
-                    "const": "frozen_value"
-                },
-                "base": {
+                "final_scalar": {
                     "range": {
-                        "environment": "a",
+                        "environment": "builtin-final",
                         "begin": {
-                            "line": 3,
-                            "column": 5,
-                            "byte": 28
+                            "line": 4,
+                            "column": 17,
+                            "byte": 39
                         },
                         "end": {
-                            "line": 3,
-                            "column": 28,
-                            "byte": 51
+                            "line": 4,
+                            "column": 27,
+                            "byte": 49
                         }
                     },
                     "schema": {
                         "type": "string",
                         "const": "frozen_value"
                     },
-                    "builtin": {
-                        "name": "fn::final",
-                        "nameRange": {
+                    "base": {
+                        "range": {
                             "environment": "a",
                             "begin": {
                                 "line": 3,
@@ -675,74 +1266,94 @@
                             },
                             "end": {
                                 "line": 3,
-                                "column": 14,
-                                "byte": 37
+                                "column": 28,
+                                "byte": 51
                             }
                         },
-                        "argSchema": true,
-                        "arg": {
-                            "range": {
+                        "schema": {
+                            "type": "string",
+                            "const": "frozen_value"
+                        },
+                        "builtin": {
+                            "name": "fn::final",
+                            "nameRange": {
                                 "environment": "a",
                                 "begin": {
                                     "line": 3,
-                                    "column": 16,
-                                    "byte": 39
+                                    "column": 5,
+                                    "byte": 28
                                 },
                                 "end": {
                                     "line": 3,
-                                    "column": 28,
-                                    "byte": 51
+                                    "column": 14,
+                                    "byte": 37
                                 }
                             },
-                            "schema": {
-                                "type": "string",
-                                "const": "frozen_value"
-                            },
-                            "literal": "frozen_value"
+                            "argSchema": true,
+                            "arg": {
+                                "range": {
+                                    "environment": "a",
+                                    "begin": {
+                                        "line": 3,
+                                        "column": 16,
+                                        "byte": 39
+                                    },
+                                    "end": {
+                                        "line": 3,
+                                        "column": 28,
+                                        "byte": 51
+                                    }
+                                },
+                                "schema": {
+                                    "type": "string",
+                                    "const": "frozen_value"
+                                },
+                                "literal": "frozen_value"
+                            }
                         }
-                    }
-                },
-                "literal": "overridden"
-            },
-            "not_final": {
-                "range": {
-                    "environment": "builtin-final",
-                    "begin": {
-                        "line": 10,
-                        "column": 14,
-                        "byte": 155
                     },
-                    "end": {
-                        "line": 10,
-                        "column": 29,
-                        "byte": 170
-                    }
+                    "literal": "overridden"
                 },
-                "schema": {
-                    "type": "string",
-                    "const": "new_plain_value"
-                },
-                "base": {
+                "not_final": {
                     "range": {
-                        "environment": "a",
+                        "environment": "builtin-final",
                         "begin": {
-                            "line": 12,
+                            "line": 10,
                             "column": 14,
-                            "byte": 215
+                            "byte": 155
                         },
                         "end": {
-                            "line": 12,
-                            "column": 25,
-                            "byte": 226
+                            "line": 10,
+                            "column": 29,
+                            "byte": 170
                         }
                     },
                     "schema": {
                         "type": "string",
-                        "const": "plain_value"
+                        "const": "new_plain_value"
                     },
-                    "literal": "plain_value"
-                },
-                "literal": "new_plain_value"
+                    "base": {
+                        "range": {
+                            "environment": "a",
+                            "begin": {
+                                "line": 12,
+                                "column": 14,
+                                "byte": 215
+                            },
+                            "end": {
+                                "line": 12,
+                                "column": 25,
+                                "byte": 226
+                            }
+                        },
+                        "schema": {
+                            "type": "string",
+                            "const": "plain_value"
+                        },
+                        "literal": "plain_value"
+                    },
+                    "literal": "new_plain_value"
+                }
             }
         },
         "properties": {
@@ -1311,49 +1922,628 @@
     ],
     "eval": {
         "exprs": {
-            "final_nested": {
+            "range": {
+                "environment": "builtin-final",
+                "begin": {
+                    "line": 4,
+                    "column": 3,
+                    "byte": 25
+                },
+                "end": {
+                    "line": 10,
+                    "column": 29,
+                    "byte": 170
+                }
+            },
+            "schema": {
+                "properties": {
+                    "final_nested": {
+                        "properties": {
+                            "key": {
+                                "type": "string",
+                                "const": "nested_frozen"
+                            },
+                            "other_key": {
+                                "type": "string",
+                                "const": "new_value"
+                            }
+                        },
+                        "type": "object",
+                        "required": [
+                            "key",
+                            "other_key"
+                        ]
+                    },
+                    "final_object": {
+                        "properties": {
+                            "retries": {
+                                "type": "number",
+                                "const": 3
+                            },
+                            "timeout": {
+                                "type": "number",
+                                "const": 30
+                            }
+                        },
+                        "type": "object",
+                        "required": [
+                            "retries",
+                            "timeout"
+                        ]
+                    },
+                    "final_scalar": {
+                        "type": "string",
+                        "const": "frozen_value"
+                    },
+                    "not_final": {
+                        "type": "string",
+                        "const": "new_plain_value"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "final_nested",
+                    "final_object",
+                    "final_scalar",
+                    "not_final"
+                ]
+            },
+            "base": {
                 "range": {
-                    "environment": "builtin-final",
+                    "environment": "a",
                     "begin": {
-                        "line": 8,
-                        "column": 5,
-                        "byte": 101
+                        "line": 2,
+                        "column": 3,
+                        "byte": 10
                     },
                     "end": {
-                        "line": 9,
+                        "line": 12,
                         "column": 25,
-                        "byte": 141
+                        "byte": 226
                     }
                 },
                 "schema": {
                     "properties": {
-                        "key": {
-                            "type": "string",
-                            "const": "nested_frozen"
+                        "final_nested": {
+                            "properties": {
+                                "key": {
+                                    "type": "string",
+                                    "const": "nested_frozen"
+                                },
+                                "other_key": {
+                                    "type": "string",
+                                    "const": "can_override"
+                                }
+                            },
+                            "type": "object",
+                            "required": [
+                                "key",
+                                "other_key"
+                            ]
                         },
-                        "other_key": {
+                        "final_object": {
+                            "properties": {
+                                "retries": {
+                                    "type": "number",
+                                    "const": 3
+                                },
+                                "timeout": {
+                                    "type": "number",
+                                    "const": 30
+                                }
+                            },
+                            "type": "object",
+                            "required": [
+                                "retries",
+                                "timeout"
+                            ]
+                        },
+                        "final_scalar": {
                             "type": "string",
-                            "const": "new_value"
+                            "const": "frozen_value"
+                        },
+                        "not_final": {
+                            "type": "string",
+                            "const": "plain_value"
                         }
                     },
                     "type": "object",
                     "required": [
-                        "key",
-                        "other_key"
+                        "final_nested",
+                        "final_object",
+                        "final_scalar",
+                        "not_final"
                     ]
                 },
-                "base": {
-                    "range": {
+                "keyRanges": {
+                    "final_nested": {
                         "environment": "a",
                         "begin": {
-                            "line": 9,
-                            "column": 5,
-                            "byte": 138
+                            "line": 8,
+                            "column": 3,
+                            "byte": 120
                         },
                         "end": {
-                            "line": 11,
-                            "column": 28,
-                            "byte": 201
+                            "line": 8,
+                            "column": 15,
+                            "byte": 132
+                        }
+                    },
+                    "final_object": {
+                        "environment": "a",
+                        "begin": {
+                            "line": 4,
+                            "column": 3,
+                            "byte": 54
+                        },
+                        "end": {
+                            "line": 4,
+                            "column": 15,
+                            "byte": 66
+                        }
+                    },
+                    "final_scalar": {
+                        "environment": "a",
+                        "begin": {
+                            "line": 2,
+                            "column": 3,
+                            "byte": 10
+                        },
+                        "end": {
+                            "line": 2,
+                            "column": 15,
+                            "byte": 22
+                        }
+                    },
+                    "not_final": {
+                        "environment": "a",
+                        "begin": {
+                            "line": 12,
+                            "column": 3,
+                            "byte": 204
+                        },
+                        "end": {
+                            "line": 12,
+                            "column": 12,
+                            "byte": 213
+                        }
+                    }
+                },
+                "object": {
+                    "final_nested": {
+                        "range": {
+                            "environment": "a",
+                            "begin": {
+                                "line": 9,
+                                "column": 5,
+                                "byte": 138
+                            },
+                            "end": {
+                                "line": 11,
+                                "column": 28,
+                                "byte": 201
+                            }
+                        },
+                        "schema": {
+                            "properties": {
+                                "key": {
+                                    "type": "string",
+                                    "const": "nested_frozen"
+                                },
+                                "other_key": {
+                                    "type": "string",
+                                    "const": "can_override"
+                                }
+                            },
+                            "type": "object",
+                            "required": [
+                                "key",
+                                "other_key"
+                            ]
+                        },
+                        "keyRanges": {
+                            "key": {
+                                "environment": "a",
+                                "begin": {
+                                    "line": 9,
+                                    "column": 5,
+                                    "byte": 138
+                                },
+                                "end": {
+                                    "line": 9,
+                                    "column": 8,
+                                    "byte": 141
+                                }
+                            },
+                            "other_key": {
+                                "environment": "a",
+                                "begin": {
+                                    "line": 11,
+                                    "column": 5,
+                                    "byte": 178
+                                },
+                                "end": {
+                                    "line": 11,
+                                    "column": 14,
+                                    "byte": 187
+                                }
+                            }
+                        },
+                        "object": {
+                            "key": {
+                                "range": {
+                                    "environment": "a",
+                                    "begin": {
+                                        "line": 10,
+                                        "column": 7,
+                                        "byte": 149
+                                    },
+                                    "end": {
+                                        "line": 10,
+                                        "column": 31,
+                                        "byte": 173
+                                    }
+                                },
+                                "schema": {
+                                    "type": "string",
+                                    "const": "nested_frozen"
+                                },
+                                "builtin": {
+                                    "name": "fn::final",
+                                    "nameRange": {
+                                        "environment": "a",
+                                        "begin": {
+                                            "line": 10,
+                                            "column": 7,
+                                            "byte": 149
+                                        },
+                                        "end": {
+                                            "line": 10,
+                                            "column": 16,
+                                            "byte": 158
+                                        }
+                                    },
+                                    "argSchema": true,
+                                    "arg": {
+                                        "range": {
+                                            "environment": "a",
+                                            "begin": {
+                                                "line": 10,
+                                                "column": 18,
+                                                "byte": 160
+                                            },
+                                            "end": {
+                                                "line": 10,
+                                                "column": 31,
+                                                "byte": 173
+                                            }
+                                        },
+                                        "schema": {
+                                            "type": "string",
+                                            "const": "nested_frozen"
+                                        },
+                                        "literal": "nested_frozen"
+                                    }
+                                }
+                            },
+                            "other_key": {
+                                "range": {
+                                    "environment": "a",
+                                    "begin": {
+                                        "line": 11,
+                                        "column": 16,
+                                        "byte": 189
+                                    },
+                                    "end": {
+                                        "line": 11,
+                                        "column": 28,
+                                        "byte": 201
+                                    }
+                                },
+                                "schema": {
+                                    "type": "string",
+                                    "const": "can_override"
+                                },
+                                "literal": "can_override"
+                            }
+                        }
+                    },
+                    "final_object": {
+                        "range": {
+                            "environment": "a",
+                            "begin": {
+                                "line": 5,
+                                "column": 5,
+                                "byte": 72
+                            },
+                            "end": {
+                                "line": 7,
+                                "column": 18,
+                                "byte": 117
+                            }
+                        },
+                        "schema": {
+                            "properties": {
+                                "retries": {
+                                    "type": "number",
+                                    "const": 3
+                                },
+                                "timeout": {
+                                    "type": "number",
+                                    "const": 30
+                                }
+                            },
+                            "type": "object",
+                            "required": [
+                                "retries",
+                                "timeout"
+                            ]
+                        },
+                        "builtin": {
+                            "name": "fn::final",
+                            "nameRange": {
+                                "environment": "a",
+                                "begin": {
+                                    "line": 5,
+                                    "column": 5,
+                                    "byte": 72
+                                },
+                                "end": {
+                                    "line": 5,
+                                    "column": 14,
+                                    "byte": 81
+                                }
+                            },
+                            "argSchema": true,
+                            "arg": {
+                                "range": {
+                                    "environment": "a",
+                                    "begin": {
+                                        "line": 6,
+                                        "column": 7,
+                                        "byte": 89
+                                    },
+                                    "end": {
+                                        "line": 7,
+                                        "column": 18,
+                                        "byte": 117
+                                    }
+                                },
+                                "schema": {
+                                    "properties": {
+                                        "retries": {
+                                            "type": "number",
+                                            "const": 3
+                                        },
+                                        "timeout": {
+                                            "type": "number",
+                                            "const": 30
+                                        }
+                                    },
+                                    "type": "object",
+                                    "required": [
+                                        "retries",
+                                        "timeout"
+                                    ]
+                                },
+                                "keyRanges": {
+                                    "retries": {
+                                        "environment": "a",
+                                        "begin": {
+                                            "line": 6,
+                                            "column": 7,
+                                            "byte": 89
+                                        },
+                                        "end": {
+                                            "line": 6,
+                                            "column": 14,
+                                            "byte": 96
+                                        }
+                                    },
+                                    "timeout": {
+                                        "environment": "a",
+                                        "begin": {
+                                            "line": 7,
+                                            "column": 7,
+                                            "byte": 106
+                                        },
+                                        "end": {
+                                            "line": 7,
+                                            "column": 14,
+                                            "byte": 113
+                                        }
+                                    }
+                                },
+                                "object": {
+                                    "retries": {
+                                        "range": {
+                                            "environment": "a",
+                                            "begin": {
+                                                "line": 6,
+                                                "column": 16,
+                                                "byte": 98
+                                            },
+                                            "end": {
+                                                "line": 6,
+                                                "column": 17,
+                                                "byte": 99
+                                            }
+                                        },
+                                        "schema": {
+                                            "type": "number",
+                                            "const": 3
+                                        },
+                                        "literal": 3
+                                    },
+                                    "timeout": {
+                                        "range": {
+                                            "environment": "a",
+                                            "begin": {
+                                                "line": 7,
+                                                "column": 16,
+                                                "byte": 115
+                                            },
+                                            "end": {
+                                                "line": 7,
+                                                "column": 18,
+                                                "byte": 117
+                                            }
+                                        },
+                                        "schema": {
+                                            "type": "number",
+                                            "const": 30
+                                        },
+                                        "literal": 30
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "final_scalar": {
+                        "range": {
+                            "environment": "a",
+                            "begin": {
+                                "line": 3,
+                                "column": 5,
+                                "byte": 28
+                            },
+                            "end": {
+                                "line": 3,
+                                "column": 28,
+                                "byte": 51
+                            }
+                        },
+                        "schema": {
+                            "type": "string",
+                            "const": "frozen_value"
+                        },
+                        "builtin": {
+                            "name": "fn::final",
+                            "nameRange": {
+                                "environment": "a",
+                                "begin": {
+                                    "line": 3,
+                                    "column": 5,
+                                    "byte": 28
+                                },
+                                "end": {
+                                    "line": 3,
+                                    "column": 14,
+                                    "byte": 37
+                                }
+                            },
+                            "argSchema": true,
+                            "arg": {
+                                "range": {
+                                    "environment": "a",
+                                    "begin": {
+                                        "line": 3,
+                                        "column": 16,
+                                        "byte": 39
+                                    },
+                                    "end": {
+                                        "line": 3,
+                                        "column": 28,
+                                        "byte": 51
+                                    }
+                                },
+                                "schema": {
+                                    "type": "string",
+                                    "const": "frozen_value"
+                                },
+                                "literal": "frozen_value"
+                            }
+                        }
+                    },
+                    "not_final": {
+                        "range": {
+                            "environment": "a",
+                            "begin": {
+                                "line": 12,
+                                "column": 14,
+                                "byte": 215
+                            },
+                            "end": {
+                                "line": 12,
+                                "column": 25,
+                                "byte": 226
+                            }
+                        },
+                        "schema": {
+                            "type": "string",
+                            "const": "plain_value"
+                        },
+                        "literal": "plain_value"
+                    }
+                }
+            },
+            "keyRanges": {
+                "final_nested": {
+                    "environment": "builtin-final",
+                    "begin": {
+                        "line": 7,
+                        "column": 3,
+                        "byte": 83
+                    },
+                    "end": {
+                        "line": 7,
+                        "column": 15,
+                        "byte": 95
+                    }
+                },
+                "final_object": {
+                    "environment": "builtin-final",
+                    "begin": {
+                        "line": 5,
+                        "column": 3,
+                        "byte": 52
+                    },
+                    "end": {
+                        "line": 5,
+                        "column": 15,
+                        "byte": 64
+                    }
+                },
+                "final_scalar": {
+                    "environment": "builtin-final",
+                    "begin": {
+                        "line": 4,
+                        "column": 3,
+                        "byte": 25
+                    },
+                    "end": {
+                        "line": 4,
+                        "column": 15,
+                        "byte": 37
+                    }
+                },
+                "not_final": {
+                    "environment": "builtin-final",
+                    "begin": {
+                        "line": 10,
+                        "column": 3,
+                        "byte": 144
+                    },
+                    "end": {
+                        "line": 10,
+                        "column": 12,
+                        "byte": 153
+                    }
+                }
+            },
+            "object": {
+                "final_nested": {
+                    "range": {
+                        "environment": "builtin-final",
+                        "begin": {
+                            "line": 8,
+                            "column": 5,
+                            "byte": 101
+                        },
+                        "end": {
+                            "line": 9,
+                            "column": 25,
+                            "byte": 141
                         }
                     },
                     "schema": {
@@ -1364,7 +2554,7 @@
                             },
                             "other_key": {
                                 "type": "string",
-                                "const": "can_override"
+                                "const": "new_value"
                             }
                         },
                         "type": "object",
@@ -1373,8 +2563,8 @@
                             "other_key"
                         ]
                     },
-                    "keyRanges": {
-                        "key": {
+                    "base": {
+                        "range": {
                             "environment": "a",
                             "begin": {
                                 "line": 9,
@@ -1382,47 +2572,184 @@
                                 "byte": 138
                             },
                             "end": {
-                                "line": 9,
+                                "line": 11,
+                                "column": 28,
+                                "byte": 201
+                            }
+                        },
+                        "schema": {
+                            "properties": {
+                                "key": {
+                                    "type": "string",
+                                    "const": "nested_frozen"
+                                },
+                                "other_key": {
+                                    "type": "string",
+                                    "const": "can_override"
+                                }
+                            },
+                            "type": "object",
+                            "required": [
+                                "key",
+                                "other_key"
+                            ]
+                        },
+                        "keyRanges": {
+                            "key": {
+                                "environment": "a",
+                                "begin": {
+                                    "line": 9,
+                                    "column": 5,
+                                    "byte": 138
+                                },
+                                "end": {
+                                    "line": 9,
+                                    "column": 8,
+                                    "byte": 141
+                                }
+                            },
+                            "other_key": {
+                                "environment": "a",
+                                "begin": {
+                                    "line": 11,
+                                    "column": 5,
+                                    "byte": 178
+                                },
+                                "end": {
+                                    "line": 11,
+                                    "column": 14,
+                                    "byte": 187
+                                }
+                            }
+                        },
+                        "object": {
+                            "key": {
+                                "range": {
+                                    "environment": "a",
+                                    "begin": {
+                                        "line": 10,
+                                        "column": 7,
+                                        "byte": 149
+                                    },
+                                    "end": {
+                                        "line": 10,
+                                        "column": 31,
+                                        "byte": 173
+                                    }
+                                },
+                                "schema": {
+                                    "type": "string",
+                                    "const": "nested_frozen"
+                                },
+                                "builtin": {
+                                    "name": "fn::final",
+                                    "nameRange": {
+                                        "environment": "a",
+                                        "begin": {
+                                            "line": 10,
+                                            "column": 7,
+                                            "byte": 149
+                                        },
+                                        "end": {
+                                            "line": 10,
+                                            "column": 16,
+                                            "byte": 158
+                                        }
+                                    },
+                                    "argSchema": true,
+                                    "arg": {
+                                        "range": {
+                                            "environment": "a",
+                                            "begin": {
+                                                "line": 10,
+                                                "column": 18,
+                                                "byte": 160
+                                            },
+                                            "end": {
+                                                "line": 10,
+                                                "column": 31,
+                                                "byte": 173
+                                            }
+                                        },
+                                        "schema": {
+                                            "type": "string",
+                                            "const": "nested_frozen"
+                                        },
+                                        "literal": "nested_frozen"
+                                    }
+                                }
+                            },
+                            "other_key": {
+                                "range": {
+                                    "environment": "a",
+                                    "begin": {
+                                        "line": 11,
+                                        "column": 16,
+                                        "byte": 189
+                                    },
+                                    "end": {
+                                        "line": 11,
+                                        "column": 28,
+                                        "byte": 201
+                                    }
+                                },
+                                "schema": {
+                                    "type": "string",
+                                    "const": "can_override"
+                                },
+                                "literal": "can_override"
+                            }
+                        }
+                    },
+                    "keyRanges": {
+                        "key": {
+                            "environment": "builtin-final",
+                            "begin": {
+                                "line": 8,
+                                "column": 5,
+                                "byte": 101
+                            },
+                            "end": {
+                                "line": 8,
                                 "column": 8,
-                                "byte": 141
+                                "byte": 104
                             }
                         },
                         "other_key": {
-                            "environment": "a",
+                            "environment": "builtin-final",
                             "begin": {
-                                "line": 11,
+                                "line": 9,
                                 "column": 5,
-                                "byte": 178
+                                "byte": 121
                             },
                             "end": {
-                                "line": 11,
+                                "line": 9,
                                 "column": 14,
-                                "byte": 187
+                                "byte": 130
                             }
                         }
                     },
                     "object": {
                         "key": {
                             "range": {
-                                "environment": "a",
+                                "environment": "builtin-final",
                                 "begin": {
-                                    "line": 10,
-                                    "column": 7,
-                                    "byte": 149
+                                    "line": 8,
+                                    "column": 10,
+                                    "byte": 106
                                 },
                                 "end": {
-                                    "line": 10,
-                                    "column": 31,
-                                    "byte": 173
+                                    "line": 8,
+                                    "column": 20,
+                                    "byte": 116
                                 }
                             },
                             "schema": {
                                 "type": "string",
                                 "const": "nested_frozen"
                             },
-                            "builtin": {
-                                "name": "fn::final",
-                                "nameRange": {
+                            "base": {
+                                "range": {
                                     "environment": "a",
                                     "begin": {
                                         "line": 10,
@@ -1431,245 +2758,108 @@
                                     },
                                     "end": {
                                         "line": 10,
-                                        "column": 16,
-                                        "byte": 158
+                                        "column": 31,
+                                        "byte": 173
                                     }
                                 },
-                                "argSchema": true,
-                                "arg": {
-                                    "range": {
+                                "schema": {
+                                    "type": "string",
+                                    "const": "nested_frozen"
+                                },
+                                "builtin": {
+                                    "name": "fn::final",
+                                    "nameRange": {
                                         "environment": "a",
                                         "begin": {
                                             "line": 10,
-                                            "column": 18,
-                                            "byte": 160
+                                            "column": 7,
+                                            "byte": 149
                                         },
                                         "end": {
                                             "line": 10,
-                                            "column": 31,
-                                            "byte": 173
+                                            "column": 16,
+                                            "byte": 158
                                         }
                                     },
-                                    "schema": {
-                                        "type": "string",
-                                        "const": "nested_frozen"
-                                    },
-                                    "literal": "nested_frozen"
+                                    "argSchema": true,
+                                    "arg": {
+                                        "range": {
+                                            "environment": "a",
+                                            "begin": {
+                                                "line": 10,
+                                                "column": 18,
+                                                "byte": 160
+                                            },
+                                            "end": {
+                                                "line": 10,
+                                                "column": 31,
+                                                "byte": 173
+                                            }
+                                        },
+                                        "schema": {
+                                            "type": "string",
+                                            "const": "nested_frozen"
+                                        },
+                                        "literal": "nested_frozen"
+                                    }
                                 }
-                            }
+                            },
+                            "literal": "overridden"
                         },
                         "other_key": {
                             "range": {
-                                "environment": "a",
+                                "environment": "builtin-final",
                                 "begin": {
-                                    "line": 11,
+                                    "line": 9,
                                     "column": 16,
-                                    "byte": 189
+                                    "byte": 132
                                 },
                                 "end": {
-                                    "line": 11,
-                                    "column": 28,
-                                    "byte": 201
+                                    "line": 9,
+                                    "column": 25,
+                                    "byte": 141
                                 }
                             },
                             "schema": {
                                 "type": "string",
-                                "const": "can_override"
+                                "const": "new_value"
                             },
-                            "literal": "can_override"
-                        }
-                    }
-                },
-                "keyRanges": {
-                    "key": {
-                        "environment": "builtin-final",
-                        "begin": {
-                            "line": 8,
-                            "column": 5,
-                            "byte": 101
-                        },
-                        "end": {
-                            "line": 8,
-                            "column": 8,
-                            "byte": 104
-                        }
-                    },
-                    "other_key": {
-                        "environment": "builtin-final",
-                        "begin": {
-                            "line": 9,
-                            "column": 5,
-                            "byte": 121
-                        },
-                        "end": {
-                            "line": 9,
-                            "column": 14,
-                            "byte": 130
-                        }
-                    }
-                },
-                "object": {
-                    "key": {
-                        "range": {
-                            "environment": "builtin-final",
-                            "begin": {
-                                "line": 8,
-                                "column": 10,
-                                "byte": 106
-                            },
-                            "end": {
-                                "line": 8,
-                                "column": 20,
-                                "byte": 116
-                            }
-                        },
-                        "schema": {
-                            "type": "string",
-                            "const": "nested_frozen"
-                        },
-                        "base": {
-                            "range": {
-                                "environment": "a",
-                                "begin": {
-                                    "line": 10,
-                                    "column": 7,
-                                    "byte": 149
-                                },
-                                "end": {
-                                    "line": 10,
-                                    "column": 31,
-                                    "byte": 173
-                                }
-                            },
-                            "schema": {
-                                "type": "string",
-                                "const": "nested_frozen"
-                            },
-                            "builtin": {
-                                "name": "fn::final",
-                                "nameRange": {
+                            "base": {
+                                "range": {
                                     "environment": "a",
                                     "begin": {
-                                        "line": 10,
-                                        "column": 7,
-                                        "byte": 149
+                                        "line": 11,
+                                        "column": 16,
+                                        "byte": 189
                                     },
                                     "end": {
-                                        "line": 10,
-                                        "column": 16,
-                                        "byte": 158
+                                        "line": 11,
+                                        "column": 28,
+                                        "byte": 201
                                     }
                                 },
-                                "argSchema": true,
-                                "arg": {
-                                    "range": {
-                                        "environment": "a",
-                                        "begin": {
-                                            "line": 10,
-                                            "column": 18,
-                                            "byte": 160
-                                        },
-                                        "end": {
-                                            "line": 10,
-                                            "column": 31,
-                                            "byte": 173
-                                        }
-                                    },
-                                    "schema": {
-                                        "type": "string",
-                                        "const": "nested_frozen"
-                                    },
-                                    "literal": "nested_frozen"
-                                }
-                            }
-                        },
-                        "literal": "overridden"
-                    },
-                    "other_key": {
-                        "range": {
-                            "environment": "builtin-final",
-                            "begin": {
-                                "line": 9,
-                                "column": 16,
-                                "byte": 132
-                            },
-                            "end": {
-                                "line": 9,
-                                "column": 25,
-                                "byte": 141
-                            }
-                        },
-                        "schema": {
-                            "type": "string",
-                            "const": "new_value"
-                        },
-                        "base": {
-                            "range": {
-                                "environment": "a",
-                                "begin": {
-                                    "line": 11,
-                                    "column": 16,
-                                    "byte": 189
+                                "schema": {
+                                    "type": "string",
+                                    "const": "can_override"
                                 },
-                                "end": {
-                                    "line": 11,
-                                    "column": 28,
-                                    "byte": 201
-                                }
+                                "literal": "can_override"
                             },
-                            "schema": {
-                                "type": "string",
-                                "const": "can_override"
-                            },
-                            "literal": "can_override"
-                        },
-                        "literal": "new_value"
-                    }
-                }
-            },
-            "final_object": {
-                "range": {
-                    "environment": "builtin-final",
-                    "begin": {
-                        "line": 6,
-                        "column": 5,
-                        "byte": 70
-                    },
-                    "end": {
-                        "line": 6,
-                        "column": 15,
-                        "byte": 80
-                    }
-                },
-                "schema": {
-                    "properties": {
-                        "retries": {
-                            "type": "number",
-                            "const": 3
-                        },
-                        "timeout": {
-                            "type": "number",
-                            "const": 30
+                            "literal": "new_value"
                         }
-                    },
-                    "type": "object",
-                    "required": [
-                        "retries",
-                        "timeout"
-                    ]
+                    }
                 },
-                "base": {
+                "final_object": {
                     "range": {
-                        "environment": "a",
+                        "environment": "builtin-final",
                         "begin": {
-                            "line": 5,
+                            "line": 6,
                             "column": 5,
-                            "byte": 72
+                            "byte": 70
                         },
                         "end": {
-                            "line": 7,
-                            "column": 18,
-                            "byte": 117
+                            "line": 6,
+                            "column": 15,
+                            "byte": 80
                         }
                     },
                     "schema": {
@@ -1689,9 +2879,8 @@
                             "timeout"
                         ]
                     },
-                    "builtin": {
-                        "name": "fn::final",
-                        "nameRange": {
+                    "base": {
+                        "range": {
                             "environment": "a",
                             "begin": {
                                 "line": 5,
@@ -1699,45 +2888,46 @@
                                 "byte": 72
                             },
                             "end": {
-                                "line": 5,
-                                "column": 14,
-                                "byte": 81
+                                "line": 7,
+                                "column": 18,
+                                "byte": 117
                             }
                         },
-                        "argSchema": true,
-                        "arg": {
-                            "range": {
-                                "environment": "a",
-                                "begin": {
-                                    "line": 6,
-                                    "column": 7,
-                                    "byte": 89
+                        "schema": {
+                            "properties": {
+                                "retries": {
+                                    "type": "number",
+                                    "const": 3
                                 },
-                                "end": {
-                                    "line": 7,
-                                    "column": 18,
-                                    "byte": 117
+                                "timeout": {
+                                    "type": "number",
+                                    "const": 30
                                 }
                             },
-                            "schema": {
-                                "properties": {
-                                    "retries": {
-                                        "type": "number",
-                                        "const": 3
-                                    },
-                                    "timeout": {
-                                        "type": "number",
-                                        "const": 30
-                                    }
+                            "type": "object",
+                            "required": [
+                                "retries",
+                                "timeout"
+                            ]
+                        },
+                        "builtin": {
+                            "name": "fn::final",
+                            "nameRange": {
+                                "environment": "a",
+                                "begin": {
+                                    "line": 5,
+                                    "column": 5,
+                                    "byte": 72
                                 },
-                                "type": "object",
-                                "required": [
-                                    "retries",
-                                    "timeout"
-                                ]
+                                "end": {
+                                    "line": 5,
+                                    "column": 14,
+                                    "byte": 81
+                                }
                             },
-                            "keyRanges": {
-                                "retries": {
+                            "argSchema": true,
+                            "arg": {
+                                "range": {
                                     "environment": "a",
                                     "begin": {
                                         "line": 6,
@@ -1745,167 +2935,179 @@
                                         "byte": 89
                                     },
                                     "end": {
-                                        "line": 6,
-                                        "column": 14,
-                                        "byte": 96
+                                        "line": 7,
+                                        "column": 18,
+                                        "byte": 117
                                     }
                                 },
-                                "timeout": {
-                                    "environment": "a",
-                                    "begin": {
-                                        "line": 7,
-                                        "column": 7,
-                                        "byte": 106
+                                "schema": {
+                                    "properties": {
+                                        "retries": {
+                                            "type": "number",
+                                            "const": 3
+                                        },
+                                        "timeout": {
+                                            "type": "number",
+                                            "const": 30
+                                        }
                                     },
-                                    "end": {
-                                        "line": 7,
-                                        "column": 14,
-                                        "byte": 113
-                                    }
-                                }
-                            },
-                            "object": {
-                                "retries": {
-                                    "range": {
+                                    "type": "object",
+                                    "required": [
+                                        "retries",
+                                        "timeout"
+                                    ]
+                                },
+                                "keyRanges": {
+                                    "retries": {
                                         "environment": "a",
                                         "begin": {
                                             "line": 6,
-                                            "column": 16,
-                                            "byte": 98
+                                            "column": 7,
+                                            "byte": 89
                                         },
                                         "end": {
                                             "line": 6,
-                                            "column": 17,
-                                            "byte": 99
+                                            "column": 14,
+                                            "byte": 96
                                         }
                                     },
-                                    "schema": {
-                                        "type": "number",
-                                        "const": 3
-                                    },
-                                    "literal": 3
-                                },
-                                "timeout": {
-                                    "range": {
+                                    "timeout": {
                                         "environment": "a",
                                         "begin": {
                                             "line": 7,
-                                            "column": 16,
-                                            "byte": 115
+                                            "column": 7,
+                                            "byte": 106
                                         },
                                         "end": {
                                             "line": 7,
-                                            "column": 18,
-                                            "byte": 117
+                                            "column": 14,
+                                            "byte": 113
                                         }
+                                    }
+                                },
+                                "object": {
+                                    "retries": {
+                                        "range": {
+                                            "environment": "a",
+                                            "begin": {
+                                                "line": 6,
+                                                "column": 16,
+                                                "byte": 98
+                                            },
+                                            "end": {
+                                                "line": 6,
+                                                "column": 17,
+                                                "byte": 99
+                                            }
+                                        },
+                                        "schema": {
+                                            "type": "number",
+                                            "const": 3
+                                        },
+                                        "literal": 3
                                     },
-                                    "schema": {
-                                        "type": "number",
-                                        "const": 30
-                                    },
-                                    "literal": 30
+                                    "timeout": {
+                                        "range": {
+                                            "environment": "a",
+                                            "begin": {
+                                                "line": 7,
+                                                "column": 16,
+                                                "byte": 115
+                                            },
+                                            "end": {
+                                                "line": 7,
+                                                "column": 18,
+                                                "byte": 117
+                                            }
+                                        },
+                                        "schema": {
+                                            "type": "number",
+                                            "const": 30
+                                        },
+                                        "literal": 30
+                                    }
                                 }
                             }
                         }
-                    }
-                },
-                "keyRanges": {
-                    "retries": {
-                        "environment": "builtin-final",
-                        "begin": {
-                            "line": 6,
-                            "column": 5,
-                            "byte": 70
-                        },
-                        "end": {
-                            "line": 6,
-                            "column": 12,
-                            "byte": 77
-                        }
-                    }
-                },
-                "object": {
-                    "retries": {
-                        "range": {
+                    },
+                    "keyRanges": {
+                        "retries": {
                             "environment": "builtin-final",
                             "begin": {
                                 "line": 6,
-                                "column": 14,
-                                "byte": 79
+                                "column": 5,
+                                "byte": 70
                             },
                             "end": {
                                 "line": 6,
-                                "column": 15,
-                                "byte": 80
+                                "column": 12,
+                                "byte": 77
                             }
-                        },
-                        "schema": {
-                            "type": "number",
-                            "const": 5
-                        },
-                        "base": {
+                        }
+                    },
+                    "object": {
+                        "retries": {
                             "range": {
-                                "environment": "a",
+                                "environment": "builtin-final",
                                 "begin": {
                                     "line": 6,
-                                    "column": 16,
-                                    "byte": 98
+                                    "column": 14,
+                                    "byte": 79
                                 },
                                 "end": {
                                     "line": 6,
-                                    "column": 17,
-                                    "byte": 99
+                                    "column": 15,
+                                    "byte": 80
                                 }
                             },
                             "schema": {
                                 "type": "number",
-                                "const": 3
+                                "const": 5
                             },
-                            "literal": 3
-                        },
-                        "literal": 5
-                    }
-                }
-            },
-            "final_scalar": {
-                "range": {
-                    "environment": "builtin-final",
-                    "begin": {
-                        "line": 4,
-                        "column": 17,
-                        "byte": 39
-                    },
-                    "end": {
-                        "line": 4,
-                        "column": 27,
-                        "byte": 49
+                            "base": {
+                                "range": {
+                                    "environment": "a",
+                                    "begin": {
+                                        "line": 6,
+                                        "column": 16,
+                                        "byte": 98
+                                    },
+                                    "end": {
+                                        "line": 6,
+                                        "column": 17,
+                                        "byte": 99
+                                    }
+                                },
+                                "schema": {
+                                    "type": "number",
+                                    "const": 3
+                                },
+                                "literal": 3
+                            },
+                            "literal": 5
+                        }
                     }
                 },
-                "schema": {
-                    "type": "string",
-                    "const": "frozen_value"
-                },
-                "base": {
+                "final_scalar": {
                     "range": {
-                        "environment": "a",
+                        "environment": "builtin-final",
                         "begin": {
-                            "line": 3,
-                            "column": 5,
-                            "byte": 28
+                            "line": 4,
+                            "column": 17,
+                            "byte": 39
                         },
                         "end": {
-                            "line": 3,
-                            "column": 28,
-                            "byte": 51
+                            "line": 4,
+                            "column": 27,
+                            "byte": 49
                         }
                     },
                     "schema": {
                         "type": "string",
                         "const": "frozen_value"
                     },
-                    "builtin": {
-                        "name": "fn::final",
-                        "nameRange": {
+                    "base": {
+                        "range": {
                             "environment": "a",
                             "begin": {
                                 "line": 3,
@@ -1914,74 +3116,94 @@
                             },
                             "end": {
                                 "line": 3,
-                                "column": 14,
-                                "byte": 37
+                                "column": 28,
+                                "byte": 51
                             }
                         },
-                        "argSchema": true,
-                        "arg": {
-                            "range": {
+                        "schema": {
+                            "type": "string",
+                            "const": "frozen_value"
+                        },
+                        "builtin": {
+                            "name": "fn::final",
+                            "nameRange": {
                                 "environment": "a",
                                 "begin": {
                                     "line": 3,
-                                    "column": 16,
-                                    "byte": 39
+                                    "column": 5,
+                                    "byte": 28
                                 },
                                 "end": {
                                     "line": 3,
-                                    "column": 28,
-                                    "byte": 51
+                                    "column": 14,
+                                    "byte": 37
                                 }
                             },
-                            "schema": {
-                                "type": "string",
-                                "const": "frozen_value"
-                            },
-                            "literal": "frozen_value"
+                            "argSchema": true,
+                            "arg": {
+                                "range": {
+                                    "environment": "a",
+                                    "begin": {
+                                        "line": 3,
+                                        "column": 16,
+                                        "byte": 39
+                                    },
+                                    "end": {
+                                        "line": 3,
+                                        "column": 28,
+                                        "byte": 51
+                                    }
+                                },
+                                "schema": {
+                                    "type": "string",
+                                    "const": "frozen_value"
+                                },
+                                "literal": "frozen_value"
+                            }
                         }
-                    }
-                },
-                "literal": "overridden"
-            },
-            "not_final": {
-                "range": {
-                    "environment": "builtin-final",
-                    "begin": {
-                        "line": 10,
-                        "column": 14,
-                        "byte": 155
                     },
-                    "end": {
-                        "line": 10,
-                        "column": 29,
-                        "byte": 170
-                    }
+                    "literal": "overridden"
                 },
-                "schema": {
-                    "type": "string",
-                    "const": "new_plain_value"
-                },
-                "base": {
+                "not_final": {
                     "range": {
-                        "environment": "a",
+                        "environment": "builtin-final",
                         "begin": {
-                            "line": 12,
+                            "line": 10,
                             "column": 14,
-                            "byte": 215
+                            "byte": 155
                         },
                         "end": {
-                            "line": 12,
-                            "column": 25,
-                            "byte": 226
+                            "line": 10,
+                            "column": 29,
+                            "byte": 170
                         }
                     },
                     "schema": {
                         "type": "string",
-                        "const": "plain_value"
+                        "const": "new_plain_value"
                     },
-                    "literal": "plain_value"
-                },
-                "literal": "new_plain_value"
+                    "base": {
+                        "range": {
+                            "environment": "a",
+                            "begin": {
+                                "line": 12,
+                                "column": 14,
+                                "byte": 215
+                            },
+                            "end": {
+                                "line": 12,
+                                "column": 25,
+                                "byte": 226
+                            }
+                        },
+                        "schema": {
+                            "type": "string",
+                            "const": "plain_value"
+                        },
+                        "literal": "plain_value"
+                    },
+                    "literal": "new_plain_value"
+                }
             }
         },
         "properties": {
