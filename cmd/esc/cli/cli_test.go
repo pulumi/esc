@@ -460,7 +460,9 @@ func (c *testPulumiClient) checkEnvironment(ctx context.Context, orgName, envNam
 		showSecrets = opts[0].ShowSecrets
 	}
 
-	checked, checkDiags := eval.CheckEnvironment(ctx, envName, environment, rot128{}, providers, envLoader, execContext, showSecrets)
+	// The test client mimics the service; existing CLI fixtures were recorded
+	// with the full trace chain, so opt into TraceModeFull to keep them stable.
+	checked, checkDiags := eval.CheckEnvironment(ctx, envName, environment, rot128{}, providers, envLoader, execContext, showSecrets, eval.EvalOptions{TraceMode: eval.TraceModeFull})
 	diags.Extend(checkDiags...)
 	return checked, mapDiags(diags), nil
 }
@@ -487,7 +489,7 @@ func (c *testPulumiClient) openEnvironment(ctx context.Context, orgName, name st
 		return "", nil, fmt.Errorf("initializing the ESC exec context: %w", err)
 	}
 
-	openEnv, evalDiags := eval.EvalEnvironment(ctx, name, decl, rot128{}, providers, envLoader, execContext)
+	openEnv, evalDiags := eval.EvalEnvironment(ctx, name, decl, rot128{}, providers, envLoader, execContext, eval.EvalOptions{TraceMode: eval.TraceModeFull})
 	diags.Extend(evalDiags...)
 
 	if diags.HasErrors() {

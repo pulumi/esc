@@ -413,12 +413,15 @@ func TestEval(t *testing.T) {
 				require.NoError(t, err)
 				sortEnvironmentDiagnostics(loadDiags)
 
+				// Snapshot fixtures were generated with the full Trace.Base chain;
+				// keep TraceModeFull here so the snapshot harness keeps testing eval
+				// semantics, not the new strip behavior.
 				check, checkDiags := CheckEnvironment(context.Background(), environmentName, env, rot128{}, testProviders{},
-					&testEnvironments{basePath}, execContext, showSecrets)
+					&testEnvironments{basePath}, execContext, showSecrets, EvalOptions{TraceMode: TraceModeFull})
 				sortEnvironmentDiagnostics(checkDiags)
 
 				actual, evalDiags := EvalEnvironment(context.Background(), environmentName, env, rot128{}, testProviders{},
-					&testEnvironments{basePath}, execContext)
+					&testEnvironments{basePath}, execContext, EvalOptions{TraceMode: TraceModeFull})
 				sortEnvironmentDiagnostics(evalDiags)
 
 				var rotated *esc.Environment
@@ -427,7 +430,7 @@ func TestEval(t *testing.T) {
 				var rotationResult RotationResult
 				if doRotate {
 					rotated, rotationResult, rotateDiags = RotateEnvironment(context.Background(), environmentName, env, rot128{}, testProviders{},
-						&testEnvironments{basePath}, execContext, rotatePaths)
+						&testEnvironments{basePath}, execContext, rotatePaths, EvalOptions{TraceMode: TraceModeFull})
 					patches = rotationResult.Patches()
 				}
 
@@ -486,19 +489,19 @@ func TestEval(t *testing.T) {
 			require.Equal(t, expected.LoadDiags, diags)
 
 			check, diags := CheckEnvironment(context.Background(), environmentName, env, rot128{}, testProviders{},
-				&testEnvironments{basePath}, execContext, showSecrets)
+				&testEnvironments{basePath}, execContext, showSecrets, EvalOptions{TraceMode: TraceModeFull})
 			sortEnvironmentDiagnostics(diags)
 			require.Equal(t, expected.CheckDiags, diags)
 
 			actual, diags := EvalEnvironment(context.Background(), environmentName, env, rot128{}, testProviders{},
-				&testEnvironments{basePath}, execContext)
+				&testEnvironments{basePath}, execContext, EvalOptions{TraceMode: TraceModeFull})
 			sortEnvironmentDiagnostics(diags)
 			require.Equal(t, expected.EvalDiags, diags)
 
 			var rotated *esc.Environment
 			if doRotate {
 				rotated_, rotationResult, diags := RotateEnvironment(context.Background(), environmentName, env, rot128{}, testProviders{},
-					&testEnvironments{basePath}, execContext, rotatePaths)
+					&testEnvironments{basePath}, execContext, rotatePaths, EvalOptions{TraceMode: TraceModeFull})
 				var patches []*Patch
 				if rotationResult != nil {
 					patches = rotationResult.Patches()
@@ -584,7 +587,7 @@ func benchmarkEval(b *testing.B, openDelay, loadDelay time.Duration) {
 		require.Empty(b, loadDiags)
 
 		_, evalDiags := EvalEnvironment(context.Background(), environmentName, env, rot128{}, testProviders{benchDelay: openDelay},
-			envs, execContext)
+			envs, execContext, EvalOptions{})
 		require.Empty(b, evalDiags)
 	}
 }
@@ -633,7 +636,7 @@ func TestSyntaxErrorCheck(t *testing.T) {
 	assert.NoError(t, err)
 
 	check, checkDiags := CheckEnvironment(context.Background(), environmentName, env, rot128{}, testProviders{},
-		&testEnvironments{}, execContext, false)
+		&testEnvironments{}, execContext, false, EvalOptions{})
 
 	assert.True(t, checkDiags.HasErrors())
 	assert.NotNil(t, check)
