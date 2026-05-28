@@ -84,8 +84,10 @@ func EvalEnvironment(
 	providers ProviderLoader,
 	environments EnvironmentLoader,
 	execContext *esc.ExecContext,
+	opts EvalOptions,
 ) (*esc.Environment, syntax.Diagnostics) {
 	opened, _, diags := evalEnvironment(ctx, false, false, name, env, decrypter, providers, environments, execContext, true, nil)
+	applyTraceModeToEnvironment(opened, opts.TraceMode)
 	return opened, diags
 }
 
@@ -100,8 +102,10 @@ func CheckEnvironment(
 	environments EnvironmentLoader,
 	execContext *esc.ExecContext,
 	showSecrets bool,
+	opts EvalOptions,
 ) (*esc.Environment, syntax.Diagnostics) {
 	checked, _, diags := evalEnvironment(ctx, true, false, name, env, decrypter, providers, environments, execContext, showSecrets, nil)
+	applyTraceModeToEnvironment(checked, opts.TraceMode)
 	return checked, diags
 }
 
@@ -116,12 +120,15 @@ func RotateEnvironment(
 	environments EnvironmentLoader,
 	execContext *esc.ExecContext,
 	paths []resource.PropertyPath,
+	opts EvalOptions,
 ) (*esc.Environment, RotationResult, syntax.Diagnostics) {
 	rotateDocPaths := make(map[string]bool, len(paths))
 	for _, path := range paths {
 		rotateDocPaths["values."+path.String()] = true
 	}
-	return evalEnvironment(ctx, false, true, name, env, decrypter, providers, environments, execContext, true, rotateDocPaths)
+	rotated, result, diags := evalEnvironment(ctx, false, true, name, env, decrypter, providers, environments, execContext, true, rotateDocPaths)
+	applyTraceModeToEnvironment(rotated, opts.TraceMode)
+	return rotated, result, diags
 }
 
 // evalEnvironment evaluates an environment and exports the result of evaluation.

@@ -33,7 +33,7 @@ func TestExpressionAt(t *testing.T) {
 	execContext, err := esc.NewExecContext(make(map[string]esc.Value))
 	require.NoError(t, err)
 
-	env, diags := eval.CheckEnvironment(context.Background(), "def", syntax, nil, testProviders{}, testEnvironments{}, execContext, false)
+	env, diags := eval.CheckEnvironment(context.Background(), "def", syntax, nil, testProviders{}, testEnvironments{}, execContext, false, eval.EvalOptions{})
 	require.Empty(t, diags)
 
 	analysis := New(*env, map[string]*schema.Schema{"test": testProviderSchema})

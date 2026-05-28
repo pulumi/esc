@@ -102,47 +102,196 @@ type Trace struct {
 	Base *Value `json:"base,omitempty"`
 }
 
+// UnmarshalJSON decodes a Value in a single pass over the input bytes,
+// reusing one json.Decoder across the entire subtree.
+//
+// The previous implementation json.Unmarshal'd into a RawMessage and then
+// re-Unmarshal'd the captured "value" subtree, scanning each byte twice per
+// nesting level — O(size × depth) on deep import-merge chains. Calling
+// dec.Decode on each child has the same effect because json allocates a
+// fresh Decoder when it dispatches into UnmarshalJSON. So children and
+// Trace.Base are decoded by calling decodeFrom directly on the shared
+// decoder, which keeps each level's bytes scanned exactly once.
+//
+// When json/v2 (go-json-experiment/json) stabilizes or lands in stdlib, this
+// streaming logic can collapse into an UnmarshalJSONFrom(*jsontext.Decoder)
+// implementation — v2 exposes the shared-decoder hook this code hand-rolls.
 func (v *Value) UnmarshalJSON(data []byte) error {
-	var raw struct {
-		Value   json.RawMessage `json:"value,omitempty"`
-		Secret  bool            `json:"secret,omitempty"`
-		Unknown bool            `json:"unknown,omitempty"`
-		Trace   Trace           `json:"trace"`
-	}
-	if err := json.Unmarshal(data, &raw); err != nil {
+	dec := json.NewDecoder(bytes.NewReader(data))
+	dec.UseNumber()
+	return v.decodeFrom(dec)
+}
+
+// decodeFrom consumes one JSON object from dec into v.
+func (v *Value) decodeFrom(dec *json.Decoder) error {
+	tok, err := dec.Token()
+	if err != nil {
 		return err
 	}
+	if d, ok := tok.(json.Delim); !ok || d != '{' {
+		return fmt.Errorf("esc.Value: expected JSON object, got %v", tok)
+	}
+	return v.decodeObjectBody(dec)
+}
 
-	v.Secret = raw.Secret
-	v.Unknown = raw.Unknown
-	v.Trace = raw.Trace
-
-	if len(raw.Value) != 0 {
-		dec := json.NewDecoder(bytes.NewReader([]byte(raw.Value)))
-		dec.UseNumber()
-
-		tok, err := dec.Token()
+// decodeObjectBody parses field-by-field until the matching '}', which it
+// consumes. The opening '{' must already have been consumed by the caller —
+// splitting it this way lets callers that have to peek the opening token
+// (e.g. to distinguish object vs null) still hand the body off to this method.
+func (v *Value) decodeObjectBody(dec *json.Decoder) error {
+	for dec.More() {
+		keyTok, err := dec.Token()
 		if err != nil {
 			return err
 		}
-		switch tok {
-		case json.Delim('['):
-			var arr []Value
-			if err := json.Unmarshal([]byte(raw.Value), &arr); err != nil {
+		key, ok := keyTok.(string)
+		if !ok {
+			return fmt.Errorf("esc.Value: expected string field name, got %v", keyTok)
+		}
+
+		switch key {
+		case "secret":
+			if err := dec.Decode(&v.Secret); err != nil {
 				return err
 			}
-			v.Value = arr
-		case json.Delim('{'):
-			var obj map[string]Value
-			if err := json.Unmarshal([]byte(raw.Value), &obj); err != nil {
+		case "unknown":
+			if err := dec.Decode(&v.Unknown); err != nil {
 				return err
 			}
-			v.Value = obj
+		case "trace":
+			if err := v.Trace.decodeFrom(dec); err != nil {
+				return err
+			}
+		case "value":
+			if err := v.decodeValueField(dec); err != nil {
+				return err
+			}
 		default:
-			v.Value = tok
+			// Match stdlib permissiveness: skip unknown fields so the wire
+			// format can grow without breaking older readers.
+			var skip json.RawMessage
+			if err := dec.Decode(&skip); err != nil {
+				return err
+			}
 		}
 	}
+	_, err := dec.Token() // consume '}'
+	return err
+}
+
+// decodeValueField decodes the contents of the "value" JSON field. The
+// field's concrete type is data-driven, so we peek the first token to pick a
+// path rather than capturing the bytes and re-parsing them later.
+func (v *Value) decodeValueField(dec *json.Decoder) error {
+	tok, err := dec.Token()
+	if err != nil {
+		return err
+	}
+
+	delim, isDelim := tok.(json.Delim)
+	if !isDelim {
+		// Scalar: nil, bool, json.Number, or string.
+		v.Value = tok
+		return nil
+	}
+
+	switch delim {
+	case '[':
+		var arr []Value
+		for dec.More() {
+			var el Value
+			if err := el.decodeFrom(dec); err != nil {
+				return err
+			}
+			arr = append(arr, el)
+		}
+		if _, err := dec.Token(); err != nil { // consume ']'
+			return err
+		}
+		v.Value = arr
+	case '{':
+		obj := map[string]Value{}
+		for dec.More() {
+			keyTok, err := dec.Token()
+			if err != nil {
+				return err
+			}
+			key, ok := keyTok.(string)
+			if !ok {
+				return fmt.Errorf("esc.Value: expected string key, got %v", keyTok)
+			}
+			var el Value
+			if err := el.decodeFrom(dec); err != nil {
+				return err
+			}
+			obj[key] = el
+		}
+		if _, err := dec.Token(); err != nil { // consume '}'
+			return err
+		}
+		v.Value = obj
+	default:
+		return fmt.Errorf("esc.Value: unexpected delimiter %v", delim)
+	}
 	return nil
+}
+
+// decodeFrom decodes a Trace object from dec. We do this by hand rather than
+// dec.Decode(&Trace) so that Trace.Base stays on the shared-decoder path
+// instead of triggering a fresh NewDecoder allocation inside
+// Value.UnmarshalJSON.
+func (t *Trace) decodeFrom(dec *json.Decoder) error {
+	tok, err := dec.Token()
+	if err != nil {
+		return err
+	}
+	if d, ok := tok.(json.Delim); !ok || d != '{' {
+		return fmt.Errorf("esc.Trace: expected JSON object, got %v", tok)
+	}
+
+	for dec.More() {
+		keyTok, err := dec.Token()
+		if err != nil {
+			return err
+		}
+		key, ok := keyTok.(string)
+		if !ok {
+			return fmt.Errorf("esc.Trace: expected string field name, got %v", keyTok)
+		}
+
+		switch key {
+		case "def":
+			if err := dec.Decode(&t.Def); err != nil {
+				return err
+			}
+		case "base":
+			// Peek so the object case can route through the shared decoder.
+			tok, err := dec.Token()
+			if err != nil {
+				return err
+			}
+			if tok == nil {
+				t.Base = nil
+				continue
+			}
+			d, ok := tok.(json.Delim)
+			if !ok || d != '{' {
+				return fmt.Errorf("esc.Trace.Base: expected null or JSON object, got %v", tok)
+			}
+			base := &Value{}
+			if err := base.decodeObjectBody(dec); err != nil {
+				return err
+			}
+			t.Base = base
+		default:
+			var skip json.RawMessage
+			if err := dec.Decode(&skip); err != nil {
+				return err
+			}
+		}
+	}
+	_, err = dec.Token() // consume '}'
+	return err
 }
 
 // FromJSON converts a plain-old-JSON value (i.e. a value of type nil, bool, json.Number, string, []any, or
