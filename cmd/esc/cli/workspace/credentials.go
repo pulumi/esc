@@ -88,6 +88,8 @@ func (w *Workspace) GetCurrentCloudURL(account *Account) string {
 	return "https://api.pulumi.com"
 }
 
+// TODO: Replace this with workspace.AgentCredentialsFallbackEnabled once ESC
+// depends on a Pulumi SDK release that includes it.
 func agentCredentialsEnabled() bool {
 	return agentdetect.Detect(os.Getenv) != "" &&
 		os.Getenv(workspace.PulumiCredentialsPathEnvVar) == "" &&
