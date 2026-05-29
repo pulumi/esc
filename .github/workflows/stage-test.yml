@@ -29,6 +29,8 @@ jobs:
   test:
     name: Test
     runs-on: ubuntu-latest
+    env:
+      GOTOOLCHAIN: go1.25.8
     steps:
       - name: Fetch secrets from ESC
         id: esc-secrets
@@ -41,7 +43,6 @@ jobs:
         uses: actions/setup-go@v5
         with:
           go-version: ${{ matrix.go-version }}
-          stable: ${{ matrix.go-stable }}
       - name: Check Go toolchain
         run: |
           go env GOTOOLCHAIN GOROOT GOVERSION GOTOOLDIR
@@ -65,4 +66,3 @@ jobs:
       fail-fast: false
       matrix:
         go-version: [1.21.x, 1.23.x, 1.25.x]
-        go-stable: [true]
