@@ -29,8 +29,6 @@ jobs:
   test:
     name: Test
     runs-on: ubuntu-latest
-    env:
-      GOTOOLCHAIN: go1.25.8
     steps:
       - name: Fetch secrets from ESC
         id: esc-secrets
@@ -45,6 +43,7 @@ jobs:
           go-version: ${{ matrix.go-version }}
       - name: Check Go toolchain
         run: |
+          go env -w GOTOOLCHAIN=go1.25.8+auto
           go env GOTOOLCHAIN GOROOT GOVERSION GOTOOLDIR
           go tool covdata 2>&1 | grep -q "Commands are"
       - name: Install Pulumi CLI
