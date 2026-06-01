@@ -38,10 +38,14 @@ jobs:
         with:
           ref: ${{ inputs.commit-ref }}
       - name: Install Go
-        uses: actions/setup-go@v2
+        uses: actions/setup-go@v5
         with:
           go-version: ${{ matrix.go-version }}
-          stable: ${{ matrix.go-stable }}
+      - name: Check Go toolchain
+        run: |
+          go env -w GOTOOLCHAIN=go1.25.8+auto
+          go env GOTOOLCHAIN GOROOT GOVERSION GOTOOLDIR
+          go tool covdata 2>&1 | grep -q "Commands are"
       - name: Install Pulumi CLI
         uses: pulumi/action-install-pulumi-cli@v2
       - name: Test w/coverage
@@ -60,5 +64,4 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        go-version: [1.21.x, 1.23.x]
-        go-stable: [true]
+        go-version: [1.21.x, 1.23.x, 1.25.x]
