@@ -45,7 +45,7 @@ type Value struct {
 
 	// Trace holds information about the expression that computed this value and the value (if any) with which it was
 	// merged.
-	Trace Trace `json:"trace"`
+	Trace *Trace `json:"trace,omitempty"`
 }
 
 // NewValue creates a new value with the given representation.
@@ -72,6 +72,7 @@ func NewSecret[T ValueType](v T) Value {
 	return Value{Value: v, Secret: true}
 }
 
+// MakeSecret converts this value to a secret.
 func (v Value) MakeSecret() Value {
 	switch vv := v.Value.(type) {
 	case nil:
@@ -107,7 +108,7 @@ func (v *Value) UnmarshalJSON(data []byte) error {
 		Value   json.RawMessage `json:"value,omitempty"`
 		Secret  bool            `json:"secret,omitempty"`
 		Unknown bool            `json:"unknown,omitempty"`
-		Trace   Trace           `json:"trace"`
+		Trace   *Trace          `json:"trace,omitempty"`
 	}
 	if err := json.Unmarshal(data, &raw); err != nil {
 		return err
@@ -186,6 +187,29 @@ func fromJSON(path string, v any) (Value, error) {
 	default:
 		return Value{}, fmt.Errorf("%v: unsupported value of type %T", path, v)
 	}
+}
+
+// WithoutTraceMetadata returns a copy of the receiver with all trace metadata recursively removed.
+func (v Value) WithoutTraceMetadata() Value {
+	vv := v
+	vv.Trace = nil
+
+	switch pv := v.Value.(type) {
+	case []Value:
+		a := make([]Value, len(pv))
+		for i, v := range pv {
+			a[i] = v.WithoutTraceMetadata()
+		}
+		vv.Value = a
+	case map[string]Value:
+		m := make(map[string]Value, len(pv))
+		for k, v := range pv {
+			m[k] = v.WithoutTraceMetadata()
+		}
+		vv.Value = m
+	}
+
+	return vv
 }
 
 // ToJSON converts a Value into a plain-old-JSON value (i.e. a value of type nil, bool, json.Number, string, []any, or

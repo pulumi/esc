@@ -177,6 +177,12 @@ type Environment struct {
 	ExecutionContext *EvaluatedExecutionContext `json:"executionContext,omitempty"`
 }
 
+// WithoutMetadata returns a copy of the receiver without expression, schema, context, and trace metadata. Only the
+// Properties field will be present.
+func (e Environment) WithoutMetadata() Environment {
+	return Environment{Properties: NewValue(e.Properties).WithoutTraceMetadata().Value.(map[string]Value)}
+}
+
 // GetEnvironmentVariables returns any environment variables defined by the environment.
 //
 // Environment variables are any scalar values in the top-level `environmentVariables` property. Boolean and
