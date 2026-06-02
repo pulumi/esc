@@ -1,2 +1,0 @@
-values:
-  imported: ${context.currentEnvironment.name}-${context.rootEnvironment.name}-${context.pulumi.user.id}

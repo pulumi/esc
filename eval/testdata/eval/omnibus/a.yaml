@@ -1,4 +1,0 @@
-values:
-  open:
-    foo: bar
-  strings: [ "hello", "world" ]

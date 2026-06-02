@@ -1,3 +1,0 @@
-values:
-  key-:
-    fn::secret: hunter2

@@ -1,2 +1,0 @@
-values:
-  cycle: ${environments.bad.bad.cycle}
