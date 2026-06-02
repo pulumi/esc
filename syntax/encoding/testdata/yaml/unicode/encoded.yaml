@@ -1,8 +1,0 @@
-values:
-  hello: 世界
-  世界: hello
-  linear-b:
-    - "\U00010000"
-    - "\U00010001"
-  danmark:
-    hovedstad: københavn

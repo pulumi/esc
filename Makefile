@@ -10,8 +10,8 @@ GO := go
 
 default: ensure build ## Build the project (default)
 
-install:: ## Install all commands
-	${GO} install ./cmd/...
+install:: ## No installable commands; this repo is a re-export shim
+	@true
 
 clean:: ## Remove build artifacts
 	rm -f ./bin/*
@@ -34,11 +34,11 @@ format: ## Format all Go source files
 verify: format lint test ## Format, lint, and test (pre-commit check)
 	@echo "All checks passed."
 
-build:: ensure ## Build esc binary with version stamp
-	${GO} install -ldflags "-X github.com/pulumi/esc/cmd/esc/cli/version.Version=${VERSION}" ./cmd/esc
+build:: ensure ## Build the re-export shim packages
+	${GO} build ./...
 
 build_debug:: ensure
-	${GO} install -gcflags="all=-N -l" -ldflags "-X github.com/pulumi/esc/cmd/esc/cli/version.Version=${VERSION}" ./cmd/esc
+	${GO} build -gcflags="all=-N -l" ./...
 
 test:: build ## Run tests (short mode, parallel)
 	${GO} test --timeout 30m -short -count 1 -parallel ${CONCURRENCY} ./...

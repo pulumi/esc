@@ -1,4 +1,0 @@
-values:
-  basePassword:
-    fn::secret:
-      ciphertext: ZXNjeAAAAAHo9e705fKyKo30VQ==
