@@ -197,7 +197,10 @@ func (v *Value) decodeValueField(dec *json.Decoder) error {
 
 	switch delim {
 	case '[':
-		var arr []Value
+		// Initialize non-nil so an empty array stays []Value{} rather than a nil
+		// slice — json.Marshal renders the former as [] and the latter as null,
+		// and the prior json.Unmarshal path always produced the non-nil form.
+		arr := []Value{}
 		for dec.More() {
 			var el Value
 			if err := el.decodeFrom(dec); err != nil {
@@ -244,6 +247,9 @@ func (t *Trace) decodeFrom(dec *json.Decoder) error {
 	tok, err := dec.Token()
 	if err != nil {
 		return err
+	}
+	if tok == nil {
+		return nil // JSON null: leave t at its zero value, matching json.Unmarshal.
 	}
 	if d, ok := tok.(json.Delim); !ok || d != '{' {
 		return fmt.Errorf("esc.Trace: expected JSON object, got %v", tok)

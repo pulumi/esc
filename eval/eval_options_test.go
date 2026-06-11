@@ -16,6 +16,7 @@ package eval
 
 import (
 	"context"
+	"fmt"
 	"os"
 	"path/filepath"
 	"testing"
@@ -35,7 +36,7 @@ func chainValue(depth int) esc.Value {
 	v := esc.Value{Value: "level-0"}
 	cur := &v
 	for i := 1; i < depth; i++ {
-		cur.Trace.Base = &esc.Value{Value: "level-" + string(rune('0'+i))}
+		cur.Trace.Base = &esc.Value{Value: fmt.Sprintf("level-%d", i)}
 		cur = cur.Trace.Base
 	}
 	return v

@@ -151,6 +151,21 @@ func TestValueUnmarshalJSON(t *testing.T) {
 			input:    `{"value":"x","futureField":{"nested":true},"anotherFuture":42}`,
 			expected: Value{Value: "x"},
 		},
+		{
+			// A null "trace" must decode to a zero Trace, not error. The prior
+			// json.Unmarshal-into-struct path accepted null for any field;
+			// forward-compatible payloads that null out unknown fields rely on it.
+			name:     "null trace decodes to zero Trace",
+			input:    `{"value":"x","trace":null}`,
+			expected: Value{Value: "x"},
+		},
+		{
+			// An empty array must stay a non-nil []Value{} so it re-serializes as
+			// [] rather than null. See TestValueUnmarshalJSON_EmptyArrayRoundTrip.
+			name:     "empty array stays non-nil",
+			input:    `{"value":[]}`,
+			expected: Value{Value: []Value{}},
+		},
 	}
 
 	for _, c := range cases {
@@ -185,6 +200,24 @@ func TestValueUnmarshalJSON_RoundTrip(t *testing.T) {
 	var got Value
 	require.NoError(t, json.Unmarshal(data, &got))
 	assert.Equal(t, orig, got)
+}
+
+func TestValueUnmarshalJSON_EmptyArrayRoundTrip(t *testing.T) {
+	// json.Marshal renders a nil []Value as null but an empty []Value{} as [].
+	// The decoder must preserve the empty slice so a decode→encode round trip
+	// keeps "value":[] intact instead of silently rewriting it to "value":null.
+	var got Value
+	require.NoError(t, json.Unmarshal([]byte(`{"value":[]}`), &got))
+
+	arr, ok := got.Value.([]Value)
+	require.Truef(t, ok, "expected []Value, got %T", got.Value)
+	assert.NotNil(t, arr)
+	assert.Empty(t, arr)
+
+	data, err := json.Marshal(got)
+	require.NoError(t, err)
+	assert.Contains(t, string(data), `"value":[]`)
+	assert.NotContains(t, string(data), `"value":null`)
 }
 
 func TestValueUnmarshalJSON_Errors(t *testing.T) {
