@@ -58,12 +58,17 @@ func applyTraceMode(v *esc.Value, mode TraceMode) {
 	switch mode {
 	case TraceModeNone:
 		v.Trace.Base = nil
-	case TraceModeCollapsed:
+	default:
+		// TraceModeCollapsed, plus any out-of-range value: degrade to the safe
+		// bounded default rather than silently preserving the full chain (which
+		// is what falling through used to do). TraceModeFull already returned
+		// above, so it never reaches here.
+		//
+		// Keep the immediate parent but strip everything reachable from it —
+		// both its own Base and its nested children's Base chains. Without this,
+		// the kept parent's data tree re-introduces deep chains and the collapse
+		// buys nothing.
 		if v.Trace.Base != nil {
-			// Keep the immediate parent but strip everything reachable from
-			// it — both its own Base and its nested children's Base chains.
-			// Without this, the kept parent's data tree re-introduces deep
-			// chains and the collapse buys nothing.
 			applyTraceMode(v.Trace.Base, TraceModeNone)
 		}
 	}

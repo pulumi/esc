@@ -79,6 +79,18 @@ func TestApplyTraceMode_Collapsed_NilBaseStaysNil(t *testing.T) {
 	assert.Nil(t, v.Trace.Base)
 }
 
+func TestApplyTraceMode_UnknownMode_DefaultsToCollapsed(t *testing.T) {
+	// TraceMode is a public API int type, so callers can pass an out-of-range
+	// value. It must degrade to the safe bounded default (Collapsed), not
+	// silently preserve the entire chain like Full.
+	v := chainValue(5)
+	applyTraceMode(&v, TraceMode(42))
+
+	assert.Equal(t, 2, chainDepth(&v))
+	assert.NotNil(t, v.Trace.Base)
+	assert.Nil(t, v.Trace.Base.Trace.Base)
+}
+
 func TestApplyTraceMode_None_ClearsBaseInsideMap(t *testing.T) {
 	child := chainValue(3)
 	v := esc.Value{Value: map[string]esc.Value{"k": child}}
