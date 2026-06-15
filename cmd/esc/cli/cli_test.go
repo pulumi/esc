@@ -875,6 +875,7 @@ func (c *testPulumiClient) OpenYAMLEnvironment(
 	orgName string,
 	yaml []byte,
 	duration time.Duration,
+	opts ...client.OpenYAMLOption,
 ) (string, []client.EnvironmentDiagnostic, error) {
 	return c.openEnvironment(ctx, orgName, "<yaml>", yaml)
 }

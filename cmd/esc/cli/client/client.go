@@ -47,6 +47,10 @@ type CheckYAMLOption struct {
 	ShowSecrets bool
 }
 
+type OpenYAMLOption struct {
+	EnvironmentOverrides map[string]string
+}
+
 // Client provides a slim wrapper around the Pulumi HTTP/REST API.
 //
 // NOTE: this is not considered a public API, and we reserve the right to make breaking changes, including adding
@@ -268,6 +272,7 @@ type Client interface {
 		orgName string,
 		yaml []byte,
 		duration time.Duration,
+		opts ...OpenYAMLOption,
 	) (string, []EnvironmentDiagnostic, error)
 
 	// Deprecated: Use GetOpenEnvironmentWithProject instead
@@ -1057,11 +1062,22 @@ func (pc *client) OpenYAMLEnvironment(
 	orgName string,
 	yaml []byte,
 	duration time.Duration,
+	opts ...OpenYAMLOption,
 ) (string, []EnvironmentDiagnostic, error) {
 	queryObj := struct {
-		Duration string `url:"duration"`
+		Duration             string `url:"duration"`
+		EnvironmentOverrides string `url:"environmentOverrides,omitempty"`
 	}{
 		Duration: duration.String(),
+	}
+
+	overrides := firstOrDefault(opts).EnvironmentOverrides
+	if len(overrides) > 0 {
+		encoded, err := json.Marshal(overrides)
+		if err != nil {
+			return "", nil, fmt.Errorf("marshaling environment overrides: %w", err)
+		}
+		queryObj.EnvironmentOverrides = string(encoded)
 	}
 
 	var resp struct {
