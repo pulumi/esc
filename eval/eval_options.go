@@ -14,92 +14,36 @@
 
 package eval
 
-import "github.com/pulumi/esc"
-
 // TraceMode controls how much of each value's Trace.Base merge-history chain
-// is retained in the result returned by the eval entry points.
+// the eval entry points retain in their result.
 //
-// The zero value is TraceModeCollapsed: it is the safe default that keeps
-// debug-friendly per-value provenance bounded to O(1) per leaf, avoiding the
-// O(size * depth) payload blowup that occurs when many imports merge into a
-// shared map.
+// The chain is only useful to a consumer that walks it end-to-end (e.g. the
+// `esc env get` provenance view, which runs on the Check path). A consumer that
+// never reads Trace.Base — such as the service storing opened environments —
+// pays for the chain without using it, and because object merges set Trace.Base
+// on every produced value the cost grows with import-merge depth. TraceModeNone
+// lets such callers drop it so opened payloads stay bounded by their logical
+// content.
 type TraceMode int
 
 const (
-	// TraceModeCollapsed keeps each value's immediate parent (one level of
-	// Trace.Base) and drops the rest of the chain. This is the zero value so
-	// existing callers get the safe default without source changes.
-	TraceModeCollapsed TraceMode = iota
+	// TraceModeFull preserves the entire Trace.Base chain. It is the zero value,
+	// so callers passing EvalOptions{} keep the historical behavior and no
+	// existing consumer of the chain regresses.
+	TraceModeFull TraceMode = iota
 
-	// TraceModeFull preserves the entire Trace.Base chain. Intended for
-	// debugging / provenance views that need the full merge history.
-	TraceModeFull
-
-	// TraceModeNone drops Trace.Base entirely. Cheapest payload; loses all
-	// merge provenance.
+	// TraceModeNone drops Trace.Base entirely: each value is exported without its
+	// merge-history chain. Cheapest payload; safe only when no consumer walks the
+	// chain.
 	TraceModeNone
 )
 
 // EvalOptions configures an evaluation. New fields must default to today's
-// behavior when zero-valued so callers passing EvalOptions{} get a sensible
-// default without thinking about the option surface.
+// behavior when zero-valued so callers passing EvalOptions{} get the historical
+// behavior without reasoning about the option surface.
 type EvalOptions struct {
-	// TraceMode selects how much merge-history to retain on each Value.
+	// TraceMode selects how much merge-history to retain on each Value. The base
+	// chain is built (or not) directly during export, so TraceModeNone never
+	// allocates the dropped chain in the first place.
 	TraceMode TraceMode
-}
-
-// applyTraceMode rewrites v's Trace.Base chain per mode, recursing through
-// the data dimension (array elements, map values). Mutates in place.
-func applyTraceMode(v *esc.Value, mode TraceMode) {
-	if v == nil || mode == TraceModeFull {
-		return
-	}
-
-	switch mode {
-	case TraceModeNone:
-		v.Trace.Base = nil
-	default:
-		// TraceModeCollapsed, plus any out-of-range value: degrade to the safe
-		// bounded default rather than silently preserving the full chain (which
-		// is what falling through used to do). TraceModeFull already returned
-		// above, so it never reaches here.
-		//
-		// Keep the immediate parent but strip everything reachable from it —
-		// both its own Base and its nested children's Base chains. Without this,
-		// the kept parent's data tree re-introduces deep chains and the collapse
-		// buys nothing.
-		if v.Trace.Base != nil {
-			applyTraceMode(v.Trace.Base, TraceModeNone)
-		}
-	}
-
-	switch inner := v.Value.(type) {
-	case []esc.Value:
-		for i := range inner {
-			applyTraceMode(&inner[i], mode)
-		}
-	case map[string]esc.Value:
-		for k, child := range inner {
-			applyTraceMode(&child, mode)
-			inner[k] = child
-		}
-	}
-}
-
-// applyTraceModeToEnvironment walks an evaluated environment and applies the
-// given trace mode to every value in Properties and the ExecutionContext.
-func applyTraceModeToEnvironment(env *esc.Environment, mode TraceMode) {
-	if env == nil || mode == TraceModeFull {
-		return
-	}
-	for k, v := range env.Properties {
-		applyTraceMode(&v, mode)
-		env.Properties[k] = v
-	}
-	if env.ExecutionContext != nil {
-		for k, v := range env.ExecutionContext.Properties {
-			applyTraceMode(&v, mode)
-			env.ExecutionContext.Properties[k] = v
-		}
-	}
 }

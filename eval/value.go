@@ -319,8 +319,12 @@ func (v *value) toString() (str string, unknown bool, secret bool) {
 	return s, unknown, secret
 }
 
-// export converts the value into its serializable representation.
-func (v *value) export(environment string) (esc.Value, syntax.Diagnostics) {
+// export converts the value into its serializable representation. includeBase
+// controls whether the value's Trace.Base merge-history chain is built: when
+// false (TraceModeNone) the chain is never allocated, rather than built and
+// stripped afterward. It is constant for a whole evaluation, so the memoized
+// result below is consistent across all call sites.
+func (v *value) export(environment string, includeBase bool) (esc.Value, syntax.Diagnostics) {
 	if v.exported != nil {
 		return *v.exported, nil
 	}
@@ -341,7 +345,7 @@ func (v *value) export(environment string) (esc.Value, syntax.Diagnostics) {
 		var elemDiags syntax.Diagnostics
 		a := make([]esc.Value, len(repr))
 		for i, v := range repr {
-			a[i], elemDiags = v.export(environment)
+			a[i], elemDiags = v.export(environment, includeBase)
 			diags.Extend(elemDiags...)
 		}
 		pv = a
@@ -351,7 +355,7 @@ func (v *value) export(environment string) (esc.Value, syntax.Diagnostics) {
 		pm := make(map[string]esc.Value, len(keys))
 		for _, k := range keys {
 			pv := v.property(v.def.repr.syntax(), k)
-			pm[k], elemDiags = pv.export(environment)
+			pm[k], elemDiags = pv.export(environment, includeBase)
 			diags.Extend(elemDiags...)
 		}
 		pv = pm
@@ -360,8 +364,8 @@ func (v *value) export(environment string) (esc.Value, syntax.Diagnostics) {
 	}
 
 	var base *esc.Value
-	if v.base != nil {
-		b, baseDiags := v.base.export("<import>")
+	if v.base != nil && includeBase {
+		b, baseDiags := v.base.export("<import>", includeBase)
 		diags.Extend(baseDiags...)
 		base = &b
 	}

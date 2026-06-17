@@ -1,19 +1,19 @@
 ### Improvements
 
-- eval: `Value.UnmarshalJSON` now decodes the entire subtree with a single
-  shared `json.Decoder`, removing the per-level double scan that made
-  decoding cost O(size × depth) on deeply merged payloads.
-- eval: introduce `eval.EvalOptions` and `eval.TraceMode`. The default
-  `TraceModeCollapsed` keeps only the immediate `Trace.Base` parent on each
-  value, bounding serialized opened-payload size to O(1) per leaf regardless
-  of import-merge depth.
+- eval: introduce `eval.EvalOptions` and `eval.TraceMode`. `TraceModeNone`
+  exports each value without its `Trace.Base` merge-history chain, bounding
+  serialized opened-payload size by its logical content instead of by
+  import-merge depth. The chain is omitted directly during export, so the
+  dropped data is never allocated. The default, `TraceModeFull`, is the zero
+  value and preserves the entire chain, so no consumer of `Trace.Base` (such as
+  the `esc env get` provenance view) regresses without opting in.
 
 ### Bug Fixes
 
 ### Breaking changes
 
-- eval: `EvalEnvironment`, `CheckEnvironment`, and `RotateEnvironment` now
-  take a final `EvalOptions` argument. Existing call sites should pass
-  `eval.EvalOptions{}` to keep the new safe default, or
-  `eval.EvalOptions{TraceMode: eval.TraceModeFull}` to preserve the prior
-  full-chain serialization behavior.
+- eval: `EvalEnvironment`, `CheckEnvironment`, and `RotateEnvironment` now take
+  a final `EvalOptions` argument. Existing call sites should pass
+  `eval.EvalOptions{}` to keep the historical full-chain behavior, or
+  `eval.EvalOptions{TraceMode: eval.TraceModeNone}` to drop the merge-history
+  chain on paths that never read it.

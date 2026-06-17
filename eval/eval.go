@@ -86,8 +86,7 @@ func EvalEnvironment(
 	execContext *esc.ExecContext,
 	opts EvalOptions,
 ) (*esc.Environment, syntax.Diagnostics) {
-	opened, _, diags := evalEnvironment(ctx, false, false, name, env, decrypter, providers, environments, execContext, true, nil)
-	applyTraceModeToEnvironment(opened, opts.TraceMode)
+	opened, _, diags := evalEnvironment(ctx, false, false, name, env, decrypter, providers, environments, execContext, true, nil, opts)
 	return opened, diags
 }
 
@@ -104,8 +103,7 @@ func CheckEnvironment(
 	showSecrets bool,
 	opts EvalOptions,
 ) (*esc.Environment, syntax.Diagnostics) {
-	checked, _, diags := evalEnvironment(ctx, true, false, name, env, decrypter, providers, environments, execContext, showSecrets, nil)
-	applyTraceModeToEnvironment(checked, opts.TraceMode)
+	checked, _, diags := evalEnvironment(ctx, true, false, name, env, decrypter, providers, environments, execContext, showSecrets, nil, opts)
 	return checked, diags
 }
 
@@ -126,9 +124,7 @@ func RotateEnvironment(
 	for _, path := range paths {
 		rotateDocPaths["values."+path.String()] = true
 	}
-	rotated, result, diags := evalEnvironment(ctx, false, true, name, env, decrypter, providers, environments, execContext, true, rotateDocPaths)
-	applyTraceModeToEnvironment(rotated, opts.TraceMode)
-	return rotated, result, diags
+	return evalEnvironment(ctx, false, true, name, env, decrypter, providers, environments, execContext, true, rotateDocPaths, opts)
 }
 
 // evalEnvironment evaluates an environment and exports the result of evaluation.
@@ -144,12 +140,14 @@ func evalEnvironment(
 	execContext *esc.ExecContext,
 	showSecrets bool,
 	rotatePaths map[string]bool,
+	opts EvalOptions,
 ) (*esc.Environment, RotationResult, syntax.Diagnostics) {
 	if env == nil || (len(env.Values.GetEntries()) == 0 && len(env.Imports.GetElements()) == 0) {
 		return nil, nil, nil
 	}
 
 	ec := newEvalContext(ctx, validating, rotating, name, env, true, decrypter, providers, envs, map[string]*imported{}, execContext, showSecrets, rotatePaths)
+	ec.traceMode = opts.TraceMode
 	v, diags := ec.evaluate()
 
 	s := schema.Never().Schema()
@@ -161,7 +159,7 @@ func evalEnvironment(
 		}
 	}
 
-	contextProperties, exportDiags := ec.myContext.export(name)
+	contextProperties, exportDiags := ec.myContext.export(name, ec.includeTraceBase())
 	diags.Extend(exportDiags...)
 
 	executionContext := &esc.EvaluatedExecutionContext{
@@ -169,7 +167,7 @@ func evalEnvironment(
 		Schema:     ec.myContext.schema,
 	}
 
-	envProperties, exportDiags := v.export(name)
+	envProperties, exportDiags := v.export(name, ec.includeTraceBase())
 	diags.Extend(exportDiags...)
 
 	return &esc.Environment{
@@ -208,7 +206,16 @@ type evalContext struct {
 	rotateDocPaths map[string]bool // the subset of document paths to invoke rotation for when rotating. if empty, all rotators will be invoked.
 	rotationResult RotationResult  // result of secret rotations
 
+	traceMode TraceMode // how much of each value's Trace.Base chain to retain when exporting
+
 	diags syntax.Diagnostics // diagnostics generated during evaluation
+}
+
+// includeTraceBase reports whether exported values should carry their
+// Trace.Base merge-history chain. It is constant for a whole evaluation (root
+// and imports share the mode), so export memoization stays consistent.
+func (e *evalContext) includeTraceBase() bool {
+	return e.traceMode != TraceModeNone
 }
 
 func newEvalContext(
@@ -564,6 +571,7 @@ func (e *evalContext) evaluateImport(expr ast.Expr, name string) (*value, bool) 
 
 		// we only want to rotate the root environment, so set rotating flag to false when evaluating imports
 		imp := newEvalContext(e.ctx, e.validating, false, name, env, false, dec, e.providers, e.environments, e.imports, e.execContext, e.showSecrets, nil)
+		imp.traceMode = e.traceMode
 		v, diags := imp.evaluate()
 		e.diags.Extend(diags...)
 
@@ -1122,7 +1130,7 @@ func (e *evalContext) evaluateBuiltinOpen(x *expr, repr *openExpr) *value {
 		return v
 	}
 
-	inputsV, exportDiags := inputs.export("")
+	inputsV, exportDiags := inputs.export("", e.includeTraceBase())
 	e.diags.Extend(exportDiags...)
 
 	output, err := provider.Open(e.ctx, inputsV.Value.(map[string]esc.Value), e.execContext)
@@ -1188,12 +1196,12 @@ func (e *evalContext) evaluateBuiltinRotate(x *expr, repr *rotateExpr) *value {
 		return v
 	}
 
-	inputsV, exportDiags := inputs.export("")
+	inputsV, exportDiags := inputs.export("", e.includeTraceBase())
 	e.diags.Extend(exportDiags...)
 
 	// if rotating, invoke prior to open
 	if e.shouldRotate(docPath) {
-		stateV, exportDiags := state.export("")
+		stateV, exportDiags := state.export("", e.includeTraceBase())
 		e.diags.Extend(exportDiags...)
 
 		newState, err := rotator.Rotate(
@@ -1234,7 +1242,7 @@ func (e *evalContext) evaluateBuiltinRotate(x *expr, repr *rotateExpr) *value {
 		state = unexport(newState, x)
 	}
 
-	stateV, exportDiags := state.export("")
+	stateV, exportDiags := state.export("", e.includeTraceBase())
 	e.diags.Extend(exportDiags...)
 
 	output, err := rotator.Open(
@@ -1424,7 +1432,7 @@ func (e *evalContext) evaluateBuiltinValidate(x *expr, repr *validateExpr) *valu
 // valueToSchema converts an evaluated value to a *schema.Schema.
 func (e *evalContext) valueToSchema(v *value) (*schema.Schema, error) {
 	// Export the value to esc.Value
-	ev, diags := v.export("")
+	ev, diags := v.export("", e.includeTraceBase())
 	e.diags.Extend(diags...)
 
 	// Convert to JSON representation
@@ -1520,7 +1528,7 @@ func (e *evalContext) evaluateBuiltinToJSON(x *expr, repr *toJSONExpr) *value {
 
 	v.combine(value)
 	if !v.unknown {
-		valueV, exportDiags := value.export("")
+		valueV, exportDiags := value.export("", e.includeTraceBase())
 		e.diags.Extend(exportDiags...)
 
 		b, err := json.Marshal(valueV.ToJSON(false))
