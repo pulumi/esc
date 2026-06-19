@@ -460,8 +460,6 @@ func (c *testPulumiClient) checkEnvironment(ctx context.Context, orgName, envNam
 		showSecrets = opts[0].ShowSecrets
 	}
 
-	// The test client mimics the service; existing CLI fixtures were recorded
-	// with the full trace chain, so opt into TraceModeFull to keep them stable.
 	checked, checkDiags := eval.CheckEnvironment(ctx, envName, environment, rot128{}, providers, envLoader, execContext, showSecrets, eval.EvalOptions{TraceMode: eval.TraceModeFull})
 	diags.Extend(checkDiags...)
 	return checked, mapDiags(diags), nil

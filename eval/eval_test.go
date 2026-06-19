@@ -413,9 +413,6 @@ func TestEval(t *testing.T) {
 				require.NoError(t, err)
 				sortEnvironmentDiagnostics(loadDiags)
 
-				// Snapshot fixtures were generated with the full Trace.Base chain;
-				// keep TraceModeFull here so the snapshot harness keeps testing eval
-				// semantics, not the new strip behavior.
 				check, checkDiags := CheckEnvironment(context.Background(), environmentName, env, rot128{}, testProviders{},
 					&testEnvironments{basePath}, execContext, showSecrets, EvalOptions{TraceMode: TraceModeFull})
 				sortEnvironmentDiagnostics(checkDiags)

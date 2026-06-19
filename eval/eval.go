@@ -206,9 +206,7 @@ type evalContext struct {
 	rotateDocPaths map[string]bool // the subset of document paths to invoke rotation for when rotating. if empty, all rotators will be invoked.
 	rotationResult RotationResult  // result of secret rotations
 
-	// traceMode is set once per evaluation (shared with imports) and passed to
-	// export, so export memoization stays consistent across call sites.
-	traceMode TraceMode
+	traceMode TraceMode // traceMode used during eval and passed to export
 
 	diags syntax.Diagnostics // diagnostics generated during evaluation
 }

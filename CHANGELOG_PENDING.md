@@ -11,9 +11,3 @@
 ### Bug Fixes
 
 ### Breaking changes
-
-- eval: `EvalEnvironment`, `CheckEnvironment`, and `RotateEnvironment` now take
-  a final `EvalOptions` argument. Existing call sites should pass
-  `eval.EvalOptions{}` to keep the historical full-chain behavior, or
-  `eval.EvalOptions{TraceMode: eval.TraceModeNone}` to drop the merge-history
-  chain on paths that never read it.
