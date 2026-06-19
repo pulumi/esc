@@ -102,20 +102,6 @@ type Trace struct {
 	Base *Value `json:"base,omitempty"`
 }
 
-// UnmarshalJSON decodes a Value from its JSON representation.
-//
-// Everything except the polymorphic "value" field is handled declaratively by
-// the standard decoder: "secret"/"unknown" are plain bools, and "trace" decodes
-// a Trace whose Base *Value recurses back through this method. Only the "value"
-// field — which may be null, a bool, a number, a string, an array, or an
-// object — needs hand-rolled dispatch, so it is captured as a RawMessage and
-// decoded once below.
-//
-// Decode cost is linear in the payload for a bounded Trace.Base chain. The
-// O(size × depth) blowup observed in the May 2026 CPU step came from deep
-// merge-history chains in the serialized payload; the evaluator now omits that
-// chain on read-only paths (eval.TraceModeNone), so depth — and with it the
-// per-level rescan inherent to any *Value-recursing decoder — stays small.
 func (v *Value) UnmarshalJSON(data []byte) error {
 	var raw struct {
 		Value   json.RawMessage `json:"value,omitempty"`
@@ -131,57 +117,30 @@ func (v *Value) UnmarshalJSON(data []byte) error {
 	v.Unknown = raw.Unknown
 	v.Trace = raw.Trace
 
-	if len(raw.Value) == 0 {
-		return nil
-	}
-	return v.unmarshalValueField(raw.Value)
-}
-
-// unmarshalValueField decodes the polymorphic "value" field. Its concrete type
-// is data-driven, so dispatch on the first non-whitespace byte. Arrays, objects
-// and their elements recurse through the standard decoder (and thus back through
-// (*Value).UnmarshalJSON), keeping the hand-rolled surface to this one field.
-func (v *Value) unmarshalValueField(raw json.RawMessage) error {
-	i := 0
-	for i < len(raw) {
-		switch raw[i] {
-		case ' ', '\t', '\n', '\r':
-			i++
-			continue
-		}
-		break
-	}
-	if i == len(raw) {
-		// Whitespace only is not valid JSON; let the decoder report it.
-		return json.Unmarshal(raw, &v.Value)
-	}
-
-	switch raw[i] {
-	case '[':
-		// Initialize non-nil so an empty array stays []Value{} rather than a nil
-		// slice — json.Marshal renders the former as [] and the latter as null,
-		// and consumers round-tripping "value":[] rely on the non-nil form.
-		arr := []Value{}
-		if err := json.Unmarshal(raw, &arr); err != nil {
-			return err
-		}
-		v.Value = arr
-	case '{':
-		obj := map[string]Value{}
-		if err := json.Unmarshal(raw, &obj); err != nil {
-			return err
-		}
-		v.Value = obj
-	default:
-		// Scalar: null, bool, json.Number, or string. UseNumber keeps numbers as
-		// json.Number to match the rest of the package.
-		dec := json.NewDecoder(bytes.NewReader(raw))
+	if len(raw.Value) != 0 {
+		dec := json.NewDecoder(bytes.NewReader([]byte(raw.Value)))
 		dec.UseNumber()
+
 		tok, err := dec.Token()
 		if err != nil {
 			return err
 		}
-		v.Value = tok
+		switch tok {
+		case json.Delim('['):
+			var arr []Value
+			if err := json.Unmarshal([]byte(raw.Value), &arr); err != nil {
+				return err
+			}
+			v.Value = arr
+		case json.Delim('{'):
+			var obj map[string]Value
+			if err := json.Unmarshal([]byte(raw.Value), &obj); err != nil {
+				return err
+			}
+			v.Value = obj
+		default:
+			v.Value = tok
+		}
 	}
 	return nil
 }

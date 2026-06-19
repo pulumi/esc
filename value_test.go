@@ -178,8 +178,8 @@ func TestValueUnmarshalJSON(t *testing.T) {
 }
 
 func TestValueUnmarshalJSON_RoundTrip(t *testing.T) {
-	// Tree mixes secrets, arrays, maps, scalars, and a Base chain so the
-	// rewrite is exercised against a representative shape in one pass.
+	// Tree mixes secrets, arrays, maps, scalars, and a Base chain so a
+	// representative shape is exercised in one pass.
 	orig := Value{
 		Value: map[string]Value{
 			"arr": {Value: []Value{
@@ -240,9 +240,8 @@ func TestValueUnmarshalJSON_Errors(t *testing.T) {
 
 func TestValueUnmarshalJSON_DeepNesting(t *testing.T) {
 	// Build a deeply nested object to confirm the decoder does not blow
-	// the stack or mis-handle depth. The original double-unmarshal path
-	// re-scans each level; this is a guard against accidental regressions
-	// during rewrite work.
+	// the stack or mis-handle depth — a guard against accidental regressions
+	// in this hot path.
 	const depth = 100
 	input := strings.Repeat(`{"value":{"k":`, depth) + `{"value":"leaf"}` + strings.Repeat(`}}`, depth)
 
