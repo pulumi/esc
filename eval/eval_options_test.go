@@ -33,9 +33,8 @@ func chainDepth(v *esc.Value) int {
 	return n
 }
 
-// inlineEnvironments implements EnvironmentLoader from an in-memory map so tests
-// can build arbitrary import topologies without scattering YAML files in
-// testdata.
+// inlineEnvironments is an in-memory EnvironmentLoader so tests can build import
+// topologies without testdata files.
 type inlineEnvironments map[string][]byte
 
 func (e inlineEnvironments) LoadEnvironment(_ context.Context, name string) ([]byte, Decrypter, error) {
@@ -46,9 +45,8 @@ func (e inlineEnvironments) LoadEnvironment(_ context.Context, name string) ([]b
 	return src, rot128{}, nil
 }
 
-// deepImportChain is a 5-environment import stack that all merge the same key,
-// producing a Trace.Base chain deeper than 2 so Full and None diverge
-// observably.
+// deepImportChain is a 5-environment stack all merging the same key, so the
+// Trace.Base chain is deep enough (>2) for Full and None to diverge observably.
 var deepImportChain = inlineEnvironments{
 	"a":    []byte("values:\n  shared: from-a\n"),
 	"b":    []byte("imports:\n  - a\nvalues:\n  shared: from-b\n"),
@@ -70,25 +68,21 @@ func evalShared(t *testing.T, envs inlineEnvironments, opts EvalOptions) esc.Val
 	return result.Properties["shared"]
 }
 
-// TestEvalEnvironment_TraceModeFull is the historical behavior: the entire
-// merge-history chain is preserved.
 func TestEvalEnvironment_TraceModeFull(t *testing.T) {
 	shared := evalShared(t, deepImportChain, EvalOptions{TraceMode: TraceModeFull})
 	assert.Greater(t, chainDepth(&shared), 2,
 		"Full must preserve a chain deeper than 2 for this 5-environment fixture")
 }
 
-// TestEvalEnvironment_TraceModeNone drops Trace.Base entirely, leaving only the
-// value itself — the fix for the import-depth payload blowup.
+// None is the fix for the import-depth payload blowup: the whole Trace is dropped.
 func TestEvalEnvironment_TraceModeNone(t *testing.T) {
 	shared := evalShared(t, deepImportChain, EvalOptions{TraceMode: TraceModeNone})
-	assert.Nil(t, shared.Trace.Base, "None must drop Trace.Base")
+	assert.Equal(t, esc.Trace{}, shared.Trace, "None must omit the entire Trace")
 	assert.Equal(t, 1, chainDepth(&shared), "None must reduce the chain to the value itself")
 }
 
-// TestEvalEnvironment_ZeroOptionsDefaultsToFull locks in the public-API promise:
-// callers passing EvalOptions{} get the historical full-chain behavior, so no
-// existing consumer of Trace.Base regresses without opting in.
+// Guards the public-API promise: EvalOptions{} stays Full, so no Trace consumer
+// regresses without opting in.
 func TestEvalEnvironment_ZeroOptionsDefaultsToFull(t *testing.T) {
 	zero := evalShared(t, deepImportChain, EvalOptions{})
 	full := evalShared(t, deepImportChain, EvalOptions{TraceMode: TraceModeFull})
@@ -97,8 +91,7 @@ func TestEvalEnvironment_ZeroOptionsDefaultsToFull(t *testing.T) {
 	assert.Greater(t, chainDepth(&zero), 2)
 }
 
-// TestEvalEnvironment_TraceModeNone_NestedData proves None is applied through the
-// data dimension too: a nested map value carries no Base chain either.
+// None must apply through nested data, not just the top-level value.
 func TestEvalEnvironment_TraceModeNone_NestedData(t *testing.T) {
 	envs := inlineEnvironments{
 		"a":    []byte("values:\n  obj:\n    k: from-a\n"),

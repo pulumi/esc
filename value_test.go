@@ -152,16 +152,14 @@ func TestValueUnmarshalJSON(t *testing.T) {
 			expected: Value{Value: "x"},
 		},
 		{
-			// A null "trace" must decode to a zero Trace, not error. The prior
-			// json.Unmarshal-into-struct path accepted null for any field;
-			// forward-compatible payloads that null out unknown fields rely on it.
+			// null "trace" must decode to a zero Trace, not error: payloads that
+			// null out fields rely on it.
 			name:     "null trace decodes to zero Trace",
 			input:    `{"value":"x","trace":null}`,
 			expected: Value{Value: "x"},
 		},
 		{
-			// An empty array must stay a non-nil []Value{} so it re-serializes as
-			// [] rather than null. See TestValueUnmarshalJSON_EmptyArrayRoundTrip.
+			// Empty array must stay non-nil so it re-serializes as [] not null.
 			name:     "empty array stays non-nil",
 			input:    `{"value":[]}`,
 			expected: Value{Value: []Value{}},
@@ -178,8 +176,6 @@ func TestValueUnmarshalJSON(t *testing.T) {
 }
 
 func TestValueUnmarshalJSON_RoundTrip(t *testing.T) {
-	// Tree mixes secrets, arrays, maps, scalars, and a Base chain so a
-	// representative shape is exercised in one pass.
 	orig := Value{
 		Value: map[string]Value{
 			"arr": {Value: []Value{
@@ -203,9 +199,8 @@ func TestValueUnmarshalJSON_RoundTrip(t *testing.T) {
 }
 
 func TestValueUnmarshalJSON_EmptyArrayRoundTrip(t *testing.T) {
-	// json.Marshal renders a nil []Value as null but an empty []Value{} as [].
-	// The decoder must preserve the empty slice so a decode→encode round trip
-	// keeps "value":[] intact instead of silently rewriting it to "value":null.
+	// nil []Value marshals as null, empty []Value{} as []; the decoder must keep
+	// the slice non-nil so a round trip preserves "value":[].
 	var got Value
 	require.NoError(t, json.Unmarshal([]byte(`{"value":[]}`), &got))
 
@@ -239,9 +234,7 @@ func TestValueUnmarshalJSON_Errors(t *testing.T) {
 }
 
 func TestValueUnmarshalJSON_DeepNesting(t *testing.T) {
-	// Build a deeply nested object to confirm the decoder does not blow
-	// the stack or mis-handle depth — a guard against accidental regressions
-	// in this hot path.
+	// Guards against the decoder blowing the stack or mis-handling deep nesting.
 	const depth = 100
 	input := strings.Repeat(`{"value":{"k":`, depth) + `{"value":"leaf"}` + strings.Repeat(`}}`, depth)
 
@@ -258,11 +251,8 @@ func TestValueUnmarshalJSON_DeepNesting(t *testing.T) {
 	assert.Equal(t, "leaf", cur.Value)
 }
 
-// BenchmarkValueUnmarshalJSON_Depth exercises UnmarshalJSON against a Trace.Base
-// chain — the shape that produced the May 2026 CPU step when an
-// import-heavy environment doubled its opened payload. Running with several
-// depths makes super-linear regressions in this hot path visible in the
-// benchmark output.
+// BenchmarkValueUnmarshalJSON_Depth varies the Trace.Base chain depth so
+// super-linear regressions in this hot path are visible.
 func BenchmarkValueUnmarshalJSON_Depth(b *testing.B) {
 	for _, depth := range []int{1, 5, 20, 50} {
 		b.Run("depth="+strconv.Itoa(depth), func(b *testing.B) {
@@ -284,9 +274,8 @@ func BenchmarkValueUnmarshalJSON_Depth(b *testing.B) {
 }
 
 func buildTraceChain(depth int) Value {
-	// Approximate the webflow shape: a map of ~10 string leaves at each level,
-	// chained via Trace.Base. The leaf width keeps the per-level work non-trivial
-	// without making the benchmark dominated by allocator churn.
+	// ~10 string leaves per level keeps per-level work non-trivial without the
+	// benchmark being dominated by allocator churn.
 	makeLeaf := func() Value {
 		m := make(map[string]Value, 10)
 		for i := range 10 {
