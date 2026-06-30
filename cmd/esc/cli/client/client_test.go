@@ -4,6 +4,7 @@ package client
 
 import (
 	"context"
+	"encoding/base64"
 	"encoding/json"
 	"fmt"
 	"io"
@@ -851,8 +852,10 @@ func TestOpenYAMLEnvironment(t *testing.T) {
 		client := newTestClient(t, http.MethodPost, "/api/esc/environments/test-org/yaml/open", func(w http.ResponseWriter, r *http.Request) {
 			assert.Equal(t, duration.String(), r.URL.Query().Get("duration"))
 
+			decoded, err := base64.RawURLEncoding.DecodeString(r.URL.Query().Get("environmentOverrides"))
+			require.NoError(t, err)
 			var got map[string]string
-			require.NoError(t, json.Unmarshal([]byte(r.URL.Query().Get("environmentOverrides")), &got))
+			require.NoError(t, json.Unmarshal(decoded, &got))
 			assert.Equal(t, overrides, got)
 
 			body, err := io.ReadAll(r.Body)

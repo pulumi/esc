@@ -19,6 +19,7 @@ import (
 	"compress/gzip"
 	"context"
 	"crypto/tls"
+	"encoding/base64"
 	"encoding/json"
 	"errors"
 	"fmt"
@@ -1077,7 +1078,7 @@ func (pc *client) OpenYAMLEnvironment(
 		if err != nil {
 			return "", nil, fmt.Errorf("marshaling environment overrides: %w", err)
 		}
-		queryObj.EnvironmentOverrides = string(encoded)
+		queryObj.EnvironmentOverrides = base64.RawURLEncoding.EncodeToString(encoded)
 	}
 
 	var resp struct {
