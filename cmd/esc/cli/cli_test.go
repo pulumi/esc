@@ -294,6 +294,10 @@ func (e *testEnvironments) LoadEnvironment(ctx context.Context, ref string) ([]b
 	return env.latest().yaml, rot128{}, nil
 }
 
+func (e *testEnvironments) AuthorizeImport(_ context.Context, _ string, _ string, _ bool) error {
+	return nil
+}
+
 type testEnvironmentRetract struct {
 	replacement int
 	reason      string
