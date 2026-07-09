@@ -8,7 +8,7 @@
 
 - Print a retirement notice on every `esc` command. The standalone ESC CLI has been retired;
   install the Pulumi CLI and use the `pulumi env` subcommand instead. See
-  https://www.pulumi.com/docs/iac/cli.
+  https://www.pulumi.com/docs/install.
   [#669](https://github.com/pulumi/esc/pull/669)
 
 ### Bug Fixes

@@ -19,9 +19,9 @@ import (
 // every command so that it never corrupts machine-readable output on stdout.
 func printRetirementBanner(w io.Writer) {
 	lines := []string{
-		"The ESC CLI has been retired.",
-		"Download the Pulumi CLI and use the 'pulumi env' subcommand instead.",
-		"See: https://www.pulumi.com/docs/iac/cli",
+		"The standalone ESC CLI has been retired and no longer receives updates.",
+		"ESC is now part of the Pulumi CLI — use 'pulumi env' instead.",
+		"Install: https://www.pulumi.com/docs/install",
 	}
 
 	width := 0
