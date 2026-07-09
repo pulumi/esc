@@ -34,7 +34,6 @@ Be sure to check out the **[Pulumi ESC explainer video](https://www.youtube.com/
 - :blue_book: [Documentation](https://pulumi.com/docs/pulumi-cloud/esc)
 - :hammer_and_wrench: [How It Works](#how-pulumi-esc-works)
 - :white_check_mark: [Features](#pulumi-esc-features)
-- :compass:	[Roadmap](#resources)
 - :busts_in_silhouette: [Community](#resources)
 - :computer: [Resources](#resources)
 
@@ -116,10 +115,6 @@ Pulumi ESC was born to address these problems and needs head on with the followi
 * __Audit Logging__: All actions taken on environments, secrets, or configuration values are fully logged for auditing.
 * __Developer-friendly__: Developers can easily access secrets via CLI, API, Kubernetes operator, the Pulumi Cloud UI, and in-code with Typescript/Javascript, Python, and Go SDKs.
 
-## Pulumi ESC Roadmap
-
-Review the planned work for the upcoming quarter and a selected backlog of issues that are on our mind but not yet scheduled on the [Pulumi Roadmap.](https://github.com/orgs/pulumi/projects/44)
-
 ## Community
 
 - Join us in the [Pulumi Community Slack](https://slack.pulumi.com/?utm_campaign=pulumi-esc-github-repo&utm_source=github.com&utm_medium=welcome-slack) to connect with our community and engineering team and ask questions. All conversations and questions are welcome.
@@ -133,4 +128,3 @@ Review the planned work for the upcoming quarter and a selected backlog of issue
 - [Twitter](https://twitter.com/PulumiCorp)
 - [YouTube](https://www.youtube.com/pulumitv)
 - [Blog](https://pulumi.com/blog?utm_campaign=pulumi-esc-github-repo&utm_source=github.com&utm_medium=esc-resources)
-- [Roadmap](https://github.com/orgs/pulumi/projects/44)
