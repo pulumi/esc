@@ -4,6 +4,21 @@
    </a>
 </p>
 
+> [!IMPORTANT]
+> **The standalone `esc` CLI has been retired, and this repository is no longer maintained.**
+>
+> Pulumi ESC is not going away. It now ships as part of the Pulumi CLI, and its source lives in
+> [pulumi/pulumi](https://github.com/pulumi/pulumi). Install the Pulumi CLI from
+> [pulumi.com/docs/install](https://www.pulumi.com/docs/install), then use `pulumi env` in place of `esc`:
+>
+> - `esc env <command>` becomes `pulumi env <command>` — for example, `esc env ls` becomes `pulumi env ls`.
+> - `esc open` and `esc run` become `pulumi env open` and `pulumi env run`.
+> - `esc login` and `esc logout` become `pulumi login` and `pulumi logout`.
+>
+> [v0.26.0](https://github.com/pulumi/esc/releases/tag/v0.26.0) is the final standalone release. Existing
+> binaries keep working, but receive no further updates, including security fixes. Please file issues and
+> pull requests against [pulumi/pulumi](https://github.com/pulumi/pulumi/issues).
+
 # Secrets Management for Multi-Cloud Environments
 
 **[Pulumi ESC](https://www.pulumi.com/product/esc/?utm_source=github.com&utm_medium=referral&utm_campaign=pulumi+esc+github+repo&utm_content=intro)** is a centralized secrets management & orchestration service that makes it easy to tame secrets sprawl and configuration complexity securely across all your cloud infrastructure and applications. You can pull and sync secrets with any secrets store – including HashiCorp Vault, AWS Secrets Manager, Azure Key Vault, GCP Secret Manager, 1Password, and more – and consume secrets in any application, tool, or CI/CD platform.
@@ -31,9 +46,9 @@ In this example, an ESC environment named aws-staging has all the necessary stag
 
 ![Pulumi's open source secrets management solution overview](./assets/esc.gif)
 
-Pulumi ESC is also offered as a managed service as part of [Pulumi Cloud,](https://www.pulumi.com/product/pulumi-cloud/?utm_campaign=pulumi-esc-github-repo&utm_source=github.com) and this repo contains the implementation of the following key components of the ESC open source secrets and configuration management solution:
+Pulumi ESC is also offered as a managed service as part of [Pulumi Cloud,](https://www.pulumi.com/product/pulumi-cloud/?utm_campaign=pulumi-esc-github-repo&utm_source=github.com) and this repo contained the implementation of the following key components of the ESC open source secrets and configuration management solution, both of which now live in [pulumi/pulumi](https://github.com/pulumi/pulumi):
 
-1. The `esc` CLI:  A CLI tool for managing and consuming environments, secrets and configuration using Pulumi ESC.
+1. The `esc` CLI:  A CLI tool for managing and consuming environments, secrets and configuration using Pulumi ESC. It is now the `pulumi env` command.
 2. The Pulumi ESC evaluator:  The core specification and implementation of the document format for defining environments, and the syntax and semantics for evaluating environments to produce a set of configuration and secrets.
 
 <div>
@@ -48,24 +63,27 @@ For a hands-on, self-paced tutorial see our Pulumi ESC [Getting Started](https:/
 
 ### Download and Install Pulumi ESC
 
-1. **Install**:
+Pulumi ESC ships as part of the Pulumi CLI. Install it by running the following (see full
+[installation instructions](https://www.pulumi.com/docs/install/?utm_campaign=pulumi-esc-github-repo&utm_source=github.com&utm_medium=getting-started-install) for additional installation options):
 
-    To install the latest Pulumi ESC release, run the following (see full
-    [installation instructions](https://www.pulumi.com/docs/install/esc/?utm_campaign=pulumi-esc-github-repo&utm_source=github.com&utm_medium=getting-started-install) for additional installation options):
+```bash
+$ curl -fsSL https://get.pulumi.com/ | sh
+```
 
-    ```bash
-    $ curl -fsSL https://get.pulumi.com/esc/install.sh | sh
-    ```
+Then use the `pulumi env` command:
+
+```bash
+$ pulumi env ls
+```
+
+The retired standalone `esc` CLI can still be installed with
+`curl -fsSL https://get.pulumi.com/esc/install.sh | sh`, but it is frozen at
+[v0.26.0](https://github.com/pulumi/esc/releases/tag/v0.26.0) and receives no further updates.
 
 ### Building the ESC CLI Locally
 
-You can build the CLI locally for testing by cloning this repo and running:
-
-```shell
-$ make install
-```
-
-This will produce an `esc` binary in your `GOBIN` directory.
+The ESC CLI and evaluator are built from [pulumi/pulumi](https://github.com/pulumi/pulumi). See that
+repository's contributing guide for build instructions.
 
 ## How Pulumi ESC Works
 
