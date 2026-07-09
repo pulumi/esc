@@ -17,7 +17,7 @@
 >
 > [v0.26.0](https://github.com/pulumi/esc/releases/tag/v0.26.0) is the final standalone release. Existing
 > binaries keep working, but receive no further updates, including security fixes. Please file issues and
-> pull requests against [pulumi/pulumi](https://github.com/pulumi/pulumi/issues).
+> pull requests against [pulumi/pulumi](https://github.com/pulumi/pulumi).
 
 # Secrets Management for Multi-Cloud Environments
 
@@ -40,7 +40,7 @@ Be sure to check out the **[Pulumi ESC explainer video](https://www.youtube.com/
 
 ## Pulumi ESC Demo
 
-Pulumi ESC not only works great for your applications and IaC, including Pulumi IaC, but it also makes your day-to-day developer workflow much more secure and streamlined. For example, the Pulumi ESC CLI (esc) allows you to give your developers immediate, just-in-time authenticated, and short-lived access to cloud credentials across any cloud provider with just a single command: `esc run aws-staging -- aws s3 ls`.
+Pulumi ESC not only works great for your applications and IaC, including Pulumi IaC, but it also makes your day-to-day developer workflow much more secure and streamlined. For example, the Pulumi CLI allows you to give your developers immediate, just-in-time authenticated, and short-lived access to cloud credentials across any cloud provider with just a single command: `pulumi env run aws-staging -- aws s3 ls`.
 
 In this example, an ESC environment named aws-staging has all the necessary staging environment configuration and OIDC setup to connect to AWS. Running this command opens up a temporary environment and executes the aws s3 ls command in that environment. The temporary AWS credentials are not stored anywhere, making them secure and also allowing you to switch between different environments dynamically.
 
