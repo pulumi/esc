@@ -4,13 +4,40 @@ package main
 
 import (
 	"fmt"
+	"io"
 	"os"
 	"runtime"
 	"runtime/debug"
+	"strings"
 
 	"github.com/pulumi/esc/cmd/esc/cli"
 	"github.com/pulumi/esc/cmd/esc/cli/version"
 )
+
+// printRetirementBanner prints a notice informing users that the standalone esc CLI has been
+// retired in favor of the Pulumi CLI's `pulumi env` subcommand. It is printed to stderr before
+// every command so that it never corrupts machine-readable output on stdout.
+func printRetirementBanner(w io.Writer) {
+	lines := []string{
+		"The standalone ESC CLI has been retired and no longer receives updates.",
+		"ESC is now part of the Pulumi CLI — use 'pulumi env' instead.",
+		"Install: https://www.pulumi.com/docs/install",
+	}
+
+	width := 0
+	for _, line := range lines {
+		if len(line) > width {
+			width = len(line)
+		}
+	}
+
+	border := strings.Repeat("─", width+2)
+	fmt.Fprintf(w, "┌%s┐\n", border)
+	for _, line := range lines {
+		fmt.Fprintf(w, "│ %-*s │\n", width, line)
+	}
+	fmt.Fprintf(w, "└%s┘\n", border)
+}
 
 // panicHandler displays an emergency error message to the user and a stack trace to
 // report the panic.
@@ -38,6 +65,8 @@ func panicHandler() {
 }
 
 func main() {
+	printRetirementBanner(os.Stderr)
+
 	err := func() error {
 		defer panicHandler()
 		return cli.New(nil).Execute()
